@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import process from 'node:process'
 import { verifyConsoleNoticeSources } from './site-vendor/console/notices.ts'
+import { verifyFontNotices } from './site-vendor/fonts/notices.ts'
 import { verifyMonacoCoreNotices } from './site-vendor/monaco/core-origins.ts'
 import { verifyMonacoDomNotices } from './site-vendor/monaco/dom-origins.ts'
 import { verifyMonacoPathNotices } from './site-vendor/monaco/node-path.ts'
@@ -12,8 +13,8 @@ import { writeOrCheckNotices } from './site-vendor/notices.ts'
 assert(process.argv.slice(2).every(arg => arg === '--check'), 'Use yarn build:site-notices [--check]')
 /** @type {import('./site-vendor/notices.ts').VendorManifest} */
 const manifest = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))
-assert.deepEqual(manifest.groups.map(group => group.name).sort(), ['console', 'monaco-editor', 'vconsole'], 'Do not silently drop a verified site component')
-assert.deepEqual(manifest.groups.filter(group => group.name !== 'console').flatMap(group => (group.components || []).map(component => component.name)).sort(), [
+assert.deepEqual(manifest.groups.map(group => group.name).sort(), ['console', 'jassub-fonts', 'monaco-editor', 'vconsole'], 'Do not silently drop a verified site component')
+assert.deepEqual(manifest.groups.filter(group => ['monaco-editor', 'vconsole'].includes(group.name)).flatMap(group => (group.components || []).map(component => component.name)).sort(), [
   '@babel/runtime',
   '@vscode/codicons',
   'Unicode data (Monaco core)',
@@ -94,6 +95,7 @@ assert.deepEqual(typeScriptNotices?.map(target => target.split('/').pop()).sort(
 for (const name of ['LICENSE', 'MIT-LICENSE', 'ATTRIBUTION.md'])
   assert(vconsoleNotices?.includes(`docs/licenses/vconsole/${name}`), `Missing vConsole notice: ${name}`)
 verifyConsoleNoticeSources(process.cwd(), manifest)
+verifyFontNotices(process.cwd(), manifest)
 verifyMonacoCoreNotices(process.cwd(), manifest)
 verifyMonacoDomNotices(process.cwd(), manifest)
 verifyMonacoUnicodeNotices(process.cwd(), manifest)

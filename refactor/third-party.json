@@ -429,14 +429,19 @@
       "owners": [
         "PKG-JASSUB-01",
         "SITE-01",
-        "PKG-JASSUB-06"
+        "PKG-JASSUB-06",
+        "SITE-07"
       ],
       "sourceStatus": "All 11 unique fonts and default alias exactly match historical upstream Pages blobs. Original acquisition/redistribution permissions are not established by that identity. See baselines/jassub-provenance.json.",
-      "licenseStatus": "Five open-font notice assemblies and six unresolved font permissions remain explicit in the supplement. PKG-JASSUB-06 / SITE-01 must resolve actual package/Pages redistribution scope; VENDOR-05 remains open.",
+      "licenseStatus": "Complete upstream notice references now ship for Liberation, Averia Sans, Lato and exact-author CHAWP. Three references retain font-table differences; Serif Simple and six unclear font permissions remain unresolved. See site-font-notices-provenance.json; VENDOR-05 stays open.",
       "upstreamSources": [
-        "https://github.com/ThaUnknown/jassub/tree/25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1"
+        "https://github.com/ThaUnknown/jassub/tree/25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+        "https://github.com/liberationfonts/liberation-fonts/files/2926169/liberation-fonts-ttf-2.00.5.tar.gz",
+        "https://github.com/google/fonts/blob/0f81bc90462b862dbfe3d16403ff284a68473833/ofl/averiasanslibre/AveriaSansLibre-Light.ttf",
+        "https://github.com/google/fonts/blob/f3b885d5590e307e02542f1a724cec55d567fdaa/ofl/lato/Lato-Regular.ttf",
+        "https://github.com/awp/chawp/blob/3c4f6317bebd6783c8d0db3bc9206aa62d602f90/chawp.otf"
       ],
-      "upstreamReviewedAt": "2026-09-14",
+      "upstreamReviewedAt": "2026-09-15",
       "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "fingerprints": [
         {

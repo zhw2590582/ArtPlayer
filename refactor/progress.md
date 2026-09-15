@@ -1,5 +1,21 @@
 # 进度与证据
 
+## SITE-07 选定字体通知与差异检查点
+
+CHAWP与作者固定Git文件完全一致；Liberation、Averia Sans、Lato的字形/映射/
+宽度一致但字体表不同，完整参考许可、内嵌版权与差异说明一起交付，字体/URL未改。
+Averia Serif Simple的g与Libre不同，保留负对照，不纳入同一来源。其余六份字体
+已向用户询问授权来源；不将公开托管视为分发授权，也未擅自替换字体。
+
+新增字体通知绑定校验和只读Python复验；96份通知输出生成/核对通过。15项通知
+测试、2项JASSUB原来源检查、严格TS/lint、篡改参考文件拒绝通过。三引擎6/6
+验证通知HTTP字节、字体URL/加载/墨迹及移动播放，零跳过/重试。见
+[记录](changes/2026-09-15-SITE-07-font-notices.md)、[来源](baselines/site-font-notices-provenance.json)
+和[验证](baselines/site-font-notices-validation.json)。
+
+SITE-07继续doing，VENDOR-05/BASE-MEDIA-01保持open；215 done、21 doing、43 todo
+不变。没有发布、推送、部署或字体运行字节变更。
+
 ## CI-TYPES-02 全生态安装类型门槛
 
 新增test:ecosystem-types，明确21库包无遗漏/重复。先重建声明、全部分发和i18n，

@@ -1,0 +1,359 @@
+{
+  "task": "SITE-07",
+  "baselineCommit": "01f3d00e4c20ff39ce0e5e7db885cee15fd820ee",
+  "scope": "Complete notice references for four selected families without changing assets or closing VENDOR-05.",
+  "tools": {
+    "python": "3.12.14",
+    "fonttools": "4.60.1",
+    "brotli": "1.1.0"
+  },
+  "group": {
+    "name": "jassub-fonts",
+    "version": "selected historical references",
+    "tarball": "https://github.com/ThaUnknown/jassub/tree/25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+    "review": "Four selected font families only. CHAWP matches author bytes; other full notice references have explicit font-table differences. Other fonts and complete redistribution provenance remain open under SITE-07/VENDOR-05.",
+    "roots": [
+      "docs/assets/jassub/default.woff2",
+      "docs/assets/jassub/fonts/default.woff2",
+      "docs/assets/jassub/fonts/Averia Sans Libre Light.ttf",
+      "docs/assets/jassub/fonts/Lato-Regular.ttf",
+      "docs/assets/jassub/fonts/chawp.otf"
+    ],
+    "files": [
+      {
+        "path": "docs/assets/jassub/default.woff2",
+        "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+        "mode": "binary"
+      },
+      {
+        "path": "docs/assets/jassub/fonts/default.woff2",
+        "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+        "mode": "binary"
+      },
+      {
+        "path": "docs/assets/jassub/fonts/Averia Sans Libre Light.ttf",
+        "sha256": "df4ca526f9a941afda1f9c5a275695beb066a531f5b008c1e28ddc2c5f6e4390",
+        "mode": "binary"
+      },
+      {
+        "path": "docs/assets/jassub/fonts/Lato-Regular.ttf",
+        "sha256": "6f6940be0835c3ddec9199e5fc42be4cbc61ebcfd58c623fdf719366253f1780",
+        "mode": "binary"
+      },
+      {
+        "path": "docs/assets/jassub/fonts/chawp.otf",
+        "sha256": "9107241585a4328ce1438dfeabbfb1a8d0cd513dab6902be9a1a5774eab607c6",
+        "mode": "binary"
+      }
+    ],
+    "components": [
+      {
+        "name": "Liberation Sans",
+        "version": "2.00.5 reference",
+        "tarball": "https://github.com/liberationfonts/liberation-fonts/files/2926169/liberation-fonts-ttf-2.00.5.tar.gz",
+        "assets": [
+          "docs/assets/jassub/default.woff2",
+          "docs/assets/jassub/fonts/default.woff2"
+        ],
+        "notices": [
+          "docs/licenses/jassub-fonts/liberation/OFL.txt",
+          "docs/licenses/jassub-fonts/ATTRIBUTION.md"
+        ]
+      },
+      {
+        "name": "Averia Sans Libre Light",
+        "version": "1.002 reference",
+        "tarball": "https://github.com/google/fonts/blob/0f81bc90462b862dbfe3d16403ff284a68473833/ofl/averiasanslibre/AveriaSansLibre-Light.ttf",
+        "assets": [
+          "docs/assets/jassub/fonts/Averia Sans Libre Light.ttf"
+        ],
+        "notices": [
+          "docs/licenses/jassub-fonts/averia-sans/OFL.txt",
+          "docs/licenses/jassub-fonts/ATTRIBUTION.md"
+        ]
+      },
+      {
+        "name": "Lato Regular",
+        "version": "2.015 reference",
+        "tarball": "https://github.com/google/fonts/blob/f3b885d5590e307e02542f1a724cec55d567fdaa/ofl/lato/Lato-Regular.ttf",
+        "assets": [
+          "docs/assets/jassub/fonts/Lato-Regular.ttf"
+        ],
+        "notices": [
+          "docs/licenses/jassub-fonts/lato/OFL.txt",
+          "docs/licenses/jassub-fonts/ATTRIBUTION.md"
+        ]
+      },
+      {
+        "name": "CHAWP",
+        "version": "1.000 exact bytes",
+        "tarball": "https://github.com/awp/chawp/blob/3c4f6317bebd6783c8d0db3bc9206aa62d602f90/chawp.otf",
+        "assets": [
+          "docs/assets/jassub/fonts/chawp.otf"
+        ],
+        "notices": [
+          "docs/licenses/jassub-fonts/chawp/OFL.txt",
+          "docs/licenses/jassub-fonts/ATTRIBUTION.md"
+        ]
+      }
+    ],
+    "notices": [
+      {
+        "source": "refactor/baselines/site-vendor/jassub-fonts/liberation-OFL.txt",
+        "target": "docs/licenses/jassub-fonts/liberation/OFL.txt",
+        "sha256": "93fed46019c38bbe566b479d22148e2e8a1e85ada614accb0211c37b2c61c19b"
+      },
+      {
+        "source": "refactor/baselines/site-vendor/jassub-fonts/averia-sans-OFL.txt",
+        "target": "docs/licenses/jassub-fonts/averia-sans/OFL.txt",
+        "sha256": "46239ba6485d28553fd944da4ad32a00d9c403aa1c3e111676b0b96fe458d1d4"
+      },
+      {
+        "source": "refactor/baselines/site-vendor/jassub-fonts/lato-OFL.txt",
+        "target": "docs/licenses/jassub-fonts/lato/OFL.txt",
+        "sha256": "74ba064d03f1f1c4a952da936c3eb71866c34404916734de3cae73b34357e59e"
+      },
+      {
+        "source": "refactor/baselines/site-vendor/jassub-fonts/chawp-OFL.txt",
+        "target": "docs/licenses/jassub-fonts/chawp/OFL.txt",
+        "sha256": "fa786a37ddd70be650bc53d476cc0a1ec5a6284c6f28a32943e941021b2397b8"
+      },
+      {
+        "source": "refactor/baselines/site-vendor/jassub-fonts/ATTRIBUTION.txt",
+        "target": "docs/licenses/jassub-fonts/ATTRIBUTION.md",
+        "sha256": "b9485c05b07bbfca2407f4336247d2bb19eba05458fe9bced8f68c81c158504d"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "liberation",
+      "reference": "https://github.com/liberationfonts/liberation-fonts/files/2926169/liberation-fonts-ttf-2.00.5.tar.gz",
+      "licenseReference": "https://github.com/liberationfonts/liberation-fonts/files/2926169/liberation-fonts-ttf-2.00.5.tar.gz",
+      "repository": "liberationfonts/liberation-fonts",
+      "commit": "24ea9469bfb089ab9bf05adb0871d0065d360edc",
+      "member": "liberation-fonts-ttf-2.00.5/LiberationSans-Regular.ttf",
+      "licenseMember": "liberation-fonts-ttf-2.00.5/LICENSE",
+      "archiveSha256": "f14ff0a0be87b5aeb672e669363b5a699db76feb1144b06798261c0fdcd2b24d",
+      "fontSha256": "4d92708b98c4f61e0288cee4524152f41e552853c64cb2a86b298fb6082f7874",
+      "fontGitBlob": null,
+      "licenseSha256": "93fed46019c38bbe566b479d22148e2e8a1e85ada614accb0211c37b2c61c19b",
+      "comparison": {
+        "localSha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+        "referenceSha256": "4d92708b98c4f61e0288cee4524152f41e552853c64cb2a86b298fb6082f7874",
+        "sameTables": [
+          "GDEF",
+          "GPOS",
+          "GSUB",
+          "OS/2",
+          "cmap",
+          "cvt ",
+          "fpgm",
+          "gasp",
+          "hhea",
+          "hmtx",
+          "kern",
+          "maxp",
+          "name",
+          "prep"
+        ],
+        "differentTables": [
+          "FFTM",
+          "glyf",
+          "head",
+          "loca",
+          "post"
+        ],
+        "glyphCounts": [
+          2592,
+          2592
+        ],
+        "glyphOrderEqual": true,
+        "outlineHashes": [
+          "cd92421c437ab1a8fecc57eaabf2fa8c9b4edecd708e7f36440b1d18aedc897f",
+          "cd92421c437ab1a8fecc57eaabf2fa8c9b4edecd708e7f36440b1d18aedc897f"
+        ],
+        "cmapEqual": true,
+        "metricsEqual": true
+      }
+    },
+    {
+      "id": "averia-sans",
+      "reference": "https://github.com/google/fonts/blob/0f81bc90462b862dbfe3d16403ff284a68473833/ofl/averiasanslibre/AveriaSansLibre-Light.ttf",
+      "licenseReference": "https://github.com/google/fonts/blob/0f81bc90462b862dbfe3d16403ff284a68473833/ofl/averiasanslibre/OFL.txt",
+      "repository": "google/fonts",
+      "commit": "0f81bc90462b862dbfe3d16403ff284a68473833",
+      "member": "ofl/averiasanslibre/AveriaSansLibre-Light.ttf",
+      "licenseMember": "ofl/averiasanslibre/OFL.txt",
+      "archiveSha256": null,
+      "fontSha256": "03725f74b84f520d8f27d29d542c31b2213c0e06caff563a43745950e88649c7",
+      "fontGitBlob": "12505e3c1535795401dece75580c5e91c41e4bb0",
+      "licenseSha256": "46239ba6485d28553fd944da4ad32a00d9c403aa1c3e111676b0b96fe458d1d4",
+      "comparison": {
+        "localSha256": "df4ca526f9a941afda1f9c5a275695beb066a531f5b008c1e28ddc2c5f6e4390",
+        "referenceSha256": "03725f74b84f520d8f27d29d542c31b2213c0e06caff563a43745950e88649c7",
+        "sameTables": [
+          "gasp",
+          "hhea",
+          "hmtx",
+          "kern",
+          "maxp",
+          "post"
+        ],
+        "differentTables": [
+          "FFTM",
+          "OS/2",
+          "cmap",
+          "glyf",
+          "head",
+          "loca",
+          "name"
+        ],
+        "glyphCounts": [
+          234,
+          234
+        ],
+        "glyphOrderEqual": true,
+        "outlineHashes": [
+          "761f6e6108e56414a5d9e1080f07f471fe0d28758d2bf8051ce14d2e37247ccc",
+          "761f6e6108e56414a5d9e1080f07f471fe0d28758d2bf8051ce14d2e37247ccc"
+        ],
+        "cmapEqual": true,
+        "metricsEqual": true
+      }
+    },
+    {
+      "id": "lato",
+      "reference": "https://github.com/google/fonts/blob/f3b885d5590e307e02542f1a724cec55d567fdaa/ofl/lato/Lato-Regular.ttf",
+      "licenseReference": "https://github.com/google/fonts/blob/f3b885d5590e307e02542f1a724cec55d567fdaa/ofl/lato/OFL.txt",
+      "repository": "google/fonts",
+      "commit": "f3b885d5590e307e02542f1a724cec55d567fdaa",
+      "member": "ofl/lato/Lato-Regular.ttf",
+      "licenseMember": "ofl/lato/OFL.txt",
+      "archiveSha256": null,
+      "fontSha256": "d636e4683231f931eda222d588e944d082bfd3bdba02f928bee461c0f185b251",
+      "fontGitBlob": "0f3d0f837d24834b9b5b0a6b735459c56f5e75c3",
+      "licenseSha256": "74ba064d03f1f1c4a952da936c3eb71866c34404916734de3cae73b34357e59e",
+      "comparison": {
+        "localSha256": "6f6940be0835c3ddec9199e5fc42be4cbc61ebcfd58c623fdf719366253f1780",
+        "referenceSha256": "d636e4683231f931eda222d588e944d082bfd3bdba02f928bee461c0f185b251",
+        "sameTables": [
+          "GPOS",
+          "GSUB",
+          "cmap",
+          "cvt ",
+          "fpgm",
+          "gasp",
+          "glyf",
+          "hhea",
+          "hmtx",
+          "loca",
+          "maxp",
+          "post",
+          "prep"
+        ],
+        "differentTables": [
+          "OS/2",
+          "head",
+          "name"
+        ],
+        "glyphCounts": [
+          3023,
+          3023
+        ],
+        "glyphOrderEqual": true,
+        "outlineHashes": [
+          "740779480b4b3a5e9ee12951dd3b4f9de9038bc66e1a5609550c0e6823134877",
+          "740779480b4b3a5e9ee12951dd3b4f9de9038bc66e1a5609550c0e6823134877"
+        ],
+        "cmapEqual": true,
+        "metricsEqual": true
+      }
+    },
+    {
+      "id": "chawp",
+      "reference": "https://github.com/awp/chawp/blob/3c4f6317bebd6783c8d0db3bc9206aa62d602f90/chawp.otf",
+      "licenseReference": "https://github.com/awp/chawp/blob/3c4f6317bebd6783c8d0db3bc9206aa62d602f90/LICENSE",
+      "repository": "awp/chawp",
+      "commit": "3c4f6317bebd6783c8d0db3bc9206aa62d602f90",
+      "member": "chawp.otf",
+      "licenseMember": "LICENSE",
+      "archiveSha256": null,
+      "fontSha256": "9107241585a4328ce1438dfeabbfb1a8d0cd513dab6902be9a1a5774eab607c6",
+      "fontGitBlob": "8cceee5183cb068903a5f65c63c64deddc74e8d7",
+      "licenseSha256": "fa786a37ddd70be650bc53d476cc0a1ec5a6284c6f28a32943e941021b2397b8",
+      "comparison": {
+        "localSha256": "9107241585a4328ce1438dfeabbfb1a8d0cd513dab6902be9a1a5774eab607c6",
+        "referenceSha256": "9107241585a4328ce1438dfeabbfb1a8d0cd513dab6902be9a1a5774eab607c6",
+        "sameTables": [
+          "CFF ",
+          "GPOS",
+          "OS/2",
+          "cmap",
+          "head",
+          "hhea",
+          "hmtx",
+          "kern",
+          "maxp",
+          "name",
+          "post"
+        ],
+        "differentTables": [],
+        "glyphCounts": [
+          204,
+          204
+        ],
+        "glyphOrderEqual": true,
+        "outlineHashes": [
+          "7c67257d98c84ab95730e41b88f9d149d5130eaee05e1fee74739296d76eefb5",
+          "7c67257d98c84ab95730e41b88f9d149d5130eaee05e1fee74739296d76eefb5"
+        ],
+        "cmapEqual": true,
+        "metricsEqual": true
+      }
+    }
+  ],
+  "unresolved": [
+    "docs/assets/jassub/fonts/allison-script.regular.otf",
+    "docs/assets/jassub/fonts/architext.regular.ttf",
+    "docs/assets/jassub/fonts/arial.ttf",
+    "docs/assets/jassub/fonts/Averia Serif Simple Light.ttf",
+    "docs/assets/jassub/fonts/FRABK.TTF",
+    "docs/assets/jassub/fonts/Gramond.ttf",
+    "docs/assets/jassub/fonts/SlatePro-Medium.otf"
+  ],
+  "negativeComparison": {
+    "reference": "https://github.com/google/fonts/blob/463ce0ab22efecdd01ac957ae91e5dcac810fef2/ofl/averiaseriflibre/AveriaSerifLibre-Light.ttf",
+    "localSha256": "fb6398238298a7010920e1c216f7b29bc920477bc810f8bcc677ae4e6f411b4b",
+    "referenceSha256": "974986d0a74bb2a888e7fd13e5556388add3ccceeba77c699e43bb3121facf18",
+    "sameTables": [
+      "gasp",
+      "hhea",
+      "kern",
+      "maxp"
+    ],
+    "differentTables": [
+      "FFTM",
+      "OS/2",
+      "cmap",
+      "glyf",
+      "head",
+      "hmtx",
+      "loca",
+      "name",
+      "post"
+    ],
+    "glyphCounts": [
+      234,
+      234
+    ],
+    "glyphOrderEqual": false,
+    "outlineHashes": [
+      "d7c4937917d1b72dc3ecb673fea61f3ea546fa3af184458e447d4655c663cb25",
+      "7bd0ec3ffac6a73bc9cdeb79829e9c97a7a6642b5355dec4749c9a99e59578a2"
+    ],
+    "cmapEqual": true,
+    "metricsEqual": false
+  },
+  "acquisition": "refactor/baselines/jassub-provenance.json"
+}

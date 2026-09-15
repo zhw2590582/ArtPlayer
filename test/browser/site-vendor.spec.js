@@ -27,6 +27,7 @@ test('mobile vConsole shows logs and upstream site notice texts are served uncha
     { path: '/licenses/monaco-editor/core-origins/ATTRIBUTION.md', count: 3 },
     { path: '/licenses/monaco-editor/core-path/ATTRIBUTION.md', count: 1 },
     { path: '/licenses/monaco-editor/core-dom/ATTRIBUTION.md', count: 1 },
+    { path: '/licenses/jassub-fonts/ATTRIBUTION.md', count: 4 },
   ]) {
     const attribution = await request.get(path)
     expect(attribution.status()).toBe(200)
@@ -68,4 +69,40 @@ test('mobile vConsole shows logs and upstream site notice texts are served uncha
     window.art.destroy()
   })
   await expect(page.locator('#__vconsole')).toHaveCount(0)
+})
+
+test('selected JASSUB font URLs preserve bytes and decode with native font loading', async ({ page, request }, testInfo) => {
+  await page.goto('/test/player.html?core=published')
+  const record = JSON.parse(fs.readFileSync('refactor/baselines/site-font-notices-provenance.json', 'utf8'))
+  const results = []
+  for (const [index, file] of record.group.files.entries()) {
+    const url = `/${file.path.slice('docs/'.length)}`
+    const response = await request.get(url)
+    expect(response.status()).toBe(200)
+    expect(createHash('sha256').update(await response.body()).digest('hex')).toBe(file.sha256)
+    const rendered = await page.evaluate(async ({ url, index }) => {
+      const family = `notice-font-${index}`
+      const font = new FontFace(family, `url(${JSON.stringify(url)})`)
+      await font.load()
+      document.fonts.add(font)
+      try {
+        const canvas = document.createElement('canvas')
+        canvas.width = 320
+        canvas.height = 80
+        const context = canvas.getContext('2d')
+        context.font = `32px ${family}`
+        context.fillText('ArtPlayer ABC 123', 4, 45)
+        const pixels = context.getImageData(0, 0, 320, 80).data
+        return { status: font.status, inkPixels: pixels.filter((value, offset) => offset % 4 === 3 && value > 0).length, width: context.measureText('ArtPlayer ABC 123').width }
+      }
+      finally {
+        document.fonts.delete(font)
+      }
+    }, { url, index })
+    expect(rendered.status).toBe('loaded')
+    expect(rendered.inkPixels).toBeGreaterThan(100)
+    expect(rendered.width).toBeGreaterThan(50)
+    results.push({ url, sha256: file.sha256, ...rendered })
+  }
+  await testInfo.attach('selected-font-http-and-native-load', { contentType: 'application/json', body: JSON.stringify(results) })
 })

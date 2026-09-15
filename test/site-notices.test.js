@@ -8,6 +8,7 @@ import process from 'node:process'
 // eslint-disable-next-line test/no-import-node-test -- Verify real notice bytes and failure-before-write behavior.
 import test from 'node:test'
 import { verifyConsoleNoticeSources } from '../scripts/site-vendor/console/notices.ts'
+import { verifyFontNotices } from '../scripts/site-vendor/fonts/notices.ts'
 import { verifyMonacoCoreNotices } from '../scripts/site-vendor/monaco/core-origins.ts'
 import { domOriginFragments, verifyMonacoDomNotices } from '../scripts/site-vendor/monaco/dom-origins.ts'
 import { verifyMonacoPathNotices } from '../scripts/site-vendor/monaco/node-path.ts'
@@ -15,6 +16,25 @@ import { verifyMonacoLanguageNoticeArchives, verifyMonacoLanguageNotices } from 
 import { generateNotices, writeOrCheckNotices } from '../scripts/site-vendor/notices.ts'
 
 const hash = bytes => createHash('sha256').update(bytes).digest('hex')
+
+test('Font notices preserve exact family/source bindings and do not promote unresolved fonts', () => {
+  const original = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))
+  assert.doesNotThrow(() => verifyFontNotices(process.cwd(), original))
+  const wrongLicense = structuredClone(original)
+  const group = wrongLicense.groups.find(group => group.name === 'jassub-fonts')
+  group.components[0].notices = group.components[1].notices
+  assert.doesNotThrow(() => generateNotices(process.cwd(), wrongLicense))
+  assert.throws(() => verifyFontNotices(process.cwd(), wrongLicense), /Font notice\/source binding/)
+  const missing = structuredClone(original)
+  missing.groups.find(group => group.name === 'jassub-fonts').notices.pop()
+  assert.throws(() => verifyFontNotices(process.cwd(), missing), /Font notice\/source binding/)
+  const promoted = structuredClone(original)
+  promoted.groups.find(group => group.name === 'jassub-fonts').components[0].assets.push('docs/assets/jassub/fonts/arial.ttf')
+  assert.throws(() => verifyFontNotices(process.cwd(), promoted), /Font notice\/source binding/)
+  const record = JSON.parse(fs.readFileSync('refactor/baselines/site-font-notices-provenance.json', 'utf8'))
+  assert(record.unresolved.includes('docs/assets/jassub/fonts/Averia Serif Simple Light.ttf'))
+  assert.notEqual(record.negativeComparison.outlineHashes[0], record.negativeComparison.outlineHashes[1])
+})
 
 test('WinJS-derived DOM helpers keep reference terms without claiming an exact original version', () => {
   const original = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))

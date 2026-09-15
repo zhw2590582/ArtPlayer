@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "scope": "Frozen source identities and verbatim upstream notice texts for Monaco, vConsole and the legacy console bundle. Embedded component attribution, fonts, media and other site provenance gates remain open; this inventory is not publication clearance.",
+  "scope": "Frozen source identities and complete upstream notice texts for selected site components and font references. Unresolved font/media and embedded provenance gates remain open; this inventory is not publication clearance.",
   "groups": [
     {
       "name": "vconsole",
@@ -2004,6 +2004,124 @@
             "docs/licenses/console/react-pure-render/LICENSE",
             "docs/licenses/console/react-pure-render/ATTRIBUTION.md"
           ]
+        }
+      ]
+    },
+    {
+      "name": "jassub-fonts",
+      "version": "selected historical references",
+      "tarball": "https://github.com/ThaUnknown/jassub/tree/25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+      "review": "Four selected font families only. CHAWP matches author bytes; other full notice references have explicit font-table differences. Other fonts and complete redistribution provenance remain open under SITE-07/VENDOR-05.",
+      "roots": [
+        "docs/assets/jassub/default.woff2",
+        "docs/assets/jassub/fonts/default.woff2",
+        "docs/assets/jassub/fonts/Averia Sans Libre Light.ttf",
+        "docs/assets/jassub/fonts/Lato-Regular.ttf",
+        "docs/assets/jassub/fonts/chawp.otf"
+      ],
+      "files": [
+        {
+          "path": "docs/assets/jassub/default.woff2",
+          "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+          "mode": "binary"
+        },
+        {
+          "path": "docs/assets/jassub/fonts/default.woff2",
+          "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+          "mode": "binary"
+        },
+        {
+          "path": "docs/assets/jassub/fonts/Averia Sans Libre Light.ttf",
+          "sha256": "df4ca526f9a941afda1f9c5a275695beb066a531f5b008c1e28ddc2c5f6e4390",
+          "mode": "binary"
+        },
+        {
+          "path": "docs/assets/jassub/fonts/Lato-Regular.ttf",
+          "sha256": "6f6940be0835c3ddec9199e5fc42be4cbc61ebcfd58c623fdf719366253f1780",
+          "mode": "binary"
+        },
+        {
+          "path": "docs/assets/jassub/fonts/chawp.otf",
+          "sha256": "9107241585a4328ce1438dfeabbfb1a8d0cd513dab6902be9a1a5774eab607c6",
+          "mode": "binary"
+        }
+      ],
+      "components": [
+        {
+          "name": "Liberation Sans",
+          "version": "2.00.5 reference",
+          "tarball": "https://github.com/liberationfonts/liberation-fonts/files/2926169/liberation-fonts-ttf-2.00.5.tar.gz",
+          "assets": [
+            "docs/assets/jassub/default.woff2",
+            "docs/assets/jassub/fonts/default.woff2"
+          ],
+          "notices": [
+            "docs/licenses/jassub-fonts/liberation/OFL.txt",
+            "docs/licenses/jassub-fonts/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "Averia Sans Libre Light",
+          "version": "1.002 reference",
+          "tarball": "https://github.com/google/fonts/blob/0f81bc90462b862dbfe3d16403ff284a68473833/ofl/averiasanslibre/AveriaSansLibre-Light.ttf",
+          "assets": [
+            "docs/assets/jassub/fonts/Averia Sans Libre Light.ttf"
+          ],
+          "notices": [
+            "docs/licenses/jassub-fonts/averia-sans/OFL.txt",
+            "docs/licenses/jassub-fonts/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "Lato Regular",
+          "version": "2.015 reference",
+          "tarball": "https://github.com/google/fonts/blob/f3b885d5590e307e02542f1a724cec55d567fdaa/ofl/lato/Lato-Regular.ttf",
+          "assets": [
+            "docs/assets/jassub/fonts/Lato-Regular.ttf"
+          ],
+          "notices": [
+            "docs/licenses/jassub-fonts/lato/OFL.txt",
+            "docs/licenses/jassub-fonts/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "CHAWP",
+          "version": "1.000 exact bytes",
+          "tarball": "https://github.com/awp/chawp/blob/3c4f6317bebd6783c8d0db3bc9206aa62d602f90/chawp.otf",
+          "assets": [
+            "docs/assets/jassub/fonts/chawp.otf"
+          ],
+          "notices": [
+            "docs/licenses/jassub-fonts/chawp/OFL.txt",
+            "docs/licenses/jassub-fonts/ATTRIBUTION.md"
+          ]
+        }
+      ],
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/jassub-fonts/liberation-OFL.txt",
+          "target": "docs/licenses/jassub-fonts/liberation/OFL.txt",
+          "sha256": "93fed46019c38bbe566b479d22148e2e8a1e85ada614accb0211c37b2c61c19b"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/jassub-fonts/averia-sans-OFL.txt",
+          "target": "docs/licenses/jassub-fonts/averia-sans/OFL.txt",
+          "sha256": "46239ba6485d28553fd944da4ad32a00d9c403aa1c3e111676b0b96fe458d1d4"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/jassub-fonts/lato-OFL.txt",
+          "target": "docs/licenses/jassub-fonts/lato/OFL.txt",
+          "sha256": "74ba064d03f1f1c4a952da936c3eb71866c34404916734de3cae73b34357e59e"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/jassub-fonts/chawp-OFL.txt",
+          "target": "docs/licenses/jassub-fonts/chawp/OFL.txt",
+          "sha256": "fa786a37ddd70be650bc53d476cc0a1ec5a6284c6f28a32943e941021b2397b8"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/jassub-fonts/ATTRIBUTION.txt",
+          "target": "docs/licenses/jassub-fonts/ATTRIBUTION.md",
+          "sha256": "b9485c05b07bbfca2407f4336247d2bb19eba05458fe9bced8f68c81c158504d"
         }
       ]
     }

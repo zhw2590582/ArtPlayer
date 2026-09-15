@@ -1,0 +1,1784 @@
+{
+  "task": "SITE-07",
+  "checkpoint": "selected-font-notice-references",
+  "baselineCommit": "01f3d00e4c20ff39ce0e5e7db885cee15fd820ee",
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "python": "3.12.14",
+    "fonttools": "4.60.1",
+    "brotli": "1.1.0"
+  },
+  "scope": "Four complete font notice references at five unchanged font URLs. Does not close other font permissions, original conversion provenance, libass shaping, remote CI or publication.",
+  "validation": {
+    "noticeTests": {
+      "passed": 15,
+      "failed": 0
+    },
+    "jassubProvenanceTests": {
+      "passed": 2,
+      "failed": 0
+    },
+    "generatedNoticeOutputs": 96,
+    "strictTypes": "pass",
+    "targetedLint": "pass",
+    "fontReferenceComparison": "all recorded observations match",
+    "tamperedReference": "rejected before parsing"
+  },
+  "browserStats": {
+    "startTime": "2026-09-15T12:30:10.762Z",
+    "duration": 15423.377,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "cases": [
+    {
+      "project": "chromium",
+      "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+      "status": "passed",
+      "durationMs": 1478,
+      "browser": {
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "manifest": {
+          "kind": "artplayer-browser-test",
+          "resources": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931
+            },
+            "/compiled/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931,
+              "aliasOf": "/candidate/artplayer.js"
+            },
+            "/uncompiled/artplayer/index.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931,
+              "aliasOf": "/candidate/artplayer.js"
+            },
+            "/candidate/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529
+            },
+            "/compiled/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529,
+              "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+            },
+            "/uncompiled/artplayer-plugin-chapter/index.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529,
+              "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "1.1.0",
+                "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                "member": "package/dist/artplayer-plugin-chapter.js"
+              },
+              "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+              "bytes": 4973
+            },
+            "/test/pattern.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/pattern.mp4"
+              },
+              "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+              "bytes": 251538
+            },
+            "/test/pattern.webm": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/pattern.webm"
+              },
+              "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+              "bytes": 162073
+            },
+            "/published-4.5.5/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "4.5.5",
+                "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+              "bytes": 153582
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-4.5.9/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "4.5.9",
+                "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+              "bytes": 156408
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.6/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.6",
+                "integrity": "sha512-cqnVVLKCKWCryKl6Pmop50/Di9IQwOeNNQs5qWGzJDPiM0qTC7Q/Enusa+8JQid8p09fvp4Vc32ViSSYutdEeQ==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "6a7b1f3007ecda9f399e6cff606490dd745c495e19ce10e864a401ff09996172",
+              "bytes": 155714
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            },
+            "/test/audio-tone.m4a": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/audio-tone.m4a"
+              },
+              "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+              "bytes": 132436
+            },
+            "/test/thumbnail-pattern.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/thumbnail-pattern.mp4"
+              },
+              "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+              "bytes": 752916
+            },
+            "/test/auto-thumbnail-timeline.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/auto-thumbnail-timeline.mp4"
+              },
+              "sha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994",
+              "bytes": 8602
+            },
+            "/test/vast-skippable.xml": {
+              "source": {
+                "kind": "local-vast-fixture",
+                "file": "test/browser/vast-fixture.mjs"
+              },
+              "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+              "bytes": 760
+            },
+            "/test/declaration-cues.vtt": {
+              "source": {
+                "kind": "test-subtitles",
+                "file": "test/browser/media/declaration-cues.vtt"
+              },
+              "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+              "bytes": 54
+            },
+            "/test/thumbnail-grid.svg": {
+              "source": {
+                "kind": "test-thumbnail-grid",
+                "file": "test/browser/media/thumbnail-grid.svg"
+              },
+              "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+              "bytes": 14969
+            },
+            "/test/legacy-safe-area.js": {
+              "source": {
+                "kind": "frozen-own-source",
+                "file": "test/helpers/legacy-safe-area.js",
+                "commit": "ccf77c4e"
+              },
+              "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+              "bytes": 795
+            },
+            "/test/iframe-boundary-child.html": {
+              "source": {
+                "kind": "iframe-fixture",
+                "file": "test/browser/iframe-boundary-child.html"
+              },
+              "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+              "bytes": 1451
+            },
+            "/published-5.3.1-beta.1/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.1-beta.1",
+                "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+              "bytes": 159458
+            },
+            "/assets/sample/video.mp4": {
+              "source": {
+                "kind": "docs-media",
+                "file": "docs/assets/sample/video.mp4"
+              },
+              "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+              "bytes": 5818706
+            },
+            "/test/performance.js": {
+              "source": {
+                "kind": "adapted-baseline-fixture",
+                "file": "refactor/fixtures/performance.js"
+              },
+              "sha256": "c5a8a8611db004aadd6c3b82c61b8ae242319c1a12e73bf784c1da06fcebed72",
+              "bytes": 9251
+            }
+          }
+        },
+        "state": {
+          "url": "http://127.0.0.1:8084/mobile.html?code=window.art%20%3D%20new%20Artplayer(%7Bcontainer%3A%22.artplayer-app%22%2Curl%3A%22%2Ftest%2Fpattern.mp4%22%2Cmuted%3Atrue%7D)%3B%20console.log(%22site-vendor-verified-message%22)%3B",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "media": null
+        },
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ]
+      },
+      "fonts": null,
+      "noticeCount": 95
+    },
+    {
+      "project": "chromium",
+      "title": "selected JASSUB font URLs preserve bytes and decode with native font loading",
+      "status": "passed",
+      "durationMs": 258,
+      "browser": {
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "manifest": {
+          "kind": "artplayer-browser-test",
+          "resources": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931
+            },
+            "/compiled/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931,
+              "aliasOf": "/candidate/artplayer.js"
+            },
+            "/uncompiled/artplayer/index.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931,
+              "aliasOf": "/candidate/artplayer.js"
+            },
+            "/candidate/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529
+            },
+            "/compiled/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529,
+              "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+            },
+            "/uncompiled/artplayer-plugin-chapter/index.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529,
+              "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "1.1.0",
+                "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                "member": "package/dist/artplayer-plugin-chapter.js"
+              },
+              "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+              "bytes": 4973
+            },
+            "/test/pattern.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/pattern.mp4"
+              },
+              "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+              "bytes": 251538
+            },
+            "/test/pattern.webm": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/pattern.webm"
+              },
+              "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+              "bytes": 162073
+            },
+            "/published-4.5.5/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "4.5.5",
+                "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+              "bytes": 153582
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-4.5.9/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "4.5.9",
+                "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+              "bytes": 156408
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.6/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.6",
+                "integrity": "sha512-cqnVVLKCKWCryKl6Pmop50/Di9IQwOeNNQs5qWGzJDPiM0qTC7Q/Enusa+8JQid8p09fvp4Vc32ViSSYutdEeQ==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "6a7b1f3007ecda9f399e6cff606490dd745c495e19ce10e864a401ff09996172",
+              "bytes": 155714
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            },
+            "/test/audio-tone.m4a": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/audio-tone.m4a"
+              },
+              "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+              "bytes": 132436
+            },
+            "/test/thumbnail-pattern.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/thumbnail-pattern.mp4"
+              },
+              "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+              "bytes": 752916
+            },
+            "/test/auto-thumbnail-timeline.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/auto-thumbnail-timeline.mp4"
+              },
+              "sha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994",
+              "bytes": 8602
+            },
+            "/test/vast-skippable.xml": {
+              "source": {
+                "kind": "local-vast-fixture",
+                "file": "test/browser/vast-fixture.mjs"
+              },
+              "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+              "bytes": 760
+            },
+            "/test/declaration-cues.vtt": {
+              "source": {
+                "kind": "test-subtitles",
+                "file": "test/browser/media/declaration-cues.vtt"
+              },
+              "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+              "bytes": 54
+            },
+            "/test/thumbnail-grid.svg": {
+              "source": {
+                "kind": "test-thumbnail-grid",
+                "file": "test/browser/media/thumbnail-grid.svg"
+              },
+              "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+              "bytes": 14969
+            },
+            "/test/legacy-safe-area.js": {
+              "source": {
+                "kind": "frozen-own-source",
+                "file": "test/helpers/legacy-safe-area.js",
+                "commit": "ccf77c4e"
+              },
+              "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+              "bytes": 795
+            },
+            "/test/iframe-boundary-child.html": {
+              "source": {
+                "kind": "iframe-fixture",
+                "file": "test/browser/iframe-boundary-child.html"
+              },
+              "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+              "bytes": 1451
+            },
+            "/published-5.3.1-beta.1/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.1-beta.1",
+                "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+              "bytes": 159458
+            },
+            "/assets/sample/video.mp4": {
+              "source": {
+                "kind": "docs-media",
+                "file": "docs/assets/sample/video.mp4"
+              },
+              "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+              "bytes": 5818706
+            },
+            "/test/performance.js": {
+              "source": {
+                "kind": "adapted-baseline-fixture",
+                "file": "refactor/fixtures/performance.js"
+              },
+              "sha256": "c5a8a8611db004aadd6c3b82c61b8ae242319c1a12e73bf784c1da06fcebed72",
+              "bytes": 9251
+            }
+          }
+        },
+        "state": {
+          "url": "http://127.0.0.1:8084/test/player.html?core=published",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "media": null
+        },
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "fonts": [
+        {
+          "url": "/assets/jassub/default.woff2",
+          "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+          "status": "loaded",
+          "inkPixels": 2577,
+          "width": 268.5625
+        },
+        {
+          "url": "/assets/jassub/fonts/default.woff2",
+          "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+          "status": "loaded",
+          "inkPixels": 2577,
+          "width": 268.5625
+        },
+        {
+          "url": "/assets/jassub/fonts/Averia Sans Libre Light.ttf",
+          "sha256": "df4ca526f9a941afda1f9c5a275695beb066a531f5b008c1e28ddc2c5f6e4390",
+          "status": "loaded",
+          "inkPixels": 2300,
+          "width": 252
+        },
+        {
+          "url": "/assets/jassub/fonts/Lato-Regular.ttf",
+          "sha256": "6f6940be0835c3ddec9199e5fc42be4cbc61ebcfd58c623fdf719366253f1780",
+          "status": "loaded",
+          "inkPixels": 2615,
+          "width": 267.2958679199219
+        },
+        {
+          "url": "/assets/jassub/fonts/chawp.otf",
+          "sha256": "9107241585a4328ce1438dfeabbfb1a8d0cd513dab6902be9a1a5774eab607c6",
+          "status": "loaded",
+          "inkPixels": 3663,
+          "width": 304.3198547363281
+        }
+      ],
+      "noticeCount": null
+    },
+    {
+      "project": "firefox",
+      "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+      "status": "passed",
+      "durationMs": 2624,
+      "browser": {
+        "browser": "155.0",
+        "platform": "win32",
+        "manifest": {
+          "kind": "artplayer-browser-test",
+          "resources": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931
+            },
+            "/compiled/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931,
+              "aliasOf": "/candidate/artplayer.js"
+            },
+            "/uncompiled/artplayer/index.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931,
+              "aliasOf": "/candidate/artplayer.js"
+            },
+            "/candidate/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529
+            },
+            "/compiled/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529,
+              "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+            },
+            "/uncompiled/artplayer-plugin-chapter/index.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529,
+              "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "1.1.0",
+                "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                "member": "package/dist/artplayer-plugin-chapter.js"
+              },
+              "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+              "bytes": 4973
+            },
+            "/test/pattern.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/pattern.mp4"
+              },
+              "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+              "bytes": 251538
+            },
+            "/test/pattern.webm": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/pattern.webm"
+              },
+              "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+              "bytes": 162073
+            },
+            "/published-4.5.5/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "4.5.5",
+                "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+              "bytes": 153582
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-4.5.9/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "4.5.9",
+                "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+              "bytes": 156408
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.6/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.6",
+                "integrity": "sha512-cqnVVLKCKWCryKl6Pmop50/Di9IQwOeNNQs5qWGzJDPiM0qTC7Q/Enusa+8JQid8p09fvp4Vc32ViSSYutdEeQ==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "6a7b1f3007ecda9f399e6cff606490dd745c495e19ce10e864a401ff09996172",
+              "bytes": 155714
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            },
+            "/test/audio-tone.m4a": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/audio-tone.m4a"
+              },
+              "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+              "bytes": 132436
+            },
+            "/test/thumbnail-pattern.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/thumbnail-pattern.mp4"
+              },
+              "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+              "bytes": 752916
+            },
+            "/test/auto-thumbnail-timeline.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/auto-thumbnail-timeline.mp4"
+              },
+              "sha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994",
+              "bytes": 8602
+            },
+            "/test/vast-skippable.xml": {
+              "source": {
+                "kind": "local-vast-fixture",
+                "file": "test/browser/vast-fixture.mjs"
+              },
+              "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+              "bytes": 760
+            },
+            "/test/declaration-cues.vtt": {
+              "source": {
+                "kind": "test-subtitles",
+                "file": "test/browser/media/declaration-cues.vtt"
+              },
+              "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+              "bytes": 54
+            },
+            "/test/thumbnail-grid.svg": {
+              "source": {
+                "kind": "test-thumbnail-grid",
+                "file": "test/browser/media/thumbnail-grid.svg"
+              },
+              "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+              "bytes": 14969
+            },
+            "/test/legacy-safe-area.js": {
+              "source": {
+                "kind": "frozen-own-source",
+                "file": "test/helpers/legacy-safe-area.js",
+                "commit": "ccf77c4e"
+              },
+              "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+              "bytes": 795
+            },
+            "/test/iframe-boundary-child.html": {
+              "source": {
+                "kind": "iframe-fixture",
+                "file": "test/browser/iframe-boundary-child.html"
+              },
+              "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+              "bytes": 1451
+            },
+            "/published-5.3.1-beta.1/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.1-beta.1",
+                "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+              "bytes": 159458
+            },
+            "/assets/sample/video.mp4": {
+              "source": {
+                "kind": "docs-media",
+                "file": "docs/assets/sample/video.mp4"
+              },
+              "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+              "bytes": 5818706
+            },
+            "/test/performance.js": {
+              "source": {
+                "kind": "adapted-baseline-fixture",
+                "file": "refactor/fixtures/performance.js"
+              },
+              "sha256": "c5a8a8611db004aadd6c3b82c61b8ae242319c1a12e73bf784c1da06fcebed72",
+              "bytes": 9251
+            }
+          }
+        },
+        "state": {
+          "url": "http://127.0.0.1:8084/mobile.html?code=window.art%20%3D%20new%20Artplayer(%7Bcontainer%3A%22.artplayer-app%22%2Curl%3A%22%2Ftest%2Fpattern.mp4%22%2Cmuted%3Atrue%7D)%3B%20console.log(%22site-vendor-verified-message%22)%3B",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "media": null
+        },
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "fonts": null,
+      "noticeCount": 95
+    },
+    {
+      "project": "firefox",
+      "title": "selected JASSUB font URLs preserve bytes and decode with native font loading",
+      "status": "passed",
+      "durationMs": 392,
+      "browser": {
+        "browser": "155.0",
+        "platform": "win32",
+        "manifest": {
+          "kind": "artplayer-browser-test",
+          "resources": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931
+            },
+            "/compiled/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931,
+              "aliasOf": "/candidate/artplayer.js"
+            },
+            "/uncompiled/artplayer/index.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931,
+              "aliasOf": "/candidate/artplayer.js"
+            },
+            "/candidate/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529
+            },
+            "/compiled/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529,
+              "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+            },
+            "/uncompiled/artplayer-plugin-chapter/index.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529,
+              "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "1.1.0",
+                "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                "member": "package/dist/artplayer-plugin-chapter.js"
+              },
+              "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+              "bytes": 4973
+            },
+            "/test/pattern.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/pattern.mp4"
+              },
+              "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+              "bytes": 251538
+            },
+            "/test/pattern.webm": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/pattern.webm"
+              },
+              "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+              "bytes": 162073
+            },
+            "/published-4.5.5/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "4.5.5",
+                "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+              "bytes": 153582
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-4.5.9/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "4.5.9",
+                "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+              "bytes": 156408
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.6/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.6",
+                "integrity": "sha512-cqnVVLKCKWCryKl6Pmop50/Di9IQwOeNNQs5qWGzJDPiM0qTC7Q/Enusa+8JQid8p09fvp4Vc32ViSSYutdEeQ==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "6a7b1f3007ecda9f399e6cff606490dd745c495e19ce10e864a401ff09996172",
+              "bytes": 155714
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            },
+            "/test/audio-tone.m4a": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/audio-tone.m4a"
+              },
+              "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+              "bytes": 132436
+            },
+            "/test/thumbnail-pattern.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/thumbnail-pattern.mp4"
+              },
+              "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+              "bytes": 752916
+            },
+            "/test/auto-thumbnail-timeline.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/auto-thumbnail-timeline.mp4"
+              },
+              "sha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994",
+              "bytes": 8602
+            },
+            "/test/vast-skippable.xml": {
+              "source": {
+                "kind": "local-vast-fixture",
+                "file": "test/browser/vast-fixture.mjs"
+              },
+              "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+              "bytes": 760
+            },
+            "/test/declaration-cues.vtt": {
+              "source": {
+                "kind": "test-subtitles",
+                "file": "test/browser/media/declaration-cues.vtt"
+              },
+              "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+              "bytes": 54
+            },
+            "/test/thumbnail-grid.svg": {
+              "source": {
+                "kind": "test-thumbnail-grid",
+                "file": "test/browser/media/thumbnail-grid.svg"
+              },
+              "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+              "bytes": 14969
+            },
+            "/test/legacy-safe-area.js": {
+              "source": {
+                "kind": "frozen-own-source",
+                "file": "test/helpers/legacy-safe-area.js",
+                "commit": "ccf77c4e"
+              },
+              "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+              "bytes": 795
+            },
+            "/test/iframe-boundary-child.html": {
+              "source": {
+                "kind": "iframe-fixture",
+                "file": "test/browser/iframe-boundary-child.html"
+              },
+              "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+              "bytes": 1451
+            },
+            "/published-5.3.1-beta.1/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.1-beta.1",
+                "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+              "bytes": 159458
+            },
+            "/assets/sample/video.mp4": {
+              "source": {
+                "kind": "docs-media",
+                "file": "docs/assets/sample/video.mp4"
+              },
+              "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+              "bytes": 5818706
+            },
+            "/test/performance.js": {
+              "source": {
+                "kind": "adapted-baseline-fixture",
+                "file": "refactor/fixtures/performance.js"
+              },
+              "sha256": "c5a8a8611db004aadd6c3b82c61b8ae242319c1a12e73bf784c1da06fcebed72",
+              "bytes": 9251
+            }
+          }
+        },
+        "state": {
+          "url": "http://127.0.0.1:8084/test/player.html?core=published",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "media": null
+        },
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "fonts": [
+        {
+          "url": "/assets/jassub/default.woff2",
+          "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+          "status": "loaded",
+          "inkPixels": 2338,
+          "width": 268.5833435058594
+        },
+        {
+          "url": "/assets/jassub/fonts/default.woff2",
+          "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+          "status": "loaded",
+          "inkPixels": 2338,
+          "width": 268.5833435058594
+        },
+        {
+          "url": "/assets/jassub/fonts/Averia Sans Libre Light.ttf",
+          "sha256": "df4ca526f9a941afda1f9c5a275695beb066a531f5b008c1e28ddc2c5f6e4390",
+          "status": "loaded",
+          "inkPixels": 2045,
+          "width": 252
+        },
+        {
+          "url": "/assets/jassub/fonts/Lato-Regular.ttf",
+          "sha256": "6f6940be0835c3ddec9199e5fc42be4cbc61ebcfd58c623fdf719366253f1780",
+          "status": "loaded",
+          "inkPixels": 2248,
+          "width": 265.5833435058594
+        },
+        {
+          "url": "/assets/jassub/fonts/chawp.otf",
+          "sha256": "9107241585a4328ce1438dfeabbfb1a8d0cd513dab6902be9a1a5774eab607c6",
+          "status": "loaded",
+          "inkPixels": 3221,
+          "width": 304.29998779296875
+        }
+      ],
+      "noticeCount": null
+    },
+    {
+      "project": "webkit",
+      "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+      "status": "passed",
+      "durationMs": 3287,
+      "browser": {
+        "browser": "26.6",
+        "platform": "win32",
+        "manifest": {
+          "kind": "artplayer-browser-test",
+          "resources": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931
+            },
+            "/compiled/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931,
+              "aliasOf": "/candidate/artplayer.js"
+            },
+            "/uncompiled/artplayer/index.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931,
+              "aliasOf": "/candidate/artplayer.js"
+            },
+            "/candidate/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529
+            },
+            "/compiled/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529,
+              "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+            },
+            "/uncompiled/artplayer-plugin-chapter/index.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529,
+              "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "1.1.0",
+                "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                "member": "package/dist/artplayer-plugin-chapter.js"
+              },
+              "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+              "bytes": 4973
+            },
+            "/test/pattern.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/pattern.mp4"
+              },
+              "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+              "bytes": 251538
+            },
+            "/test/pattern.webm": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/pattern.webm"
+              },
+              "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+              "bytes": 162073
+            },
+            "/published-4.5.5/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "4.5.5",
+                "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+              "bytes": 153582
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-4.5.9/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "4.5.9",
+                "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+              "bytes": 156408
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.6/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.6",
+                "integrity": "sha512-cqnVVLKCKWCryKl6Pmop50/Di9IQwOeNNQs5qWGzJDPiM0qTC7Q/Enusa+8JQid8p09fvp4Vc32ViSSYutdEeQ==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "6a7b1f3007ecda9f399e6cff606490dd745c495e19ce10e864a401ff09996172",
+              "bytes": 155714
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            },
+            "/test/audio-tone.m4a": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/audio-tone.m4a"
+              },
+              "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+              "bytes": 132436
+            },
+            "/test/thumbnail-pattern.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/thumbnail-pattern.mp4"
+              },
+              "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+              "bytes": 752916
+            },
+            "/test/auto-thumbnail-timeline.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/auto-thumbnail-timeline.mp4"
+              },
+              "sha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994",
+              "bytes": 8602
+            },
+            "/test/vast-skippable.xml": {
+              "source": {
+                "kind": "local-vast-fixture",
+                "file": "test/browser/vast-fixture.mjs"
+              },
+              "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+              "bytes": 760
+            },
+            "/test/declaration-cues.vtt": {
+              "source": {
+                "kind": "test-subtitles",
+                "file": "test/browser/media/declaration-cues.vtt"
+              },
+              "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+              "bytes": 54
+            },
+            "/test/thumbnail-grid.svg": {
+              "source": {
+                "kind": "test-thumbnail-grid",
+                "file": "test/browser/media/thumbnail-grid.svg"
+              },
+              "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+              "bytes": 14969
+            },
+            "/test/legacy-safe-area.js": {
+              "source": {
+                "kind": "frozen-own-source",
+                "file": "test/helpers/legacy-safe-area.js",
+                "commit": "ccf77c4e"
+              },
+              "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+              "bytes": 795
+            },
+            "/test/iframe-boundary-child.html": {
+              "source": {
+                "kind": "iframe-fixture",
+                "file": "test/browser/iframe-boundary-child.html"
+              },
+              "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+              "bytes": 1451
+            },
+            "/published-5.3.1-beta.1/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.1-beta.1",
+                "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+              "bytes": 159458
+            },
+            "/assets/sample/video.mp4": {
+              "source": {
+                "kind": "docs-media",
+                "file": "docs/assets/sample/video.mp4"
+              },
+              "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+              "bytes": 5818706
+            },
+            "/test/performance.js": {
+              "source": {
+                "kind": "adapted-baseline-fixture",
+                "file": "refactor/fixtures/performance.js"
+              },
+              "sha256": "c5a8a8611db004aadd6c3b82c61b8ae242319c1a12e73bf784c1da06fcebed72",
+              "bytes": 9251
+            }
+          }
+        },
+        "state": {
+          "url": "http://127.0.0.1:8084/mobile.html?code=window.art%20%3D%20new%20Artplayer(%7Bcontainer%3A%22.artplayer-app%22%2Curl%3A%22%2Ftest%2Fpattern.mp4%22%2Cmuted%3Atrue%7D)%3B%20console.log(%22site-vendor-verified-message%22)%3B",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "media": null
+        },
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "fonts": null,
+      "noticeCount": 95
+    },
+    {
+      "project": "webkit",
+      "title": "selected JASSUB font URLs preserve bytes and decode with native font loading",
+      "status": "passed",
+      "durationMs": 554,
+      "browser": {
+        "browser": "26.6",
+        "platform": "win32",
+        "manifest": {
+          "kind": "artplayer-browser-test",
+          "resources": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931
+            },
+            "/compiled/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931,
+              "aliasOf": "/candidate/artplayer.js"
+            },
+            "/uncompiled/artplayer/index.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+              "bytes": 378931,
+              "aliasOf": "/candidate/artplayer.js"
+            },
+            "/candidate/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529
+            },
+            "/compiled/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529,
+              "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+            },
+            "/uncompiled/artplayer-plugin-chapter/index.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+              },
+              "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+              "bytes": 8529,
+              "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published/artplayer-plugin-chapter.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "1.1.0",
+                "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                "member": "package/dist/artplayer-plugin-chapter.js"
+              },
+              "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+              "bytes": 4973
+            },
+            "/test/pattern.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/pattern.mp4"
+              },
+              "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+              "bytes": 251538
+            },
+            "/test/pattern.webm": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/pattern.webm"
+              },
+              "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+              "bytes": 162073
+            },
+            "/published-4.5.5/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "4.5.5",
+                "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+              "bytes": 153582
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-4.5.9/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "4.5.9",
+                "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+              "bytes": 156408
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.6/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.6",
+                "integrity": "sha512-cqnVVLKCKWCryKl6Pmop50/Di9IQwOeNNQs5qWGzJDPiM0qTC7Q/Enusa+8JQid8p09fvp4Vc32ViSSYutdEeQ==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "6a7b1f3007ecda9f399e6cff606490dd745c495e19ce10e864a401ff09996172",
+              "bytes": 155714
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            },
+            "/test/audio-tone.m4a": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/audio-tone.m4a"
+              },
+              "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+              "bytes": 132436
+            },
+            "/test/thumbnail-pattern.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/thumbnail-pattern.mp4"
+              },
+              "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+              "bytes": 752916
+            },
+            "/test/auto-thumbnail-timeline.mp4": {
+              "source": {
+                "kind": "generated-media",
+                "file": "test/browser/media/auto-thumbnail-timeline.mp4"
+              },
+              "sha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994",
+              "bytes": 8602
+            },
+            "/test/vast-skippable.xml": {
+              "source": {
+                "kind": "local-vast-fixture",
+                "file": "test/browser/vast-fixture.mjs"
+              },
+              "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+              "bytes": 760
+            },
+            "/test/declaration-cues.vtt": {
+              "source": {
+                "kind": "test-subtitles",
+                "file": "test/browser/media/declaration-cues.vtt"
+              },
+              "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+              "bytes": 54
+            },
+            "/test/thumbnail-grid.svg": {
+              "source": {
+                "kind": "test-thumbnail-grid",
+                "file": "test/browser/media/thumbnail-grid.svg"
+              },
+              "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+              "bytes": 14969
+            },
+            "/test/legacy-safe-area.js": {
+              "source": {
+                "kind": "frozen-own-source",
+                "file": "test/helpers/legacy-safe-area.js",
+                "commit": "ccf77c4e"
+              },
+              "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+              "bytes": 795
+            },
+            "/test/iframe-boundary-child.html": {
+              "source": {
+                "kind": "iframe-fixture",
+                "file": "test/browser/iframe-boundary-child.html"
+              },
+              "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+              "bytes": 1451
+            },
+            "/published-5.3.1-beta.1/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.1-beta.1",
+                "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+              "bytes": 159458
+            },
+            "/assets/sample/video.mp4": {
+              "source": {
+                "kind": "docs-media",
+                "file": "docs/assets/sample/video.mp4"
+              },
+              "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+              "bytes": 5818706
+            },
+            "/test/performance.js": {
+              "source": {
+                "kind": "adapted-baseline-fixture",
+                "file": "refactor/fixtures/performance.js"
+              },
+              "sha256": "c5a8a8611db004aadd6c3b82c61b8ae242319c1a12e73bf784c1da06fcebed72",
+              "bytes": 9251
+            }
+          }
+        },
+        "state": {
+          "url": "http://127.0.0.1:8084/test/player.html?core=published",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "media": null
+        },
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "fonts": [
+        {
+          "url": "/assets/jassub/default.woff2",
+          "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+          "status": "loaded",
+          "inkPixels": 2338,
+          "width": 268.5625
+        },
+        {
+          "url": "/assets/jassub/fonts/default.woff2",
+          "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+          "status": "loaded",
+          "inkPixels": 2338,
+          "width": 268.5625
+        },
+        {
+          "url": "/assets/jassub/fonts/Averia Sans Libre Light.ttf",
+          "sha256": "df4ca526f9a941afda1f9c5a275695beb066a531f5b008c1e28ddc2c5f6e4390",
+          "status": "loaded",
+          "inkPixels": 2045,
+          "width": 252
+        },
+        {
+          "url": "/assets/jassub/fonts/Lato-Regular.ttf",
+          "sha256": "6f6940be0835c3ddec9199e5fc42be4cbc61ebcfd58c623fdf719366253f1780",
+          "status": "loaded",
+          "inkPixels": 2252,
+          "width": 266.6239013671875
+        },
+        {
+          "url": "/assets/jassub/fonts/chawp.otf",
+          "sha256": "9107241585a4328ce1438dfeabbfb1a8d0cd513dab6902be9a1a5774eab607c6",
+          "status": "loaded",
+          "inkPixels": 3221,
+          "width": 304.31988525390625
+        }
+      ],
+      "noticeCount": null
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/font-review/browser.json",
+      "sha256": "3442f404ab90021eebb5ff0de02cf5c2d077dd59bf395172b08d3cd39cb723e7"
+    },
+    {
+      "file": "refactor/.cache/font-review/browser.log",
+      "sha256": "a04f212976fa87d1bf5cd5bfe2842db9b643d4c4e6140803eed2163eaa52c5af"
+    },
+    {
+      "file": "refactor/.cache/font-review/notice-tests.log",
+      "sha256": "9508f1ee4706fe7fa9ef1043a43f06f29e68f15373850fbd8a5bfc63436bf2f0"
+    },
+    {
+      "file": "refactor/.cache/font-review/jassub-provenance.log",
+      "sha256": "9f95ca43d056c881b5c52a48595a72dae4233900d7eb01cc5528fddbbfd6955d"
+    },
+    {
+      "file": "refactor/.cache/font-review/comparison-negative.json",
+      "sha256": "e7924279388cdd01b7129ea8bd0aa5d81925722e02938ab927ea754096a861f0"
+    }
+  ],
+  "inputs": {
+    "scripts/build-site-notices.mjs": "93e945f0b4b60183133529a0bfa162fc202833bbcadb039fe8fae4a64fe12e2d",
+    "scripts/site-vendor/manifest.json": "0443f8e8af0c56f1ae507104354772717c5b51015866ca6d57f72c14a5dca7b5",
+    "scripts/site-vendor/fonts/notices.ts": "0a9b455031eff12caaa9556d3ef410ee29adc19dcb843c9f3eda4225a407f3a0",
+    "refactor/scripts/site-font-comparison.py": "392004de7cc17e6799322c3607c644a7131013f3942712efb6d1584545566e6f",
+    "refactor/baselines/site-font-notices-provenance.json": "59f00adf39a66f94c3ebf1a0bfc28b968c7fd8dff61aaa037c059b43c19b83c9",
+    "test/site-notices.test.js": "435ea0d0926db5d028a4632de764332e26699cf4349cfc16811a0cec3fbbdcb4",
+    "test/browser/site-vendor.spec.js": "2ca455c0efef513ce2c08af7593a6196263aa60a831e58874b6e998385a8532c",
+    "docs/assets/jassub/default.woff2": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+    "docs/assets/jassub/fonts/default.woff2": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+    "docs/assets/jassub/fonts/Averia Sans Libre Light.ttf": "df4ca526f9a941afda1f9c5a275695beb066a531f5b008c1e28ddc2c5f6e4390",
+    "docs/assets/jassub/fonts/Lato-Regular.ttf": "6f6940be0835c3ddec9199e5fc42be4cbc61ebcfd58c623fdf719366253f1780",
+    "docs/assets/jassub/fonts/chawp.otf": "9107241585a4328ce1438dfeabbfb1a8d0cd513dab6902be9a1a5774eab607c6",
+    "refactor/baselines/site-vendor/jassub-fonts/liberation-OFL.txt": "93fed46019c38bbe566b479d22148e2e8a1e85ada614accb0211c37b2c61c19b",
+    "docs/licenses/jassub-fonts/liberation/OFL.txt": "93fed46019c38bbe566b479d22148e2e8a1e85ada614accb0211c37b2c61c19b",
+    "refactor/baselines/site-vendor/jassub-fonts/averia-sans-OFL.txt": "46239ba6485d28553fd944da4ad32a00d9c403aa1c3e111676b0b96fe458d1d4",
+    "docs/licenses/jassub-fonts/averia-sans/OFL.txt": "46239ba6485d28553fd944da4ad32a00d9c403aa1c3e111676b0b96fe458d1d4",
+    "refactor/baselines/site-vendor/jassub-fonts/lato-OFL.txt": "74ba064d03f1f1c4a952da936c3eb71866c34404916734de3cae73b34357e59e",
+    "docs/licenses/jassub-fonts/lato/OFL.txt": "74ba064d03f1f1c4a952da936c3eb71866c34404916734de3cae73b34357e59e",
+    "refactor/baselines/site-vendor/jassub-fonts/chawp-OFL.txt": "fa786a37ddd70be650bc53d476cc0a1ec5a6284c6f28a32943e941021b2397b8",
+    "docs/licenses/jassub-fonts/chawp/OFL.txt": "fa786a37ddd70be650bc53d476cc0a1ec5a6284c6f28a32943e941021b2397b8",
+    "refactor/baselines/site-vendor/jassub-fonts/ATTRIBUTION.txt": "b9485c05b07bbfca2407f4336247d2bb19eba05458fe9bced8f68c81c158504d",
+    "docs/licenses/jassub-fonts/ATTRIBUTION.md": "b9485c05b07bbfca2407f4336247d2bb19eba05458fe9bced8f68c81c158504d"
+  }
+}

@@ -470,7 +470,10 @@
         "docs/assets/sample",
         "docs/assets/jassub",
         "refactor/site-inventory.md",
-        "refactor/baselines/site-provenance.json"
+        "refactor/baselines/site-provenance.json",
+        "refactor/changes/2026-09-15-SITE-07-font-notices.md",
+        "refactor/baselines/site-font-notices-provenance.json",
+        "refactor/baselines/site-font-notices-validation.json"
       ],
       "compatibleResolution": "复用现有样本时记录来源；缺许可的公开分发样本需补证据或可兼容替代，不能从文件名猜授权。",
       "closureCriteria": "候选实际分发样本有来源、许可/使用依据和测试映射。"
@@ -599,7 +602,10 @@
         "refactor/baselines/jassub-provenance-validation.json",
         "refactor/changes/2026-09-14-PKG-JASSUB-01-provenance.md",
         "refactor/site-inventory.md",
-        "refactor/baselines/site-provenance.json"
+        "refactor/baselines/site-provenance.json",
+        "refactor/changes/2026-09-15-SITE-07-font-notices.md",
+        "refactor/baselines/site-font-notices-provenance.json",
+        "refactor/baselines/site-font-notices-validation.json"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"

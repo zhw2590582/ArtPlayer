@@ -69,6 +69,14 @@ Follow-up: finish Monaco's broader bundled-component notice audit and remaining
 fonts/media. Do not upgrade these assets
 without verifying globals, AMD/worker paths, CSS, consoleLog and user interaction.
 
+The notice inventory also includes four selected JASSUB font families at their
+five unchanged URLs. CHAWP matches the author font exactly; Liberation, Averia
+Sans and Lato have explicitly recorded reference-table differences. Full upstream
+terms and embedded copyright are delivered together. Averia Serif Simple and six
+other font permissions remain unresolved; this is not font redistribution clearance.
+See [font reference maintenance](fonts/README.md). The generator now preserves all
+four top-level groups and validates the font-to-notice bindings before writing.
+
 Monaco's actual TypeScript 4.4.4 worker now has a separate source proof and notice
 supplement; its original notice's 2.7.2 label is retained and explained. See
 [Monaco maintenance](monaco/README.md) for the fixed six source adaptations,

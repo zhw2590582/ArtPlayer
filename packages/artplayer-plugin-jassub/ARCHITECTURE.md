@@ -110,6 +110,16 @@ and six unclear font redistribution permissions remain VENDOR-04/05 gates in
 PKG-JASSUB-06 / SITE-01. Source identity permits owned adapter work to proceed after 01;
 it does not authorize redistribution or prove original acquisition history.
 
+SITE-07 now ships complete notice references for Liberation Sans, Averia Sans Libre
+Light, Lato Regular and CHAWP at `docs/licenses/jassub-fonts/`. All font bytes and
+URLs are unchanged. CHAWP has exact author-byte identity; the other references
+retain documented font-table differences. Averia Serif Simple has a different
+`g` from the Serif Libre reference and is not treated as the same font. These
+partial notice improvements leave VENDOR-05 and the other permission questions
+open. See [font maintenance](../../scripts/site-vendor/fonts/README.md) for exact
+sources, comparison reproduction and native font HTTP/loading checks; these do
+not replace libass shaping/rendering acceptance.
+
 Use the pinned Node/Yarn toolchain:
 
 ```sh
