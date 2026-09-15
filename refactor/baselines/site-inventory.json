@@ -4,9 +4,9 @@
   "note": "Read-only source inventory. Heading matches are candidates, never semantic API coverage. Asset identity is not permission. No runtime, remote Pages or npm acceptance is implied.",
   "counts": {
     "packages": 22,
-    "markdown": 27,
+    "markdown": 28,
     "examples": 30,
-    "html": 36,
+    "html": 37,
     "declarationMembers": 963,
     "assets": 204
   },
@@ -1947,6 +1947,73 @@
       "translationOwner": null
     },
     {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+      "sha256Lf": "a563349b064adac119dac943060ffc5bc82a8ccbd6e20d2d7b5a1e1cb4d66ba2",
+      "language": "en",
+      "route": "/document/en/plugin/danmuku.html",
+      "headings": [
+        {
+          "text": "Danmuku",
+          "line": 1
+        },
+        {
+          "text": "Demo",
+          "line": 8
+        },
+        {
+          "text": "Installation",
+          "line": 13
+        },
+        {
+          "text": "CDN",
+          "line": 39
+        },
+        {
+          "text": "Comment structure",
+          "line": 53
+        },
+        {
+          "text": "All options",
+          "line": 70
+        },
+        {
+          "text": "Array, XML and asynchronous input",
+          "line": 111
+        },
+        {
+          "text": "Lifecycle callbacks",
+          "line": 136
+        },
+        {
+          "text": "Methods and state",
+          "line": 156
+        },
+        {
+          "text": "Loading and configuration",
+          "line": 177
+        },
+        {
+          "text": "External mount",
+          "line": 214
+        },
+        {
+          "text": "Heatmap",
+          "line": 241
+        },
+        {
+          "text": "Events",
+          "line": 279
+        },
+        {
+          "text": "TypeScript",
+          "line": 301
+        }
+      ],
+      "runCodeMarkers": 4,
+      "translation": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
+      "translationOwner": null
+    },
+    {
       "file": "packages/artplayer-vitepress/docs/en/start/i18n.md",
       "sha256Lf": "1551bf939aab1ee942d8480df891640109d18aa9adc016adf1d075bee5ef1de9",
       "language": "en",
@@ -2265,7 +2332,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-      "sha256Lf": "a019e334d22628f1697a2a0be15e9c3f01e36b2c8da825f32ea86b4135b91c2b",
+      "sha256Lf": "3162d24c17eac5c7e07dd8552f8004ba2b74c9caf7f65b7bf0f54e7a4a8c1031",
       "language": "zh",
       "route": "/document/plugin/danmuku.html",
       "headings": [
@@ -2275,80 +2342,92 @@
         },
         {
           "text": "演示",
-          "line": 3
-        },
-        {
-          "text": "安装",
           "line": 7
         },
         {
+          "text": "安装",
+          "line": 13
+        },
+        {
           "text": "CDN",
-          "line": 29
+          "line": 35
         },
         {
           "text": "弹幕结构",
-          "line": 43
+          "line": 49
         },
         {
           "text": "全部选项",
-          "line": 58
+          "line": 64
         },
         {
           "text": "生命周期",
-          "line": 94
+          "line": 104
         },
         {
           "text": "使用弹幕数组",
-          "line": 158
+          "line": 170
         },
         {
           "text": "使用弹幕 XML",
-          "line": 181
+          "line": 193
         },
         {
           "text": "使用异步返回",
-          "line": 201
+          "line": 213
         },
         {
           "text": "`hide/show`",
-          "line": 228
+          "line": 242
         },
         {
           "text": "`isHide`",
-          "line": 264
+          "line": 278
         },
         {
           "text": "`emit`",
-          "line": 299
+          "line": 313
         },
         {
           "text": "`config`",
-          "line": 335
+          "line": 349
         },
         {
           "text": "`load`",
-          "line": 373
+          "line": 387
         },
         {
           "text": "`reset`",
-          "line": 424
+          "line": 438
         },
         {
           "text": "`mount`",
-          "line": 448
+          "line": 462
         },
         {
           "text": "`option`",
-          "line": 477
+          "line": 496
         },
         {
           "text": "事件",
-          "line": 501
+          "line": 520
+        },
+        {
+          "text": "`isStop` 与方法返回值",
+          "line": 582
+        },
+        {
+          "text": "热力图",
+          "line": 591
+        },
+        {
+          "text": "TypeScript",
+          "line": 626
         }
       ],
-      "runCodeMarkers": 13,
-      "translation": null,
-      "translationOwner": "SITE-04"
+      "runCodeMarkers": 14,
+      "translation": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+      "translationOwner": null
     },
     {
       "file": "packages/artplayer-vitepress/docs/start/i18n.md",
@@ -2702,7 +2781,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 335
+          "line": 349
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -2833,7 +2912,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 477
+          "line": 496
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -3457,7 +3536,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 477
+          "line": 496
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -3614,7 +3693,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 299
+          "line": 313
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -3627,7 +3706,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 299
+          "line": 313
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -3640,7 +3719,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 299
+          "line": 313
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -3777,7 +3856,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 424
+          "line": 438
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4853,7 +4932,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 299
+          "line": 313
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6807,6 +6886,10 @@
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
           "line": 576
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+          "line": 156
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7091,7 +7174,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 335
+          "line": 349
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -8791,6 +8874,10 @@
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
           "line": 576
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+          "line": 156
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -8808,6 +8895,10 @@
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
           "line": 576
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+          "line": 156
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -10391,7 +10482,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 424
+          "line": 438
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -10669,7 +10760,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 477
+          "line": 496
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11253,7 +11344,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 424
+          "line": 438
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11357,7 +11448,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 335
+          "line": 349
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11488,7 +11579,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 477
+          "line": 496
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11721,7 +11812,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 477
+          "line": 496
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13051,6 +13142,10 @@
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
           "line": 576
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+          "line": 156
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13068,6 +13163,10 @@
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
           "line": 576
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+          "line": 156
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14667,7 +14766,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 477
+          "line": 496
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14874,7 +14973,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
-          "line": 477
+          "line": 496
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -16766,6 +16865,7 @@
         "packages/artplayer-vitepress/docs/en/component/layers.md",
         "packages/artplayer-vitepress/docs/en/component/setting.md",
         "packages/artplayer-vitepress/docs/en/index.md",
+        "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
         "packages/artplayer-vitepress/docs/en/start/i18n.md",
         "packages/artplayer-vitepress/docs/en/start/option.md",
         "packages/artplayer-vitepress/docs/index.md",
@@ -16870,6 +16970,7 @@
       ],
       "sidebarMentionsPackage": true,
       "dedicatedPages": [
+        "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
         "packages/artplayer-vitepress/docs/plugin/danmuku.md"
       ],
       "contentReviewOwner": "SITE-04",
@@ -17047,6 +17148,7 @@
         "packages/artplayer-vitepress/docs/en/component/layers.md",
         "packages/artplayer-vitepress/docs/en/component/setting.md",
         "packages/artplayer-vitepress/docs/en/index.md",
+        "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
         "packages/artplayer-vitepress/docs/en/start/i18n.md",
         "packages/artplayer-vitepress/docs/en/start/option.md",
         "packages/artplayer-vitepress/docs/index.md",
@@ -17148,7 +17250,7 @@
     {
       "name": "canvas",
       "source": "docs/assets/example/canvas.js",
-      "sha256Lf": "95a971773e93cfb340a07eebcd49e333825f49ce0d167514ad98a188cd027799",
+      "sha256Lf": "cb92730640913cdc8f03e01cce9d7c877537177950491449d48817e77960f458",
       "menuLinks": [
         "/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas"
       ],
@@ -17497,10 +17599,10 @@
     {
       "source": "docs/document/404.html",
       "route": "/document/404.html",
-      "sha256Lf": "539657203fa549c6cd296ded750c44bc0781f93c016deac48520294a41bbfbc9",
+      "sha256Lf": "3717d17f8ed125c4781ef3663b7b7d2bb72f579d6043a406ea5459010caa08e3",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17510,10 +17612,10 @@
     {
       "source": "docs/document/advanced/built-in.html",
       "route": "/document/advanced/built-in.html",
-      "sha256Lf": "172ce867c6e9be9cae181e82e798bf79d85d5019223d62b209e2c942f83b2d4c",
+      "sha256Lf": "70c42ca5bb8c524b56c7ebbb8eaf72f5be14fc41ebc5bf4ec790d0bfa7263097",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17523,10 +17625,10 @@
     {
       "source": "docs/document/advanced/class.html",
       "route": "/document/advanced/class.html",
-      "sha256Lf": "bf38af7c5748bf94a1bf1dcafbd6f23697e0cd50204d6e2509d020aa28bdcc26",
+      "sha256Lf": "9d5cd62993d6baf1300181830b2a780e2167bdcee0eeee683736c3d5b43baf24",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17536,10 +17638,10 @@
     {
       "source": "docs/document/advanced/event.html",
       "route": "/document/advanced/event.html",
-      "sha256Lf": "5a833a4b5328a35e0f5dcb19b993559321e6de2aa4d58751adc495d7d6b06d8a",
+      "sha256Lf": "a4624a2b6a7b68186ab03a4780fa795b97682ca5415c4022e56e8a36db1b49b2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17549,10 +17651,10 @@
     {
       "source": "docs/document/advanced/global.html",
       "route": "/document/advanced/global.html",
-      "sha256Lf": "3733acaca58c75e9d8aad4b9d506f765d6b50f7e31b2043632b9f1fed52f0c06",
+      "sha256Lf": "1003ceb4ee253f71e0da816a4bded4fef25b4cab690c77273b2dd5b4ec459943",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17562,10 +17664,10 @@
     {
       "source": "docs/document/advanced/plugin.html",
       "route": "/document/advanced/plugin.html",
-      "sha256Lf": "836a34aab7f2648d9ac021e7c262ba45ed61b4a526322532ff92609cb81bf5d5",
+      "sha256Lf": "68792c9def7906427a8e47f682d1f2f55ee96e420531428622a4339a7ca18e0f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17575,10 +17677,10 @@
     {
       "source": "docs/document/advanced/property.html",
       "route": "/document/advanced/property.html",
-      "sha256Lf": "39c16129fd8fffeea83dcc35d4fb91f2b9707c8a370be310017be3931c89eb50",
+      "sha256Lf": "0b15099f0a6c754cb05e2b5173b491960cb9e8b0b61e5c2de47589dc27d871b3",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17588,10 +17690,10 @@
     {
       "source": "docs/document/component/contextmenu.html",
       "route": "/document/component/contextmenu.html",
-      "sha256Lf": "6c4da715916004ab72d6ad9cd1b3d16c58cc3c16b433103bdd77c32afbb19af9",
+      "sha256Lf": "e6fe13021fe8e092e0c6588322c2f647bc16fff9b3f890b01398104f519cc8ce",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17601,10 +17703,10 @@
     {
       "source": "docs/document/component/controls.html",
       "route": "/document/component/controls.html",
-      "sha256Lf": "2df485cc46bb0bf30aab32ba21707e16403eadffd1c67f05e32f1b1662774c28",
+      "sha256Lf": "00134da8fcd9f14c21d0f3bc6dd1fe4a0e44f146c57d63a6db4255d0365007c6",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17614,10 +17716,10 @@
     {
       "source": "docs/document/component/layers.html",
       "route": "/document/component/layers.html",
-      "sha256Lf": "0455e8a65e52d91c4b570cb0a7a6f28327c935a5c041167ba2058cb94b892a00",
+      "sha256Lf": "9b5c25d8d9faa9a3a35815a1606ffea4a1ab127f12214ba2b5f3caac9eac2428",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17627,10 +17729,10 @@
     {
       "source": "docs/document/component/setting.html",
       "route": "/document/component/setting.html",
-      "sha256Lf": "4da033bf086aa86424a459c626f3768d17116a7c995bb13f2c0d5a929877147d",
+      "sha256Lf": "eaa3c6e752df873f6839888c5c6a163a91142697939954af61ee6526f9aab50f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17640,10 +17742,10 @@
     {
       "source": "docs/document/en/advanced/built-in.html",
       "route": "/document/en/advanced/built-in.html",
-      "sha256Lf": "2ff6ed01ad01fe332dd01a202db0064b2d194cf975dcdd4b7f3287f6653feed1",
+      "sha256Lf": "5fc6b3db2706c3214f2e540cc5ebc46f87abbbbf9cd7770b5fe7f8ec0cdfd67b",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17653,10 +17755,10 @@
     {
       "source": "docs/document/en/advanced/class.html",
       "route": "/document/en/advanced/class.html",
-      "sha256Lf": "fb7606e487d485d5db02982d3b02cefb38bdf9ccc144a10b06beb1adf3c4ac09",
+      "sha256Lf": "ae3117b42d654f5c14d62923c7fe7198eae616895dd19885391265d5f11349fb",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17666,10 +17768,10 @@
     {
       "source": "docs/document/en/advanced/event.html",
       "route": "/document/en/advanced/event.html",
-      "sha256Lf": "04440e121d4427951e561a7759daae3928ac6d50c58ce8bca4c81d41591bb9ad",
+      "sha256Lf": "4514bf9c007728a1b9b0ec70a7c2a558754fcfafdb879901b1410fd5bc2d5b5b",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17679,10 +17781,10 @@
     {
       "source": "docs/document/en/advanced/global.html",
       "route": "/document/en/advanced/global.html",
-      "sha256Lf": "229287d5d83f834984c4877b23a9c934bcfe144e0c2ca4d3379da6020a927f52",
+      "sha256Lf": "edeb817d22b3726d8acfb3c23dd08b9aeeb64db0d8433a691f0087e05cf7b885",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17692,10 +17794,10 @@
     {
       "source": "docs/document/en/advanced/plugin.html",
       "route": "/document/en/advanced/plugin.html",
-      "sha256Lf": "82336d21ca5d5e291b0cfb59e1e0cf4d8cdf1475ddc5d924c15f2fbcbccf4e29",
+      "sha256Lf": "056784cf908fd500cf3404178916a9f104ccfa398ca2252513a6b630d813fdd0",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17705,10 +17807,10 @@
     {
       "source": "docs/document/en/advanced/property.html",
       "route": "/document/en/advanced/property.html",
-      "sha256Lf": "bfa5ea6f6b2da43af736138ee73316b9eb2a430d1ea152795ff726d4b65752de",
+      "sha256Lf": "5fb1b32907c402c28d41d137e94867bc78e21fc386004be0c91b76b4ed7a78d0",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17718,10 +17820,10 @@
     {
       "source": "docs/document/en/component/contextmenu.html",
       "route": "/document/en/component/contextmenu.html",
-      "sha256Lf": "318bfa1cc6124341c31eca2a3d305b56be15447312235e274bcac7d8f4dbbb22",
+      "sha256Lf": "5d627e52eaa6eb5e23a4e457413075da44891d86ceeca5bfc7abf82323cc565f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17731,10 +17833,10 @@
     {
       "source": "docs/document/en/component/controls.html",
       "route": "/document/en/component/controls.html",
-      "sha256Lf": "901fdae7862dd45c79992e60d81b6c65afe8dd6e8c8b3acb1352fcaa56a5bd10",
+      "sha256Lf": "51d1d91c55ab2037dc5369f01671268147bc378f234f28d37431dd3ea10619c4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17744,10 +17846,10 @@
     {
       "source": "docs/document/en/component/layers.html",
       "route": "/document/en/component/layers.html",
-      "sha256Lf": "3ab5d4f80f5a7d5edd85683e5a606ab0a40810d464df69c9b0d61c55e5a36c6f",
+      "sha256Lf": "db32aa21944b2fede614cb334e10e851be477db41e15d2f278984aaf78d811bb",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17757,10 +17859,10 @@
     {
       "source": "docs/document/en/component/setting.html",
       "route": "/document/en/component/setting.html",
-      "sha256Lf": "c142bc66446fd44dafb7c2de72ca8f7a16c1942a8801f94b69f84a4ab27a1e48",
+      "sha256Lf": "f93d37f4e55b63b9104db19d23036fd85834ed4912f096d37424c29cf46307ad",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17770,10 +17872,23 @@
     {
       "source": "docs/document/en/index.html",
       "route": "/document/en/",
-      "sha256Lf": "0fbd6f191738454a17aee0237e838c09b06f8695aa926fad9e131c1705814d41",
+      "sha256Lf": "87c123295fda463867a49c51100efe6f7cceba3c782f5b382ac74ab84d6e1f30",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/plugin/danmuku.html",
+      "route": "/document/en/plugin/danmuku.html",
+      "sha256Lf": "86621ce3fb3405c95218723fd6cbbc2cf5a6d891fb3ddb6b84c59b6b3c89e87b",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17783,10 +17898,10 @@
     {
       "source": "docs/document/en/start/i18n.html",
       "route": "/document/en/start/i18n.html",
-      "sha256Lf": "06d5dd102dbbafe05ca8d8cc5d968cb88fbe3b0933c7e18ca3b0cbb0f816760c",
+      "sha256Lf": "992222ce0409b150179d6a0550af3c9246d788b8f12f77f2bdb2037492657fcc",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17796,10 +17911,10 @@
     {
       "source": "docs/document/en/start/option.html",
       "route": "/document/en/start/option.html",
-      "sha256Lf": "7120aa0145aeb484115e59a55c048584dc0e50376b8b7e6feadb6fad662d6e80",
+      "sha256Lf": "0ffd030e774f314402529cf4c091b13d73d0530e0a8fb9772285cb39622ef9ec",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17809,10 +17924,10 @@
     {
       "source": "docs/document/index.html",
       "route": "/document/",
-      "sha256Lf": "c86b90d96e4aa9ece0f7f3e8e0f3cdffb2adb4e7c4bcf5655d1843fefa7cb319",
+      "sha256Lf": "d538b202da9fa5543c5e54e5fb76907e133a0d33edf273f3eb360cb0a2623160",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17822,10 +17937,10 @@
     {
       "source": "docs/document/plugin/danmuku.html",
       "route": "/document/plugin/danmuku.html",
-      "sha256Lf": "e7dde20704a5bc55bc064831e80ce1bfc6dc4525a497fd9bf57dd67166b3c82f",
+      "sha256Lf": "bbcdebc4df8b3feb86b46d565f731a72c02bf367ec00c8e893b9745693bf5db1",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17835,10 +17950,10 @@
     {
       "source": "docs/document/start/i18n.html",
       "route": "/document/start/i18n.html",
-      "sha256Lf": "6e43e29b3fbb0f1cb160a096d154380438034b769ee62251111e746b53324571",
+      "sha256Lf": "f40445700bc315b34b0d51a876d906954a302691259f66efcf3aa237f3791297",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17848,10 +17963,10 @@
     {
       "source": "docs/document/start/option.html",
       "route": "/document/start/option.html",
-      "sha256Lf": "0687d12ed7f615d232fb80bf1b342eeb4641088111a4b3fef92275b50ca590a1",
+      "sha256Lf": "9b8d61e7546ee088785c29dbf85b2f37f62e90d7b97d58ac9c934fccba46dd0f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BfyKMyXg.js",
+        "/document/assets/app.CUpGwB5x.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17981,7 +18096,9 @@
       "docs/assets/example/asr.local.js"
     ],
     "examplesRemoved": [],
-    "htmlAdded": [],
+    "htmlAdded": [
+      "docs/document/en/plugin/danmuku.html"
+    ],
     "htmlRemoved": []
   },
   "editorDeclarations": [
@@ -18135,11 +18252,11 @@
     },
     {
       "file": "scripts/projects.js",
-      "sha256Lf": "a88d5da78a0d50c4ac92a37ea5594a833b169a51d45b5442d3af4d97ffa16965"
+      "sha256Lf": "3956faff0032ab5b91daa45f390a664ca246559621f95fd2f53cef8bb8b58bdf"
     },
     {
       "file": "docs/assets/js/common.js",
-      "sha256Lf": "4ccfc0bba7093a45621e2fe0c9b48cb6da0e6101a2b87a5a0f8785611d2d98fc"
+      "sha256Lf": "63877e6800bcd9de557ac3f785500aa173bca856e6fc99ee1005810e59806c93"
     },
     {
       "file": "docs/assets/js/mobile.js",
@@ -18147,7 +18264,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/public/main.js",
-      "sha256Lf": "b8c9b9334abc800e12fd2b8154d89f04c580adf0a155718f2ed44e85f7fd44d7"
+      "sha256Lf": "44b388d74b23e241b534498f53b615dbf2e91be077336ed31971aa09e65a8fd4"
     },
     {
       "file": "packages/artplayer-vitepress/docs/vite.config.ts",
@@ -18155,7 +18272,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/.vitepress/config.js",
-      "sha256Lf": "6b43f16ad2f74dcab0e4d3b3426f36118621a7daa04a1b9547aac9c910ed4462"
+      "sha256Lf": "2363e83274e7f1cb0af335fb10a2933a65fd9eadd30a15facc844f83ef9a46a5"
     },
     {
       "file": "scripts/build-site-assets.mjs",
@@ -18175,7 +18292,7 @@
     },
     {
       "file": "scripts/editor-declarations/core.ts",
-      "sha256Lf": "0cda0fe093299099c62ae907a6f517f1cb5c49be9085d4c8fb20aed6579a0058"
+      "sha256Lf": "a5526f52c74746403aac06b47fe71ab8ea4e87f652a62abf29313dbcc2823353"
     },
     {
       "file": "scripts/editor-declarations/dependencies.ts",
@@ -18187,7 +18304,7 @@
     },
     {
       "file": "scripts/editor-declarations/plugin.ts",
-      "sha256Lf": "02dd90a19b75235ac6080aa2088114f3ae51c45567789c7daf2653be63ceee7d"
+      "sha256Lf": "5678bd5fe5d23669c734463196e2f96eaa75d891b713002e60819196e1e6dfbe"
     },
     {
       "file": "scripts/editor-declarations/syntax.ts",
@@ -18251,7 +18368,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/browser/editor-host.ts",
-      "sha256Lf": "05673be0ca9aea7d890aa4cd84ab372b7d34407bd8ab674f2c0f619996586f03"
+      "sha256Lf": "4c8f657850f670528f513789dfcf798db10b6e6b0f0335ed4fbd822a09799b8a"
     },
     {
       "file": "packages/artplayer-vitepress/browser/editor-libraries.ts",
@@ -18275,7 +18392,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/browser/editor.ts",
-      "sha256Lf": "e27f46bb84abc363a36a3239018168d7ec8d22fe8690cf835a2c354ce54443bd"
+      "sha256Lf": "132f6e12333aac3b54e4eea9f54469a26a9e676ea688034168c3a1ef134ba668"
     },
     {
       "file": "packages/artplayer-vitepress/browser/loader.ts",
@@ -18297,7 +18414,7 @@
     "build:i18n": "node ./scripts/build-i18n.js",
     "build:test": "node ./scripts/build-test.js",
     "build:all": "yarn ci:build && yarn lint",
-    "ci:build": "yarn build:types && yarn build all && yarn build:i18n && yarn build:ts && yarn build:llm && yarn build:test && yarn build:docs && yarn test:imports",
+    "ci:build": "yarn build:types && yarn build all && yarn build:i18n && yarn build:ts && yarn build:llm && yarn build:vconsole && yarn build:console && yarn build:site-notices && yarn build:test && yarn build:docs && yarn test:imports",
     "build:types": "node scripts/build-types.mjs --write"
   },
   "siteManifest": {
@@ -19330,13 +19447,13 @@
     },
     {
       "file": "docs/assets/js/vconsole.min.js",
-      "bytes": 282381,
-      "sha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4"
+      "bytes": 283667,
+      "sha256": "3d1b8c3aff5f415ccf3bdc3cdcec6e01cff5b4c64d4558c078ca33d003f616ac"
     },
     {
       "file": "docs/assets/js/console.js",
-      "bytes": 340306,
-      "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      "bytes": 340552,
+      "sha256": "a5f1388175fd885c03dd21b35fff97dca0b548745588dfca3172579a96537163"
     }
   ]
 }

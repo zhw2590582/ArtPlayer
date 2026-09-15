@@ -139,6 +139,7 @@ const config = {
           text: 'Plugins',
           collapsible: true,
           items: [
+            { text: 'Danmuku', link: '/en/plugin/danmuku' },
             { text: 'Advertise', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads' },
             { text: 'Iframe Control', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-tool-iframe/index.js&example=iframe' },
             { text: 'HLS Control', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control' },

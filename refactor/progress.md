@@ -1,5 +1,21 @@
 # 进度与证据
 
+## SITE-DANMUKU-01 双语指南和示例验证
+
+新增 Danmuku 英文指南/侧栏，按源码修正中文 Promise/owner、加载、回调、mount、
+reset、heatmap/points 与旧类型说明，保留旧中文路径和19个标题ID。明确 /runtime 与
+本轮修复尚未发布；CDN仍加载旧版本。站点现为28页，中英各14页。
+
+两个TS片段strict NodeNext零诊断，站点工具7+17项通过；三引擎60项通过无跳过，
+覆盖18个示例的真实样本ready/清理及双语导航/Run Code，不代表完整播放和设备验收。
+首轮54通过6失败来自Vue导航后的测试选择器，修正后全部通过，保留失败证据。
+生成站点、LLM、浏览器路由与清单同步；插件运行时/历史类型/依赖/版本不变。
+详见[记录](changes/2026-09-15-SITE-DANMUKU-01-guides.md)与[证据](baselines/danmuku-docs-validation.json)。
+
+SITE-04保留原依赖，其他包双语与最终验收继续未完成；207 done、21 doing、43 todo，
+共271项。没有推送、部署或发布。
+
+
 ## CI-NPM-01 精确候选的本地交付准备
 
 新增严格 TS 准备模块和 yarn release:bundle：干净 Git 状态、两次完整准入读取、

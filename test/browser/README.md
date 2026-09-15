@@ -101,6 +101,16 @@ cleanup and storage restoration. It does not execute all 233 documentation cases
 or prove remote SDKs/features. DPIP-MEDIA-01's exact WebKit intrinsic/layout size
 pairs remain explicit observations; this suite does not close that risk.
 
+`yarn test:browser document-site.spec.js document-danmuku.spec.js --workers=1`
+checks built bilingual navigation and Run Code URLs, then extracts every runnable
+Danmuku snippet from both source guides. It loads the local Danmuku distribution
+(whose SHA-256 is attached), candidate core and real documentation sample in owned
+frames. This covers readiness and cleanup; it does not click every example control,
+wait for every delayed callback, prove playback or replace PKG-DANMUKU-08.
+Regenerate the site and its browser assets before navigation checks. Preserve both
+`.run-code` and `[classname="run-code"]` selectors: SSR and Vue navigation can
+produce different attribute forms, both supported by the site's handler.
+
 `yarn test:browser test/browser/ads.spec.js` tests actual Ads 1.0.6 and candidate code
 with published 4.5.5/5.4.1 and candidate cores using local image/video media. It covers actual
 decoded pixels, countdown, skipping, content restoration, 404 and source replacement.

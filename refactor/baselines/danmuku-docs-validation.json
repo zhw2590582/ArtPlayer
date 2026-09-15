@@ -1,0 +1,2256 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-DANMUKU-01",
+  "sourceHead": "520727d762d958bbc0378a04426bd885789d655b",
+  "environment": {
+    "os": "win32",
+    "node": "v24.21.0",
+    "yarn": "1.22.22"
+  },
+  "scope": "Danmuku bilingual documentation, generated pages/LLM/navigation, snippets and readiness. Not package playback/device acceptance, whole-site search, remote CI/CD or publication.",
+  "sources": [
+    {
+      "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
+      "sha256Lf": "3162d24c17eac5c7e07dd8552f8004ba2b74c9caf7f65b7bf0f54e7a4a8c1031"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+      "sha256Lf": "a563349b064adac119dac943060ffc5bc82a8ccbd6e20d2d7b5a1e1cb4d66ba2"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/.vitepress/config.js",
+      "sha256Lf": "2363e83274e7f1cb0af335fb10a2933a65fd9eadd30a15facc844f83ef9a46a5"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/public/main.js",
+      "sha256Lf": "44b388d74b23e241b534498f53b615dbf2e91be077336ed31971aa09e65a8fd4"
+    },
+    {
+      "file": "packages/artplayer-vitepress/README.md",
+      "sha256Lf": "a618940a071624584e6cfe20483ee356e4ec9191856e68d43540bf40c69245dd"
+    },
+    {
+      "file": "test/browser/document-site.spec.js",
+      "sha256Lf": "9dfed417beebf6329c5c42157aace2d4bfc3615a83224d99b7de1d366d65ce08"
+    },
+    {
+      "file": "test/browser/document-danmuku.spec.js",
+      "sha256Lf": "4461aca47465c99a98788f9645ac094fdd6d3eef2bb9f42d970807f468970b4b"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/src/index.ts",
+      "sha256Lf": "bb94fb7c711159c5bad8240b2cad3b5d11b7623307b0ef77f25b88ad21314d00"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/src/danmuku.ts",
+      "sha256Lf": "e15716c37b4e42e2a1b7b4b77d4ecdb66bb854a87715f6d99018f00bc321a3a5"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/src/config.ts",
+      "sha256Lf": "ecdc1206b984126c4d49480fe264e2202d8e3393970d1552406e6a399c612951"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/src/input.ts",
+      "sha256Lf": "a9340c7031f486e22074a8def633fba47eb22c2a745fc5d6e6ddac988b9c6839"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/src/setting.ts",
+      "sha256Lf": "9273fd8869364efb12fb90e9f45674fb0d5f9e49675acb2c2500850f0386ee5a"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/src/setting-send.ts",
+      "sha256Lf": "b6abbaf3a5e29d42cffb41de44e1ec3760fa3c3223e1b0476e9c8a57f94fd650"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/src/scheduler.ts",
+      "sha256Lf": "d3493d28a6222edf78287c8b52510db6462dad29eda0ded0987744a47fdc7dd2"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/src/heatmap.ts",
+      "sha256Lf": "032ec70f9594824fb6eedaed277e1125a6327219a8551bd22956f8a5ac162381"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/src/heatmap-geometry.ts",
+      "sha256Lf": "fc4a3073bdcfdeb09facf7dafce5bd10c2518ec6feb5ab6fccc008c869d01ee0"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/types/runtime-shared.d.ts",
+      "sha256Lf": "72e84f4fc2d5d0fa110708d77fab2ede3df03b3ce9ee67951985a6cdf142652b"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+      "sha256Lf": "708d4eb455c1bffae284d2208c915ca3534bcb59731dd570bff65c5a39ca7f36"
+    }
+  ],
+  "static": {
+    "task": "SITE-DANMUKU-01",
+    "node": "v24.21.0",
+    "pages": [
+      {
+        "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
+        "sha256Lf": "3162d24c17eac5c7e07dd8552f8004ba2b74c9caf7f65b7bf0f54e7a4a8c1031",
+        "built": "docs/document/plugin/danmuku.html",
+        "sha256": "bbcdebc4df8b3feb86b46d565f731a72c02bf367ec00c8e893b9745693bf5db1",
+        "examples": [
+          {
+            "id": "plugin/danmuku.md:121",
+            "sha256": "467984f33a3b381b4532fd9fe86a850f2160688d5f3b07dcaf4d7f07855abaa1"
+          },
+          {
+            "id": "plugin/danmuku.md:177",
+            "sha256": "7eaaec8c7c251524c4c0c19268eb2f53d1ee26a6eadc52e356a54df866c3e44a"
+          },
+          {
+            "id": "plugin/danmuku.md:202",
+            "sha256": "f1b82664baece00569ce5254b18532f8426e4ef8ec8f60d50625a1db15af8eda"
+          },
+          {
+            "id": "plugin/danmuku.md:222",
+            "sha256": "850ce28c8a0565ae34ebee6b929f2b6cae7b9a4eb6ca10b9fcc92a90306b3534"
+          },
+          {
+            "id": "plugin/danmuku.md:251",
+            "sha256": "d2f9433bce47f9466eb97f7800ffbec5868c07e84ddfb89449eb01d29a8c3d88"
+          },
+          {
+            "id": "plugin/danmuku.md:287",
+            "sha256": "fb4ac30053eaa8f8991a73caed58222f43fbb61800c392267862f7253438fa84"
+          },
+          {
+            "id": "plugin/danmuku.md:322",
+            "sha256": "45189f4a784a31cc7fdadf0e163c233f02ce4462c1948724c79b04b2d11d9534"
+          },
+          {
+            "id": "plugin/danmuku.md:358",
+            "sha256": "97d7d25eb5fd3fb57fe562a20ba5dad95cb2849bf66358b737c49d14315bce05"
+          },
+          {
+            "id": "plugin/danmuku.md:396",
+            "sha256": "0ff379699ebae7ff8fea21780dbefcbd5bdc170a34ee9f7aa0f900d23ea43f00"
+          },
+          {
+            "id": "plugin/danmuku.md:447",
+            "sha256": "16527731a31a3b145ca94f4fc55d8eac4b90d1d3bc5ddceeb818351240dc9f37"
+          },
+          {
+            "id": "plugin/danmuku.md:474",
+            "sha256": "92adb428cddf2137276b82c8154604bf048931a986125eb6b17a7722732dcb9c"
+          },
+          {
+            "id": "plugin/danmuku.md:505",
+            "sha256": "87d543947f11b766327a956117efeae3537bc26b216b2beff4c8f6d63d480260"
+          },
+          {
+            "id": "plugin/danmuku.md:531",
+            "sha256": "89a7728637e229224fb6016566ed89b54b24095f50fc4052f9b78eb6cb7afe39"
+          },
+          {
+            "id": "plugin/danmuku.md:608",
+            "sha256": "4d1dac54d0ff0bc569d7f06ac645a45e5a034b52ce8574a5416834407fab9f0e"
+          }
+        ],
+        "types": {
+          "compiler": "5.9.3",
+          "module": "NodeNext",
+          "strict": true,
+          "skipLibCheck": false,
+          "diagnostics": 0
+        }
+      },
+      {
+        "file": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+        "sha256Lf": "a563349b064adac119dac943060ffc5bc82a8ccbd6e20d2d7b5a1e1cb4d66ba2",
+        "built": "docs/document/en/plugin/danmuku.html",
+        "sha256": "86621ce3fb3405c95218723fd6cbbc2cf5a6d891fb3ddb6b84c59b6b3c89e87b",
+        "examples": [
+          {
+            "id": "en/plugin/danmuku.md:121",
+            "sha256": "e16b38fac1c77137f1d9d41ca1d76a3e0518e4f589f9b79059b9d70a173e026c"
+          },
+          {
+            "id": "en/plugin/danmuku.md:194",
+            "sha256": "d7125109d366d5211d354e82e56703b187e4c98b580dc50c386813a8f5c2c2bf"
+          },
+          {
+            "id": "en/plugin/danmuku.md:225",
+            "sha256": "ffb15f7204f3ccc8a46d342263db29ea455c597eb069a786926a7571bfc9ccdb"
+          },
+          {
+            "id": "en/plugin/danmuku.md:261",
+            "sha256": "0c1a623c4a9a4ad37744c9ec6e8310859f2754403f50769f142f0880b836db91"
+          }
+        ],
+        "types": {
+          "compiler": "5.9.3",
+          "module": "NodeNext",
+          "strict": true,
+          "skipLibCheck": false,
+          "diagnostics": 0
+        }
+      }
+    ],
+    "checks": {
+      "preservedChineseHeadings": [
+        "弹幕库",
+        "演示",
+        "安装",
+        "cdn",
+        "弹幕结构",
+        "全部选项",
+        "生命周期",
+        "使用弹幕数组",
+        "使用弹幕-xml",
+        "使用异步返回",
+        "hide-show",
+        "ishide",
+        "emit",
+        "config",
+        "load",
+        "reset",
+        "mount",
+        "option",
+        "事件"
+      ],
+      "englishSidebar": true,
+      "scope": "Local docs, exact snippets, built links and preserved Chinese heading IDs; not whole-site search, remote CDN, package device or release acceptance."
+    }
+  },
+  "browser": {
+    "file": "refactor/.cache/danmuku-docs-browser-final.json",
+    "sha256": "b0859f3a7f8ee0189c066f73fc662027febf2dc3aa673bc81e637dbaddb8c6af",
+    "stats": {
+      "startTime": "2026-09-15T08:38:50.583Z",
+      "duration": 68675.89099999999,
+      "expected": 60,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "rows": [
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:121",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:177",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:202",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:222",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:251",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:287",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:322",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:358",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:396",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:447",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:474",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:505",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:531",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:608",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:121",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:194",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:225",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:261",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:121",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:177",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:202",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:222",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:251",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:287",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:322",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:358",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:396",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:447",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:474",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:505",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:531",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:608",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:121",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:194",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:225",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:261",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:121",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:177",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:202",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:222",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:251",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:287",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:322",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:358",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:396",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:447",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:474",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:505",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:531",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:608",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:121",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:194",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:225",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:261",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      }
+    ]
+  },
+  "firstBrowser": {
+    "file": "refactor/.cache/danmuku-docs-browser-first.json",
+    "sha256": "dceefef022e49fd93013f4beba1ba3a6f92eac70da0f3ffb88c9c78c262550c9",
+    "stats": {
+      "startTime": "2026-09-15T08:35:23.388Z",
+      "duration": 170330.21,
+      "expected": 54,
+      "skipped": 0,
+      "unexpected": 6,
+      "flaky": 0
+    },
+    "rows": [
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:121",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:177",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:202",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:222",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:251",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:287",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:322",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:358",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:396",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:447",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:474",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:505",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:531",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:608",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:121",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:194",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:225",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:261",
+        "project": "chromium",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:121",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:177",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:202",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:222",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:251",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:287",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:322",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:358",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:396",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:447",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:474",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:505",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:531",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:608",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:121",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:194",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:225",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:261",
+        "project": "firefox",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:121",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:177",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:202",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:222",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:251",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:287",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:322",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:358",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:396",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:447",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:474",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:505",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:531",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: plugin/danmuku.md:608",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:121",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:194",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:225",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "documented Danmuku example becomes ready and cleans up: en/plugin/danmuku.md:261",
+        "project": "webkit",
+        "status": "passed",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+        "project": "chromium",
+        "status": "timedOut",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [
+          "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[classname=\"run-code\"]').first()\u001b[22m\n\n\n  54 |     await expect(page.locator('h1')).toContainText(language === 'en' ? 'Danmuku' : '弹幕库')\n  55 |     const examplePopup = context.waitForEvent('page')\n> 56 |     await page.locator('[classname=\"run-code\"]').first().click()\n     |                                                          ^\n  57 |     const example = await examplePopup\n  58 |     await exampl",
+          "Error: browserContext.waitForEvent: Test timeout of 20000ms exceeded.\n\n  53 |     await danmukuLink.click()\n  54 |     await expect(page.locator('h1')).toContainText(language === 'en' ? 'Danmuku' : '弹幕库')\n> 55 |     const examplePopup = context.waitForEvent('page')\n     |                                  ^\n  56 |     await page.locator('[classname=\"run-code\"]').first().click()\n  57 |     const example = await examplePopup\n  58 |     await example.waitForLoadState('domcontentloaded')\n    at D:\\gi"
+        ],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+        "project": "chromium",
+        "status": "timedOut",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "errors": [
+          "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[classname=\"run-code\"]').first()\u001b[22m\n\n\n  54 |     await expect(page.locator('h1')).toContainText(language === 'en' ? 'Danmuku' : '弹幕库')\n  55 |     const examplePopup = context.waitForEvent('page')\n> 56 |     await page.locator('[classname=\"run-code\"]').first().click()\n     |                                                          ^\n  57 |     const example = await examplePopup\n  58 |     await exampl",
+          "Error: browserContext.waitForEvent: Test timeout of 20000ms exceeded.\n\n  53 |     await danmukuLink.click()\n  54 |     await expect(page.locator('h1')).toContainText(language === 'en' ? 'Danmuku' : '弹幕库')\n> 55 |     const examplePopup = context.waitForEvent('page')\n     |                                  ^\n  56 |     await page.locator('[classname=\"run-code\"]').first().click()\n  57 |     const example = await examplePopup\n  58 |     await example.waitForLoadState('domcontentloaded')\n    at D:\\gi"
+        ],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+        "project": "firefox",
+        "status": "timedOut",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [
+          "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[classname=\"run-code\"]').first()\u001b[22m\n\n\n  54 |     await expect(page.locator('h1')).toContainText(language === 'en' ? 'Danmuku' : '弹幕库')\n  55 |     const examplePopup = context.waitForEvent('page')\n> 56 |     await page.locator('[classname=\"run-code\"]').first().click()\n     |                                                          ^\n  57 |     const example = await examplePopup\n  58 |     await exampl",
+          "Error: browserContext.waitForEvent: Test timeout of 20000ms exceeded.\n\n  53 |     await danmukuLink.click()\n  54 |     await expect(page.locator('h1')).toContainText(language === 'en' ? 'Danmuku' : '弹幕库')\n> 55 |     const examplePopup = context.waitForEvent('page')\n     |                                  ^\n  56 |     await page.locator('[classname=\"run-code\"]').first().click()\n  57 |     const example = await examplePopup\n  58 |     await example.waitForLoadState('domcontentloaded')\n    at D:\\gi"
+        ],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+        "project": "firefox",
+        "status": "timedOut",
+        "attempts": 1,
+        "browser": "155.0",
+        "errors": [
+          "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[classname=\"run-code\"]').first()\u001b[22m\n\n\n  54 |     await expect(page.locator('h1')).toContainText(language === 'en' ? 'Danmuku' : '弹幕库')\n  55 |     const examplePopup = context.waitForEvent('page')\n> 56 |     await page.locator('.run-code, [classname=\"run-code\"]').first().click()\n     |                                                          ^\n  57 |     const example = await examplePopup\n  58 |     a",
+          "Error: browserContext.waitForEvent: Test timeout of 20000ms exceeded.\n\n  53 |     await danmukuLink.click()\n  54 |     await expect(page.locator('h1')).toContainText(language === 'en' ? 'Danmuku' : '弹幕库')\n> 55 |     const examplePopup = context.waitForEvent('page')\n     |                                  ^\n  56 |     await page.locator('.run-code, [classname=\"run-code\"]').first().click()\n  57 |     const example = await examplePopup\n  58 |     await example.waitForLoadState('domcontentloaded')\n "
+        ],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+        "project": "webkit",
+        "status": "timedOut",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [
+          "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[classname=\"run-code\"]').first()\u001b[22m\n\n\n  54 |     await expect(page.locator('h1')).toContainText(language === 'en' ? 'Danmuku' : '弹幕库')\n  55 |     const examplePopup = context.waitForEvent('page')\n> 56 |     await page.locator('.run-code, [classname=\"run-code\"]').first().click()\n     |                                                          ^\n  57 |     const example = await examplePopup\n  58 |     a",
+          "Error: browserContext.waitForEvent: Test timeout of 20000ms exceeded.\n\n  53 |     await danmukuLink.click()\n  54 |     await expect(page.locator('h1')).toContainText(language === 'en' ? 'Danmuku' : '弹幕库')\n> 55 |     const examplePopup = context.waitForEvent('page')\n     |                                  ^\n  56 |     await page.locator('.run-code, [classname=\"run-code\"]').first().click()\n  57 |     const example = await examplePopup\n  58 |     await example.waitForLoadState('domcontentloaded')\n "
+        ],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      },
+      {
+        "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+        "project": "webkit",
+        "status": "timedOut",
+        "attempts": 1,
+        "browser": "26.6",
+        "errors": [
+          "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+          "Error: locator.click: Test timeout of 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[classname=\"run-code\"]').first()\u001b[22m\n\n\n  54 |     await expect(page.locator('h1')).toContainText(language === 'en' ? 'Danmuku' : '弹幕库')\n  55 |     const examplePopup = context.waitForEvent('page')\n> 56 |     await page.locator('.run-code, [classname=\"run-code\"]').first().click()\n     |                                                          ^\n  57 |     const example = await examplePopup\n  58 |     a",
+          "Error: browserContext.waitForEvent: Test timeout of 20000ms exceeded.\n\n  53 |     await danmukuLink.click()\n  54 |     await expect(page.locator('h1')).toContainText(language === 'en' ? 'Danmuku' : '弹幕库')\n> 55 |     const examplePopup = context.waitForEvent('page')\n     |                                  ^\n  56 |     await page.locator('.run-code, [classname=\"run-code\"]').first().click()\n  57 |     const example = await examplePopup\n  58 |     await example.waitForLoadState('domcontentloaded')\n "
+        ],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        }
+      }
+    ]
+  },
+  "checks": [
+    {
+      "command": "yarn build:docs",
+      "exitCode": 0,
+      "log": {
+        "file": "refactor/.cache/danmuku-docs-build-final.log",
+        "sha256": "6bdc8fb49d1ca756d0dbfbc1325fe9e80b67a047ed86a825f768feffb967018f"
+      }
+    },
+    {
+      "command": "yarn test:site-build",
+      "exitCode": 0,
+      "passed": 7,
+      "log": {
+        "file": "refactor/.cache/danmuku-docs-site-tests.log",
+        "sha256": "d640494076391c86291057813582fc6da490045fbaa5f0fdd4e8f0ab00fcefd9"
+      }
+    },
+    {
+      "command": "node --test test/site-loading.test.js test/documentation-pipeline.test.js",
+      "exitCode": 0,
+      "passed": 17,
+      "log": {
+        "file": "refactor/.cache/danmuku-docs-pipeline-tests.log",
+        "sha256": "33dec7dca94dca07d4601bc3394dec9163863d0526ac78d6e87dd8fff4fc3c86"
+      }
+    },
+    {
+      "command": "eslint document-site.spec.js document-danmuku.spec.js config.js",
+      "exitCode": 0,
+      "log": {
+        "file": "refactor/.cache/danmuku-docs-lint-final.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "failedChecks": [
+    {
+      "file": "refactor/.cache/danmuku-docs-lint-first.log",
+      "sha256": "0bf57901aace4bd3b256a8e7a253bcdc919fb9808ff895cb37a040deb04eed08"
+    },
+    {
+      "file": "refactor/.cache/danmuku-docs-tool-tests.log",
+      "sha256": "35b57b224784d9cc804e658f8a7ab0b97fbe421b33902c2a6bbd3c37db39d485"
+    },
+    {
+      "file": "refactor/.cache/danmuku-docs-tool-tests-final.log",
+      "sha256": "4fca070f8aee26b44dbb8c2a33ee0eba1d1698636c6da3d4db82c8284cf4f56f"
+    },
+    {
+      "file": "refactor/.cache/danmuku-docs-static.log",
+      "sha256": "6969a6f63003590dccf3482cb286317a3a3f9b80a9240ccc887e2118f0df4e19"
+    },
+    {
+      "file": "refactor/.cache/danmuku-docs-static-final.log",
+      "sha256": "6969a6f63003590dccf3482cb286317a3a3f9b80a9240ccc887e2118f0df4e19"
+    }
+  ],
+  "notes": [
+    "First browser run: 54 passed, 6 selector failures. Site handler already supported class and className; only tests changed.",
+    "First lint failed import ordering. Direct node and yarn node both lacked the required npm_execpath; existing yarn test:site-build supplies the right script environment.",
+    "Static parser initially assumed browser attribute normalization; actual attribute-name inspection fixed the harness. No runtime changes.",
+    "Whitespace cleanup rebuilt identical bilingual HTML after browser validation; Chinese bbcdebc4df8b3feb86b46d565f731a72c02bf367ec00c8e893b9745693bf5db1, English 86621ce3fb3405c95218723fd6cbbc2cf5a6d891fb3ddb6b84c59b6b3c89e87b.",
+    "build:test and check:docs-smoke passed; generated Chinese core-only outputs unchanged because plugin/en pages are excluded.",
+    "LLM regeneration also refreshed previously committed inputs: docs/assets/ts/artplayer-plugin-vast.d.ts (e5c73fa62), docs/assets/ts/artplayer.d.ts (7cf6f3313), docs/assets/example/canvas.js (c3967bcbf). All three verified byte-for-byte after LF normalization against starting HEAD; no input edits in this task."
+  ]
+}

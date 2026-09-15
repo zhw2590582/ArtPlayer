@@ -25,7 +25,7 @@ for (const language of ['zh', 'en']) {
     await expect(page.locator('h1')).toContainText(
       language === 'en' ? 'Basic Options' : '基础选项',
     )
-    const button = page.locator('[classname="run-code"]').first()
+    const button = page.locator('.run-code, [classname="run-code"]').first()
     await expect(button).toBeVisible()
     const popupPromise = context.waitForEvent('page')
     await button.click()
@@ -49,5 +49,17 @@ for (const language of ['zh', 'en']) {
     await expect(group.locator('input[type="radio"]').nth(1)).toBeChecked()
     await expect(group.locator('.blocks > div').nth(1)).toBeVisible()
     await expect(group.locator('.blocks > div').first()).toBeHidden()
+    const danmukuLink = page.locator(`.VPSidebar a[href="${prefix}/plugin/danmuku.html"]`)
+    await danmukuLink.click()
+    await expect(page.locator('h1')).toContainText(language === 'en' ? 'Danmuku' : '弹幕库')
+    const examplePopup = context.waitForEvent('page')
+    await page.locator('.run-code, [classname="run-code"]').first().click()
+    const example = await examplePopup
+    await example.waitForLoadState('domcontentloaded')
+    const exampleUrl = new URL(example.url())
+    expect(exampleUrl.searchParams.get('libs')).toBe('./uncompiled/artplayer-plugin-danmuku/index.js')
+    expect(exampleUrl.searchParams.get('code')).toContain('artplayerPluginDanmuku({')
+    expect(failedAssets).toEqual([])
+    await example.close()
   })
 }

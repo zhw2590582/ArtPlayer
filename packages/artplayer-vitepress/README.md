@@ -10,17 +10,28 @@ not a VitePress page. Keep both URL surfaces compatible.
 | --- | --- | --- |
 | `docs/index.md`, `docs/start`, `docs/component`, `docs/advanced` | Chinese API documentation | `/document/` |
 | `docs/en` | English counterparts | `/document/en/` |
-| `docs/plugin/danmuku.md` | Dedicated Chinese Danmuku guide | `/document/plugin/danmuku.html` |
+| `docs/plugin/danmuku.md`, `docs/en/plugin/danmuku.md` | Danmuku options, callbacks, commands, heatmap and types in both languages | `/document/plugin/danmuku.html`, `/document/en/plugin/danmuku.html` |
 | `docs/.vitepress/config.js` | Navigation, base URL, output path, page head | Repository `docs/document/` |
 | `docs/vite.config.ts` | Search plugin configuration | VitePress/Vite integration; real search acceptance remains pending |
 | `docs/public/main.js` | Run Code links and first-visit language redirect | Copied into the built site |
 | `docs/public/style.css` | Documentation presentation | Copied into the built site |
 
 Edit Markdown and public sources here. Do not edit the generated repository
-`docs/document/`. The current inventory contains 27 Markdown pages: 14 Chinese
-and 13 English. Danmuku has no English counterpart yet. Other plugins currently
+`docs/document/`. The current inventory contains 28 Markdown pages: 14 Chinese
+and 14 English. Danmuku has a dedicated guide and navigation in both languages. Other plugins currently
 use their package README, architecture notes and linked editor examples;
 navigation links alone are not complete API documentation.
+
+Danmuku guides describe the refactor branch and explicitly distinguish unpublished
+`/runtime` declarations from current CDN releases. Preserve old Chinese heading
+anchors when editing. Rebuild site assets (the English route inventory), the
+LLM corpus and VitePress after changing these pages. The generated readiness smoke
+excludes plugin pages; `test/browser/document-danmuku.spec.js` extracts and runs
+both guides separately with the local distribution and real sample media. These
+checks cover readiness and cleanup, not every interaction or complete playback.
+The translation CLI
+does not select plugin pages; maintain the two Danmuku guides together manually.
+SITE-DANMUKU-01 covers this guide; full bilingual package coverage remains SITE-04.
 
 Site-owned browser behavior now lives in `browser/`; its README maps the shared
 loader, desktop editor, mobile entry and Run Code/language navigation. `docs/public/main.js` is a
@@ -54,7 +65,7 @@ The repository generators have different ownership:
   Checked TS modules in `scripts/editor-declarations/` validate all selected
   declarations together with current and historical compilers before writing.
   Use `yarn check:editor-types` for drift checks; see that module's README.
-- `scripts/build-test.js`: extracts Chinese Run Code blocks into `docs/test/test.js`.
+- `scripts/build-test.js`: extracts Chinese core Run Code blocks into `docs/test/test.js`; plugin and English pages are excluded.
   The TS implementation in `scripts/docs-smoke/` produces deterministic readiness
   smoke cases with owned frames, error observation and cleanup. It does not prove
   complete playback or plugin behavior. See its maintenance README and SITE-SMOKE-01.

@@ -1,8 +1,14 @@
 # 弹幕库
 
+[English guide](../en/plugin/danmuku.md)
+
+本文描述当前重构分支。`/runtime` 类型入口与本轮修复尚未发布到 npm；CDN 默认仍加载已发布版本。
+
 ## 演示
 
 👉 [查看完整演示](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku)
+
+下方 Run Code 使用本站构建的插件与样本。接入自己的应用时，请替换容器和媒体 URL。
 
 ## 安装
 
@@ -47,9 +53,9 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
 ```js
 {
     text: '', // 弹幕文本
-    time: 10, // 弹幕时间, 默认为当前播放器时间
+    time: 10, // 弹幕时间, 单位秒，省略时为当前播放器时间加 0.5 秒；显式 0 保留
     mode: 0, // 弹幕模式: 0: 滚动(默认)，1: 顶部，2: 底部
-    color: '#FFFFFF', // 弹幕颜色，默认为白色
+    color: '#FFFFFF', // 弹幕颜色，默认使用配置 color（初始为白色）
     border: false, // 弹幕是否有描边, 默认为 false
     style: {}, // 弹幕自定义样式, 默认为空对象
 }
@@ -57,7 +63,7 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
 
 ## 全部选项
 
-只有`danmuku`是必须的参数，其余都是非必填
+工厂需要一个配置对象。运行时可传 `{}`，每个字段都有默认值；旧版根入口类型仍要求 `danmuku`，旧项目继续传入它即可。准确类型见下方 TypeScript 说明。
 
 ```js
 {
@@ -74,9 +80,9 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
     mount: undefined, // 弹幕发射器挂载点, 默认为播放器控制栏中部
     heatmap: false, // 是否开启热力图
     width: 512, // 当播放器宽度小于此值时，弹幕发射器置于播放器底部
-    points: [], // 热力图数据
+    points: [], // 保留的配置字段；绘制自定义数据请发送 points 事件
     filter: () => true, // 弹幕载入前的过滤器，只支持返回布尔值
-    beforeEmit: () => true, // 弹幕发送前的过滤器，支持返回 Promise
+    beforeEmit: () => true, // 输入框发送前的过滤器，支持返回 Promise
     beforeVisible: () => true, // 弹幕显示前的过滤器，支持返回 Promise
     visible: true, // 弹幕层是否可见
     emitter: true, // 是否开启弹幕发射器
@@ -91,13 +97,19 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
 }
 ```
 
+`OPACITY`、`FONT_SIZE`、`MARGIN`、`SPEED` 可覆盖滑块的 `min`、`max`、`steps`。
+每个 step 可包含 `name`、`value`、`hide`、`show`；MARGIN 的 value 是上下边距数组。
+`COLOR` 用 CSS 颜色字符串数组替换调色板，空数组使用内置调色板。
+
 ## 生命周期
+
+`filter` 同步执行，不应返回 Promise；`beforeEmit` 可异步，但只有严格返回 `true` 才发送。`beforeVisible` 可以异步。普通函数形式的这三个回调，其 `this` 都是当前配置对象。直接调用 `emit` 不执行 `beforeEmit`，需要业务校验时请在调用前完成。
 
 来自用户输入的弹幕: 
 
 `beforeEmit -> filter -> beforeVisible -> artplayerPluginDanmuku:visible`
 
-来自服务器的弹幕: 
+来自服务器或直接调用 `emit` 的弹幕:
 
 `filter -> beforeVisible -> artplayerPluginDanmuku:visible`
 
@@ -151,7 +163,7 @@ var art = new Artplayer({
 
 // 弹幕已经出现在播放器里，你可以访问到弹幕的dom元素里
 art.on('artplayerPluginDanmuku:visible', danmu => {
-    danmu.$ref.innerHTML = 'ଘ(੭ˊᵕˋ)੭: ' + danmu.$ref.innerHTML;
+    danmu.$ref.textContent = 'ଘ(੭ˊᵕˋ)੭: ' + danmu.$ref.textContent;
 })
 ```
 
@@ -200,6 +212,8 @@ var art = new Artplayer({
 
 ## 使用异步返回
 
+也可以直接传入 `Promise<弹幕数组>`，或传入同步返回数组的函数。输入函数没有配置对象作为 `this`。
+
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
 </div>
@@ -211,8 +225,8 @@ var art = new Artplayer({
     plugins: [
         artplayerPluginDanmuku({
             danmuku: function () {
-                return new Promise((resovle) => {
-                    return resovle([
+                return new Promise((resolve) => {
+                    return resolve([
                         {
                             text: '使用 Promise 异步返回',
                             time: 1
@@ -298,7 +312,7 @@ var art = new Artplayer({
 
 ## `emit`
 
-通过方法 `emit` 发送一条实时弹幕
+通过方法 `emit` 向队列添加一条弹幕。它返回 Promise；完成表示入队处理完成，不代表已经显示。请用 `await` 或 `.catch(...)` 处理拒绝。省略时间时安排在当前播放时间之后 0.5 秒，显示仍受播放状态、过滤器和可用轨道影响。
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -325,7 +339,7 @@ var art = new Artplayer({
                     text: text,
                     color: color,
                     border: true,
-                });
+                }).catch(console.error);
             },
         },
     ],
@@ -334,7 +348,7 @@ var art = new Artplayer({
 
 ## `config`
 
-通过方法 `config` 实时改变弹幕配置
+通过方法 `config` 同步合并弹幕配置。更改 `danmuku` 不会自动重新加载，之后调用无参数的 `load()` 才会替换队列；无效配置不会覆盖现有配置。需要移动发射器时调用 `mount(target)`；热力图应在初始化时启用，`config({ heatmap: true })` 不会创建热力图。
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -372,7 +386,7 @@ var art = new Artplayer({
 
 ## `load`
 
-通过 load 方法可以重载弹幕库，或者切换新弹幕库，或者追加新的弹幕库
+通过 `load` 重载、切换或追加弹幕库，返回 Promise。无参数 `load()` 在读取配置中的输入成功后替换队列；传入 `load(input)` 则追加。输入读取失败不会清空现有队列，但逐条过滤时发生异常不保证整批回滚。并发追加互不取消，新的替换会取消尚未完成的旧替换。销毁会取消未完成加载；被取消的 Promise 仍正常结束，但不会发出迟到的 loaded/error 事件。
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -394,7 +408,7 @@ var art = new Artplayer({
             html: '重载',
             click: function () {
                 // 重新加载当前弹幕库
-                art.plugins.artplayerPluginDanmuku.load();
+                art.plugins.artplayerPluginDanmuku.load().catch(console.error);
             },
         },
         {
@@ -405,7 +419,7 @@ var art = new Artplayer({
                 art.plugins.artplayerPluginDanmuku.config({
                     danmuku: '/assets/sample/danmuku-v2.xml',
                 });
-                art.plugins.artplayerPluginDanmuku.load();
+                art.plugins.artplayerPluginDanmuku.load().catch(console.error);
             },
         },
         {
@@ -414,7 +428,7 @@ var art = new Artplayer({
             click: function () {
                 // 追加新的弹幕库，参数类型和option.danmuku相同
                 const target = '/assets/sample/danmuku.xml'
-                art.plugins.artplayerPluginDanmuku.load(target);
+                art.plugins.artplayerPluginDanmuku.load(target).catch(console.error);
             },
         },
     ],
@@ -423,7 +437,7 @@ var art = new Artplayer({
 
 ## `reset`
 
-用于清空当前显示的弹幕
+用于清空当前显示的弹幕并将队列项重置为等待状态。它不删除队列；后续播放仍可按时间显示弹幕。
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -450,12 +464,15 @@ art.on('resize', () => {
 在初始化弹幕插件的时候，是可以指定弹幕发射器的挂载位置的，默认是挂载在控制栏的中部，你也可以把它挂载在播放器以外的地方。
 当播放器全屏的时候，发射器会自动回到控制栏的中部。假如你挂载的地方是亮色的话，建议把 `theme` 设置成 `light`，否则会看不清。
 
+退出全屏后会返回配置的挂载点。`mount(target)` 必须传入已存在的元素或选择器，省略参数不会恢复默认位置；它返回 `undefined`。销毁会移除插件面板，应用创建的外部容器由应用清理。
+
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
 </div>
 
 ```js
-var $danmu = document.querySelector('.artplayer-app');
+var $danmu = document.createElement('div');
+document.querySelector('.artplayer-app').after($danmu);
 
 var art = new Artplayer({
     container: '.artplayer-app',
@@ -463,12 +480,14 @@ var art = new Artplayer({
     fullscreenWeb: true,
     plugins: [
         artplayerPluginDanmuku({
-			mount: $danmu,
+            mount: $danmu,
             theme: 'dark',
             danmuku: '/assets/sample/danmuku.xml',
         }),
     ],
 });
+
+art.on('destroy', () => $danmu.remove());
 
 // 也可以手动挂载
 // art.plugins.artplayerPluginDanmuku.mount($danmu);
@@ -476,7 +495,7 @@ var art = new Artplayer({
 
 ## `option`
 
-用于获取当前弹幕配置
+用于获取当前弹幕配置，返回实时配置对象。更新配置请调用 `config`，避免直接修改对象而绕过校验和 UI 同步。
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -499,6 +518,10 @@ art.on('ready', () => {
 ```
 
 ## 事件
+
+使用 `art.on(name, callback)` 订阅，`art.off(name, callback)` 取消订阅。事件不会向迟到的监听器重放；初始空数组可能在构造期间就完成加载。若需要观察后续加载，先订阅再调用 `load()`。
+
+`loaded` 参数是当前完整队列，包含已追加数据；`error` 也可能来自显示调度。监听错误事件并不能代替处理公开方法的 Promise 拒绝。
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -524,7 +547,7 @@ art.on('artplayerPluginDanmuku:loaded', (danmus) => {
 });
 
 art.on('artplayerPluginDanmuku:error', (error) => {
-    console.info('加载错误', error);
+    console.info('弹幕错误', error);
 });
 
 art.on('artplayerPluginDanmuku:config', (option) => {
@@ -555,3 +578,67 @@ art.on('artplayerPluginDanmuku:destroy', () => {
     console.info('弹幕销毁');
 });
 ```
+
+## `isStop` 与方法返回值
+
+`art.plugins.artplayerPluginDanmuku.isStop` 是实时只读的停止状态，与 `isHide` 不同，也不表示媒体是否准备就绪。
+`emit/load` 返回的 Promise 完成后得到内部 Danmuku 对象；`config/hide/show/reset` 同步返回同一个内部对象。它与注册在 `art.plugins` 上的插件对象不是同一个对象。后续命令继续通过注册的插件调用即可。
+
+`beforeEmit` 抛出或拒绝时会在控制台报告错误，输入框可再次尝试发送。
+`beforeVisible` 拒绝时，对该项在当前调度轮报告一次 `artplayerPluginDanmuku:error`，其他项继续处理；暂停后恢复、reset 或更换回调后，仍符合时间条件的项可重试。
+暂停、seek、隐藏、reset 和销毁会取消尚未完成的显示准备。
+
+## 热力图
+
+初始化时设置 `heatmap: true`，按队列自动采样；直播不绘制热力图。
+本轮修复了密集弹幕曲线过高遮挡视频的问题（issue #958），自动曲线会适配到图表底部四分之一区域。显式设置有限的 `yMin/yMax` 或发送自定义 points 时保留原坐标映射。
+
+`heatmap` 也可传配置对象：`xMin`、`xMax`、`yMin`、`yMax`、`scale`、`opacity`、`minHeight`、`sampling`、`smoothing`、`flattening`。
+默认分别为 `0`、图表宽度、`0`、`128`、`0.25`、`0.2`、`floor(图表高度 * 0.05)`、`max(1, floor(图表宽度 / 100))`、`0.2`、`0.2`。
+
+绘制自定义数据使用 `art.emit('artplayerPluginDanmuku:points', points)`，每项为 `[x, value]`。默认 x 是图表像素坐标，不是秒。
+渲染会修改内层数组的第二项，保留原数据时请复制每一对坐标。配置中的 `points` 字段仅存储，不会自动绘图。
+resize 或成功 load 会恢复自动曲线，需要自定义曲线时可在这些事件后重新发送。
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
+    ▶ Run Code
+</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    plugins: [artplayerPluginDanmuku({
+        danmuku: [{ text: '热力图示例', time: 1 }],
+        heatmap: true,
+    })],
+});
+var points = [[0, 5], [0.25, 12], [0.5, 30], [0.75, 10], [1, 5]];
+function drawPoints() {
+    var width = art.controls.heatmap.offsetWidth;
+    art.emit('artplayerPluginDanmuku:points', points.map(([ratio, value]) => [ratio * width, value]));
+}
+art.on('ready', drawPoints);
+art.on('resize', drawPoints);
+art.on('artplayerPluginDanmuku:loaded', drawPoints);
+```
+
+## TypeScript
+
+根入口和 `/legacy` 保留 npm 5.3.0 的历史声明形状，其中部分方法返回值与真实运行时不一致。
+当前分支新增 `/runtime` 提供准确类型，加载的仍是同一个运行时工厂；该入口尚未发布，不能从旧 CDN 版本导入。
+
+```ts
+import Artplayer from 'artplayer';
+import danmuku from 'artplayer-plugin-danmuku/runtime';
+import type { RuntimeOption, Point, EventMap } from 'artplayer-plugin-danmuku/runtime';
+
+const option: RuntimeOption = { danmuku: [], heatmap: true };
+const points: Point[] = [[0, 5], [100, 10]];
+const onError = (...[error]: EventMap['artplayerPluginDanmuku:error']) => console.error(error);
+const art = new Artplayer({ container: '#player', url: '/video.mp4', plugins: [danmuku(option)] });
+art.on('artplayerPluginDanmuku:error', onError);
+```
+
+`EventMap` 显式描述事件参数，不会自动扩展核心历史事件声明。工厂仍暴露 `icons` 对象供自定义图标。
+包内 `README.md` 和 `ARCHITECTURE.md` 维护模块职责、验证命令及尚未完成的设备和组合验收。

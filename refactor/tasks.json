@@ -4413,6 +4413,27 @@
       ]
     },
     {
+      "id": "SITE-DANMUKU-01",
+      "phase": "6 文档与消费者",
+      "title": "核对弹幕双语指南并补齐英文入口",
+      "scope": [
+        "artplayer-vitepress",
+        "artplayer-plugin-danmuku"
+      ],
+      "dependsOn": [
+        "SITE-03",
+        "PKG-DANMUKU-07"
+      ],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "按实现修正中文调用说明，新增英文完整选项/API/热力图/类型指南和导航；同步生成站点与LLM资料，新增双语示例浏览器验收",
+      "acceptance": "旧中文URL和标题保留；实际方法返回、加载语义、回调与points边界准确；双语页面、Run Code及示例实测，完整插件组合和设备验收不冒充完成",
+      "evidence": [
+        "changes/2026-09-15-SITE-DANMUKU-01-guides.md",
+        "baselines/danmuku-docs-validation.json"
+      ]
+    },
+    {
       "id": "SITE-04",
       "phase": "6 文档与消费者",
       "title": "交叉核对逐包持续维护的文档",
@@ -4441,7 +4462,8 @@
         "PKG-IFRAME-04",
         "PKG-TOOL-THUMB-04",
         "PKG-DANMUKU-06",
-        "PKG-MB-08"
+        "PKG-MB-08",
+        "SITE-DANMUKU-01"
       ],
       "status": "todo",
       "risk": "M",

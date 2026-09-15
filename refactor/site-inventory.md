@@ -50,14 +50,15 @@ SITE-AI-DOCS-01/SITE-BUILD-01 已落实生成、翻译草稿和暂存构建；SI
 
 SITE-01 在 `d62ab13a35c756ea567c426d4fbe00d893dd7e2b` 后核对当前源码。
 可重跑清单见 [site-inventory.json](baselines/site-inventory.json)；它登记
-22 包、27 Markdown、30 示例、36 HTML、963 条声明成员和 204 个资产指纹。
+初始 22 包、27 Markdown、30 示例、36 HTML、963 条声明成员和 204 个资产指纹。
+SITE-DANMUKU-01 增加英文指南后，当前清单为 28 Markdown、37 HTML，其余数量不变。
 成员统计包括继承接口、重载和 runtime 声明，不能当作 963 个不同公开 API。
 标题匹配只是人工核对的候选位置；所有成员均明确交由 SITE-04 检查语义和中英文说明。
 
 ## 页面与内容责任
 
-- 中文 14 页、英文 13 页；核心安装、选项、i18n、四类组件、六类高级说明有对应页面。
-- Danmuku 有中文独立页，缺英文页；其余 15 插件使用包 README 和编辑器链接，缺独立双语指南。
+- 当前中文 14 页、英文 14 页；核心安装、选项、i18n、四类组件、六类高级说明有对应页面。
+- Danmuku 已补齐双语独立页和导航（SITE-DANMUKU-01）；其余 15 插件使用包 README 和编辑器链接，仍缺独立双语指南。
 - 2 proxy、2 tool 有包 README 和示例。包内维护文档不等于站点双语使用文档。
 - 清单逐包列出 README、ARCHITECTURE、菜单引用和示例；SITE-04 负责补充双语入口及缺失说明，
   不要求为了统一形式机械复制 20 份 README。SITE-05 验证实际生成页面和链接。
