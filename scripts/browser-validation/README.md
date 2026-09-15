@@ -38,6 +38,14 @@ the pre-major package set, with no claim of full Firefox/WebKit installed or dev
 acceptance. See `refactor/baselines/ci-installed-chromium-validation.json` and its
 CI-01 change record; retain the earlier five-package three-engine report separately.
 
+Firefox 155.0 then ran the same 77-file / 845-case installed roster at `b3344a7c6`
+using the unchanged `run-cRduve` artifacts: 844 passed, the same bare 4.5.2 seek
+failure, zero skips/retries, 1043.223 seconds, exit 1. The run HEAD and package HEAD
+are recorded separately; intervening changes were evidence/docs only, and launch
+reverified input freshness. See `refactor/baselines/ci-installed-firefox-validation.json`.
+The complete WebKit installed run remains pending; these passes do not close prior
+intermittent, physical-device, remote CI or final-major package gates.
+
 `yarn test:browser:installed` requires ARTPLAYER_BROWSER_ARTIFACTS from
 `yarn test:package --browser`.
 Both launcher and config validate the selected packages' installed hashes

@@ -1,5 +1,21 @@
 # 进度与证据
 
+## CI-01 完整 Firefox 安装包回归
+
+固定b3344a7c6、Node24.21.0/Yarn1.22.22，复用5e0447fc5打包的run-cRduve；
+启动时再次验证20包源码/构建及安装文件指纹。完整77文件/845项：844通过、
+1失败、0跳过/重试，1043.223秒，退出1。运行期间跟踪文件未改，完整报告、
+trace与输入证据已归档；没有重打包或把执行HEAD当作打包HEAD。
+
+唯一失败仍是裸dash.js4.5.2暂停seek停在6；候选DASH四个稳定边界组合、安装
+JASSUB三核心原生绘制与清理全部通过。DASH-SEEK-01继续open，历史间歇问题、
+受控能力及设备缺口不因单次通过而关闭。见
+[记录](changes/2026-09-15-CI-01-installed-firefox.md)、
+[证据](baselines/ci-installed-firefox-validation.json)。
+
+CI-01继续doing，217 done、21 doing、43 todo不变；版本仍未落实major升级。
+下一步同一映射完整Windows WebKit安装回归，不推送或发布。
+
 ## CI-01 完整 Chromium 安装包回归
 
 固定5e0447fc5、Node24.21.0/Yarn1.22.22重新构建并隔离安装20包，149.29秒通过；

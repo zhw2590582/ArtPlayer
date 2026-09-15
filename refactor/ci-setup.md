@@ -1,5 +1,11 @@
 # PR 检查和 Pages 操作说明
 
+同一run-cRduve安装映射随后在b3344a7c6执行完整Firefox155.0：77文件/845项，
+844通过、1个裸DASH4.5.2暂停seek失败、0跳过/重试，1043.223秒，退出1。
+执行HEAD与打包HEAD分别记录，启动时再次验证指纹；没有重新打包或修改测试。
+见[Firefox记录](changes/2026-09-15-CI-01-installed-firefox.md)和
+[完整输入/结果](baselines/ci-installed-firefox-validation.json)。完整WebKit安装回归仍待执行。
+
 最新完整Chromium安装回归固定5e0447fc5：重新构建并隔离安装20包后，77文件/845项
 执行844通过、1个裸DASH4.5.2暂停seek失败、0跳过/重试，948.777秒，退出1。
 候选DASH四个稳定边界组合及安装JASSUB三核心原生绘制清理通过；保留历史失败。
