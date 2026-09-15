@@ -109,7 +109,37 @@ the editor's document-format action formats JSON/HTML while preserving content.
 All four mode URLs must return 200; disposed models must lose their diagnostics.
 This complements direct worker methods and the typed player test.
 
-## Language-service notices
+## Basic-language sources and tokenizer regression
+
+`reproduce-basic.ts` verifies all 76 shipped basic-language bundles against 76
+original TypeScript sources, including the shared TypeScript grammar in JavaScript.
+The fixed Monaco commit's repository archive is SHA-256/size checked; every selected
+member additionally has a Git blob ID and SHA-256. Only named members are read.
+Historical compilers stay in the ignored cache; no install scripts or new root
+dependencies are used. HTML/PHP need an explicit RequireJS separator after trailing
+comments. Complete fragment coverage and complete minified bytes are both required.
+
+`basic-fixtures.ts` evaluates the fixed test definitions with a recording runner,
+preserving generated Clojure cases and SCSS preprocessing. Imports are restricted
+to the runner and the verified Clojure grammar; this VM is not a security sandbox.
+The 2,511 cases are frozen for ordinary offline browser CI; full reproduction
+regenerates and compares them with TypeScript 4.4.4. The upstream runner, recipe,
+config, LICENSE and third-party notices are retained alongside the provenance.
+
+```sh
+yarn verify:monaco-basic-sources --fetch
+yarn verify:monaco-basic-sources
+yarn test:browser test/browser/editor-basic-languages.spec.js --workers=1
+```
+
+The browser test uses Monaco's real AMD loader, language registration and tokenizer.
+It retains every upstream case unchanged, and adds 12 explicit cases: INI has no
+upstream test; CSP/ECL have empty suites; pgsql/redshift upstream tests actually
+target SQL. All 76 grammar URLs must load successfully. Token offsets/types and
+multiline state are compared, not just module loading. This is editor tokenization
+evidence, not playback, physical-device evidence or a complete embedded-origin review.
+
+## Language-service notice bindings
 
 `monaco-language-notices.json` binds seven verified package versions to their nine
 complete original LICENSE/third-party notice files. Two exact source-comment slices

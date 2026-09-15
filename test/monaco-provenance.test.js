@@ -2,9 +2,21 @@ import assert from 'node:assert/strict'
 // eslint-disable-next-line test/no-import-node-test -- Verify fixed source transforms without executing archived runtime.
 import test from 'node:test'
 import ts from 'typescript'
+import { extractBasicFixtures } from '../scripts/site-vendor/monaco/basic-fixtures.ts'
 import { emitAmd } from '../scripts/site-vendor/monaco/compiler.ts'
 import { aliasModule, moduleIds, nameModule, verifyWorkerSources } from '../scripts/site-vendor/monaco/languages.ts'
 import { browserTypeScript, verifyTypeScriptSource } from '../scripts/site-vendor/monaco/typescript.ts'
+
+test('Monaco fixture extraction retains generated cases and preprocessing but rejects extra imports', () => {
+  const file = 'monaco-languages/src/scss/scss.test.ts'
+  const source = `import { testTokenization } from '../test/testRunner';
+    const cases = ['a\\nb', 'c'].map(line => [{ line: line.replace(/\\n/g, ' '), tokens: [{ startIndex: 0, type: 'text' }] }]);
+    testTokenization(['scss', 'css'], cases);`
+  const [fixture] = extractBasicFixtures(ts, [file], () => source)
+  assert.deepEqual(fixture.languages, ['scss', 'css'])
+  assert.deepEqual(fixture.cases.map(item => item[0].line), ['a b', 'c'])
+  assert.throws(() => extractBasicFixtures(ts, [file], () => 'import fs from "node:fs"; fs.readFileSync("x");'), /Unexpected test import/)
+})
 
 const source = `"use strict";
     ts.sys = (function () {

@@ -1,0 +1,874 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "status": "checkpoint-incomplete",
+  "recordedAt": "2026-09-15T02:22:25.121Z",
+  "baseCommit": "bc9cb61aaf1a4ca466cebd4645fe19286042e56d",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "fingerprints": {
+    "refactor/baselines/monaco-basic-provenance.json": "ea712d51d1e51ef01b1b87097e9c3692271151b311970fd59b18362e59594403",
+    "refactor/baselines/monaco-basic-fixtures.json": "2468d8957ef94503a7f46832b9fc8646ed6c3ffd3e133c048e96c90d97987612",
+    "scripts/site-vendor/monaco/basic-fixtures.ts": "eaed3dfa54f7ae6434e60e80c9fe36a037834c81273945a382ffe0f4a4ff6692",
+    "scripts/site-vendor/monaco/reproduce-basic.ts": "e3f3d5b483c4d06de3162dab9d241d2534fb0fc652e211878007a4e706e400c7",
+    "test/browser/editor-basic-languages.spec.js": "f3f594819f0ff2506a719542c4d699673d2865a84d621059c2577469662aa290"
+  },
+  "reproduction": {
+    "offline": {
+      "exitCode": 0,
+      "log": "refactor/.cache/monaco-basic-source.log",
+      "result": {
+        "files": [
+          {
+            "language": "abap",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "49638217243bab4ed7d928d194bafe334abb614777440bf46f8636b9e5dfe0a4"
+          },
+          {
+            "language": "apex",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "034f340001e4c340b80e18abe45c990564931c4a061b4e74de86c012fb7d7a21"
+          },
+          {
+            "language": "azcli",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "be50c776891279c9717db0d48a20d6d99f07cb60d2d8d279422fa917826683cf"
+          },
+          {
+            "language": "bat",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "3ec5d66f73ee7e7dc2b43db5999a768d1a54e933de9f507015fe7709a184adee"
+          },
+          {
+            "language": "bicep",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "59d02b8930e36e2cbc3e472e263f881a82d84da292a79faf1d379cb060a2d7e1"
+          },
+          {
+            "language": "cameligo",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "f93cd405c71f97f26b4739f7f917b242e82a993ad42884422a43bf27d5b413e2"
+          },
+          {
+            "language": "clojure",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "9e99cf86bcfb25c1b33bac9e26e11e4646868fa753356c7d737cfb24b7b1e49c"
+          },
+          {
+            "language": "coffee",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "90d6aae23c9f5e4f335df5cb57634fa0193a102629deb88b98f238b4025f0551"
+          },
+          {
+            "language": "cpp",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "ece3d119688eaf8a37fffae388118b12f8724ac2c3c8ff10d44caf2e91026424"
+          },
+          {
+            "language": "csharp",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "d6367d0d67c0612cf37d25319e00cda2e4e38869a3c3200b1bfcd856cfe7fb4b"
+          },
+          {
+            "language": "csp",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "01241c709a7dddc0b5cedffb6dcf913a5d95c826eb68e2c27f114640719af7df"
+          },
+          {
+            "language": "css",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "1f8468a126f6bfdc43d49a75e0ae758de913ebf55e685165adb6d069a454de5c"
+          },
+          {
+            "language": "dart",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "6b410bbe17b8ebcaed969bdfcf8049df6fe863482756ae73d2aebb919630034c"
+          },
+          {
+            "language": "dockerfile",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "315769a72a2877f8ddddf9497a2e7e259e8df51cc38232ddf76fbe4556c0d7cd"
+          },
+          {
+            "language": "ecl",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "fc412fe18e564cff17e9a0bcd5674ba15c49f4739417cf589ce1c546b21033a9"
+          },
+          {
+            "language": "elixir",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "130d310090d723f51111d573000a72aa26fe44c9d79e6d04d12524e6631cfb6b"
+          },
+          {
+            "language": "flow9",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "fafd88d973aed314454cd7d842b270125553f7a7613bb068c3c799a21ac61b64"
+          },
+          {
+            "language": "fsharp",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "32027afd4be75ddeca6c7beb9b52eda07d59afe3ea39a84f0696a6b3d074dcbf"
+          },
+          {
+            "language": "go",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "c93466a4479ee8aa5e3ec70a89b469db1277b801d1551d40ad700d5abd367363"
+          },
+          {
+            "language": "graphql",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "60a8825e939ca81540eb6ac00b17867b3e55af97bff99a9fa40c422a4281bdcf"
+          },
+          {
+            "language": "handlebars",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "5a174247aa64c7a064fc977365bb1c7161b4c97e559a6121773188c25df9d9a2"
+          },
+          {
+            "language": "hcl",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "6053e90b8aa918c9744f41dcb1c0e58229a4946f0968a39b00776c3893538f54"
+          },
+          {
+            "language": "html",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "6e7ae0ce7f07ec01c64db1368869715c115690e40fb5c183d5ced0d2716038bd"
+          },
+          {
+            "language": "ini",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "ecdb5c36a38a8b68af6384789c380d0e28b5b3df86de9c3419d348e688b8810e"
+          },
+          {
+            "language": "java",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "8fd9c491b67dfa9ab831ed71a3973cc6ffc840f438f41114a794163672f4cf9c"
+          },
+          {
+            "language": "javascript",
+            "modules": 2,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "bbd7fb1b714d347704eae4c74cb36c352876864f2103a69af3965f32c1c982c6"
+          },
+          {
+            "language": "julia",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "ef3783cbb81cee25697c0bddc9476813b593fb64712c21bc60099c8109c748f0"
+          },
+          {
+            "language": "kotlin",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "31b082803acb08622aa2dd736dca42772f6a0d3224fdb7c0e9c3e1f17800ca32"
+          },
+          {
+            "language": "less",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "5ba9296cc5c6a7699028ac6e263631eb9284f80bfbffe99a4429f6c85dfc0589"
+          },
+          {
+            "language": "lexon",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "2be27259788a7a4a6fb94a59150b47d169ef6e04933f76977e568c4cb0227f57"
+          },
+          {
+            "language": "liquid",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "f4454c09b7e66ab2ffd81451aef2f12c79c0011839e19bcdb0fce42928acce6b"
+          },
+          {
+            "language": "lua",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "f39154e727c8d3df5c70ecab1737c0a07df3011977288ba4adc7d25c8ef639b5"
+          },
+          {
+            "language": "m3",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "a3b616444441f34b90b4e06a6a3a845f2804da67220c19721b9461140eb7f074"
+          },
+          {
+            "language": "markdown",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "47ae9f567af2e69e682d14703bf4ad5428708464edb3d30791f3255a2863a52e"
+          },
+          {
+            "language": "mips",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "fcc6104a8c7092794744a1472511cd348d585d1cba0421e61e5eb8e0c58af186"
+          },
+          {
+            "language": "msdax",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "f98e43f6600e629bfc354196006a02f9f9cc26480de064cc480e3bc885beb283"
+          },
+          {
+            "language": "mysql",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "1cafe5b6c81234fc6680a421dd6290ec590ce03b9e525eacb0936a78ab50aeae"
+          },
+          {
+            "language": "objective-c",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "7cfdb8b492b6f1c5a1d83fefc3bd349bb1acdd489516534aefacd553c2850e75"
+          },
+          {
+            "language": "pascal",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "f2886264f5ad42d173ef18e8ea961f674090be7513f48af95dcef4eb1191cac3"
+          },
+          {
+            "language": "pascaligo",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "3d3317429e0837f6960e33829a2c2fd62119ca1514ad735f62345da8fd1dd817"
+          },
+          {
+            "language": "perl",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "317b527f0ade315a7cb066eac72672e5f2ba6d0c02c6014be052c32fb6566aed"
+          },
+          {
+            "language": "pgsql",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "f58b4ab8529e311f7f98f690ed39e13de22f3ae29cc8916bf99c21ac86917970"
+          },
+          {
+            "language": "php",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "3d7d187fb2e3b959adfda7b7557ccda4b6f690f838babc525cabffbe0dda7dd0"
+          },
+          {
+            "language": "pla",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "6138b0b0a1be95370c00afe6eca5022ea10e8b0f11f1db9382163f28975373e6"
+          },
+          {
+            "language": "postiats",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "5b18eac81236e88ffca2e67e527fa1d6fb42f53a4df42c1fbeb37312a9ec2fe4"
+          },
+          {
+            "language": "powerquery",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "fb9705793a687b03fe08605f19c3f1019d83cf06394a8381db541bda92e230d4"
+          },
+          {
+            "language": "powershell",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "b80339b4a8450fd3a5bb5bf3817fb1b67fe6202690fc1ce97ef22336bcd7053b"
+          },
+          {
+            "language": "protobuf",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "18f13fbd6b421023eec480901e48354d249bc9c3dce9d0e0cc842cbab4393fd3"
+          },
+          {
+            "language": "pug",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "dbce9bb879b84cf3bf8bd05643a4d3d2ae6ded03b4a9234a0e8d2ebfab6ade44"
+          },
+          {
+            "language": "python",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "b0c9cb9c96d3b289b4ee1bb6ca921e810d87ec2967ebaf8608d5570865ac6524"
+          },
+          {
+            "language": "qsharp",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "6cf9e660e8082f7a8dff4e8041c58c5e9fed1e622e0301b359886a5148c15327"
+          },
+          {
+            "language": "r",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "889684005db07d8b2e8c6f17d54b7bbf1bd67ad948b0b9ca411c2e55ba3433dd"
+          },
+          {
+            "language": "razor",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "da07ee116d392fbf97f5adc9d4f1fd46e5bbbe9765949c8cb9a6f6a4917ce6cb"
+          },
+          {
+            "language": "redis",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "286518ee6a7e76356149bebfbcdc19d2d30c19a5fa48d4bfcbf2f7a946783bd0"
+          },
+          {
+            "language": "redshift",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "8b865d41e76c227f3e1eb3bc74f8e9cf24627b449cc94164c803c1e515a9bbfd"
+          },
+          {
+            "language": "restructuredtext",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "32c72e9b8fa318289b628efee24bc5b573e3f74f8ab7dd544dead1b3545fc351"
+          },
+          {
+            "language": "ruby",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "93a9fbda62d9b4ef5537de37d7b4c77a89d8e2b0a2193dddac534ce98da47b5f"
+          },
+          {
+            "language": "rust",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "6352c16af73494a44e09b5ccad8a61c0369933d94881fcf58a7e8a75a27315cf"
+          },
+          {
+            "language": "sb",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "7323046d28f72e54b5abda684d4ec67d55b688a0b5e1d23ffe1d675c1c141b69"
+          },
+          {
+            "language": "scala",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "57309bc0e00edda2c4edb5fd255e042e1ef6ce8d51f51c7e822a74268e04f444"
+          },
+          {
+            "language": "scheme",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "3fe89a5618aa1c4eafa5c65aad212fcf2ba34e302de73df7db0867ba01dbd866"
+          },
+          {
+            "language": "scss",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "b01dfbdbd787642ed55a3ca7b0b89b2edb80e4aa486d89fee0ba748124dad4f9"
+          },
+          {
+            "language": "shell",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "39063f662fa62eb543e5d8f9b792b31d14c484abafd9a67943dae52fc9f5ce36"
+          },
+          {
+            "language": "solidity",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "e25859bb2a1babe193f03028489c95296b1bfe98a92dcb450d4c539661b5a86d"
+          },
+          {
+            "language": "sophia",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "4ba061aa0beb82ba64efeb6bd1128da0d3445ac8cfc26d3f4591c66df0fa4bb0"
+          },
+          {
+            "language": "sparql",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "162783ddf2dd67384d379ebf485f6ed0cafd820e892e4d89e82c8ba8617390c4"
+          },
+          {
+            "language": "sql",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "3b1decbf86cb0b163070cc144e826f104ba10468798b36e6d0e64257a35fd1f8"
+          },
+          {
+            "language": "st",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "b3ac35684d5668c2d08105cec31f43e8d897e4ab94103d8bd64ac804d256c20c"
+          },
+          {
+            "language": "swift",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "288a0ad2974e332bb873bacbb2a284f8f39cdc7d12b1fd5e3c46699147a63633"
+          },
+          {
+            "language": "systemverilog",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "40b18f15d29e3201142eb02fd5cc5ad690b32386bbe5dc0a874fd68a2f176f41"
+          },
+          {
+            "language": "tcl",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "317b63a872ce538d4eef5dae701641670fd3f99dfc0439465d444b2992b69bea"
+          },
+          {
+            "language": "twig",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "c3442379367d5ef43f1377a14e3c6a04ec451dabb05bed200571ea6dc328dfa0"
+          },
+          {
+            "language": "typescript",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "25dd318efd5aada375fdf391c488bd0b5ec0d665ba16e49f1e7968217ad01139"
+          },
+          {
+            "language": "vb",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "41d3d863c8b955c53eddb8724866a487d3632995114c77c0e9bc416227d148bf"
+          },
+          {
+            "language": "xml",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "95ddef452d5ff87f5c9f807d56f3f74964727677b5a55baa13a0a4870e2ae850"
+          },
+          {
+            "language": "yaml",
+            "modules": 1,
+            "exactSources": true,
+            "exactOutput": true,
+            "sha256": "a6ffa854247873af58df3ad550bbdd474b2d8dbc1d1c730fce4e44dfcb5f9b62"
+          }
+        ],
+        "sources": 156,
+        "upstreamSuites": 76,
+        "upstreamCases": 2511,
+        "coreAndEmbeddedOriginsReviewed": false
+      }
+    },
+    "firstFetch": {
+      "exitCode": 1,
+      "error": "getaddrinfo ENOTFOUND codeload.github.com",
+      "log": "refactor/.cache/monaco-basic-fetch.log"
+    },
+    "retryFetch": {
+      "exitCode": 0,
+      "log": "refactor/.cache/monaco-basic-fetch-retry.log",
+      "resultMatchesOffline": true
+    }
+  },
+  "unit": {
+    "passed": 16,
+    "log": "refactor/.cache/monaco-basic-unit.log"
+  },
+  "typecheck": {
+    "exitCode": 0,
+    "log": "refactor/.cache/monaco-basic-types.log"
+  },
+  "lint": {
+    "exitCode": 0,
+    "log": "refactor/.cache/monaco-basic-lint.log"
+  },
+  "browser": {
+    "report": "refactor/.cache/browser/report.json",
+    "sha256": "035ba9f3d91bcfaaa039dbb95c1d06e75d54e244ded901620fab49dde3d949c1",
+    "stats": {
+      "startTime": "2026-09-15T02:12:29.720Z",
+      "duration": 10487.906,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "project": "chromium",
+        "status": "passed",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "cases": 2523,
+        "suites": 81,
+        "languages": [
+          "abap",
+          "apex",
+          "azcli",
+          "bat",
+          "bicep",
+          "cameligo",
+          "clojure",
+          "coffeescript",
+          "cpp",
+          "csharp",
+          "csp",
+          "css",
+          "dart",
+          "dockerfile",
+          "ecl",
+          "elixir",
+          "flow9",
+          "fsharp",
+          "go",
+          "graphql",
+          "handlebars",
+          "hcl",
+          "html",
+          "javascript",
+          "java",
+          "julia",
+          "kotlin",
+          "less",
+          "lexon",
+          "liquid",
+          "lua",
+          "m3",
+          "markdown",
+          "mips",
+          "msdax",
+          "mysql",
+          "objective-c",
+          "pascal",
+          "pascaligo",
+          "perl",
+          "sql",
+          "php",
+          "pla",
+          "postiats",
+          "powerquery",
+          "powershell",
+          "proto",
+          "pug",
+          "python",
+          "qsharp",
+          "r",
+          "razor",
+          "redis",
+          "restructuredtext",
+          "ruby",
+          "rust",
+          "sb",
+          "scala",
+          "scheme",
+          "scss",
+          "shell",
+          "sol",
+          "aes",
+          "sparql",
+          "st",
+          "swift",
+          "systemverilog",
+          "tcl",
+          "twig",
+          "typescript",
+          "vb",
+          "xml",
+          "yaml",
+          "ini",
+          "pgsql",
+          "redshift"
+        ],
+        "failures": [],
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "status": "passed",
+        "browser": "155.0",
+        "platform": "win32",
+        "cases": 2523,
+        "suites": 81,
+        "languages": [
+          "abap",
+          "apex",
+          "azcli",
+          "bat",
+          "bicep",
+          "cameligo",
+          "clojure",
+          "coffeescript",
+          "cpp",
+          "csharp",
+          "csp",
+          "css",
+          "dart",
+          "dockerfile",
+          "ecl",
+          "elixir",
+          "flow9",
+          "fsharp",
+          "go",
+          "graphql",
+          "handlebars",
+          "hcl",
+          "html",
+          "javascript",
+          "java",
+          "julia",
+          "kotlin",
+          "less",
+          "lexon",
+          "liquid",
+          "lua",
+          "m3",
+          "markdown",
+          "mips",
+          "msdax",
+          "mysql",
+          "objective-c",
+          "pascal",
+          "pascaligo",
+          "perl",
+          "sql",
+          "php",
+          "pla",
+          "postiats",
+          "powerquery",
+          "powershell",
+          "proto",
+          "pug",
+          "python",
+          "qsharp",
+          "r",
+          "razor",
+          "redis",
+          "restructuredtext",
+          "ruby",
+          "rust",
+          "sb",
+          "scala",
+          "scheme",
+          "scss",
+          "shell",
+          "sol",
+          "aes",
+          "sparql",
+          "st",
+          "swift",
+          "systemverilog",
+          "tcl",
+          "twig",
+          "typescript",
+          "vb",
+          "xml",
+          "yaml",
+          "ini",
+          "pgsql",
+          "redshift"
+        ],
+        "failures": [],
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "status": "passed",
+        "browser": "26.6",
+        "platform": "win32",
+        "cases": 2523,
+        "suites": 81,
+        "languages": [
+          "abap",
+          "apex",
+          "azcli",
+          "bat",
+          "bicep",
+          "cameligo",
+          "clojure",
+          "coffeescript",
+          "cpp",
+          "csharp",
+          "csp",
+          "css",
+          "dart",
+          "dockerfile",
+          "ecl",
+          "elixir",
+          "flow9",
+          "fsharp",
+          "go",
+          "graphql",
+          "handlebars",
+          "hcl",
+          "html",
+          "javascript",
+          "java",
+          "julia",
+          "kotlin",
+          "less",
+          "lexon",
+          "liquid",
+          "lua",
+          "m3",
+          "markdown",
+          "mips",
+          "msdax",
+          "mysql",
+          "objective-c",
+          "pascal",
+          "pascaligo",
+          "perl",
+          "sql",
+          "php",
+          "pla",
+          "postiats",
+          "powerquery",
+          "powershell",
+          "proto",
+          "pug",
+          "python",
+          "qsharp",
+          "r",
+          "razor",
+          "redis",
+          "restructuredtext",
+          "ruby",
+          "rust",
+          "sb",
+          "scala",
+          "scheme",
+          "scss",
+          "shell",
+          "sol",
+          "aes",
+          "sparql",
+          "st",
+          "swift",
+          "systemverilog",
+          "tcl",
+          "twig",
+          "typescript",
+          "vb",
+          "xml",
+          "yaml",
+          "ini",
+          "pgsql",
+          "redshift"
+        ],
+        "failures": [],
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      }
+    ]
+  },
+  "limitations": [
+    "Full upstream semantic typecheck and editor core/embedded origin review are not complete.",
+    "Upstream INI tests absent; CSP/ECL suites empty; pgsql/redshift upstream cases target SQL. Twelve supplemental cases cover these gaps without replacing original cases.",
+    "No runtime or delivered notice changes, playback/device/external SDK/remote CI/publication evidence in this batch.",
+    "Thumbnail default compatibility choice remains pending."
+  ]
+}

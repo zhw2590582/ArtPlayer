@@ -167,7 +167,8 @@
     "test:site-console": "node --test test/site-console.test.js",
     "verify:monaco-typescript-source": "node scripts/site-vendor/monaco/reproduce-typescript.ts",
     "verify:monaco-language-sources": "node scripts/site-vendor/monaco/reproduce-languages.ts",
-    "verify:monaco-mode-sources": "node scripts/site-vendor/monaco/reproduce-modes.ts"
+    "verify:monaco-mode-sources": "node scripts/site-vendor/monaco/reproduce-modes.ts",
+    "verify:monaco-basic-sources": "node scripts/site-vendor/monaco/reproduce-basic.ts"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

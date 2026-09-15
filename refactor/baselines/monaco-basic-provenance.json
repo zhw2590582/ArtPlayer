@@ -1,0 +1,2640 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "commit": "5a7ba61be909ae9e4889768a3453ebb0dec392e2",
+  "archives": [
+    {
+      "name": "monaco-editor",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.30.1.tgz",
+      "integrity": "sha512-B/y4+b2O5G2gjuxIFtCE2EkM17R2NM7/3F8x0qcPsqy4V83bitJTIO4TIeZpYlzu/xy6INiY/+84BEm6+7Cmzg==",
+      "sha256": "d7872ab742036036eca48cd54e43d751bede56742f0689bcf4049bcf701468c7"
+    },
+    {
+      "name": "typescript",
+      "version": "4.4.4",
+      "tarball": "https://registry.npmjs.org/typescript/-/typescript-4.4.4.tgz",
+      "integrity": "sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==",
+      "sha256": "7524841bbf63777fef1fe6e1a826026b1dd4849f54f5affa481502faab2cdb16"
+    },
+    {
+      "name": "terser",
+      "version": "5.9.0",
+      "tarball": "https://registry.npmjs.org/terser/-/terser-5.9.0.tgz",
+      "integrity": "sha512-h5hxa23sCdpzcye/7b8YqbE5OwKca/ni0RQz1uRX3tGh8haaGHqcuSqbGRybuAKNdntZ0mDgFNXPJ48xQ2RXKQ==",
+      "sha256": "2ca0d9c4731b6ebd3b86ed1a7b735f685f98636ee5a067ae9e27e83246069619"
+    },
+    {
+      "name": "source-map",
+      "version": "0.7.3",
+      "tarball": "https://registry.npmjs.org/source-map/-/source-map-0.7.3.tgz",
+      "integrity": "sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==",
+      "sha256": "ad69b787ba774733c3e4f0eb20403df7b1fa466252d453533dbcc6a5ad15833e"
+    }
+  ],
+  "compilerMembers": [
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/typescript.js",
+      "sha256": "69fde5346b9468255c32d8d0bff32842445822528b25da1a323ec1c076979384"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/lib.es5.d.ts",
+      "sha256": "aa9fb4c70f369237c2f45f9d969c9a59e0eae9a192962eb48581fe864aa609db"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/lib.dom.d.ts",
+      "sha256": "e54c8715a4954cfdc66cd69489f2b725c09ebf37492dbd91cff0a1688b1159e8"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/lib.es2015.collection.d.ts",
+      "sha256": "43fb1d932e4966a39a41b464a12a81899d9ae5f2c829063f5571b6b87e6d2f9c"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/lib.es2015.promise.d.ts",
+      "sha256": "2bb4b3927299434052b37851a47bf5c39764f2ba88a888a107b32262e9292b7c"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/lib.es2015.iterable.d.ts",
+      "sha256": "2c8c5ee58f30e7c944e04ab1fb5506fdbb4dd507c9efa6972cf4b91cec90c503"
+    },
+    {
+      "archive": "terser-5.9.0",
+      "member": "package/dist/bundle.min.js",
+      "sha256": "b8b44743a529c5bd1cf8d6676f040c3c9bed29c7c114e5a26dde5e0fb2125838"
+    }
+  ],
+  "sourceArchive": {
+    "url": "https://codeload.github.com/microsoft/monaco-editor/tar.gz/5a7ba61be909ae9e4889768a3453ebb0dec392e2",
+    "file": "monaco-editor-source.tgz",
+    "bytes": 5614226,
+    "sha256": "b286f3d5891f12e5995563716feafa2e7672d667eb1d4b09d064c305c39716cd"
+  },
+  "members": [
+    {
+      "path": "monaco-languages/src/abap/abap.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/abap/abap.ts",
+      "sha256": "ed8d2a3e2cffd68f35596a5388020540967d20713f693325934c63fe3f6ab676",
+      "gitBlobSha": "092d9aeab70c91a5824fbc5fb63c8a5cc77e43c0"
+    },
+    {
+      "path": "monaco-languages/src/apex/apex.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/apex/apex.ts",
+      "sha256": "2faf11f6124edabc30a3aec86fb2befffad849ef12d63ab63423fe8e71956534",
+      "gitBlobSha": "1ebed5bbfde2ea112ae44c7ce66e0d1fc7c75923"
+    },
+    {
+      "path": "monaco-languages/src/azcli/azcli.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/azcli/azcli.ts",
+      "sha256": "3ed48da2675eccece2e6b5d78168efff75b1f21bc2d8a7a6b36fc538682c74ed",
+      "gitBlobSha": "b527a4111b974361521b479df716fee335159e70"
+    },
+    {
+      "path": "monaco-languages/src/bat/bat.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/bat/bat.ts",
+      "sha256": "06d1407ab372f4095ee33b52e313658b522478a3c43d05f8bd1dd02dae9b4890",
+      "gitBlobSha": "0b7969dd51294ac0ebfeda59441c8964e6455fc9"
+    },
+    {
+      "path": "monaco-languages/src/bicep/bicep.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/bicep/bicep.ts",
+      "sha256": "1592de8d4cd6c1b8c6fadd075f975be88fb3cf48f11474a3690e14c4778996a9",
+      "gitBlobSha": "4c68870126bb3ced83a982f95209e612cf111fa4"
+    },
+    {
+      "path": "monaco-languages/src/cameligo/cameligo.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/cameligo/cameligo.ts",
+      "sha256": "650c65a05406ddb427ff8426172300b66fd73296ac6e2a22770caa60d193aa16",
+      "gitBlobSha": "b4fdd1ac5a8ec625e66ac49c47778d25561ecce0"
+    },
+    {
+      "path": "monaco-languages/src/clojure/clojure.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/clojure/clojure.ts",
+      "sha256": "2c35c189113054b53ce8d353e2d3d45d1e522ee0e3d7d3abbdbaf859683b853d",
+      "gitBlobSha": "1eaa55f9d0992fe190c891ad8b84fb2dc0b1218e"
+    },
+    {
+      "path": "monaco-languages/src/coffee/coffee.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/coffee/coffee.ts",
+      "sha256": "10afc83ae1b75af7d762ddafc9d69a30acfc49718e223a2eba7c18b6a07c63b8",
+      "gitBlobSha": "0994a23f8b333885f51c3b87e0c2373e19b3bfa8"
+    },
+    {
+      "path": "monaco-languages/src/cpp/cpp.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/cpp/cpp.ts",
+      "sha256": "a8ef73671b4ae037b0f7bc2ae43522fdae2eddc6f3ace7a591154c4b934aa413",
+      "gitBlobSha": "6b4eef5093b93470ab65bd072041d1383a0970c1"
+    },
+    {
+      "path": "monaco-languages/src/csharp/csharp.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/csharp/csharp.ts",
+      "sha256": "8ac0dc21b97ee47e69c2fe94e2b63bbd5dbf3ef47f8f5118296ece41fe8c3bee",
+      "gitBlobSha": "3b2e3e7302e9513ce5eec2e6416d08c32ae123c0"
+    },
+    {
+      "path": "monaco-languages/src/csp/csp.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/csp/csp.ts",
+      "sha256": "de0d6106523b09cea3227b3b9c4cb418a5e10f7eeb0dc403deff5de55b0ee12f",
+      "gitBlobSha": "e93be69d82b519c742ab7a112a3e51a4b206144f"
+    },
+    {
+      "path": "monaco-languages/src/css/css.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/css/css.ts",
+      "sha256": "84271bee5307d37b5894ae54fb49185e497d54dcd38919e8c30798289acb9222",
+      "gitBlobSha": "add1fab74f2fabac79e209a7d10e2d1dd58fbb3f"
+    },
+    {
+      "path": "monaco-languages/src/dart/dart.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/dart/dart.ts",
+      "sha256": "0eb708e565aa8c0a2f7e27ae0d0e3dc34ce6227d1cc436a57e36f471ba0e4e60",
+      "gitBlobSha": "6ca9648eef751545ae37b877b14acc6c4384f7a0"
+    },
+    {
+      "path": "monaco-languages/src/dockerfile/dockerfile.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/dockerfile/dockerfile.ts",
+      "sha256": "4a484758f63d1b10612c4d0a553784602d53ee9adf55077cd91771608a9f9de5",
+      "gitBlobSha": "ed59327b0fce5d5010595db05cbd3251f14cd31c"
+    },
+    {
+      "path": "monaco-languages/src/ecl/ecl.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/ecl/ecl.ts",
+      "sha256": "038fc15382e4ecfc1c11498cf2a3694533027d2a6d144f0e091ad283af6c3c1c",
+      "gitBlobSha": "a106173893dd3f6ca5e9284c8f33b8970f5e7e0c"
+    },
+    {
+      "path": "monaco-languages/src/elixir/elixir.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/elixir/elixir.ts",
+      "sha256": "c23b863d8c54dc70213cbdef82e57d5b799b9a35683f89dc2aa7cf12a0dc31a2",
+      "gitBlobSha": "6d6028b9b1606376f74eb2b2fd60f0b17f774982"
+    },
+    {
+      "path": "monaco-languages/src/flow9/flow9.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/flow9/flow9.ts",
+      "sha256": "e171d537043d58841227f958514ad7ef951b79b630f854207e8a9971f249df9d",
+      "gitBlobSha": "e3d779c046a0739243d4068cf0629847fcb56d95"
+    },
+    {
+      "path": "monaco-languages/src/fsharp/fsharp.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/fsharp/fsharp.ts",
+      "sha256": "e6c855ae86756acd8c79c4a407f3478853c85303b41e22fddd24ea6b3ae37690",
+      "gitBlobSha": "2b6ea177509f2a2fb47b80e3b210b0525cb1097e"
+    },
+    {
+      "path": "monaco-languages/src/go/go.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/go/go.ts",
+      "sha256": "4adba6598af9f6de879ae2bb0c45245eb6d84baa0475c9f25eba9b92a4d91764",
+      "gitBlobSha": "6e3bbab5cc649835fa3a7c90389eec799ed07917"
+    },
+    {
+      "path": "monaco-languages/src/graphql/graphql.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/graphql/graphql.ts",
+      "sha256": "cad880dc1fdbf8022abac5acda1c445d0462b181a8344cd0ddc981a4a3908203",
+      "gitBlobSha": "a96b93e89644a6705376142523b1eaa0c7e3a92c"
+    },
+    {
+      "path": "monaco-languages/src/handlebars/handlebars.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/handlebars/handlebars.ts",
+      "sha256": "058ee4e8fd0a5cd9a574a4d04f8419cf23cc7459fd409f2b9100719aef6b459d",
+      "gitBlobSha": "92bb81a76f0c7158777241536cfef9f8c9277a41"
+    },
+    {
+      "path": "monaco-languages/src/hcl/hcl.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/hcl/hcl.ts",
+      "sha256": "833ecdf71327f1296a09e080d2dfc67aabcb247fb0c1c3f917b7285070488202",
+      "gitBlobSha": "9d37584a16ece11255cf6ec6f9c66e4ab6bb7a3a"
+    },
+    {
+      "path": "monaco-languages/src/html/html.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/html/html.ts",
+      "sha256": "e7dd54909ad95b1db6b4e10ad8c49c1075989f85f8e1098f45c72cae78008a1e",
+      "gitBlobSha": "a8476184193dc4dbbfdd40cff412399d60f57855"
+    },
+    {
+      "path": "monaco-languages/src/ini/ini.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/ini/ini.ts",
+      "sha256": "0468fb709dfe500a443399a02c669f9dea0173452276166eb08b0d72e3472e42",
+      "gitBlobSha": "7a68557dcfee8188dd547ef5bef5b824e1df1833"
+    },
+    {
+      "path": "monaco-languages/src/java/java.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/java/java.ts",
+      "sha256": "4ceb492438ba0638e4a006c928ed120060e7009dd123e8ac542377ce2ed5cb18",
+      "gitBlobSha": "e23485a5cf5f506f5fea0308fce41a7790338492"
+    },
+    {
+      "path": "monaco-languages/src/typescript/typescript.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/typescript/typescript.ts",
+      "sha256": "0f30bb3dda1603faa6735d56878def442c0666b49abea0e887ec8d894d7966b1",
+      "gitBlobSha": "9bf81ebce994ecc019e27838e786ff66a0f87055"
+    },
+    {
+      "path": "monaco-languages/src/javascript/javascript.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/javascript/javascript.ts",
+      "sha256": "12e10961048b4d966daca75e69377266a6bb86fb3aec7cd1aea50baf90bab1ac",
+      "gitBlobSha": "6e34efe6f0dbb1b186384fc99666f2f3b3d4af1b"
+    },
+    {
+      "path": "monaco-languages/src/julia/julia.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/julia/julia.ts",
+      "sha256": "41ad9cebcac0b7eafb72517ca9d7979f7f857c95b1295b8217f88e740195238f",
+      "gitBlobSha": "2d62f1a76ec756d5b2b305d8280c13c060635235"
+    },
+    {
+      "path": "monaco-languages/src/kotlin/kotlin.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/kotlin/kotlin.ts",
+      "sha256": "cdba3baa32436fdaa1a367eef1f4f24103de94a4036c2dcce6e50122283d8b3c",
+      "gitBlobSha": "ca3568cb5e73512451b6337ddbdc8addfec22bc8"
+    },
+    {
+      "path": "monaco-languages/src/less/less.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/less/less.ts",
+      "sha256": "87a600f7fc4610f2e2e4525f582ffcdd89ad05078af66d28834d8a22c0d80149",
+      "gitBlobSha": "a2fb0c8562f84eea804e8a04311b6a4a04b8d08c"
+    },
+    {
+      "path": "monaco-languages/src/lexon/lexon.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/lexon/lexon.ts",
+      "sha256": "ae14494fc604e7f200aee37f48f9251c9a5ffa8ade3168b2dd784249daecab69",
+      "gitBlobSha": "29865ea9969c82d994c3ac173dcd579c7eee2778"
+    },
+    {
+      "path": "monaco-languages/src/liquid/liquid.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/liquid/liquid.ts",
+      "sha256": "32b54398ddf43606d6077ec0b653df546d3befdbe839466651202445e3892085",
+      "gitBlobSha": "65384185a4a7e1497efc710ff01b042f400ccf13"
+    },
+    {
+      "path": "monaco-languages/src/lua/lua.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/lua/lua.ts",
+      "sha256": "1192f5282e9c8f72553e7dc5d8d28931f2fbe3d367b5add300521cf11195c8fd",
+      "gitBlobSha": "13cef28e70f62081c3e80ae982b60c13b3d7206e"
+    },
+    {
+      "path": "monaco-languages/src/m3/m3.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/m3/m3.ts",
+      "sha256": "3f38d56545cca06dcdb01ce58be85351edec2745989c18ad85adb94e3eefaaa8",
+      "gitBlobSha": "243f36bde3a6889fa511aed3fd099c986f6b10ea"
+    },
+    {
+      "path": "monaco-languages/src/markdown/markdown.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/markdown/markdown.ts",
+      "sha256": "eaab42fb96976603c62c515b16eceb262ef9315bd7ca3254e71b7b5662f9bed9",
+      "gitBlobSha": "685fa67350e3953f7fb7e454906ddd7059e08e3b"
+    },
+    {
+      "path": "monaco-languages/src/mips/mips.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/mips/mips.ts",
+      "sha256": "c99b9273871a36248055b97b81d68423c0c45f41e11807266e52b2c4e38cc07b",
+      "gitBlobSha": "d66e4becf1a375ce0b79c25108d4ea3e0b0bbb14"
+    },
+    {
+      "path": "monaco-languages/src/msdax/msdax.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/msdax/msdax.ts",
+      "sha256": "8f18bf5d89b980d3932455d53a7b4d7ab8310df2025b7988199705257cc2f1e5",
+      "gitBlobSha": "45124d346db411807305ac4e55aa97ffff058107"
+    },
+    {
+      "path": "monaco-languages/src/mysql/mysql.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/mysql/mysql.ts",
+      "sha256": "e1a8ea48bc025f3f55f8b8b07bc7c1a26ae4a862b1e68b04d987c970617bbd7b",
+      "gitBlobSha": "97483a5bb20515b623b923b8f48da21bc1a22ebc"
+    },
+    {
+      "path": "monaco-languages/src/objective-c/objective-c.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/objective-c/objective-c.ts",
+      "sha256": "e0cc7edeebb24e921bdafdc8ff53533b655a35cbbb7cc892c2555351f2c22fb1",
+      "gitBlobSha": "04ebdc62c85c15220262f87641a46de5797eb0cd"
+    },
+    {
+      "path": "monaco-languages/src/pascal/pascal.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/pascal/pascal.ts",
+      "sha256": "617e6ffea29f3dfbafdbac8e9879e41eb8f0ba6ca86353f347972608d9c837e3",
+      "gitBlobSha": "ef0eb5b68f239a900a2ca17a86ba7aaaa6ad2558"
+    },
+    {
+      "path": "monaco-languages/src/pascaligo/pascaligo.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/pascaligo/pascaligo.ts",
+      "sha256": "6df031621cae0388cd1d4b3ef4576cf76cfd3d7b1c77a4fc2110a413cb482915",
+      "gitBlobSha": "24b7584481aa63e24b9707f8e06fb7b3a9ad3fd6"
+    },
+    {
+      "path": "monaco-languages/src/perl/perl.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/perl/perl.ts",
+      "sha256": "8716a1cabf0b8f546b8a67469022074bddbca3c77726c917ff4b6e8124ca9579",
+      "gitBlobSha": "ce0eef8a842524665f678d553f38555dba9e7940"
+    },
+    {
+      "path": "monaco-languages/src/pgsql/pgsql.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/pgsql/pgsql.ts",
+      "sha256": "ebc1f673e6a6f6a4c7ae2cf2016fb05479e7c2172c5c541181ba04b5dc00311c",
+      "gitBlobSha": "0e34d8304790175b42ded9228781fdb31169c6aa"
+    },
+    {
+      "path": "monaco-languages/src/php/php.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/php/php.ts",
+      "sha256": "444f4f41a03f009685b6c0f3c000f07f3adab3c58fcfedbf18a11117f835b93e",
+      "gitBlobSha": "e02c09e6a4c15a1186addf239825891e8684ee4e"
+    },
+    {
+      "path": "monaco-languages/src/pla/pla.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/pla/pla.ts",
+      "sha256": "99674423c8c4077d5258213dfbf9f681a50eea32ddf27e329523661e2d879273",
+      "gitBlobSha": "0f45d80e19871e3dabae2646732bb4ea6a361bce"
+    },
+    {
+      "path": "monaco-languages/src/postiats/postiats.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/postiats/postiats.ts",
+      "sha256": "d2dcf7af79ea7243bf20dc266ba387ddc5ed79c35e172ee86bd57356004b0bc7",
+      "gitBlobSha": "8c542a59bd893fe9c9c13534568af961abe40966"
+    },
+    {
+      "path": "monaco-languages/src/powerquery/powerquery.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/powerquery/powerquery.ts",
+      "sha256": "bb80f327fe35059c7b1cd82221f1a324ac33bbe873256a3d746714c78a92db7c",
+      "gitBlobSha": "639200e734ec451f7aa2e760ef99a6907cd3da1e"
+    },
+    {
+      "path": "monaco-languages/src/powershell/powershell.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/powershell/powershell.ts",
+      "sha256": "50cf7a95e288e576098599afe5a57eef988c17191ca904c82127382a698791b7",
+      "gitBlobSha": "2790e700f612691c53914c4be77617f90efc8724"
+    },
+    {
+      "path": "monaco-languages/src/protobuf/protobuf.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/protobuf/protobuf.ts",
+      "sha256": "01b7961667f3b8f3b51c0ae87deeadd6e22dfce6378f4cd75c3d87751974733a",
+      "gitBlobSha": "79ca16e3ec3d665cf225998e2076b3e870267f0e"
+    },
+    {
+      "path": "monaco-languages/src/pug/pug.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/pug/pug.ts",
+      "sha256": "671d321e8f08f2a95eaf9aa740e2ddac36095925e4091b42118954ee9337ccae",
+      "gitBlobSha": "6dcbafa2e2ad7ef405b0e26af1a6507a944e0395"
+    },
+    {
+      "path": "monaco-languages/src/python/python.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/python/python.ts",
+      "sha256": "5e598b5f94cf6fa313eaa8cacaf227e49e6480b016515feff269626cd8554980",
+      "gitBlobSha": "816cdb504ffcf2d36cb17ddf11b9372bffb584c6"
+    },
+    {
+      "path": "monaco-languages/src/qsharp/qsharp.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/qsharp/qsharp.ts",
+      "sha256": "c99891826bdd8445c67b63521a7676e8c905b3f99d799679c04720c5759d5ee8",
+      "gitBlobSha": "f41413380c0dd54bf12fa681f52aca089755bab6"
+    },
+    {
+      "path": "monaco-languages/src/r/r.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/r/r.ts",
+      "sha256": "0a3e63eb477ef64f5f46ff564054a12ad111d7167ca2b60bba795765d114191c",
+      "gitBlobSha": "644ed471364ca29945153582eea66f16e41a639c"
+    },
+    {
+      "path": "monaco-languages/src/razor/razor.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/razor/razor.ts",
+      "sha256": "3f8f25cd997ff29bc8ab36e5625b932ed3365fd306466a008a0dc5b934f49cde",
+      "gitBlobSha": "969fa486f53cceea34981d14ccf2a69fa49e669d"
+    },
+    {
+      "path": "monaco-languages/src/redis/redis.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/redis/redis.ts",
+      "sha256": "47d4e49631c1470491ba19da261db00592145ac4152c9f802f3f36a7d440439d",
+      "gitBlobSha": "535dbe3f65a8b26ecafd2c7f599bf009f0a0b8bc"
+    },
+    {
+      "path": "monaco-languages/src/redshift/redshift.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/redshift/redshift.ts",
+      "sha256": "ea338815b31d8dd475f0a3a2d18492efea7e1df11e232ec1a4fd8f187d152536",
+      "gitBlobSha": "f8f847af826a3ba00611a9949f92f15453e5e972"
+    },
+    {
+      "path": "monaco-languages/src/restructuredtext/restructuredtext.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/restructuredtext/restructuredtext.ts",
+      "sha256": "d3a250174430313b6ebb3caa5e3d8227824aeffe8f329862c79c77097e3c662c",
+      "gitBlobSha": "0f7eee1520d11ca9044a6320f8ad67a8ab7759b2"
+    },
+    {
+      "path": "monaco-languages/src/ruby/ruby.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/ruby/ruby.ts",
+      "sha256": "5aefe92af037b090106394d0695535462ecbacfc63a66592d90cf5b1bf1cd227",
+      "gitBlobSha": "27167cffe59be66853dfa460e244b7e9ec36f4d6"
+    },
+    {
+      "path": "monaco-languages/src/rust/rust.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/rust/rust.ts",
+      "sha256": "34224ca9c13d6ca47adb9e83817a7a69dcdc866cda3e7b859af242c2ac0d37d1",
+      "gitBlobSha": "a605021dbb117badd5383cc30b6ee3f2b55f7e09"
+    },
+    {
+      "path": "monaco-languages/src/sb/sb.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/sb/sb.ts",
+      "sha256": "552812c8a15afbc2622dd4fac34d74de272a969b7b0360bf3872b520f64a39f6",
+      "gitBlobSha": "f73aefcf9e5b9a3f79e0de2a8f8c507c0420b1ee"
+    },
+    {
+      "path": "monaco-languages/src/scala/scala.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/scala/scala.ts",
+      "sha256": "a3799f8501fc0ecbb618ce7905a5cb4ef13dcd90a570ea9ee5253447289487c1",
+      "gitBlobSha": "c66566824cb8703f91c1f8582441351d96d91dfd"
+    },
+    {
+      "path": "monaco-languages/src/scheme/scheme.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/scheme/scheme.ts",
+      "sha256": "6799b5824426ad72859efea049a160beb3093758e1c768b3096ccecfdd9e7e04",
+      "gitBlobSha": "8cc8571f72ba4470503863e297ecbcd59a6abed9"
+    },
+    {
+      "path": "monaco-languages/src/scss/scss.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/scss/scss.ts",
+      "sha256": "13c1ff4430bbad6262c779aa742a9a787ae6bc1ed21989ca24f4c955c0f8feab",
+      "gitBlobSha": "93b40189e2cc3eab109f04044117b3c159917887"
+    },
+    {
+      "path": "monaco-languages/src/shell/shell.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/shell/shell.ts",
+      "sha256": "3936809f6a8e09956c014a01dae93d63d4dae522a324551a616a24fb6f37acd9",
+      "gitBlobSha": "f7b6a6c349334975fff7ec3807a93858e2e9693d"
+    },
+    {
+      "path": "monaco-languages/src/solidity/solidity.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/solidity/solidity.ts",
+      "sha256": "6134fe6d2833f29ca951f712710006dba31355698288ae736409e1cbaa85fd3d",
+      "gitBlobSha": "a69a646b22f744931cecbc3c1856d797d3a1dc29"
+    },
+    {
+      "path": "monaco-languages/src/sophia/sophia.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/sophia/sophia.ts",
+      "sha256": "d1a91c4bec1f8d7883a8913f9e514f80130248c8b0eca47a8e55ac917a2fd512",
+      "gitBlobSha": "2273a730a269dc4ec004c239ad8cc6aa8244b935"
+    },
+    {
+      "path": "monaco-languages/src/sparql/sparql.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/sparql/sparql.ts",
+      "sha256": "e83e71c4b610ce646609e9e443922a0982a9e9a7a800a7c585316e72f5383094",
+      "gitBlobSha": "2c552d4b2ec61b307f15753587646cf9831c4182"
+    },
+    {
+      "path": "monaco-languages/src/sql/sql.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/sql/sql.ts",
+      "sha256": "885d53d734675f3f5ccad262e6162d63a337aab10d6019ca4a8ce05c9f9b4339",
+      "gitBlobSha": "066d6cc495ede3ffa106835a2f3508850184f051"
+    },
+    {
+      "path": "monaco-languages/src/st/st.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/st/st.ts",
+      "sha256": "94a610df678af5403aeeb9494ab48e581b0ac6bbe2789eaecbc64a5fd4351b70",
+      "gitBlobSha": "a5d0aa56cf321eb4240a546d29b96660d95eb65d"
+    },
+    {
+      "path": "monaco-languages/src/swift/swift.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/swift/swift.ts",
+      "sha256": "487c2cf4b3fe34117afa04d80aa90942d2a9fd2ca90f156755f2db5e77c54380",
+      "gitBlobSha": "12a7a9fa80abad85afa1ad3d973235c4a970077e"
+    },
+    {
+      "path": "monaco-languages/src/systemverilog/systemverilog.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/systemverilog/systemverilog.ts",
+      "sha256": "e9c03aa6dbb7c849fd90fd455ac3625b0ae37aa57c53b38988695a216ab7c11f",
+      "gitBlobSha": "15064f1d01ab2daddc5f3ebfe440a6d2b8d2d20a"
+    },
+    {
+      "path": "monaco-languages/src/tcl/tcl.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/tcl/tcl.ts",
+      "sha256": "8fb5e509d89221cbab38effd0aab903c0df6178724a9bc7ec0604cbe0a4808b8",
+      "gitBlobSha": "1806f6654990c4f3ef77bf742ef8afea86aa829e"
+    },
+    {
+      "path": "monaco-languages/src/twig/twig.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/twig/twig.ts",
+      "sha256": "307b7daa4ab7d331f2e2de8df0ec3cf16c988a40685a541d664090d8135334e9",
+      "gitBlobSha": "455b1c406885481f520823abc2bc535843159019"
+    },
+    {
+      "path": "monaco-languages/src/vb/vb.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/vb/vb.ts",
+      "sha256": "71a26ada96f2f484edd46481dd6e5e224a2f2686594f47bebef94b4301592bf7",
+      "gitBlobSha": "f6e8a7c987fad21467e62f08be1273e86024d11b"
+    },
+    {
+      "path": "monaco-languages/src/xml/xml.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/xml/xml.ts",
+      "sha256": "cf42dba52dfbd27a81a358682f2c167508cc43d7643a441f7522c453a9b753fd",
+      "gitBlobSha": "593fd645d55f7ca412c8133b7b71871ed6be4c8e"
+    },
+    {
+      "path": "monaco-languages/src/yaml/yaml.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/yaml/yaml.ts",
+      "sha256": "01d8f590e3fb9ba26db5b77189f6e419fcca3a40a4cd2281885d23a345dd25ff",
+      "gitBlobSha": "27cee7d3129ba331d5c6c3af6e95cafd7fe91fb9"
+    },
+    {
+      "path": "monaco-languages/src/abap/abap.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/abap/abap.test.ts",
+      "sha256": "2cbf9cc18609708f8fe24f1cfbba4683f3f0b1da0daee197a06ce665e1012918",
+      "gitBlobSha": "7c5db1dc76e8ca9cc457a42e2bfc182712394ef5"
+    },
+    {
+      "path": "monaco-languages/src/apex/apex.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/apex/apex.test.ts",
+      "sha256": "1051380964f6901003e6450895e418b951a91e23342ab86bd8e80da5f986a6de",
+      "gitBlobSha": "a683d991b7d5aaebcb4cd14d634dcfd8c8eb8b47"
+    },
+    {
+      "path": "monaco-languages/src/azcli/azcli.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/azcli/azcli.test.ts",
+      "sha256": "1d52c2dd3fec0fe3717d649081ca55bdb3cac97d44f8da2ae33f66e7b3752b89",
+      "gitBlobSha": "cf34ecfdfa7088b4603d2c721f2909155554d28e"
+    },
+    {
+      "path": "monaco-languages/src/bat/bat.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/bat/bat.test.ts",
+      "sha256": "68959a3b662514dc6053655846875c9ce66643cae10e8505ef538c3de65375c2",
+      "gitBlobSha": "e3f4afa2b2ff6730f1f5f8fa29c9c64ffbcb2189"
+    },
+    {
+      "path": "monaco-languages/src/bicep/bicep.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/bicep/bicep.test.ts",
+      "sha256": "493f7e62268fab35f84c6b65672b6287a51d498b1dde275967525e2d3141a2a2",
+      "gitBlobSha": "feb0cf34fe4748cf7aeddbd9abb2dc8c17ef9c84"
+    },
+    {
+      "path": "monaco-languages/src/cameligo/cameligo.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/cameligo/cameligo.test.ts",
+      "sha256": "dbfab26152bf09e627f54fd2a00cb4c6f07a7712a28c3252ab5572859e501df5",
+      "gitBlobSha": "2e48ecf428628067f647db297df4d3a22732320a"
+    },
+    {
+      "path": "monaco-languages/src/clojure/clojure.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/clojure/clojure.test.ts",
+      "sha256": "b4ec40110ee6e696ea8b8b98de6f54243eb6df08b72d48204185c76c27195e63",
+      "gitBlobSha": "4046eeb396d232b18628964e8b12c9a81635cf76"
+    },
+    {
+      "path": "monaco-languages/src/coffee/coffee.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/coffee/coffee.test.ts",
+      "sha256": "fa476d01a69997f8b01d2fda8b3f20f0a8f339db77ab836c7c9add3ef2a9dc7b",
+      "gitBlobSha": "4008060c7357ba6507c6412b2e979174965d8523"
+    },
+    {
+      "path": "monaco-languages/src/cpp/cpp.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/cpp/cpp.test.ts",
+      "sha256": "37c3727bd0d5b6d3de1f6c79239fa0479622bdf42f3bfa351c42484b721937c3",
+      "gitBlobSha": "b776103f86184da510a08184fbd0c3c22d5f37fc"
+    },
+    {
+      "path": "monaco-languages/src/csharp/csharp.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/csharp/csharp.test.ts",
+      "sha256": "2bc5d5c33f5b8115ae55f83f1864220ccff433b59c5b499ea3b7ea5e792af2b8",
+      "gitBlobSha": "9b1aaae7a1600c5928ebdb7c51c073fc5e995c3a"
+    },
+    {
+      "path": "monaco-languages/src/csp/csp.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/csp/csp.test.ts",
+      "sha256": "451d95ebcd2b63f3746c23f0ae024acf05113bcd65b1a3081e0c214f0cd9b602",
+      "gitBlobSha": "318769d867e8e27163e5d4b7c59d28da9671803d"
+    },
+    {
+      "path": "monaco-languages/src/css/css.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/css/css.test.ts",
+      "sha256": "3654b89942110d0516c44eb7a4fd55d28fe2f51d560a20661543e0c2be7aee95",
+      "gitBlobSha": "1c072f71cdfb2596ea30528f5a341d984e73e3a5"
+    },
+    {
+      "path": "monaco-languages/src/dart/dart.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/dart/dart.test.ts",
+      "sha256": "9fda4b80eb39095619c935c01728592ee47621b3df35a4a44dbfd2f3ce2ecab4",
+      "gitBlobSha": "14e822e4d0aac4c2e1f161fde5f168f99ab4fee8"
+    },
+    {
+      "path": "monaco-languages/src/dockerfile/dockerfile.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/dockerfile/dockerfile.test.ts",
+      "sha256": "b2933b1fb7428dfa4c2cd499165c80df9fd6a8b6ae1a45e4806c614fb02a38e4",
+      "gitBlobSha": "fb7c8251ee22f119c64efe0d78a5d079d0273d30"
+    },
+    {
+      "path": "monaco-languages/src/ecl/ecl.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/ecl/ecl.test.ts",
+      "sha256": "c095c82b168747bde70d94edf8859288910ae1269a17d262c9f58a1deb4d4948",
+      "gitBlobSha": "d2bbaed1eac4c2b253236aca2b1b8ee2ccc0ad11"
+    },
+    {
+      "path": "monaco-languages/src/elixir/elixir.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/elixir/elixir.test.ts",
+      "sha256": "c672de8044b608e2dc370c14621da4218994203167d2d984551e4c7cee1532f8",
+      "gitBlobSha": "a6e9d26ff0289b3eb4a2f8d1e7d445231e67ff5c"
+    },
+    {
+      "path": "monaco-languages/src/flow9/flow9.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/flow9/flow9.test.ts",
+      "sha256": "4a1787116bcb1600ee8878fb5ef71e09cd60cca101668fc9ea81fb8370e31cf1",
+      "gitBlobSha": "6bf9b04ef01d9744707b46b5f297e64fc77b8aad"
+    },
+    {
+      "path": "monaco-languages/src/fsharp/fsharp.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/fsharp/fsharp.test.ts",
+      "sha256": "06f28aa232b9cbe1203c54f11a134a9571c397b4b9b77655f13246f2e6434107",
+      "gitBlobSha": "fd4a07449d22a99e26ded0dce92dd14f28eea986"
+    },
+    {
+      "path": "monaco-languages/src/go/go.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/go/go.test.ts",
+      "sha256": "0216d0197b61a640b3c0929dee317fca71ba2d4c1eaf05a718086d3ae0b7541a",
+      "gitBlobSha": "2afb7687c394257a5790df558e4dc30ab39f989c"
+    },
+    {
+      "path": "monaco-languages/src/graphql/graphql.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/graphql/graphql.test.ts",
+      "sha256": "39bf15813196aaa1ad34d067bb8744f3a4e7f68de124fae26da1272675f93107",
+      "gitBlobSha": "56c33047b3b1f94a6f9d8f0d1f2998e7d962f312"
+    },
+    {
+      "path": "monaco-languages/src/handlebars/handlebars.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/handlebars/handlebars.test.ts",
+      "sha256": "085caf1c246edb2a191d9edba4d91e31557ce9d2c0fced7194019ea431bbee83",
+      "gitBlobSha": "75a087d08e17b73089a2459c850d1ab1491a0a5d"
+    },
+    {
+      "path": "monaco-languages/src/hcl/hcl.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/hcl/hcl.test.ts",
+      "sha256": "a3850093440947c46cb1dd5773560b0d150f2cbe30971f96e926a7eaa5e36fbc",
+      "gitBlobSha": "3f2f763266eb7805fbe364638573768cf9ac591e"
+    },
+    {
+      "path": "monaco-languages/src/html/html.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/html/html.test.ts",
+      "sha256": "cd72359d189b9dbcaff412fd57043dd4668579a6ec7f0694a83b44b0dc135528",
+      "gitBlobSha": "a49c4f6e8fc8cafd1974723381a6def253a82627"
+    },
+    {
+      "path": "monaco-languages/src/java/java.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/java/java.test.ts",
+      "sha256": "3518a84c7fbae3c715d99cdf91e64477ce356e2d21aa9dab9f6a6a811f7b1ae3",
+      "gitBlobSha": "158a73bd8501c73fdcc7e4b40506ef405cc1d4fb"
+    },
+    {
+      "path": "monaco-languages/src/javascript/javascript.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/javascript/javascript.test.ts",
+      "sha256": "9f22f14f2b4cfed011448fee3eed3cc91c4a0ddfb5f6ad01b4913253c6c3032b",
+      "gitBlobSha": "a3566422a705975ac57f39ad44461ee2f02927de"
+    },
+    {
+      "path": "monaco-languages/src/julia/julia.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/julia/julia.test.ts",
+      "sha256": "ca4b789db371e9920beed4cfca57d85083cb93314aaef068b1e5832e2a5c9c20",
+      "gitBlobSha": "14e21268c676c81f31f9e0f6e4d91aff426ae456"
+    },
+    {
+      "path": "monaco-languages/src/kotlin/kotlin.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/kotlin/kotlin.test.ts",
+      "sha256": "923f5f5b140e609f5a6b37b9d59c5d6e9165d8fb551829533dc75d2babd3d63a",
+      "gitBlobSha": "11b2bbb7017e6fd5b270e716b92541c625fc19e7"
+    },
+    {
+      "path": "monaco-languages/src/less/less.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/less/less.test.ts",
+      "sha256": "9f5e317ed00b0161501c88825deeebe9df8f45a17b61a5022355acb135391a7d",
+      "gitBlobSha": "89ffbf7689593ccd7a31d4eca69a5ea6b663cd63"
+    },
+    {
+      "path": "monaco-languages/src/lexon/lexon.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/lexon/lexon.test.ts",
+      "sha256": "da31d3aec3a3c732545f006c64232ba0b7673c8cddf87cd29349c5893b124b8d",
+      "gitBlobSha": "a1a72dfcaf529b4255a22dc322b483b721e2d86f"
+    },
+    {
+      "path": "monaco-languages/src/liquid/liquid.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/liquid/liquid.test.ts",
+      "sha256": "b54e16ca357e04442f6ef868b592522bbb28e118e1c4e08f0178d256a330422b",
+      "gitBlobSha": "b067fd0904f7209dd2394107d4471498e4357b4f"
+    },
+    {
+      "path": "monaco-languages/src/lua/lua.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/lua/lua.test.ts",
+      "sha256": "223c322e0627d3ef9430ebc43a50f3ab8d32f4593b76cf615faf753a01b5251e",
+      "gitBlobSha": "37fc779e06873f11ad21772057349043a58722e1"
+    },
+    {
+      "path": "monaco-languages/src/m3/m3.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/m3/m3.test.ts",
+      "sha256": "363cd9c62288f1806ed5357260bfdf8a1c851bdf11d0b010104940a107b21d2e",
+      "gitBlobSha": "c089527e334793d72fdc50ba06d245095fdc4444"
+    },
+    {
+      "path": "monaco-languages/src/markdown/markdown.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/markdown/markdown.test.ts",
+      "sha256": "b23665bff5b4be3ca66d61c7c37bed0e146bbbbb03aa9f56bc54cf31ac09abeb",
+      "gitBlobSha": "7253cbe6a7aca740e7b05b0737fe437040b6bde5"
+    },
+    {
+      "path": "monaco-languages/src/mips/mips.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/mips/mips.test.ts",
+      "sha256": "2dc1eec86287d3ca5a947ff3850a25a42c4855331d239c67463ee2cda086bee0",
+      "gitBlobSha": "65a6d040cc046ced1176a2c26e72db037336ecfe"
+    },
+    {
+      "path": "monaco-languages/src/msdax/msdax.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/msdax/msdax.test.ts",
+      "sha256": "d2ae4a434495e911bd0248eb32ed8f3e7befd6e6f9a3d1c9855c90333a5f1cd5",
+      "gitBlobSha": "7dcac2be995aaa25a3d6e4758baf33c14ac54353"
+    },
+    {
+      "path": "monaco-languages/src/mysql/mysql.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/mysql/mysql.test.ts",
+      "sha256": "f226a4f72a8d80fe0d9d69adaa370bc950d144652e5ccd3ad346268af3deeabd",
+      "gitBlobSha": "a8111a25414111fe6c9785ed202c1f570477727a"
+    },
+    {
+      "path": "monaco-languages/src/objective-c/objective-c.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/objective-c/objective-c.test.ts",
+      "sha256": "26b8ba8098531e204f7a9377dad864de316e7b35208bab2f1bdf3ab06ca7484c",
+      "gitBlobSha": "0c5afd3f6a35591c234ac09003b895ce5c45ef0b"
+    },
+    {
+      "path": "monaco-languages/src/pascal/pascal.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/pascal/pascal.test.ts",
+      "sha256": "dda7cddfeb804265e24b109cbc7920462953de77cfe3cb6e14346ff106f06bb4",
+      "gitBlobSha": "5c7eff7760f27862a004c52984b66b0e67e29fda"
+    },
+    {
+      "path": "monaco-languages/src/pascaligo/pascaligo.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/pascaligo/pascaligo.test.ts",
+      "sha256": "bc1f08f59eacd0cce804ae68b2a4f2326dc676648bd185e06d5b2b0790388a12",
+      "gitBlobSha": "98080a998d02a8dcb14d5d87831fc069d579bafd"
+    },
+    {
+      "path": "monaco-languages/src/perl/perl.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/perl/perl.test.ts",
+      "sha256": "ee2e91ce6d7c4c66682587eceb10057ff0e189997529316a7a19a51a011e4ae7",
+      "gitBlobSha": "cb7934750f549f67c2238374803a766b91d8a008"
+    },
+    {
+      "path": "monaco-languages/src/pgsql/pgsql.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/pgsql/pgsql.test.ts",
+      "sha256": "553c61d3cbf464c046be8f8a154c216c5a1080e03d8218bd66a7d5dd21f40c5d",
+      "gitBlobSha": "cf1e4447be344d62919c7048cbc7e3b0be22082c"
+    },
+    {
+      "path": "monaco-languages/src/php/php.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/php/php.test.ts",
+      "sha256": "7e98f7081f123d3b790ac2441b76a02ca8688469d9c118d1b7bcfb9964447e6c",
+      "gitBlobSha": "8467ac3dff27da7885bb36ab6e3fb36489965d96"
+    },
+    {
+      "path": "monaco-languages/src/pla/pla.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/pla/pla.test.ts",
+      "sha256": "640a9a36560baf63492132409ad8e11da554fd213c829b545f0f3b6fac95bc06",
+      "gitBlobSha": "553d86753ee675f989f31ed056e4494fc2eb7290"
+    },
+    {
+      "path": "monaco-languages/src/postiats/postiats.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/postiats/postiats.test.ts",
+      "sha256": "2f635e1019820e7cf0593487bb2ca13379bee104afb4ca33274e731aa8ff1b75",
+      "gitBlobSha": "c8d41a559c8ab8f9c2a6a81c913465ee90ed6f49"
+    },
+    {
+      "path": "monaco-languages/src/powerquery/powerquery.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/powerquery/powerquery.test.ts",
+      "sha256": "c4a5cdf09c81d1d35c265e45afd82be6696c62cb2904c4220c99d73c0d437b87",
+      "gitBlobSha": "9066966e08e4219875575960367da8312111db24"
+    },
+    {
+      "path": "monaco-languages/src/powershell/powershell.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/powershell/powershell.test.ts",
+      "sha256": "5a07962bdedd4a083a72605784426b9b6b32c1e0b6674f4597a8d59fa72aa0fd",
+      "gitBlobSha": "82762398889730cd89f2f4423ac8ebfbbbe3f821"
+    },
+    {
+      "path": "monaco-languages/src/protobuf/protobuf.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/protobuf/protobuf.test.ts",
+      "sha256": "b0d6f366bfbc4ee22edc3b3cd0f5b879fe7f8a4b6a04ec1f60609f03439600a2",
+      "gitBlobSha": "86e04b430acfa9a4e305c15ba8a195cc5ca1bed6"
+    },
+    {
+      "path": "monaco-languages/src/pug/pug.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/pug/pug.test.ts",
+      "sha256": "f83cffd3e964b1f46cc9822b742e3973c4e24328833b061226204b8d687530d9",
+      "gitBlobSha": "8e70101400bb70f87f7a4f3c2be6f7df3cc7d775"
+    },
+    {
+      "path": "monaco-languages/src/python/python.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/python/python.test.ts",
+      "sha256": "25d1e797bfdf0e2b61815b88946ebc7a02fe197fb156e7355a2c5e2ba895cc55",
+      "gitBlobSha": "ef01dc21991fed6c01d7bcc5b47a6c8845bc01a6"
+    },
+    {
+      "path": "monaco-languages/src/qsharp/qsharp.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/qsharp/qsharp.test.ts",
+      "sha256": "927ba700bd80133ae063789ce2c924bf043c71d4988e94d4732d07176f1605f6",
+      "gitBlobSha": "c28890679206f6a7c0f046d7c2db40dfc2c8af3b"
+    },
+    {
+      "path": "monaco-languages/src/r/r.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/r/r.test.ts",
+      "sha256": "e7450bd92e389d9a89ba0ba661638d1c79bc59890c82ebe8a17e56683821b9a7",
+      "gitBlobSha": "09a9b9709c28d9fcb50d634b9defe5026d9a6065"
+    },
+    {
+      "path": "monaco-languages/src/razor/razor.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/razor/razor.test.ts",
+      "sha256": "1c0159c33176859b674bb37da82fb6f5ef3de38d173a6ddd53e24bbb7fb05f7b",
+      "gitBlobSha": "24a58134bc7ea8e2df7b283e4d790c40d0d2b972"
+    },
+    {
+      "path": "monaco-languages/src/redis/redis.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/redis/redis.test.ts",
+      "sha256": "8521750114a91f6113ce5e574c0458b618f71ae547bf205eb0e35171e7f10a52",
+      "gitBlobSha": "3c0b7c42faea9295e62e29db053cfbd7fdbc1c51"
+    },
+    {
+      "path": "monaco-languages/src/redshift/redshift.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/redshift/redshift.test.ts",
+      "sha256": "553c61d3cbf464c046be8f8a154c216c5a1080e03d8218bd66a7d5dd21f40c5d",
+      "gitBlobSha": "cf1e4447be344d62919c7048cbc7e3b0be22082c"
+    },
+    {
+      "path": "monaco-languages/src/restructuredtext/restructuredtext.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/restructuredtext/restructuredtext.test.ts",
+      "sha256": "2bffc2044b45b31cf3ff54bd83dfdaefb9e3fde23b2d4a0518b3ab8de699cc88",
+      "gitBlobSha": "dae5bd0bd7bf4b70017acff83c63522ffadb686a"
+    },
+    {
+      "path": "monaco-languages/src/ruby/ruby.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/ruby/ruby.test.ts",
+      "sha256": "bc654a00b32e5d7bd6a136d8547e27ad6a15a939a41970642b447300a5ae77d5",
+      "gitBlobSha": "849fb6bd9f8012ee3ad0f39ac36ba4fdc2ff772c"
+    },
+    {
+      "path": "monaco-languages/src/rust/rust.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/rust/rust.test.ts",
+      "sha256": "f03632614f079ee3a1cf9d02237d3e09907e8fef044e8bee98f99ae5e4b03306",
+      "gitBlobSha": "45cae5eaf1e24f9d3bbd95d54f844ac435ca6eb4"
+    },
+    {
+      "path": "monaco-languages/src/sb/sb.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/sb/sb.test.ts",
+      "sha256": "bb65080b5b09c569e8ac808c65849f9ab749b2e571d75fd328b93bb0b55588a3",
+      "gitBlobSha": "5ad8b8048486b7607e9529b64ae4657303e18b32"
+    },
+    {
+      "path": "monaco-languages/src/scala/scala.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/scala/scala.test.ts",
+      "sha256": "e9b8470eb20cef727dd3960df8449718fe97f4106a2526c26ae4c4ef71c90740",
+      "gitBlobSha": "d2bcd030bef9b8cf3761d557b51ff957a459ef9e"
+    },
+    {
+      "path": "monaco-languages/src/scheme/scheme.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/scheme/scheme.test.ts",
+      "sha256": "5484232ff1817c21b47c28f9a1932ad9fce6be523a35ef0a1e99c38f66ffd9be",
+      "gitBlobSha": "578431a874eae9ea8540af3264f6364aff6db156"
+    },
+    {
+      "path": "monaco-languages/src/scss/scss.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/scss/scss.test.ts",
+      "sha256": "7781a06c2442301b01f02d19a35b8683d26a82b9d31ea0c8912010f572aa979d",
+      "gitBlobSha": "996cf7bff56b59222fb92f2bcfb6005453ce9963"
+    },
+    {
+      "path": "monaco-languages/src/shell/shell.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/shell/shell.test.ts",
+      "sha256": "109e1e6e95090ff9dcadf150409c4e24ce6838a1e6f2d13f7a8f5080aff66aab",
+      "gitBlobSha": "71ce92b097e6e097ddec95865faa3d8ff00aae28"
+    },
+    {
+      "path": "monaco-languages/src/solidity/solidity.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/solidity/solidity.test.ts",
+      "sha256": "b93c84068b3fc42effc275b0ef9c47276f79036d99020d249b32d4c40ff658e1",
+      "gitBlobSha": "1bfe2fc09f2bb02214a65ce9a90e0fe7390eed00"
+    },
+    {
+      "path": "monaco-languages/src/sophia/sophia.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/sophia/sophia.test.ts",
+      "sha256": "08df640cab9c0b4090feff4eb1e0447dc877e70f9a80c1e6dbf34633e6dd59f1",
+      "gitBlobSha": "85d09bc5d62a3f1dd062111647f673ba3ee0aac4"
+    },
+    {
+      "path": "monaco-languages/src/sparql/sparql.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/sparql/sparql.test.ts",
+      "sha256": "dacf36b268f13379c1a0b5e2c4b9740fffd8a3a45990ad9bd00bd5c8133b2740",
+      "gitBlobSha": "a88d8ca105498fdb5a6f4e7e52941ccea63b1879"
+    },
+    {
+      "path": "monaco-languages/src/sql/sql.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/sql/sql.test.ts",
+      "sha256": "f0b409f0688ea5449ab1c2c2858c0699035c629faa388331d170b1375cfde0f4",
+      "gitBlobSha": "efd35c9d1943eef13c0b4886000ac31af7423de7"
+    },
+    {
+      "path": "monaco-languages/src/st/st.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/st/st.test.ts",
+      "sha256": "94917fc67fccc71c2551e0b40d4009505ca8700051e01bc0d83d631336188f58",
+      "gitBlobSha": "fdf1fa1b9172373ced767cb598fcd161767af8ef"
+    },
+    {
+      "path": "monaco-languages/src/swift/swift.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/swift/swift.test.ts",
+      "sha256": "84eaae0ef2b5428c9c9c1728c8b9c7c5b2a60191f0ff55d9da2816d2f91b4605",
+      "gitBlobSha": "5f5d32f861019d59da075169db1adf4317ae82d1"
+    },
+    {
+      "path": "monaco-languages/src/systemverilog/systemverilog.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/systemverilog/systemverilog.test.ts",
+      "sha256": "9332abdfc3ca31fadc988df6aee9ed6065f952928b1035522143eb28daf5da33",
+      "gitBlobSha": "5555da38f34af0682546258826e88f9c5d51c92f"
+    },
+    {
+      "path": "monaco-languages/src/tcl/tcl.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/tcl/tcl.test.ts",
+      "sha256": "febc6d036063ba0c7308cccc09b9cfaa2ed7962f01373e1995de5f459728afa2",
+      "gitBlobSha": "ffbb9ebe7456cfa8c4c87bf7eb246bb820e604ee"
+    },
+    {
+      "path": "monaco-languages/src/twig/twig.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/twig/twig.test.ts",
+      "sha256": "52d08c73ef3183e9e5ce9f76d0d55e5599f8787090b1db00d7d085e62436f839",
+      "gitBlobSha": "a957eec7881ef772176692f799a00ccd678ea2d8"
+    },
+    {
+      "path": "monaco-languages/src/typescript/typescript.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/typescript/typescript.test.ts",
+      "sha256": "cc591ae70552f9ec2cb59c141dc559ab2541833a614a8a9ca193020a42925b04",
+      "gitBlobSha": "b2a3400e4d14d4c5e31087a1d65ac69340811ade"
+    },
+    {
+      "path": "monaco-languages/src/vb/vb.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/vb/vb.test.ts",
+      "sha256": "c09daaedf09b51117523496bc1741cb226cf1608f1084134243285e235c5f07e",
+      "gitBlobSha": "5167093f469cd8f1463ebda665fc96213a704fb8"
+    },
+    {
+      "path": "monaco-languages/src/xml/xml.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/xml/xml.test.ts",
+      "sha256": "d7b26bdd2232778c77657832975d020041b477fa9c02ffe5a678ab6d92497730",
+      "gitBlobSha": "8f2bdc5c4ab6138d2f6fe778ddcdb7f0956455db"
+    },
+    {
+      "path": "monaco-languages/src/yaml/yaml.test.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/yaml/yaml.test.ts",
+      "sha256": "3e079f8ad418474402aece3c57721ae95567bd872917f539261142d6ae942ac2",
+      "gitBlobSha": "6a0aa84660d2a08821b05f117145a58850098c4c"
+    },
+    {
+      "path": "monaco-languages/scripts/bundle.js",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/scripts/bundle.js",
+      "sha256": "0660c4a67d6dd30cc9961ea5840f23b1b1bb46e17c2d412175222ececf718039",
+      "gitBlobSha": "fb3742eeb22f946b93e8b9fae5858481c052675a",
+      "frozen": "refactor/baselines/site-vendor/monaco-basic/monaco-languages-scripts-bundle.js"
+    },
+    {
+      "path": "monaco-languages/src/tsconfig.json",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/tsconfig.json",
+      "sha256": "38d77fc8ad4331f6566726bb849a09fc7a141c29f0add7449720bd9f88e32a04",
+      "gitBlobSha": "23b3bea3ad9f9914499c22ee8c4693ee547e8842",
+      "frozen": "refactor/baselines/site-vendor/monaco-basic/monaco-languages-src-tsconfig.json"
+    },
+    {
+      "path": "monaco-languages/src/test/testRunner.ts",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/monaco-languages/src/test/testRunner.ts",
+      "sha256": "6d8a2947e55dea64d968d8a8afc4b30faafee663b768eb758364035990fdbbe7",
+      "gitBlobSha": "859cd40801ff09b4f3a445db43ec36d41b55c756",
+      "frozen": "refactor/baselines/site-vendor/monaco-basic/monaco-languages-src-test-testRunner.ts"
+    },
+    {
+      "path": "LICENSE.md",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/LICENSE.md",
+      "sha256": "33e4ff1a06ef62ba21788ea162564ee8165269a24a9ce6ef301837447eab0ac6",
+      "gitBlobSha": "76fdc58a0d7f76d050f6098fb19e53ee86231b3e",
+      "frozen": "refactor/baselines/site-vendor/monaco-basic/LICENSE"
+    },
+    {
+      "path": "ThirdPartyNotices.txt",
+      "member": "monaco-editor-5a7ba61be909ae9e4889768a3453ebb0dec392e2/ThirdPartyNotices.txt",
+      "sha256": "88aceff189c4e1f3f536eb0a39c93896c05da349042949c79fdf6943f0015d07",
+      "gitBlobSha": "e41189fb487cf7e33b3fafba6ccac02303ef6da3",
+      "frozen": "refactor/baselines/site-vendor/monaco-basic/ThirdPartyNotices.txt"
+    }
+  ],
+  "modules": [
+    {
+      "id": "vs/basic-languages/abap/abap",
+      "path": "monaco-languages/src/abap/abap.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/apex/apex",
+      "path": "monaco-languages/src/apex/apex.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/azcli/azcli",
+      "path": "monaco-languages/src/azcli/azcli.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/bat/bat",
+      "path": "monaco-languages/src/bat/bat.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/bicep/bicep",
+      "path": "monaco-languages/src/bicep/bicep.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/cameligo/cameligo",
+      "path": "monaco-languages/src/cameligo/cameligo.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/clojure/clojure",
+      "path": "monaco-languages/src/clojure/clojure.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/coffee/coffee",
+      "path": "monaco-languages/src/coffee/coffee.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/cpp/cpp",
+      "path": "monaco-languages/src/cpp/cpp.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/csharp/csharp",
+      "path": "monaco-languages/src/csharp/csharp.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/csp/csp",
+      "path": "monaco-languages/src/csp/csp.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/css/css",
+      "path": "monaco-languages/src/css/css.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/dart/dart",
+      "path": "monaco-languages/src/dart/dart.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/dockerfile/dockerfile",
+      "path": "monaco-languages/src/dockerfile/dockerfile.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/ecl/ecl",
+      "path": "monaco-languages/src/ecl/ecl.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/elixir/elixir",
+      "path": "monaco-languages/src/elixir/elixir.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/flow9/flow9",
+      "path": "monaco-languages/src/flow9/flow9.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/fsharp/fsharp",
+      "path": "monaco-languages/src/fsharp/fsharp.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/go/go",
+      "path": "monaco-languages/src/go/go.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/graphql/graphql",
+      "path": "monaco-languages/src/graphql/graphql.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/handlebars/handlebars",
+      "path": "monaco-languages/src/handlebars/handlebars.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/hcl/hcl",
+      "path": "monaco-languages/src/hcl/hcl.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/html/html",
+      "path": "monaco-languages/src/html/html.ts",
+      "suffix": "\n;"
+    },
+    {
+      "id": "vs/basic-languages/ini/ini",
+      "path": "monaco-languages/src/ini/ini.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/java/java",
+      "path": "monaco-languages/src/java/java.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/typescript/typescript",
+      "path": "monaco-languages/src/typescript/typescript.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/javascript/javascript",
+      "path": "monaco-languages/src/javascript/javascript.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/julia/julia",
+      "path": "monaco-languages/src/julia/julia.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/kotlin/kotlin",
+      "path": "monaco-languages/src/kotlin/kotlin.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/less/less",
+      "path": "monaco-languages/src/less/less.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/lexon/lexon",
+      "path": "monaco-languages/src/lexon/lexon.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/liquid/liquid",
+      "path": "monaco-languages/src/liquid/liquid.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/lua/lua",
+      "path": "monaco-languages/src/lua/lua.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/m3/m3",
+      "path": "monaco-languages/src/m3/m3.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/markdown/markdown",
+      "path": "monaco-languages/src/markdown/markdown.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/mips/mips",
+      "path": "monaco-languages/src/mips/mips.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/msdax/msdax",
+      "path": "monaco-languages/src/msdax/msdax.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/mysql/mysql",
+      "path": "monaco-languages/src/mysql/mysql.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/objective-c/objective-c",
+      "path": "monaco-languages/src/objective-c/objective-c.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/pascal/pascal",
+      "path": "monaco-languages/src/pascal/pascal.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/pascaligo/pascaligo",
+      "path": "monaco-languages/src/pascaligo/pascaligo.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/perl/perl",
+      "path": "monaco-languages/src/perl/perl.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/pgsql/pgsql",
+      "path": "monaco-languages/src/pgsql/pgsql.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/php/php",
+      "path": "monaco-languages/src/php/php.ts",
+      "suffix": "\n;"
+    },
+    {
+      "id": "vs/basic-languages/pla/pla",
+      "path": "monaco-languages/src/pla/pla.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/postiats/postiats",
+      "path": "monaco-languages/src/postiats/postiats.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/powerquery/powerquery",
+      "path": "monaco-languages/src/powerquery/powerquery.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/powershell/powershell",
+      "path": "monaco-languages/src/powershell/powershell.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/protobuf/protobuf",
+      "path": "monaco-languages/src/protobuf/protobuf.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/pug/pug",
+      "path": "monaco-languages/src/pug/pug.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/python/python",
+      "path": "monaco-languages/src/python/python.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/qsharp/qsharp",
+      "path": "monaco-languages/src/qsharp/qsharp.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/r/r",
+      "path": "monaco-languages/src/r/r.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/razor/razor",
+      "path": "monaco-languages/src/razor/razor.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/redis/redis",
+      "path": "monaco-languages/src/redis/redis.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/redshift/redshift",
+      "path": "monaco-languages/src/redshift/redshift.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/restructuredtext/restructuredtext",
+      "path": "monaco-languages/src/restructuredtext/restructuredtext.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/ruby/ruby",
+      "path": "monaco-languages/src/ruby/ruby.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/rust/rust",
+      "path": "monaco-languages/src/rust/rust.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/sb/sb",
+      "path": "monaco-languages/src/sb/sb.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/scala/scala",
+      "path": "monaco-languages/src/scala/scala.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/scheme/scheme",
+      "path": "monaco-languages/src/scheme/scheme.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/scss/scss",
+      "path": "monaco-languages/src/scss/scss.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/shell/shell",
+      "path": "monaco-languages/src/shell/shell.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/solidity/solidity",
+      "path": "monaco-languages/src/solidity/solidity.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/sophia/sophia",
+      "path": "monaco-languages/src/sophia/sophia.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/sparql/sparql",
+      "path": "monaco-languages/src/sparql/sparql.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/sql/sql",
+      "path": "monaco-languages/src/sql/sql.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/st/st",
+      "path": "monaco-languages/src/st/st.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/swift/swift",
+      "path": "monaco-languages/src/swift/swift.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/systemverilog/systemverilog",
+      "path": "monaco-languages/src/systemverilog/systemverilog.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/tcl/tcl",
+      "path": "monaco-languages/src/tcl/tcl.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/twig/twig",
+      "path": "monaco-languages/src/twig/twig.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/vb/vb",
+      "path": "monaco-languages/src/vb/vb.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/xml/xml",
+      "path": "monaco-languages/src/xml/xml.ts",
+      "suffix": ""
+    },
+    {
+      "id": "vs/basic-languages/yaml/yaml",
+      "path": "monaco-languages/src/yaml/yaml.ts",
+      "suffix": ""
+    }
+  ],
+  "files": [
+    {
+      "language": "abap",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/abap/abap.js",
+        "sha256": "a31239d850fa9b4726a69ac2bcd479757a6c8b1cbb36191b37b543954fceb982"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/abap/abap.js",
+        "sha256": "49638217243bab4ed7d928d194bafe334abb614777440bf46f8636b9e5dfe0a4"
+      },
+      "ids": [
+        "vs/basic-languages/abap/abap"
+      ]
+    },
+    {
+      "language": "apex",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/apex/apex.js",
+        "sha256": "eb063abdc0beeccfba3d15c80211bb090ce542930e178ceee320c9b13aa8ba86"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/apex/apex.js",
+        "sha256": "034f340001e4c340b80e18abe45c990564931c4a061b4e74de86c012fb7d7a21"
+      },
+      "ids": [
+        "vs/basic-languages/apex/apex"
+      ]
+    },
+    {
+      "language": "azcli",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/azcli/azcli.js",
+        "sha256": "76dc21849458d456a723ec80762a9fb2001dd5bc14c69efadab1ad5448f8f938"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/azcli/azcli.js",
+        "sha256": "be50c776891279c9717db0d48a20d6d99f07cb60d2d8d279422fa917826683cf"
+      },
+      "ids": [
+        "vs/basic-languages/azcli/azcli"
+      ]
+    },
+    {
+      "language": "bat",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/bat/bat.js",
+        "sha256": "b5f76ddccc351a365881416386f130f28aadf8efa09d4379a96f839daa383c17"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/bat/bat.js",
+        "sha256": "3ec5d66f73ee7e7dc2b43db5999a768d1a54e933de9f507015fe7709a184adee"
+      },
+      "ids": [
+        "vs/basic-languages/bat/bat"
+      ]
+    },
+    {
+      "language": "bicep",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/bicep/bicep.js",
+        "sha256": "31facff212ec10918413c23c9bc4e1dc2803dd4f17778ccbda82723926c92c0a"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/bicep/bicep.js",
+        "sha256": "59d02b8930e36e2cbc3e472e263f881a82d84da292a79faf1d379cb060a2d7e1"
+      },
+      "ids": [
+        "vs/basic-languages/bicep/bicep"
+      ]
+    },
+    {
+      "language": "cameligo",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/cameligo/cameligo.js",
+        "sha256": "5fc9a369894c87eb98aba304a910c7da7f6958f91c8cc9c4f33ef17f4d97ee13"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/cameligo/cameligo.js",
+        "sha256": "f93cd405c71f97f26b4739f7f917b242e82a993ad42884422a43bf27d5b413e2"
+      },
+      "ids": [
+        "vs/basic-languages/cameligo/cameligo"
+      ]
+    },
+    {
+      "language": "clojure",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/clojure/clojure.js",
+        "sha256": "909cc61c1b4345842cda4413f9fa46690ebdaf7b89324e2dc36db25372c7137f"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/clojure/clojure.js",
+        "sha256": "9e99cf86bcfb25c1b33bac9e26e11e4646868fa753356c7d737cfb24b7b1e49c"
+      },
+      "ids": [
+        "vs/basic-languages/clojure/clojure"
+      ]
+    },
+    {
+      "language": "coffee",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/coffee/coffee.js",
+        "sha256": "34d5bd7c9777dcbb0476ad084a1f2a674b6b8ca48aafede8436994cb06f4fa72"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/coffee/coffee.js",
+        "sha256": "90d6aae23c9f5e4f335df5cb57634fa0193a102629deb88b98f238b4025f0551"
+      },
+      "ids": [
+        "vs/basic-languages/coffee/coffee"
+      ]
+    },
+    {
+      "language": "cpp",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/cpp/cpp.js",
+        "sha256": "a8eee807f26cbf5735e6ec1f12ea1edaf52cb324cb81899c308b29a0afea37bc"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/cpp/cpp.js",
+        "sha256": "ece3d119688eaf8a37fffae388118b12f8724ac2c3c8ff10d44caf2e91026424"
+      },
+      "ids": [
+        "vs/basic-languages/cpp/cpp"
+      ]
+    },
+    {
+      "language": "csharp",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/csharp/csharp.js",
+        "sha256": "457fbb844f886c760e4eb631acdfddbac592eb7f5f0ca7d134764507966e8055"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/csharp/csharp.js",
+        "sha256": "d6367d0d67c0612cf37d25319e00cda2e4e38869a3c3200b1bfcd856cfe7fb4b"
+      },
+      "ids": [
+        "vs/basic-languages/csharp/csharp"
+      ]
+    },
+    {
+      "language": "csp",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/csp/csp.js",
+        "sha256": "b09dd6db537d3e21bac1e4fda703107c71fef81d1a724b30d5381c8c7373973b"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/csp/csp.js",
+        "sha256": "01241c709a7dddc0b5cedffb6dcf913a5d95c826eb68e2c27f114640719af7df"
+      },
+      "ids": [
+        "vs/basic-languages/csp/csp"
+      ]
+    },
+    {
+      "language": "css",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/css/css.js",
+        "sha256": "c277de82a2b5b2161d30268c828c6a896f71a09b3ce66a232d7a49ccee3a9744"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/css/css.js",
+        "sha256": "1f8468a126f6bfdc43d49a75e0ae758de913ebf55e685165adb6d069a454de5c"
+      },
+      "ids": [
+        "vs/basic-languages/css/css"
+      ]
+    },
+    {
+      "language": "dart",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/dart/dart.js",
+        "sha256": "c9eb0241ddd10afde4780faee8012e1f93ccbd7099fc5515d09cc7ec0eeac633"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/dart/dart.js",
+        "sha256": "6b410bbe17b8ebcaed969bdfcf8049df6fe863482756ae73d2aebb919630034c"
+      },
+      "ids": [
+        "vs/basic-languages/dart/dart"
+      ]
+    },
+    {
+      "language": "dockerfile",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/dockerfile/dockerfile.js",
+        "sha256": "783e45c6434043a63c1910788266ec8811a9729d5123c717939c0b7cb3ca1ac2"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/dockerfile/dockerfile.js",
+        "sha256": "315769a72a2877f8ddddf9497a2e7e259e8df51cc38232ddf76fbe4556c0d7cd"
+      },
+      "ids": [
+        "vs/basic-languages/dockerfile/dockerfile"
+      ]
+    },
+    {
+      "language": "ecl",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/ecl/ecl.js",
+        "sha256": "8c4159c1c33646300d2aea2b8e6bfeaf8081fa9b5a2f92dc665e4dd0c6b28409"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/ecl/ecl.js",
+        "sha256": "fc412fe18e564cff17e9a0bcd5674ba15c49f4739417cf589ce1c546b21033a9"
+      },
+      "ids": [
+        "vs/basic-languages/ecl/ecl"
+      ]
+    },
+    {
+      "language": "elixir",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/elixir/elixir.js",
+        "sha256": "c4ad247966599f6bf9747ac8b847872f7c9c15b61e8dcf629ead1b91af989563"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/elixir/elixir.js",
+        "sha256": "130d310090d723f51111d573000a72aa26fe44c9d79e6d04d12524e6631cfb6b"
+      },
+      "ids": [
+        "vs/basic-languages/elixir/elixir"
+      ]
+    },
+    {
+      "language": "flow9",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/flow9/flow9.js",
+        "sha256": "8f77ad50ace6bc3aba5f351001f7a299bb8d8fc04127be81d485f5007c598571"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/flow9/flow9.js",
+        "sha256": "fafd88d973aed314454cd7d842b270125553f7a7613bb068c3c799a21ac61b64"
+      },
+      "ids": [
+        "vs/basic-languages/flow9/flow9"
+      ]
+    },
+    {
+      "language": "fsharp",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/fsharp/fsharp.js",
+        "sha256": "bafab211e85c34b2787eb29f265382afc55aaf746b6317aa8a3266005014d4b6"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/fsharp/fsharp.js",
+        "sha256": "32027afd4be75ddeca6c7beb9b52eda07d59afe3ea39a84f0696a6b3d074dcbf"
+      },
+      "ids": [
+        "vs/basic-languages/fsharp/fsharp"
+      ]
+    },
+    {
+      "language": "go",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/go/go.js",
+        "sha256": "908af762024367652a4f2e8ff7adbc3f9d461180adb5bf326d48eb30ca497ef0"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/go/go.js",
+        "sha256": "c93466a4479ee8aa5e3ec70a89b469db1277b801d1551d40ad700d5abd367363"
+      },
+      "ids": [
+        "vs/basic-languages/go/go"
+      ]
+    },
+    {
+      "language": "graphql",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/graphql/graphql.js",
+        "sha256": "534a0e4254a82f37da4f20a981b6d5288cd6e241c8074d8bd55c6a624f0148ed"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/graphql/graphql.js",
+        "sha256": "60a8825e939ca81540eb6ac00b17867b3e55af97bff99a9fa40c422a4281bdcf"
+      },
+      "ids": [
+        "vs/basic-languages/graphql/graphql"
+      ]
+    },
+    {
+      "language": "handlebars",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/handlebars/handlebars.js",
+        "sha256": "adf36e10c3abba01b47690d64e24908cba32ac6cf769370536f0aeece5160c2b"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/handlebars/handlebars.js",
+        "sha256": "5a174247aa64c7a064fc977365bb1c7161b4c97e559a6121773188c25df9d9a2"
+      },
+      "ids": [
+        "vs/basic-languages/handlebars/handlebars"
+      ]
+    },
+    {
+      "language": "hcl",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/hcl/hcl.js",
+        "sha256": "f70f51d8f64f12629c515094f731c2f9a1a790d7ade7e80fa700d1549d7689fd"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/hcl/hcl.js",
+        "sha256": "6053e90b8aa918c9744f41dcb1c0e58229a4946f0968a39b00776c3893538f54"
+      },
+      "ids": [
+        "vs/basic-languages/hcl/hcl"
+      ]
+    },
+    {
+      "language": "html",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/html/html.js",
+        "sha256": "5b98e45652e4a029b27029a7301575b1d94ee1b19d657a61000c1ffb41ab723b"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/html/html.js",
+        "sha256": "6e7ae0ce7f07ec01c64db1368869715c115690e40fb5c183d5ced0d2716038bd"
+      },
+      "ids": [
+        "vs/basic-languages/html/html"
+      ]
+    },
+    {
+      "language": "ini",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/ini/ini.js",
+        "sha256": "421f67bca3b007c05cf3a05a67895a977f94461691ba1427d6141b3e5ce8e9a3"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/ini/ini.js",
+        "sha256": "ecdb5c36a38a8b68af6384789c380d0e28b5b3df86de9c3419d348e688b8810e"
+      },
+      "ids": [
+        "vs/basic-languages/ini/ini"
+      ]
+    },
+    {
+      "language": "java",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/java/java.js",
+        "sha256": "153172aa428695164c6b9a0a349312524178654d6840632e5f3b2f31e1f7051f"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/java/java.js",
+        "sha256": "8fd9c491b67dfa9ab831ed71a3973cc6ffc840f438f41114a794163672f4cf9c"
+      },
+      "ids": [
+        "vs/basic-languages/java/java"
+      ]
+    },
+    {
+      "language": "javascript",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/javascript/javascript.js",
+        "sha256": "ea102caf229a79c9e562e90c5c1579b3623244231c22b3c5bd702d62ed86e258"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/javascript/javascript.js",
+        "sha256": "bbd7fb1b714d347704eae4c74cb36c352876864f2103a69af3965f32c1c982c6"
+      },
+      "ids": [
+        "vs/basic-languages/typescript/typescript",
+        "vs/basic-languages/javascript/javascript"
+      ]
+    },
+    {
+      "language": "julia",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/julia/julia.js",
+        "sha256": "f66f6f110b47581e4a27547c3f88a634f3ccf7cbb3cd2971309fb580ca5d5941"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/julia/julia.js",
+        "sha256": "ef3783cbb81cee25697c0bddc9476813b593fb64712c21bc60099c8109c748f0"
+      },
+      "ids": [
+        "vs/basic-languages/julia/julia"
+      ]
+    },
+    {
+      "language": "kotlin",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/kotlin/kotlin.js",
+        "sha256": "d82a249c3d832a4289bea888d2a30df903bd3eb541c2e35288e08da180504df5"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/kotlin/kotlin.js",
+        "sha256": "31b082803acb08622aa2dd736dca42772f6a0d3224fdb7c0e9c3e1f17800ca32"
+      },
+      "ids": [
+        "vs/basic-languages/kotlin/kotlin"
+      ]
+    },
+    {
+      "language": "less",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/less/less.js",
+        "sha256": "ad96ca3634d00beec193020a33f193bab6d252680e6b0086e628819ff2a92c9a"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/less/less.js",
+        "sha256": "5ba9296cc5c6a7699028ac6e263631eb9284f80bfbffe99a4429f6c85dfc0589"
+      },
+      "ids": [
+        "vs/basic-languages/less/less"
+      ]
+    },
+    {
+      "language": "lexon",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/lexon/lexon.js",
+        "sha256": "6ac48c75e08a4803093035001666cb37f44116e0565855e8246c654b988d89a2"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/lexon/lexon.js",
+        "sha256": "2be27259788a7a4a6fb94a59150b47d169ef6e04933f76977e568c4cb0227f57"
+      },
+      "ids": [
+        "vs/basic-languages/lexon/lexon"
+      ]
+    },
+    {
+      "language": "liquid",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/liquid/liquid.js",
+        "sha256": "ff62b4f75e551b542f4102ab107dff1401638c189ef6d8a39edd067502b5bb1f"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/liquid/liquid.js",
+        "sha256": "f4454c09b7e66ab2ffd81451aef2f12c79c0011839e19bcdb0fce42928acce6b"
+      },
+      "ids": [
+        "vs/basic-languages/liquid/liquid"
+      ]
+    },
+    {
+      "language": "lua",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/lua/lua.js",
+        "sha256": "d724bbd18c9e8c064fb0dc1655fe871786725a809819d5cd83f91190c002f851"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/lua/lua.js",
+        "sha256": "f39154e727c8d3df5c70ecab1737c0a07df3011977288ba4adc7d25c8ef639b5"
+      },
+      "ids": [
+        "vs/basic-languages/lua/lua"
+      ]
+    },
+    {
+      "language": "m3",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/m3/m3.js",
+        "sha256": "58616444f4f251fc682ef21d800a647f9d564ecb098fb9ba662decf8afa423b9"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/m3/m3.js",
+        "sha256": "a3b616444441f34b90b4e06a6a3a845f2804da67220c19721b9461140eb7f074"
+      },
+      "ids": [
+        "vs/basic-languages/m3/m3"
+      ]
+    },
+    {
+      "language": "markdown",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/markdown/markdown.js",
+        "sha256": "b997ffab59de542e00e7c4d4c5138be7d505b6208e0f733012e64050dc52cc21"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/markdown/markdown.js",
+        "sha256": "47ae9f567af2e69e682d14703bf4ad5428708464edb3d30791f3255a2863a52e"
+      },
+      "ids": [
+        "vs/basic-languages/markdown/markdown"
+      ]
+    },
+    {
+      "language": "mips",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/mips/mips.js",
+        "sha256": "165095319999e636094876a4b9dd24bbf74d231874749345942bec9a7feddad7"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/mips/mips.js",
+        "sha256": "fcc6104a8c7092794744a1472511cd348d585d1cba0421e61e5eb8e0c58af186"
+      },
+      "ids": [
+        "vs/basic-languages/mips/mips"
+      ]
+    },
+    {
+      "language": "msdax",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/msdax/msdax.js",
+        "sha256": "5a5ab177822f051e2b0db211f343d0f017ee85ff3cfa06b771414bf7a2b50d30"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/msdax/msdax.js",
+        "sha256": "f98e43f6600e629bfc354196006a02f9f9cc26480de064cc480e3bc885beb283"
+      },
+      "ids": [
+        "vs/basic-languages/msdax/msdax"
+      ]
+    },
+    {
+      "language": "mysql",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/mysql/mysql.js",
+        "sha256": "a4179ed2ef287316115edf949fded06fd1453383529313231c1f652382ef395b"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/mysql/mysql.js",
+        "sha256": "1cafe5b6c81234fc6680a421dd6290ec590ce03b9e525eacb0936a78ab50aeae"
+      },
+      "ids": [
+        "vs/basic-languages/mysql/mysql"
+      ]
+    },
+    {
+      "language": "objective-c",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/objective-c/objective-c.js",
+        "sha256": "460881fdc5f058e44294a706e9c1cce5f57f9ddc712a82707b0dfffed97d32b3"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/objective-c/objective-c.js",
+        "sha256": "7cfdb8b492b6f1c5a1d83fefc3bd349bb1acdd489516534aefacd553c2850e75"
+      },
+      "ids": [
+        "vs/basic-languages/objective-c/objective-c"
+      ]
+    },
+    {
+      "language": "pascal",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/pascal/pascal.js",
+        "sha256": "85f173e303c4141501181bdca5158b7482809592676b2629a76ec8ead65fbc4b"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/pascal/pascal.js",
+        "sha256": "f2886264f5ad42d173ef18e8ea961f674090be7513f48af95dcef4eb1191cac3"
+      },
+      "ids": [
+        "vs/basic-languages/pascal/pascal"
+      ]
+    },
+    {
+      "language": "pascaligo",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/pascaligo/pascaligo.js",
+        "sha256": "e8d78141a7444ff79238906ed19799f167080f6a904689a6d9bc2a6ecc91982a"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/pascaligo/pascaligo.js",
+        "sha256": "3d3317429e0837f6960e33829a2c2fd62119ca1514ad735f62345da8fd1dd817"
+      },
+      "ids": [
+        "vs/basic-languages/pascaligo/pascaligo"
+      ]
+    },
+    {
+      "language": "perl",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/perl/perl.js",
+        "sha256": "87038c8a50ae085ac52c70d4303a61d08c9f60fea4fe63cd4610ec6688ad68be"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/perl/perl.js",
+        "sha256": "317b527f0ade315a7cb066eac72672e5f2ba6d0c02c6014be052c32fb6566aed"
+      },
+      "ids": [
+        "vs/basic-languages/perl/perl"
+      ]
+    },
+    {
+      "language": "pgsql",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/pgsql/pgsql.js",
+        "sha256": "5d0956be65c40c73ae64e0ca72a6dab363a64105b5b03058507212d8d2df0059"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/pgsql/pgsql.js",
+        "sha256": "f58b4ab8529e311f7f98f690ed39e13de22f3ae29cc8916bf99c21ac86917970"
+      },
+      "ids": [
+        "vs/basic-languages/pgsql/pgsql"
+      ]
+    },
+    {
+      "language": "php",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/php/php.js",
+        "sha256": "cb9007955450cc04de0c3f66f41e146bdc12e076c2908e278f6ef1013d6c40fb"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/php/php.js",
+        "sha256": "3d7d187fb2e3b959adfda7b7557ccda4b6f690f838babc525cabffbe0dda7dd0"
+      },
+      "ids": [
+        "vs/basic-languages/php/php"
+      ]
+    },
+    {
+      "language": "pla",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/pla/pla.js",
+        "sha256": "f4171d41602d244904901a4c7417e5857ac69aa78d870b551725749bd6b4b92c"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/pla/pla.js",
+        "sha256": "6138b0b0a1be95370c00afe6eca5022ea10e8b0f11f1db9382163f28975373e6"
+      },
+      "ids": [
+        "vs/basic-languages/pla/pla"
+      ]
+    },
+    {
+      "language": "postiats",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/postiats/postiats.js",
+        "sha256": "a15844754818ffbd87fa68519f802c98da4853d2b8616aceca3a8883ff2bb3a7"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/postiats/postiats.js",
+        "sha256": "5b18eac81236e88ffca2e67e527fa1d6fb42f53a4df42c1fbeb37312a9ec2fe4"
+      },
+      "ids": [
+        "vs/basic-languages/postiats/postiats"
+      ]
+    },
+    {
+      "language": "powerquery",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/powerquery/powerquery.js",
+        "sha256": "b621c1b5c0b931b09cfb9eff01a8eefc057ab5ac43bea7fd3ce80c7a6bb34604"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/powerquery/powerquery.js",
+        "sha256": "fb9705793a687b03fe08605f19c3f1019d83cf06394a8381db541bda92e230d4"
+      },
+      "ids": [
+        "vs/basic-languages/powerquery/powerquery"
+      ]
+    },
+    {
+      "language": "powershell",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/powershell/powershell.js",
+        "sha256": "f97269cd8c74214641f26a91d257c70f717eead90577b89d536587c68bdcfb72"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/powershell/powershell.js",
+        "sha256": "b80339b4a8450fd3a5bb5bf3817fb1b67fe6202690fc1ce97ef22336bcd7053b"
+      },
+      "ids": [
+        "vs/basic-languages/powershell/powershell"
+      ]
+    },
+    {
+      "language": "protobuf",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/protobuf/protobuf.js",
+        "sha256": "60422fda31e1c1c51b1b6a950a704939823335872220cb6622157f9eaff872b0"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/protobuf/protobuf.js",
+        "sha256": "18f13fbd6b421023eec480901e48354d249bc9c3dce9d0e0cc842cbab4393fd3"
+      },
+      "ids": [
+        "vs/basic-languages/protobuf/protobuf"
+      ]
+    },
+    {
+      "language": "pug",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/pug/pug.js",
+        "sha256": "0af2beef28df7f930008b52c286e1317cc504e1f728f34fb9c967409da3d216b"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/pug/pug.js",
+        "sha256": "dbce9bb879b84cf3bf8bd05643a4d3d2ae6ded03b4a9234a0e8d2ebfab6ade44"
+      },
+      "ids": [
+        "vs/basic-languages/pug/pug"
+      ]
+    },
+    {
+      "language": "python",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/python/python.js",
+        "sha256": "56f50465fb164623720eb3051a776b7465c92f41c4d2643badca9640b99e9e27"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/python/python.js",
+        "sha256": "b0c9cb9c96d3b289b4ee1bb6ca921e810d87ec2967ebaf8608d5570865ac6524"
+      },
+      "ids": [
+        "vs/basic-languages/python/python"
+      ]
+    },
+    {
+      "language": "qsharp",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/qsharp/qsharp.js",
+        "sha256": "09a0f464c1d099028942ee720fa35164e3677843c0600375c660fbe11c05bc8e"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/qsharp/qsharp.js",
+        "sha256": "6cf9e660e8082f7a8dff4e8041c58c5e9fed1e622e0301b359886a5148c15327"
+      },
+      "ids": [
+        "vs/basic-languages/qsharp/qsharp"
+      ]
+    },
+    {
+      "language": "r",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/r/r.js",
+        "sha256": "1b6b4a2f46688d95cdfce099703e168f041d00fd53dc4fa4ec6ba253497f4726"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/r/r.js",
+        "sha256": "889684005db07d8b2e8c6f17d54b7bbf1bd67ad948b0b9ca411c2e55ba3433dd"
+      },
+      "ids": [
+        "vs/basic-languages/r/r"
+      ]
+    },
+    {
+      "language": "razor",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/razor/razor.js",
+        "sha256": "a49352b3c4c466e3f612f0de241c14237b57c230fbd40e01d637200c9fab03d6"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/razor/razor.js",
+        "sha256": "da07ee116d392fbf97f5adc9d4f1fd46e5bbbe9765949c8cb9a6f6a4917ce6cb"
+      },
+      "ids": [
+        "vs/basic-languages/razor/razor"
+      ]
+    },
+    {
+      "language": "redis",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/redis/redis.js",
+        "sha256": "7d619a574f9d07b44b8c15c723f62f02e2cbe9531d3e58d79b985811ce72ee18"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/redis/redis.js",
+        "sha256": "286518ee6a7e76356149bebfbcdc19d2d30c19a5fa48d4bfcbf2f7a946783bd0"
+      },
+      "ids": [
+        "vs/basic-languages/redis/redis"
+      ]
+    },
+    {
+      "language": "redshift",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/redshift/redshift.js",
+        "sha256": "309fb7f90c2a1b6f3f5f241789502590b56afaa3956abe0fcef473b1c9b6ec76"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/redshift/redshift.js",
+        "sha256": "8b865d41e76c227f3e1eb3bc74f8e9cf24627b449cc94164c803c1e515a9bbfd"
+      },
+      "ids": [
+        "vs/basic-languages/redshift/redshift"
+      ]
+    },
+    {
+      "language": "restructuredtext",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/restructuredtext/restructuredtext.js",
+        "sha256": "4b24c7829d821e442776063c73eb90f8a4ad3cd9e384c5910a6f9701672e0129"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/restructuredtext/restructuredtext.js",
+        "sha256": "32c72e9b8fa318289b628efee24bc5b573e3f74f8ab7dd544dead1b3545fc351"
+      },
+      "ids": [
+        "vs/basic-languages/restructuredtext/restructuredtext"
+      ]
+    },
+    {
+      "language": "ruby",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/ruby/ruby.js",
+        "sha256": "e2ab68325b11a2197361367f76efc48de4c062774ffe9773ebfa960544ef3e5a"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/ruby/ruby.js",
+        "sha256": "93a9fbda62d9b4ef5537de37d7b4c77a89d8e2b0a2193dddac534ce98da47b5f"
+      },
+      "ids": [
+        "vs/basic-languages/ruby/ruby"
+      ]
+    },
+    {
+      "language": "rust",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/rust/rust.js",
+        "sha256": "a7400a1bcac2fdeb72f8e26262070121a7e24a61e2604cf1f1b46818b3e8db12"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/rust/rust.js",
+        "sha256": "6352c16af73494a44e09b5ccad8a61c0369933d94881fcf58a7e8a75a27315cf"
+      },
+      "ids": [
+        "vs/basic-languages/rust/rust"
+      ]
+    },
+    {
+      "language": "sb",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/sb/sb.js",
+        "sha256": "f9050601e64dd71ab9f2e9d8d0880140cf350c67fcd94fbdbeca5781ad64f7d5"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/sb/sb.js",
+        "sha256": "7323046d28f72e54b5abda684d4ec67d55b688a0b5e1d23ffe1d675c1c141b69"
+      },
+      "ids": [
+        "vs/basic-languages/sb/sb"
+      ]
+    },
+    {
+      "language": "scala",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/scala/scala.js",
+        "sha256": "1b0f2ae32454dd684f73e3b99fee53689c8a7d9f49989f0ecd81564d5e6f70ce"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/scala/scala.js",
+        "sha256": "57309bc0e00edda2c4edb5fd255e042e1ef6ce8d51f51c7e822a74268e04f444"
+      },
+      "ids": [
+        "vs/basic-languages/scala/scala"
+      ]
+    },
+    {
+      "language": "scheme",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/scheme/scheme.js",
+        "sha256": "e11639073232ebaacc6086de47a03af62bc0f100ee9b73ccfb0ada746b02a69d"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/scheme/scheme.js",
+        "sha256": "3fe89a5618aa1c4eafa5c65aad212fcf2ba34e302de73df7db0867ba01dbd866"
+      },
+      "ids": [
+        "vs/basic-languages/scheme/scheme"
+      ]
+    },
+    {
+      "language": "scss",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/scss/scss.js",
+        "sha256": "04aa92ef44d4a8ce3e2592fe385833d69402c97ba0864a04f1732fa55c94249e"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/scss/scss.js",
+        "sha256": "b01dfbdbd787642ed55a3ca7b0b89b2edb80e4aa486d89fee0ba748124dad4f9"
+      },
+      "ids": [
+        "vs/basic-languages/scss/scss"
+      ]
+    },
+    {
+      "language": "shell",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/shell/shell.js",
+        "sha256": "587a397b274a69e331044f48677d0826b6bc6e96fe9285da691a8e4e2e75bf8b"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/shell/shell.js",
+        "sha256": "39063f662fa62eb543e5d8f9b792b31d14c484abafd9a67943dae52fc9f5ce36"
+      },
+      "ids": [
+        "vs/basic-languages/shell/shell"
+      ]
+    },
+    {
+      "language": "solidity",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/solidity/solidity.js",
+        "sha256": "1fca04bd24fd59fc72564c727475c83f9e593574b5a84e664da17cbaccd6b6c9"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/solidity/solidity.js",
+        "sha256": "e25859bb2a1babe193f03028489c95296b1bfe98a92dcb450d4c539661b5a86d"
+      },
+      "ids": [
+        "vs/basic-languages/solidity/solidity"
+      ]
+    },
+    {
+      "language": "sophia",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/sophia/sophia.js",
+        "sha256": "3190fbfb7fbcc8cb7e068d3f31f34deb589d55a41e9c332740d21c986f7a7852"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/sophia/sophia.js",
+        "sha256": "4ba061aa0beb82ba64efeb6bd1128da0d3445ac8cfc26d3f4591c66df0fa4bb0"
+      },
+      "ids": [
+        "vs/basic-languages/sophia/sophia"
+      ]
+    },
+    {
+      "language": "sparql",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/sparql/sparql.js",
+        "sha256": "c755ef24dc37cd1ff9b55f6e15d1623ecc3f8e3df389bac10b1d12d6f8ea8a5c"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/sparql/sparql.js",
+        "sha256": "162783ddf2dd67384d379ebf485f6ed0cafd820e892e4d89e82c8ba8617390c4"
+      },
+      "ids": [
+        "vs/basic-languages/sparql/sparql"
+      ]
+    },
+    {
+      "language": "sql",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/sql/sql.js",
+        "sha256": "e8d956091a7c9ce313ab130cbd377f73e57e3f28e14c3b4b26b85bffd03d5a35"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/sql/sql.js",
+        "sha256": "3b1decbf86cb0b163070cc144e826f104ba10468798b36e6d0e64257a35fd1f8"
+      },
+      "ids": [
+        "vs/basic-languages/sql/sql"
+      ]
+    },
+    {
+      "language": "st",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/st/st.js",
+        "sha256": "6bd7f5b7ac43ff5e1890cafdca90d9af95c511360dd1a7c4aad54c3025688a10"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/st/st.js",
+        "sha256": "b3ac35684d5668c2d08105cec31f43e8d897e4ab94103d8bd64ac804d256c20c"
+      },
+      "ids": [
+        "vs/basic-languages/st/st"
+      ]
+    },
+    {
+      "language": "swift",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/swift/swift.js",
+        "sha256": "b2639f39c16f410d20b23ae992e8c91618a63c5f35819d03163f1227edba273c"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/swift/swift.js",
+        "sha256": "288a0ad2974e332bb873bacbb2a284f8f39cdc7d12b1fd5e3c46699147a63633"
+      },
+      "ids": [
+        "vs/basic-languages/swift/swift"
+      ]
+    },
+    {
+      "language": "systemverilog",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/systemverilog/systemverilog.js",
+        "sha256": "b70579f4e6a62dd2e16e8b4be2e6b5551a6bf0e3e9ebd8952cf4cced524da68b"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/systemverilog/systemverilog.js",
+        "sha256": "40b18f15d29e3201142eb02fd5cc5ad690b32386bbe5dc0a874fd68a2f176f41"
+      },
+      "ids": [
+        "vs/basic-languages/systemverilog/systemverilog"
+      ]
+    },
+    {
+      "language": "tcl",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/tcl/tcl.js",
+        "sha256": "a56c7db54c31a5ccb4e2861bc5e8a1d7f08a8ad4d723a42b1c41b091c171939d"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/tcl/tcl.js",
+        "sha256": "317b63a872ce538d4eef5dae701641670fd3f99dfc0439465d444b2992b69bea"
+      },
+      "ids": [
+        "vs/basic-languages/tcl/tcl"
+      ]
+    },
+    {
+      "language": "twig",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/twig/twig.js",
+        "sha256": "3f45e833c5fead069c2657adf7cd7dbf259294c41898e55481cb2cd90a64fd9e"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/twig/twig.js",
+        "sha256": "c3442379367d5ef43f1377a14e3c6a04ec451dabb05bed200571ea6dc328dfa0"
+      },
+      "ids": [
+        "vs/basic-languages/twig/twig"
+      ]
+    },
+    {
+      "language": "typescript",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/typescript/typescript.js",
+        "sha256": "44ff0636316b75d7340e8012e8a800c662edeb26d6a64fe613bfefacef19a0a5"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/typescript/typescript.js",
+        "sha256": "25dd318efd5aada375fdf391c488bd0b5ec0d665ba16e49f1e7968217ad01139"
+      },
+      "ids": [
+        "vs/basic-languages/typescript/typescript"
+      ]
+    },
+    {
+      "language": "vb",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/vb/vb.js",
+        "sha256": "71a3e47997c00deb8d2d52084619a5b32acb8824d0bb387e59349182dbda0788"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/vb/vb.js",
+        "sha256": "41d3d863c8b955c53eddb8724866a487d3632995114c77c0e9bc416227d148bf"
+      },
+      "ids": [
+        "vs/basic-languages/vb/vb"
+      ]
+    },
+    {
+      "language": "xml",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/xml/xml.js",
+        "sha256": "8844896cb2c7dff3804b5da2cfa3bc098557eac63be32a712d4f9d83febc861f"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/xml/xml.js",
+        "sha256": "95ddef452d5ff87f5c9f807d56f3f74964727677b5a55baa13a0a4870e2ae850"
+      },
+      "ids": [
+        "vs/basic-languages/xml/xml"
+      ]
+    },
+    {
+      "language": "yaml",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/basic-languages/yaml/yaml.js",
+        "sha256": "ba8104ac0cffc1ba2acf767afff22b7b01d6db11cca57f335a842fb10763ae0b"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/basic-languages/yaml/yaml.js",
+        "sha256": "a6ffa854247873af58df3ad550bbdd474b2d8dbc1d1c730fce4e44dfcb5f9b62"
+      },
+      "ids": [
+        "vs/basic-languages/yaml/yaml"
+      ]
+    }
+  ],
+  "fixtures": {
+    "path": "refactor/baselines/monaco-basic-fixtures.json",
+    "sha256": "2468d8957ef94503a7f46832b9fc8646ed6c3ffd3e133c048e96c90d97987612",
+    "tests": [
+      "monaco-languages/src/abap/abap.test.ts",
+      "monaco-languages/src/apex/apex.test.ts",
+      "monaco-languages/src/azcli/azcli.test.ts",
+      "monaco-languages/src/bat/bat.test.ts",
+      "monaco-languages/src/bicep/bicep.test.ts",
+      "monaco-languages/src/cameligo/cameligo.test.ts",
+      "monaco-languages/src/clojure/clojure.test.ts",
+      "monaco-languages/src/coffee/coffee.test.ts",
+      "monaco-languages/src/cpp/cpp.test.ts",
+      "monaco-languages/src/csharp/csharp.test.ts",
+      "monaco-languages/src/csp/csp.test.ts",
+      "monaco-languages/src/css/css.test.ts",
+      "monaco-languages/src/dart/dart.test.ts",
+      "monaco-languages/src/dockerfile/dockerfile.test.ts",
+      "monaco-languages/src/ecl/ecl.test.ts",
+      "monaco-languages/src/elixir/elixir.test.ts",
+      "monaco-languages/src/flow9/flow9.test.ts",
+      "monaco-languages/src/fsharp/fsharp.test.ts",
+      "monaco-languages/src/go/go.test.ts",
+      "monaco-languages/src/graphql/graphql.test.ts",
+      "monaco-languages/src/handlebars/handlebars.test.ts",
+      "monaco-languages/src/hcl/hcl.test.ts",
+      "monaco-languages/src/html/html.test.ts",
+      "monaco-languages/src/java/java.test.ts",
+      "monaco-languages/src/javascript/javascript.test.ts",
+      "monaco-languages/src/julia/julia.test.ts",
+      "monaco-languages/src/kotlin/kotlin.test.ts",
+      "monaco-languages/src/less/less.test.ts",
+      "monaco-languages/src/lexon/lexon.test.ts",
+      "monaco-languages/src/liquid/liquid.test.ts",
+      "monaco-languages/src/lua/lua.test.ts",
+      "monaco-languages/src/m3/m3.test.ts",
+      "monaco-languages/src/markdown/markdown.test.ts",
+      "monaco-languages/src/mips/mips.test.ts",
+      "monaco-languages/src/msdax/msdax.test.ts",
+      "monaco-languages/src/mysql/mysql.test.ts",
+      "monaco-languages/src/objective-c/objective-c.test.ts",
+      "monaco-languages/src/pascal/pascal.test.ts",
+      "monaco-languages/src/pascaligo/pascaligo.test.ts",
+      "monaco-languages/src/perl/perl.test.ts",
+      "monaco-languages/src/pgsql/pgsql.test.ts",
+      "monaco-languages/src/php/php.test.ts",
+      "monaco-languages/src/pla/pla.test.ts",
+      "monaco-languages/src/postiats/postiats.test.ts",
+      "monaco-languages/src/powerquery/powerquery.test.ts",
+      "monaco-languages/src/powershell/powershell.test.ts",
+      "monaco-languages/src/protobuf/protobuf.test.ts",
+      "monaco-languages/src/pug/pug.test.ts",
+      "monaco-languages/src/python/python.test.ts",
+      "monaco-languages/src/qsharp/qsharp.test.ts",
+      "monaco-languages/src/r/r.test.ts",
+      "monaco-languages/src/razor/razor.test.ts",
+      "monaco-languages/src/redis/redis.test.ts",
+      "monaco-languages/src/redshift/redshift.test.ts",
+      "monaco-languages/src/restructuredtext/restructuredtext.test.ts",
+      "monaco-languages/src/ruby/ruby.test.ts",
+      "monaco-languages/src/rust/rust.test.ts",
+      "monaco-languages/src/sb/sb.test.ts",
+      "monaco-languages/src/scala/scala.test.ts",
+      "monaco-languages/src/scheme/scheme.test.ts",
+      "monaco-languages/src/scss/scss.test.ts",
+      "monaco-languages/src/shell/shell.test.ts",
+      "monaco-languages/src/solidity/solidity.test.ts",
+      "monaco-languages/src/sophia/sophia.test.ts",
+      "monaco-languages/src/sparql/sparql.test.ts",
+      "monaco-languages/src/sql/sql.test.ts",
+      "monaco-languages/src/st/st.test.ts",
+      "monaco-languages/src/swift/swift.test.ts",
+      "monaco-languages/src/systemverilog/systemverilog.test.ts",
+      "monaco-languages/src/tcl/tcl.test.ts",
+      "monaco-languages/src/twig/twig.test.ts",
+      "monaco-languages/src/typescript/typescript.test.ts",
+      "monaco-languages/src/vb/vb.test.ts",
+      "monaco-languages/src/xml/xml.test.ts",
+      "monaco-languages/src/yaml/yaml.test.ts"
+    ],
+    "cases": 2511,
+    "suites": 76,
+    "missing": [
+      "ini"
+    ],
+    "empty": [
+      "csp",
+      "ecl"
+    ],
+    "misdirected": [
+      "pgsql",
+      "redshift"
+    ]
+  }
+}

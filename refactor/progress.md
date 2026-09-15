@@ -1,5 +1,14 @@
 # 进度与证据
 
+## SITE-07 Monaco 基础语言
+
+76 份语言源码与全部 76 个压缩文件精确复现，77 个模块实例；156 个归档成员有
+Git blob/SHA-256 身份验证。2,511 个上游用例与 12 个补充用例在三引擎全部通过，
+并验证全部 76 个语言 URL；单元 16/16、严格类型和相关 lint 通过。重跑脚本、
+固定测试数据、原始配方/runner/许可与限制见
+[记录](changes/2026-09-15-SITE-07-monaco-basic.md)。SITE-07/VENDOR-06 仍开放，
+接续 Monaco core/内嵌来源，199/265；Thumbnail 默认兼容策略仍待答。
+
 ## SITE-07 Monaco 四种语言模式
 
 CSS/HTML/JSON/TypeScript mode 的 26 个模块实例及完整压缩产物已精确复现，

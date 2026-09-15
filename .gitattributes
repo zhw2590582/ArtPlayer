@@ -36,3 +36,5 @@ refactor/baselines/site-vendor/monaco-languages/** -text whitespace=-trailing-sp
 refactor/baselines/site-vendor/monaco-language-notices/** -text whitespace=-trailing-space,cr-at-eol
 docs/licenses/monaco-editor/language-services/** -text whitespace=-trailing-space,cr-at-eol
 refactor/baselines/site-vendor/monaco-modes/** -text whitespace=-trailing-space,cr-at-eol
+refactor/baselines/site-vendor/monaco-basic/** -text whitespace=-trailing-space,cr-at-eol
+refactor/baselines/monaco-basic-fixtures.json text eol=lf
