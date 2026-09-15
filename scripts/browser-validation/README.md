@@ -29,6 +29,15 @@ CI-JASSUB-SOURCE-01 subsequently adds current-source candidates on all three cor
 while retaining the original published controls and their unaltered assertions.
 Full installed, remote Actions and physical-device acceptance remain separate.
 
+The complete installed Chromium roster at `5e0447fc5` was subsequently run against
+twenty freshly rebuilt, packed and isolated-installed packages (`run-cRduve`):
+77 files / 845 cases, 844 passed, one bare dash.js 4.5.2 paused-seek failure,
+zero skips/retries, 948.777 seconds, exit 1. All four candidate DASH stable-boundary
+combinations and three native installed JASSUB/core combinations passed. This is
+the pre-major package set, with no claim of full Firefox/WebKit installed or device
+acceptance. See `refactor/baselines/ci-installed-chromium-validation.json` and its
+CI-01 change record; retain the earlier five-package three-engine report separately.
+
 `yarn test:browser:installed` requires ARTPLAYER_BROWSER_ARTIFACTS from
 `yarn test:package --browser`.
 Both launcher and config validate the selected packages' installed hashes

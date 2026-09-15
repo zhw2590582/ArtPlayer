@@ -1,5 +1,22 @@
 # 进度与证据
 
+## CI-01 完整 Chromium 安装包回归
+
+固定5e0447fc5、Node24.21.0/Yarn1.22.22重新构建并隔离安装20包，149.29秒通过；
+核心/Chapter运行时与根/精确类型、Audio/HLS安装类型检查通过。使用run-cRduve
+执行当前全部77文件/845项安装清单：844通过、1失败、0跳过/重试，948.777秒，退出1。
+运行期间跟踪文件未改，完整报告/trace/安装指纹已归档。
+
+唯一失败是裸dash.js4.5.2暂停seek仍停在6；没有创建ArtPlayer。候选DASH新旧
+核心和两个SDK四个稳定边界组合通过，安装JASSUB三核心原生绘制与直接/宿主销毁
+通过。DASH-SEEK-01继续open，不将旧失败或受控能力断言混成全量播放通过。见
+[记录](changes/2026-09-15-CI-01-installed-chromium.md)、[证据](baselines/ci-installed-chromium-validation.json)。
+
+CI-01继续doing，217 done、21 doing、43 todo不变。版本仍为升级前值，20包清单
+不替代全部22workspace验收。下一步同一映射完整Firefox/WebKit安装回归；设备、
+远端Actions、最终major候选和三轮复盘继续保留，不推送或发布。
+
+
 ## CI-JASSUB-SOURCE-01 原生字幕源码覆盖
 
 修复默认原生 JASSUB 只加载 npm 包的测试缺口；现在发布包和当前源码各覆盖三核心，

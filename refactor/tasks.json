@@ -792,7 +792,9 @@
         "changes/2026-09-15-CI-01-source-webkit.md",
         "baselines/ci-source-webkit-validation.json",
         "changes/2026-09-15-CI-JASSUB-SOURCE-01-native-inputs.md",
-        "baselines/jassub-source-selection-validation.json"
+        "baselines/jassub-source-selection-validation.json",
+        "changes/2026-09-15-CI-01-installed-chromium.md",
+        "baselines/ci-installed-chromium-validation.json"
       ]
     },
     {

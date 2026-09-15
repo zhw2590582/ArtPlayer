@@ -1,5 +1,12 @@
 # PR 检查和 Pages 操作说明
 
+最新完整Chromium安装回归固定5e0447fc5：重新构建并隔离安装20包后，77文件/845项
+执行844通过、1个裸DASH4.5.2暂停seek失败、0跳过/重试，948.777秒，退出1。
+候选DASH四个稳定边界组合及安装JASSUB三核心原生绘制清理通过；保留历史失败。
+见[记录](changes/2026-09-15-CI-01-installed-chromium.md)及
+[逐包输入和结果](baselines/ci-installed-chromium-validation.json)。该轮仍是major升级前
+产物，其他两引擎的完整安装运行、远端Actions和设备门槛继续单独验收。
+
 本地完整源码回归现分别有 Chromium、Firefox 和 Windows WebKit 的记录，
 对应不同提交与测试集合，不能拼成同一候选的绿色矩阵。最新 WebKit 在 ae56937d3
 执行174文件/1664项：1515通过、11失败、138能力跳过、0重试，1816.373秒。
