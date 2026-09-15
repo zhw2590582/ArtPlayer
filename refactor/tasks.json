@@ -4503,7 +4503,10 @@
         "changes/2026-09-15-SITE-07-console-embedded-sources.md",
         "baselines/console-derived-attribution.json",
         "baselines/console-derived-validation.json",
-        "changes/2026-09-15-SITE-07-console-derived-attribution.md"
+        "changes/2026-09-15-SITE-07-console-derived-attribution.md",
+        "baselines/console-stackoverflow-provenance.json",
+        "baselines/console-stackoverflow-validation.json",
+        "changes/2026-09-15-SITE-07-console-stackoverflow.md"
       ]
     },
     {

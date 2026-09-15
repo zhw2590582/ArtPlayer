@@ -20,6 +20,8 @@ The fixed upstream is `refactor/baselines/site-vendor/console-original.js`, chec
 by SHA-256. Only W5CS (view) and Focm (entry) bodies change. The other 100 modules,
 their dependency maps and Parcel runtime remain byte-for-byte intact. The dead
 `/index.js.map` trailer is removed; a complete upstream source map is unavailable.
+A non-executable attribution comment is appended for the matched Stack Overflow
+snippet. The build test compares every other byte outside the two owned bodies.
 The entry injects existing React/ReactDOM 17.0.2, console-feed and
 styled-components 5.3.3. RxPG supplies the historical parser and V2JG the method
 list. Root `@types/react` 19.1.10 is used for type checking only; no React 19 runtime
@@ -185,6 +187,18 @@ Gary Court's original README/MIT text and Austin Appleby's public-domain header
 are preserved for the two explicit MurmurHash source references. Original sources
 and excerpts are hashed; attribution is never inferred from the outer Emotion MIT.
 
-There are now 42 console notice outputs. Remaining follow-ups are the Component
-Stack Overflow reference and final embedded-source review. Do not close VENDOR-08
-solely because all Parcel modules reproduce.
+`stackoverflow.ts` verifies a fixed answer revision's author, timestamp, license,
+body and code, then locates the unique module declaration for comparison.
+The customStringify function matches answer 48254637 revision 5, dated 2018-09-19,
+under CC BY-SA 4.0. Revision 1 used Map and the current revision changes duplicate
+handling; neither is the matching source. TypeScript 4.1.2 reproduces the function
+exactly before minification. `console-stackoverflow-provenance.json` retains the
+minimal revision response, source and full license; the public attribution credits
+Alexander Mills and Rob W. A generated bundle comment retains the license and
+links even when the script is read separately from the site notice index.
+
+There are now 45 console notice outputs for 43 components. This includes a
+CC BY-SA snippet; never describe the bundle as MIT-only. Final embedded-source
+and mixed-license distribution review remains open. The shallowequal 1.1.0 README
+explicitly identifies react-pure-render as its code origin; review that original
+notice before closing VENDOR-08. Exact Parcel module reproduction alone is insufficient.

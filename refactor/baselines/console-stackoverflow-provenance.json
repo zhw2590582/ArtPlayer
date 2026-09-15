@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "revision": {
+    "guid": "8FD5F52A-B16F-4C66-AB48-830EABB36CC0",
+    "postId": 48254637,
+    "number": 5,
+    "created": 1537324801,
+    "userId": 1223975,
+    "license": "CC BY-SA 4.0",
+    "bodySha256": "ac1755e8e74c0c4eccb849df04e4b0848e8394ea516a3606262952dadcfdfc5e",
+    "snippetSha256": "966fdc4a37e65e90c2dc1f6ba9385e572c75ce4c0647d35f3ce566ed9ef7f6bb"
+  },
+  "apiUrl": "https://api.stackexchange.com/2.3/revisions/8FD5F52A-B16F-4C66-AB48-830EABB36CC0?site=stackoverflow&filter=withbody",
+  "response": {
+    "source": "refactor/baselines/site-vendor/console-stackoverflow/revision.json.txt",
+    "sha256": "3d064c420212061dd6af500b21f9895b73ced3265ccc4c9a7bae1ce932103a25"
+  },
+  "source": "refactor/baselines/site-vendor/console-stackoverflow/source.txt",
+  "target": {
+    "archive": "console-feed-3.2.2",
+    "member": "package/lib/Component/index.js",
+    "sha256": "c8b99fb95f5272ad6f4e152945e19dca6023f28b34e9c2bf0dda68738c978cf1"
+  },
+  "binding": "customStringify",
+  "compiledSha256": "aeb37aeab3a4ba2ca5a21e96490d77aec519888dccd8df0c06cfac81c12f504b",
+  "license": {
+    "url": "https://creativecommons.org/licenses/by-sa/4.0/legalcode.txt",
+    "source": "refactor/baselines/site-vendor/console-stackoverflow/CC-BY-SA-4.0.txt",
+    "sha256": "28a9529c7d0bb4dc51f4bf5c116a3d16ef247a052f7591466768ddf563fd1cf5"
+  },
+  "notices": [
+    {
+      "source": "refactor/baselines/site-vendor/console-stackoverflow/CC-BY-SA-4.0.txt",
+      "target": "docs/licenses/console/stackoverflow/LICENSE",
+      "sha256": "28a9529c7d0bb4dc51f4bf5c116a3d16ef247a052f7591466768ddf563fd1cf5"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/console-stackoverflow/source.txt",
+      "target": "docs/licenses/console/stackoverflow/SOURCE.js",
+      "sha256": "966fdc4a37e65e90c2dc1f6ba9385e572c75ce4c0647d35f3ce566ed9ef7f6bb"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/console-stackoverflow/ATTRIBUTION.txt",
+      "target": "docs/licenses/console/stackoverflow/ATTRIBUTION.md",
+      "sha256": "4ac7ae9b19a1201b6cfe6af1d35ec85d015a2de8fb1aac6b03796145e648a667"
+    }
+  ],
+  "policySource": "https://stackoverflow.com/help/licensing",
+  "limits": [
+    "The exact matching revision is 5 (Set), not revision 1 (Map) or the current revised function.",
+    "CC BY-SA 4.0 is declared on the revision itself. Mixed-license bundle review remains open; do not infer MIT-only status from console-feed root LICENSE.",
+    "No functional runtime change; generated bundle gains an attribution comment."
+  ]
+}

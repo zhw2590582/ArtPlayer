@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "revision_guid": "8FD5F52A-B16F-4C66-AB48-830EABB36CC0",
+      "post_id": 48254637,
+      "revision_number": 5,
+      "creation_date": 1537324801,
+      "user": {
+        "user_id": 1223975
+      },
+      "content_license": "CC BY-SA 4.0",
+      "body": "<p>@RobW's answer is correct, but this is more performant ! Because it uses a hashmap/set:</p>\n<pre><code>const customStringify = function (v) {\n  const cache = new Set();\n  return JSON.stringify(v, function (key, value) {\n    if (typeof value === 'object' &amp;&amp; value !== null) {\n      if (cache.has(value)) {\n        // Circular reference found, discard key\n        return;\n      }\n      // Store value in our set\n      cache.add(value);\n    }\n    return value;\n  });\n};\n</code></pre>\n"
+    }
+  ]
+}

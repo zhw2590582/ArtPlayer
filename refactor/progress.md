@@ -1,5 +1,13 @@
 # 进度与证据
 
+## SITE-07 Stack Overflow 片段修订与署名
+
+customStringify已精确匹配2018-09-19第5次修订，补齐CC BY-SA4.0全文、作者及
+原始片段；脚本只新增署名注释。单元25/25，联网复现及三引擎组合51/51通过
+（含18项历史验证），详见[记录](changes/2026-09-15-SITE-07-console-stackoverflow.md)。
+最终清查新发现shallowequal引用react-pure-render原始实现，继续核对其署名；
+VENDOR-08 open、SITE-07 doing，仍199/265，未推送或发布。
+
 ## SITE-07 修改版 replicator 与 Emotion 署名
 
 固定TS源码重现replicator运行代码，Emotion Stylis发布源码匹配Git tag；补齐

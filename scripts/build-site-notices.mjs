@@ -60,11 +60,12 @@ assert.deepEqual(consoleGroup?.components?.map(component => component.name).sort
   'scheduler',
   'shallowequal',
   'simple-html-tokenizer',
+  'stackoverflow-custom-stringify',
   'styled-components',
   'stylis (Emotion fork)',
   'stylis-rule-sheet',
 ], 'Do not silently drop verified console component attribution')
-assert.equal(consoleGroup?.notices.length, 42, 'Missing reviewed console notice')
+assert.equal(consoleGroup?.notices.length, 45, 'Missing reviewed console notice')
 const vconsoleNotices = manifest.groups.find(group => group.name === 'vconsole')?.notices.map(notice => notice.target)
 for (const name of ['LICENSE', 'MIT-LICENSE', 'ATTRIBUTION.md'])
   assert(vconsoleNotices?.includes(`docs/licenses/vconsole/${name}`), `Missing vConsole notice: ${name}`)

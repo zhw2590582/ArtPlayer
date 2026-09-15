@@ -21,6 +21,9 @@ SITE-07 冻结原始 bundle 和浏览器契约，SITE-CONSOLE-01 已实现自有
   第三方模块和跨包依赖。原始锁未找回；内嵌代码署名及完整 notices 仍待验收。
 - 原末尾指向不存在的 /index.js.map。原始 bundle 和模块指纹见
   [冻结来源](baselines/site-console-inventory.json)。
+- 当前产物另附Stack Overflow代码片段的CC BY-SA 4.0署名注释；只增加注释，
+  不改变100个第三方模块或Parcel运行代码。见[修订来源](baselines/console-stackoverflow-provenance.json)。
+  站点分发45份控制台notice；最终混合许可/内嵌来源清查仍未关闭。
 
 ## 必须保留或明确验证的契约
 
@@ -83,7 +86,7 @@ SITE-07 冻结原始 bundle 和浏览器契约，SITE-CONSOLE-01 已实现自有
 受控 persisted pagehide 事件不代替真实设备 BFCache；第三方来源/许可仍由
 SITE-07 / VENDOR-08 跟踪。本次没有远端 CI、部署或 npm 发布验收。
 
-当前 [site-console.spec.js](../test/browser/site-console.spec.js) 含两种输入的共同
-行为，以及三个仅指向冻结旧版的问题复现。历史问题用例通过意味着问题仍可复现，
-**不意味着候选已修复**。SITE-CONSOLE-01 必须新增候选“无泄漏/不丢日志/错误消息可见”
-断言并通过；不得将历史缺陷断言移用为候选验收标准。
+当前 [site-console.spec.js](../test/browser/site-console.spec.js) 含新旧输入的共同
+行为、冻结旧版的问题复现，以及SITE-CONSOLE-01已加入的候选卸载/共享订阅/错误
+消息/编辑器生命周期回归。历史问题用例通过只证明旧缺陷可复现，不能计为候选
+修复证据；统计浏览器结果时保留测试名称和历史/候选范围。

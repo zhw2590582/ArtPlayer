@@ -703,11 +703,15 @@
         "refactor/baselines/console-derived-attribution.json",
         "refactor/baselines/console-derived-validation.json",
         "refactor/changes/2026-09-15-SITE-07-console-derived-attribution.md",
-        "scripts/site-vendor/console/attribution.ts"
+        "scripts/site-vendor/console/attribution.ts",
+        "refactor/baselines/console-stackoverflow-provenance.json",
+        "refactor/baselines/console-stackoverflow-validation.json",
+        "refactor/changes/2026-09-15-SITE-07-console-stackoverflow.md",
+        "scripts/site-vendor/console/stackoverflow.ts"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
-      "workspaceState": "All 100 vendor modules and Parcel loader reproduce. Embedded inspector/tokenizer sources match; fixed replicator TS fork reproduces its archived runtime and Emotion Stylis source matches the immutable tag. Additional upstream author notices bring console notices to 42; all 60 site notice files passed HTTP byte checks in three engines. Stack Overflow attribution and final embedded review remain open. Original Closure service and full historical lockfile are not claimed; runtime unchanged."
+      "workspaceState": "All vendor source reproduction remains verified. customStringify exactly matches Stack Overflow revision 5 under CC BY-SA 4.0; author credits, full license, source and emitted attribution comment are included. The bundle is not MIT-only. 45 console notices and all 63 site notices pass HTTP checks; 51 browser cases include 18 historical checks. Final mixed-license/source review and the newly identified shallowequal/react-pure-render origin remain open. Functional runtime unchanged."
     },
     {
       "id": "SDK-01",

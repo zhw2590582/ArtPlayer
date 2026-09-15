@@ -1061,7 +1061,7 @@
         "SITE-01"
       ],
       "sourceStatus": "Frozen original 340306-byte Parcel bundle e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03 has 102 modules. SITE-CONSOLE-01 replaces only owned Focm/W5CS bodies and removes the missing map trailer. All 100 retained vendor bodies and Parcel loader exactly reproduce from 32 official runtime archives, Babel standalone 7.16.4, Terser 3.17.0 and Parcel 1.12.5 recipes; all package edges verified. This establishes exact source identities, not the original full lockfile or uniquely installed versions.",
-      "licenseStatus": "Original notices for all 32 runtime archive packages and Parcel preserved; styled-components npm omitted LICENSE, supplemented from matching immutable upstream commit 9b3457036cfedf1d5336f654f3171657630a9fd8. Complete embedded-component attribution and public console notices remain open.",
+      "licenseStatus": "Generated public console notices now cover 43 components in 45 files, including embedded original-author notices and customStringify answer 48254637 revision 5 under CC BY-SA 4.0. The reviewed asset delta from 3136eb2402f642f25673b322b6c686405d9af9e0 is exclusively the attribution comment; see refactor/baselines/console-stackoverflow-validation.json. Final mixed-license review and shallowequal/react-pure-render attribution remain open; do not describe the complete bundle as MIT-only.",
       "upstreamSources": [
         "https://registry.npmjs.org/console-feed/-/console-feed-3.2.2.tgz",
         "https://registry.npmjs.org/terser/-/terser-3.17.0.tgz",
@@ -1106,7 +1106,7 @@
         {
           "path": "docs/assets/js/console.js",
           "algorithm": "sha256-lf",
-          "sha256": "5644af7bb35bb6d0bcfa7eeae9a21b406ac4fc1b499a6c797a6534c7d33f0678"
+          "sha256": "a5f1388175fd885c03dd21b35fff97dca0b548745588dfca3172579a96537163"
         }
       ]
     },

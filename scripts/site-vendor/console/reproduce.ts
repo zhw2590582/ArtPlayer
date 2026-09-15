@@ -3,6 +3,7 @@ import type { EmbeddedNotice } from './embedded-notices.ts'
 import type { Member, SourceMapRecord, TransformedSource } from './embedded-sources.ts'
 import type { Archive, External, Source } from './provenance.ts'
 import type { BabelRuntime, EsmSource } from './reconstruction.ts'
+import type { Revision } from './stackoverflow.ts'
 import assert from 'node:assert/strict'
 import { Buffer } from 'node:buffer'
 import { execFileSync } from 'node:child_process'
@@ -16,6 +17,7 @@ import { extractNotice } from './embedded-notices.ts'
 import { verifyMappedSources, verifyTransformedSources } from './embedded-sources.ts'
 import { hash, parcelModules, verifyArchive, verifyModules, verifyPackageEdges } from './provenance.ts'
 import { reconstructModule, verifyPrelude } from './reconstruction.ts'
+import { moduleStatement, revisionSnippet } from './stackoverflow.ts'
 
 interface CompilerOptions { warnings: boolean, safari10: boolean, mangle: { toplevel: boolean }, output?: { comments: boolean } }
 interface Provenance {
@@ -58,6 +60,16 @@ interface DerivedProvenance {
   cache: { reference: Member, upstreamUrl: string, notice: string }
 }
 interface HistoricalTypeScript { version: string, transpileModule: (source: string, options: { compilerOptions: DerivedProvenance['compiler']['options'] }) => { outputText: string } }
+interface StackOverflowProvenance {
+  revision: Revision
+  apiUrl: string
+  response: { source: string, sha256: string }
+  source: string
+  target: Member
+  binding: string
+  compiledSha256: string
+  license: { url: string, source: string, sha256: string }
+}
 
 const root = fileURLToPath(new URL('../../../', import.meta.url))
 const record: Provenance = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/console-feed-provenance.json'), 'utf8'))
@@ -65,6 +77,7 @@ const common: SourceGroup<CommonSource> = JSON.parse(fs.readFileSync(path.join(r
 const esm: EsmProvenance = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/console-esm-provenance.json'), 'utf8'))
 const embeddedSources: EmbeddedProvenance = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/console-embedded-sources.json'), 'utf8'))
 const derived: DerivedProvenance = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/console-derived-attribution.json'), 'utf8'))
+const stackOverflow: StackOverflowProvenance = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/console-stackoverflow-provenance.json'), 'utf8'))
 assert(process.argv.slice(2).every(arg => arg === '--fetch'), 'Use reproduce.ts [--fetch]')
 assert.equal(process.version, `v${fs.readFileSync(path.join(root, '.node-version'), 'utf8').trim()}`, 'Use canonical Node')
 const cacheRoot = fs.realpathSync(path.join(root, 'refactor/.cache'))
@@ -275,4 +288,16 @@ const publicDomain = extractNotice(gitSource(derived.hash.source), derived.hash.
 assert.equal(fs.readFileSync(path.join(root, derived.hash.notice.source), 'utf8'), publicDomain, 'Public domain notice changed')
 assert(derivedMember(derived.cache.reference).toString('utf8').includes(derived.cache.upstreamUrl), 'Rule-sheet source attribution changed')
 assert(fs.readFileSync(path.join(root, derived.cache.notice), 'utf8').includes('Copyright (c) 2016 Sultan Tarimo'), 'Rule-sheet attribution missing')
-console.log(JSON.stringify({ exactModules: identified.size, consoleFeed: count, commonjs: commonCount, esm: esmCount, parcelPrelude: true, packageEdges: true, embeddedNotices: embedded.notices.length, embeddedMappedSources: mappedCount, embeddedTransformedSources: transformedCount, derivedGitSources: gitSources.size, replicatorFork: true, emotionStylisSource: true, unresolved: 0, licenseClosure: false }))
+const answerSnapshot = fs.readFileSync(path.join(root, stackOverflow.response.source))
+assert.equal(hash(answerSnapshot), stackOverflow.response.sha256, 'Frozen answer revision changed')
+const snippet = revisionSnippet(answerSnapshot, stackOverflow.revision)
+assert.equal(fs.readFileSync(path.join(root, stackOverflow.source), 'utf8'), snippet, 'Frozen answer snippet changed')
+const compiledSnippet = historicalTs.transpileModule(snippet, { compilerOptions: tsCompiler.options }).outputText.trimEnd()
+assert.equal(hash(compiledSnippet), stackOverflow.compiledSha256, 'Compiled answer snippet changed')
+assert.equal(compiledSnippet, moduleStatement(derivedMember(stackOverflow.target).toString('utf8'), stackOverflow.binding), 'Answer snippet differs from archived function')
+assert.equal(hash(fs.readFileSync(path.join(root, stackOverflow.license.source))), stackOverflow.license.sha256, 'Frozen CC license changed')
+if (process.argv.includes('--fetch')) {
+  revisionSnippet(await download(stackOverflow.apiUrl), stackOverflow.revision)
+  assert.equal(hash(await download(stackOverflow.license.url)), stackOverflow.license.sha256, 'Upstream CC license changed')
+}
+console.log(JSON.stringify({ exactModules: identified.size, consoleFeed: count, commonjs: commonCount, esm: esmCount, parcelPrelude: true, packageEdges: true, embeddedNotices: embedded.notices.length, embeddedMappedSources: mappedCount, embeddedTransformedSources: transformedCount, derivedGitSources: gitSources.size, replicatorFork: true, emotionStylisSource: true, stackOverflowRevision: stackOverflow.revision.number, unresolved: 0, licenseClosure: false }))

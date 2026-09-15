@@ -1,0 +1,708 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "status": "checkpoint-incomplete",
+  "recordedAt": "2026-09-15T00:05:08.769Z",
+  "baseCommit": "3136eb2402f642f25673b322b6c686405d9af9e0",
+  "node": "v24.21.0",
+  "sourceFingerprint": {
+    "manifestSha256": "da942d3ec12fd6879bf4432098f84e45d9aadfb1771726a14ab1f3d84d65c16c",
+    "sourceRecordSha256": "a34bfd062a6bdfcf8a327f4924a3bf030e7a5405685505a633a7a586a1157302",
+    "previousConsoleSha256": "5644af7bb35bb6d0bcfa7eeae9a21b406ac4fc1b499a6c797a6534c7d33f0678",
+    "consoleSha256": "a5f1388175fd885c03dd21b35fff97dca0b548745588dfca3172579a96537163",
+    "delta": "Exact previous console bytes plus the generated attribution comment."
+  },
+  "unit": {
+    "passed": 25,
+    "failed": 0,
+    "log": "refactor/.cache/console-stackoverflow-tests.log"
+  },
+  "reproduction": {
+    "archives": 42,
+    "exactModules": 100,
+    "matchedStackOverflowRevision": 5,
+    "fetchLog": "refactor/.cache/console-stackoverflow-fetch.log",
+    "licenseClosure": false
+  },
+  "browser": {
+    "report": "refactor/.cache/browser/report.json",
+    "sha256": "af42264bf7b0056493c047e61656c397e0a095239dbfc0733a02e361d0e10b91",
+    "counts": {
+      "current-contract": 9,
+      "historical-contract": 9,
+      "historical-probe": 9,
+      "candidate-regression": 18,
+      "editor": 3,
+      "notice-delivery": 3
+    },
+    "tests": [
+      {
+        "project": "chromium",
+        "title": "current console globals, returned component and repeated mount retain their interfaces",
+        "category": "current-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "current console renders levels and raw objects; Clear resets the visible log count",
+        "category": "current-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [
+          "error-message Error: native-error\n    at eval (eval at evaluate (:311:30), <anonymous>:12:45)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+        ],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "current console scrolls new logs and preserves the pointer hover pause",
+        "category": "current-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "historical console globals, returned component and repeated mount retain their interfaces",
+        "category": "historical-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "historical console renders levels and raw objects; Clear resets the visible log count",
+        "category": "historical-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [
+          "error-message Error: native-error\n    at eval (eval at evaluate (:311:30), <anonymous>:12:45)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+        ],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "historical console scrolls new logs and preserves the pointer hover pause",
+        "category": "historical-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "frozen historical console leaves its scheduled scroll callback after unmount",
+        "category": "historical-probe",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "frozen historical console loses the remaining viewer when another viewer unmounts",
+        "category": "historical-probe",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "frozen historical console error-only rendering loses the message on Firefox and WebKit",
+        "category": "historical-probe",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [
+          "Error: native-error-message\n    at eval (eval at evaluate (:311:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+        ],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "candidate console cancels pending scroll and log work on unmount and survives remount",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "candidate console retains the surviving viewer when removing first",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "candidate console retains the surviving viewer when removing second",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "candidate console keeps native Error message and stack visible without modifying Error",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [
+          "Error: candidate-error-message\n    at eval (eval at evaluate (:311:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+        ],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "candidate console leaves later external wrappers intact and remounts without duplicate forwarding",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "editor retains console on persisted pagehide and releases it on final pagehide",
+        "category": "editor",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "candidate console parses stateful methods once for shared viewers",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "current console globals, returned component and repeated mount retain their interfaces",
+        "category": "current-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "current console renders levels and raw objects; Clear resets the visible log count",
+        "category": "current-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [
+          "error-message Error"
+        ],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "current console scrolls new logs and preserves the pointer hover pause",
+        "category": "current-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "historical console globals, returned component and repeated mount retain their interfaces",
+        "category": "historical-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "historical console renders levels and raw objects; Clear resets the visible log count",
+        "category": "historical-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [
+          "error-message Error"
+        ],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "historical console scrolls new logs and preserves the pointer hover pause",
+        "category": "historical-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "frozen historical console leaves its scheduled scroll callback after unmount",
+        "category": "historical-probe",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "frozen historical console loses the remaining viewer when another viewer unmounts",
+        "category": "historical-probe",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "frozen historical console error-only rendering loses the message on Firefox and WebKit",
+        "category": "historical-probe",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [
+          "Error"
+        ],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "candidate console cancels pending scroll and log work on unmount and survives remount",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "candidate console retains the surviving viewer when removing first",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "candidate console retains the surviving viewer when removing second",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "candidate console keeps native Error message and stack visible without modifying Error",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [
+          "Error"
+        ],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "candidate console leaves later external wrappers intact and remounts without duplicate forwarding",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "editor retains console on persisted pagehide and releases it on final pagehide",
+        "category": "editor",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "firefox",
+        "title": "candidate console parses stateful methods once for shared viewers",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "current console globals, returned component and repeated mount retain their interfaces",
+        "category": "current-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "current console renders levels and raw objects; Clear resets the visible log count",
+        "category": "current-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [
+          "error-message Error: native-error"
+        ],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "current console scrolls new logs and preserves the pointer hover pause",
+        "category": "current-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "historical console globals, returned component and repeated mount retain their interfaces",
+        "category": "historical-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "historical console renders levels and raw objects; Clear resets the visible log count",
+        "category": "historical-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [
+          "error-message Error: native-error"
+        ],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "historical console scrolls new logs and preserves the pointer hover pause",
+        "category": "historical-contract",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "frozen historical console leaves its scheduled scroll callback after unmount",
+        "category": "historical-probe",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "frozen historical console loses the remaining viewer when another viewer unmounts",
+        "category": "historical-probe",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "frozen historical console error-only rendering loses the message on Firefox and WebKit",
+        "category": "historical-probe",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [
+          "Error: native-error-message"
+        ],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "candidate console cancels pending scroll and log work on unmount and survives remount",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "candidate console retains the surviving viewer when removing first",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "candidate console retains the surviving viewer when removing second",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "candidate console keeps native Error message and stack visible without modifying Error",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [
+          "Error: candidate-error-message"
+        ],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "candidate console leaves later external wrappers intact and remounts without duplicate forwarding",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "editor retains console on persisted pagehide and releases it on final pagehide",
+        "category": "editor",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "candidate console parses stateful methods once for shared viewers",
+        "category": "candidate-regression",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "category": "notice-delivery",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ]
+      },
+      {
+        "project": "firefox",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "category": "notice-delivery",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "category": "notice-delivery",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      }
+    ],
+    "noticeFilesPerEngine": 63
+  },
+  "checks": [
+    "Strict docs-tools TypeScript",
+    "Scoped source/test/maintenance ESLint",
+    "Read-only console and notice generation",
+    "Exact previous asset plus attribution comment"
+  ],
+  "followUp": [
+    {
+      "archive": "shallowequal-1.1.0",
+      "member": "package/README.md",
+      "sha256": "6e0194e17b560c9d68e29d457e3d0d273ddaf520e89309401d82ec12cccaccbb",
+      "finding": "Credit section explicitly identifies gaearon/react-pure-render as the code origin.",
+      "status": "pending original notice review"
+    }
+  ],
+  "limits": [
+    "The 18 historical contract/probe tests are not candidate-fix evidence.",
+    "CC BY-SA 4.0 applies to the matched revision; the console bundle must not be described as MIT-only.",
+    "Final embedded-source and mixed-license distribution review remains open.",
+    "HTTPS integrations isolated; Windows local-page checks do not replace physical devices or remote deployment.",
+    "No functional runtime or lockfile changes; no push, deployment or publication."
+  ]
+}

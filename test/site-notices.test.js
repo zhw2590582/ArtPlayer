@@ -111,7 +111,7 @@ test('Console notice CLI rejects omitted package or embedded attribution before 
   const manifestPath = path.join(root, 'scripts/site-vendor/manifest.json')
   fs.mkdirSync(path.dirname(manifestPath), { recursive: true })
   const original = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))
-  for (const name of ['console-feed', 'parcel-bundler', 'styled-components', 'chromium-string-utils', 'stylis-rule-sheet', '@babel/runtime (react-inspector embedded)', 'regenerator-runtime', 'simple-html-tokenizer', 'replicator (console-feed fork)', 'stylis (Emotion fork)', 'murmurhash-js (Gary Court)', 'murmurhash2 (Austin Appleby)']) {
+  for (const name of ['console-feed', 'parcel-bundler', 'styled-components', 'chromium-string-utils', 'stylis-rule-sheet', '@babel/runtime (react-inspector embedded)', 'regenerator-runtime', 'simple-html-tokenizer', 'replicator (console-feed fork)', 'stylis (Emotion fork)', 'murmurhash-js (Gary Court)', 'murmurhash2 (Austin Appleby)', 'stackoverflow-custom-stringify']) {
     for (const field of ['components', 'notices']) {
       const manifest = structuredClone(original)
       const group = manifest.groups.find(group => group.name === 'console')

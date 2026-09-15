@@ -80,7 +80,7 @@ Source: https://registry.npmjs.org/@vscode/codicons/-/codicons-0.0.26.tgz
 
 Source: https://github.com/zhw2590582/ArtPlayer/blob/5d6b2f22bc75213ac97cff0bcffa4a1ce2bc786c/docs/assets/js/console.js
 
-The 100 third-party Parcel modules and loader have exact source reproduction. The two owned adapter modules are built from TypeScript. Preserved notices also cover two embedded license headers, all 17 react-inspector external source-map members, and all seven HTML tokenizer sources from its fixed Git dependency. Embedded attribution review is still incomplete; this inventory is not publication clearance. Modified replicator and Emotion/Stylis copies retain upstream author licenses; the original Emotion online Closure stage is not claimed to be reproducible. MurmurHash credits include Gary Court and Austin Appleby.
+The 100 third-party Parcel modules and loader have exact source reproduction. The two owned adapter modules are built from TypeScript. Preserved notices also cover two embedded license headers, all 17 react-inspector external source-map members, and all seven HTML tokenizer sources from its fixed Git dependency. Embedded attribution review is still incomplete; this inventory is not publication clearance. Modified replicator and Emotion/Stylis copies retain upstream author licenses; the original Emotion online Closure stage is not claimed to be reproducible. MurmurHash credits include Gary Court and Austin Appleby. The customStringify snippet matches Stack Overflow answer revision 5 under CC BY-SA 4.0; its separate attribution, source and full license are supplied. This is a mixed-license bundle, not MIT-only.
 
 Included component: console-feed 3.2.2
 
@@ -250,6 +250,10 @@ Included component: murmurhash2 (Austin Appleby) 61a0530
 
 Source: https://github.com/aappleby/smhasher/blob/61a0530f28277f2e850bfc39600ce61d02b518de/src/MurmurHash2.cpp
 
+Included component: stackoverflow-custom-stringify answer 48254637 revision 5 (CC BY-SA 4.0)
+
+Source: https://api.stackexchange.com/2.3/revisions/8FD5F52A-B16F-4C66-AB48-830EABB36CC0?site=stackoverflow&filter=withbody
+
 - licenses/console/console-feed/console-feed-3.2.2-LICENSE
 - licenses/console/react/react-17.0.2-LICENSE
 - licenses/console/react-dom/react-dom-17.0.2-LICENSE
@@ -292,3 +296,6 @@ Source: https://github.com/aappleby/smhasher/blob/61a0530f28277f2e850bfc39600ce6
 - licenses/console/stylis/LICENSE
 - licenses/console/murmurhash-js/README.md
 - licenses/console/murmurhash2/PUBLIC-DOMAIN.txt
+- licenses/console/stackoverflow/LICENSE
+- licenses/console/stackoverflow/SOURCE.js
+- licenses/console/stackoverflow/ATTRIBUTION.md

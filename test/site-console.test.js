@@ -7,7 +7,7 @@ import process from 'node:process'
 import test from 'node:test'
 import ts from 'typescript'
 import { decodeGitSource, verifyForkOutput, verifyGitSource } from '../scripts/site-vendor/console/attribution.ts'
-import { generateConsole, moduleRanges, obsoleteMap, upstreamSha256 } from '../scripts/site-vendor/console/build.ts'
+import { attributionBanner, generateConsole, moduleRanges, obsoleteMap, upstreamSha256 } from '../scripts/site-vendor/console/build.ts'
 import { extractNotice } from '../scripts/site-vendor/console/embedded-notices.ts'
 import { verifyMappedSources, verifyTransformedSources } from '../scripts/site-vendor/console/embedded-sources.ts'
 import { hash, parcelModules, verifyArchive, verifyModules, verifyPackageEdges } from '../scripts/site-vendor/console/provenance.ts'
@@ -15,6 +15,22 @@ import { reconstructModule, verifyPrelude } from '../scripts/site-vendor/console
 import { errorArgument } from '../scripts/site-vendor/console/runtime/errors.ts'
 import { css } from '../scripts/site-vendor/console/runtime/style.ts'
 import { createSubscriptions } from '../scripts/site-vendor/console/runtime/subscriptions.ts'
+import { moduleStatement, revisionSnippet } from '../scripts/site-vendor/console/stackoverflow.ts'
+
+test('Stack Overflow provenance rejects another revision, license or changed snippet', () => {
+  const record = JSON.parse(fs.readFileSync('refactor/baselines/console-stackoverflow-provenance.json', 'utf8'))
+  const response = fs.readFileSync(record.response.source)
+  assert.equal(revisionSnippet(response, record.revision), fs.readFileSync(record.source, 'utf8'))
+  for (const patch of [{ revision_number: 1 }, { content_license: 'CC BY-SA 3.0' }, { creation_date: 0 }, { body: 'changed' }]) {
+    const data = JSON.parse(response)
+    Object.assign(data.items[0], patch)
+    assert.throws(() => revisionSnippet(Buffer.from(JSON.stringify(data)), record.revision), /identity changed|body changed/)
+  }
+  assert.throws(() => revisionSnippet(Buffer.from('{"items":[]}'), record.revision), /one fixed/)
+  assert.equal(moduleStatement('var before = 0;\nvar customStringify = function () {};\nvar after = 2;', 'customStringify'), 'var customStringify = function () {};')
+  assert.throws(() => moduleStatement('var other = 0;', 'customStringify'), /one module/)
+  assert.throws(() => moduleStatement('var customStringify; var customStringify;', 'customStringify'), /one module/)
+})
 
 test('Immutable Git attribution verifies original blob identity and rejects altered API content', () => {
   const record = JSON.parse(fs.readFileSync('refactor/baselines/console-derived-attribution.json', 'utf8'))
@@ -234,7 +250,7 @@ test('Console error adaptation keeps existing stacks and arbitrary objects, and 
   assert.equal(errorArgument(error), error)
 })
 
-test('Console build changes only the two owned module bodies and is deterministic', async () => {
+test('Console build changes only owned bodies and a license comment and is deterministic', async () => {
   const source = fs.readFileSync('refactor/baselines/site-vendor/console-original.js', 'utf8')
   assert.equal(createHash('sha256').update(source).digest('hex'), upstreamSha256)
   const mask = (text) => {
@@ -253,7 +269,8 @@ test('Console build changes only the two owned module bodies and is deterministi
   }
   visit(view)
   assert.deepEqual(styles, [css])
-  assert.equal(mask(candidate), mask(source).slice(0, -obsoleteMap.length))
+  assert.equal(mask(candidate), mask(source).slice(0, -obsoleteMap.length) + attributionBanner)
+  assert.match(attributionBanner, /^\n\/\*![\s\S]*\*\/\n$/)
   assert.equal(candidate, await generateConsole(process.cwd()))
   assert.notEqual(candidate, source)
   assert.throws(() => moduleRanges('var unrelated = 1'), /Missing owned/)

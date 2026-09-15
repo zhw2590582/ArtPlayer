@@ -26,6 +26,8 @@ export function moduleRanges(code: string) {
   return ranges
 }
 
+export const attributionBanner = '\n/*! customStringify: Alexander Mills, with credit to Rob W. CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/ . Source revision: https://api.stackexchange.com/2.3/revisions/8FD5F52A-B16F-4C66-AB48-830EABB36CC0?site=stackoverflow&filter=withbody . ES3 compilation and minification; notices and source: /licenses/console/stackoverflow/ATTRIBUTION.md . Other component notices: /THIRD_PARTY_NOTICES.md */\n'
+
 export async function generateConsole(root: string) {
   const upstream = fs.readFileSync(path.join(root, 'refactor/baselines/site-vendor/console-original.js'), 'utf8')
   assert.equal(createHash('sha256').update(upstream).digest('hex'), upstreamSha256, 'Frozen console source changed')
@@ -44,5 +46,5 @@ export async function generateConsole(root: string) {
   for (const [id, range] of [...ranges].sort((a, b) => b[1].start - a[1].start))
     output = output.slice(0, range.start) + bodies.get(id) + output.slice(range.end)
   assert(output.endsWith(obsoleteMap), 'Unexpected original console source map trailer')
-  return output.slice(0, -obsoleteMap.length)
+  return output.slice(0, -obsoleteMap.length) + attributionBanner
 }
