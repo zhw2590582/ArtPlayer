@@ -236,4 +236,44 @@ Remaining origin review can start from the map inventory: `dom.ts` references Wi
 marked names a Stack Overflow snippet; `path.ts` identifies Node 14.16.0 while the
 older supplied notice links a different commit. Reference comments alone do not
 establish copied expression or a missing license; inspect actual boundaries and
-original terms before deciding. Core registration assembly and CSS remain separate.
+original terms before deciding. Registration assembly is covered below; CSS remains
+separate.
+
+## Contribution registration assembly
+
+`reproduce-contributions.ts` closes the appended-registration gap left by the
+core minifier check. Six fixed npm archives and the fixed Monaco Git archive supply
+TypeScript 4.4.4, RequireJS 2.3.6, Terser 5.9.0 and its nested source-map 0.7.3.
+The top-level lock also contains source-map 0.6.1; it is not Terser's dependency.
+Nothing is installed in the workspace and no historical install script runs.
+
+The record covers 102 Git members, including 88 TypeScript module inputs and the
+original metadata, release recipe, five bundler recipes/configurations and license.
+Modules are emitted with the original ES5/AMD/strict settings. Standalone fillers
+use program emission: isolated transpilation would incorrectly wrap their existing
+AMD calls in another module. RequireJS itself names and orders definitions and
+removes standalone strict directives. Each run uses a fresh ignored directory so
+missing modules cannot resolve from stale outputs. This proves output equivalence,
+not a full upstream semantic TypeScript check.
+
+`contributions.ts` parses the fixed metadata statically and verifies the five-group
+order: TypeScript (3 modules), CSS (2), JSON (2), HTML (2), basic languages (79).
+After Terser minification and version headers, the release recipe injects the core
+API dependency into each filler, renames the original editor entry, appends groups
+and an API-returning alias, and preserves the exact source-map trailer. Both full
+development and minified editor files must match their npm archive bytes; the
+minified file must also match the unchanged site asset. Core's nested anonymous UMD
+definitions are allowed; the unique renamed entry must be used by an AMD call,
+including the archived string-table lookup (index 719 in both core builds).
+
+```sh
+yarn verify:monaco-contributions --fetch
+yarn verify:monaco-contributions
+yarn test:browser test/browser/editor-modes.spec.js test/browser/editor-basic-languages.spec.js --workers=1
+```
+
+Unit counterexamples cover missing/reordered groups, computed/duplicate metadata,
+foreign modules, missing/repeated/already-injected dependencies and false entry
+strings. Browser regressions exercise real diagnostics/formatting and all pinned
+tokenizer cases. This does not close original core TS compilation, CSS reproduction,
+remaining embedded-origin review, or the broader SITE-07 release requirements.

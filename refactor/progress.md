@@ -1,5 +1,15 @@
 # 进度与证据
 
+## SITE-07 Monaco 完整贡献模块装配
+
+六个 npm 归档和 102 个 Git 成员支撑 88 个 TS 注册模块，原 RequireJS/Terser
+流程及发布配方精确复现完整 dev/min editor.main，站点运行字节不变。23/23
+单元、严格类型/lint、联网/离线复验和三引擎语言模式/分词回归 6/6 通过。
+见[记录](changes/2026-09-15-SITE-07-monaco-contributions.md)。SITE-07/VENDOR-06 仍开放，199/265；
+后续 CSS 与其余内嵌来源，完整原始 core TS 编译未被本批替代。Thumbnail 默认
+兼容策略仍待答。
+
+
 ## SITE-07 Monaco 核心压缩与编辑操作
 
 固定 esbuild 0.12.6 精确复现 13 个 core JS 产物，loader 源码/版本头及 css/nls

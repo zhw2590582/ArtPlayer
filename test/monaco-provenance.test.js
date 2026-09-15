@@ -4,10 +4,54 @@ import test from 'node:test'
 import ts from 'typescript'
 import { extractBasicFixtures } from '../scripts/site-vendor/monaco/basic-fixtures.ts'
 import { emitAmd } from '../scripts/site-vendor/monaco/compiler.ts'
+import { assembleContributions, injectCoreDependency, readContributionMetadata } from '../scripts/site-vendor/monaco/contributions.ts'
 import { inventoryCoreMap, readCoreNls, restoreCoreMapComment } from '../scripts/site-vendor/monaco/core-build.ts'
 import { adaptCoreOrigin } from '../scripts/site-vendor/monaco/core-origins.ts'
 import { aliasModule, moduleIds, nameModule, verifyWorkerSources } from '../scripts/site-vendor/monaco/languages.ts'
 import { browserTypeScript, verifyTypeScriptSource } from '../scripts/site-vendor/monaco/typescript.ts'
+
+const contributionGroups = ['typescript', 'css', 'json', 'html', 'languages'].map((name) => {
+  const modulePrefix = name === 'languages' ? 'vs/basic-languages' : `vs/language/${name}`
+  return { name: `monaco-${name}`, modulePrefix, contrib: `${modulePrefix}/monaco.contribution` }
+})
+
+test('Contribution metadata preserves upstream ordering and rejects computed or duplicate values', () => {
+  const plugins = contributionGroups.map(group => ({ ...group, rootPath: `./${group.name}`, paths: { dev: './release/dev', min: './release/min' } }))
+  const metadata = list => `var METADATA = ${JSON.stringify({ PLUGINS: list })};`
+  assert.deepEqual(readContributionMetadata(metadata(plugins)), contributionGroups)
+  assert.throws(() => readContributionMetadata(metadata([...plugins].reverse())), /order changed/)
+  assert.throws(() => readContributionMetadata(metadata(plugins).replace('"monaco-css"', 'getName()')), /literal metadata/)
+  assert.throws(() => readContributionMetadata(metadata(plugins).replace('"name":"monaco-css"', '"name":"monaco-css","name":"monaco-css"')), /one metadata property/)
+})
+
+test('Contribution assembly retains the entry alias, dependency order and exact map boundary', () => {
+  const core = 'define("vs/editor/editor.main",[],function(){return {};});\n'
+  const map = '//# sourceMappingURL=../../../min-maps/vs/editor/editor.main.js.map'
+  const groups = contributionGroups.map(group => ({ ...group, source: `define('${group.modulePrefix}/fillers/monaco-editor-core',[],function(){return self.monaco;});\ndefine('${group.contrib}',[],function(){});` }))
+  const output = assembleContributions(core + map, groups)
+  assert(output.startsWith(core.replace('editor.main', 'edcore.main')))
+  assert(output.endsWith(`function(api) { return api; });\n${map}`))
+  assert.deepEqual(moduleIds(output), ['vs/editor/edcore.main', ...groups.flatMap(group => [`${group.modulePrefix}/fillers/monaco-editor-core`, group.contrib]), 'vs/editor/editor.main'])
+  assert.equal(output.split('[\'vs/editor/editor.api\']').length, 6)
+  assert.equal(assembleContributions(core, groups), output.slice(0, -map.length))
+  assert.throws(() => assembleContributions(core + core, groups), /unique quoted core entry/)
+  assert.throws(() => assembleContributions('const name = "vs/editor/editor.main";', groups), /Missing core AMD entry/)
+  assert(assembleContributions(`define([],function(){});\n${core}`, groups).startsWith('define([],function(){});'))
+  const indexed = 'var names = ["other","vs/editor/editor.main"];define(names[1 /* entry */],[],function(){});'
+  assert(assembleContributions(indexed, groups).startsWith(indexed.replace('editor.main', 'edcore.main')))
+  assert.throws(() => assembleContributions(indexed.replace('names[1', 'names[0'), groups), /Missing core AMD entry/)
+  assert.throws(() => assembleContributions(core, groups.slice(1)), /order changed/)
+  assert.throws(() => assembleContributions(core, groups.map((group, index) => index ? group : { ...group, source: `${group.source}\ndefine('unrelated',[],function(){});` })), /ownership/)
+})
+
+test('Core dependency injection rejects omissions, duplicates and already patched filler modules', () => {
+  const prefix = 'vs/basic-languages'
+  const source = `define('${prefix}/fillers/monaco-editor-core',[],function(){return self.monaco;});`
+  assert.throws(() => injectCoreDependency('', prefix), /one empty core filler/)
+  assert.throws(() => injectCoreDependency(source + source, prefix), /one empty core filler/)
+  assert.throws(() => injectCoreDependency(source, 'vs/language/css'), /Wrong core filler/)
+  assert.throws(() => injectCoreDependency(injectCoreDependency(source, prefix), prefix), /one empty core filler/)
+})
 
 test('Core NLS extraction accepts historical trailing commas without evaluating expressions', () => {
   assert.deepEqual(readCoreNls('define("nls", { "find": ["Find", "查找",], });'), { id: 'nls', messages: { find: ['Find', '查找'] } })
