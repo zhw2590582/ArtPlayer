@@ -60,6 +60,12 @@ CI-NPM-01 从 CI-03 拆出本地精确候选交付准备，供后续 artifact �
 验收全部保留。当前包仍被准入门槛阻止，详见[记录](changes/2026-09-15-CI-NPM-01-bundle.md)
 及[实现维护](../scripts/release/README.md)。
 
+CI-NPM-02补齐下载后的内容校验：`yarn release:verify-bundle`要求独立的源码SHA、
+manifest摘要和明确包批次/tag，重算当前仓库台账并比对已登记tarball，不能由
+下载报告自证准入。它不读取GitHub/npm，不证明workflow/run/artifact来源或版本
+占用，也不授权发布。CI-03仍须建立可信来源传递、下载与发布步骤；不能以此
+本地子任务代替CI-01、CI-03或CI-04的完整验收。
+
 | 任务 | 交付 |
 | --- | --- |
 | ENG-02 | 只读脚本、PR/主线检查及部署隔离基础 |

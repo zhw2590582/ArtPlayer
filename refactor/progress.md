@@ -1,5 +1,16 @@
 # 进度与证据
 
+## CI-NPM-02 下载候选内容核验
+
+新增`release:verify-bundle`，以独立提供的源码SHA、manifest摘要、包批次/tag
+核验下载内容，并两次重算当前仓库发布台账。严格比对preflight、登记tarball字节、
+SHA-512、版本/工具链及文件清单；拒绝额外文件、路径重定向和校验过程中变化。
+没有新增依赖。36项准备/下载校验测试、严格TS及lint通过；真实仓库台账仍正确
+拒绝放行。合成通过夹具不作为真实候选准入。见[记录](changes/2026-09-16-CI-NPM-02-verify-bundle.md)
+及[证据](baselines/npm-bundle-verification.json)。
+CI-NPM-02从CI-03拆出并成为其依赖；CI-03原依赖与远端来源、registry、发布流程
+全部保留。223 done、20 doing、41 todo，共284项。没有启动复盘或执行远端写入。
+
 ## REL-09 全包下一 major 版本落实
 
 22个workspace已设置各自下一major并新增unreleased CHANGELOG；核心/弹幕6.0.0、

@@ -9,6 +9,17 @@ yarn typecheck:release
 yarn test:release-bundle
 ```
 
+For a downloaded copy of an already prepared bundle, use:
+
+```sh
+yarn release:verify-bundle --directory refactor/.cache/downloaded-bundle --packages artplayer,artplayer-plugin-chapter --tag next --source-commit <expected-40-hex-commit> --manifest-sha256 <independent-64-hex-digest>
+```
+
+Get the expected commit, batch, tag and manifest digest from the trusted handoff,
+not from the downloaded bundle itself. Passing a digest copied from an untrusted
+manifest does not establish authenticity. The workflow that establishes this
+handoff is still CI-03 work; this command only verifies local contents and gates.
+
 `release:bundle` does not build, pack, install, contact npm or publish. It is a
 handoff step for candidates already recorded in `refactor/release-ledger.json`.
 Both commands currently refuse release acceptance because the repository still
@@ -24,6 +35,15 @@ reports are not evidence that an ArtPlayer package is ready to publish.
 - `bundle.ts` consumes the repository ledger, checks the batch, copies exact
   tarball bytes and writes a hash-bound manifest. Its injected inspector is an
   internal test seam; the CLI never trusts a supplied JSON report as approval.
+- `bundle.ts` also owns the shared batch rules and manifest description, so
+  preparation and verification agree on the same versioned handoff format.
+- `verify.ts` compares every downloaded file with independent expectations and
+  two fresh ledger reads. It checks registered candidate bytes and SHA-512,
+  strict manifest metadata, preflight contents and the exact file roster, then
+  rechecks the downloaded files before returning. It performs no writes.
+- `../verify-release.mjs` is the verification CLI. It requires explicit arguments,
+  canonical Node/Yarn and clean Git state on both fresh ledger reads. A downloaded
+  JSON report cannot be injected as the inspector through the CLI.
 - `../../refactor/scripts/release-ledger.mjs` remains the source of candidate,
   input fingerprint, review, risk, source/license, device, rollback and CI checks.
   Do not introduce another manually maintained green-status list here.
@@ -65,9 +85,31 @@ The future publisher must validate downloaded contents and fresh release evidenc
 it must not trust an artifact solely because it has this manifest shape. Do not
 add a rebuild fallback to preparation or publishing when an artifact is missing.
 
+CI-NPM-02 supplies that content-validation step. A successful verification still
+returns `workflowProvenanceVerified: false`, `registryOccupancyVerified: false`
+and `publicationAuthorized: false`. It neither contacts GitHub/npm nor executes
+package lifecycle scripts. CI-03 must separately verify the repository/workflow,
+run, attempt, source commit and artifact identity using trusted remote metadata,
+and check registry occupancy immediately before an authorized publication.
+The verifier does not preserve a publishable approval across later file changes;
+the future publisher must revalidate and consume those same bytes at use time.
+
+Restore the registered candidate files and required evidence to their ledger
+locations before verification. The downloaded preflight must equal the newly
+computed report, including toolchain and file hashes. A different environment,
+missing ignored evidence, changed files or new blockers can therefore reject
+an otherwise intact historical download. Keep and diagnose that rejection;
+do not edit the downloaded report to make it pass or rebuild a replacement.
+Extra files, directories, symlinks/junctions and redirected parent paths are
+rejected. Failed verification leaves the downloaded evidence intact.
+
 `release-bundle.test.mjs` uses small real tar archives with explicitly synthetic
 ledger reports for byte-copy/failure tests, and temporary real Git repositories
 for the clean-source guard. It covers stale inputs, changed outputs, missing
 gates, site confusion, selection/tag errors, outside paths/junctions, partial
 cleanup and original exception retention. These tests run in `test:baseline`;
 strict TypeScript checking runs in `ci:check`, and the TS source is in root lint.
+`release-verify.test.mjs` additionally tests downloaded copies, self-consistent
+manifest/preflight forgeries, stale fresh gates, changed registered/downloaded
+tarballs, missing/extra members, redirected paths and mid-verification changes.
+Successful synthetic tests are not actual ArtPlayer candidate acceptance.

@@ -835,7 +835,8 @@
         "CI-01",
         "REL-08",
         "REL-04",
-        "CI-NPM-01"
+        "CI-NPM-01",
+        "CI-NPM-02"
       ],
       "status": "todo",
       "risk": "H",
@@ -6137,6 +6138,26 @@
         "baselines/ci-installed-webkit-validation.json",
         "changes/2026-09-16-PKG-DANMUKU-START-01-first-sample.md",
         "baselines/danmuku-start-validation.json"
+      ]
+    },
+    {
+      "id": "CI-NPM-02",
+      "phase": "2.2 GitHub CI/CD",
+      "title": "校验下载候选与实时发布台账",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "CI-NPM-01",
+        "REL-09"
+      ],
+      "status": "done",
+      "risk": "H",
+      "deliverable": "独立摘要/源码/包批次输入、完整下载文件核验、实时台账重算和篡改/失效测试；供CI-03复用",
+      "acceptance": "不能以下载报告自证准入，不重建或发布；拒绝摘要/候选/版本/路径/台账漂移，明确远端来源和registry仍待核实",
+      "evidence": [
+        "changes/2026-09-16-CI-NPM-02-verify-bundle.md",
+        "baselines/npm-bundle-verification.json"
       ]
     }
   ]

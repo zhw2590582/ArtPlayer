@@ -33,11 +33,37 @@ export interface LedgerSnapshot {
   packages: PackageRow[]
 }
 
+interface PackedCandidate {
+  name: string
+  version: string
+  file: string
+  bytes: number
+  sha256: string
+  integrity: string
+  sourceCommit: string
+  inputFingerprint: string
+}
+
+export function bundleManifest(report: LedgerSnapshot, tag: string, preflightSha256: string, packages: PackedCandidate[]) {
+  return {
+    schemaVersion: 1,
+    kind: 'artplayer-npm-bundle',
+    publicationAuthorized: false,
+    sourceCommit: report.sourceCommit,
+    registry: 'https://registry.npmjs.org/',
+    tag,
+    toolchain: report.toolchain,
+    preflight: { file: 'preflight.json', sha256: preflightSha256 },
+    packages,
+    limitations: ['This bundle is not publication authorization.', 'A future publisher must verify trusted workflow/run provenance, current registry occupancy, all bundle hashes and fresh release evidence before publishing these exact tarballs.'],
+  }
+}
+
 const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex')
 const integrity = (bytes: Uint8Array) => `sha512-${createHash('sha512').update(bytes).digest('base64')}`
 const encode = (value: unknown) => Buffer.from(`${JSON.stringify(value, null, 2)}\n`)
 
-function checkBatch(report: LedgerSnapshot, names: string[], tag: string): void {
+export function checkBatch(report: LedgerSnapshot, names: string[], tag: string): void {
   assert.equal(report.schemaVersion, 1, 'Unsupported release ledger report')
   assert.equal(report.publicationAuthorized, false, 'A ledger report cannot authorize publication')
   assert(/^[a-f\d]{40}$/.test(report.sourceCommit), 'Missing source commit')
@@ -88,18 +114,7 @@ export function prepareReleaseBundle(directory: string, names: string[], tag: st
     const preflight = encode(final)
     fs.writeFileSync(path.join(stage, 'preflight.json'), preflight, { flag: 'wx' })
     assert.equal(sha256(fs.readFileSync(path.join(stage, 'preflight.json'))), sha256(preflight), 'Written preflight report differs')
-    const manifest = {
-      schemaVersion: 1,
-      kind: 'artplayer-npm-bundle',
-      publicationAuthorized: false,
-      sourceCommit: final.sourceCommit,
-      registry: 'https://registry.npmjs.org/',
-      tag,
-      toolchain: final.toolchain,
-      preflight: { file: 'preflight.json', sha256: sha256(preflight) },
-      packages,
-      limitations: ['This bundle is not publication authorization.', 'A future publisher must verify trusted workflow/run provenance, current registry occupancy, all bundle hashes and fresh release evidence before publishing these exact tarballs.'],
-    }
+    const manifest = bundleManifest(final, tag, sha256(preflight), packages)
     // Completion marker is written last; no directory is returned on failure.
     fs.writeFileSync(path.join(stage, 'manifest.json'), encode(manifest), { flag: 'wx' })
     return { directory: stage, manifest }

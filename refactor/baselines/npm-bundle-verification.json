@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "task": "CI-NPM-02",
+  "verifiedAt": "2026-09-15T16:59:12.794Z",
+  "startedFrom": "2983cb7c51f65e6cf1bdd8c8c3387c75e0c3287c",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "commands": [
+    {
+      "command": "yarn test:release-bundle",
+      "exitCode": 0,
+      "tests": 36,
+      "pass": 36,
+      "fail": 0,
+      "skipped": 0,
+      "durationMs": 2158.2169,
+      "log": {
+        "path": "refactor/.cache/ci-npm02-tests-final.log",
+        "sha256": "0f4f27201e3f03cf6d20add909e901024209e8b04ded143780a17b05bf533b6a"
+      }
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -p scripts/tsconfig.release.json --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "node node_modules/eslint/bin/eslint.js scripts/release/bundle.ts scripts/release/verify.ts scripts/verify-release.mjs refactor/scripts/release-verify.test.mjs",
+      "exitCode": 0
+    }
+  ],
+  "currentRepositoryRejection": {
+    "directory": "D:\\github\\ArtPlayer\\refactor\\.cache\\npm02-blocked-fmr1O8",
+    "expected": {
+      "names": [
+        "artplayer"
+      ],
+      "tag": "next",
+      "sourceCommit": "2983cb7c51f65e6cf1bdd8c8c3387c75e0c3287c",
+      "manifestSha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    "syntheticManifest": true,
+    "inspector": "default buildLedger, actual current repository",
+    "rejected": true,
+    "message": "Release preflight is blocked; candidate bundle was not prepared",
+    "record": {
+      "path": "refactor/.cache/ci-npm02-repository-rejection.json",
+      "sha256": "fd7a0058dfd08c3240c5b4ca757bf388a890033a7c049432c497944aeebe0b5e"
+    },
+    "cleanSourceCliUsed": false,
+    "explanation": "The component default inspector computed the actual current repository ledger; a synthetic empty manifest with its digest did not override blocked gates. This is a rejection check, not real bundle acceptance."
+  },
+  "inputs": [
+    {
+      "path": "scripts/release/bundle.ts",
+      "sha256": "30c1f2334ed88a60e2b340b15a1a74423b08fb278425088d32f809715903c70d"
+    },
+    {
+      "path": "scripts/release/verify.ts",
+      "sha256": "27ac68bde4fb8b364bc23247ba9af1a2234b0db6ec594d6a66dda44b84b94e9e"
+    },
+    {
+      "path": "scripts/verify-release.mjs",
+      "sha256": "215d684511e598da8703277471d871c756ddae5fe3df23670e2e8495f661df58"
+    },
+    {
+      "path": "refactor/scripts/release-verify.test.mjs",
+      "sha256": "ef83c92c9d768cf04b3d8da3726166a1477fcee4b5b20461f4fe2325e14ba724"
+    }
+  ],
+  "limits": {
+    "successfulFixturesAreSynthetic": true,
+    "realCandidateAccepted": false,
+    "workflowProvenanceVerified": false,
+    "registryOccupancyVerified": false,
+    "remoteWorkflowRun": false,
+    "publicationAuthorized": false,
+    "formalReviewStarted": false
+  }
+}
