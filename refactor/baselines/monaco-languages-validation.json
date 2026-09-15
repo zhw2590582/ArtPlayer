@@ -1,0 +1,751 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "status": "checkpoint-incomplete",
+  "recordedAt": "2026-09-15T01:09:12.810Z",
+  "baseCommit": "11296975f100e027f7dcbf7e5be6663bc9978cd3",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "fingerprints": {
+    "sourceRecord": "43d720dbc73f94a2a2bb6d403813f3835f2714dea0fc74b8d846ed83ad506718",
+    "runtimeChanges": "No changes to any Monaco runtime asset"
+  },
+  "reproduction": {
+    "result": {
+      "archives": 11,
+      "gitSources": 13,
+      "npmModules": 91,
+      "aliases": 8,
+      "workers": [
+        {
+          "language": "css",
+          "modules": 48,
+          "exactSources": true,
+          "exactWorker": true,
+          "sha256": "073e09f9301dcf147e40ef675e3f18d8cc29de9f49673ec8d17711569144552d"
+        },
+        {
+          "language": "html",
+          "modules": 38,
+          "exactSources": true,
+          "exactWorker": true,
+          "sha256": "0b14f0af7ae7ab85732574fb384496dae3e85d28f953188cc842eec468a8a457"
+        },
+        {
+          "language": "json",
+          "modules": 33,
+          "exactSources": true,
+          "exactWorker": true,
+          "sha256": "0eb929c56d44afddb3030c011913010311ce34e5eadb1129a3ce9cbafd4c771d"
+        }
+      ],
+      "licenseReviewComplete": false,
+      "otherMonacoComponentsReviewed": false
+    },
+    "fetchLog": "refactor/.cache/monaco-languages-fetch.log",
+    "offlineLog": "refactor/.cache/monaco-languages-yarn.log"
+  },
+  "unit": {
+    "passed": 4,
+    "log": "refactor/.cache/monaco-languages-unit.log"
+  },
+  "browser": {
+    "report": "refactor/.cache/browser/report.json",
+    "sha256": "9c16417579ea84d295d1ae5d0bc5f6d845fa44790abba33119d5ae44f8e500cc",
+    "tests": [
+      {
+        "project": "chromium",
+        "title": "docs Monaco CSS, HTML and JSON workers validate, complete and format real models",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "results": {
+          "cssValid": [],
+          "cssInvalid": [
+            {
+              "code": "css-propertyvalueexpected",
+              "source": "css",
+              "message": "property value expected",
+              "severity": 1,
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 11
+                },
+                "end": {
+                  "line": 0,
+                  "character": 12
+                }
+              }
+            }
+          ],
+          "jsonValid": [],
+          "jsonInvalid": [
+            {
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 9
+                },
+                "end": {
+                  "line": 0,
+                  "character": 10
+                }
+              },
+              "message": "Value expected",
+              "severity": 1,
+              "code": 516,
+              "source": "json"
+            }
+          ],
+          "completionLabels": [
+            "html",
+            "head",
+            "title",
+            "base",
+            "link",
+            "meta",
+            "style",
+            "body",
+            "article",
+            "section",
+            "nav",
+            "aside",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "header",
+            "footer",
+            "address",
+            "p",
+            "hr",
+            "pre",
+            "blockquote",
+            "ol",
+            "ul",
+            "li",
+            "dl",
+            "dt",
+            "dd",
+            "figure",
+            "figcaption",
+            "main",
+            "div",
+            "a",
+            "em",
+            "strong",
+            "small",
+            "s",
+            "cite",
+            "q",
+            "dfn",
+            "abbr",
+            "ruby",
+            "rb",
+            "rt",
+            "rp",
+            "time",
+            "code",
+            "var",
+            "samp",
+            "kbd",
+            "sub",
+            "sup",
+            "i",
+            "b",
+            "u",
+            "mark",
+            "bdi",
+            "bdo",
+            "span",
+            "br",
+            "wbr",
+            "ins",
+            "del",
+            "picture",
+            "img",
+            "iframe",
+            "embed",
+            "object",
+            "param",
+            "video",
+            "audio",
+            "source",
+            "track",
+            "map",
+            "area",
+            "table",
+            "caption",
+            "colgroup",
+            "col",
+            "tbody",
+            "thead",
+            "tfoot",
+            "tr",
+            "td",
+            "th",
+            "form",
+            "label",
+            "input",
+            "button",
+            "select",
+            "datalist",
+            "optgroup",
+            "option",
+            "textarea",
+            "output",
+            "progress",
+            "meter",
+            "fieldset",
+            "legend",
+            "details",
+            "summary",
+            "dialog",
+            "script",
+            "noscript",
+            "template",
+            "canvas"
+          ],
+          "htmlSymbols": [
+            "div",
+            "p",
+            "p"
+          ],
+          "htmlEdits": [
+            {
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 0
+                },
+                "end": {
+                  "line": 0,
+                  "character": 35
+                }
+              },
+              "newText": "<div>\n  <p>hello</p>\n  <p>world</p>\n</div>"
+            }
+          ],
+          "jsonEdits": [
+            {
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 1
+                },
+                "end": {
+                  "line": 0,
+                  "character": 1
+                }
+              },
+              "newText": "\n  "
+            },
+            {
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 9
+                },
+                "end": {
+                  "line": 0,
+                  "character": 9
+                }
+              },
+              "newText": " "
+            },
+            {
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 10
+                },
+                "end": {
+                  "line": 0,
+                  "character": 10
+                }
+              },
+              "newText": "\n"
+            }
+          ],
+          "startedWorkers": [
+            "http://127.0.0.1:8084/assets/js/vs/base/worker/workerMain.js#css",
+            "http://127.0.0.1:8084/assets/js/vs/base/worker/workerMain.js#css",
+            "http://127.0.0.1:8084/assets/js/vs/base/worker/workerMain.js#json",
+            "http://127.0.0.1:8084/assets/js/vs/base/worker/workerMain.js#json",
+            "http://127.0.0.1:8084/assets/js/vs/base/worker/workerMain.js#html"
+          ]
+        }
+      },
+      {
+        "project": "firefox",
+        "title": "docs Monaco CSS, HTML and JSON workers validate, complete and format real models",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "results": {
+          "cssValid": [],
+          "cssInvalid": [
+            {
+              "code": "css-propertyvalueexpected",
+              "source": "css",
+              "message": "property value expected",
+              "severity": 1,
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 11
+                },
+                "end": {
+                  "line": 0,
+                  "character": 12
+                }
+              }
+            }
+          ],
+          "jsonValid": [],
+          "jsonInvalid": [
+            {
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 9
+                },
+                "end": {
+                  "line": 0,
+                  "character": 10
+                }
+              },
+              "message": "Value expected",
+              "severity": 1,
+              "code": 516,
+              "source": "json"
+            }
+          ],
+          "completionLabels": [
+            "html",
+            "head",
+            "title",
+            "base",
+            "link",
+            "meta",
+            "style",
+            "body",
+            "article",
+            "section",
+            "nav",
+            "aside",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "header",
+            "footer",
+            "address",
+            "p",
+            "hr",
+            "pre",
+            "blockquote",
+            "ol",
+            "ul",
+            "li",
+            "dl",
+            "dt",
+            "dd",
+            "figure",
+            "figcaption",
+            "main",
+            "div",
+            "a",
+            "em",
+            "strong",
+            "small",
+            "s",
+            "cite",
+            "q",
+            "dfn",
+            "abbr",
+            "ruby",
+            "rb",
+            "rt",
+            "rp",
+            "time",
+            "code",
+            "var",
+            "samp",
+            "kbd",
+            "sub",
+            "sup",
+            "i",
+            "b",
+            "u",
+            "mark",
+            "bdi",
+            "bdo",
+            "span",
+            "br",
+            "wbr",
+            "ins",
+            "del",
+            "picture",
+            "img",
+            "iframe",
+            "embed",
+            "object",
+            "param",
+            "video",
+            "audio",
+            "source",
+            "track",
+            "map",
+            "area",
+            "table",
+            "caption",
+            "colgroup",
+            "col",
+            "tbody",
+            "thead",
+            "tfoot",
+            "tr",
+            "td",
+            "th",
+            "form",
+            "label",
+            "input",
+            "button",
+            "select",
+            "datalist",
+            "optgroup",
+            "option",
+            "textarea",
+            "output",
+            "progress",
+            "meter",
+            "fieldset",
+            "legend",
+            "details",
+            "summary",
+            "dialog",
+            "script",
+            "noscript",
+            "template",
+            "canvas"
+          ],
+          "htmlSymbols": [
+            "div",
+            "p",
+            "p"
+          ],
+          "htmlEdits": [
+            {
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 0
+                },
+                "end": {
+                  "line": 0,
+                  "character": 35
+                }
+              },
+              "newText": "<div>\n  <p>hello</p>\n  <p>world</p>\n</div>"
+            }
+          ],
+          "jsonEdits": [
+            {
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 1
+                },
+                "end": {
+                  "line": 0,
+                  "character": 1
+                }
+              },
+              "newText": "\n  "
+            },
+            {
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 9
+                },
+                "end": {
+                  "line": 0,
+                  "character": 9
+                }
+              },
+              "newText": " "
+            },
+            {
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 10
+                },
+                "end": {
+                  "line": 0,
+                  "character": 10
+                }
+              },
+              "newText": "\n"
+            }
+          ],
+          "startedWorkers": [
+            "/assets/js/vs/base/worker/workerMain.js#css",
+            "/assets/js/vs/base/worker/workerMain.js#css",
+            "/assets/js/vs/base/worker/workerMain.js#json",
+            "/assets/js/vs/base/worker/workerMain.js#json",
+            "/assets/js/vs/base/worker/workerMain.js#html"
+          ]
+        }
+      },
+      {
+        "project": "webkit",
+        "title": "docs Monaco CSS, HTML and JSON workers validate, complete and format real models",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "results": {
+          "cssValid": [],
+          "cssInvalid": [
+            {
+              "code": "css-propertyvalueexpected",
+              "source": "css",
+              "message": "property value expected",
+              "severity": 1,
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 11
+                },
+                "end": {
+                  "line": 0,
+                  "character": 12
+                }
+              }
+            }
+          ],
+          "jsonValid": [],
+          "jsonInvalid": [
+            {
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 9
+                },
+                "end": {
+                  "line": 0,
+                  "character": 10
+                }
+              },
+              "message": "Value expected",
+              "severity": 1,
+              "code": 516,
+              "source": "json"
+            }
+          ],
+          "completionLabels": [
+            "html",
+            "head",
+            "title",
+            "base",
+            "link",
+            "meta",
+            "style",
+            "body",
+            "article",
+            "section",
+            "nav",
+            "aside",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "header",
+            "footer",
+            "address",
+            "p",
+            "hr",
+            "pre",
+            "blockquote",
+            "ol",
+            "ul",
+            "li",
+            "dl",
+            "dt",
+            "dd",
+            "figure",
+            "figcaption",
+            "main",
+            "div",
+            "a",
+            "em",
+            "strong",
+            "small",
+            "s",
+            "cite",
+            "q",
+            "dfn",
+            "abbr",
+            "ruby",
+            "rb",
+            "rt",
+            "rp",
+            "time",
+            "code",
+            "var",
+            "samp",
+            "kbd",
+            "sub",
+            "sup",
+            "i",
+            "b",
+            "u",
+            "mark",
+            "bdi",
+            "bdo",
+            "span",
+            "br",
+            "wbr",
+            "ins",
+            "del",
+            "picture",
+            "img",
+            "iframe",
+            "embed",
+            "object",
+            "param",
+            "video",
+            "audio",
+            "source",
+            "track",
+            "map",
+            "area",
+            "table",
+            "caption",
+            "colgroup",
+            "col",
+            "tbody",
+            "thead",
+            "tfoot",
+            "tr",
+            "td",
+            "th",
+            "form",
+            "label",
+            "input",
+            "button",
+            "select",
+            "datalist",
+            "optgroup",
+            "option",
+            "textarea",
+            "output",
+            "progress",
+            "meter",
+            "fieldset",
+            "legend",
+            "details",
+            "summary",
+            "dialog",
+            "script",
+            "noscript",
+            "template",
+            "canvas"
+          ],
+          "htmlSymbols": [
+            "div",
+            "p",
+            "p"
+          ],
+          "htmlEdits": [
+            {
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 0
+                },
+                "end": {
+                  "line": 0,
+                  "character": 35
+                }
+              },
+              "newText": "<div>\n  <p>hello</p>\n  <p>world</p>\n</div>"
+            }
+          ],
+          "jsonEdits": [
+            {
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 1
+                },
+                "end": {
+                  "line": 0,
+                  "character": 1
+                }
+              },
+              "newText": "\n  "
+            },
+            {
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 9
+                },
+                "end": {
+                  "line": 0,
+                  "character": 9
+                }
+              },
+              "newText": " "
+            },
+            {
+              "range": {
+                "start": {
+                  "line": 0,
+                  "character": 10
+                },
+                "end": {
+                  "line": 0,
+                  "character": 10
+                }
+              },
+              "newText": "\n"
+            }
+          ],
+          "startedWorkers": [
+            "http://127.0.0.1:8084/assets/js/vs/base/worker/workerMain.js#css",
+            "http://127.0.0.1:8084/assets/js/vs/base/worker/workerMain.js#css",
+            "http://127.0.0.1:8084/assets/js/vs/base/worker/workerMain.js#json",
+            "http://127.0.0.1:8084/assets/js/vs/base/worker/workerMain.js#json",
+            "http://127.0.0.1:8084/assets/js/vs/base/worker/workerMain.js#html"
+          ]
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "Source and exact output proof; not a complete upstream semantic typecheck.",
+    "Language-service original notices and embedded source attribution remain under review.",
+    "Mode bundles, editor core, basic languages and other site assets are not closed by this record.",
+    "No playback, physical device, external SDK, remote CI or publication verification in this checkpoint."
+  ]
+}

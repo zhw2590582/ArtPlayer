@@ -1,5 +1,13 @@
 # 进度与证据
 
+## SITE-07 Monaco CSS/HTML/JSON worker
+
+完成三个 worker 的全部源码片段与压缩产物复现：11 归档、13 Git 来源、119 模块
+实例，nls 确认为 Monaco 自有 shim。单元 4/4、三引擎真实 worker 诊断/补全/格式化
+3/3 通过，见[记录](changes/2026-09-15-SITE-07-monaco-languages.md)。运行资产和锁
+未改；服务包原始 notices 与内嵌来源、mode/core/basic-language 继续审查。
+SITE-07 doing、VENDOR-06 open，整体 199/265，没有推送或发布。
+
 ## SITE-07 Monaco TypeScript 4.4.4
 
 核对实际worker与固定提交锁，补充准确版本及三份原始许可/第三方说明，保留

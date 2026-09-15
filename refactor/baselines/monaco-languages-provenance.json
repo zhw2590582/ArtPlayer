@@ -1,0 +1,956 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "commit": "5a7ba61be909ae9e4889768a3453ebb0dec392e2",
+  "scope": "Complete source-fragment and minified-output matching for CSS/HTML/JSON workers; not a full historical typecheck or embedded-license closure.",
+  "archives": [
+    {
+      "name": "monaco-editor",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.30.1.tgz",
+      "integrity": "sha512-B/y4+b2O5G2gjuxIFtCE2EkM17R2NM7/3F8x0qcPsqy4V83bitJTIO4TIeZpYlzu/xy6INiY/+84BEm6+7Cmzg==",
+      "sha256": "d7872ab742036036eca48cd54e43d751bede56742f0689bcf4049bcf701468c7"
+    },
+    {
+      "name": "typescript",
+      "version": "4.4.4",
+      "tarball": "https://registry.npmjs.org/typescript/-/typescript-4.4.4.tgz",
+      "integrity": "sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==",
+      "sha256": "7524841bbf63777fef1fe6e1a826026b1dd4849f54f5affa481502faab2cdb16"
+    },
+    {
+      "name": "terser",
+      "version": "5.9.0",
+      "tarball": "https://registry.npmjs.org/terser/-/terser-5.9.0.tgz",
+      "integrity": "sha512-h5hxa23sCdpzcye/7b8YqbE5OwKca/ni0RQz1uRX3tGh8haaGHqcuSqbGRybuAKNdntZ0mDgFNXPJ48xQ2RXKQ==",
+      "sha256": "2ca0d9c4731b6ebd3b86ed1a7b735f685f98636ee5a067ae9e27e83246069619"
+    },
+    {
+      "name": "source-map",
+      "version": "0.7.3",
+      "tarball": "https://registry.npmjs.org/source-map/-/source-map-0.7.3.tgz",
+      "integrity": "sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==",
+      "sha256": "ad69b787ba774733c3e4f0eb20403df7b1fa466252d453533dbcc6a5ad15833e"
+    },
+    {
+      "name": "jsonc-parser",
+      "version": "3.0.0",
+      "tarball": "https://registry.npmjs.org/jsonc-parser/-/jsonc-parser-3.0.0.tgz",
+      "integrity": "sha512-fQzRfAbIBnR0IQvftw9FJveWiHp72Fg20giDrHz6TdfB12UH/uue0D3hm57UB5KgAVuniLMCaS8P1IMj9NR7cA==",
+      "sha256": "807c53e781c6c6181165f6214db5f6892742041338d9891ce3c335cf3bc25da8"
+    },
+    {
+      "name": "vscode-css-languageservice",
+      "version": "5.1.8",
+      "tarball": "https://registry.npmjs.org/vscode-css-languageservice/-/vscode-css-languageservice-5.1.8.tgz",
+      "integrity": "sha512-Si1sMykS8U/p8LYgLGPCfZD1YFT0AtvUJQp9XJGw64DZWhtwYo28G2l64USLS9ge4ZPMZpwdpOK7PfbVKfgiiA==",
+      "sha256": "d527257e471c1d9e60d0171c44c90bca38fac3ae195c2b11fcd32318c931f6f9"
+    },
+    {
+      "name": "vscode-html-languageservice",
+      "version": "4.1.1",
+      "tarball": "https://registry.npmjs.org/vscode-html-languageservice/-/vscode-html-languageservice-4.1.1.tgz",
+      "integrity": "sha512-rrDyCiOgMwOPgchpPGAeLzjYVVEW/Ror2/a1BWUEI3S9+NQhA9vj4SQkzmH6g2Bq9S9SV0OQeadD+xphOf1N3w==",
+      "sha256": "e2e3a8552a2090ea6f86e3acedaba629544bc2ea81c18d7cb30dcb2dab6bb17e"
+    },
+    {
+      "name": "vscode-json-languageservice",
+      "version": "4.1.9",
+      "tarball": "https://registry.npmjs.org/vscode-json-languageservice/-/vscode-json-languageservice-4.1.9.tgz",
+      "integrity": "sha512-kxNHitUy2fCxmP6vAp0SRLrUSuecUYzzxlC+85cC3jJlFHWmvtCJOzikC+kcUnIdls9fQSB8n0yHs8Sl6taxJw==",
+      "sha256": "7ad177f8bd4db88fb12f335f50a33cff3a6cc0ee54cbf8057a6fc3ef42f391ca"
+    },
+    {
+      "name": "vscode-languageserver-textdocument",
+      "version": "1.0.2",
+      "tarball": "https://registry.npmjs.org/vscode-languageserver-textdocument/-/vscode-languageserver-textdocument-1.0.2.tgz",
+      "integrity": "sha512-T7uPC18+f8mYE4lbVZwb3OSmvwTZm3cuFhrdx9Bn2l11lmp3SvSuSVjy2JtvrghzjAo4G6Trqny2m9XGnFnWVA==",
+      "sha256": "2dac6ed99ac87c7205f446ca1e38912d0d3f8da702346509bd056239358f3bda"
+    },
+    {
+      "name": "vscode-languageserver-types",
+      "version": "3.16.0",
+      "tarball": "https://registry.npmjs.org/vscode-languageserver-types/-/vscode-languageserver-types-3.16.0.tgz",
+      "integrity": "sha512-k8luDIWJWyenLc5ToFQQMaSrqCHiLwyKPHKPQZ5zz21vM+vIVUSvsRpcbiECH4WR88K2XZqc4ScRcZ7nk/jbeA==",
+      "sha256": "eb934ea5eda6fd6b5d21ae8706922be1179501c30350260e07998e76c6946a2c"
+    },
+    {
+      "name": "vscode-uri",
+      "version": "3.0.2",
+      "tarball": "https://registry.npmjs.org/vscode-uri/-/vscode-uri-3.0.2.tgz",
+      "integrity": "sha512-jkjy6pjU1fxUvI51P+gCsxg1u2n8LSt0W6KrCNQceaziKzff74GoWmjVG46KieVzybO1sttPQmYfrwSHey7GUA==",
+      "sha256": "e1e26ccda45c167ec7c01d74f4e0fef5a97b96c791f0a006d9a1eaf1b9d55223"
+    }
+  ],
+  "remotes": [
+    {
+      "source": "refactor/baselines/site-vendor/monaco-typescript/package-lock.json.txt",
+      "sha256": "84c66bfe8ae95b2226ca289279133999356e64137db7ba001817737fa1ac8cf8",
+      "gitBlobSha": "9f647e9fc82150a5d06a9c02dc781d2dbe902ed6",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/package-lock.json?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-css-scripts-bundle.js.txt",
+      "sha256": "2a9dbfbd62b6106835ac69d930e4e1024000196154d0fd98e7a42bfab9977751",
+      "gitBlobSha": "49709bc5efb3f5e81c2797fa771b0576f86c71fb",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-css/scripts/bundle.js?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-css-src-fillers-vscode-nls.ts.txt",
+      "sha256": "5c1791a7852fece6124a82df100f45caf5e00ce1a9025f0884d1ebb017222534",
+      "gitBlobSha": "38f7b334931d9a88e19f18153ce4a24f92ac0ffd",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-css/src/fillers/vscode-nls.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-css-src-tsconfig.json.txt",
+      "sha256": "d5739d74d37ae0ff0d8b55f19b1116433bae9b0f8a81c8b410bd587e11bc7694",
+      "gitBlobSha": "707f714dd2869a2e1fe3c5a679cf1eb116f0f542",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-css/src/tsconfig.json?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-css-src-cssWorker.ts.txt",
+      "sha256": "bba953a5a241cbe197f77a48188aff704cb3c63698db467aa4bcfb60a20621ed",
+      "gitBlobSha": "45628043913f3bed8b6e3720f1fe50de666b0dbe",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-css/src/cssWorker.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-html-scripts-bundle.js.txt",
+      "sha256": "9a101e8926d384a880bdfc13ae72559f72d1b4e8b1d7dd755a6a999ca6383718",
+      "gitBlobSha": "d5932edf6307028d76be68e76fcaf08ec2768a58",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-html/scripts/bundle.js?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-html-src-fillers-vscode-nls.ts.txt",
+      "sha256": "5c1791a7852fece6124a82df100f45caf5e00ce1a9025f0884d1ebb017222534",
+      "gitBlobSha": "38f7b334931d9a88e19f18153ce4a24f92ac0ffd",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-html/src/fillers/vscode-nls.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-html-src-tsconfig.json.txt",
+      "sha256": "d5739d74d37ae0ff0d8b55f19b1116433bae9b0f8a81c8b410bd587e11bc7694",
+      "gitBlobSha": "707f714dd2869a2e1fe3c5a679cf1eb116f0f542",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-html/src/tsconfig.json?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-html-src-htmlWorker.ts.txt",
+      "sha256": "83627006efb72fd7a407a5f7c60d04eb8b9eca00b13bd4a4f1aa5e29d63c02a7",
+      "gitBlobSha": "cf5cb6e5fdbde35659a80e017a36539437e48650",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-html/src/htmlWorker.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-json-scripts-bundle.js.txt",
+      "sha256": "1326211da917b321808ae29987c666226028ad276af3e1d376cd7d0ed3902fd6",
+      "gitBlobSha": "cb54926f4a3fb00d16824d2be6c6e51b3a6524ec",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-json/scripts/bundle.js?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-json-src-fillers-vscode-nls.ts.txt",
+      "sha256": "5c1791a7852fece6124a82df100f45caf5e00ce1a9025f0884d1ebb017222534",
+      "gitBlobSha": "38f7b334931d9a88e19f18153ce4a24f92ac0ffd",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-json/src/fillers/vscode-nls.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-json-src-tsconfig.json.txt",
+      "sha256": "d5739d74d37ae0ff0d8b55f19b1116433bae9b0f8a81c8b410bd587e11bc7694",
+      "gitBlobSha": "707f714dd2869a2e1fe3c5a679cf1eb116f0f542",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-json/src/tsconfig.json?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-json-src-jsonWorker.ts.txt",
+      "sha256": "6e31ea103fee114dd20382f373da50bcbd38fc79ec41c711434e4245180a4817",
+      "gitBlobSha": "781b58e26822e64534d312e3be74b850a6c3ecae",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-json/src/jsonWorker.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    }
+  ],
+  "compilerMembers": [
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/typescript.js",
+      "sha256": "69fde5346b9468255c32d8d0bff32842445822528b25da1a323ec1c076979384"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/lib.es5.d.ts",
+      "sha256": "aa9fb4c70f369237c2f45f9d969c9a59e0eae9a192962eb48581fe864aa609db"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/lib.dom.d.ts",
+      "sha256": "e54c8715a4954cfdc66cd69489f2b725c09ebf37492dbd91cff0a1688b1159e8"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/lib.es2015.collection.d.ts",
+      "sha256": "43fb1d932e4966a39a41b464a12a81899d9ae5f2c829063f5571b6b87e6d2f9c"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/lib.es2015.promise.d.ts",
+      "sha256": "2bb4b3927299434052b37851a47bf5c39764f2ba88a888a107b32262e9292b7c"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/lib.es2015.iterable.d.ts",
+      "sha256": "2c8c5ee58f30e7c944e04ab1fb5506fdbb4dd507c9efa6972cf4b91cec90c503"
+    },
+    {
+      "archive": "terser-5.9.0",
+      "member": "package/dist/bundle.min.js",
+      "sha256": "b8b44743a529c5bd1cf8d6676f040c3c9bed29c7c114e5a26dde5e0fb2125838"
+    }
+  ],
+  "modules": [
+    {
+      "id": "vscode-css-languageservice/parser/cssScanner",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/parser/cssScanner.js",
+      "sha256": "9a3e5c2184bbba40ddc07db9ca98a2f19829f757b5dea3eaecc8dbbb1c5f6f96"
+    },
+    {
+      "id": "vscode-css-languageservice/utils/strings",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/utils/strings.js",
+      "sha256": "748ec977a08777cc6505d5284f3990620e240d4546cb4fb36fd55f9090e61154"
+    },
+    {
+      "id": "vscode-css-languageservice/parser/cssNodes",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/parser/cssNodes.js",
+      "sha256": "64575246c66daa56db99500cce3e2f3a7a67c20876c713ed45c3ba44bd831930"
+    },
+    {
+      "id": "vscode-css-languageservice/parser/cssErrors",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/parser/cssErrors.js",
+      "sha256": "60ab648e896944405fa3f599b2d6146e21894eac2d82fbd80d6f00d40bf1ef55"
+    },
+    {
+      "id": "vscode-css-languageservice/languageFacts/entry",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/languageFacts/entry.js",
+      "sha256": "8310c2e12cbdaa3cb7ae15805dcf4059b0db7e7fc251f2eb73dbdbfcfa77adef"
+    },
+    {
+      "id": "vscode-css-languageservice/languageFacts/colors",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/languageFacts/colors.js",
+      "sha256": "3ed3fb3c267e0883aa55cc580dbe3c7503a549fe537edf0bc14d1e04d6324eca"
+    },
+    {
+      "id": "vscode-css-languageservice/languageFacts/builtinData",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/languageFacts/builtinData.js",
+      "sha256": "74879dea4179de802db9319846482b6ae57dad1cfc7a964442dea19fef80b603"
+    },
+    {
+      "id": "vscode-css-languageservice/languageFacts/facts",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/languageFacts/facts.js",
+      "sha256": "ddda6c80e26f28f0ef89bac8da92211d9d7d02bde900d86a3755dc58a0ee044e"
+    },
+    {
+      "id": "vscode-css-languageservice/utils/objects",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/utils/objects.js",
+      "sha256": "19cc9d4d2130327dbd0c4551bd0e220897ef5492f9cd8970e826217d97e3f837"
+    },
+    {
+      "id": "vscode-css-languageservice/parser/cssParser",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/parser/cssParser.js",
+      "sha256": "adc62e779d870315f584a329e7c4785277c3310ef78b04a61e8634c81fb028d9"
+    },
+    {
+      "id": "vscode-css-languageservice/utils/arrays",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/utils/arrays.js",
+      "sha256": "66ca208f853159481a2b08e895ecbf03649c956d28c9332c09a0b85cf7704a52"
+    },
+    {
+      "id": "vscode-css-languageservice/parser/cssSymbolScope",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/parser/cssSymbolScope.js",
+      "sha256": "12308880e5b364e704ef33485ce3d3f25209a79f1f44bf8077fe2b28205182fb"
+    },
+    {
+      "id": "vscode-languageserver-types/main",
+      "archive": "vscode-languageserver-types-3.16.0",
+      "member": "package/lib/umd/main.js",
+      "sha256": "bc54d0255c6527858d4b2a6c9fd366dd5bdc08d627aa6a81ebb52b27fe1bb17d"
+    },
+    {
+      "id": "vscode-languageserver-textdocument/main",
+      "archive": "vscode-languageserver-textdocument-1.0.2",
+      "member": "package/lib/umd/main.js",
+      "sha256": "618d67aa720519285678550ff320e2ebb432486bc231e4b308eea176c714bcdc"
+    },
+    {
+      "id": "vscode-css-languageservice/cssLanguageTypes",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/cssLanguageTypes.js",
+      "sha256": "20048c4d17d1c63f32c2105f22258c079b19a48a18e2d2f6432a8277910c5f9b"
+    },
+    {
+      "id": "vscode-uri/index",
+      "archive": "vscode-uri-3.0.2",
+      "member": "package/lib/umd/index.js",
+      "sha256": "db68af3be3a6ef95333900f2c0eaa304ed14d25cf1963699503922ddf266c058"
+    },
+    {
+      "id": "vscode-css-languageservice/utils/resources",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/utils/resources.js",
+      "sha256": "9a66fabd2621ec3419657864057d2b1cd32ef219fb8d969510c4d39f472c7e1a"
+    },
+    {
+      "id": "vscode-css-languageservice/services/pathCompletion",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/services/pathCompletion.js",
+      "sha256": "77b2dbcb2c0f25bf2146ed63c5afdee297f2d53c4003a6022fd8cac67902e9ff"
+    },
+    {
+      "id": "vscode-css-languageservice/services/cssCompletion",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/services/cssCompletion.js",
+      "sha256": "7fe9f7fad6e6e71c9ee6b754eda716894403c5e7335f6411168b49003b84e04b"
+    },
+    {
+      "id": "vscode-css-languageservice/services/selectorPrinting",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/services/selectorPrinting.js",
+      "sha256": "03d88007d099f5adad4d5b6f3b620d45c924f3cdf5760bfbe22ce6742093d8c7"
+    },
+    {
+      "id": "vscode-css-languageservice/services/cssHover",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/services/cssHover.js",
+      "sha256": "f75b206433ad126c753226a031ff232ffcc0b642567dea71d47e5a9de1dada66"
+    },
+    {
+      "id": "vscode-css-languageservice/services/cssNavigation",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/services/cssNavigation.js",
+      "sha256": "fe188264fa79527ec2acf8cd5d8e120841cee5650ed00157df87d0367977991d"
+    },
+    {
+      "id": "vscode-css-languageservice/services/lintRules",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/services/lintRules.js",
+      "sha256": "9e59715f9792793a15d34f3827b332504782b790798a7abdc61b51f17a2dcff9"
+    },
+    {
+      "id": "vscode-css-languageservice/services/cssCodeActions",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/services/cssCodeActions.js",
+      "sha256": "b6c8720895da4450238997b738e3b643e8f5479a4146e719fd60ecc715ae71ee"
+    },
+    {
+      "id": "vscode-css-languageservice/services/lintUtil",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/services/lintUtil.js",
+      "sha256": "316aec7ef76258da65e13f9f86eb4778027bb35133ed84370fd8afacf8c7cefe"
+    },
+    {
+      "id": "vscode-css-languageservice/services/lint",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/services/lint.js",
+      "sha256": "0150ff9e418bd6d288f0ed9b588da9bc4e1f96dd79c18b8b93a7a719627b834b"
+    },
+    {
+      "id": "vscode-css-languageservice/services/cssValidation",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/services/cssValidation.js",
+      "sha256": "388b4731d0f06d428edc481c29dad408967dd9d89ac4548b70698721ec7f1bc9"
+    },
+    {
+      "id": "vscode-css-languageservice/parser/scssScanner",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/parser/scssScanner.js",
+      "sha256": "d2a14f27d408de907ce8e3cca02048358c743ed75573ed9c4e771894086e77e9"
+    },
+    {
+      "id": "vscode-css-languageservice/parser/scssErrors",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/parser/scssErrors.js",
+      "sha256": "5aa357ae803184c63ba446254811ce548f69043147bfd2ada3c0405400c253b9"
+    },
+    {
+      "id": "vscode-css-languageservice/parser/scssParser",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/parser/scssParser.js",
+      "sha256": "e9efcc8541c5010088d396d4f1e29d8bfe61c974a1f0f416513a44a77014b15c"
+    },
+    {
+      "id": "vscode-css-languageservice/services/scssCompletion",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/services/scssCompletion.js",
+      "sha256": "7219ba9e076f7c30733854fa466feb5db1d1c6bc998db2a7b305924824549db1"
+    },
+    {
+      "id": "vscode-css-languageservice/parser/lessScanner",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/parser/lessScanner.js",
+      "sha256": "74853819ef4d00a32f50e126349f23c984218fffcd54c61babf45a0f401d66a0"
+    },
+    {
+      "id": "vscode-css-languageservice/parser/lessParser",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/parser/lessParser.js",
+      "sha256": "95196b16ff95f8cc4cf911fdbf8e1dc011d0f62c2e12b47486a74549ebe0f429"
+    },
+    {
+      "id": "vscode-css-languageservice/services/lessCompletion",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/services/lessCompletion.js",
+      "sha256": "52512f0a1dc0676267fb46f1c650b59b9c7bf86f6f6d5d8a06c91723404dd2be"
+    },
+    {
+      "id": "vscode-css-languageservice/services/cssFolding",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/services/cssFolding.js",
+      "sha256": "bb2794e309541086adb0f083472030143f2843bd9ae9af9a4c0f81d2c43c8305"
+    },
+    {
+      "id": "vscode-css-languageservice/data/webCustomData",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/data/webCustomData.js",
+      "sha256": "9fae0a6b3f7b86242e7ca13f0cbc333c2e16f93fc5ca532d134655a9835221b6"
+    },
+    {
+      "id": "vscode-css-languageservice/languageFacts/dataProvider",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/languageFacts/dataProvider.js",
+      "sha256": "3df94e0f896e1616e536f49325cdb0ef51a628d31117586453046ad5ede320aa"
+    },
+    {
+      "id": "vscode-css-languageservice/languageFacts/dataManager",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/languageFacts/dataManager.js",
+      "sha256": "033adccfea25862b3ab4e658e2da4affebb611600bdd7b23fc6c8c855c2ed677"
+    },
+    {
+      "id": "vscode-css-languageservice/services/cssSelectionRange",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/services/cssSelectionRange.js",
+      "sha256": "c1fcac66818e4fbfdc718925b626502970d3de80672d9673c1ff5dbacc153911"
+    },
+    {
+      "id": "vscode-css-languageservice/services/scssNavigation",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/services/scssNavigation.js",
+      "sha256": "747974c4216cc9d36fceb5833bbaebb5d2828242ae06dbe3f1b257a6b4c52434"
+    },
+    {
+      "id": "vscode-css-languageservice/cssLanguageService",
+      "archive": "vscode-css-languageservice-5.1.8",
+      "member": "package/lib/umd/cssLanguageService.js",
+      "sha256": "5c9e8608e05c59af83be5c4a7ea5ca8d915b6f90a6219cd86bd0107f53adbe29"
+    },
+    {
+      "id": "vscode-html-languageservice/htmlLanguageTypes",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/htmlLanguageTypes.js",
+      "sha256": "982e3a2ab00e4430eebacc273928ebff48625da72f39809ee7c633ebf27caa4e"
+    },
+    {
+      "id": "vscode-html-languageservice/parser/htmlScanner",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/parser/htmlScanner.js",
+      "sha256": "bdf450d86dd0179d009ce7a9fe74908b908ee27ee352ccd1439f66ace2f99f9a"
+    },
+    {
+      "id": "vscode-html-languageservice/utils/arrays",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/utils/arrays.js",
+      "sha256": "3299dfaa289f7acb4948c934e3c52067539d258573113cbf1a9d93c9bfd8b0a5"
+    },
+    {
+      "id": "vscode-html-languageservice/languageFacts/fact",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/languageFacts/fact.js",
+      "sha256": "f32bb00d0985d8e932733ed665d6d9aefed2411f93b975bad5ca92216fa45112"
+    },
+    {
+      "id": "vscode-html-languageservice/parser/htmlParser",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/parser/htmlParser.js",
+      "sha256": "5f3e15e450e27e2a5bbf84dfc1f78bd75605ee767bc038a3cfe76e6b261c22a9"
+    },
+    {
+      "id": "vscode-html-languageservice/parser/htmlEntities",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/parser/htmlEntities.js",
+      "sha256": "31922ec4c2c2e4ea94291fe57fec7c6a451f5bd724ce6d8147cf41a99257bcae"
+    },
+    {
+      "id": "vscode-html-languageservice/utils/strings",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/utils/strings.js",
+      "sha256": "9488b095ef9365d62ca2aba172caa0099e12ad77ae2e3ce392750103e6d93073"
+    },
+    {
+      "id": "vscode-html-languageservice/utils/object",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/utils/object.js",
+      "sha256": "94781228184ce67e6d8d0bbe8d0c82856be525e4541c5f4e5bacdd087f25fe1c"
+    },
+    {
+      "id": "vscode-html-languageservice/utils/markup",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/utils/markup.js",
+      "sha256": "61452127d0d143f3ce39547cea25b6e9a37db9d5692473a78d68018443f995e1"
+    },
+    {
+      "id": "vscode-html-languageservice/languageFacts/dataProvider",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/languageFacts/dataProvider.js",
+      "sha256": "3156f81a9da25a94e2502c9bb718a022f95ec7ff0dd36d874459183fbcb5bce2"
+    },
+    {
+      "id": "vscode-html-languageservice/services/pathCompletion",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/services/pathCompletion.js",
+      "sha256": "98960ad43356fda078d923c57c20cfab041b9d1c10d02e35810ad8be1e589150"
+    },
+    {
+      "id": "vscode-html-languageservice/services/htmlCompletion",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/services/htmlCompletion.js",
+      "sha256": "009c43c6ceac4802df7e943b6a6871adee62d81a829b1af2e78cc0887d519be3"
+    },
+    {
+      "id": "vscode-html-languageservice/services/htmlHover",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/services/htmlHover.js",
+      "sha256": "6d3a706feec6b36675333b4768d45ce606497bb23adb38face9c8f1567022477"
+    },
+    {
+      "id": "vscode-html-languageservice/beautify/beautify",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/beautify/beautify.js",
+      "sha256": "07c96eca8fa5d2897a1ada7d5a166b7aa647d581b3bf50cb2e3e4cba8d9574b7"
+    },
+    {
+      "id": "vscode-html-languageservice/beautify/beautify-css",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/beautify/beautify-css.js",
+      "sha256": "2fecfef68c27cd406a74b0b45ffae7394d0ee5b3fc8f342297b4a4029fa08723"
+    },
+    {
+      "id": "vscode-html-languageservice/beautify/beautify-html",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/beautify/beautify-html.js",
+      "sha256": "4a66107fa529ebe572351eb3f9c5ce89179cb3c9de43430a12a447a423cea092"
+    },
+    {
+      "id": "vscode-html-languageservice/services/htmlFormatter",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/services/htmlFormatter.js",
+      "sha256": "5353913e5123247fbf42d7cd4b43d68f0efa6a67961a592266d04425dafb2254"
+    },
+    {
+      "id": "vscode-html-languageservice/services/htmlLinks",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/services/htmlLinks.js",
+      "sha256": "dddb002d97986746bef35b63fb3d7c0f8421023671a4680d04dc7cdf649f5288"
+    },
+    {
+      "id": "vscode-html-languageservice/services/htmlHighlighting",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/services/htmlHighlighting.js",
+      "sha256": "3fb3d112e834f2c9a9998fcbff20d05a8f5572240fd6d9b462ca8c4e1b967224"
+    },
+    {
+      "id": "vscode-html-languageservice/services/htmlSymbolsProvider",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/services/htmlSymbolsProvider.js",
+      "sha256": "fbf9b4cbb5e61a8983ece43c71536d71266da85a3af77721795abcac48443330"
+    },
+    {
+      "id": "vscode-html-languageservice/services/htmlRename",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/services/htmlRename.js",
+      "sha256": "f4300d94a8e7c711c1ec57d10fb603432ca49fa194ffd5d0a937f5ed10af33f1"
+    },
+    {
+      "id": "vscode-html-languageservice/services/htmlMatchingTagPosition",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/services/htmlMatchingTagPosition.js",
+      "sha256": "538d4a8eb183bbf53bb38a02726f00258cf66ef6db7c328f1fc163bbce78b720"
+    },
+    {
+      "id": "vscode-html-languageservice/services/htmlLinkedEditing",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/services/htmlLinkedEditing.js",
+      "sha256": "0fefcf02a603244607d49ee7b85e0ec81a7289aab96d5382335ecc29913c6497"
+    },
+    {
+      "id": "vscode-html-languageservice/services/htmlFolding",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/services/htmlFolding.js",
+      "sha256": "9dcce482530eaf5504cc96b56b7da3161f3cd7d0e5f06a3db2c37b3b3ba79331"
+    },
+    {
+      "id": "vscode-html-languageservice/services/htmlSelectionRange",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/services/htmlSelectionRange.js",
+      "sha256": "5d8c77bec64f2ccc6c83032adfead3e69a77ebe97b9a561213f617ad34255372"
+    },
+    {
+      "id": "vscode-html-languageservice/languageFacts/data/webCustomData",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/languageFacts/data/webCustomData.js",
+      "sha256": "9bba4331433943077574ebcc0aa0c36321d6097e48afe1a5288858e0c19f0a96"
+    },
+    {
+      "id": "vscode-html-languageservice/languageFacts/dataManager",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/languageFacts/dataManager.js",
+      "sha256": "3ce95d3d6ecea80bdac5016ef34985f466d19b539145de1935c8fc11972d181a"
+    },
+    {
+      "id": "vscode-html-languageservice/htmlLanguageService",
+      "archive": "vscode-html-languageservice-4.1.1",
+      "member": "package/lib/umd/htmlLanguageService.js",
+      "sha256": "dc6df6148384f49065b0d089052c80d75c09eccbaaec3b315bd4352af32d5884"
+    },
+    {
+      "id": "jsonc-parser/impl/scanner",
+      "archive": "jsonc-parser-3.0.0",
+      "member": "package/lib/umd/impl/scanner.js",
+      "sha256": "1de9d507a6fc3cbe314fe77d4129db5d0d717b453d6340dc822869f6be6f01ef"
+    },
+    {
+      "id": "jsonc-parser/impl/format",
+      "archive": "jsonc-parser-3.0.0",
+      "member": "package/lib/umd/impl/format.js",
+      "sha256": "0a6e9addcaba963b19bdc28a9e563affe7ecfa9d710bbbf88a798e134b8c2d9e"
+    },
+    {
+      "id": "jsonc-parser/impl/parser",
+      "archive": "jsonc-parser-3.0.0",
+      "member": "package/lib/umd/impl/parser.js",
+      "sha256": "0bcb61b4cddc09380ae45a8bb74d97162a46733dd87bada5590579f91abc2a62"
+    },
+    {
+      "id": "jsonc-parser/impl/edit",
+      "archive": "jsonc-parser-3.0.0",
+      "member": "package/lib/umd/impl/edit.js",
+      "sha256": "be5cbec07265803c812a888d8aeaf18f69c77c827a120486ef38515d6225008d"
+    },
+    {
+      "id": "jsonc-parser/main",
+      "archive": "jsonc-parser-3.0.0",
+      "member": "package/lib/umd/main.js",
+      "sha256": "09e425ed64c68688277ed7ef8e0b627700134e4e2290aa36b175530b658245aa"
+    },
+    {
+      "id": "vscode-json-languageservice/utils/objects",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/utils/objects.js",
+      "sha256": "a0e8ca194e3b1d4382979d3d9afa6d1c39706a427a8e7175dd5ba52934ee002d"
+    },
+    {
+      "id": "vscode-json-languageservice/utils/strings",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/utils/strings.js",
+      "sha256": "30a235d6a7fbbb695d1dc1934efab7b5d9d54e5cd3c4b2c0ed391e0f3b29f655"
+    },
+    {
+      "id": "vscode-json-languageservice/jsonLanguageTypes",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/jsonLanguageTypes.js",
+      "sha256": "8f3ec73ca0bbfddd228647025ffb70977ad3e6117ed9631c52da17c250abfd16"
+    },
+    {
+      "id": "vscode-json-languageservice/parser/jsonParser",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/parser/jsonParser.js",
+      "sha256": "a5de026273bd8733a0e71ce3e728811e83963cd72cbd9a9144bd50b490574982"
+    },
+    {
+      "id": "vscode-json-languageservice/utils/json",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/utils/json.js",
+      "sha256": "6b4dc8f5b5a750c3777b86385032860cdec81e7d3f60e2ac8d9701d81269ba11"
+    },
+    {
+      "id": "vscode-json-languageservice/services/jsonCompletion",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/services/jsonCompletion.js",
+      "sha256": "576eb397054b08294b67a4cf1aa106834995b58dcf32919c4634a6c23c340907"
+    },
+    {
+      "id": "vscode-json-languageservice/services/jsonHover",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/services/jsonHover.js",
+      "sha256": "428f5942d222674f80c6844cefb2612d023730c584b227a0a8fa30f541d88903"
+    },
+    {
+      "id": "vscode-json-languageservice/utils/glob",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/utils/glob.js",
+      "sha256": "d93f444d070184b3023f66a4dbca8892ce16084308022f5e549516f3fe104009"
+    },
+    {
+      "id": "vscode-json-languageservice/services/jsonSchemaService",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/services/jsonSchemaService.js",
+      "sha256": "44c1710fc51f81f442c7e5d136907b78ac6bae10ea57484081247c8f4e2a555f"
+    },
+    {
+      "id": "vscode-json-languageservice/services/jsonValidation",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/services/jsonValidation.js",
+      "sha256": "141aeca0078844b5c571315ff633ac01f901d03dd1fd926a48de4254ebf390f0"
+    },
+    {
+      "id": "vscode-json-languageservice/utils/colors",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/utils/colors.js",
+      "sha256": "cfa77c1bcc440cfb7a020ff34c9e6de3adcefacd5fcde1feb590dcff35a0b7a0"
+    },
+    {
+      "id": "vscode-json-languageservice/services/jsonDocumentSymbols",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/services/jsonDocumentSymbols.js",
+      "sha256": "8d39c136aa85b33a3dee106ce919cf8ea554b287d31beb1db8da052d51242e8c"
+    },
+    {
+      "id": "vscode-json-languageservice/services/configuration",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/services/configuration.js",
+      "sha256": "50baf826322ce80df882f4e49906ce73a6a6d7b958910335788b6b043b0edade"
+    },
+    {
+      "id": "vscode-json-languageservice/services/jsonFolding",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/services/jsonFolding.js",
+      "sha256": "9e20d176b7d8a73f9ca6b963f825eadc21248304aa2031735bbf635e51cbe8c0"
+    },
+    {
+      "id": "vscode-json-languageservice/services/jsonSelectionRanges",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/services/jsonSelectionRanges.js",
+      "sha256": "fbbadc20c9a705816195f26256dc1971334c36e0759417c99b299824bd8d3399"
+    },
+    {
+      "id": "vscode-json-languageservice/services/jsonLinks",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/services/jsonLinks.js",
+      "sha256": "435e501e3d8f3b50d34ba4bdd14421818e12d1aa1eb631086d47d818091711e4"
+    },
+    {
+      "id": "vscode-json-languageservice/jsonLanguageService",
+      "archive": "vscode-json-languageservice-4.1.9",
+      "member": "package/lib/umd/jsonLanguageService.js",
+      "sha256": "216f762160fe72d4fc48c550be9b0f0a5b1a3f7fc63fc69e008aa4e7c468e4a3"
+    }
+  ],
+  "aliases": [
+    {
+      "id": "jsonc-parser",
+      "main": "main"
+    },
+    {
+      "id": "vscode-css-languageservice",
+      "main": "cssLanguageService"
+    },
+    {
+      "id": "vscode-html-languageservice",
+      "main": "htmlLanguageService"
+    },
+    {
+      "id": "vscode-json-languageservice",
+      "main": "jsonLanguageService"
+    },
+    {
+      "id": "vscode-languageserver-textdocument",
+      "main": "main"
+    },
+    {
+      "id": "vscode-languageserver-types",
+      "main": "main"
+    },
+    {
+      "id": "vscode-uri",
+      "main": "index"
+    },
+    {
+      "id": "vscode-nls",
+      "main": "vscode-nls"
+    }
+  ],
+  "workers": [
+    {
+      "language": "css",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/language/css/cssWorker.js",
+        "sha256": "469b4efaa98ec340a463d7cf9f34f6efc574ed889e55d0af7f4e1a65c0deb7b5"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/language/css/cssWorker.js",
+        "sha256": "073e09f9301dcf147e40ef675e3f18d8cc29de9f49673ec8d17711569144552d"
+      },
+      "ids": [
+        "vscode-css-languageservice/parser/cssScanner",
+        "vscode-css-languageservice/utils/strings",
+        "vscode-css-languageservice/parser/cssNodes",
+        "vscode-nls/vscode-nls",
+        "vscode-nls",
+        "vscode-css-languageservice/parser/cssErrors",
+        "vscode-css-languageservice/languageFacts/entry",
+        "vscode-css-languageservice/languageFacts/colors",
+        "vscode-css-languageservice/languageFacts/builtinData",
+        "vscode-css-languageservice/languageFacts/facts",
+        "vscode-css-languageservice/utils/objects",
+        "vscode-css-languageservice/parser/cssParser",
+        "vscode-css-languageservice/utils/arrays",
+        "vscode-css-languageservice/parser/cssSymbolScope",
+        "vscode-languageserver-types/main",
+        "vscode-languageserver-types",
+        "vscode-languageserver-textdocument/main",
+        "vscode-languageserver-textdocument",
+        "vscode-css-languageservice/cssLanguageTypes",
+        "vscode-uri/index",
+        "vscode-uri",
+        "vscode-css-languageservice/utils/resources",
+        "vscode-css-languageservice/services/pathCompletion",
+        "vscode-css-languageservice/services/cssCompletion",
+        "vscode-css-languageservice/services/selectorPrinting",
+        "vscode-css-languageservice/services/cssHover",
+        "vscode-css-languageservice/services/cssNavigation",
+        "vscode-css-languageservice/services/lintRules",
+        "vscode-css-languageservice/services/cssCodeActions",
+        "vscode-css-languageservice/services/lintUtil",
+        "vscode-css-languageservice/services/lint",
+        "vscode-css-languageservice/services/cssValidation",
+        "vscode-css-languageservice/parser/scssScanner",
+        "vscode-css-languageservice/parser/scssErrors",
+        "vscode-css-languageservice/parser/scssParser",
+        "vscode-css-languageservice/services/scssCompletion",
+        "vscode-css-languageservice/parser/lessScanner",
+        "vscode-css-languageservice/parser/lessParser",
+        "vscode-css-languageservice/services/lessCompletion",
+        "vscode-css-languageservice/services/cssFolding",
+        "vscode-css-languageservice/data/webCustomData",
+        "vscode-css-languageservice/languageFacts/dataProvider",
+        "vscode-css-languageservice/languageFacts/dataManager",
+        "vscode-css-languageservice/services/cssSelectionRange",
+        "vscode-css-languageservice/services/scssNavigation",
+        "vscode-css-languageservice/cssLanguageService",
+        "vscode-css-languageservice",
+        "vs/language/css/cssWorker"
+      ],
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-css-src-cssWorker.ts.txt",
+      "shim": "refactor/baselines/site-vendor/monaco-languages/monaco-css-src-fillers-vscode-nls.ts.txt",
+      "config": "refactor/baselines/site-vendor/monaco-languages/monaco-css-src-tsconfig.json.txt"
+    },
+    {
+      "language": "html",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/language/html/htmlWorker.js",
+        "sha256": "8f6344e4a97ba8c42f3b5bc5d9b6d405ab7ea0435077d91f332476d3ddccc3a5"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/language/html/htmlWorker.js",
+        "sha256": "0b14f0af7ae7ab85732574fb384496dae3e85d28f953188cc842eec468a8a457"
+      },
+      "ids": [
+        "vscode-nls/vscode-nls",
+        "vscode-nls",
+        "vscode-languageserver-types/main",
+        "vscode-languageserver-types",
+        "vscode-languageserver-textdocument/main",
+        "vscode-languageserver-textdocument",
+        "vscode-html-languageservice/htmlLanguageTypes",
+        "vscode-html-languageservice/parser/htmlScanner",
+        "vscode-html-languageservice/utils/arrays",
+        "vscode-html-languageservice/languageFacts/fact",
+        "vscode-html-languageservice/parser/htmlParser",
+        "vscode-html-languageservice/parser/htmlEntities",
+        "vscode-html-languageservice/utils/strings",
+        "vscode-html-languageservice/utils/object",
+        "vscode-html-languageservice/utils/markup",
+        "vscode-html-languageservice/languageFacts/dataProvider",
+        "vscode-html-languageservice/services/pathCompletion",
+        "vscode-html-languageservice/services/htmlCompletion",
+        "vscode-html-languageservice/services/htmlHover",
+        "vscode-html-languageservice/beautify/beautify",
+        "vscode-html-languageservice/beautify/beautify-css",
+        "vscode-html-languageservice/beautify/beautify-html",
+        "vscode-html-languageservice/services/htmlFormatter",
+        "vscode-uri/index",
+        "vscode-uri",
+        "vscode-html-languageservice/services/htmlLinks",
+        "vscode-html-languageservice/services/htmlHighlighting",
+        "vscode-html-languageservice/services/htmlSymbolsProvider",
+        "vscode-html-languageservice/services/htmlRename",
+        "vscode-html-languageservice/services/htmlMatchingTagPosition",
+        "vscode-html-languageservice/services/htmlLinkedEditing",
+        "vscode-html-languageservice/services/htmlFolding",
+        "vscode-html-languageservice/services/htmlSelectionRange",
+        "vscode-html-languageservice/languageFacts/data/webCustomData",
+        "vscode-html-languageservice/languageFacts/dataManager",
+        "vscode-html-languageservice/htmlLanguageService",
+        "vscode-html-languageservice",
+        "vs/language/html/htmlWorker"
+      ],
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-html-src-htmlWorker.ts.txt",
+      "shim": "refactor/baselines/site-vendor/monaco-languages/monaco-html-src-fillers-vscode-nls.ts.txt",
+      "config": "refactor/baselines/site-vendor/monaco-languages/monaco-html-src-tsconfig.json.txt"
+    },
+    {
+      "language": "json",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/language/json/jsonWorker.js",
+        "sha256": "81f25e487025e001ce806e1d1b0dea5fc261d3ee4bf4e4485f04203abf727f50"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/language/json/jsonWorker.js",
+        "sha256": "0eb929c56d44afddb3030c011913010311ce34e5eadb1129a3ce9cbafd4c771d"
+      },
+      "ids": [
+        "jsonc-parser/impl/scanner",
+        "jsonc-parser/impl/format",
+        "jsonc-parser/impl/parser",
+        "jsonc-parser/impl/edit",
+        "jsonc-parser/main",
+        "jsonc-parser",
+        "vscode-json-languageservice/utils/objects",
+        "vscode-json-languageservice/utils/strings",
+        "vscode-languageserver-types/main",
+        "vscode-languageserver-types",
+        "vscode-languageserver-textdocument/main",
+        "vscode-languageserver-textdocument",
+        "vscode-json-languageservice/jsonLanguageTypes",
+        "vscode-nls/vscode-nls",
+        "vscode-nls",
+        "vscode-json-languageservice/parser/jsonParser",
+        "vscode-json-languageservice/utils/json",
+        "vscode-json-languageservice/services/jsonCompletion",
+        "vscode-json-languageservice/services/jsonHover",
+        "vscode-uri/index",
+        "vscode-uri",
+        "vscode-json-languageservice/utils/glob",
+        "vscode-json-languageservice/services/jsonSchemaService",
+        "vscode-json-languageservice/services/jsonValidation",
+        "vscode-json-languageservice/utils/colors",
+        "vscode-json-languageservice/services/jsonDocumentSymbols",
+        "vscode-json-languageservice/services/configuration",
+        "vscode-json-languageservice/services/jsonFolding",
+        "vscode-json-languageservice/services/jsonSelectionRanges",
+        "vscode-json-languageservice/services/jsonLinks",
+        "vscode-json-languageservice/jsonLanguageService",
+        "vscode-json-languageservice",
+        "vs/language/json/jsonWorker"
+      ],
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-json-src-jsonWorker.ts.txt",
+      "shim": "refactor/baselines/site-vendor/monaco-languages/monaco-json-src-fillers-vscode-nls.ts.txt",
+      "config": "refactor/baselines/site-vendor/monaco-languages/monaco-json-src-tsconfig.json.txt"
+    }
+  ]
+}

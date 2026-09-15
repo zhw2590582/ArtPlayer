@@ -165,7 +165,8 @@
     "build:console": "node scripts/build-console.mjs",
     "check:console": "node scripts/build-console.mjs --check",
     "test:site-console": "node --test test/site-console.test.js",
-    "verify:monaco-typescript-source": "node scripts/site-vendor/monaco/reproduce-typescript.ts"
+    "verify:monaco-typescript-source": "node scripts/site-vendor/monaco/reproduce-typescript.ts",
+    "verify:monaco-language-sources": "node scripts/site-vendor/monaco/reproduce-languages.ts"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

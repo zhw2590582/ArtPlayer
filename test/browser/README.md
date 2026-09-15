@@ -1,5 +1,12 @@
 # Browser regression entry
 
+`editor-languages.spec.js` loads the frozen Monaco 0.30.1 CSS/HTML/JSON workers,
+checks real Worker creation, positive/negative diagnostics, tag completion, document
+symbols and formatting, and disposes models/workers. It uses `createWebWorker` with
+the archived mode managers' options; this version does not expose public language
+worker getters other than TypeScript. These checks complement `editor-types.spec.js`
+and do not replace full editor UI or actual player playback tests.
+
 `yarn test:vast-native` is the explicit external Google IMA suite; it is separate
 from default `*.spec.js` PR checks. It uses local VAST/media inputs and real SDK
 loading, playback, content restoration and destruction. See

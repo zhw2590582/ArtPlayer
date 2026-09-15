@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 // eslint-disable-next-line test/no-import-node-test -- Verify fixed source transforms without executing archived runtime.
 import test from 'node:test'
+import { aliasModule, moduleIds, nameModule, verifyWorkerSources } from '../scripts/site-vendor/monaco/languages.ts'
 import { browserTypeScript, verifyTypeScriptSource } from '../scripts/site-vendor/monaco/typescript.ts'
 
 const source = `"use strict";
@@ -36,4 +37,37 @@ test('Monaco TypeScript proof rejects modified or repeated worker content', () =
   assert.throws(() => verifyTypeScriptSource(source, worker.replace('etwModule = undefined', 'etwModule = {}')), /differs/)
   assert.throws(() => verifyTypeScriptSource(source, worker + output), /Duplicate/)
   assert.throws(() => verifyTypeScriptSource(source, worker.slice(1)), /differs/)
+})
+
+test('Monaco AMD naming ignores strings and preserves source bodies', () => {
+  const anonymous = '// define(fake)\nconst example = "define(fake)";\ndefine(["exports"], function (exports) { exports.value = 1; });\n//# sourceMappingURL=source.js.map\n'
+  const named = nameModule(anonymous, 'library/main')
+  assert(named.includes('const example = "define(fake)";'))
+  assert(named.includes('define(\'library/main\',["exports"]'))
+  assert(!named.includes('sourceMappingURL'))
+  assert.deepEqual(moduleIds(named), ['library/main'])
+  assert(nameModule(anonymous.trimEnd(), 'library/main').endsWith('//# sourceMappingURL=source.js.map;'))
+  assert.throws(() => nameModule(named, 'library/main'), /anonymous AMD dependency array/)
+  assert.throws(() => nameModule(anonymous + anonymous, 'library/main'), /one anonymous/)
+  assert.throws(() => nameModule(anonymous, 'library/\'main'), /identifier/)
+  assert.throws(() => nameModule(`${anonymous}//# sourceMappingURL=second.map\n`, 'library/main'), /Duplicate source map/)
+})
+
+test('Monaco worker proof covers helper code, aliases and all module boundaries', () => {
+  const id = 'library/main'
+  const source = nameModule('const helper = 1;\ndefine(["exports"], function (exports) { exports.value = helper; });', id)
+  const alias = aliasModule('library', 'main')
+  const worker = `${source}\n\n${alias}\n`
+  const fragments = [{ id, source }, { id: 'library', source: alias }]
+  const ids = [id, 'library']
+  verifyWorkerSources(worker, ids, fragments)
+  assert.throws(() => verifyWorkerSources(worker.replace('helper = 1', 'helper = 2'), ids, fragments), /Source differs/)
+  assert.throws(() => verifyWorkerSources(`globalThis.hidden = true;\n${worker}`, ids, fragments), /Unattributed worker content/)
+  assert.throws(() => verifyWorkerSources(`${worker}globalThis.hidden = true;`, ids, fragments), /Unattributed worker suffix/)
+  assert.throws(() => verifyWorkerSources(worker, ids, fragments.slice(0, 1)), /Incomplete source coverage/)
+  assert.throws(() => verifyWorkerSources(worker, ids, [{ id, source: alias }, fragments[1]]), /ownership/)
+  assert.throws(() => verifyWorkerSources(worker.replace('[\'library/main\']', '[\'library/other\']'), ids, fragments), /Source differs/)
+  assert.throws(() => verifyWorkerSources(worker + alias, ids, fragments), /Duplicate AMD/)
+  assert.throws(() => verifyWorkerSources(`${worker}define('extra', [], function () {});`, ids, fragments), /inventory changed/)
+  assert.throws(() => moduleIds('define(dynamicName, [], function () {});'), /literal AMD name/)
 })

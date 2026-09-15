@@ -4514,7 +4514,10 @@
         "changes/2026-09-15-SITE-07-console-notice-review.md",
         "baselines/monaco-typescript-provenance.json",
         "baselines/monaco-typescript-validation.json",
-        "changes/2026-09-15-SITE-07-monaco-typescript.md"
+        "changes/2026-09-15-SITE-07-monaco-typescript.md",
+        "baselines/monaco-languages-provenance.json",
+        "baselines/monaco-languages-validation.json",
+        "changes/2026-09-15-SITE-07-monaco-languages.md"
       ]
     },
     {

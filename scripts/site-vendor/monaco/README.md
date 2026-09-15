@@ -40,8 +40,49 @@ CopyrightNotice and ThirdPartyNoticeText. The last file includes upstream third-
 terms, not just Apache 2.0. Preserve raw bytes, including encoding and line endings.
 The new attribution explains upstream modifications and the stale version label.
 
-The other language services, localization shim, core embedded libraries and
-language definitions remain under VENDOR-06 review. A match for this worker does
-not close those components. Revalidate actual editor diagnostics/emission and
-notice HTTP delivery after changes; use the committed editor-types and site-vendor
-browser tests. Whole-site, physical-device and remote release gates remain separate.
+## CSS, HTML and JSON workers
+
+`languages.ts` names anonymous AMD modules syntactically, accounts for exact map
+trailers and package aliases, and checks every source fragment and intervening byte.
+It rejects missing modules, renamed dependencies, uncovered helper code, overlaps
+and duplicate definitions. The npm sources are whole UMD files, including their
+helpers and comments; module bodies alone are insufficient evidence.
+
+`archives.ts` verifies archives and fixed Git files and extracts only historical
+compiler inputs into the isolated cache. `reproduce-languages.ts` uses the fixed
+upstream lock and recipes to match 91 npm modules from seven packages, eight root
+aliases, the shared Monaco localization shim and three worker adapters. The complete
+CSS/HTML/JSON development files contain 48/38/33 module instances respectively.
+All bytes except whitespace are assigned to a verified source fragment. Terser
+5.9.0 with the original options and header reproduces all three shipped workers.
+
+The shim is Monaco's own `src/fillers/vscode-nls.ts`, identical in the three packages;
+it is not the installed `vscode-nls` npm implementation. Compile the shim and worker
+adapters with TypeScript 4.4.4 and its ES5/DOM/collection/promise/iterable libraries.
+The compiler program intentionally omits import resolution; exact emission is
+verified, but this is not a full upstream build or semantic typecheck. Standalone
+`transpileModule` changes an async helper's Promise argument and does not reproduce
+these adapters. No service runtime or install script executes during source checks.
+
+```sh
+yarn verify:monaco-language-sources --fetch
+yarn verify:monaco-language-sources
+node --test test/monaco-provenance.test.js
+yarn typecheck:docs-tools
+yarn test:browser test/browser/editor-languages.spec.js --workers=1
+```
+
+The source record is `refactor/baselines/monaco-languages-provenance.json`; its 13
+fixed Git references include the shared upstream lock plus all three bundle recipes,
+compiler configs, shims and adapters. The browser suite creates real workers with
+Monaco's public `createWebWorker`, using the archived mode-manager options, and
+disposes both workers and models. Monaco 0.30.1 has no public CSS/HTML/JSON worker
+getter equivalent to `getTypeScriptWorker`. Tests exercise valid/invalid CSS and
+JSON, HTML tag completion, document symbols, and HTML/JSON formatting on three engines.
+
+This source checkpoint does not close embedded license review. Follow up with the
+seven packages' original licenses/third-party notices, including HTML beautifiers
+and data sources. Core embedded libraries, mode bundles and language definitions
+also remain under VENDOR-06. Revalidate editor-types and site-vendor tests when
+changing declarations or delivered notices. Whole-site, physical-device and remote
+release gates remain separate.
