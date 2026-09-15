@@ -3204,11 +3204,13 @@
         "refactor/changes/2026-09-14-PKG-DASH-SEEK-01-buffer-metrics.md",
         "refactor/baselines/dash-seek-recovery-validation.json",
         "refactor/changes/2026-09-15-CI-01-adaptive-installed.md",
-        "refactor/baselines/ci-adaptive-installed-validation.json"
+        "refactor/baselines/ci-adaptive-installed-validation.json",
+        "refactor/baselines/ci-source-firefox-validation.json",
+        "refactor/changes/2026-09-15-SITE-EDITOR-VAST-01-consumer.md"
       ],
       "compatibleResolution": "PKG-DASH-SEEK-01 已在候选插件按精确版本和真实空缓冲同步 SDK 指标，新旧核心及两引擎严格跳转通过。裸 SDK 4.5.2 和冻结旧插件仍保留原始失败；不伪造媒体事件、不偏移 seek、不强制升级 SDK，完整组合及发布验收仍开放。",
       "closureCriteria": "原失败的新旧核心/插件组合有确定根因与对应修复/可验证环境边界；原生对照及原顺序、原目标回归成立，后续偶然通过不能关闭。",
-      "workspaceState": "CI-01 十二包安装扩展中，裸 SDK 4.5.2 在 Chromium/Firefox 的恢复时间仍为 6，原断言大于 6.2 失败；候选插件集成通过不关闭裸 SDK 原始缺陷，完整失败报告保留。"
+      "workspaceState": "CI-01 十二包安装扩展中，裸 SDK 4.5.2 在 Chromium/Firefox 的恢复时间仍为 6，原断言大于 6.2 失败；候选插件集成通过不关闭裸 SDK 原始缺陷，完整失败报告保留。 Complete Firefox source run at 4545c4367 again fails the bare 4.5.2 control; all four candidate stable-boundary cases pass. Original failure remains open and unfiltered."
     },
     {
       "id": "ADS-TYPE-01",
@@ -6779,6 +6781,30 @@
         "refactor/baselines/site-routes-validation.json"
       ],
       "resolutionRationale": "Nine actual Git additions recorded. Three targeted tests pass with positive controls and invalid metadata cases. Full ci:check passes 2937 runtime, 170 engineering and 619 baseline invocations after the old 617/618 baseline failure; no runtime or browser-acceptance scope expansion."
+    },
+    {
+      "id": "SITE-EDITOR-VAST-01",
+      "title": "Monaco browser consumer still assumes the workspace VAST namespace after the approved npm-root restoration",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "SITE-EDITOR-VAST-01"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-15-SITE-EDITOR-VAST-01-consumer.md",
+        "refactor/baselines/editor-vast-consumer-validation.json",
+        "refactor/baselines/ci-source-firefox-validation.json",
+        "test/browser/editor-declarations.spec.js"
+      ],
+      "compatibleResolution": "Follow the approved published root declaration in the current browser consumer while retaining the frozen workspace generator fixture. Preserve public runtime/root types.",
+      "closureCriteria": "Keep original 2503/7006 browser diagnostics; current full declaration set and positive consumer compile, invalid root and workspace-only calls remain rejected, emitted Chapter code runs and destroys in all three engines.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-15-SITE-EDITOR-VAST-01-consumer.md",
+        "refactor/baselines/editor-vast-consumer-validation.json",
+        "refactor/baselines/ci-source-firefox-validation.json",
+        "test/browser/editor-declarations.spec.js"
+      ],
+      "resolutionRationale": "The full Firefox collection exposed an obsolete test contract. The corrected consumer passes in Chromium, Firefox and Windows WebKit with five exact negative diagnostics and zero positive/declaration errors; four generator tests still pass. No production declaration or SDK behavior changed."
     }
   ]
 }

@@ -82,6 +82,14 @@ yarn test:browser test/browser/editor-declarations.spec.js --workers=1
 
 Browser coverage uses the actual repository Monaco assets, all loaded declarations,
 positive/negative consumers and emitted Chapter code against controlled media.
+The current VAST global consumer extracts its callback with
+`Parameters<typeof artplayerPluginVast>[0]` and checks the published root's
+`id`, `$container`, `art`, `playUrl` and `playRes` fields. Negative calls reject
+wrong id/URL types and the workspace-only `init`/`playerOptions` fields. The
+historical workspace generator test in `test/editor-types.test.js` deliberately
+retains its frozen named types; it is not the current editor contract. Keep these
+two consumers separate when updating public declarations. See
+`../../refactor/changes/2026-09-15-SITE-EDITOR-VAST-01-consumer.md`.
 VAST is type-checked only: no ad request or SDK/network/device acceptance. Full
 editor UI migration and its targeted interaction checks are recorded in SITE-03;
 full routes, example coverage and release reviews remain SITE-04/05, EX-03 and

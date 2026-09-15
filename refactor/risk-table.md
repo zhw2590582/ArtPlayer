@@ -288,3 +288,4 @@
 | CI-BROWSER-MODE-01 | resolved / 已复现 | Installed browser validation can inherit rendering substitutions and direct config loading bypasses launcher diagnostic policy | CI-01 |
 | AUTO-THUMB-REGISTRATION-01 | resolved / 已复现 | Delayed direct factory installation on a destroyed host retains subscriptions and can restart hidden decoding | PKG-AUTO-THUMB-13 |
 | SITE-HTML-INVENTORY-01 | resolved / 已复现 | New documentation HTML is missing from historical demo route coverage, failing the complete local CI check | SITE-ROUTES-01 |
+| SITE-EDITOR-VAST-01 | resolved / 已复现 | Monaco browser consumer still assumes the workspace VAST namespace after the approved npm-root restoration | SITE-EDITOR-VAST-01 |

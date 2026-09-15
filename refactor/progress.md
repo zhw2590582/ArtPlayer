@@ -1,5 +1,22 @@
 # 进度与证据
 
+## SITE-EDITOR-VAST-01 与完整 Firefox 源码回归
+
+固定4545c4367执行174文件/1664项完整Firefox源码回归：1662通过、2失败，
+0跳过/重试，1460.175秒。原报告已归档：裸dash.js4.5.2暂停seek故障继续开放；
+另一项是Monaco用例仍使用VAST工作区类型，与已批准恢复的npm根声明冲突。
+
+当前消费者改用Parameters提取根回调，检查id/容器/核心和URL/XML参数；
+五项负例包含工作区专属字段拒绝。三引擎3/3通过，22声明与正例零错误，
+Chapter实际编译运行及销毁通过，4项Node生成器测试和定向lint通过。
+公开声明、生产代码和生成资源未改，冻结工作区生成测试仍保留。见
+[记录](changes/2026-09-15-SITE-EDITOR-VAST-01-consumer.md)、[修复证据](baselines/editor-vast-consumer-validation.json)和
+[全量原始结果](baselines/ci-source-firefox-validation.json)。
+
+新增独立修复任务完成，216 done、21 doing、43 todo，共280；CI-01继续doing。
+没有重跑并宣称完整Firefox全绿，没有远端Actions、设备、部署或发布验收。
+
+
 ## SITE-07 选定字体通知与差异检查点
 
 CHAWP与作者固定Git文件完全一致；Liberation、Averia Sans、Lato的字形/映射/

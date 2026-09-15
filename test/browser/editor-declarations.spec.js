@@ -26,14 +26,17 @@ const chapters: artplayerPluginChapter.Chapters = [{ start: 0, end: 2, title: 'I
 const player = new Artplayer({ container: '.player', url: '/test/pattern.mp4', muted: true, plugins: [artplayerPluginChapter({ chapters })] });
 const chapter = player.plugins.artplayerPluginChapter as artplayerPluginChapter.Result;
 chapter.update({ chapters: [{ start: 0, end: 1, title: 'Updated' }] });
-const adOption: artplayerPluginVast.ArtplayerPluginVastOption = context => {
-  const volume: number = context.init().volume;
-  context.playerOptions.autoResize = true;
+const adOption: Parameters<typeof artplayerPluginVast>[0] = context => {
+  const id: string = context.id;
+  const container: HTMLDivElement = context.$container;
+  const art: Artplayer = context.art;
+  context.playUrl('/test/pattern.mp4');
+  context.playRes('<VAST/>');
   return Promise.resolve();
 };
 `, 'typescript', api.Uri.parse('file:///editor-consumer.ts'))
     const invalid = api.editor.createModel(`
-artplayerPluginVast(context => { context.init().volume = 'loud'; context.playerOptions.autoResize = 'yes'; });
+artplayerPluginVast(context => { context.id = 1; context.playUrl(123); context.init(); context.playerOptions.autoResize = true; });
 artplayerPluginChapter({ chapters: [{ start: '0', end: 2, title: '' }] });
 `, 'typescript', api.Uri.parse('file:///editor-invalid.ts'))
     try {
@@ -75,7 +78,7 @@ artplayerPluginChapter({ chapters: [{ start: '0', end: 2, title: '' }] });
   expect(result.syntax).toEqual([])
   expect(result.semantic).toEqual([])
   expect(result.declarations).toEqual([])
-  expect(result.bad).toEqual([2322, 2322, 2322])
+  expect(result.bad).toEqual([2322, 2345, 2339, 2339, 2322])
   expect(result.name).toBe('artplayerPluginChapter')
   expect(result.ready).toBe(true)
   expect(result.instances).toBe(0)

@@ -786,7 +786,9 @@
         "changes/2026-09-15-CI-01-rendering-policy.md",
         "baselines/ci-rendering-policy-validation.json",
         "changes/2026-09-15-SITE-ROUTES-01-html-inventory.md",
-        "baselines/site-routes-validation.json"
+        "baselines/site-routes-validation.json",
+        "baselines/ci-source-firefox-validation.json",
+        "changes/2026-09-15-SITE-EDITOR-VAST-01-consumer.md"
       ]
     },
     {
@@ -845,7 +847,8 @@
         "SITE-06",
         "CI-BROWSER-01",
         "CI-TYPES-01",
-        "CI-TYPES-02"
+        "CI-TYPES-02",
+        "SITE-EDITOR-VAST-01"
       ],
       "status": "todo",
       "risk": "H",
@@ -4521,7 +4524,8 @@
         "SITE-DASH-01",
         "SITE-AUDIO-01",
         "SITE-VTT-01",
-        "SITE-ROUTES-01"
+        "SITE-ROUTES-01",
+        "SITE-EDITOR-VAST-01"
       ],
       "status": "todo",
       "risk": "M",
@@ -6018,6 +6022,29 @@
       "evidence": [
         "changes/2026-09-15-CI-TYPES-02-ecosystem.md",
         "baselines/ecosystem-types-validation.json"
+      ]
+    },
+    {
+      "id": "SITE-EDITOR-VAST-01",
+      "phase": "6 文档与消费者",
+      "title": "修正 Monaco 对 VAST 已批准根类型的消费者",
+      "scope": [
+        "artplayer-vitepress",
+        "artplayer-plugin-vast"
+      ],
+      "dependsOn": [
+        "SITE-02",
+        "PKG-VAST-04"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "当前编辑器根类型正反例与冻结工作区生成器测试分离，保留完整 Firefox 失败证据",
+      "acceptance": "22份声明一起零诊断，历史根回调字段受检，工作区字段被拒绝，三引擎真实 Monaco 编译和 Chapter 运行清理通过；不改变公开类型或忽略诊断",
+      "evidence": [
+        "changes/2026-09-15-SITE-EDITOR-VAST-01-consumer.md",
+        "baselines/editor-vast-consumer-validation.json",
+        "baselines/ci-source-firefox-validation.json",
+        "vast-type-decision.md"
       ]
     }
   ]
