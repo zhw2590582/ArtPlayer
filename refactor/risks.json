@@ -2832,7 +2832,9 @@
       "evidence": [
         "test/browser/hls-sdk.spec.js",
         "refactor/changes/2026-09-12-PKG-HLS-SDK-01-integration.md",
-        "refactor/baselines/hls-sdk-validation.json"
+        "refactor/baselines/hls-sdk-validation.json",
+        "refactor/changes/2026-09-15-PKG-HLS-SDK-01-switch-boundary.md",
+        "refactor/baselines/hls-switch-boundary-validation.json"
       ],
       "compatibleResolution": "区分 SDK、测试媒体/时序和宿主问题，保留真实档位/解码断言及 trace；不扩大等待或只验证菜单。",
       "closureCriteria": "直接 Hls 与新旧核心对照定位切换停滞，验证处置和正常/连续组切换，不能以重复通过关闭。"

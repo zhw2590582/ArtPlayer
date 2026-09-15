@@ -10,13 +10,14 @@ import { observeWorkers } from '../../test/helpers/worker-observer.js'
 import { ensureArchive, hash, readMember, refactorDir } from './releases.mjs'
 
 // Direct SDK control: no ArtPlayer or plugin is loaded, and no worker output is substituted.
-export async function diagnose({ version = '1.7.2', iterations = 5, transport = 'http', teardown = 'reset-first', worker = true, host = 'direct', plugin = false, sdkLogs = false, workerObserver = false, captureBeforeDestroy = false } = {}) {
+export async function diagnose({ version = '1.7.2', iterations = 5, transport = 'http', teardown = 'reset-first', worker = true, host = 'direct', plugin = false, sdkLogs = false, workerObserver = false, captureBeforeDestroy = false, switchBoundary = 'switched', prefill = false } = {}) {
   const runnerSHA256 = hash(fs.readFileSync(new URL(import.meta.url)))
   const observerSHA256 = hash(fs.readFileSync(new URL('../../test/helpers/worker-observer.js', import.meta.url)))
   assert(Number.isInteger(iterations) && iterations > 0 && iterations <= 50)
   assert(['http', 'route'].includes(transport))
   assert(['reset-first', 'sdk-first'].includes(teardown))
   assert(['direct', 'published', 'candidate'].includes(host))
+  assert(['switched', 'selected', 'immediate'].includes(switchBoundary))
   assert(!plugin || host !== 'direct', 'Plugin comparison requires an ArtPlayer host')
   const matrix = JSON.parse(fs.readFileSync(path.join(refactorDir, 'baselines/hls-sdk-matrix.json')))
   const release = matrix.releases.find(item => item.version === version)
@@ -98,7 +99,7 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
           let art
           const records = []
           const buffer = ranges => Array.from({ length: ranges.length }, (_, index) => [ranges.start(index), ranges.end(index)])
-          const state = () => ({ time: video.currentTime, readyState: video.readyState, height: video.videoHeight, paused: video.paused, buffered: buffer(video.buffered), seekable: buffer(video.seekable) })
+          const state = () => ({ time: video.currentTime, readyState: video.readyState, height: video.videoHeight, paused: video.paused, frames: video.getVideoPlaybackQuality().totalVideoFrames, buffered: buffer(video.buffered), seekable: buffer(video.seekable) })
           const record = (event, data) => {
             records.push({ at: performance.now(), event, data, media: state() })
             if (records.length > 400)
@@ -108,8 +109,8 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
           function attach(element) {
             video = element
             hls = new window.Hls({ enableWorker: worker, startLevel: 0, debug: sdkLogs ? logger : false })
-            for (const key of ['ERROR', 'AUDIO_TRACKS_UPDATED', 'AUDIO_TRACK_SWITCHED', 'LEVEL_SWITCHED', 'FRAG_BUFFERED', 'BUFFER_FLUSHED']) {
-              hls.on(window.Hls.Events[key], (_, data) => record(key, { id: data.id, level: data.level, fatal: data.fatal, details: data.details, frag: data.frag && { type: data.frag.type, sn: data.frag.sn, level: data.frag.level }, tracks: data.audioTracks?.map(track => ({ id: track.id, name: track.name, group: track.groupId })) }))
+            for (const key of ['ERROR', 'AUDIO_TRACKS_UPDATED', 'AUDIO_TRACK_SWITCHING', 'AUDIO_TRACK_SWITCHED', 'LEVEL_SWITCHING', 'LEVEL_SWITCHED', 'FRAG_BUFFERED', 'BUFFER_FLUSHED']) {
+              hls.on(window.Hls.Events[key], (_, data) => record(key, { id: data.id, level: typeof data.level === 'number' ? data.level : undefined, fatal: data.fatal, details: typeof data.details === 'string' ? data.details : undefined, frag: data.frag && { type: data.frag.type, sn: data.frag.sn, level: data.frag.level }, tracks: data.audioTracks?.map(track => ({ id: track.id, name: track.name, group: track.groupId })) }))
             }
             for (const name of ['waiting', 'stalled', 'seeking', 'seeked', 'playing', 'pause', 'ended', 'loadedmetadata', 'canplay', 'error'])
               video.addEventListener(name, () => record(name))
@@ -143,6 +144,7 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
             get hls() { return hls },
             get video() { return video },
             records,
+            record,
             state,
             destroy() {
               record('destroy:start', teardown)
@@ -170,21 +172,60 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
         await wait(() => window.direct.video?.readyState >= 3)
         await page.evaluate(() => window.direct.video.play())
         await wait(() => window.direct.video.currentTime > 0.3)
+        if (prefill) {
+          entry.phase = 'initial-prefill'
+          await wait(() => {
+            const video = window.direct.video
+            return video.buffered.length === 1 && video.buffered.end(0) >= video.duration - 0.1
+          })
+        }
         entry.phase = 'low-group'
         await page.evaluate(() => {
           window.direct.hls.currentLevel = 0
         })
         await wait(() => window.direct.hls.audioTracks.length === 2 && window.direct.hls.audioTracks.every(track => track.groupId === 'low'))
-        await page.evaluate(() => {
+        await page.evaluate((switchBoundary) => {
           window.direct.mark = performance.now()
           window.direct.hls.audioTrack = 1
-        })
-        await wait(() => window.direct.records.some(item => item.at >= window.direct.mark && item.event === 'AUDIO_TRACK_SWITCHED' && item.data.id === 1))
+          if (switchBoundary === 'immediate') {
+            window.direct.record('high-group:requested', { boundary: switchBoundary, audioTrack: window.direct.hls.audioTrack })
+            window.direct.hls.currentLevel = 1
+          }
+        }, switchBoundary)
+        if (switchBoundary === 'switched') {
+          await wait(() => window.direct.records.some(item => item.at >= window.direct.mark && item.event === 'AUDIO_TRACK_SWITCHED' && item.data.id === 1))
+        }
+        else if (switchBoundary === 'selected') {
+          if (plugin)
+            await expect(page.locator('.art-control-hls-audio .art-selector-value')).toHaveText('French', { timeout: 7000 })
+          else
+            await wait(() => window.direct.hls.audioTrack === 1)
+        }
         entry.phase = 'high-group'
-        await page.evaluate(() => {
-          window.direct.hls.currentLevel = 1
-        })
+        if (switchBoundary !== 'immediate') {
+          if (prefill) {
+            entry.phase = 'low-prefill'
+            await wait(() => {
+              const video = window.direct.video
+              return video.buffered.length === 1 && video.buffered.end(0) >= video.duration - 0.1
+            })
+            entry.phase = 'high-group'
+          }
+          await page.evaluate((switchBoundary) => {
+            window.direct.record('high-group:requested', { boundary: switchBoundary, audioTrack: window.direct.hls.audioTrack })
+            window.direct.hls.currentLevel = 1
+          }, switchBoundary)
+        }
         await wait(() => window.direct.video.videoHeight === 180 && window.direct.hls.audioTrack === 0)
+        entry.phase = 'high-group-playback'
+        await page.evaluate(() => {
+          window.direct.playbackStart = window.direct.state()
+        })
+        await wait(() => {
+          const current = window.direct.state()
+          return !current.paused && current.height === 180 && current.time > window.direct.playbackStart.time + 0.3 && current.frames > window.direct.playbackStart.frames + 2
+        })
+        entry.highPlayback = await page.evaluate(() => ({ start: window.direct.playbackStart, end: window.direct.state() }))
         entry.phase = 'commentary-track'
         await page.evaluate(() => {
           window.direct.hls.audioTrack = 2
@@ -195,6 +236,16 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
           window.direct.hls.currentLevel = 0
         })
         await wait(() => window.direct.hls.audioTracks.length === 2)
+        entry.phase = 'return-low-playback'
+        await wait(() => window.direct.video.videoHeight === 90)
+        await page.evaluate(() => {
+          window.direct.playbackStart = window.direct.state()
+        })
+        await wait(() => {
+          const current = window.direct.state()
+          return !current.paused && current.height === 90 && current.time > window.direct.playbackStart.time + 0.3 && current.frames > window.direct.playbackStart.frames + 2
+        })
+        entry.lowPlayback = await page.evaluate(() => ({ start: window.direct.playbackStart, end: window.direct.state() }))
         if (captureBeforeDestroy) {
           entry.phase = 'capture-before-destroy'
           entry.beforeDestroy = await page.evaluate(() => ({ coreLoaded: typeof window.Artplayer, pluginLoaded: typeof window.artplayerPluginHlsControl, media: window.direct.state(), sdk: { version: window.Hls.version, workerEnabled: window.direct.hls.config.enableWorker, level: window.direct.hls.currentLevel, audioTrack: window.direct.hls.audioTrack }, events: window.direct.records }))
@@ -214,7 +265,7 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
       finally {
         entry.failurePhase = entry.status === 'failed' ? entry.phase : undefined
         entry.phase = 'final-state'
-        entry.state = await page.evaluate(() => ({ coreLoaded: typeof window.Artplayer, pluginLoaded: typeof window.artplayerPluginHlsControl, workers: window.workerEvidence, media: window.direct?.state(), events: window.direct?.records, sdk: { version: window.Hls?.version, level: window.direct?.hls.currentLevel, audioTrack: window.direct?.hls.audioTrack } })).catch(error => ({ error: error.message }))
+        entry.state = await page.evaluate(() => ({ coreLoaded: typeof window.Artplayer, pluginLoaded: typeof window.artplayerPluginHlsControl, workers: window.workerEvidence, media: window.direct?.state(), events: window.direct?.records, sdk: { version: window.Hls?.version, level: window.direct?.hls.currentLevel, audioTrack: window.direct?.hls.audioTrack, mainState: window.direct?.hls.streamController?.state, audioState: window.direct?.hls.audioStreamController?.state } })).catch(error => ({ error: error.message }))
         entry.phase = 'trace-stop'
         await context.tracing.stop({ path: path.join(directory, `${iteration}.zip`) }).catch((error) => {
           entry.traceError = error.message
@@ -236,14 +287,14 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
     await browser?.close()
     server.closeAllConnections()
     await new Promise(resolve => server.close(resolve))
-    fs.writeFileSync(path.join(directory, 'report.json'), `${JSON.stringify({ version, iterations, transport, teardown, worker, host, plugin, sdkLogs, workerObserver, captureBeforeDestroy, runnerSHA256, observerSHA256, browserVersion, release, inputs: Object.fromEntries([...files].map(([file, bytes]) => [file, hash(bytes)])), results }, null, 2)}\n`)
+    fs.writeFileSync(path.join(directory, 'report.json'), `${JSON.stringify({ version, iterations, transport, teardown, worker, host, plugin, sdkLogs, workerObserver, captureBeforeDestroy, switchBoundary, prefill, runnerSHA256, observerSHA256, browserVersion, release, inputs: Object.fromEntries([...files].map(([file, bytes]) => [file, hash(bytes)])), results }, null, 2)}\n`)
     console.log(`Diagnostic report: ${directory}`)
   }
   return results
 }
 
-const { values } = parseArgs({ options: { 'version': { type: 'string', default: '1.7.2' }, 'iterations': { type: 'string', default: '5' }, 'transport': { type: 'string', default: 'http' }, 'teardown': { type: 'string', default: 'reset-first' }, 'no-worker': { type: 'boolean', default: false }, 'host': { type: 'string', default: 'direct' }, 'plugin': { type: 'boolean', default: false }, 'sdk-logs': { type: 'boolean', default: false }, 'observe-workers': { type: 'boolean', default: false }, 'capture-before-destroy': { type: 'boolean', default: false } } })
-diagnose({ version: values.version, iterations: Number(values.iterations), transport: values.transport, teardown: values.teardown, worker: !values['no-worker'], host: values.host, plugin: values.plugin, sdkLogs: values['sdk-logs'], workerObserver: values['observe-workers'], captureBeforeDestroy: values['capture-before-destroy'] }).then((results) => {
+const { values } = parseArgs({ options: { 'version': { type: 'string', default: '1.7.2' }, 'iterations': { type: 'string', default: '5' }, 'transport': { type: 'string', default: 'http' }, 'teardown': { type: 'string', default: 'reset-first' }, 'host': { type: 'string', default: 'direct' }, 'no-worker': { type: 'boolean', default: false }, 'plugin': { type: 'boolean', default: false }, 'sdk-logs': { type: 'boolean', default: false }, 'observe-workers': { type: 'boolean', default: false }, 'capture-before-destroy': { type: 'boolean', default: false }, 'switch-boundary': { type: 'string', default: 'switched' }, 'prefill': { type: 'boolean', default: false } } })
+diagnose({ version: values.version, iterations: Number(values.iterations), transport: values.transport, teardown: values.teardown, worker: !values['no-worker'], host: values.host, plugin: values.plugin, sdkLogs: values['sdk-logs'], workerObserver: values['observe-workers'], captureBeforeDestroy: values['capture-before-destroy'], switchBoundary: values['switch-boundary'], prefill: values.prefill }).then((results) => {
   process.exitCode = results.some(result => result.status !== 'passed') ? 1 : 0
 }).catch((error) => {
   console.error(error)

@@ -135,6 +135,16 @@ HTTP without ArtPlayer/plugin or a Worker observer still reproduced crashes with
 both reset-first and SDK-first teardown. A passing no-worker control does not
 replace worker acceptance. See the 2026-09-14 HTTP teardown checkpoint in refactor.
 
+For the separate grouped-playback stall, `--switch-boundary switched|selected|immediate`
+compares completed SDK audio switching, selected UI/getter state, and same-call audio/level
+selection. The default remains switched. `--prefill` adds a controlled fully buffered
+fixture condition; it is not a player workaround. Both diagnostic and integration paths
+now require the clock and frame count to advance at the target height after high/low
+switches. Keep the original 7000ms height assertion and the failed trace even when a
+later control passes. Diagnostic private SDK fields are read-only, version-specific;
+never read load-level getters after SDK destruction. See the 2026-09-15 switch-boundary
+checkpoint in refactor for the reproduced empty-buffer failure and remaining attribution.
+
 ## Package file boundary
 
 The package .npmignore excludes src and tsconfig.json. The implementation config

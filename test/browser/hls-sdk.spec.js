@@ -41,12 +41,18 @@ test.beforeAll(async () => {
 test.afterEach(async ({ page }, testInfo) => {
   const state = await page.evaluate(() => {
     const video = window.art?.video
+    const hls = window.art?.hls
+    const ranges = buffered => buffered && Array.from({ length: buffered.length }, (_, index) => [buffered.start(index), buffered.end(index)])
+    const controller = source => source && ({ state: source.state, level: source.level, nextLoadPosition: source.nextLoadPosition, altAudio: source.altAudio, buffered: ranges(source.mediaBuffer?.buffered), frag: source.fragCurrent && { sn: source.fragCurrent.sn, level: source.fragCurrent.level, type: source.fragCurrent.type } })
     return {
       workers: window.workerEvidence,
       errors: window.sdkErrors,
       events: window.sdkEvents,
       supported: window.Hls?.isSupported(),
       destroyed: window.destroyedEngines,
+      controllers: { main: controller(hls?.streamController), audio: controller(hls?.audioStreamController) },
+      sdk: !window.destroyedEngines && hls ? { currentLevel: hls.currentLevel, loadLevel: hls.loadLevel, nextLoadLevel: hls.nextLoadLevel, mediaSourceState: hls.bufferController?.mediaSource?.readyState } : { destroyed: window.destroyedEngines },
+      buffers: hls?.bufferController?.sourceBuffers?.map(([type, source]) => ({ type, updating: source?.updating, buffered: ranges(source?.buffered) })),
       tracks: window.art?.hls?.audioTracks?.map(track => ({ id: track.id, name: track.name, groupId: track.groupId })),
       media: video && { time: video.currentTime, paused: video.paused, ended: video.ended, readyState: video.readyState, height: video.videoHeight, buffered: Array.from({ length: video.buffered.length }, (_, index) => [video.buffered.start(index), video.buffered.end(index)]) },
     }
@@ -81,8 +87,8 @@ async function open(page, testInfo, release, core, plugin = 'candidate', manifes
         art.hls = hls
         const mediaState = () => ({ time: video.currentTime, paused: video.paused, readyState: video.readyState, height: video.videoHeight, buffered: Array.from({ length: video.buffered.length }, (_, index) => [video.buffered.start(index), video.buffered.end(index)]) })
         hls.on(window.Hls.Events.ERROR, (_, data) => window.sdkErrors.push({ type: data.type, details: data.details, fatal: data.fatal, media: mediaState() }))
-        for (const key of ['AUDIO_TRACKS_UPDATED', 'AUDIO_TRACK_SWITCHED', 'LEVEL_SWITCHED', 'MEDIA_ATTACHED', 'MEDIA_DETACHED'])
-          hls.on(window.Hls.Events[key], (_, data) => window.sdkEvents.push({ key, id: data.id, level: data.level, tracks: data.audioTracks?.map(track => ({ id: track.id, name: track.name, groupId: track.groupId })), media: mediaState() }))
+        for (const key of ['AUDIO_TRACKS_UPDATED', 'AUDIO_TRACK_SWITCHED', 'LEVEL_SWITCHED', 'MEDIA_ATTACHED', 'MEDIA_DETACHED', 'BUFFER_FLUSHING', 'BUFFER_FLUSHED', 'FRAG_LOADING', 'FRAG_BUFFERED'])
+          hls.on(window.Hls.Events[key], (_, data) => window.sdkEvents.push({ key, id: data.id, level: data.level, type: data.type, frag: data.frag && { sn: data.frag.sn, level: data.frag.level, type: data.frag.type }, tracks: data.audioTracks?.map(track => ({ id: track.id, name: track.name, groupId: track.groupId })), media: mediaState() }))
         hls.on(window.Hls.Events.DESTROYING, () => window.destroyedEngines++)
         hls.loadSource(url)
         hls.attachMedia(video)
@@ -110,6 +116,14 @@ async function destroyed(page) {
   await expect.poll(() => page.evaluate(() => window.workerEvidence.filter(worker => worker.terminated !== 1).length)).toBe(0)
   expect(await page.evaluate(() => window.workerEvidence.flatMap(worker => worker.errors))).toEqual([])
   expect(await page.evaluate(() => ({ media: window.art.hls.media, children: document.querySelector('.player').childElementCount, errors: window.sdkErrors.filter(error => error.fatal) }))).toEqual({ media: null, children: 0, errors: [] })
+}
+
+async function playbackAdvances(page, height) {
+  const start = await page.evaluate(() => ({ time: window.art.video.currentTime, frames: window.art.video.getVideoPlaybackQuality().totalVideoFrames }))
+  await expect.poll(() => page.evaluate(({ start, height }) => {
+    const video = window.art.video
+    return !video.paused && video.videoHeight === height && video.currentTime > start.time + 0.3 && video.getVideoPlaybackQuality().totalVideoFrames > start.frames + 2
+  }, { start, height })).toBe(true)
 }
 
 for (const release of matrix.releases) {
@@ -165,6 +179,7 @@ for (const release of matrix.releases) {
         await expect.poll(() => page.evaluate(() => window.art.hls.audioTracks.map(track => ({ id: track.id, name: track.name, group: track.groupId })))).toEqual([{ id: 0, name: 'French', group: 'high' }, { id: 1, name: 'English', group: 'high' }, { id: 2, name: 'Commentary', group: 'high' }])
         await expect.poll(() => page.evaluate(() => ({ index: window.art.hls.audioTrack, height: window.art.video.videoHeight }))).toEqual({ index: 0, height: 180 })
         await expect(page.locator('.art-control-hls-audio .art-selector-value')).toHaveText('French')
+        await playbackAdvances(page, 180)
         await page.evaluate(() => {
           window.art.controls.show = true
         })
@@ -179,6 +194,7 @@ for (const release of matrix.releases) {
         })
         await expect.poll(() => page.evaluate(() => window.art.hls.audioTracks.length)).toBe(2)
         await expect(control.locator('.art-selector-item')).toHaveCount(2)
+        await playbackAdvances(page, 90)
         await destroyed(page)
       })
       test(`${core} core: actual SDK detaches and reattaches to the same media`, async ({ page }, testInfo) => {
