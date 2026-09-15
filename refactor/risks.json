@@ -6754,6 +6754,25 @@
         "refactor/baselines/auto-thumbnail-registration-validation.json"
       ],
       "resolutionRationale": "Two prechange Node failures and both real-core Chromium failures reproduce retained subscriptions and native video creation. Source193, main/legacy88 each and three-engine42 each pass after the entry guard; live/absent-flag hosts retain successful generation. Public types and first-frame/device gates remain unchanged."
+    },
+    {
+      "id": "SITE-HTML-INVENTORY-01",
+      "title": "New documentation HTML is missing from historical demo route coverage, failing the complete local CI check",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "SITE-ROUTES-01"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-15-SITE-ROUTES-01-html-inventory.md",
+        "refactor/baselines/site-routes-validation.json"
+      ],
+      "compatibleResolution": "Keep BASE-04 immutable and explicitly track introduced pages, route identity and task ownership; preserve omission and deletion checks.",
+      "closureCriteria": "Old complete CI failure and final full local CI success with negative coverage tests; historical snapshot unchanged.",
+      "resolutionEvidence": [
+        "refactor/baselines/site-routes-validation.json"
+      ],
+      "resolutionRationale": "Nine actual Git additions recorded. Three targeted tests pass with positive controls and invalid metadata cases. Full ci:check passes 2937 runtime, 170 engineering and 619 baseline invocations after the old 617/618 baseline failure; no runtime or browser-acceptance scope expansion."
     }
   ]
 }

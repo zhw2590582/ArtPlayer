@@ -1,0 +1,335 @@
+{
+  "task": "SITE-ROUTES-01",
+  "baselineCommit": "876fa4c32882c8ae27ed15d1bc8507ae75d55eae",
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "typescript": "5.9.3",
+    "platform": "Windows"
+  },
+  "scope": "Full local ci:check on the existing installation, before failure and after route-ledger repair. No new installation, ci:build, coverage, browser matrix, remote job or release acceptance.",
+  "before": {
+    "exitCode": 1,
+    "path": "refactor/.cache/ci-check-876fa4c3.log",
+    "sha256": "b463f7d7c04cfc5b23ea2504a622300063c219ff384991a14b666f90081650bd",
+    "tests": [
+      2937,
+      170,
+      618
+    ],
+    "passed": [
+      2937,
+      170,
+      617
+    ],
+    "failed": [
+      0,
+      0,
+      1
+    ],
+    "skipped": [
+      0,
+      0,
+      0
+    ],
+    "canceled": [
+      0,
+      0,
+      0
+    ],
+    "todo": [
+      0,
+      0,
+      0
+    ],
+    "durationsMs": [
+      59471.0185,
+      24736.7005,
+      139417.8916
+    ]
+  },
+  "after": {
+    "exitCode": 0,
+    "path": "refactor/.cache/ci-check-site-routes-final.log",
+    "sha256": "351243244c4415ebb1b6a1cafb0e7b5e7428e73c707faeb365afe33da431c592",
+    "tests": [
+      2937,
+      170,
+      619
+    ],
+    "passed": [
+      2937,
+      170,
+      619
+    ],
+    "failed": [
+      0,
+      0,
+      0
+    ],
+    "skipped": [
+      0,
+      0,
+      0
+    ],
+    "canceled": [
+      0,
+      0,
+      0
+    ],
+    "todo": [
+      0,
+      0,
+      0
+    ],
+    "durationsMs": [
+      48705.6332,
+      24768.6579,
+      159316.7625
+    ],
+    "finalYarnSeconds": 476.52
+  },
+  "targetedBefore": {
+    "path": "refactor/.cache/site-routes-before.log",
+    "sha256": "06f1c24bd2ad95bd67236030d2bd08ebc35ae61aca2e52adae7386b014795fc4",
+    "tests": [
+      3
+    ],
+    "passed": [
+      0
+    ],
+    "failed": [
+      3
+    ],
+    "skipped": [
+      0
+    ],
+    "canceled": [
+      0
+    ],
+    "todo": [
+      0
+    ],
+    "durationsMs": [
+      127.1716
+    ]
+  },
+  "targetedAfter": {
+    "path": "refactor/.cache/site-routes-after.log",
+    "sha256": "931b7025249bb7e151c3ff9d04651a799e884b74c5fa1c8f5a993ebd1bed9d49",
+    "tests": [
+      3
+    ],
+    "passed": [
+      3
+    ],
+    "failed": [
+      0
+    ],
+    "skipped": [
+      0
+    ],
+    "canceled": [
+      0
+    ],
+    "todo": [
+      0
+    ],
+    "durationsMs": [
+      153.284
+    ]
+  },
+  "lint": {
+    "path": "refactor/.cache/site-routes-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "files": [
+    {
+      "path": "refactor/baselines/demo-inventory.json",
+      "sha256": "ffbb50e14dc008819b3674802aa26fac5643ea78205103d25d268dece8bafb61"
+    },
+    {
+      "path": "refactor/baselines/demo-additions.json",
+      "sha256": "6c2027bd0a035704ac6c13790bc3e2719a9a621ca19f1509216b4868b1a289da"
+    },
+    {
+      "path": "refactor/scripts/demos.mjs",
+      "sha256": "4e63262e1b3a173148c775222e5f0494f270ca97bf216ae51754105c0d014053"
+    },
+    {
+      "path": "refactor/scripts/demos.test.mjs",
+      "sha256": "f0e549b9072b506ef65f2869a684b89d4130cf912b8a3583b125a785a49b305b"
+    },
+    {
+      "path": "refactor/docs-browser-testing.md",
+      "sha256": "d458d87bcc5f58930a14a4d189b9aff27f04dd8c614049874d76e9b725cc53b7"
+    },
+    {
+      "path": "packages/artplayer-vitepress/README.md",
+      "sha256": "8457b4d12991646648a925dc1cc1674895801ec8f03891450feca923aeb7413f"
+    }
+  ],
+  "historicalInventoryUnchanged": true,
+  "introductions": [
+    {
+      "source": "docs/document/en/plugin/audio-track.html",
+      "commit": "d3349e83f24fdea3fa55fdfa6254cb1587fc5a26",
+      "parentContainsPath": false,
+      "addedByCommit": true
+    },
+    {
+      "source": "docs/document/en/plugin/danmuku.html",
+      "commit": "ea3174daa28e698af3db2ff36aecf4ef2da54470",
+      "parentContainsPath": false,
+      "addedByCommit": true
+    },
+    {
+      "source": "docs/document/en/plugin/dash-control.html",
+      "commit": "319dccb60593f6206418dc04b27b1170767fa716",
+      "parentContainsPath": false,
+      "addedByCommit": true
+    },
+    {
+      "source": "docs/document/en/plugin/hls-control.html",
+      "commit": "4ea0ba94ae51d14d353bc57a3222a8c19b11ac66",
+      "parentContainsPath": false,
+      "addedByCommit": true
+    },
+    {
+      "source": "docs/document/en/plugin/vtt-thumbnail.html",
+      "commit": "9ba3c82f99e6bad0e858f6c2e1d8624dfb725c8c",
+      "parentContainsPath": false,
+      "addedByCommit": true
+    },
+    {
+      "source": "docs/document/plugin/audio-track.html",
+      "commit": "d3349e83f24fdea3fa55fdfa6254cb1587fc5a26",
+      "parentContainsPath": false,
+      "addedByCommit": true
+    },
+    {
+      "source": "docs/document/plugin/dash-control.html",
+      "commit": "319dccb60593f6206418dc04b27b1170767fa716",
+      "parentContainsPath": false,
+      "addedByCommit": true
+    },
+    {
+      "source": "docs/document/plugin/hls-control.html",
+      "commit": "4ea0ba94ae51d14d353bc57a3222a8c19b11ac66",
+      "parentContainsPath": false,
+      "addedByCommit": true
+    },
+    {
+      "source": "docs/document/plugin/vtt-thumbnail.html",
+      "commit": "9ba3c82f99e6bad0e858f6c2e1d8624dfb725c8c",
+      "parentContainsPath": false,
+      "addedByCommit": true
+    }
+  ],
+  "totals": {
+    "historicalExamples": 29,
+    "addedExamples": 1,
+    "historicalHtml": 36,
+    "addedHtml": 9,
+    "packages": 22
+  },
+  "checks": [
+    "yarn check:toolchain --strict",
+    "yarn check:commits --report",
+    "yarn check:impact --report",
+    "yarn check:ci",
+    "yarn test:contracts",
+    "yarn check:contracts --report",
+    "yarn check:plan",
+    "yarn check:release-ledger",
+    "yarn typecheck:release",
+    "yarn check:rollback-inventory",
+    "yarn lint",
+    "yarn typecheck:library",
+    "yarn typecheck:scaffold",
+    "yarn typecheck:docs-tools",
+    "yarn check:docs-smoke",
+    "yarn check:editor-types",
+    "yarn check:llm",
+    "yarn check:vconsole",
+    "yarn check:console",
+    "yarn check:site-notices",
+    "yarn typecheck:site-assets",
+    "yarn check:site-assets",
+    "yarn check:types",
+    "yarn typecheck",
+    "yarn typecheck:react",
+    "yarn lint:react",
+    "yarn typecheck:vue",
+    "yarn lint:vue",
+    "yarn test"
+  ],
+  "branchImpact": {
+    "path": "refactor/.cache/ci-check-876fa4c3-branch-impact.json",
+    "sha256": "3ef8de607e99b1438edb0ef2aaf3aa47b536803e4772b8fcea939c461e75b62a",
+    "capturedBeforeFix": true,
+    "range": "explicit-base",
+    "head": "876fa4c32882c8ae27ed15d1bc8507ae75d55eae",
+    "base": "40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f",
+    "changedPaths": 3288,
+    "affectedPackages": [
+      "artplayer",
+      "artplayer-plugin-ads",
+      "artplayer-plugin-ambilight",
+      "artplayer-plugin-asr",
+      "artplayer-plugin-audio-track",
+      "artplayer-plugin-auto-thumbnail",
+      "artplayer-plugin-chapter",
+      "artplayer-plugin-chromecast",
+      "artplayer-plugin-danmuku",
+      "artplayer-plugin-danmuku-mask",
+      "artplayer-plugin-dash-control",
+      "artplayer-plugin-document-pip",
+      "artplayer-plugin-hls-control",
+      "artplayer-plugin-jassub",
+      "artplayer-plugin-multiple-subtitles",
+      "artplayer-plugin-vast",
+      "artplayer-plugin-vtt-thumbnail",
+      "artplayer-proxy-canvas",
+      "artplayer-proxy-mediabunny",
+      "artplayer-tool-iframe",
+      "artplayer-tool-thumbnail",
+      "artplayer-vitepress"
+    ],
+    "requiredCIJobs": [
+      "browser-consumers",
+      "browser-smoke",
+      "checks",
+      "coverage"
+    ],
+    "reviewRequired": true,
+    "unknownPathCount": 650,
+    "installedConsumerGaps": [
+      "artplayer-plugin-ads",
+      "artplayer-plugin-ambilight",
+      "artplayer-plugin-asr",
+      "artplayer-plugin-audio-track",
+      "artplayer-plugin-auto-thumbnail",
+      "artplayer-plugin-chromecast",
+      "artplayer-plugin-danmuku",
+      "artplayer-plugin-danmuku-mask",
+      "artplayer-plugin-dash-control",
+      "artplayer-plugin-document-pip",
+      "artplayer-plugin-hls-control",
+      "artplayer-plugin-jassub",
+      "artplayer-plugin-multiple-subtitles",
+      "artplayer-plugin-vast",
+      "artplayer-plugin-vtt-thumbnail",
+      "artplayer-proxy-canvas",
+      "artplayer-proxy-mediabunny",
+      "artplayer-tool-iframe",
+      "artplayer-tool-thumbnail"
+    ]
+  },
+  "limitations": [
+    "Historical baseline tests deliberately reproduce old defects; passing them does not mean old artifacts are fixed.",
+    "introducedBy/introducedAfter format is validated, but normal checker does not perform Git provenance verification; the nine current entries were verified separately.",
+    "No runtime or generated site content changed; existing guide browser evidence remains with its original task.",
+    "Full CI/CD, generic installed consumers, physical devices and publication remain pending."
+  ]
+}

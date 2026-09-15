@@ -39,6 +39,16 @@ export function validateDemoInventory(inventory, additions = JSON.parse(read('re
   assert.equal(inventory.schemaVersion, 1)
   assert.equal(additions.schemaVersion, 1)
   const taskIds = new Set(JSON.parse(read('refactor/tasks.json')).tasks.map(task => task.id))
+  const addedPages = additions.pages ?? []
+  assert(Array.isArray(addedPages), 'Invalid added pages')
+  for (const page of addedPages) {
+    assert(/^docs\/(?:[a-z0-9][a-z0-9._-]*\/)*[a-z0-9][a-z0-9._-]*\.html$/.test(page.source), 'Invalid added HTML path')
+    const references = ['introducedBy', 'introducedAfter'].filter(key => Object.hasOwn(page, key))
+    assert.equal(references.length, 1, 'Page requires one introduction reference')
+    assert(/^[a-f0-9]{40}$/.test(page[references[0]]), 'Missing page introduction commit')
+    assert(taskIds.has(page.owner) && page.finalDemoOwner === 'EX-03', 'Missing added page owner')
+    assert.equal(page.route, `/${page.source.slice(5)}`.replace(/index\.html$/, ''), 'Added page route does not match its HTML path')
+  }
   for (const addition of additions.examples) {
     assert(/^docs\/assets\/example\/[a-z0-9.]+\.js$/.test(addition.source), 'Invalid added example path')
     assert(/^[a-f0-9]{40}$/.test(addition.introducedBy), 'Missing introduction commit')
@@ -48,7 +58,9 @@ export function validateDemoInventory(inventory, additions = JSON.parse(read('re
   const sources = [...inventory.examples, ...additions.examples].map(item => item.source)
   assert.equal(new Set(sources).size, sources.length, 'Duplicate baseline/addition paths')
   assert.deepEqual(sources.sort(), fs.readdirSync(path.join(root, 'docs/assets/example')).filter(name => name.endsWith('.js')).map(name => `docs/assets/example/${name}`).sort(), 'Demo file coverage drift')
-  assert.deepEqual(inventory.pages.map(item => item.source).sort(), htmlFiles(), 'HTML route coverage drift')
+  const pages = [...inventory.pages, ...addedPages].map(item => item.source)
+  assert.equal(new Set(pages).size, pages.length, 'Duplicate baseline/addition HTML paths')
+  assert.deepEqual(pages.sort(), htmlFiles(), 'HTML route coverage drift')
   assert.deepEqual(inventory.examples.flatMap(item => item.menuLinks).sort(), menuLinks().sort(), 'Editor link coverage drift')
   assert.deepEqual(inventory.packages.map(item => item.name).sort(), JSON.parse(read('refactor/package-inventory.json')).packages.map(item => item.name).sort(), 'Package demo coverage drift')
   const names = new Set(inventory.examples.map(item => item.name))
@@ -70,6 +82,6 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     const inventory = JSON.parse(fs.readFileSync(filename, 'utf8'))
     validateDemoInventory(inventory)
     const additions = JSON.parse(read('refactor/baselines/demo-additions.json'))
-    console.log(`Demo coverage: ${inventory.examples.length} historical + ${additions.examples.length} added examples, ${inventory.pages.length} HTML paths, ${inventory.packages.length} packages; no browser pass implied`)
+    console.log(`Demo coverage: ${inventory.examples.length} historical + ${additions.examples.length} added examples, ${inventory.pages.length} historical + ${additions.pages?.length || 0} added HTML paths, ${inventory.packages.length} packages; no browser pass implied`)
   }
 }

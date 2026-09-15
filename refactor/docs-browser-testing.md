@@ -60,4 +60,16 @@ IFRAME-05 的 `yarn test:iframe-history` 使用8085的独立缓存页面及完�
 
 [完整路径台账](baselines/demo-inventory.json) 已覆盖 29 个示例、36 个 HTML 和 22 包，包括生成文档、独立 upscaler 与站点验证页面。源脚本/菜单参数与 editor prod/ts/code/log 规则已有记录；这些官方入口尚未运行，运行时实际存储值和网络来源仍待 EX-03 采集。
 
+以上是冻结的 BASE-04 快照。新增页面和示例应写入
+[增量台账](baselines/demo-additions.json)，不得重拍历史快照来消除覆盖失败。
+当前增量包含 asr.local 示例和九个生成文档 HTML，合计30示例、45 HTML。
+每个新增HTML登记 source、对应route、引入依据、责任task和finalDemoOwner。
+已提交页面用introducedBy记录实际引入commit；与页面同次提交的新记录用introducedAfter
+记录修改前的HEAD，配合owner任务追踪引入，避免要求提交包含自身未来的Git哈希。
+两字段只能选一项；introducedAfter只是起点，不代表实际引入commit已确定。
+运行 `node refactor/scripts/demos.mjs --check` 以及 `node --test refactor/scripts/demos.test.mjs`；
+校验保留所有历史路径，并拒绝未登记、重复、越界或缺少责任的新增页面。
+提交来源在登记时用Git核实；校验器检查提交ID格式，不把它当作已完成语义审查。
+各指南的实际浏览器结果保留在各自任务证据中；路径登记本身不新增浏览器通过结论。
+
 独立发布包夹具的 DOM/CSS、Tab/热键、设置与网页全屏已在内置浏览器两次实测，见 [覆盖及问题](baselines/dom-coverage.md)。它没有运行 Monaco，不代表编辑器 Run 或官方 chapter demo 通过。thumbnail 无菜单示例依赖不在当前 workspace 的旧插件，已交 SITE-01/EX-03 核实。

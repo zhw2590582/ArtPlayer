@@ -21,7 +21,14 @@ not a VitePress page. Keep both URL surfaces compatible.
 | `docs/public/style.css` | Documentation presentation | Copied into the built site |
 
 Edit Markdown and public sources here. Do not edit the generated repository
-`docs/document/`. The current inventory contains 36 Markdown pages: 18 Chinese
+HTML directly. After adding a guide, rebuild the site, record its new HTML path
+in `refactor/baselines/demo-additions.json` with its owner task and either the known
+`introducedBy` commit or the pre-change HEAD as `introducedAfter` for a new page,
+and run `node refactor/scripts/demos.mjs --check`. Preserve the frozen BASE-04
+inventory. Also refresh and check the current site inventory; the two inventories
+serve different purposes. Neither path check replaces browser navigation tests.
+
+The generated site lives in `docs/document/`. The current inventory contains 36 Markdown pages: 18 Chinese
 and 18 English. Danmuku, HLS, DASH, Audio Track and VTT Thumbnail have dedicated guides and navigation in both languages. Other plugins currently
 use their package README, architecture notes and linked editor examples;
 navigation links alone are not complete API documentation.

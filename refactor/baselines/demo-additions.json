@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "note": "Append-only additions to BASE-04. This records path ownership, not browser acceptance; the original 29-example snapshot remains unchanged.",
+  "note": "Append-only example and HTML additions to BASE-04. Records path ownership and introduction commits, not browser acceptance; the original 29-example/36-HTML snapshot stays unchanged.",
   "examples": [
     {
       "source": "docs/assets/example/asr.local.js",
@@ -9,6 +9,80 @@
       "owner": "PKG-ASR-05",
       "finalDemoOwner": "EX-03",
       "note": "Local audio capture demo with simulated subtitles; does not contact a recognition service. No menu link. Runtime evidence remains with the owning task."
+    }
+  ],
+  "pages": [
+    {
+      "source": "docs/document/en/plugin/audio-track.html",
+      "route": "/document/en/plugin/audio-track.html",
+      "introducedBy": "d3349e83f24fdea3fa55fdfa6254cb1587fc5a26",
+      "owner": "SITE-AUDIO-01",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
+    },
+    {
+      "source": "docs/document/en/plugin/danmuku.html",
+      "route": "/document/en/plugin/danmuku.html",
+      "introducedBy": "ea3174daa28e698af3db2ff36aecf4ef2da54470",
+      "owner": "SITE-DANMUKU-01",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
+    },
+    {
+      "source": "docs/document/en/plugin/dash-control.html",
+      "route": "/document/en/plugin/dash-control.html",
+      "introducedBy": "319dccb60593f6206418dc04b27b1170767fa716",
+      "owner": "SITE-DASH-01",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
+    },
+    {
+      "source": "docs/document/en/plugin/hls-control.html",
+      "route": "/document/en/plugin/hls-control.html",
+      "introducedBy": "4ea0ba94ae51d14d353bc57a3222a8c19b11ac66",
+      "owner": "SITE-HLS-01",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
+    },
+    {
+      "source": "docs/document/en/plugin/vtt-thumbnail.html",
+      "route": "/document/en/plugin/vtt-thumbnail.html",
+      "introducedBy": "9ba3c82f99e6bad0e858f6c2e1d8624dfb725c8c",
+      "owner": "SITE-VTT-01",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
+    },
+    {
+      "source": "docs/document/plugin/audio-track.html",
+      "route": "/document/plugin/audio-track.html",
+      "introducedBy": "d3349e83f24fdea3fa55fdfa6254cb1587fc5a26",
+      "owner": "SITE-AUDIO-01",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
+    },
+    {
+      "source": "docs/document/plugin/dash-control.html",
+      "route": "/document/plugin/dash-control.html",
+      "introducedBy": "319dccb60593f6206418dc04b27b1170767fa716",
+      "owner": "SITE-DASH-01",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
+    },
+    {
+      "source": "docs/document/plugin/hls-control.html",
+      "route": "/document/plugin/hls-control.html",
+      "introducedBy": "4ea0ba94ae51d14d353bc57a3222a8c19b11ac66",
+      "owner": "SITE-HLS-01",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
+    },
+    {
+      "source": "docs/document/plugin/vtt-thumbnail.html",
+      "route": "/document/plugin/vtt-thumbnail.html",
+      "introducedBy": "9ba3c82f99e6bad0e858f6c2e1d8624dfb725c8c",
+      "owner": "SITE-VTT-01",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
     }
   ]
 }

@@ -784,7 +784,9 @@
         "changes/2026-09-15-CI-01-vast-installed.md",
         "baselines/ci-vast-installed-validation.json",
         "changes/2026-09-15-CI-01-rendering-policy.md",
-        "baselines/ci-rendering-policy-validation.json"
+        "baselines/ci-rendering-policy-validation.json",
+        "changes/2026-09-15-SITE-ROUTES-01-html-inventory.md",
+        "baselines/site-routes-validation.json"
       ]
     },
     {
@@ -4516,7 +4518,8 @@
         "SITE-HLS-01",
         "SITE-DASH-01",
         "SITE-AUDIO-01",
-        "SITE-VTT-01"
+        "SITE-VTT-01",
+        "SITE-ROUTES-01"
       ],
       "status": "todo",
       "risk": "M",
@@ -5946,6 +5949,27 @@
       "evidence": [
         "changes/2026-09-15-PKG-AUTO-THUMB-13-registration.md",
         "baselines/auto-thumbnail-registration-validation.json"
+      ]
+    },
+    {
+      "id": "SITE-ROUTES-01",
+      "phase": "6 文档与消费者",
+      "title": "将新增文档HTML纳入保留历史的路径覆盖台账",
+      "scope": [
+        "artplayer-vitepress",
+        "workspace"
+      ],
+      "dependsOn": [
+        "BASE-04",
+        "SITE-03"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "不覆盖BASE-04的HTML增量台账、准确路由/责任校验及完整CI证据",
+      "acceptance": "复现完整ci:check的路径覆盖失败；新页面必须显式登记，拒绝漏项/重复/错误路由/越界/缺任务和提交，保留旧页面保护及浏览器验收边界",
+      "evidence": [
+        "changes/2026-09-15-SITE-ROUTES-01-html-inventory.md",
+        "baselines/site-routes-validation.json"
       ]
     }
   ]
