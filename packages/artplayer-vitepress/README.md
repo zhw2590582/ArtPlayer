@@ -15,6 +15,8 @@ not a VitePress page. Keep both URL surfaces compatible.
 | `docs/plugin/dash-control.md`, `docs/en/plugin/dash-control.md` | DASH SDK generations, menus, lifecycle and types | `/document/plugin/dash-control.html`, `/document/en/plugin/dash-control.html` |
 | `docs/plugin/audio-track.md`, `docs/en/plugin/audio-track.md` | Separate audio synchronization, ownership and update types | `/document/plugin/audio-track.html`, `/document/en/plugin/audio-track.html` |
 | `docs/plugin/vtt-thumbnail.md`, `docs/en/plugin/vtt-thumbnail.md` | Sprite index format, timing boundaries, asynchronous registration and types | `/document/plugin/vtt-thumbnail.html`, `/document/en/plugin/vtt-thumbnail.html` |
+| `docs/plugin/chapter.md`, `docs/en/plugin/chapter.md` | Chapter ranges, caller-data mutation, replacement updates, cleanup and types | `/document/plugin/chapter.html`, `/document/en/plugin/chapter.html` |
+| `docs/plugin/ambilight.md`, `docs/en/plugin/ambilight.md` | Sampling options, start/stop ownership, pixel access and compatible type entries | `/document/plugin/ambilight.html`, `/document/en/plugin/ambilight.html` |
 | `docs/.vitepress/config.js` | Navigation, base URL, output path, page head | Repository `docs/document/` |
 | `docs/vite.config.ts` | Search plugin configuration | VitePress/Vite integration; real search acceptance remains pending |
 | `docs/public/main.js` | Run Code links and first-visit language redirect | Copied into the built site |
@@ -28,10 +30,17 @@ and run `node refactor/scripts/demos.mjs --check`. Preserve the frozen BASE-04
 inventory. Also refresh and check the current site inventory; the two inventories
 serve different purposes. Neither path check replaces browser navigation tests.
 
-The generated site lives in `docs/document/`. The current inventory contains 36 Markdown pages: 18 Chinese
-and 18 English. Danmuku, HLS, DASH, Audio Track and VTT Thumbnail have dedicated guides and navigation in both languages. Other plugins currently
+The generated site lives in `docs/document/`. The current inventory contains 40 Markdown pages: 20 Chinese
+and 20 English. Danmuku, HLS, DASH, Audio Track, VTT Thumbnail, Chapter and Ambilight have dedicated guides and navigation in both languages. Other plugins currently
 use their package README, architecture notes and linked editor examples;
 navigation links alone are not complete API documentation.
+
+Chapter and Ambilight guides preserve their original demo code and explicitly
+document the mutation, lifecycle and historical type boundaries. Keep their
+language pairs together; the content mapping is in `refactor/site-content-review.md`.
+Run Code markers need visible text as well as the existing className/data-libs
+hooks. Navigation checks verify exact code forwarding, not playback in the editor.
+The documented core version in the shared navigation is 6.0.0, marked unreleased.
 
 VTT Thumbnail guides preserve the original vtt.thumbnail demo. The document-vtt
 suite checks actual screenshot crop pixels, a shared time boundary, a gap and

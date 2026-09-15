@@ -1,5 +1,10 @@
 # 文档站、示例与生成链清单
 
+2026-09-16 SITE-04检查点：Chapter/Ambilight已补独立双语指南、原样示例与本地导航；
+当前40 Markdown、49 HTML，中英各20页。八处空Run Code控件补上可见标签，导航
+版本同步6.0.0并标注unreleased。逐包内容核对见[跟踪表](site-content-review.md)；
+963条核心声明成员及其余生态内容仍需语义核对，不能按页面数量视为完成。
+
 核心分发后续：13 个 core JavaScript 压缩产物已通过固定 esbuild 0.12.6 精确
 复现，loader 与 css/nls loader 固定源码匹配；十种语言编辑/查找和核心 diff
 worker 三引擎 33/33 通过。两个 source map 的 549 份不同准备源码已登记，

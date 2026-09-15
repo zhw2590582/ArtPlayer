@@ -23,7 +23,7 @@ import artplayerPluginAudioTrack from 'artplayer-plugin-audio-track';
 
 下面与[在线音轨示例](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-audio-track/index.js&example=audio.track)使用同一份代码。站点提供示例媒体和 `.artplayer-app` 容器；接入自己的应用时替换这些地址和容器。
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-audio-track/index.js"></div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-audio-track/index.js">▶ Run Code</div>
 
 ```js
 // npm i artplayer-plugin-audio-track

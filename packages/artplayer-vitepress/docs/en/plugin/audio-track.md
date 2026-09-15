@@ -23,7 +23,7 @@ For script tags, load ArtPlayer before the plugin's `dist/artplayer-plugin-audio
 
 This is the same code as the [online audio example](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-audio-track/index.js&example=audio.track). The demo site supplies the media files and `.artplayer-app` container; replace both when integrating it into your application.
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-audio-track/index.js"></div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-audio-track/index.js">▶ Run Code</div>
 
 ```js
 // npm i artplayer-plugin-audio-track

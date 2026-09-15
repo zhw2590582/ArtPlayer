@@ -47,8 +47,16 @@
       "sha256Lf": "adec563b74e5d690f97a710bf58478d04092f0de199674152e68da817f412ee5"
     },
     {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/ambilight.md",
+      "sha256Lf": "d3362744c24d26e8d9c045cb73e54984cc47c9173b4612421b431bcfbde1b65c"
+    },
+    {
       "file": "packages/artplayer-vitepress/docs/en/plugin/audio-track.md",
-      "sha256Lf": "9da86cbb6dd4edb97056344deadd176a609b4a49a41e3437c9e9839aa2fb4865"
+      "sha256Lf": "6bca6009903dcc933689f69b48cf8611a63057e74ea0e1d782fba644eada178f"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/chapter.md",
+      "sha256Lf": "b08eb8e82fb5afa73c54e3957dc764f20b3cb81ab7f6d46aa0c2dc8fc22f6239"
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
@@ -64,7 +72,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md",
-      "sha256Lf": "92c0969b9ef1726a59f325b2f6d7d78cc42db688cadc9400f7061270262a9769"
+      "sha256Lf": "0c6a11dae51a13e13bb90cc6900c588529be57de638d1de2ce894a8ef9050e5a"
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/start/i18n.md",
@@ -287,5 +295,5 @@
       "sha256Lf": "967db6e5026a2fd3cc24d8a04e5c78859f543d0c0f6d4f9599c103e4e93c9b29"
     }
   ],
-  "outputSha256Lf": "876007aa4a3a83186a2615b12ca2262c921e568ae0f4a67847da9b95a4572b26"
+  "outputSha256Lf": "073a81799d395af6911d7df3315d267f28f3d1756b43cc37b540c0c0eeb23adc"
 }

@@ -23,7 +23,7 @@ For script loading, load ArtPlayer first, followed by `dist/artplayer-plugin-vtt
 
 This is the exact code from the [online thumbnail example](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail). The demo site supplies the media and `.artplayer-app` container; replace them in your application.
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-vtt-thumbnail/index.js"></div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-vtt-thumbnail/index.js">▶ Run Code</div>
 
 ```js
 // npm i artplayer-plugin-vtt-thumbnail

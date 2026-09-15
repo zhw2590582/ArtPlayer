@@ -23,7 +23,7 @@ import artplayerPluginVttThumbnail from 'artplayer-plugin-vtt-thumbnail';
 
 下面与[在线缩略图示例](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail)使用同一份代码。站点提供媒体和 `.artplayer-app` 容器，自己的应用需要替换对应地址。
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-vtt-thumbnail/index.js"></div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-vtt-thumbnail/index.js">▶ Run Code</div>
 
 ```js
 // npm i artplayer-plugin-vtt-thumbnail

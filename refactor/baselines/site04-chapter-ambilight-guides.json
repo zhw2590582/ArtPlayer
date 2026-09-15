@@ -1,0 +1,670 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "doing",
+  "scope": "Chapter/Ambilight bilingual guides and existing Audio/VTT Run Code labels; not complete site/member acceptance",
+  "sourceBefore": "dba354f8cd752bc2f82f5299997fb1ff60b553b5",
+  "capturedAt": "2026-09-15T18:26:41.218Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "platform": "win32",
+    "static": [
+      {
+        "name": "chapter",
+        "language": "zh",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/plugin/chapter.md",
+          "sha256": "6401e3ef3ad79b62718db93062d013f9e0b1ba149ef9c70730898054edee2bab"
+        },
+        "html": {
+          "path": "docs/document/plugin/chapter.html",
+          "sha256": "aa95f77a560ff6a7c67ce03a6ec438a5f31a6a6f499845530b7d460638772946"
+        },
+        "example": {
+          "path": "docs/assets/example/chapter.js",
+          "sha256": "93f2378a1b7a105721511d34fd632ec7745b4b20c472072c410f76b25383c96b"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-guides-final/chapter-zh.mts",
+          "sha256": "99af2f78cc1b328bf7d0b70d6d2396b658462cc716baff9b1c9291c30421efc4"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/plugin/chapter.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/audio-track.html",
+          "/document/plugin/chapter.html#%E8%A7%86%E9%A2%91%E7%AB%A0%E8%8A%82",
+          "/document/en/plugin/chapter.html",
+          "/document/plugin/chapter.html#%E5%AE%89%E8%A3%85%E5%92%8C%E7%A4%BA%E4%BE%8B",
+          "/document/plugin/chapter.html#chapters",
+          "/document/plugin/chapter.html#update",
+          "/document/plugin/chapter.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%8E%E6%A0%B7%E5%BC%8F",
+          "/document/plugin/chapter.html#typescript"
+        ]
+      },
+      {
+        "name": "chapter",
+        "language": "en",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/plugin/chapter.md",
+          "sha256": "b08eb8e82fb5afa73c54e3957dc764f20b3cb81ab7f6d46aa0c2dc8fc22f6239"
+        },
+        "html": {
+          "path": "docs/document/en/plugin/chapter.html",
+          "sha256": "23e080bbdfaaad3b1d803ca590ef2fe06b2d1cd3d5a2163dacbbe6f2fd6c6265"
+        },
+        "example": {
+          "path": "docs/assets/example/chapter.js",
+          "sha256": "93f2378a1b7a105721511d34fd632ec7745b4b20c472072c410f76b25383c96b"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-guides-final/chapter-en.mts",
+          "sha256": "99af2f78cc1b328bf7d0b70d6d2396b658462cc716baff9b1c9291c30421efc4"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/en/plugin/chapter.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/plugin/chapter.html#video-chapters",
+          "/document/plugin/chapter.html",
+          "/document/en/plugin/chapter.html#installation-and-example",
+          "/document/en/plugin/chapter.html#chapters",
+          "/document/en/plugin/chapter.html#update",
+          "/document/en/plugin/chapter.html#lifecycle-and-styling",
+          "/document/en/plugin/chapter.html#typescript"
+        ]
+      },
+      {
+        "name": "ambilight",
+        "language": "zh",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/plugin/ambilight.md",
+          "sha256": "3ed8105311f1da0aeae9c95936f56e0a55f4885c6cb04268e86162d4823935c6"
+        },
+        "html": {
+          "path": "docs/document/plugin/ambilight.html",
+          "sha256": "5d42be2f69d20836d6da8b3517cdf6764c8dc2094c921e44af31049cc25a632f"
+        },
+        "example": {
+          "path": "docs/assets/example/ambilight.js",
+          "sha256": "f97c1404886ba6474b4e14339c563fd2de50b7d50fdc4c9d59d85a3142a1ad52"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-guides-final/ambilight-zh.mts",
+          "sha256": "5f554a76d05509999d340acb1bb3d2a6f2d0a94227179c9925ed99653f3063a5"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/plugin/ambilight.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/audio-track.html",
+          "/document/plugin/ambilight.html#%E8%A7%86%E9%A2%91%E8%83%8C%E5%85%89",
+          "/document/en/plugin/ambilight.html",
+          "/document/plugin/ambilight.html#%E5%AE%89%E8%A3%85%E5%92%8C%E7%A4%BA%E4%BE%8B",
+          "/document/plugin/ambilight.html#%E9%85%8D%E7%BD%AE",
+          "/document/plugin/ambilight.html#start-%E5%92%8C-stop",
+          "/document/plugin/ambilight.html#%E5%AA%92%E4%BD%93%E8%AE%BF%E9%97%AE%E5%92%8C%E4%BB%A3%E7%90%86",
+          "/document/plugin/ambilight.html#typescript-%E5%85%BC%E5%AE%B9%E5%85%A5%E5%8F%A3"
+        ]
+      },
+      {
+        "name": "ambilight",
+        "language": "en",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/plugin/ambilight.md",
+          "sha256": "d3362744c24d26e8d9c045cb73e54984cc47c9173b4612421b431bcfbde1b65c"
+        },
+        "html": {
+          "path": "docs/document/en/plugin/ambilight.html",
+          "sha256": "d05c96371c3e526879da98433a00d3ee78c6467220ee3f9766bf129ec55cfcdf"
+        },
+        "example": {
+          "path": "docs/assets/example/ambilight.js",
+          "sha256": "f97c1404886ba6474b4e14339c563fd2de50b7d50fdc4c9d59d85a3142a1ad52"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-guides-final/ambilight-en.mts",
+          "sha256": "5f554a76d05509999d340acb1bb3d2a6f2d0a94227179c9925ed99653f3063a5"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/en/plugin/ambilight.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/plugin/ambilight.html#video-ambilight",
+          "/document/plugin/ambilight.html",
+          "/document/en/plugin/ambilight.html#installation-and-example",
+          "/document/en/plugin/ambilight.html#options",
+          "/document/en/plugin/ambilight.html#start-and-stop",
+          "/document/en/plugin/ambilight.html#media-access-and-proxies",
+          "/document/en/plugin/ambilight.html#typescript-compatibility-entries"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "plugin/chapter.md",
+        "passed": true,
+        "errors": [],
+        "title": "视频章节\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-chapter/index.js",
+          "codeSha256": "dc33b0b9fe53ba2e1ce03ae5105a66afcd0c4106111fe6ddb7da1c2fbe708d93"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-guides-final/chromium-chapter-zh.png",
+          "sha256": "6f5dd9a55c80b9ec5ce7d95693c34bf59a83079dda30bb5c8f1ed050bacf2db6"
+        },
+        "translation": "/document/en/plugin/chapter.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "en/plugin/chapter.md",
+        "passed": true,
+        "errors": [],
+        "title": "Video chapters\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-chapter/index.js",
+          "codeSha256": "dc33b0b9fe53ba2e1ce03ae5105a66afcd0c4106111fe6ddb7da1c2fbe708d93"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-guides-final/chromium-chapter-en.png",
+          "sha256": "5a925aa053134212e065dbfdb9e704208e900589b276a45adb177904298000f8"
+        },
+        "translation": "/document/plugin/chapter.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "plugin/ambilight.md",
+        "passed": true,
+        "errors": [],
+        "title": "视频背光\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-ambilight/index.js",
+          "codeSha256": "2e755d0b867db520fb85e2605369e574961b88dfc4d494c5b60ab65fde37c13e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-guides-final/chromium-ambilight-zh.png",
+          "sha256": "ad6fb8fac96c430962ac837a87b1fc9531e3bc83a5f7a38b611bd254af66938f"
+        },
+        "translation": "/document/en/plugin/ambilight.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "en/plugin/ambilight.md",
+        "passed": true,
+        "errors": [],
+        "title": "Video ambilight\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-ambilight/index.js",
+          "codeSha256": "2e755d0b867db520fb85e2605369e574961b88dfc4d494c5b60ab65fde37c13e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-guides-final/chromium-ambilight-en.png",
+          "sha256": "7f41a472b0054ebb04dfe76aaced4a1359dd0348197827e0a66af6f30e208f98"
+        },
+        "translation": "/document/plugin/ambilight.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "plugin/chapter.md",
+        "passed": true,
+        "errors": [],
+        "title": "视频章节\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-chapter/index.js",
+          "codeSha256": "dc33b0b9fe53ba2e1ce03ae5105a66afcd0c4106111fe6ddb7da1c2fbe708d93"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-guides-final/firefox-chapter-zh.png",
+          "sha256": "4aa7fe710d3e01af205c333e2262ba4fc64b46687025b9baf88d48ad74c32bd4"
+        },
+        "translation": "/document/en/plugin/chapter.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "en/plugin/chapter.md",
+        "passed": true,
+        "errors": [],
+        "title": "Video chapters\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-chapter/index.js",
+          "codeSha256": "dc33b0b9fe53ba2e1ce03ae5105a66afcd0c4106111fe6ddb7da1c2fbe708d93"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-guides-final/firefox-chapter-en.png",
+          "sha256": "090db853fd7129817b3b7e758656f2b436046a94fb4e2b8373bd3444add585c8"
+        },
+        "translation": "/document/plugin/chapter.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "plugin/ambilight.md",
+        "passed": true,
+        "errors": [],
+        "title": "视频背光\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-ambilight/index.js",
+          "codeSha256": "2e755d0b867db520fb85e2605369e574961b88dfc4d494c5b60ab65fde37c13e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-guides-final/firefox-ambilight-zh.png",
+          "sha256": "3822d403da8a982b08f262c6e25dc80836c284255c15d32776aeeecb14118a7e"
+        },
+        "translation": "/document/en/plugin/ambilight.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "en/plugin/ambilight.md",
+        "passed": true,
+        "errors": [],
+        "title": "Video ambilight\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-ambilight/index.js",
+          "codeSha256": "2e755d0b867db520fb85e2605369e574961b88dfc4d494c5b60ab65fde37c13e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-guides-final/firefox-ambilight-en.png",
+          "sha256": "3e6539e5528ccbc242074b4b947233daa7515ab565365ec6958bbc800351c0fc"
+        },
+        "translation": "/document/plugin/ambilight.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "plugin/chapter.md",
+        "passed": true,
+        "errors": [],
+        "title": "视频章节 ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-chapter/index.js",
+          "codeSha256": "dc33b0b9fe53ba2e1ce03ae5105a66afcd0c4106111fe6ddb7da1c2fbe708d93"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-guides-final/webkit-chapter-zh.png",
+          "sha256": "96742ae2cc0d24b8c0ce260afe8ff45934e0a91babef41efc66d3930cedcc136"
+        },
+        "translation": "/document/en/plugin/chapter.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "en/plugin/chapter.md",
+        "passed": true,
+        "errors": [],
+        "title": "Video chapters ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-chapter/index.js",
+          "codeSha256": "dc33b0b9fe53ba2e1ce03ae5105a66afcd0c4106111fe6ddb7da1c2fbe708d93"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-guides-final/webkit-chapter-en.png",
+          "sha256": "ac615a5a0ebede86e79d99f3ce8266053fbbe0116f6b6565f62a31e489ce7784"
+        },
+        "translation": "/document/plugin/chapter.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "plugin/ambilight.md",
+        "passed": true,
+        "errors": [],
+        "title": "视频背光 ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-ambilight/index.js",
+          "codeSha256": "2e755d0b867db520fb85e2605369e574961b88dfc4d494c5b60ab65fde37c13e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-guides-final/webkit-ambilight-zh.png",
+          "sha256": "871178c087646f9916efba6083204984ffe83de98a48412e963504e5c0235a0b"
+        },
+        "translation": "/document/en/plugin/ambilight.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "en/plugin/ambilight.md",
+        "passed": true,
+        "errors": [],
+        "title": "Video ambilight ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-ambilight/index.js",
+          "codeSha256": "2e755d0b867db520fb85e2605369e574961b88dfc4d494c5b60ab65fde37c13e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-guides-final/webkit-ambilight-en.png",
+          "sha256": "8a10c01666a541c722d0da952b2b6fe90bfe822b315ad08540b8583b5394d198"
+        },
+        "translation": "/document/plugin/ambilight.html"
+      }
+    ],
+    "controls": [
+      {
+        "guide": "plugin/chapter.md",
+        "visibleLabel": "▶ Run Code",
+        "originalExample": "chapter",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/plugin/chapter.md",
+          "sha256": "6401e3ef3ad79b62718db93062d013f9e0b1ba149ef9c70730898054edee2bab"
+        },
+        "html": {
+          "path": "docs/document/plugin/chapter.html",
+          "sha256": "aa95f77a560ff6a7c67ce03a6ec438a5f31a6a6f499845530b7d460638772946"
+        }
+      },
+      {
+        "guide": "en/plugin/chapter.md",
+        "visibleLabel": "▶ Run Code",
+        "originalExample": "chapter",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/plugin/chapter.md",
+          "sha256": "b08eb8e82fb5afa73c54e3957dc764f20b3cb81ab7f6d46aa0c2dc8fc22f6239"
+        },
+        "html": {
+          "path": "docs/document/en/plugin/chapter.html",
+          "sha256": "23e080bbdfaaad3b1d803ca590ef2fe06b2d1cd3d5a2163dacbbe6f2fd6c6265"
+        }
+      },
+      {
+        "guide": "plugin/ambilight.md",
+        "visibleLabel": "▶ Run Code",
+        "originalExample": "ambilight",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/plugin/ambilight.md",
+          "sha256": "3ed8105311f1da0aeae9c95936f56e0a55f4885c6cb04268e86162d4823935c6"
+        },
+        "html": {
+          "path": "docs/document/plugin/ambilight.html",
+          "sha256": "5d42be2f69d20836d6da8b3517cdf6764c8dc2094c921e44af31049cc25a632f"
+        }
+      },
+      {
+        "guide": "en/plugin/ambilight.md",
+        "visibleLabel": "▶ Run Code",
+        "originalExample": "ambilight",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/plugin/ambilight.md",
+          "sha256": "d3362744c24d26e8d9c045cb73e54984cc47c9173b4612421b431bcfbde1b65c"
+        },
+        "html": {
+          "path": "docs/document/en/plugin/ambilight.html",
+          "sha256": "d05c96371c3e526879da98433a00d3ee78c6467220ee3f9766bf129ec55cfcdf"
+        }
+      },
+      {
+        "guide": "plugin/audio-track.md",
+        "visibleLabel": "▶ Run Code",
+        "originalExample": "audio.track",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/plugin/audio-track.md",
+          "sha256": "4a8c23926545a7ea742e385c8911417f937b3acfb171d90987930a4ddf73593b"
+        },
+        "html": {
+          "path": "docs/document/plugin/audio-track.html",
+          "sha256": "8cd593d6c4f041b19044d28f0c4596d0ad45117d9a523b82608f8ba04a9b3731"
+        }
+      },
+      {
+        "guide": "en/plugin/audio-track.md",
+        "visibleLabel": "▶ Run Code",
+        "originalExample": "audio.track",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/plugin/audio-track.md",
+          "sha256": "6bca6009903dcc933689f69b48cf8611a63057e74ea0e1d782fba644eada178f"
+        },
+        "html": {
+          "path": "docs/document/en/plugin/audio-track.html",
+          "sha256": "46857be46742e996cfee259184129545c291f635292f7e3d740764f4c802f51e"
+        }
+      },
+      {
+        "guide": "plugin/vtt-thumbnail.md",
+        "visibleLabel": "▶ Run Code",
+        "originalExample": "vtt.thumbnail",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/plugin/vtt-thumbnail.md",
+          "sha256": "0abb4c123b67ec539e35684ae4adf77cb209c333ee3ffc8aeba955d67c28a0e0"
+        },
+        "html": {
+          "path": "docs/document/plugin/vtt-thumbnail.html",
+          "sha256": "e35f0091710837b1f15e1d3e5ba6e78bed8cabd163f7230d368da52a5c2eacc3"
+        }
+      },
+      {
+        "guide": "en/plugin/vtt-thumbnail.md",
+        "visibleLabel": "▶ Run Code",
+        "originalExample": "vtt.thumbnail",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md",
+          "sha256": "0c6a11dae51a13e13bb90cc6900c588529be57de638d1de2ce894a8ef9050e5a"
+        },
+        "html": {
+          "path": "docs/document/en/plugin/vtt-thumbnail.html",
+          "sha256": "46cd81f234baa17a541157353d4d783f1c43d6874d28a0d8690e629455d3efea"
+        }
+      }
+    ],
+    "complete": true,
+    "limitations": [
+      "Guide rendering/navigation and original-code forwarding only; popup editor response is isolated, not media playback.",
+      "Does not complete SITE-04 core/member coverage, SITE-05, EX-03 or physical-device validation."
+    ]
+  },
+  "report": {
+    "path": "refactor/.cache/site04-guides-final/report.json",
+    "sha256": "83faff7d42810deef007da6163532cee8b414a8afe158eaa8762175620d57790"
+  },
+  "script": {
+    "path": "refactor/.cache/site04-guides-validate.mjs",
+    "sha256": "80f1ed8066ce64f44f1bd866e3eb6f1f1967db01d2b3e5554ddf02cd58cc1b99"
+  },
+  "logs": [
+    {
+      "path": "refactor/.cache/site04-guides-final-llm.log",
+      "sha256": "02cb6dff6826a2cdc17e4d65ce3b1526a547c5a83f629fe5fe8752395ae0251a"
+    },
+    {
+      "path": "refactor/.cache/site04-guides-final-build.log",
+      "sha256": "84748657b91709f5cef825b4766ce93a6afee953fa26f4cf0110eab0a15facac"
+    },
+    {
+      "path": "refactor/.cache/site04-guides-final-validate.log",
+      "sha256": "e6b3dcebc9fe90e6345d432b764d552009902592847f55df209284a4d289bea1"
+    },
+    {
+      "path": "refactor/.cache/site04-guides-tools.log",
+      "sha256": "c0ecd3f1911f2ee51f615cf140ee18c915f6b814e2ce7efe523b51be65950aef"
+    },
+    {
+      "path": "refactor/.cache/site04-guides-static-before.log",
+      "sha256": "f477ac61ce743e1e86b5a26987231d992eb0c9d5036307e00e0ff5660a4d7bd1"
+    },
+    {
+      "path": "refactor/.cache/site04-guides-static-before-2.log",
+      "sha256": "f477ac61ce743e1e86b5a26987231d992eb0c9d5036307e00e0ff5660a4d7bd1"
+    }
+  ],
+  "toolTests": {
+    "passed": 17,
+    "failed": 0,
+    "skipped": 0,
+    "durationMs": 1411.5968
+  },
+  "earlierNavigation": {
+    "report": {
+      "path": "refactor/.cache/site04-guides/report.json",
+      "sha256": "60513f898835b7c642e7dbab121fe822905bc6f50fbcd8da12fbb6339120666d"
+    },
+    "passed": 12,
+    "limitation": "Navigation passed, but visual inspection found empty control labels. Final labeled controls were rebuilt and revalidated."
+  },
+  "visualReview": {
+    "before": {
+      "path": "refactor/.cache/site04-guides/chromium-chapter-zh.png",
+      "sha256": "44a73a2cbe86774032ff88e00f188ca600245b56ee259bc475c0953640e3ed5c"
+    },
+    "after": {
+      "path": "refactor/.cache/site04-guides-final/chromium-ambilight-zh.png",
+      "sha256": "ad6fb8fac96c430962ac837a87b1fc9531e3bc83a5f7a38b611bd254af66938f"
+    },
+    "finding": "The initial empty Run Code div appeared as a tiny green block; the final label is visible."
+  },
+  "inAppBrowser": {
+    "tab": 14,
+    "url": "http://localhost:8082/document/plugin/chapter.html",
+    "title": "视频章节 | Artplayer.js",
+    "browserVersion": null,
+    "scope": "Observed local guide accessibility tree before label correction; not playback evidence."
+  },
+  "libraryCandidates": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-RbQLEC/report.json",
+      "sha256": "defb80e77baf55a09051eb634a466d590aeff0e4a7f9dab5ca6330eb104a7532"
+    },
+    "buildEvidence": 21,
+    "stale": []
+  },
+  "limitations": [
+    "First two static probes failed because the lightweight HTML parser preserved className casing while its selector normalized it. Direct attribute inspection fixed the probe; page markup was not changed to satisfy that probe.",
+    "Popup destination is intercepted with an empty local response to verify navigation and exact code parameters; this does not run media playback.",
+    "No library source, declaration or distribution changes; no remote operation or formal review."
+  ],
+  "whitespaceCheck": {
+    "fullStagedExitCode": 2,
+    "exceptions": [
+      {
+        "file": "docs/document/en/plugin/ambilight.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/en/plugin/ambilight.html",
+        "line": 49
+      },
+      {
+        "file": "docs/document/en/plugin/chapter.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/en/plugin/chapter.html",
+        "line": 65
+      },
+      {
+        "file": "docs/document/plugin/ambilight.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/plugin/ambilight.html",
+        "line": 49
+      },
+      {
+        "file": "docs/document/plugin/chapter.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/plugin/chapter.html",
+        "line": 65
+      }
+    ],
+    "verifiedException": "Only whitespace-only lines from the generated VitePress template; outputs were not hand-edited.",
+    "otherStagedFilesExitCode": 0
+  }
+}

@@ -4551,11 +4551,15 @@
         "SITE-ROUTES-01",
         "SITE-EDITOR-VAST-01"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "M",
       "deliverable": "已随实现更新的中文/英文 API、包内实现地图、旧 JS 示例及已知能力限制的全包核对",
       "acceptance": "未把缺环境的能力写成已验证，静态核对不等待设备任务；最终 demo 仍由 EX-03 验收；按 SITE-01 声明成员/候选标题清单逐项语义核对，补齐缺失的双语插件说明和 Danmuku 英文入口",
-      "evidence": []
+      "evidence": [
+        "site-content-review.md",
+        "changes/2026-09-16-SITE-04-chapter-ambilight-guides.md",
+        "baselines/site04-chapter-ambilight-guides.json"
+      ]
     },
     {
       "id": "SITE-05",

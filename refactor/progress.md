@@ -1,5 +1,16 @@
 # 进度与证据
 
+## SITE-04 Chapter/Ambilight双语内容核对
+
+新增两包四份指南，覆盖真实参数、生命周期、数组修改/采样行为和兼容类型入口，
+保留原样示例并接入本地导航。顺带修复八处无文字的Run Code控件，版本菜单显示
+6.0.0且标注unreleased。四份TS片段、每页29个本地链接/锚点、三浏览器12组导航
+及17项既有工具测试通过；构建、LLM、目录清单和lint通过。见[记录](changes/2026-09-16-SITE-04-chapter-ambilight-guides.md)、
+[证据](baselines/site04-chapter-ambilight-guides.json)和[接续表](site-content-review.md)。
+当前40 Markdown/49 HTML；SITE-04为doing，核心963条成员及其余包仍未完成全量
+语义核对。21库候选build指纹有效，未启动复盘。总计224 done、22 doing、39 todo。
+
+
 ## PKG-CHAPTER-05 当前major的时序失败仍可复现
 
 实际登记候选的清晰度切换矩阵11通过、1个Windows WebKit失败；失败组合为新核心+

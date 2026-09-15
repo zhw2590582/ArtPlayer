@@ -4571,6 +4571,98 @@ You need to modify it before importing the `Artplayer` dependency for it to take
 
 :::
 
+===== packages/artplayer-vitepress/docs/en/plugin/ambilight.md =====
+
+# Video ambilight
+
+[简体中文](../../plugin/ambilight.md)
+
+Sample colors from the video to display a blurred glow around the player. The plugin reads pixels with Canvas, needs no additional SDK, and does not change video playback or audio output.
+
+This page describes the refactor branch. Its lifecycle fixes and accurate type entry are not published yet. The online example and unpinned npm/CDN packages are not the current candidate.
+
+## Installation and example
+
+```sh
+yarn add artplayer artplayer-plugin-ambilight
+```
+
+```js
+import Artplayer from 'artplayer';
+import artplayerPluginAmbilight from 'artplayer-plugin-ambilight';
+```
+
+For script usage, load ArtPlayer before `dist/artplayer-plugin-ambilight.js`. The global is `artplayerPluginAmbilight`. The following code is unchanged from the [online ambilight example](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight). Your application must provide its own container and accessible video.
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-ambilight/index.js">▶ Run Code</div>
+
+```js
+// npm i artplayer-plugin-ambilight
+// import artplayerPluginAmbilight from 'artplayer-plugin-ambilight';
+
+const art = new Artplayer({
+  container: '.artplayer-app',
+  url: '/assets/sample/video.mp4',
+  autoSize: true,
+  plugins: [
+    artplayerPluginAmbilight({
+      blur: '50px',
+      opacity: 1,
+      frequency: 10,
+      duration: 0.3,
+    }),
+  ],
+})
+```
+
+## Options
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `blur` | `string` | `'50px'` | CSS blur radius |
+| `opacity` | `number` | `0.5` | Glow grid opacity; the example explicitly uses `1` |
+| `frequency` | `number` | `10` | Maximum samples per second; use a positive value; playback and frame scheduling limit the actual rate |
+| `duration` | `number` | `0.3` | Color transition duration in seconds |
+| `zIndex` | `number` | Actual value fixed at `9` | Historical accepted input that does not change the grid's stacking order |
+
+The plugin samples a 3×3 grid. Colors update only while the player is playing and the sampling interval has elapsed. `frequency` does not set the video's frame rate. Masks, clipping and an ancestor's `overflow` styles can also affect how much of the glow is visible.
+
+## start and stop
+
+The result has the fixed `name` of `artplayerPluginAmbilight`. When installed through the constructor options, it starts scheduling after the player's `ready` event:
+
+```js
+const light = art.plugins.artplayerPluginAmbilight;
+light.stop();  // Stop sampling and retain the last colors.
+light.start(); // Resume sampling while the player is playing.
+```
+
+Both methods return `undefined` synchronously and do not play or pause the video. `stop()` retains the last colors. `start()` is not a Promise that captures a frame immediately. Repeated calls do not create multiple sampling loops. If you install the plugin with `art.plugins.add(...)` after `ready` has already fired, call `start()` on the returned result yourself.
+
+There is no plugin `update` or separate `destroy` method. Destroying the player stops frame scheduling, removes the grid and plugin subscriptions, and releases the sampling canvas. Retained `start/stop` methods do no work after destruction.
+
+## Media access and proxies
+
+The browser must be able to decode the video and read its pixels into Canvas. Cross-origin video needs the appropriate media CORS configuration and server response headers; successful playback alone does not grant pixel access. A failed pixel read skips that update and retains existing colors. A later readable source can recover. The plugin does not bypass browser origin restrictions.
+
+Canvas proxy sampling uses the actual dimensions of its output canvas. Other proxies must be checked for a drawable output; a passing desktop combination does not establish support for every browser or proxy. The effect does not control a physical monitor's backlight.
+
+## TypeScript compatibility entries
+
+The root and `/legacy` entries retain the published 1.1.0 factory type: the options object is required, while its fields are optional. Pass `{}` for defaults with those types. JavaScript calls can still omit the argument.
+
+For accurate optional calls, the CommonJS `.default` self-alias, or callable NodeNext ESM default types, use `/runtime`, which shares the same implementation:
+
+```ts
+import ambilight from 'artplayer-plugin-ambilight/runtime';
+
+const installLight = ambilight();
+const installDefaultLight = ambilight.default({ opacity: 0.5 });
+```
+
+The root declarations export the named types `Option`, `Result`, `Callable`, `Factory` and `RuntimeFactory`. Version 1.0.0 used `export =` and required option fields, unlike 1.1.0. Earlier `import = require` callers can move to `/runtime`; reads of optional fields need a fallback. Node10 TypeScript default imports of `/runtime` require `esModuleInterop`; `import = require` works without it.
+
+
 ===== packages/artplayer-vitepress/docs/en/plugin/audio-track.md =====
 
 # Audio Track
@@ -4598,7 +4690,7 @@ For script tags, load ArtPlayer before the plugin's `dist/artplayer-plugin-audio
 
 This is the same code as the [online audio example](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-audio-track/index.js&example=audio.track). The demo site supplies the media files and `.artplayer-app` container; replace both when integrating it into your application.
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-audio-track/index.js"></div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-audio-track/index.js">▶ Run Code</div>
 
 ```js
 // npm i artplayer-plugin-audio-track
@@ -4682,6 +4774,114 @@ const art = new Artplayer({
 Named types include `Option`, `UpdateOption`, the old `Result`, `RuntimeResult` and `RuntimeFactory`. The online editor's default global retains legacy inference too. To select precise update typing, explicitly use `artplayerPluginAudioTrack as artplayerPluginAudioTrack.RuntimeFactory`. This does not create a second plugin implementation.
 
 Actual desktop tests cover audio/video playback, pause, seeking, updates and destruction. They do not establish support for every mobile device, proxy player, audio format or long-running synchronization combination. Check browser decoding capabilities and the project's validation records for the applicable scope.
+
+
+===== packages/artplayer-vitepress/docs/en/plugin/chapter.md =====
+
+# Video chapters
+
+[简体中文](../../plugin/chapter.md)
+
+Divide the progress bar into chapters and display a title on hover while retaining the player's seeking and thumbnail controls. The plugin does not extract chapter metadata from the media file; your application supplies the times.
+
+This page describes the refactor branch. Its candidates and fixes are not published yet. The online example and unpinned npm/CDN packages may use different code.
+
+## Installation and example
+
+```sh
+yarn add artplayer artplayer-plugin-chapter
+```
+
+```js
+import Artplayer from 'artplayer';
+import artplayerPluginChapter from 'artplayer-plugin-chapter';
+```
+
+For script usage, load ArtPlayer before `dist/artplayer-plugin-chapter.js`. The plugin global is `artplayerPluginChapter`. The following code is unchanged from the [online chapter example](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter). The site provides its container, video and thumbnail image; replace those resources when integrating it into your application.
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-chapter/index.js">▶ Run Code</div>
+
+```js
+// npm i artplayer-plugin-chapter
+// import artplayerPluginChapter from 'artplayer-plugin-chapter';
+
+const art = new Artplayer({
+  container: '.artplayer-app',
+  url: '/assets/sample/video.mp4',
+  autoSize: true,
+  fullscreen: true,
+  fullscreenWeb: true,
+  miniProgressBar: true,
+  autoOrientation: true,
+  thumbnails: {
+    url: '/assets/sample/thumbnails.png',
+    number: 60,
+    column: 10,
+  },
+  plugins: [
+    artplayerPluginChapter({
+      chapters: [
+        { start: 0, end: 18, title: 'One more chance' },
+        { start: 18, end: 36, title: '谁でもいいはずなのに' },
+        { start: 36, end: 54, title: '夏の想い出がまわる' },
+        { start: 54, end: 72, title: 'こんなとこにあるはずもないのに' },
+        { start: 72, end: Infinity, title: '终わり' },
+      ],
+    }),
+  ],
+})
+```
+
+## chapters
+
+The factory accepts an optional options object containing `chapters`. Each entry has these fields:
+
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `start` | `number` | Start time in seconds; a finite, nonnegative number |
+| `end` | `number` | End time in seconds; `Infinity` means the current video's end |
+| `title` | `string` | Hover title; an empty string retains an untitled interval |
+
+Every interval must satisfy `start < end <= video duration`, without overlapping the next chapter. The plugin sorts chapters by start time and fills uncovered intervals at the beginning, end and between chapters. It **mutates the supplied array** by sorting it, inserting untitled entries and replacing `Infinity` with the current duration. Pass a fresh array and fresh entry objects whenever you need to preserve the original configuration.
+
+Chapters are created only when the media duration is finite and positive. Missing, empty or non-array input clears the view; TypeScript still accepts only the declared array type. Invalid field types throw `TypeError`; invalid times and overlapping intervals throw `Error`. Titles are plain text, not HTML. Displayed titles are trimmed without changing the original object's `title`.
+
+## update
+
+The result has the fixed `name` of `artplayerPluginChapter`. `update(option)` replaces the chapters synchronously and returns `undefined`. Its options object is required; `update({})` clears the chapters:
+
+```js
+art.plugins.artplayerPluginChapter.update({
+    chapters: [{ start: 0, end: Infinity, title: 'Introduction' }],
+});
+
+// Clear all chapter segments and the hover title.
+art.plugins.artplayerPluginChapter.update({});
+```
+
+An update clears the previous view before validating the replacement. If validation throws, the previous chapters are not retained. A successful update synchronously emits the existing `setBar('loaded', ...)` event; progress interactions continue to use the core controls.
+
+The initial configuration is applied only on the first `video:loadedmetadata`. Switching media does not calculate new chapters automatically. After the new media loads, call `update` with fresh data for its duration. Do not reuse an object whose `Infinity` end was already replaced by the previous duration.
+
+## Lifecycle and styling
+
+Destroying the player removes this plugin's listeners, chapter nodes, title and `artplayer-plugin-chapter` class, including when `art.destroy(false)` retains the player HTML. Calling `update` on a retained result after destruction does not recreate the view. There is no separate plugin `destroy()` method.
+
+The existing `.art-chapter`, `.art-chapter-title` and chapter `data-start/end/duration/title` hooks remain. Long titles are clipped to the progress bar width, while their full text remains in the text content and data attributes. The stylesheet is shared by the page and is retained when one player is destroyed.
+
+## TypeScript
+
+The root and `/legacy` entries share the public API and export the `Chapters`, `Option` and `Result` types. This package does not require a separate `/runtime` entry:
+
+```ts
+import artplayerPluginChapter from 'artplayer-plugin-chapter';
+import type { Chapters } from 'artplayer-plugin-chapter';
+
+const chapters: Chapters = [{ start: 0, end: Infinity, title: 'Introduction' }];
+const installChapters = artplayerPluginChapter({ chapters });
+```
+
+Desktop tests cover chapters with quality selection, thumbnails and fullscreen. They do not establish support on every mobile device. The current Windows WebKit quality-switch tests still encounter stalls while reading browser state, so this page does not promise timing reliability on every platform.
 
 
 ===== packages/artplayer-vitepress/docs/en/plugin/danmuku.md =====
@@ -5385,7 +5585,7 @@ For script loading, load ArtPlayer first, followed by `dist/artplayer-plugin-vtt
 
 This is the exact code from the [online thumbnail example](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail). The demo site supplies the media and `.artplayer-app` container; replace them in your application.
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-vtt-thumbnail/index.js"></div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-vtt-thumbnail/index.js">▶ Run Code</div>
 
 ```js
 // npm i artplayer-plugin-vtt-thumbnail

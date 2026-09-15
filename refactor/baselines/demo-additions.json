@@ -13,12 +13,28 @@
   ],
   "pages": [
     {
+      "source": "docs/document/en/plugin/ambilight.html",
+      "route": "/document/en/plugin/ambilight.html",
+      "introducedAfter": "dba354f8cd752bc2f82f5299997fb1ff60b553b5",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated bilingual guide added during SITE-04 implementation; content/navigation evidence does not complete full demo or release acceptance."
+    },
+    {
       "source": "docs/document/en/plugin/audio-track.html",
       "route": "/document/en/plugin/audio-track.html",
       "introducedBy": "d3349e83f24fdea3fa55fdfa6254cb1587fc5a26",
       "owner": "SITE-AUDIO-01",
       "finalDemoOwner": "EX-03",
       "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
+    },
+    {
+      "source": "docs/document/en/plugin/chapter.html",
+      "route": "/document/en/plugin/chapter.html",
+      "introducedAfter": "dba354f8cd752bc2f82f5299997fb1ff60b553b5",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated bilingual guide added during SITE-04 implementation; content/navigation evidence does not complete full demo or release acceptance."
     },
     {
       "source": "docs/document/en/plugin/danmuku.html",
@@ -53,12 +69,28 @@
       "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
     },
     {
+      "source": "docs/document/plugin/ambilight.html",
+      "route": "/document/plugin/ambilight.html",
+      "introducedAfter": "dba354f8cd752bc2f82f5299997fb1ff60b553b5",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated bilingual guide added during SITE-04 implementation; content/navigation evidence does not complete full demo or release acceptance."
+    },
+    {
       "source": "docs/document/plugin/audio-track.html",
       "route": "/document/plugin/audio-track.html",
       "introducedBy": "d3349e83f24fdea3fa55fdfa6254cb1587fc5a26",
       "owner": "SITE-AUDIO-01",
       "finalDemoOwner": "EX-03",
       "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
+    },
+    {
+      "source": "docs/document/plugin/chapter.html",
+      "route": "/document/plugin/chapter.html",
+      "introducedAfter": "dba354f8cd752bc2f82f5299997fb1ff60b553b5",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated bilingual guide added during SITE-04 implementation; content/navigation evidence does not complete full demo or release acceptance."
     },
     {
       "source": "docs/document/plugin/dash-control.html",
