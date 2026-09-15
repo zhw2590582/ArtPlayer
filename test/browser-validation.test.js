@@ -20,6 +20,7 @@ test('Source invocation clears inherited artifact selection without changing cal
   assert.notEqual(source.directory, installed.directory)
   assert(installedTests.includes('ambilight-proxy.spec.js'))
   assert(installedTests.includes('canvas-lifecycle.spec.js'))
+  assert(installedTests.includes('asr-no-audio.spec.js'))
   for (const file of installedTests)
     assert(fs.existsSync(path.resolve('test/browser', file)))
 })

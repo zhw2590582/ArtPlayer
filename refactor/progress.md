@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-ASR-05 无音轨视频与恢复
+
+新增真实无音轨 H.264 → AAC 的默认/显式捕获测试：播放时钟与解码画面继续，
+无非零 PCM；显式捕获失败后关闭 Context/捕获轨且不直接绑定媒体；切源后恢复
+非零采集，销毁清理通过。源码、隔离安装 main/legacy 合计 24 通过、12 Windows
+WebKit WebAudio 能力跳过，零失败/重试。229 ASR 专项、6 清单测试、类型/lint/
+严格工具链通过。新增文件已纳入 installed CI 清单，远端未执行。
+
+见[检查点](changes/2026-09-15-PKG-ASR-05-no-audio.md)和
+[证据](baselines/asr-no-audio-validation.json)。生产运行字节/类型/依赖/锁未改；
+任务05仍 doing，不关闭其他不支持媒体、真实设备和发布门槛。202 done、21 doing、
+43 todo；继续剩余实际验收，不重复已有跨域恢复证据。
+
 ## SITE-07 Monaco 历史 Unicode 数据检查点
 
 三份原生成配方在冻结依赖下复现 RTL/Emoji 正则、imprecise token 表达式和全部

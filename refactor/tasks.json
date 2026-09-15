@@ -2921,7 +2921,9 @@
         "baselines/asr-combinations-validation.json",
         "changes/2026-09-13-PKG-ASR-05-cors-combinations.md",
         "baselines/asr-explicit-capture-validation.json",
-        "changes/2026-09-13-PKG-ASR-05-editor-generation.md"
+        "changes/2026-09-13-PKG-ASR-05-editor-generation.md",
+        "changes/2026-09-15-PKG-ASR-05-no-audio.md",
+        "baselines/asr-no-audio-validation.json"
       ]
     },
     {

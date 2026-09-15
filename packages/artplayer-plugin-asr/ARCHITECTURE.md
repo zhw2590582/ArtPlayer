@@ -154,7 +154,7 @@ From the repository root:
 Windows Playwright WebKit 26.6 lacks AudioContext and AudioWorkletNode. Its native
 ASR cases remain explicit skips and do not establish Safari/device compatibility.
 Native direct/fallback routing, volume/mute, CORS and audio-track combinations
-have scoped browser evidence. Unsupported media, external-owner integration,
+have scoped browser evidence. Other unsupported media,
 Safari and physical devices remain PKG-ASR-05 acceptance work. CORS restrictions
 and main-video-only capture are explicit integration boundaries, not a claim
 that every media source can be recognized. Do not use the demo's external
@@ -162,10 +162,27 @@ recognizer service as a prerequisite for local audio verification.
 
 ## Shared installed browser validation
 
-Six browser files select verified installed ASR bytes through browser-candidate.js. The Audio Track combination independently verifies both installed plugins. Published ASR controls retain their frozen archives; attachments distinguish selected published, installed and source inputs. Tests cover native local PCM, direct/capture routing, CORS, volume/mute and ownership. Deliberately forced Firefox binding rejection remains labeled; no recognition service or physical speaker output is claimed.
+Seven browser files select verified installed ASR bytes through browser-candidate.js. The Audio Track combination independently verifies both installed plugins. Published ASR controls retain their frozen archives; attachments distinguish selected published, installed and source inputs. Tests cover native local PCM, direct/capture routing, CORS, video-only input recovery, volume/mute and ownership. Deliberately forced Firefox binding rejection remains labeled; no recognition service or physical speaker output is claimed.
 
 Use `yarn test:package --browser`, then `yarn test:browser:installed`. The common
 roster in scripts/browser-validation/scope.ts drives both preparation and required
 inputs. Explicit artifact overrides are rejected when an installed map is present;
 missing or stale inputs fail without source fallback. Source mode retains deliberate
 artifact selection. See ../../refactor/changes/2026-09-15-CI-01-asr-cast-installed.md.
+
+## Video-only input
+
+`test/browser/asr-no-audio.spec.js` uses the generated H.264 video with no audio
+track, verifies changing decoded pixels and the media clock, then changes the same
+player to the local AAC tone. The default direct graph can yield silence or no
+chunks for the video-only source and remains available for the later audio source.
+Capture-only mode naturally fails `createMediaStreamSource` with no audio track;
+the failed graph closes its context and stops its captured video track without
+taking over or pausing native playback. A later playable source reacquires capture.
+Both paths verify nonzero recovered PCM and final context/track cleanup.
+
+The test observes real browser nodes/streams and does not inject a binding failure.
+It does not prove speaker output, malformed-media recovery, Safari or device
+support. Run `yarn test:browser asr-no-audio.spec.js --workers=1` for source mode;
+the same file is included in the installed CI roster. WebAudio capability skips
+remain visible and cannot be counted as audio processing passes.

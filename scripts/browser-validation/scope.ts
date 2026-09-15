@@ -41,6 +41,7 @@ export const installedTests = [
   'asr-fallback.spec.js',
   'asr-cors.spec.js',
   'asr-capture-cors.spec.js',
+  'asr-no-audio.spec.js',
   'asr-audio-track.spec.js',
   'chromecast-lifecycle.spec.js',
   'mediabunny-audio.spec.js',
