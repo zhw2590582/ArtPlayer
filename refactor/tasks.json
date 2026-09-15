@@ -4522,7 +4522,10 @@
         "changes/2026-09-15-SITE-07-monaco-languages.md",
         "baselines/monaco-language-notices.json",
         "baselines/monaco-language-notices-validation.json",
-        "changes/2026-09-15-SITE-07-monaco-language-notices.md"
+        "changes/2026-09-15-SITE-07-monaco-language-notices.md",
+        "baselines/monaco-modes-provenance.json",
+        "baselines/monaco-modes-validation.json",
+        "changes/2026-09-15-SITE-07-monaco-modes.md"
       ]
     },
     {

@@ -1037,7 +1037,8 @@
           "version": "3.0.0",
           "tarball": "https://registry.npmjs.org/jsonc-parser/-/jsonc-parser-3.0.0.tgz",
           "assets": [
-            "docs/assets/js/vs/language/json/jsonWorker.js"
+            "docs/assets/js/vs/language/json/jsonWorker.js",
+            "docs/assets/js/vs/language/json/jsonMode.js"
           ],
           "notices": [
             "docs/licenses/monaco-editor/language-services/jsonc-parser/LICENSE.md",
@@ -1103,7 +1104,10 @@
           "assets": [
             "docs/assets/js/vs/language/css/cssWorker.js",
             "docs/assets/js/vs/language/html/htmlWorker.js",
-            "docs/assets/js/vs/language/json/jsonWorker.js"
+            "docs/assets/js/vs/language/json/jsonWorker.js",
+            "docs/assets/js/vs/language/css/cssMode.js",
+            "docs/assets/js/vs/language/html/htmlMode.js",
+            "docs/assets/js/vs/language/json/jsonMode.js"
           ],
           "notices": [
             "docs/licenses/monaco-editor/language-services/vscode-languageserver-types/License.txt",

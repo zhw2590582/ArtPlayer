@@ -1,5 +1,11 @@
 # Browser regression entry
 
+`editor-modes.spec.js` exercises Monaco's actual automatic mode/provider registration
+through a real editor. It switches CSS/JSON/TypeScript/HTML models, checks diagnostic
+arrival/removal and document formatting, verifies all four mode bundle responses,
+and checks model disposal clears markers. It complements direct worker tests;
+neither suite alone proves all editor UI, physical-device or player integration paths.
+
 `editor-languages.spec.js` loads the frozen Monaco 0.30.1 CSS/HTML/JSON workers,
 checks real Worker creation, positive/negative diagnostics, tag completion, document
 symbols and formatting, and disposes models/workers. It uses `createWebWorker` with

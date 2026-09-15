@@ -1,0 +1,464 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "status": "checkpoint-incomplete",
+  "recordedAt": "2026-09-15T01:41:29.392Z",
+  "baseCommit": "99c208aeee331eec2d9ffa9bb15a608fdc17a840",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "fingerprints": {
+    "sourceRecord": "e360eff36f2d424dd8f6dfcc65a68c9c527216f8bf1dda7635cc8bc52524782a",
+    "noticeRecord": "2bb8c11e6fa5f971a7abf89516dde88abe0d29e1e5e417566505d6f8c7f756da",
+    "manifest": "20c856848f0801d4f6fd66d5b86a37c81bb0b374bf7062b7363602dcc2921971",
+    "runtimeChanges": "No Monaco runtime or notice text changes"
+  },
+  "reproduction": {
+    "result": {
+      "archives": 6,
+      "gitSources": 23,
+      "ownModules": 14,
+      "npmModules": 6,
+      "aliases": 2,
+      "modes": [
+        {
+          "language": "css",
+          "modules": 5,
+          "exactSources": true,
+          "exactOutput": true,
+          "sha256": "c0f3a99395d07b421ef75f6eb78389c6ef29477f6a05556f9b94e2bb918dd6c1"
+        },
+        {
+          "language": "html",
+          "modules": 5,
+          "exactSources": true,
+          "exactOutput": true,
+          "sha256": "91f7b295ddc3b0b679c669b84865f3ace79fdd30bfcd814f2960c06f3e24d600"
+        },
+        {
+          "language": "json",
+          "modules": 12,
+          "exactSources": true,
+          "exactOutput": true,
+          "sha256": "9abacb664dcd8564f28ef004465da0f4b3c551b2741424bf42e61c0a26e61adb"
+        },
+        {
+          "language": "typescript",
+          "modules": 4,
+          "exactSources": true,
+          "exactOutput": true,
+          "sha256": "35d94edaf7982c8b59c95cda38c5ebffcf93479ee91a5c9820b9bf60719351c2"
+        }
+      ],
+      "coreAndBasicLanguagesReviewed": false
+    },
+    "offlineLog": "refactor/.cache/monaco-modes-offline.log",
+    "firstFetch": {
+      "exitCode": 1,
+      "error": "getaddrinfo ENOTFOUND registry.npmjs.org",
+      "log": "refactor/.cache/monaco-modes-fetch.log"
+    },
+    "retryFetch": {
+      "exitCode": 0,
+      "log": "refactor/.cache/monaco-modes-fetch-retry.log"
+    },
+    "workerRegression": {
+      "result": {
+        "archives": 11,
+        "gitSources": 13,
+        "npmModules": 91,
+        "aliases": 8,
+        "workers": [
+          {
+            "language": "css",
+            "modules": 48,
+            "exactSources": true,
+            "exactWorker": true,
+            "sha256": "073e09f9301dcf147e40ef675e3f18d8cc29de9f49673ec8d17711569144552d"
+          },
+          {
+            "language": "html",
+            "modules": 38,
+            "exactSources": true,
+            "exactWorker": true,
+            "sha256": "0b14f0af7ae7ab85732574fb384496dae3e85d28f953188cc842eec468a8a457"
+          },
+          {
+            "language": "json",
+            "modules": 33,
+            "exactSources": true,
+            "exactWorker": true,
+            "sha256": "0eb929c56d44afddb3030c011913010311ce34e5eadb1129a3ce9cbafd4c771d"
+          }
+        ],
+        "notices": 12,
+        "licenseReviewComplete": false,
+        "otherMonacoComponentsReviewed": false
+      },
+      "log": "refactor/.cache/monaco-modes-worker-regression.log"
+    }
+  },
+  "unit": {
+    "passed": 15,
+    "log": "refactor/.cache/monaco-modes-unit.log"
+  },
+  "browser": {
+    "report": "refactor/.cache/browser/report.json",
+    "sha256": "491703cee7accd59f58b154dec0f5841b4195cbe60ee9fe3d64b47efb0fb8b14",
+    "tests": [
+      {
+        "project": "chromium",
+        "title": "docs Monaco mode registrations update editor diagnostics and formatting across languages",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "results": {
+          "evidence": [
+            {
+              "language": "css",
+              "markers": [
+                {
+                  "resource": {
+                    "scheme": "file",
+                    "authority": "",
+                    "path": "/mode-probe-css",
+                    "query": "",
+                    "fragment": "",
+                    "_formatted": "file:///mode-probe-css",
+                    "_fsPath": null
+                  },
+                  "owner": "css",
+                  "code": "css-propertyvalueexpected",
+                  "severity": 8,
+                  "message": "property value expected",
+                  "source": "css",
+                  "startLineNumber": 1,
+                  "startColumn": 12,
+                  "endLineNumber": 1,
+                  "endColumn": 13
+                }
+              ]
+            },
+            {
+              "language": "json",
+              "markers": [
+                {
+                  "resource": {
+                    "scheme": "file",
+                    "authority": "",
+                    "path": "/mode-probe-json",
+                    "query": "",
+                    "fragment": "",
+                    "_formatted": "file:///mode-probe-json",
+                    "_fsPath": null
+                  },
+                  "owner": "json",
+                  "code": "516",
+                  "severity": 8,
+                  "message": "Value expected",
+                  "source": "json",
+                  "startLineNumber": 1,
+                  "startColumn": 10,
+                  "endLineNumber": 1,
+                  "endColumn": 11
+                }
+              ]
+            },
+            {
+              "language": "json",
+              "formatted": "{\r\n  \"value\": 1\r\n}"
+            },
+            {
+              "language": "typescript",
+              "markers": [
+                {
+                  "resource": {
+                    "scheme": "file",
+                    "authority": "",
+                    "path": "/mode-probe-typescript",
+                    "query": "",
+                    "fragment": "",
+                    "_formatted": "file:///mode-probe-typescript",
+                    "_fsPath": null
+                  },
+                  "owner": "typescript",
+                  "code": "2322",
+                  "severity": 8,
+                  "message": "Type 'string' is not assignable to type 'number'.",
+                  "startLineNumber": 1,
+                  "startColumn": 7,
+                  "endLineNumber": 1,
+                  "endColumn": 12,
+                  "relatedInformation": [],
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "language": "html",
+              "formatted": "<div>\r\n  <p>hello</p>\r\n  <p>world</p>\r\n</div>"
+            }
+          ],
+          "loadedModes": [
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/language/css/cssMode.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/language/json/jsonMode.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/language/typescript/tsMode.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/language/html/htmlMode.js",
+              "status": 200
+            }
+          ]
+        }
+      },
+      {
+        "project": "firefox",
+        "title": "docs Monaco mode registrations update editor diagnostics and formatting across languages",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "results": {
+          "evidence": [
+            {
+              "language": "css",
+              "markers": [
+                {
+                  "resource": {
+                    "scheme": "file",
+                    "authority": "",
+                    "path": "/mode-probe-css",
+                    "query": "",
+                    "fragment": "",
+                    "_formatted": "file:///mode-probe-css",
+                    "_fsPath": null
+                  },
+                  "owner": "css",
+                  "code": "css-propertyvalueexpected",
+                  "severity": 8,
+                  "message": "property value expected",
+                  "source": "css",
+                  "startLineNumber": 1,
+                  "startColumn": 12,
+                  "endLineNumber": 1,
+                  "endColumn": 13
+                }
+              ]
+            },
+            {
+              "language": "json",
+              "markers": [
+                {
+                  "resource": {
+                    "scheme": "file",
+                    "authority": "",
+                    "path": "/mode-probe-json",
+                    "query": "",
+                    "fragment": "",
+                    "_formatted": "file:///mode-probe-json",
+                    "_fsPath": null
+                  },
+                  "owner": "json",
+                  "code": "516",
+                  "severity": 8,
+                  "message": "Value expected",
+                  "source": "json",
+                  "startLineNumber": 1,
+                  "startColumn": 10,
+                  "endLineNumber": 1,
+                  "endColumn": 11
+                }
+              ]
+            },
+            {
+              "language": "json",
+              "formatted": "{\r\n  \"value\": 1\r\n}"
+            },
+            {
+              "language": "typescript",
+              "markers": [
+                {
+                  "resource": {
+                    "scheme": "file",
+                    "authority": "",
+                    "path": "/mode-probe-typescript",
+                    "query": "",
+                    "fragment": "",
+                    "_formatted": "file:///mode-probe-typescript",
+                    "_fsPath": null
+                  },
+                  "owner": "typescript",
+                  "code": "2322",
+                  "severity": 8,
+                  "message": "Type 'string' is not assignable to type 'number'.",
+                  "startLineNumber": 1,
+                  "startColumn": 7,
+                  "endLineNumber": 1,
+                  "endColumn": 12,
+                  "relatedInformation": [],
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "language": "html",
+              "formatted": "<div>\r\n  <p>hello</p>\r\n  <p>world</p>\r\n</div>"
+            }
+          ],
+          "loadedModes": [
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/language/css/cssMode.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/language/json/jsonMode.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/language/typescript/tsMode.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/language/html/htmlMode.js",
+              "status": 200
+            }
+          ]
+        }
+      },
+      {
+        "project": "webkit",
+        "title": "docs Monaco mode registrations update editor diagnostics and formatting across languages",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "results": {
+          "evidence": [
+            {
+              "language": "css",
+              "markers": [
+                {
+                  "resource": {
+                    "scheme": "file",
+                    "authority": "",
+                    "path": "/mode-probe-css",
+                    "query": "",
+                    "fragment": "",
+                    "_formatted": "file:///mode-probe-css",
+                    "_fsPath": null
+                  },
+                  "owner": "css",
+                  "code": "css-propertyvalueexpected",
+                  "severity": 8,
+                  "message": "property value expected",
+                  "source": "css",
+                  "startLineNumber": 1,
+                  "startColumn": 12,
+                  "endLineNumber": 1,
+                  "endColumn": 13
+                }
+              ]
+            },
+            {
+              "language": "json",
+              "markers": [
+                {
+                  "resource": {
+                    "scheme": "file",
+                    "authority": "",
+                    "path": "/mode-probe-json",
+                    "query": "",
+                    "fragment": "",
+                    "_formatted": "file:///mode-probe-json",
+                    "_fsPath": null
+                  },
+                  "owner": "json",
+                  "code": "516",
+                  "severity": 8,
+                  "message": "Value expected",
+                  "source": "json",
+                  "startLineNumber": 1,
+                  "startColumn": 10,
+                  "endLineNumber": 1,
+                  "endColumn": 11
+                }
+              ]
+            },
+            {
+              "language": "json",
+              "formatted": "{\n  \"value\": 1\n}"
+            },
+            {
+              "language": "typescript",
+              "markers": [
+                {
+                  "resource": {
+                    "scheme": "file",
+                    "authority": "",
+                    "path": "/mode-probe-typescript",
+                    "query": "",
+                    "fragment": "",
+                    "_formatted": "file:///mode-probe-typescript",
+                    "_fsPath": null
+                  },
+                  "owner": "typescript",
+                  "code": "2322",
+                  "severity": 8,
+                  "message": "Type 'string' is not assignable to type 'number'.",
+                  "startLineNumber": 1,
+                  "startColumn": 7,
+                  "endLineNumber": 1,
+                  "endColumn": 12,
+                  "relatedInformation": [],
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "language": "html",
+              "formatted": "<div>\n  <p>hello</p>\n  <p>world</p>\n</div>"
+            }
+          ],
+          "loadedModes": [
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/language/css/cssMode.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/language/json/jsonMode.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/language/typescript/tsMode.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/language/html/htmlMode.js",
+              "status": 200
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "Exact source emission is not a complete upstream semantic typecheck.",
+    "Editor core/basic-language and remaining embedded origin review remain open.",
+    "No playback, device, external SDK, remote CI or publication verification in this checkpoint.",
+    "Thumbnail compatibility choice remains pending and its defaults unchanged."
+  ]
+}

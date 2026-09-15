@@ -1,5 +1,14 @@
 # 进度与证据
 
+## SITE-07 Monaco 四种语言模式
+
+CSS/HTML/JSON/TypeScript mode 的 26 个模块实例及完整压缩产物已精确复现，
+使用 6 归档/23 Git 来源，jsonc 原声明驱动 const enum 编译；许可绑定补齐模式
+资产。单元 15/15，自动编辑器诊断/格式化/切换/销毁三引擎 3/3，三个 worker
+共享编译器回归复现通过。联网首次 DNS 失败后重试成功，离线复现独立通过。
+见[记录](changes/2026-09-15-SITE-07-monaco-modes.md)。运行/notice 字节与锁未变，
+199/265，SITE-07/VENDOR-06 仍开放；Thumbnail 默认决策仍待答。
+
 ## PKG-TOOL-THUMB-04 默认兼容策略待选择
 
 重新核对恢复的 3.5.31 与工作区 4.4.0，历史契约/行为 62/62 通过。已将先前待答

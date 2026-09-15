@@ -6,6 +6,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { ArchiveCache, hash } from './archives.ts'
+import { emitAmd } from './compiler.ts'
 import { aliasModule, languageHeader, nameModule, verifyWorkerSources } from './languages.ts'
 import { verifyMonacoLanguageNoticeArchives } from './notices.ts'
 
@@ -65,32 +66,7 @@ assert.equal(require('terser/package.json').version, '5.9.0', 'Wrong Terser comp
 
 assert.equal(require('source-map/package.json').version, '0.7.3', 'Wrong minifier dependency')
 
-function compile(source: string): string {
-  // Emit with the real pinned standard libraries. Isolated transpileModule loses
-  // Promise type resolution and emits a different async helper argument here.
-  // Unresolved service imports are intentionally not a full upstream typecheck.
-  const options: import('typescript').CompilerOptions = {
-    target: ts.ScriptTarget.ES5,
-    module: ts.ModuleKind.AMD,
-    newLine: ts.NewLineKind.LineFeed,
-    noResolve: true,
-    lib: ['lib.es5.d.ts', 'lib.dom.d.ts', 'lib.es2015.collection.d.ts', 'lib.es2015.promise.d.ts', 'lib.es2015.iterable.d.ts'],
-  }
-  const host = ts.createCompilerHost(options)
-  const getSourceFile = host.getSourceFile.bind(host)
-  host.getSourceFile = (file, languageVersion, onError, createNew) => file === 'worker.ts'
-    ? ts.createSourceFile(file, source, languageVersion, true)
-    : getSourceFile(file, languageVersion, onError, createNew)
-  let output = ''
-  host.writeFile = (file, text) => {
-    assert(file.endsWith('.js') && !output, 'Unexpected compiler output')
-    output = text
-  }
-  const program = ts.createProgram(['worker.ts'], options, host)
-  const result = program.emit()
-  assert(!result.emitSkipped && output, 'Missing language source emission')
-  return output
-}
+const compile = (source: string) => emitAmd(ts, source, ['es5', 'dom', 'es2015.collection', 'es2015.promise', 'es2015.iterable'])
 const modules = new Map(record.modules.map(member => [member.id, nameModule(cache.member(member).toString('utf8'), member.id)]))
 const aliases = new Map(record.aliases.map(alias => [alias.id, aliasModule(alias.id, alias.main)]))
 const results = []

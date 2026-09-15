@@ -10,7 +10,8 @@
       "tarball": "https://registry.npmjs.org/jsonc-parser/-/jsonc-parser-3.0.0.tgz",
       "archive": "jsonc-parser-3.0.0",
       "assets": [
-        "docs/assets/js/vs/language/json/jsonWorker.js"
+        "docs/assets/js/vs/language/json/jsonWorker.js",
+        "docs/assets/js/vs/language/json/jsonMode.js"
       ],
       "notices": [
         "docs/licenses/monaco-editor/language-services/jsonc-parser/LICENSE.md"
@@ -76,7 +77,10 @@
       "assets": [
         "docs/assets/js/vs/language/css/cssWorker.js",
         "docs/assets/js/vs/language/html/htmlWorker.js",
-        "docs/assets/js/vs/language/json/jsonWorker.js"
+        "docs/assets/js/vs/language/json/jsonWorker.js",
+        "docs/assets/js/vs/language/css/cssMode.js",
+        "docs/assets/js/vs/language/html/htmlMode.js",
+        "docs/assets/js/vs/language/json/jsonMode.js"
       ],
       "notices": [
         "docs/licenses/monaco-editor/language-services/vscode-languageserver-types/License.txt"
@@ -104,7 +108,8 @@
       "tarball": "https://registry.npmjs.org/jsonc-parser/-/jsonc-parser-3.0.0.tgz",
       "archive": "jsonc-parser-3.0.0",
       "assets": [
-        "docs/assets/js/vs/language/json/jsonWorker.js"
+        "docs/assets/js/vs/language/json/jsonWorker.js",
+        "docs/assets/js/vs/language/json/jsonMode.js"
       ],
       "notices": [
         "docs/licenses/monaco-editor/language-services/jsonc-parser/LICENSE.md",
@@ -175,7 +180,10 @@
       "assets": [
         "docs/assets/js/vs/language/css/cssWorker.js",
         "docs/assets/js/vs/language/html/htmlWorker.js",
-        "docs/assets/js/vs/language/json/jsonWorker.js"
+        "docs/assets/js/vs/language/json/jsonWorker.js",
+        "docs/assets/js/vs/language/css/cssMode.js",
+        "docs/assets/js/vs/language/html/htmlMode.js",
+        "docs/assets/js/vs/language/json/jsonMode.js"
       ],
       "notices": [
         "docs/licenses/monaco-editor/language-services/vscode-languageserver-types/License.txt",
@@ -318,5 +326,6 @@
       "target": "docs/licenses/monaco-editor/language-services/ATTRIBUTION.md",
       "sha256": "432cca135809edabcd9ccedd05576138b64b167445999005a6e1550132391d98"
     }
-  ]
+  ],
+  "modeSourceRecord": "refactor/baselines/monaco-modes-provenance.json"
 }

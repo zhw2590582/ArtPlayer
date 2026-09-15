@@ -1,0 +1,450 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "commit": "5a7ba61be909ae9e4889768a3453ebb0dec392e2",
+  "scope": "All four language mode bundles; exact module/helper and minified output coverage, not a complete upstream typecheck.",
+  "archives": [
+    {
+      "name": "monaco-editor",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.30.1.tgz",
+      "integrity": "sha512-B/y4+b2O5G2gjuxIFtCE2EkM17R2NM7/3F8x0qcPsqy4V83bitJTIO4TIeZpYlzu/xy6INiY/+84BEm6+7Cmzg==",
+      "sha256": "d7872ab742036036eca48cd54e43d751bede56742f0689bcf4049bcf701468c7"
+    },
+    {
+      "name": "typescript",
+      "version": "4.4.4",
+      "tarball": "https://registry.npmjs.org/typescript/-/typescript-4.4.4.tgz",
+      "integrity": "sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==",
+      "sha256": "7524841bbf63777fef1fe6e1a826026b1dd4849f54f5affa481502faab2cdb16"
+    },
+    {
+      "name": "terser",
+      "version": "5.9.0",
+      "tarball": "https://registry.npmjs.org/terser/-/terser-5.9.0.tgz",
+      "integrity": "sha512-h5hxa23sCdpzcye/7b8YqbE5OwKca/ni0RQz1uRX3tGh8haaGHqcuSqbGRybuAKNdntZ0mDgFNXPJ48xQ2RXKQ==",
+      "sha256": "2ca0d9c4731b6ebd3b86ed1a7b735f685f98636ee5a067ae9e27e83246069619"
+    },
+    {
+      "name": "source-map",
+      "version": "0.7.3",
+      "tarball": "https://registry.npmjs.org/source-map/-/source-map-0.7.3.tgz",
+      "integrity": "sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==",
+      "sha256": "ad69b787ba774733c3e4f0eb20403df7b1fa466252d453533dbcc6a5ad15833e"
+    },
+    {
+      "name": "jsonc-parser",
+      "version": "3.0.0",
+      "tarball": "https://registry.npmjs.org/jsonc-parser/-/jsonc-parser-3.0.0.tgz",
+      "integrity": "sha512-fQzRfAbIBnR0IQvftw9FJveWiHp72Fg20giDrHz6TdfB12UH/uue0D3hm57UB5KgAVuniLMCaS8P1IMj9NR7cA==",
+      "sha256": "807c53e781c6c6181165f6214db5f6892742041338d9891ce3c335cf3bc25da8"
+    },
+    {
+      "name": "vscode-languageserver-types",
+      "version": "3.16.0",
+      "tarball": "https://registry.npmjs.org/vscode-languageserver-types/-/vscode-languageserver-types-3.16.0.tgz",
+      "integrity": "sha512-k8luDIWJWyenLc5ToFQQMaSrqCHiLwyKPHKPQZ5zz21vM+vIVUSvsRpcbiECH4WR88K2XZqc4ScRcZ7nk/jbeA==",
+      "sha256": "eb934ea5eda6fd6b5d21ae8706922be1179501c30350260e07998e76c6946a2c"
+    }
+  ],
+  "remotes": [
+    {
+      "source": "refactor/baselines/site-vendor/monaco-typescript/package-lock.json.txt",
+      "sha256": "84c66bfe8ae95b2226ca289279133999356e64137db7ba001817737fa1ac8cf8",
+      "gitBlobSha": "9f647e9fc82150a5d06a9c02dc781d2dbe902ed6",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/package-lock.json?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-css-scripts-bundle.js.txt",
+      "sha256": "2a9dbfbd62b6106835ac69d930e4e1024000196154d0fd98e7a42bfab9977751",
+      "gitBlobSha": "49709bc5efb3f5e81c2797fa771b0576f86c71fb",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-css/scripts/bundle.js?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-css-src-tsconfig.json.txt",
+      "sha256": "d5739d74d37ae0ff0d8b55f19b1116433bae9b0f8a81c8b410bd587e11bc7694",
+      "gitBlobSha": "707f714dd2869a2e1fe3c5a679cf1eb116f0f542",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-css/src/tsconfig.json?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-html-scripts-bundle.js.txt",
+      "sha256": "9a101e8926d384a880bdfc13ae72559f72d1b4e8b1d7dd755a6a999ca6383718",
+      "gitBlobSha": "d5932edf6307028d76be68e76fcaf08ec2768a58",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-html/scripts/bundle.js?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-html-src-tsconfig.json.txt",
+      "sha256": "d5739d74d37ae0ff0d8b55f19b1116433bae9b0f8a81c8b410bd587e11bc7694",
+      "gitBlobSha": "707f714dd2869a2e1fe3c5a679cf1eb116f0f542",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-html/src/tsconfig.json?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-json-scripts-bundle.js.txt",
+      "sha256": "1326211da917b321808ae29987c666226028ad276af3e1d376cd7d0ed3902fd6",
+      "gitBlobSha": "cb54926f4a3fb00d16824d2be6c6e51b3a6524ec",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-json/scripts/bundle.js?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-languages/monaco-json-src-tsconfig.json.txt",
+      "sha256": "d5739d74d37ae0ff0d8b55f19b1116433bae9b0f8a81c8b410bd587e11bc7694",
+      "gitBlobSha": "707f714dd2869a2e1fe3c5a679cf1eb116f0f542",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-json/src/tsconfig.json?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-typescript/bundle.js.txt",
+      "sha256": "1f418cf3a1c27d9c466ce315ebb185451e47e70847e3fb53f383aae2bb5250d9",
+      "gitBlobSha": "2478682d11c9122debd33d6a7339183b16238799",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-typescript/scripts/bundle.js?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-modes/monaco-typescript-src-tsconfig.json.txt",
+      "sha256": "0db526f0bf18e6022981cde7257af00875f4c2027d4f2a5e88221f6541f80452",
+      "gitBlobSha": "001f587e6dd21981e63aff2bebdfd8a6a79a74eb",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-typescript/src/tsconfig.json?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-modes/monaco-css-src-workerManager.ts.txt",
+      "sha256": "8705e3989d308a42c23f5f9d3ea422fcb11315787c1e937cd8f9539ce9c49504",
+      "gitBlobSha": "335396d5d17303bca55cf8f043762501e6a55d4a",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-css/src/workerManager.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-modes/monaco-css-src-languageFeatures.ts.txt",
+      "sha256": "0f2f6b94992a614c930dc3c2516cd875c77424f05bb9ad730e123fbc6ac1e7da",
+      "gitBlobSha": "462521c8aa98a1527b00c2510b5f00c8570716ae",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-css/src/languageFeatures.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-modes/monaco-css-src-cssMode.ts.txt",
+      "sha256": "24af822e60188a50129779164aef98415355a3e7aa29e2cb200987b0fa7c4fbe",
+      "gitBlobSha": "ec3ea26039c2df9889a0769b9cbfe38bb14c2a10",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-css/src/cssMode.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-modes/monaco-html-src-workerManager.ts.txt",
+      "sha256": "c46c7286896e5c8eff4f0eb8dbcee0d114486419314c861d52dafcd5b7fef0f9",
+      "gitBlobSha": "5122168b53c9ef913d76e9cd9baf1b6f6c9e30a5",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-html/src/workerManager.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-modes/monaco-html-src-languageFeatures.ts.txt",
+      "sha256": "f444cec1b734bfc64d2941291ffc172e6e9326b0f4112c53660fe4e07064e9eb",
+      "gitBlobSha": "2d6ec03408b5dc1f96b58aced67240521af4bc2b",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-html/src/languageFeatures.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-modes/monaco-html-src-htmlMode.ts.txt",
+      "sha256": "a48c1bc729ea7a609bbd5bf122a37c7960437763498c58828f4a69424e28d495",
+      "gitBlobSha": "95b560cb358b16920eb204b5ab4d362b3a59de49",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-html/src/htmlMode.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-modes/monaco-json-src-workerManager.ts.txt",
+      "sha256": "88f875df4f3358d1759e7c60efeed6033a3490f7e6a51f6ad89b96d97aceb75c",
+      "gitBlobSha": "6c32e001806ee072a11b0a763a2ff8b3178d2da5",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-json/src/workerManager.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-modes/monaco-json-src-languageFeatures.ts.txt",
+      "sha256": "4b0e8d14b8c6553e078173217e6fcd7c50b5d56b1718cad6f37733db90998da8",
+      "gitBlobSha": "cc6391a0b00a922503c799a3181848c5c9540371",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-json/src/languageFeatures.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-modes/monaco-json-src-tokenization.ts.txt",
+      "sha256": "14cab1d17770916632f94955a5cd14664d7fe02facc8ce3c9354e515c22ffec1",
+      "gitBlobSha": "aa9bd5a447d9fbe78b685d5765bdf2f02e5445c0",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-json/src/tokenization.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-modes/monaco-json-src-jsonMode.ts.txt",
+      "sha256": "7e098ac320154c14b9f026df9189b06c1433e71171e6c6c6b1d9f0ce5406a684",
+      "gitBlobSha": "7d66f6a0e1b14951b81c43cb3486ac0a7862aa79",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-json/src/jsonMode.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-modes/monaco-typescript-src-workerManager.ts.txt",
+      "sha256": "a0d0f19f8b8819e6a38144dd1a30cd27763eeca1f2ac94501f76dba46a73e43f",
+      "gitBlobSha": "6e70ae025f568ab8468d0c86ada8e0e70ec58ea5",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-typescript/src/workerManager.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-modes/monaco-typescript-src-lib-lib.index.ts.txt",
+      "sha256": "722036bc714d9c5e1b06e419dd96400d0f59eec13a20bec44a0403bca50b6383",
+      "gitBlobSha": "a501460f03cbd6a88b45bfee44a9ab6ef595db4f",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-typescript/src/lib/lib.index.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-modes/monaco-typescript-src-languageFeatures.ts.txt",
+      "sha256": "4be07e7664d0127a7339e70b81b4dd783479c40f3020bf83de24c9beb8ab1580",
+      "gitBlobSha": "2dba4a863fca7f516b7009e2a09d41c78c48f262",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-typescript/src/languageFeatures.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-modes/monaco-typescript-src-tsMode.ts.txt",
+      "sha256": "2be7c0ef70f9c0d819680057e87b041f3ba34b1d4f60801f5058bfd4fc12232d",
+      "gitBlobSha": "9ebf59cf6bcc66b93c2e728644fb6eba695bbe6a",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-typescript/src/tsMode.ts?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    }
+  ],
+  "compilerMembers": [
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/typescript.js",
+      "sha256": "69fde5346b9468255c32d8d0bff32842445822528b25da1a323ec1c076979384"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/lib.es5.d.ts",
+      "sha256": "aa9fb4c70f369237c2f45f9d969c9a59e0eae9a192962eb48581fe864aa609db"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/lib.dom.d.ts",
+      "sha256": "e54c8715a4954cfdc66cd69489f2b725c09ebf37492dbd91cff0a1688b1159e8"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/lib.es2015.collection.d.ts",
+      "sha256": "43fb1d932e4966a39a41b464a12a81899d9ae5f2c829063f5571b6b87e6d2f9c"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/lib.es2015.promise.d.ts",
+      "sha256": "2bb4b3927299434052b37851a47bf5c39764f2ba88a888a107b32262e9292b7c"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/lib/lib.es2015.iterable.d.ts",
+      "sha256": "2c8c5ee58f30e7c944e04ab1fb5506fdbb4dd507c9efa6972cf4b91cec90c503"
+    },
+    {
+      "archive": "terser-5.9.0",
+      "member": "package/dist/bundle.min.js",
+      "sha256": "b8b44743a529c5bd1cf8d6676f040c3c9bed29c7c114e5a26dde5e0fb2125838"
+    }
+  ],
+  "declaration": {
+    "archive": "jsonc-parser-3.0.0",
+    "member": "package/lib/umd/main.d.ts",
+    "sha256": "5c65cfde6c6384c36d66bdbe76316d4fa274183c63258cb75b922306e845171f"
+  },
+  "npmModules": [
+    {
+      "id": "vscode-languageserver-types/main",
+      "archive": "vscode-languageserver-types-3.16.0",
+      "member": "package/lib/umd/main.js",
+      "sha256": "bc54d0255c6527858d4b2a6c9fd366dd5bdc08d627aa6a81ebb52b27fe1bb17d"
+    },
+    {
+      "id": "jsonc-parser/impl/scanner",
+      "archive": "jsonc-parser-3.0.0",
+      "member": "package/lib/umd/impl/scanner.js",
+      "sha256": "1de9d507a6fc3cbe314fe77d4129db5d0d717b453d6340dc822869f6be6f01ef"
+    },
+    {
+      "id": "jsonc-parser/impl/format",
+      "archive": "jsonc-parser-3.0.0",
+      "member": "package/lib/umd/impl/format.js",
+      "sha256": "0a6e9addcaba963b19bdc28a9e563affe7ecfa9d710bbbf88a798e134b8c2d9e"
+    },
+    {
+      "id": "jsonc-parser/impl/parser",
+      "archive": "jsonc-parser-3.0.0",
+      "member": "package/lib/umd/impl/parser.js",
+      "sha256": "0bcb61b4cddc09380ae45a8bb74d97162a46733dd87bada5590579f91abc2a62"
+    },
+    {
+      "id": "jsonc-parser/impl/edit",
+      "archive": "jsonc-parser-3.0.0",
+      "member": "package/lib/umd/impl/edit.js",
+      "sha256": "be5cbec07265803c812a888d8aeaf18f69c77c827a120486ef38515d6225008d"
+    },
+    {
+      "id": "jsonc-parser/main",
+      "archive": "jsonc-parser-3.0.0",
+      "member": "package/lib/umd/main.js",
+      "sha256": "09e425ed64c68688277ed7ef8e0b627700134e4e2290aa36b175530b658245aa"
+    }
+  ],
+  "aliases": [
+    {
+      "id": "jsonc-parser",
+      "main": "main"
+    },
+    {
+      "id": "vscode-languageserver-types",
+      "main": "main"
+    }
+  ],
+  "files": [
+    {
+      "language": "css",
+      "name": "cssMode",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/language/css/cssMode.js",
+        "sha256": "a541bd23805055fda946f0b462a56cfe1f9ff1ec3cf8c63aa5dd1f56a86a9001"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/language/css/cssMode.js",
+        "sha256": "c0f3a99395d07b421ef75f6eb78389c6ef29477f6a05556f9b94e2bb918dd6c1"
+      },
+      "ids": [
+        "vs/language/css/workerManager",
+        "vscode-languageserver-types/main",
+        "vscode-languageserver-types",
+        "vs/language/css/languageFeatures",
+        "vs/language/css/cssMode"
+      ],
+      "modules": [
+        {
+          "id": "vs/language/css/workerManager",
+          "source": "refactor/baselines/site-vendor/monaco-modes/monaco-css-src-workerManager.ts.txt",
+          "resolveJsonc": false
+        },
+        {
+          "id": "vs/language/css/languageFeatures",
+          "source": "refactor/baselines/site-vendor/monaco-modes/monaco-css-src-languageFeatures.ts.txt",
+          "resolveJsonc": false
+        },
+        {
+          "id": "vs/language/css/cssMode",
+          "source": "refactor/baselines/site-vendor/monaco-modes/monaco-css-src-cssMode.ts.txt",
+          "resolveJsonc": false
+        }
+      ],
+      "config": "refactor/baselines/site-vendor/monaco-languages/monaco-css-src-tsconfig.json.txt"
+    },
+    {
+      "language": "html",
+      "name": "htmlMode",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/language/html/htmlMode.js",
+        "sha256": "d5f1df4fcfb72023f0a35ccc339ba35c08ffa9d5677361246d4e8bcd49c912a5"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/language/html/htmlMode.js",
+        "sha256": "91f7b295ddc3b0b679c669b84865f3ace79fdd30bfcd814f2960c06f3e24d600"
+      },
+      "ids": [
+        "vs/language/html/workerManager",
+        "vscode-languageserver-types/main",
+        "vscode-languageserver-types",
+        "vs/language/html/languageFeatures",
+        "vs/language/html/htmlMode"
+      ],
+      "modules": [
+        {
+          "id": "vs/language/html/workerManager",
+          "source": "refactor/baselines/site-vendor/monaco-modes/monaco-html-src-workerManager.ts.txt",
+          "resolveJsonc": false
+        },
+        {
+          "id": "vs/language/html/languageFeatures",
+          "source": "refactor/baselines/site-vendor/monaco-modes/monaco-html-src-languageFeatures.ts.txt",
+          "resolveJsonc": false
+        },
+        {
+          "id": "vs/language/html/htmlMode",
+          "source": "refactor/baselines/site-vendor/monaco-modes/monaco-html-src-htmlMode.ts.txt",
+          "resolveJsonc": false
+        }
+      ],
+      "config": "refactor/baselines/site-vendor/monaco-languages/monaco-html-src-tsconfig.json.txt"
+    },
+    {
+      "language": "json",
+      "name": "jsonMode",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/language/json/jsonMode.js",
+        "sha256": "75451dc400862d52cf48e3da7d1810f3fbb6958ec00a98fc1745ca101b968ee0"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/language/json/jsonMode.js",
+        "sha256": "9abacb664dcd8564f28ef004465da0f4b3c551b2741424bf42e61c0a26e61adb"
+      },
+      "ids": [
+        "vs/language/json/workerManager",
+        "vscode-languageserver-types/main",
+        "vscode-languageserver-types",
+        "vs/language/json/languageFeatures",
+        "jsonc-parser/impl/scanner",
+        "jsonc-parser/impl/format",
+        "jsonc-parser/impl/parser",
+        "jsonc-parser/impl/edit",
+        "jsonc-parser/main",
+        "jsonc-parser",
+        "vs/language/json/tokenization",
+        "vs/language/json/jsonMode"
+      ],
+      "modules": [
+        {
+          "id": "vs/language/json/workerManager",
+          "source": "refactor/baselines/site-vendor/monaco-modes/monaco-json-src-workerManager.ts.txt",
+          "resolveJsonc": false
+        },
+        {
+          "id": "vs/language/json/languageFeatures",
+          "source": "refactor/baselines/site-vendor/monaco-modes/monaco-json-src-languageFeatures.ts.txt",
+          "resolveJsonc": false
+        },
+        {
+          "id": "vs/language/json/tokenization",
+          "source": "refactor/baselines/site-vendor/monaco-modes/monaco-json-src-tokenization.ts.txt",
+          "resolveJsonc": true
+        },
+        {
+          "id": "vs/language/json/jsonMode",
+          "source": "refactor/baselines/site-vendor/monaco-modes/monaco-json-src-jsonMode.ts.txt",
+          "resolveJsonc": false
+        }
+      ],
+      "config": "refactor/baselines/site-vendor/monaco-languages/monaco-json-src-tsconfig.json.txt"
+    },
+    {
+      "language": "typescript",
+      "name": "tsMode",
+      "development": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/dev/vs/language/typescript/tsMode.js",
+        "sha256": "6e360cea797f62d8547a55a6a9f9e51075580ee299e500920c46636a30bd09ef"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/language/typescript/tsMode.js",
+        "sha256": "35d94edaf7982c8b59c95cda38c5ebffcf93479ee91a5c9820b9bf60719351c2"
+      },
+      "ids": [
+        "vs/language/typescript/workerManager",
+        "vs/language/typescript/lib/lib.index",
+        "vs/language/typescript/languageFeatures",
+        "vs/language/typescript/tsMode"
+      ],
+      "modules": [
+        {
+          "id": "vs/language/typescript/workerManager",
+          "source": "refactor/baselines/site-vendor/monaco-modes/monaco-typescript-src-workerManager.ts.txt",
+          "resolveJsonc": false
+        },
+        {
+          "id": "vs/language/typescript/lib/lib.index",
+          "source": "refactor/baselines/site-vendor/monaco-modes/monaco-typescript-src-lib-lib.index.ts.txt",
+          "resolveJsonc": false
+        },
+        {
+          "id": "vs/language/typescript/languageFeatures",
+          "source": "refactor/baselines/site-vendor/monaco-modes/monaco-typescript-src-languageFeatures.ts.txt",
+          "resolveJsonc": false
+        },
+        {
+          "id": "vs/language/typescript/tsMode",
+          "source": "refactor/baselines/site-vendor/monaco-modes/monaco-typescript-src-tsMode.ts.txt",
+          "resolveJsonc": false
+        }
+      ],
+      "config": "refactor/baselines/site-vendor/monaco-modes/monaco-typescript-src-tsconfig.json.txt"
+    }
+  ]
+}

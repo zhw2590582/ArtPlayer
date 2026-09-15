@@ -80,6 +80,35 @@ disposes both workers and models. Monaco 0.30.1 has no public CSS/HTML/JSON work
 getter equivalent to `getTypeScriptWorker`. Tests exercise valid/invalid CSS and
 JSON, HTML tag completion, document symbols, and HTML/JSON formatting on three engines.
 
+## Mode registration bundles
+
+`reproduce-modes.ts` covers cssMode, htmlMode, jsonMode and tsMode. The fixed record
+has six archives, 23 Git files, 14 Monaco sources, six npm source modules and two
+package aliases. All 26 module instances and intervening helper bytes match the
+development bundles; their four complete minified outputs match existing assets.
+`jsonc-parser` and `vscode-languageserver-types` notice bindings include these mode
+assets as well as workers. No runtime or notice text is rewritten.
+
+`compiler.ts` shares pinned TypeScript emission with the worker reproducer.
+JSON tokenization needs the original jsonc-parser 3.0.0 main.d.ts to inline const
+enums. The compiler host resolves only explicitly supplied declarations, avoiding
+accidental resolution against current root dependencies. Module names may contain
+a dot (`lib.index`); traversal segments remain rejected. TypeScript mode compilation
+uses the fixed strict config. Exact emission is not a complete upstream typecheck.
+
+```sh
+yarn verify:monaco-mode-sources --fetch
+yarn verify:monaco-mode-sources
+yarn verify:monaco-language-sources
+yarn test:browser test/browser/editor-modes.spec.js --workers=1
+```
+
+`editor-modes.spec.js` uses a real editor, automatic mode loading/provider registration
+and model switching. CSS/JSON/TypeScript errors appear and clear after correction;
+the editor's document-format action formats JSON/HTML while preserving content.
+All four mode URLs must return 200; disposed models must lose their diagnostics.
+This complements direct worker methods and the typed player test.
+
 ## Language-service notices
 
 `monaco-language-notices.json` binds seven verified package versions to their nine
@@ -99,7 +128,7 @@ ranges. Preserve raw bytes and the `-text` Git attributes for frozen/output noti
 12 relative links, alongside mobile player playback and console cleanup.
 
 This does not close all Monaco embedded-source review. Core embedded libraries,
-mode bundles, language definitions and remaining upstream data/origin details stay
+language definitions and remaining upstream data/origin details stay
 under VENDOR-06. Revalidate editor-types and site-vendor tests when changing
 declarations or delivered notices. Whole-site, physical-device and remote release
 gates remain separate.

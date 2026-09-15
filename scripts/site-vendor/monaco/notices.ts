@@ -29,6 +29,7 @@ function readNotices(root: string): NoticeRecord {
 export function verifyMonacoLanguageNotices(root: string, manifest: VendorManifest): number {
   const record = readNotices(root)
   const sources: Sources = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/monaco-languages-provenance.json'), 'utf8'))
+  const modes: { files: Sources['workers'] } = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/monaco-modes-provenance.json'), 'utf8'))
   assert.equal(record.notices.length, 12, 'Missing Monaco language notice source')
   assert.equal(record.components.length, 9, 'Missing Monaco language component source')
   assert.deepEqual(record.packages.map(item => item.name).sort(), [...new Set(sources.modules.map(item => item.id.split('/')[0]))].sort(), 'Incomplete Monaco service attribution')
@@ -38,7 +39,7 @@ export function verifyMonacoLanguageNotices(root: string, manifest: VendorManife
     const archive = sources.archives.find(item => `${item.name}-${item.version}` === pkg.archive)
     assert(archive && archive.name === pkg.name && archive.version === pkg.version && archive.tarball === pkg.tarball, 'Wrong Monaco service source identity')
     const modules = sources.modules.filter(item => item.archive === pkg.archive).map(item => item.id)
-    const assets = sources.workers.filter(worker => worker.ids.some(id => modules.includes(id))).map(worker => worker.target.path)
+    const assets = [...sources.workers, ...modes.files].filter(worker => worker.ids.some(id => modules.includes(id))).map(worker => worker.target.path)
     assert.deepEqual(pkg.assets, assets, 'Wrong Monaco service asset binding')
   }
   for (const expected of record.components) {

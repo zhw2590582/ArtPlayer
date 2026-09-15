@@ -25,7 +25,7 @@ export function moduleIds(source: string): string[] {
 // RequireJS names one anonymous AMD definition and removes newline-ended maps.
 // Locate the call syntactically so comments/strings containing define( are inert.
 export function nameModule(source: string, id: string): string {
-  assert(/^[\w/-]+$/.test(id), 'Unexpected AMD identifier')
+  assert(/^[\w./-]+$/.test(id) && id.split('/').every(part => part !== '.' && part !== '..'), 'Unexpected AMD identifier')
   const calls = definitions(source)
   assert.equal(calls.length, 1, 'Expected one anonymous AMD definition')
   const call = calls[0]!
@@ -70,7 +70,7 @@ export function verifyWorkerSources(worker: string, ids: string[], fragments: { 
 }
 
 export function languageHeader(language: string): string {
-  assert(['css', 'html', 'json'].includes(language), 'Unexpected Monaco language')
+  assert(['css', 'html', 'json', 'typescript'].includes(language), 'Unexpected Monaco language')
   return `/*!-----------------------------------------------------------------------------
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * monaco-${language} version: 0.30.1(5a7ba61be909ae9e4889768a3453ebb0dec392e2)

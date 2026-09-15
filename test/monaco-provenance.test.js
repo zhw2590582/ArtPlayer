@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict'
 // eslint-disable-next-line test/no-import-node-test -- Verify fixed source transforms without executing archived runtime.
 import test from 'node:test'
+import ts from 'typescript'
+import { emitAmd } from '../scripts/site-vendor/monaco/compiler.ts'
 import { aliasModule, moduleIds, nameModule, verifyWorkerSources } from '../scripts/site-vendor/monaco/languages.ts'
 import { browserTypeScript, verifyTypeScriptSource } from '../scripts/site-vendor/monaco/typescript.ts'
 
@@ -46,11 +48,24 @@ test('Monaco AMD naming ignores strings and preserves source bodies', () => {
   assert(named.includes('define(\'library/main\',["exports"]'))
   assert(!named.includes('sourceMappingURL'))
   assert.deepEqual(moduleIds(named), ['library/main'])
+  assert.deepEqual(moduleIds(nameModule(anonymous, 'library/lib.index')), ['library/lib.index'])
+  assert.throws(() => nameModule(anonymous, '../library'), /identifier/)
   assert(nameModule(anonymous.trimEnd(), 'library/main').endsWith('//# sourceMappingURL=source.js.map;'))
   assert.throws(() => nameModule(named, 'library/main'), /anonymous AMD dependency array/)
   assert.throws(() => nameModule(anonymous + anonymous, 'library/main'), /one anonymous/)
   assert.throws(() => nameModule(anonymous, 'library/\'main'), /identifier/)
   assert.throws(() => nameModule(`${anonymous}//# sourceMappingURL=second.map\n`, 'library/main'), /Duplicate source map/)
+})
+
+test('Monaco mode emission resolves const enums only from explicit declaration inputs', () => {
+  const source = 'import { ScanError } from "pinned-json"; export const code = ScanError.End;'
+  const declarations = [{ name: 'pinned-json', source: 'export declare const enum ScanError { End = 2 }' }]
+  const compiled = emitAmd(ts, source, ['es5'], true, declarations)
+  assert.match(compiled, /exports.code = 2/)
+  const wrong = emitAmd(ts, source, ['es5'], true, [{ ...declarations[0], source: declarations[0].source.replace('2', '3') }])
+  const fragment = nameModule(compiled, 'mode')
+  assert.throws(() => verifyWorkerSources(nameModule(wrong, 'mode'), ['mode'], [{ id: 'mode', source: fragment }]), /Source differs/)
+  assert(!emitAmd(ts, source, ['es5'], true).includes('exports.code = 2'))
 })
 
 test('Monaco worker proof covers helper code, aliases and all module boundaries', () => {
