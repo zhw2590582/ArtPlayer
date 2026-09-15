@@ -1,5 +1,12 @@
 # 进度与证据
 
+## PKG-AUTO-THUMB-04 完成源码与公开类型迁移验收
+
+八个自有模块均为严格 TS，当前包及真实核心接入 fixture 编译/lint 通过；当前 tarball 与 npm 旧包在仓库外完成 10 组 TS/模块解析、精确负例、导出身份和 Promise 注册检查，编辑器 24 个声明输出只读检查通过。运行字节未改，与任务12的189项源码、两份产物各82项及各36项浏览器证据指纹相同。见[记录](changes/2026-09-15-PKG-AUTO-THUMB-04-migration.md)及[证据](baselines/auto-thumbnail-migration-validation.json)。
+
+04 基于已完成子任务独立验收；05 直接依赖03与04，校验器保护03门槛。03原验收、首帧风险与设备要求未降低，完整包仍不能标完成。状态201/266 done、22 doing、43 todo。Thumbnail工具的默认兼容选择仍待用户答复，后续独立工作继续。
+
+
 ## PKG-AUTO-THUMB-12 元数据加载超时与资源回收
 
 修复隐藏视频在未收到 metadata/error 时永久等待：独立 30 秒期限归 extraction/job 所有，成功/取消后旧期限失效，超时保留上一张可用图。旧 main 的 7 项回归全红；源码 189/189、main/legacy 各 82/82，重建后三引擎各 36/36。首版 WebKit 请求拦截等待失败已保留，最终用真实 HTTP 挂起端点及服务端到达证据验证。期限回调由测试显式触发，不声称等待了真实 30 秒。见[变更](changes/2026-09-15-PKG-AUTO-THUMB-12-metadata.md)与[证据](baselines/auto-thumbnail-metadata-validation.json)。

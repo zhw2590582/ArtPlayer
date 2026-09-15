@@ -1848,7 +1848,11 @@
         "artplayer-plugin-auto-thumbnail"
       ],
       "dependsOn": [
-        "PKG-AUTO-THUMB-03",
+        "PKG-AUTO-THUMB-02",
+        "CORE-09",
+        "CORE-19",
+        "PKG-AUTO-THUMB-07",
+        "PKG-AUTO-THUMB-12",
         "ENG-04",
         "ENG-06",
         "CORE-07",
@@ -1857,11 +1861,16 @@
         "PKG-AUTO-THUMB-10",
         "PKG-AUTO-THUMB-11"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "抽帧结果和真实异步插件返回类型兼容",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-15-PKG-AUTO-THUMB-04-migration.md",
+        "baselines/auto-thumbnail-migration-validation.json",
+        "changes/2026-09-13-PKG-AUTO-THUMB-03-internal-types.md",
+        "baselines/auto-thumbnail-metadata-validation.json"
+      ]
     },
     {
       "id": "PKG-AUTO-THUMB-05",
@@ -1873,7 +1882,8 @@
       "dependsOn": [
         "PKG-AUTO-THUMB-04",
         "CORE-22",
-        "PKG-AUTO-THUMB-12"
+        "PKG-AUTO-THUMB-12",
+        "PKG-AUTO-THUMB-03"
       ],
       "status": "todo",
       "risk": "H",

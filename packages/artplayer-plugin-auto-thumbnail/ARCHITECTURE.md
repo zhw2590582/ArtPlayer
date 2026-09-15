@@ -157,11 +157,12 @@ historical missing 1.0.0 main/legacy files without substituting source-only code
 Historical contract/failure tests remain separate and continue to reproduce old
 defects; their passing status does not mean those defects should remain.
 
-The public type entry is tracked independently as `PKG-AUTO-THUMB-08`, split from
-04 so that declaration work can proceed without weakening the unfinished 03
-pixel gate. Task04 still depends on both 03 and 08. The source/runtime remains an
-intermediate `PKG-AUTO-THUMB-03` implementation. Native lifecycle
-validation does not prove correct pixels. The attached renderer now has native
+The public type entry originated in `PKG-AUTO-THUMB-08`; task09 restored the
+historical factory alias. Task04 has verified the complete strict source and
+installed public type/module surfaces using those changes and resource fixes
+07/10/11/12. Task03 remains unfinished; task05 depends directly on both 03 and 04,
+so type completion cannot waive its pixel gate. Native lifecycle validation does
+not prove correct pixels. The attached renderer now has native
 pixel checks for all five cells when native frame callbacks are available,
 including the unique first frame, real black content, changing colors, spatial
 detail and presentation timestamps. The callback-less fallback still only has
@@ -224,8 +225,9 @@ annotations describe the nominal options; no runtime casts or
 normalization were added, so historical coercible JS inputs retain the same
 validation/arithmetic and raw values. Missing options retain the existing behavior.
 Tasks08/09 supplied the compatible public declarations, implementation assignment
-fixtures and historical CommonJS alias. Task04 still requires the completed task03
-implementation and final migration acceptance. Task05 verifies old/final cores and actual
+fixtures and historical CommonJS alias. Task04's migration acceptance is recorded
+in `refactor/changes/2026-09-15-PKG-AUTO-THUMB-04-migration.md`; unresolved runtime
+behavior remains with task03. Task05 requires both and verifies old/final cores and actual
 devices; task06 covers installed package entries and the real demo/editor. The
 package version remains unchanged. Use
 `refactor/baselines/auto-thumbnail-contract.md` and `auto-thumbnail-failures.md` as
