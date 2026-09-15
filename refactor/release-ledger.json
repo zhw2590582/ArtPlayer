@@ -61,8 +61,20 @@
         "basis": "refactor/baselines/releases.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer.tgz",
+        "version": "6.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "896b9f1f57feb447e9baef3b02c2c04e51b79eadef858b01a921e2b2146ff75a",
+        "integrity": "sha512-b2Sl/KMnRriJH4/TKsksknoCmLtPDduL6t9RROlzInp6CC1YN4L7t4EYGl/kdmpcgzAJsH0Fz6k4YUFmrDaPQw=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer.json",
+          "sha256": "89a5930640647bcea82d550c2c9e1822560520b0fc69b7338ce9020884c89c8a"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-ads",
@@ -82,8 +94,20 @@
         "basis": "refactor/baselines/ads-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-ads.tgz",
+        "version": "3.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "a7c85c3cbd5893306c50af3e5ab2ae900838633184e2b5509a7790a346e63277",
+        "integrity": "sha512-pTd5JgYmP2Du2kWNrjTTgWXmroM5WgCofQKRFyKOeak1T+uFx6nuvBYh8QIlEwqdZIleyMOkldD75cKG11nBCQ=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-ads.json",
+          "sha256": "e4771a73ca98d80af4388045ee5979b03bdac7fe2b642dcf23923dda19b32524"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-ambilight",
@@ -103,8 +127,20 @@
         "basis": "refactor/baselines/ambilight-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-ambilight.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "58b3de027f6da9358927a032585af2db0b98ece514263062e61a26c0b0a60d69",
+        "integrity": "sha512-zwcVOBkU0MHYQE7nwLsWc8uWDOUFZYdQQ7Kn6eTjizuioAqpTZuMMlYA/CB0IzaLro4pHvN60HBNvvm6mFyvzg=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-ambilight.json",
+          "sha256": "738587b016b33c97c1a6f0bd6e38f1b1841c4f30f473672d718b8ee4db422cab"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-asr",
@@ -124,8 +160,20 @@
         "basis": "refactor/baselines/asr-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-asr.tgz",
+        "version": "3.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "e99563e05cf2fa5cb687bee25bbec5f663dadb39cd7a780ae506121a069f3288",
+        "integrity": "sha512-rfRi6YB5cTiqnPQD/AN4dLprsXt7XIRo8F4KhyPp9cx/5UCNXBnSwnQYo0ZSFXWM5Y9CgIe9UxQ39NOKNX3hFQ=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-asr.json",
+          "sha256": "fecd1307ff173994735a89218e06279ee0a44e20943fbd7d07257114cf52982b"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-audio-track",
@@ -145,8 +193,20 @@
         "basis": "refactor/baselines/audio-track-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-audio-track.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "68251599fb975857e5124b3a7804e2e7edbd9de6b3b22eef2882ae9cf38c3560",
+        "integrity": "sha512-EY3TTnz3UEOyLjSpvjOmqykrGCuTLJ38O35JzSeFx11vQFt/fMA06fKBjvczMIyO3HgesWgXllIadJL3bgRAPg=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-audio-track.json",
+          "sha256": "5e9c8fb3a9c48d541310d5347515183f7f067038344b555f526196bd837da804"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-auto-thumbnail",
@@ -166,8 +226,20 @@
         "basis": "refactor/baselines/auto-thumbnail-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-auto-thumbnail.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "03b31364d6b6ef6802213802031c1e4a811e1cd590e12468d882fbb4f0f7945d",
+        "integrity": "sha512-dcsPHwFqulFreP1myyXF9mkdy+LDeaJI33gl0QOnZ/VGNIXZAbuhskmAowTFw2PErj1C7saxmg3ArElLZqkfbA=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-auto-thumbnail.json",
+          "sha256": "12918e779e3c555ac6dce672fd9de55337cf8843a58a73230fef5fb6847511c9"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-chapter",
@@ -187,8 +259,20 @@
         "basis": "refactor/baselines/releases.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-chapter.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "4dcc9e5c4e127edbc17ab1e59e3fb973ac9733125cff744c3031b43b98476e02",
+        "integrity": "sha512-uiugo8ZhrPwCUSUAIQAyS/bqLxWB+ox/mYadTRqOsh2WgktcoRxeTvEzFzvxIH+UUR8IEz3IB+Ug3tpp0bEIbg=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-chapter.json",
+          "sha256": "e105d66f1dac3c3100c3b86d1dd94f24a257825da8f4644f4ec492ad76d1ffe4"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-chromecast",
@@ -208,8 +292,20 @@
         "basis": "refactor/baselines/chromecast-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-chromecast.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "e16de620bd4770b4ab717291af29d5a2f450025ae8bdf22815f6efd51e40056e",
+        "integrity": "sha512-CtzTXvyn3QQDV9FiksabGo9mlTw6erU3FkDhHf3s1EtUBm+DvYJGi+msrZqa0IAoxUDyXLgNw/g6l4ivCpE1nQ=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-chromecast.json",
+          "sha256": "b8606c1b0819552c9e15744802e5cec9c8e80ac7280d3f4b451a0f863a861449"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-danmuku",
@@ -229,8 +325,20 @@
         "basis": "refactor/baselines/danmuku-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-danmuku.tgz",
+        "version": "6.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "90d09ab98a1ca36575a5ed38332d518c03265bcd4ad95524170394b1e67209c0",
+        "integrity": "sha512-064flVtWOP8FvGSA+cKjKOfYIrj3WU40RkBzgiHWecrLiiYHQE+gxox29goEs0r3W0BbSPcJR6luCGTbDqWf9Q=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-danmuku.json",
+          "sha256": "3a5ea4e0b9951fb07835ab899128b9095c6c2a8105402bd1b77075aa0c4647c3"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-danmuku-mask",
@@ -250,8 +358,20 @@
         "basis": "refactor/baselines/danmuku-mask-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-danmuku-mask.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "71b4367caed8ad8cbe4a171abb3bb4be3955c15dea4694255c1448c85d6dfb17",
+        "integrity": "sha512-Ib4RP36N7k75k2pO2oyjlfmVQ1I5ODrNoGVOxrj042ZJ7OPrteqrBuy+wsFzvOoF24uZKHGpBD+vX+8y+5XvWw=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-danmuku-mask.json",
+          "sha256": "90102c773284689dc3359bd6446bf262db2caf9d883e66be0215b68c7e682c47"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-dash-control",
@@ -271,8 +391,20 @@
         "basis": "refactor/baselines/dash-control-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-dash-control.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "3130f6e7c49373a87b094582bcc9affbdf799c562ec688137bb96f3d7ed42157",
+        "integrity": "sha512-01z5sdzWx7zNFiUITEelZ8f9v+rSGiYH3HkxnTN0qQxQY12la0fJ1kK5YIFRzoeWcj4cakygSsvMuPqjQ6OFKQ=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-dash-control.json",
+          "sha256": "1ecc3c78adffcbc2927be782dba77b4135163353c98cb5f7f02372c10cf4250c"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-document-pip",
@@ -292,8 +424,20 @@
         "basis": "refactor/baselines/dpip-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-document-pip.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "3507d1d5e0de702173c25a2e5caddac6e245046d9cd1249728b76e6dea9b8b77",
+        "integrity": "sha512-AJ3JW4+TU0wbFWci5YeSOcV66gEOBrys3ud5xgp3tqjoRxu3IHK4t1z4j3nxlROsKbqeHnOHzxwMeusYM9FyQg=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-document-pip.json",
+          "sha256": "ad72be2b4586f763012275f9e21e7236e85bcb5ba8909c4c2c9e6585f295d274"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-hls-control",
@@ -313,8 +457,20 @@
         "basis": "refactor/baselines/hls-control-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-hls-control.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "3210ec59c5b8440d584d509e214f4021a0a5117639a1e883d617e95e2ac9a49b",
+        "integrity": "sha512-yBcdrwu+AaVwKK5K15rBoqzvkU4a3KeUUKOikJjO+uLuJr6Jw/LL8eu9ye5M+vFFO25jDjbAPxAJ1e0xm5i0lA=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-hls-control.json",
+          "sha256": "b15c8524a387b5eaef9bdb2b1c0c83f2811d4cafcb0b358cf378ea3ef188158d"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-jassub",
@@ -334,8 +490,20 @@
         "basis": "refactor/baselines/jassub-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-jassub.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "e0391ecf1e2c9da0a622bb933a857f718bb370ecfb63ecc4b5e3ef1261e84371",
+        "integrity": "sha512-NgBP0rzu7okmarQfGT9+XgXTxrLc+VUjDA9gu9lFlR5a72/EDnCDgalRZOIZpTix3Wtg8bGJsXgKkPpBKpfe/A=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-jassub.json",
+          "sha256": "6cc27cf985a46374a0e5c5476fcb6f443df46998f7009e8a1bea1f500f62210e"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-multiple-subtitles",
@@ -355,8 +523,20 @@
         "basis": "refactor/baselines/multiple-subtitles-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-multiple-subtitles.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "d2b9e3f04560bcb5a5e6028166c7f92d23554290be6ae29fc632bf1eb82d1f87",
+        "integrity": "sha512-oP46adeD15srjRhvC48jfXt2/7HsCbFkDs5dAm2EVFTGnJELHgUiBgoJmkq59s20j0Q0dJA6BAedlSp+xtXdgg=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-multiple-subtitles.json",
+          "sha256": "f9a7e145a314a3119e54dca8988563c230a02badd16bdffdcd0429aa68d1b928"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-vast",
@@ -376,8 +556,20 @@
         "basis": "refactor/baselines/vast-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-vast.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "07e23e4b5ad201e2b33afd0f8b689161c6228d0c0e0621487e48b04457fef766",
+        "integrity": "sha512-nayI7zsg4owfZLynn6p3v6VYIWjSW6LJ98wC+3zmc0qH1TKtGeyn0Tg8k5CcCF1oozpT8S4UtdMb7PLlQZ1gmw=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-vast.json",
+          "sha256": "9081ed8ab28d23b246adacacd1c6327ba9c3986e49e258c901fae359ab971a9f"
+        }
+      }
     },
     {
       "name": "artplayer-plugin-vtt-thumbnail",
@@ -397,8 +589,20 @@
         "basis": "refactor/baselines/vtt-thumbnail-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-vtt-thumbnail.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "4a7cbdb38d5d876a68bc74a3a785402a2989b3730638b0654c358275bcffc423",
+        "integrity": "sha512-fWfOv3Iaiq0LACMK/Xb22i68xwqWIDFbkAAw2nX80vkc/1Jf2jBZQZcJR/VArvv6xVejyTFB+TR0zLX8z7uKmQ=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-vtt-thumbnail.json",
+          "sha256": "09dee0ce9a5ec8de4c0881f45be2dd5d49bd82a4664cb19674286839b7a76ae1"
+        }
+      }
     },
     {
       "name": "artplayer-proxy-canvas",
@@ -418,8 +622,20 @@
         "basis": "refactor/baselines/canvas-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-proxy-canvas.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "3cad2e085d0cf960508f5ed75ed62731c245e741246659a0f882fd73f2ed5430",
+        "integrity": "sha512-sz03E3CYDHEkmNKnx1DuGOopnUkD+uC0ZU+ll1wz01kGPKffIlphIDS9JX00FugulDzc0KxHs8o4yW5bkBy0YA=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-proxy-canvas.json",
+          "sha256": "a83229d5b26ba8f92efc5114858b8df04d226ff32c360113ab436f717bfc858d"
+        }
+      }
     },
     {
       "name": "artplayer-proxy-mediabunny",
@@ -439,8 +655,20 @@
         "basis": "refactor/baselines/mb-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-proxy-mediabunny.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "adca4dc42d1a1bfe05ba81ebb397b607eb548ca6ec02856f1312dd41ea96a232",
+        "integrity": "sha512-o8KG4j71P1/c0FOmsgtwCupWKCdKrPuPD5xKc5QQgJzvVuDZ+HLrhJoJ98dRcUSc+TEKgZm6Bv7GMSajFpXIVQ=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-proxy-mediabunny.json",
+          "sha256": "cf87b99a13f6075522c85fe3df7679ecd63770e66fcd2c614a39474e00083329"
+        }
+      }
     },
     {
       "name": "artplayer-tool-iframe",
@@ -461,8 +689,20 @@
         "basis": "refactor/baselines/iframe-release.json",
         "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-tool-iframe.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "a0808c48db68a5d433ebb983348cf28130552e5bea99c38a1335b90b4b302d3c",
+        "integrity": "sha512-o9jnANxOLRNAwBuqNgHy0Ep2Xc7PgOcOcNoy5SKucETjCvzPNS/q95vqWl8f52U+I5LS383lLH8IgYm3c/0gCg=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-tool-iframe.json",
+          "sha256": "6a34daaf2dae2004a13a946c4f4701ffd1baa8c5087a5bce1f482a010d655483"
+        }
+      }
     },
     {
       "name": "artplayer-tool-thumbnail",
@@ -482,8 +722,20 @@
         "basis": "refactor/baselines/thumbnail-release.json",
         "strategy": "Original tarball is unavailable. Resolve a complete rollback alternative and migration scope under REL-04 before release."
       },
-      "candidate": null,
-      "evidence": {}
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/thumbnail-package-types-3AozAr/candidate.tgz",
+        "version": "5.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "b6403202698ea9beccee34f764727442c31ad806cb5b5e3b4f6e944f760acdb8",
+        "integrity": "sha512-NMeqORYyJOhxYgfULuZnznKUo3iQO3A3J6pGjRAGB05OA0SLOj4w8cDpG3vffwTZqCD6m+rdYCqJtYtBdriVxA=="
+      },
+      "evidence": {
+        "build": {
+          "path": "refactor/baselines/major-candidate-build/artplayer-tool-thumbnail.json",
+          "sha256": "d23f16252447f32907456bda58507b2dfd88d041a403db352fc622f702238506"
+        }
+      }
     },
     {
       "name": "artplayer-vitepress",

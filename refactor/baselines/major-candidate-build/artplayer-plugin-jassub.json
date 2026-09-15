@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "package": "artplayer-plugin-jassub",
+  "version": "2.0.0",
+  "gate": "build",
+  "candidateIntegrity": "sha512-NgBP0rzu7okmarQfGT9+XgXTxrLc+VUjDA9gu9lFlR5a72/EDnCDgalRZOIZpTix3Wtg8bGJsXgKkPpBKpfe/A==",
+  "inputFingerprint": "e0391ecf1e2c9da0a622bb933a857f718bb370ecfb63ecc4b5e3ef1261e84371",
+  "result": "pass",
+  "checks": [
+    {
+      "id": "major-version-and-distribution-members",
+      "result": "pass",
+      "mode": "native"
+    },
+    {
+      "id": "production-build-archive-members",
+      "result": "pass",
+      "mode": "native"
+    },
+    {
+      "id": "isolated-install-and-frozen-lock",
+      "result": "pass",
+      "mode": "native"
+    },
+    {
+      "id": "unchanged-source-and-validation-inputs",
+      "result": "pass",
+      "mode": "native"
+    }
+  ],
+  "environment": [
+    {
+      "os": "Windows",
+      "node": "v24.21.0",
+      "yarn": "1.22.22",
+      "remote": false
+    }
+  ],
+  "command": "yarn test:package --browser",
+  "reviewedBy": "Codex implementation verification; formal REVIEW-01/02/03 not started",
+  "artifacts": [
+    {
+      "path": "refactor/.cache/release-ledger-3sr7NB/report.json",
+      "sha256": "33e123525ef8678b1d602d06ec56733f86ddaf10676f61652f56ac17c7e055de"
+    },
+    {
+      "path": "refactor/.cache/release-ledger-cv1smZ/report.json",
+      "sha256": "33e123525ef8678b1d602d06ec56733f86ddaf10676f61652f56ac17c7e055de"
+    },
+    {
+      "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+      "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+    },
+    {
+      "path": "refactor/.cache/packages/run-XvHA8v/build.log",
+      "sha256": "adb0113c55572d7efc7b67110f8805d1a97b30c2be778dbc116e3713d10e8cba"
+    },
+    {
+      "path": "refactor/.cache/packages/run-XvHA8v/install.log",
+      "sha256": "c3b09f4c65bfb4a1bf31ddd2e3328c22988cf52a31e36c31ea2de4d3132a89c6"
+    },
+    {
+      "path": "refactor/.cache/packages/run-XvHA8v/frozen-install.log",
+      "sha256": "6d8a95fad69ac94a55d176b472fc3a0f72783092e49b7e683156b6717510f4a8"
+    },
+    {
+      "path": "refactor/.cache/packages/run-XvHA8v/consumer-yarn.lock",
+      "sha256": "93ca1a7b169b752bee3c094abb0eb89f2bf549dc78ffdc9cbcc1b79c4d0db27c"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-3AozAr/report.json",
+      "sha256": "ba0e55229d60cc8451e156a87d7347d5e26d32c6648bdb362138c5457a214ace"
+    },
+    {
+      "path": "refactor/.cache/rel02-registered-thumbnail-build.log",
+      "sha256": "545018474b0cf4ef35b043cef1c9491a3b8816f25589658a761a41080f1cc268"
+    },
+    {
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-jassub.tgz",
+      "sha256": "b598a720fffbd839c61adde33e1a19e2da2473548aebaeb4669be58278605b91"
+    },
+    {
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-jassub-pack.log",
+      "sha256": "bf9c6bc5f3ce1faf77f5ae0895b8d5acb98fb9e26b3c0870df6ba7ee83ff80ae"
+    },
+    {
+      "path": "refactor/baselines/major-candidate-preparation.json",
+      "sha256": "0b2d5ed5102aca0c5214fc12e802c58e88a4d40a43c4eff352c46e2091ed3386"
+    }
+  ]
+}

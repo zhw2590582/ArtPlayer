@@ -5017,7 +5017,9 @@
         "changes/2026-09-16-REL-02-types-inputs.md",
         "baselines/major-installed-types-validation.json",
         "changes/2026-09-16-REL-02-yarn-candidate-archives.md",
-        "baselines/major-candidate-archive-validation.json"
+        "baselines/major-candidate-archive-validation.json",
+        "changes/2026-09-16-REL-02-candidate-registration.md",
+        "baselines/major-candidate-preparation.json"
       ]
     },
     {

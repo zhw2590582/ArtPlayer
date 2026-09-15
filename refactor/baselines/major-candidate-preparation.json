@@ -1,0 +1,448 @@
+{
+  "task": "REL-02",
+  "capturedAt": "2026-09-15T17:57:17.388Z",
+  "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+  "collector": {
+    "path": "refactor/.cache/record-rel02-candidates.mjs",
+    "sha256": "f6356d93e73359e29cd55fc8b40ba11a2b147f2ace58218e4bfa40626d6a42bf"
+  },
+  "toolchain": {
+    "node": "v24.21.0",
+    "canonicalNode": "24.21.0",
+    "packageManager": "yarn@1.22.22",
+    "observedUserAgent": "yarn/1.22.22 npm/? node/v24.21.0 win32 x64",
+    "declaredTools": {
+      "@antfu/eslint-config": "5.4.1",
+      "@playwright/test": "1.63.0",
+      "@types/markdown-it": "14.1.2",
+      "@types/node": "24.10.0",
+      "@types/react": "19.1.10",
+      "@types/react-dom": "19.1.7",
+      "@vitejs/plugin-react": "5.0.0",
+      "@vitejs/plugin-vue": "6.0.1",
+      "@vue/compiler-sfc": "3.5.28",
+      "@yarnpkg/lockfile": "1.1.0",
+      "c8": "12.0.0",
+      "cpy": "13.2.3",
+      "cross-env": "10.1.0",
+      "cross-spawn": "7.0.6",
+      "dotenv": "17.2.4",
+      "dts-bundle-generator": "9.5.1",
+      "esbuild": "0.27.7",
+      "eslint": "9.39.2",
+      "eslint-plugin-format": "2.0.1",
+      "glob": "13.0.6",
+      "lerna": "8.2.4",
+      "less": "4.5.1",
+      "linkedom": "0.18.13",
+      "monaco-editor": "0.30.1",
+      "mrmime": "2.0.1",
+      "pngjs": "7.0.0",
+      "prompts": "2.4.2",
+      "react": "19.1.1",
+      "react-dom": "19.1.1",
+      "semver": "7.7.4",
+      "servor": "4.0.2",
+      "svgo": "4.1.0",
+      "terser": "5.51.2",
+      "typescript": "5.9.3",
+      "typescript-compat": "npm:typescript@4.3.5",
+      "typescript-runtime-compat": "npm:typescript@5.1.6",
+      "vite": "7.3.6",
+      "vue": "3.5.28",
+      "vue-tsc": "3.3.11",
+      "yaml": "2.8.2"
+    },
+    "lock": {
+      "path": "yarn.lock",
+      "sha256": "aa33cfc38c7933ab53ce626a911fdafd7b14023e45f93ca37bf7f2f6a1d3ecce"
+    }
+  },
+  "inputReports": [
+    {
+      "path": "refactor/.cache/release-ledger-3sr7NB/report.json",
+      "sha256": "33e123525ef8678b1d602d06ec56733f86ddaf10676f61652f56ac17c7e055de"
+    },
+    {
+      "path": "refactor/.cache/release-ledger-cv1smZ/report.json",
+      "sha256": "33e123525ef8678b1d602d06ec56733f86ddaf10676f61652f56ac17c7e055de"
+    }
+  ],
+  "unchangedLibraryInputFiles": 1918,
+  "matchedSnapshotFiles": 1041,
+  "unrelatedSiteInputChanges": [],
+  "checks": [
+    "All 21 library fingerprints and their raw input files unchanged before/after build and at collection",
+    "Copied build snapshot inputs and generated package files match current normalized inputs",
+    "All candidate archive members match build bytes and installed copies where retained",
+    "21 target versions and CHANGELOG files match the approved version plan"
+  ],
+  "packages": [
+    {
+      "name": "artplayer",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer.tgz",
+      "version": "6.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "896b9f1f57feb447e9baef3b02c2c04e51b79eadef858b01a921e2b2146ff75a",
+      "integrity": "sha512-b2Sl/KMnRriJH4/TKsksknoCmLtPDduL6t9RROlzInp6CC1YN4L7t4EYGl/kdmpcgzAJsH0Fz6k4YUFmrDaPQw==",
+      "sha256": "917d472448b672510878a90cde259e8074991f09c6fe5d84820f24331b2f829d",
+      "members": 69,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-chapter.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "4dcc9e5c4e127edbc17ab1e59e3fb973ac9733125cff744c3031b43b98476e02",
+      "integrity": "sha512-uiugo8ZhrPwCUSUAIQAyS/bqLxWB+ox/mYadTRqOsh2WgktcoRxeTvEzFzvxIH+UUR8IEz3IB+Ug3tpp0bEIbg==",
+      "sha256": "07124421d415e6dfa62c05cfa439ac1d89553829bb797b06f7b196b90a07204f",
+      "members": 10,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-ambilight.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "58b3de027f6da9358927a032585af2db0b98ece514263062e61a26c0b0a60d69",
+      "integrity": "sha512-zwcVOBkU0MHYQE7nwLsWc8uWDOUFZYdQQ7Kn6eTjizuioAqpTZuMMlYA/CB0IzaLro4pHvN60HBNvvm6mFyvzg==",
+      "sha256": "b0b05920f38315b3607879707c990edf536777d98aaeb5291b847ea98f74aa5a",
+      "members": 11,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-proxy-canvas.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "3cad2e085d0cf960508f5ed75ed62731c245e741246659a0f882fd73f2ed5430",
+      "integrity": "sha512-sz03E3CYDHEkmNKnx1DuGOopnUkD+uC0ZU+ll1wz01kGPKffIlphIDS9JX00FugulDzc0KxHs8o4yW5bkBy0YA==",
+      "sha256": "42f610ccdbaa75f755dbffb2424bd871dd73435be839cfda3c9fe456c44a50c6",
+      "members": 13,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-document-pip.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "3507d1d5e0de702173c25a2e5caddac6e245046d9cd1249728b76e6dea9b8b77",
+      "integrity": "sha512-AJ3JW4+TU0wbFWci5YeSOcV66gEOBrys3ud5xgp3tqjoRxu3IHK4t1z4j3nxlROsKbqeHnOHzxwMeusYM9FyQg==",
+      "sha256": "5713c022da6053920b91a41a5b9b9eba481586164014bba72ad84d5cd7da1fe9",
+      "members": 10,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-ads.tgz",
+      "version": "3.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "a7c85c3cbd5893306c50af3e5ab2ae900838633184e2b5509a7790a346e63277",
+      "integrity": "sha512-pTd5JgYmP2Du2kWNrjTTgWXmroM5WgCofQKRFyKOeak1T+uFx6nuvBYh8QIlEwqdZIleyMOkldD75cKG11nBCQ==",
+      "sha256": "f8a8b707897660d75efb89e39d88878f14bbe6b064796d41e7d519631b406c77",
+      "members": 13,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-audio-track.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "68251599fb975857e5124b3a7804e2e7edbd9de6b3b22eef2882ae9cf38c3560",
+      "integrity": "sha512-EY3TTnz3UEOyLjSpvjOmqykrGCuTLJ38O35JzSeFx11vQFt/fMA06fKBjvczMIyO3HgesWgXllIadJL3bgRAPg==",
+      "sha256": "81451d0161a50a1b9de188134be897b71974df90ff56af0ca1a402261941bf57",
+      "members": 13,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-vtt-thumbnail.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "4a7cbdb38d5d876a68bc74a3a785402a2989b3730638b0654c358275bcffc423",
+      "integrity": "sha512-fWfOv3Iaiq0LACMK/Xb22i68xwqWIDFbkAAw2nX80vkc/1Jf2jBZQZcJR/VArvv6xVejyTFB+TR0zLX8z7uKmQ==",
+      "sha256": "83ebbcc093ec31fff5fe60a8f98b277a44f810300918390642ddb5c2008e02e6",
+      "members": 13,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-multiple-subtitles.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "d2b9e3f04560bcb5a5e6028166c7f92d23554290be6ae29fc632bf1eb82d1f87",
+      "integrity": "sha512-oP46adeD15srjRhvC48jfXt2/7HsCbFkDs5dAm2EVFTGnJELHgUiBgoJmkq59s20j0Q0dJA6BAedlSp+xtXdgg==",
+      "sha256": "bfd94ee29f2a76242f01dcad2f55bb306fca5335f164f4063b74dee510c7e54a",
+      "members": 12,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-hls-control.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "3210ec59c5b8440d584d509e214f4021a0a5117639a1e883d617e95e2ac9a49b",
+      "integrity": "sha512-yBcdrwu+AaVwKK5K15rBoqzvkU4a3KeUUKOikJjO+uLuJr6Jw/LL8eu9ye5M+vFFO25jDjbAPxAJ1e0xm5i0lA==",
+      "sha256": "c31a2ea368cf17223f7c20b5a424c121f3e4dbb26387f0a29d1c4c0eff0a4423",
+      "members": 10,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-dash-control.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "3130f6e7c49373a87b094582bcc9affbdf799c562ec688137bb96f3d7ed42157",
+      "integrity": "sha512-01z5sdzWx7zNFiUITEelZ8f9v+rSGiYH3HkxnTN0qQxQY12la0fJ1kK5YIFRzoeWcj4cakygSsvMuPqjQ6OFKQ==",
+      "sha256": "d29880418e4327f78c3a2847a391be7e2be20cd5ad6035accb9070c20f1c4cac",
+      "members": 10,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-auto-thumbnail.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "03b31364d6b6ef6802213802031c1e4a811e1cd590e12468d882fbb4f0f7945d",
+      "integrity": "sha512-dcsPHwFqulFreP1myyXF9mkdy+LDeaJI33gl0QOnZ/VGNIXZAbuhskmAowTFw2PErj1C7saxmg3ArElLZqkfbA==",
+      "sha256": "65fa24282f7f0b9e814434f696f2f4e302f19008a6c62281175c887b3d74c6fe",
+      "members": 12,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-asr.tgz",
+      "version": "3.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "e99563e05cf2fa5cb687bee25bbec5f663dadb39cd7a780ae506121a069f3288",
+      "integrity": "sha512-rfRi6YB5cTiqnPQD/AN4dLprsXt7XIRo8F4KhyPp9cx/5UCNXBnSwnQYo0ZSFXWM5Y9CgIe9UxQ39NOKNX3hFQ==",
+      "sha256": "c2ddf26932b1dc811b1c344bd83a92096610b276ba9fcc634736be9b346be3e5",
+      "members": 11,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-chromecast.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "e16de620bd4770b4ab717291af29d5a2f450025ae8bdf22815f6efd51e40056e",
+      "integrity": "sha512-CtzTXvyn3QQDV9FiksabGo9mlTw6erU3FkDhHf3s1EtUBm+DvYJGi+msrZqa0IAoxUDyXLgNw/g6l4ivCpE1nQ==",
+      "sha256": "c2c891a6ad97a38932235f73e5f8df5571c5fd3d91ce69303e467391f073e791",
+      "members": 11,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-proxy-mediabunny.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "adca4dc42d1a1bfe05ba81ebb397b607eb548ca6ec02856f1312dd41ea96a232",
+      "integrity": "sha512-o8KG4j71P1/c0FOmsgtwCupWKCdKrPuPD5xKc5QQgJzvVuDZ+HLrhJoJ98dRcUSc+TEKgZm6Bv7GMSajFpXIVQ==",
+      "sha256": "a4ef98b5a587b9aaf4a6773a1290eee042d95eaed9ec2b998dd465fa8700938f",
+      "members": 10,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-jassub.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "e0391ecf1e2c9da0a622bb933a857f718bb370ecfb63ecc4b5e3ef1261e84371",
+      "integrity": "sha512-NgBP0rzu7okmarQfGT9+XgXTxrLc+VUjDA9gu9lFlR5a72/EDnCDgalRZOIZpTix3Wtg8bGJsXgKkPpBKpfe/A==",
+      "sha256": "b598a720fffbd839c61adde33e1a19e2da2473548aebaeb4669be58278605b91",
+      "members": 16,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-danmuku.tgz",
+      "version": "6.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "90d09ab98a1ca36575a5ed38332d518c03265bcd4ad95524170394b1e67209c0",
+      "integrity": "sha512-064flVtWOP8FvGSA+cKjKOfYIrj3WU40RkBzgiHWecrLiiYHQE+gxox29goEs0r3W0BbSPcJR6luCGTbDqWf9Q==",
+      "sha256": "b1c1079ffdbb14e7dbc42639cb39a475a2f9f75bf1cf598ae3a00e2a68e5fcd8",
+      "members": 12,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-danmuku-mask.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "71b4367caed8ad8cbe4a171abb3bb4be3955c15dea4694255c1448c85d6dfb17",
+      "integrity": "sha512-Ib4RP36N7k75k2pO2oyjlfmVQ1I5ODrNoGVOxrj042ZJ7OPrteqrBuy+wsFzvOoF24uZKHGpBD+vX+8y+5XvWw==",
+      "sha256": "fb44b8bc4ae67f2a36c50e2d457b77c0a8b02105275e84e7904a03aa59c70de3",
+      "members": 9,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-tool-iframe.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "a0808c48db68a5d433ebb983348cf28130552e5bea99c38a1335b90b4b302d3c",
+      "integrity": "sha512-o9jnANxOLRNAwBuqNgHy0Ep2Xc7PgOcOcNoy5SKucETjCvzPNS/q95vqWl8f52U+I5LS383lLH8IgYm3c/0gCg==",
+      "sha256": "b49470c336a2a8129bc27228e4d71eac7d154168a6c7a1f205ba1cf11cabacc4",
+      "members": 10,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-vast.tgz",
+      "version": "2.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "07e23e4b5ad201e2b33afd0f8b689161c6228d0c0e0621487e48b04457fef766",
+      "integrity": "sha512-nayI7zsg4owfZLynn6p3v6VYIWjSW6LJ98wC+3zmc0qH1TKtGeyn0Tg8k5CcCF1oozpT8S4UtdMb7PLlQZ1gmw==",
+      "sha256": "15dba54c26b9054f6ab6a5f762560335377e82bd9d8b2e5bbeb30327d05a9678",
+      "members": 12,
+      "report": {
+        "path": "refactor/.cache/packages/run-XvHA8v/report.json",
+        "sha256": "ae757c0b47903aa3e53b333ea161c122981b125238209bac926c4b2575213145"
+      }
+    },
+    {
+      "name": "artplayer-tool-thumbnail",
+      "kind": "npm-tarball",
+      "path": "refactor/.cache/thumbnail-package-types-3AozAr/candidate.tgz",
+      "version": "5.0.0",
+      "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+      "inputFingerprint": "b6403202698ea9beccee34f764727442c31ad806cb5b5e3b4f6e944f760acdb8",
+      "integrity": "sha512-NMeqORYyJOhxYgfULuZnznKUo3iQO3A3J6pGjRAGB05OA0SLOj4w8cDpG3vffwTZqCD6m+rdYCqJtYtBdriVxA==",
+      "sha256": "fa7387e42a7a1d315cf76e5eeaca4dbf66c4688b62f442a1e14e96cdc102b0ab",
+      "members": 12,
+      "report": {
+        "path": "refactor/.cache/thumbnail-package-types-3AozAr/report.json",
+        "sha256": "ba0e55229d60cc8451e156a87d7347d5e26d32c6648bdb362138c5457a214ace"
+      }
+    }
+  ],
+  "publicationAuthorized": false,
+  "limitations": [
+    "Build and isolated installation only; no whole-package runtime/types/browser/devices/combinations/rollback/reviews/remote-ci acceptance inferred.",
+    "Thumbnail historical workspace fixture is not the missing published npm tarball.",
+    "Local ignored cache attachments must be preserved; missing bytes invalidate evidence."
+  ],
+  "browser": {
+    "command": "yarn test:browser:installed danmuku-timing-diagnostic.spec.js audio-buffering.spec.js --grep \"pending|sampling|sample|timing|held\"",
+    "artifactMap": {
+      "path": "refactor/.cache/packages/run-XvHA8v/browser-artifacts.json",
+      "sha256": "bf0ca0fdfd6f1aa336f7abe65e4bb2225b959ff1dfd15c8902438bbf2f3a967b"
+    },
+    "stats": {
+      "startTime": "2026-09-15T17:56:15.675Z",
+      "duration": 51651.034,
+      "expected": 36,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "report": {
+      "path": "refactor/.cache/rel02-registered-browser/report.json",
+      "sha256": "3b1a68fe1a4abd51af8640664cf1e7b17a35a0d8a19e694ed83a5ae9470d66f7"
+    },
+    "invocation": {
+      "path": "refactor/.cache/rel02-registered-browser/invocation.json",
+      "sha256": "8becddc71d5247cea27024b64b215965e92ca16c6fa0c268d89df49b616c3b4d"
+    },
+    "result": {
+      "path": "refactor/.cache/rel02-registered-browser/result.json",
+      "sha256": "0132d84089bcff324bda8625ed72010ef60e2fbc3b6def23d5a75dcf512527d0"
+    },
+    "scope": "24 Danmuku native sampling/eligibility cases and 12 Audio held-switch cases across desktop Chromium/Firefox/WebKit; no native starvation closure",
+    "environments": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "platform": "win32"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "platform": "win32"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "platform": "win32"
+      }
+    ]
+  }
+}

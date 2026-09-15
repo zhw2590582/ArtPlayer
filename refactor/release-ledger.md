@@ -45,7 +45,9 @@ integrity、输入指纹不一致的 rollback 报告仍被拒绝，远端恢复�
 
 ## 候选绑定
 
-所有初始candidate均为null，evidence为空。先完成目标版本准备和对应实际构建/pack，
+初始candidate均为null，evidence为空。REL-02已登记21库的目标major候选及build
+封套，见[实际准备记录](changes/2026-09-16-REL-02-candidate-registration.md)；站点
+candidate仍为null，其他门槛未由这次构建代替。先完成目标版本准备和对应实际构建/pack，
 在构建快照中计算输入指纹，再登记真实文件；不能只复制当前指纹到旧产物冒充重建。
 build报告和REVIEW-03负责审查构建来源及实际内容对应关系。
 
