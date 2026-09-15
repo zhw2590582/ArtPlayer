@@ -169,7 +169,7 @@ recognizer service as a prerequisite for local audio verification.
 
 ## Shared installed browser validation
 
-Eight browser files select verified installed ASR bytes through browser-candidate.js. The Audio Track combination independently verifies both installed plugins. Published ASR controls retain their frozen archives; attachments distinguish selected published, installed and source inputs. Tests cover native local PCM, direct/capture routing, CORS, video-only input recovery, volume/mute and ownership. Deliberately forced Firefox binding rejection remains labeled; no recognition service or physical speaker output is claimed.
+Nine browser files select verified installed ASR bytes through browser-candidate.js. The Audio Track combination independently verifies both installed plugins. Published ASR controls retain their frozen archives; attachments distinguish selected published, installed and source inputs. Tests cover native local PCM, direct/capture routing, CORS, video-only input recovery, volume/mute and ownership. Deliberately forced Firefox binding rejection remains labeled; no recognition service or physical speaker output is claimed.
 
 Use `yarn test:package --browser`, then `yarn test:browser:installed`. The common
 roster in scripts/browser-validation/scope.ts drives both preparation and required
@@ -201,3 +201,10 @@ are rejected and normal audio recognition resumes on a valid source. It does not
 simulate a network outage or every decoder error. `test/asr-media-error.test.js`
 also covers errors during Worklet loading and delayed capture closure. Both are
 required when changing capture cancellation or error listener ownership.
+
+`asr-initial-error.spec.js` separately checks failure before the first metadata:
+native play rejects, no Context or recognition is allocated, and stop/destroy are
+safe even when the player never became ready. Recovery is a separate test, requiring
+actual nonzero PCM from the first valid source and final Context closure. The
+failure/cleanup test also runs without WebAudio; only audio recovery is capability
+skipped. This keeps initial-failure evidence distinct from successful playback.

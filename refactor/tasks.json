@@ -2924,7 +2924,9 @@
         "baselines/asr-explicit-capture-validation.json",
         "changes/2026-09-13-PKG-ASR-05-editor-generation.md",
         "changes/2026-09-15-PKG-ASR-05-no-audio.md",
-        "baselines/asr-no-audio-validation.json"
+        "baselines/asr-no-audio-validation.json",
+        "changes/2026-09-15-PKG-ASR-05-initial-error.md",
+        "baselines/asr-initial-error-validation.json"
       ]
     },
     {

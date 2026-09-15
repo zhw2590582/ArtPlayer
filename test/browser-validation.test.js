@@ -22,6 +22,7 @@ test('Source invocation clears inherited artifact selection without changing cal
   assert(installedTests.includes('canvas-lifecycle.spec.js'))
   assert(installedTests.includes('asr-no-audio.spec.js'))
   assert(installedTests.includes('asr-media-error.spec.js'))
+  assert(installedTests.includes('asr-initial-error.spec.js'))
   for (const file of installedTests)
     assert(fs.existsSync(path.resolve('test/browser', file)))
 })

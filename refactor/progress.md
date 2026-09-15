@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-ASR-05 首次媒体失败与恢复
+
+首次metadata之前的原生媒体失败、play拒绝、零音频资源、stop/destroy以及首个
+合法来源恢复已验证。源码/复用的已安装main和legacy三轮各30通过、6恢复能力
+跳过，共90通过（54失败清理、36真实PCM恢复），18 Windows WebKit恢复跳过。
+失败清理用例在WebKit实际执行，不把部分检查或缺WebAudio算成恢复成功。
+
+见[检查点](changes/2026-09-15-PKG-ASR-05-initial-error.md)及
+[证据](baselines/asr-initial-error-validation.json)。6清单回归、类型/lint/工具链通过；
+新增CI清单、包内说明和ASR环境行。运行字节/依赖/锁未改，没有重打包，旧归档
+不包含本次新增文档。203 done、21 doing、43 todo不变；任务05的设备、外部服务
+及完整分发要求继续开放。后续转向其他包的剩余验收。
+
 ## PKG-ASR-10 修复原生媒体错误后的过期识别
 
 复现真实 `art.video.src` 不可解码输入产生 error 而没有 pause：旧识别结果仍显示、
