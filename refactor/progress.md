@@ -1,5 +1,16 @@
 # 进度与证据
 
+## SITE-07 Monaco CSS 来源与样式回归
+
+68 份样式、3 个内联图片和字体按原配方恢复，81 个 Git 成员验证；显式记录
+70 个生成 CRLF 到发布 LF 的转换后，完整开发 CSS 匹配。历史 cssnano/PostCSS
+及冻结 Yarn 安装复现完整压缩 CSS，站点五个头部 CRLF 保留。25/25 单元、
+严格类型/lint、联网重试/离线复验和三引擎主题/字体/布局回归 3/3 通过。
+见[记录](changes/2026-09-15-SITE-07-monaco-css.md)。该换行归一化的原发布步骤
+尚未定位；其余内嵌来源与完整原始 core TS 编译仍开放。SITE-07/VENDOR-06
+保持未完结，199/265；Thumbnail 默认兼容策略仍待答。
+
+
 ## SITE-07 Monaco 完整贡献模块装配
 
 六个 npm 归档和 102 个 Git 成员支撑 88 个 TS 注册模块，原 RequireJS/Terser

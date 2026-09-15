@@ -7,12 +7,30 @@ import { emitAmd } from '../scripts/site-vendor/monaco/compiler.ts'
 import { assembleContributions, injectCoreDependency, readContributionMetadata } from '../scripts/site-vendor/monaco/contributions.ts'
 import { inventoryCoreMap, readCoreNls, restoreCoreMapComment } from '../scripts/site-vendor/monaco/core-build.ts'
 import { adaptCoreOrigin } from '../scripts/site-vendor/monaco/core-origins.ts'
+import { coreStyleOrder, prepareCoreStyles } from '../scripts/site-vendor/monaco/css.ts'
 import { aliasModule, moduleIds, nameModule, verifyWorkerSources } from '../scripts/site-vendor/monaco/languages.ts'
 import { browserTypeScript, verifyTypeScriptSource } from '../scripts/site-vendor/monaco/typescript.ts'
 
 const contributionGroups = ['typescript', 'css', 'json', 'html', 'languages'].map((name) => {
   const modulePrefix = name === 'languages' ? 'vs/basic-languages' : `vs/language/${name}`
   return { name: `monaco-${name}`, modulePrefix, contrib: `${modulePrefix}/monaco.contribution` }
+})
+
+test('Core CSS inventory follows registration order instead of the module-name table order', () => {
+  const source = 'var names = ["vs/css!vs/editor/editor.main","vs/css!vs/a","vs/css!vs/b"]; define(names[2],[],{}); define(names[1],[],{});'
+  assert.deepEqual(coreStyleOrder(source), ['vs/b', 'vs/a'])
+  assert.throws(() => coreStyleOrder(`${source} define(names[2],[],{});`), /repeated core CSS/)
+  assert.throws(() => coreStyleOrder('define([],{});'), /Missing/)
+})
+
+test('CSS source transport cannot silently fall back to unverified or missing inputs', () => {
+  const unexpectedRead = () => {
+    throw new Error('unexpected read')
+  }
+  assert.throws(() => prepareCoreStyles('', '', ['vs/a'], unexpectedRead), /one transportCSS/)
+  const recipe = 'function transportCSS(module: string, enqueue: Function, write: Function) { fs.readFileSync("/outside/a.css"); return true; }'
+  assert.throws(() => prepareCoreStyles(recipe, '', ['vs/a'], unexpectedRead), /escaped verified inputs/)
+  assert.throws(() => prepareCoreStyles('function transportCSS() { return true; }', '', ['vs/a'], unexpectedRead), /Missing transported CSS/)
 })
 
 test('Contribution metadata preserves upstream ordering and rejects computed or duplicate values', () => {

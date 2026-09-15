@@ -1,0 +1,265 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "status": "checkpoint-incomplete",
+  "recordedAt": "2026-09-15T03:54:24.439Z",
+  "baseCommit": "23ac6f71284547a5e4dbf6cdbf0966f6cef49c87",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "fingerprints": {
+    "refactor/baselines/monaco-css-build-provenance.json": "9842dab17ddc7ffedfedb3dbb3c16e8d2ec9fcade5a5cd42ac2ce124cb2fa3ab",
+    "scripts/site-vendor/monaco/css.ts": "b287c31c3d52a88e46f8937ee465907d28573615d59e1f731a69fc5439e2bf3e",
+    "scripts/site-vendor/monaco/reproduce-css.ts": "ce5f077886b90b83d482044e8b5b77d2779bc106d6e4537855b2fd2374f45fd2",
+    "test/monaco-provenance.test.js": "132c76e2daf2a9369b5331014fa05062cb77bb284b5615d067f03e5c03131657",
+    "test/browser/editor-styles.spec.js": "13deeb38582a9bfda94ed10d661c8302224f5b77dcbbcdff63aefa6e35404f11",
+    "docs/assets/js/vs/editor/editor.main.css": "165d5ada907097527448677d0d0f0213578fe5cfaffcb245d7229862e849783a"
+  },
+  "reproduction": {
+    "result": {
+      "gitSources": 81,
+      "styles": 68,
+      "inlinedImages": [
+        "src/vs/editor/contrib/colorPicker/images/opacity-background.png",
+        "src/vs/editor/standalone/browser/iPadShowKeyboard/keyboard-light.svg",
+        "src/vs/editor/standalone/browser/iPadShowKeyboard/keyboard-dark.svg"
+      ],
+      "fonts": [
+        "vs/base/browser/ui/codicons/codicon/codicon.ttf"
+      ],
+      "dependencySelectors": 153,
+      "normalizedSeparators": 70,
+      "developmentBytes": 114942,
+      "minifiedBytes": 72052,
+      "siteBytes": 72057,
+      "exactDevelopment": true,
+      "exactMinification": true,
+      "preservedSiteCrlf": 5,
+      "compiler": {
+        "cssnano": "4.1.11",
+        "postcss": "7.0.35"
+      },
+      "originalCoreTypeScriptCompiled": false
+    },
+    "offline": {
+      "exitCode": 0,
+      "logSha256": "8ac42cf42c91a65214244292da8a65813ce58664ab2a5ee225d5b67eac65c2b3"
+    },
+    "online": {
+      "exitCode": 0,
+      "logSha256": "ed86a59cef3c1c314ff6f9d82a7c8bf3d4adeb41b6608521d70a92c17e994ce7"
+    },
+    "earlierFailure": {
+      "code": "ENOTFOUND",
+      "host": "codeload.github.com",
+      "logSha256": "a8dd9a7d79f947e364226fef4b48444e1900a51cdf3bd2bce89bc2cfcb26ae33",
+      "resolvedBy": "Retry of the same verified archive request"
+    }
+  },
+  "unit": {
+    "passed": 25,
+    "failed": 0,
+    "logSha256": "1ddccc2a6b48f578f34a75170853c779a76da71b529d3a4e854b9ba33024a3ea"
+  },
+  "types": {
+    "exitCode": 0,
+    "logSha256": "71642f85fdc68059b2c4f81737d70eb55c3f56f5a7a76523e672764bef7a5034"
+  },
+  "lint": {
+    "exitCode": 0
+  },
+  "browser": {
+    "command": "yarn test:browser test/browser/editor-styles.spec.js --workers=1",
+    "reportSha256": "473741dd39d4296600b66b3e4fdec65ae1e6c48143362d97c608609a88e1eeba",
+    "stats": {
+      "startTime": "2026-09-15T03:50:07.778Z",
+      "duration": 7879.217,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": [],
+    "tests": [
+      {
+        "title": "docs Monaco styles retain layout, themes and loaded codicon glyphs",
+        "project": "chromium",
+        "status": "passed",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "styles": {
+          "themes": [
+            {
+              "theme": "vs-dark",
+              "color": "rgb(30, 30, 30)"
+            },
+            {
+              "theme": "vs",
+              "color": "rgb(255, 255, 254)"
+            }
+          ],
+          "font": {
+            "loaded": [
+              {
+                "family": "codicon",
+                "status": "loaded"
+              }
+            ],
+            "family": "codicon",
+            "content": "\"\""
+          },
+          "hostBox": {
+            "x": 8,
+            "y": 389,
+            "width": 640,
+            "height": 320
+          },
+          "findBox": {
+            "x": 201,
+            "y": 353.1777648925781,
+            "width": 419,
+            "height": 33
+          },
+          "assets": [
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.css",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/base/browser/ui/codicons/codicon/codicon.ttf",
+              "status": 200
+            }
+          ],
+          "resized": {
+            "width": 420,
+            "height": 240
+          }
+        }
+      },
+      {
+        "title": "docs Monaco styles retain layout, themes and loaded codicon glyphs",
+        "project": "firefox",
+        "status": "passed",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "styles": {
+          "themes": [
+            {
+              "theme": "vs-dark",
+              "color": "rgb(30, 30, 30)"
+            },
+            {
+              "theme": "vs",
+              "color": "rgb(255, 255, 254)"
+            }
+          ],
+          "font": {
+            "loaded": [
+              {
+                "family": "codicon",
+                "status": "loaded"
+              }
+            ],
+            "family": "codicon",
+            "content": "\"\""
+          },
+          "hostBox": {
+            "x": 8,
+            "y": 390,
+            "width": 640,
+            "height": 320
+          },
+          "findBox": {
+            "x": 201,
+            "y": 357.7498779296875,
+            "width": 419,
+            "height": 33
+          },
+          "assets": [
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.css",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/base/browser/ui/codicons/codicon/codicon.ttf",
+              "status": 200
+            }
+          ],
+          "resized": {
+            "width": 420,
+            "height": 240
+          }
+        }
+      },
+      {
+        "title": "docs Monaco styles retain layout, themes and loaded codicon glyphs",
+        "project": "webkit",
+        "status": "passed",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "styles": {
+          "themes": [
+            {
+              "theme": "vs-dark",
+              "color": "rgb(30, 30, 30)"
+            },
+            {
+              "theme": "vs",
+              "color": "rgb(255, 255, 254)"
+            }
+          ],
+          "font": {
+            "loaded": [
+              {
+                "family": "codicon",
+                "status": "loaded"
+              }
+            ],
+            "family": "codicon",
+            "content": "\"\""
+          },
+          "hostBox": {
+            "x": 8,
+            "y": 392,
+            "width": 640,
+            "height": 320
+          },
+          "findBox": {
+            "x": 201,
+            "y": 375.0150146484375,
+            "width": 419,
+            "height": 33
+          },
+          "assets": [
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.css",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/js/vs/base/browser/ui/codicons/codicon/codicon.ttf",
+              "status": 200
+            }
+          ],
+          "resized": {
+            "width": 420,
+            "height": 240
+          }
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "The original CSS plugin emits 70 CRLF separators. Conversion to the observed LF-only npm development file is explicit; the exact original publication stage responsible remains unidentified.",
+    "Original core TypeScript compilation and remaining embedded-origin review are not completed by CSS reproduction.",
+    "Runtime CSS, font files and notice delivery remain unchanged. No physical device, external SDK, remote CI or publication evidence is claimed.",
+    "Thumbnail default compatibility policy remains pending."
+  ]
+}

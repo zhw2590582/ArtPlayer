@@ -1,0 +1,2185 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "commit": "829382514cb1065f5ebb90f436e1c6103e153953",
+  "archives": [
+    {
+      "name": "monaco-editor",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.30.1.tgz",
+      "integrity": "sha512-B/y4+b2O5G2gjuxIFtCE2EkM17R2NM7/3F8x0qcPsqy4V83bitJTIO4TIeZpYlzu/xy6INiY/+84BEm6+7Cmzg==",
+      "sha256": "d7872ab742036036eca48cd54e43d751bede56742f0689bcf4049bcf701468c7"
+    },
+    {
+      "name": "monaco-editor-core",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor-core/-/monaco-editor-core-0.30.1.tgz",
+      "integrity": "sha512-WNxfchYafMZXVfysqg/ESW4MtOpYLPaIKrzudNlgwYvfYID+O/nwSZI5X+KxW84roVzHsNgFGyOOesfHFZwYUA==",
+      "sha256": "a3b004061373a7f6217eba6399f1a1de31970bee2eee693aada289035198c5ec"
+    }
+  ],
+  "sourceArchive": {
+    "url": "https://codeload.github.com/microsoft/vscode/tar.gz/829382514cb1065f5ebb90f436e1c6103e153953",
+    "file": "vscode-source.tgz",
+    "bytes": 15189427,
+    "sha256": "a9da18677f80cf174078043f9ce11cfe95fdf28acbea2a538ae01b6c719e1d2e"
+  },
+  "members": [
+    {
+      "path": "build/lib/standalone.ts",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/build/lib/standalone.ts",
+      "sha256": "37a767aaca2ee3747cae82f607099c8eb3ef84305e7400c2f6340a43d8fb0cfb",
+      "gitBlobSha": "8b87b9fa4ae56e922e9eb6fe39bbdb693f1d9df9",
+      "frozen": "refactor/baselines/site-vendor/monaco-css-build/build/lib/standalone.ts.txt"
+    },
+    {
+      "path": "src/vs/base/browser/ui/actionbar/actionbar.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/actionbar/actionbar.css",
+      "sha256": "5d1d96e5cc4a046eac3cfc9b27a6731690bc4342e19da20ff4b15c044e151c7c",
+      "gitBlobSha": "71ecf512f7c0d058042573825412f0721e3107ba"
+    },
+    {
+      "path": "src/vs/base/browser/ui/aria/aria.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/aria/aria.css",
+      "sha256": "f684c3c5beccb27afc61a66c1dadc4d78900041f27879bff9186e992b4c2b5de",
+      "gitBlobSha": "fdcbb34c7d79112c98a6d14a752aa2a291e1b86b"
+    },
+    {
+      "path": "src/vs/base/browser/ui/button/button.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/button/button.css",
+      "sha256": "8b2ce2b7d873f56ad8dc90b7fdfb68c06758b03cf3e34b1e991e4165b4c8dcdb",
+      "gitBlobSha": "46a5b0e04819c2d25a869a07fdf1b5c1e0b16afe"
+    },
+    {
+      "path": "src/vs/base/browser/ui/checkbox/checkbox.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/checkbox/checkbox.css",
+      "sha256": "4772d40bee7b19fef001c93e709169a21650c610d00651262f06f8c8eb289378",
+      "gitBlobSha": "c754adc15182ada6824bb9df01aafae0e27ab6ad"
+    },
+    {
+      "path": "src/vs/base/browser/ui/codicons/codicon/codicon.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/codicons/codicon/codicon.css",
+      "sha256": "99f01fefdf7db1fd9068224930c001ba9ae60059bd1b9bfc6a0f29ef60018233",
+      "gitBlobSha": "77cc04a1df40208ca72351a6619be32f9201a77b"
+    },
+    {
+      "path": "src/vs/base/browser/ui/codicons/codicon/codicon-modifiers.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/codicons/codicon/codicon-modifiers.css",
+      "sha256": "556929c9e6bb20f4e2f55e2d4febc053fbf5eb164e4d36f43cadeadf29139592",
+      "gitBlobSha": "9666216f6ae00e73fd6ce82d8039f6d97ab179cb"
+    },
+    {
+      "path": "src/vs/base/browser/ui/contextview/contextview.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/contextview/contextview.css",
+      "sha256": "e631f5f7b76f46f668e169f4efd85d0e72a98f16383e108ebce4edd5bc0bbb1c",
+      "gitBlobSha": "bb7ebbcfdb2948a306e2bbb4620d68c345609bbf"
+    },
+    {
+      "path": "src/vs/base/browser/ui/countBadge/countBadge.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/countBadge/countBadge.css",
+      "sha256": "d7d1c3b723f4954916ab8c7138e741f1ecd47f022c3fb727b13606bda80b600d",
+      "gitBlobSha": "eb0c0837ee9f9442838631ef42a4bf78209dac14"
+    },
+    {
+      "path": "src/vs/base/browser/ui/dropdown/dropdown.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/dropdown/dropdown.css",
+      "sha256": "781655865f06a3550b298f01bb48a4da3fd3faceb8f6b7ec5f5ecaf875abbeed",
+      "gitBlobSha": "bfcaee41f98ade3a33bb5e05e3ebaa17582fa12a"
+    },
+    {
+      "path": "src/vs/base/browser/ui/findinput/findInput.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/findinput/findInput.css",
+      "sha256": "12299785f7ad7f5fd5fca3dd39850756a9fa7499eb3d23c862930938e7ac8037",
+      "gitBlobSha": "4bb6b8cec63feae7f18531b7a402fbabb365f1ae"
+    },
+    {
+      "path": "src/vs/base/browser/ui/hover/hover.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/hover/hover.css",
+      "sha256": "205d557881324c7a6f18bfa92468d7987f55df1925d752b8a337558210713959",
+      "gitBlobSha": "20f56038fd00451d57d1f887547f554fe8b2c7df"
+    },
+    {
+      "path": "src/vs/base/browser/ui/iconLabel/iconlabel.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/iconLabel/iconlabel.css",
+      "sha256": "9ac2adda231f1be8459af3bfc2854a216e7526c34ae89a15c150c0ae3f0f3692",
+      "gitBlobSha": "45b73bece04eb0a691febeac5ddad8a4f2b2f46c"
+    },
+    {
+      "path": "src/vs/base/browser/ui/inputbox/inputBox.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/inputbox/inputBox.css",
+      "sha256": "d52ce2226163043306fe5f953422e71013c9a0f5ebd86bd8a7e2f8ca9aa044d2",
+      "gitBlobSha": "2279df6c298348fe55e63457a49f8b09cf39b371"
+    },
+    {
+      "path": "src/vs/base/browser/ui/keybindingLabel/keybindingLabel.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/keybindingLabel/keybindingLabel.css",
+      "sha256": "23a01c4bb4b2e7a9baf99262cc69a47a3b1e5cf576bb4b3f081f5053f3fc1627",
+      "gitBlobSha": "7f203773f5e2facd8359e341112201b11383a38e"
+    },
+    {
+      "path": "src/vs/base/browser/ui/list/list.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/list/list.css",
+      "sha256": "5caecf03b1c3bdb3294e8dc21dddb7ce4b039d98284c9579c68c60ad97c15f49",
+      "gitBlobSha": "eaca3ae8bd8910b9cdc4e02dca73e61ee7e719b3"
+    },
+    {
+      "path": "src/vs/base/browser/ui/mouseCursor/mouseCursor.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/mouseCursor/mouseCursor.css",
+      "sha256": "3b28cb70a62b42ff07756b10e1917c4ce4c155f43340f73cb0fd6b55fde085cc",
+      "gitBlobSha": "2a998c4d97020ed62024f1216c392f1384db70b2"
+    },
+    {
+      "path": "src/vs/base/browser/ui/progressbar/progressbar.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/progressbar/progressbar.css",
+      "sha256": "ef85063811082752c80cdc3f6e94c96caf617547b2b518cdc0d63d4abf21b0d8",
+      "gitBlobSha": "55e6a1a69637e002ddde013a356b0f64514dce77"
+    },
+    {
+      "path": "src/vs/base/browser/ui/sash/sash.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/sash/sash.css",
+      "sha256": "84f0d9e7c8dddf8a8adcc020ada3c6e4a7cfa5b35b5c4807c43d3e6abcfbf921",
+      "gitBlobSha": "eb0aa0d6b689c2eb07d715dca57ac65856e45ed5"
+    },
+    {
+      "path": "src/vs/base/browser/ui/scrollbar/media/scrollbars.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/scrollbar/media/scrollbars.css",
+      "sha256": "a5378d14e5a583315994b1ce0604633193040e8da242e7a5b149db2dfc171e91",
+      "gitBlobSha": "d50aa58526c168da30910e795e8275f77bd6a075"
+    },
+    {
+      "path": "src/vs/base/browser/ui/splitview/splitview.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/splitview/splitview.css",
+      "sha256": "d8fe7c928757ccf073c81ca5457ddf01059851588c66f53f13261d0537f9332d",
+      "gitBlobSha": "3af3e9062d2c9c13dd058da7d02d122164412681"
+    },
+    {
+      "path": "src/vs/base/browser/ui/table/table.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/table/table.css",
+      "sha256": "8253507467c603341b6328009b53fdcd714b3cc84474e553434ae47971a53725",
+      "gitBlobSha": "89edc6f0ffee0024e6eee5332dca7d61611b2f1e"
+    },
+    {
+      "path": "src/vs/base/browser/ui/tree/media/tree.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/tree/media/tree.css",
+      "sha256": "736966f6c4165030ed019753cc4ea1aa0ae370b7849e61a25881908893cad5df",
+      "gitBlobSha": "22f0d23bf60f011d96954ae904cb910cc5256913"
+    },
+    {
+      "path": "src/vs/base/parts/quickinput/browser/media/quickInput.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/parts/quickinput/browser/media/quickInput.css",
+      "sha256": "912264ee182e99218f4c9c23ebcf86a264fabaac0c9c0229b60576a366916a97",
+      "gitBlobSha": "6548432adc583a504d1ccbf9183057236f5df9a9"
+    },
+    {
+      "path": "src/vs/editor/browser/controller/textAreaHandler.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/controller/textAreaHandler.css",
+      "sha256": "83ca140b943719f081b9d47e5ac5e6e3f9b04cbc400e3adae829d647ca3681dd",
+      "gitBlobSha": "19036f1115f5d81c3ab1bf14ff0110dca8d36934"
+    },
+    {
+      "path": "src/vs/editor/browser/viewParts/currentLineHighlight/currentLineHighlight.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/viewParts/currentLineHighlight/currentLineHighlight.css",
+      "sha256": "0db1b60e7a96cf42f110c60dcd8df00359cbc933021cd26dfaa98d8ca8b37e80",
+      "gitBlobSha": "2a0e39dffa7b1ea79e268504e1bd636230290411"
+    },
+    {
+      "path": "src/vs/editor/browser/viewParts/decorations/decorations.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/viewParts/decorations/decorations.css",
+      "sha256": "99476b89eceb85cec7ba421dda957dc22a925a103a3f205ea72b96c6fc8aa457",
+      "gitBlobSha": "37c39f620e8d025cb574f4fc45685165b21e29a9"
+    },
+    {
+      "path": "src/vs/editor/browser/viewParts/glyphMargin/glyphMargin.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/viewParts/glyphMargin/glyphMargin.css",
+      "sha256": "a0f79b9999053592ca5041aca83e39528fba750b51a014d51131ad6c803e7120",
+      "gitBlobSha": "17f7d5defd5b53b66fbbe487fd2bddf23be483b4"
+    },
+    {
+      "path": "src/vs/editor/browser/viewParts/indentGuides/indentGuides.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/viewParts/indentGuides/indentGuides.css",
+      "sha256": "0661a84fa18a7e06cbdf0fc28d4f755185ea196262eef97d8fa518aef8d730ec",
+      "gitBlobSha": "ed1326697573c41e025b25aa4d705339ec60d5b1"
+    },
+    {
+      "path": "src/vs/editor/browser/viewParts/lineNumbers/lineNumbers.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/viewParts/lineNumbers/lineNumbers.css",
+      "sha256": "79a36f8981b5ca61adcf765a940b0d8509a03fab3e6776c01dd5c66278ff0a04",
+      "gitBlobSha": "02def4da31f3fcbef1b5a100dbcafec68e634228"
+    },
+    {
+      "path": "src/vs/editor/browser/viewParts/lines/viewLines.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/viewParts/lines/viewLines.css",
+      "sha256": "dbd41ddd3cd905392082d2d1e7e0974313b9e697f64cabe5e9cadad58e753401",
+      "gitBlobSha": "d363d2533b4b96702725ce66ed40fe972da14306"
+    },
+    {
+      "path": "src/vs/editor/browser/viewParts/linesDecorations/linesDecorations.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/viewParts/linesDecorations/linesDecorations.css",
+      "sha256": "b62019a94802b8cf42358168f2d30bf2b8283a84257419403dd6bdf12410d05f",
+      "gitBlobSha": "452d83eeb8b7a106584573b8e352fe4305e07aac"
+    },
+    {
+      "path": "src/vs/editor/browser/viewParts/marginDecorations/marginDecorations.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/viewParts/marginDecorations/marginDecorations.css",
+      "sha256": "df329935ff57eea3d2dba1d3a923e29d72175a3ae03e6fb4385c709bf514221c",
+      "gitBlobSha": "7bd8f89ab0ea7616a1368bef8d56a274ea923ad4"
+    },
+    {
+      "path": "src/vs/editor/browser/viewParts/minimap/minimap.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/viewParts/minimap/minimap.css",
+      "sha256": "f8a94a5df2c82befd9bd7e68ccc54dfae35abefae141132a902628fc39ed2771",
+      "gitBlobSha": "f4663ece04dc75620f8cdf5586a836e1835425cb"
+    },
+    {
+      "path": "src/vs/editor/browser/viewParts/overlayWidgets/overlayWidgets.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/viewParts/overlayWidgets/overlayWidgets.css",
+      "sha256": "f114f69d3668c20319bbf412e2078ff060698f93829dd4b749c5c74ee60a988b",
+      "gitBlobSha": "5898f172e9d22a20fe1d7dac57c78aac91b30540"
+    },
+    {
+      "path": "src/vs/editor/browser/viewParts/rulers/rulers.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/viewParts/rulers/rulers.css",
+      "sha256": "7f4020bdbfd26d8a60feb736bbf888cb76029d0e5c6d3e6cd62b72a4f0629d4a",
+      "gitBlobSha": "d3d2d26ec95a3f8c6abb5f3ae0753781b38d7eaa"
+    },
+    {
+      "path": "src/vs/editor/browser/viewParts/scrollDecoration/scrollDecoration.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/viewParts/scrollDecoration/scrollDecoration.css",
+      "sha256": "c5791a321e4f9b2aea29a2169c93c8f40ba293cdbea5ae487f36414bffcb1530",
+      "gitBlobSha": "1eabd692f83d056afe483f57dd56e0486671660e"
+    },
+    {
+      "path": "src/vs/editor/browser/viewParts/selections/selections.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/viewParts/selections/selections.css",
+      "sha256": "c13de3bbadb6fb063366b634553f61741b6da4768fb3bf1ac193f6fb5fe5e983",
+      "gitBlobSha": "c2b95174ca4fb28c55861946d53661ae88b02100"
+    },
+    {
+      "path": "src/vs/editor/browser/viewParts/viewCursors/viewCursors.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/viewParts/viewCursors/viewCursors.css",
+      "sha256": "80ec5ff555a3a5aad06b154a39b6269c86cf4d02d252a227fc6e06f9257cf367",
+      "gitBlobSha": "484b79befe0ce94c4a6199c1f1c7d0488ae79dfb"
+    },
+    {
+      "path": "src/vs/editor/browser/widget/media/diffEditor.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/widget/media/diffEditor.css",
+      "sha256": "0b3205897bdf8d823ff9be9abf6fef9472aecf2c11033932988f6232e0983420",
+      "gitBlobSha": "e27e996b7b0dbc688069a25593f48ebbf5ed0826"
+    },
+    {
+      "path": "src/vs/editor/browser/widget/media/diffReview.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/widget/media/diffReview.css",
+      "sha256": "3c1b3354765e9a36cd42d3172f07e61e1ef92d670f9ebb5ca6d9d959d03cea12",
+      "gitBlobSha": "56c6f15cbf6d4dfdf73653ca79a6a8dcb574f3f7"
+    },
+    {
+      "path": "src/vs/editor/browser/widget/media/editor.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/browser/widget/media/editor.css",
+      "sha256": "c3a511718bae79ef59e219171e87ef2ccc83ff5a46ad1a444e0e062cb3fc87b4",
+      "gitBlobSha": "7936ff11ad8f15eca0fe9ca0679278082de73e13"
+    },
+    {
+      "path": "src/vs/editor/contrib/anchorSelect/anchorSelect.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/anchorSelect/anchorSelect.css",
+      "sha256": "ecf6df8fc380837b9c7990c3c75fe0bef49985573fb2e129ef7beef02defb351",
+      "gitBlobSha": "46ea76d20117c0b6925c95a02d9b6e4b13ffeed8"
+    },
+    {
+      "path": "src/vs/editor/contrib/bracketMatching/bracketMatching.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/bracketMatching/bracketMatching.css",
+      "sha256": "e3be0a10c04166639c6f63215715ac5823156e262b5dea3059143f2c739859ad",
+      "gitBlobSha": "3acf3fd25bf6ad8f0184d9e2bcac2269b0ec13fc"
+    },
+    {
+      "path": "src/vs/editor/contrib/codeAction/lightBulbWidget.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/codeAction/lightBulbWidget.css",
+      "sha256": "41ea0ce56ef86cc11b6e0cc8242ecbdd5a63c1e8d330f68311985912fbdf4f2a",
+      "gitBlobSha": "29c4fe0c0436d6ec8ac8712d43dbc70e1b038752"
+    },
+    {
+      "path": "src/vs/editor/contrib/codelens/codelensWidget.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/codelens/codelensWidget.css",
+      "sha256": "24f078ff30f51eba75077ebe48721be4395de74e8972e7e01a933ecd1d924bbb",
+      "gitBlobSha": "033157076792467e7ac9a5be952fe612d68cf09e"
+    },
+    {
+      "path": "src/vs/editor/contrib/colorPicker/colorPicker.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/colorPicker/colorPicker.css",
+      "sha256": "6e7abfe880a1f362c8771c5610e425c4e9b80a2dcfbd55edf5460086648c92eb",
+      "gitBlobSha": "96056d480d1679cc763e0f4f75fcd29c30d5bb68"
+    },
+    {
+      "path": "src/vs/editor/contrib/colorPicker/images/opacity-background.png",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/colorPicker/images/opacity-background.png",
+      "sha256": "f4b465b0c59dd075ea94d4170ea73d2e1a99dd0877cabe24cbe18f0b9c30375a",
+      "gitBlobSha": "0c18a715a1c03a019ced874f86a6496977035a45"
+    },
+    {
+      "path": "src/vs/editor/contrib/dnd/dnd.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/dnd/dnd.css",
+      "sha256": "aec3494b4eb02f6e69d35c831069463f0240a90311f20c104dcba04013d45a52",
+      "gitBlobSha": "d42f164bbe376b4bd69500177c9205e8e92ea588"
+    },
+    {
+      "path": "src/vs/editor/contrib/find/findWidget.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/find/findWidget.css",
+      "sha256": "bda74e7996cfb90c5cf3fdc2d8c0ca2986ba9abfe471a207507aef5390a60e97",
+      "gitBlobSha": "f7ea6fb54ae34f704c524ab3259a4251930075e8"
+    },
+    {
+      "path": "src/vs/editor/contrib/folding/folding.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/folding/folding.css",
+      "sha256": "db97b7ae1fcd3fba224d6b44f619aabedb66c443022fc794df18d24fef6857ca",
+      "gitBlobSha": "a68daff8155c901e73e804de70404d2b652fd786"
+    },
+    {
+      "path": "src/vs/editor/contrib/gotoError/media/gotoErrorWidget.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/gotoError/media/gotoErrorWidget.css",
+      "sha256": "98df6bb0718bfdc28d001e1c89a73c507d614de058ab27c1e10cd327077fa4ed",
+      "gitBlobSha": "b04725f79b52cdebe97fdf7121f41dc5cd0fce7f"
+    },
+    {
+      "path": "src/vs/editor/contrib/gotoSymbol/link/goToDefinitionAtPosition.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/gotoSymbol/link/goToDefinitionAtPosition.css",
+      "sha256": "2857bdff50d749925ac7c544fa5810d3a2e02e460e31990115fe4806228c739e",
+      "gitBlobSha": "3361b104429117307aea55945ab45fecb716be68"
+    },
+    {
+      "path": "src/vs/editor/contrib/gotoSymbol/peek/referencesWidget.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/gotoSymbol/peek/referencesWidget.css",
+      "sha256": "d446a7c5245aa93da72b3bd3a71007583ed6dbb7e497d38e2afcc4d2a5b34b1b",
+      "gitBlobSha": "81ef64c747ccd57ccb414784bb1adb636ac8fa02"
+    },
+    {
+      "path": "src/vs/editor/contrib/inlineCompletions/ghostText.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/inlineCompletions/ghostText.css",
+      "sha256": "3206ef1bd6e6503c4e8d6447e7b611f1f3fd5f68d0b327623d8b44da26148063",
+      "gitBlobSha": "29ce74074fd15612f1f5aaab94262ba95fda1bc1"
+    },
+    {
+      "path": "src/vs/editor/contrib/links/links.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/links/links.css",
+      "sha256": "a4aec41833a172509b9c086f339ec1e914fe92b3476910d005232c427c80acc8",
+      "gitBlobSha": "7516dac36edb29e845f2f0f3f87d32cc87fe1db5"
+    },
+    {
+      "path": "src/vs/editor/contrib/message/messageController.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/message/messageController.css",
+      "sha256": "d9409fc8e307d3fcdb04a0d7aa22fdc698856b745b674ddde2c78a3c0730c7bd",
+      "gitBlobSha": "924349d112e3ca6dd030a289047647ca4975c639"
+    },
+    {
+      "path": "src/vs/editor/contrib/parameterHints/parameterHints.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/parameterHints/parameterHints.css",
+      "sha256": "85f48cac1fe97d49bfc92ebfa93c46a8de74d77ed5a19f4f5004892d552b6772",
+      "gitBlobSha": "4aaffeac4559f932d027be9ca87cbaf3acb583e1"
+    },
+    {
+      "path": "src/vs/editor/contrib/peekView/media/peekViewWidget.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/peekView/media/peekViewWidget.css",
+      "sha256": "ea9d39370936ceeb7bbac2d7d60e7bee87bbeb8f0e449bbb2bff080b40e645e1",
+      "gitBlobSha": "12bacdc5de0e4c809cbcb71a5a4f407cfc5597ef"
+    },
+    {
+      "path": "src/vs/editor/contrib/rename/renameInputField.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/rename/renameInputField.css",
+      "sha256": "5f88664636b34e9a43851c5b2d82380547a722543730deeb344c059332fed0cb",
+      "gitBlobSha": "99757bf38a4c35883c70dd63f633a9d70ebca715"
+    },
+    {
+      "path": "src/vs/editor/contrib/snippet/snippetSession.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/snippet/snippetSession.css",
+      "sha256": "3da7860e44a70cd31209ec2cbb574da365196a1df14cdaec966cf7e694773ffa",
+      "gitBlobSha": "d262eaf1b11adfd87eecc0efd71e54448505a141"
+    },
+    {
+      "path": "src/vs/editor/contrib/suggest/media/suggest.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/suggest/media/suggest.css",
+      "sha256": "3ba64ce99256cd2839fee65f2df07105d326826e35f586c2f04b6108b339d1c9",
+      "gitBlobSha": "3d118cc8d091a0f42fbf608d57bad42b3a12c7cc"
+    },
+    {
+      "path": "src/vs/editor/contrib/zoneWidget/zoneWidget.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/contrib/zoneWidget/zoneWidget.css",
+      "sha256": "b1f9346f00e9767f3caf6deac9fb75e9274671f4ceaaa91c3a34609b152d55de",
+      "gitBlobSha": "b9d960656edf36a7550fde8d7b8f8f0ea8a320ec"
+    },
+    {
+      "path": "src/vs/editor/standalone/browser/accessibilityHelp/accessibilityHelp.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/standalone/browser/accessibilityHelp/accessibilityHelp.css",
+      "sha256": "4b538ad4395a6839692df84dbf80886ab5635bd91580dc8f35f5067d6fdec260",
+      "gitBlobSha": "18d8c75a24ae24350c65a522dd77bd0fa3ea9d96"
+    },
+    {
+      "path": "src/vs/editor/standalone/browser/iPadShowKeyboard/iPadShowKeyboard.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/standalone/browser/iPadShowKeyboard/iPadShowKeyboard.css",
+      "sha256": "166128d2a50fbe7773c7444484123ac342d7a0dbce024b88de940bcdf3405a85",
+      "gitBlobSha": "7579f7890602c6441e5af8a0b1a22745bed7db9c"
+    },
+    {
+      "path": "src/vs/editor/standalone/browser/iPadShowKeyboard/keyboard-light.svg",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/standalone/browser/iPadShowKeyboard/keyboard-light.svg",
+      "sha256": "7f949b9913ddd198a9b217e7dffc602bb1fcb643660f1f869cec298440f00512",
+      "gitBlobSha": "152bf777f62aaeb0a67603128cb35179425fca6c"
+    },
+    {
+      "path": "src/vs/editor/standalone/browser/iPadShowKeyboard/keyboard-dark.svg",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/standalone/browser/iPadShowKeyboard/keyboard-dark.svg",
+      "sha256": "63a90612315e7d3f817e64a0c4d47487558486c066864779d6b17230fc068395",
+      "gitBlobSha": "308c5331695d46ceabd910e8a22210516bb09c8a"
+    },
+    {
+      "path": "src/vs/editor/standalone/browser/inspectTokens/inspectTokens.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/standalone/browser/inspectTokens/inspectTokens.css",
+      "sha256": "5bcc093096db1c180dc4ed94e6f17d890c6a5f391619b3eca571e7101ce65a4e",
+      "gitBlobSha": "b8bbbd662e6b7e4d32f7e2d3f3c3b87b83c3d8b4"
+    },
+    {
+      "path": "src/vs/editor/standalone/browser/quickInput/standaloneQuickInput.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/standalone/browser/quickInput/standaloneQuickInput.css",
+      "sha256": "217a2e26f107ae2a4bb16e01e98e52e79885b858406878af316302c48565939e",
+      "gitBlobSha": "c48737cfaf48cf060945c486a54136878fb9879c"
+    },
+    {
+      "path": "src/vs/editor/standalone/browser/standalone-tokens.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/editor/standalone/browser/standalone-tokens.css",
+      "sha256": "efb287c6e9749dcdb84b45872cf82cc61be10e4521f690d8fa4ddfc2301414e5",
+      "gitBlobSha": "1933d35edae5bcb56c454bd3f4635bfa400db665"
+    },
+    {
+      "path": "src/vs/platform/actions/browser/menuEntryActionViewItem.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/platform/actions/browser/menuEntryActionViewItem.css",
+      "sha256": "bdf2038bc11f092916912cbfe77768263ff08f638fe53dca6ec6b5771cad9db7",
+      "gitBlobSha": "86fe628b520642cf9f26f6b4af0706412954f6a2"
+    },
+    {
+      "path": "src/vs/platform/contextview/browser/contextMenuHandler.css",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/platform/contextview/browser/contextMenuHandler.css",
+      "sha256": "8be94b314cdf88f3d3c27b5d303bb272dece1dea73049d4b36ce6a9fa667db99",
+      "gitBlobSha": "51a9e40092389bbcda43a6d35b7e5cef10dd126b"
+    },
+    {
+      "path": "src/vs/css.build.js",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/css.build.js",
+      "sha256": "32291cf07329c01f9873612558bdfc7c7216137201bddfc691db3deceddfa6bc",
+      "gitBlobSha": "5ad45ba6a0d4446c37d290561f96899cdd5f52f0",
+      "frozen": "refactor/baselines/site-vendor/monaco-css-build/src/vs/css.build.js.txt"
+    },
+    {
+      "path": "src/vs/base/browser/ui/codicons/codicon/codicon.ttf",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/src/vs/base/browser/ui/codicons/codicon/codicon.ttf",
+      "sha256": "ff6b888d65cfd8077d49c6c704c1bfc8f2ce1ed71db9c583c63e0a49f046c79c",
+      "gitBlobSha": "2bca0f7b453405d9c7b39388aa3ba3c07d3442e3"
+    },
+    {
+      "path": "build/lib/optimize.ts",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/build/lib/optimize.ts",
+      "sha256": "13fa654c711dd3090ae793ba7419c9d8cdfea9cee122c330940a419050ff8f04",
+      "gitBlobSha": "96b4e854f6f1a39e30957999585f5d7cd7bb7c81",
+      "frozen": "refactor/baselines/site-vendor/monaco-css-build/build/lib/optimize.ts.txt"
+    },
+    {
+      "path": "build/gulpfile.editor.js",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/build/gulpfile.editor.js",
+      "sha256": "d3413f097c19ab22c275f35e7708424bd18c7a4fb7782905d5ab021ef5524167",
+      "gitBlobSha": "39b26b2f64610f649dc3010f97cf58a020034492",
+      "frozen": "refactor/baselines/site-vendor/monaco-css-build/build/gulpfile.editor.js.txt"
+    },
+    {
+      "path": "build/lib/bundle.js",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/build/lib/bundle.js",
+      "sha256": "d41d7f1db067854a546df9577052c2cbc8f7e5412d9c2fd60295292113eb051a",
+      "gitBlobSha": "7d0c8d9b55ef0c78a6107e06c96b33f0c10c5800",
+      "frozen": "refactor/baselines/site-vendor/monaco-css-build/build/lib/bundle.js.txt"
+    },
+    {
+      "path": "package.json",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/package.json",
+      "sha256": "816dc8aa30b04f1601c112bf002e2a3b98c32cd088f0736c51c3e95167413976",
+      "gitBlobSha": "63b479ec19aee091f412c0b1a39c767464225235",
+      "frozen": "refactor/baselines/site-vendor/monaco-css-build/package.json.txt"
+    },
+    {
+      "path": "yarn.lock",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/yarn.lock",
+      "sha256": "9f74da55701070e0d2203daf46b1552e12a95c0b7ee9bd10694fa2b61a47227a",
+      "gitBlobSha": "2b4d4ce38436144cd7b3405a1eef1a4cd7d53cac",
+      "frozen": "refactor/baselines/site-vendor/monaco-css-build/yarn.lock.txt"
+    },
+    {
+      "path": "LICENSE.txt",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/LICENSE.txt",
+      "sha256": "cce33203a80863c22499035b1cfb6aba5df5f02e4ea2669cf5bc5730c1864236",
+      "gitBlobSha": "0ac28ee234d232ac0691f39cebf95bf6b2a763a5",
+      "gitNormalizeCRLF": true,
+      "frozen": "refactor/baselines/site-vendor/monaco-css-build/LICENSE.txt.txt"
+    },
+    {
+      "path": ".gitattributes",
+      "member": "vscode-829382514cb1065f5ebb90f436e1c6103e153953/.gitattributes",
+      "sha256": "c600f6ffd35bda99e94113904a45635f623495e1a50ef8e36464438b5d084eac",
+      "gitBlobSha": "f6263094d01a2de129ccec850512c503ef9e25ae",
+      "frozen": "refactor/baselines/site-vendor/monaco-css-build/.gitattributes.txt"
+    }
+  ],
+  "tooling": {
+    "manifest": {
+      "name": "monaco-css-historical-tools",
+      "private": true,
+      "browserslist": [
+        "defaults"
+      ],
+      "dependencies": {
+        "cssnano": "^4.1.11"
+      }
+    },
+    "selectors": [
+      {
+        "selector": "cssnano@^4.1.11",
+        "name": "cssnano",
+        "version": "4.1.11",
+        "resolved": "https://registry.yarnpkg.com/cssnano/-/cssnano-4.1.11.tgz#c7b5f5b81da269cb1fd982cb960c1200910c9a99",
+        "integrity": "sha512-6gZm2htn7xIPJOHY824ERgj8cNPgPxyCSnkXc4v7YvNW+TdVfzgngHcEhy/8D11kUWRUMbke+tC+AUcUsnMz2g=="
+      },
+      {
+        "selector": "cosmiconfig@^5.0.0",
+        "name": "cosmiconfig",
+        "version": "5.2.1",
+        "resolved": "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-5.2.1.tgz#040f726809c591e77a17c0a3626ca45b4f168b1a",
+        "integrity": "sha512-H65gsXo1SKjf8zmrJ67eJk8aIRKV5ff2D4uKZIBZShbhGSpEmsQOPW/SKMKYhSTrqR7ufy6RP69rPogdaPh/kA=="
+      },
+      {
+        "selector": "import-fresh@^2.0.0",
+        "name": "import-fresh",
+        "version": "2.0.0",
+        "resolved": "https://registry.yarnpkg.com/import-fresh/-/import-fresh-2.0.0.tgz#d81355c15612d386c61f9ddd3922d4304822a546",
+        "integrity": "sha1-2BNVwVYS04bGH53dOSLUMEgipUY="
+      },
+      {
+        "selector": "caller-path@^2.0.0",
+        "name": "caller-path",
+        "version": "2.0.0",
+        "resolved": "https://registry.yarnpkg.com/caller-path/-/caller-path-2.0.0.tgz#468f83044e369ab2010fac5f06ceee15bb2cb1f4",
+        "integrity": "sha1-Ro+DBE42mrIBD6xfBs7uFbsssfQ="
+      },
+      {
+        "selector": "caller-callsite@^2.0.0",
+        "name": "caller-callsite",
+        "version": "2.0.0",
+        "resolved": "https://registry.yarnpkg.com/caller-callsite/-/caller-callsite-2.0.0.tgz#847e0fce0a223750a9a027c54b33731ad3154134",
+        "integrity": "sha1-hH4PzgoiN1CpoCfFSzNzGtMVQTQ="
+      },
+      {
+        "selector": "callsites@^2.0.0",
+        "name": "callsites",
+        "version": "2.0.0",
+        "resolved": "https://registry.yarnpkg.com/callsites/-/callsites-2.0.0.tgz#06eb84f00eea413da86affefacbffb36093b3c50",
+        "integrity": "sha1-BuuE8A7qQT2oav/vrL/7Ngk7PFA="
+      },
+      {
+        "selector": "resolve-from@^3.0.0",
+        "name": "resolve-from",
+        "version": "3.0.0",
+        "resolved": "https://registry.yarnpkg.com/resolve-from/-/resolve-from-3.0.0.tgz#b22c7af7d9d6881bc8b6e653335eebcb0a188748",
+        "integrity": "sha1-six699nWiBvItuZTM17rywoYh0g="
+      },
+      {
+        "selector": "is-directory@^0.3.1",
+        "name": "is-directory",
+        "version": "0.3.1",
+        "resolved": "https://registry.yarnpkg.com/is-directory/-/is-directory-0.3.1.tgz#61339b6f2475fc772fd9c9d83f5c8575dc154ae1",
+        "integrity": "sha1-YTObbyR1/Hcv2cnYP1yFddwVSuE="
+      },
+      {
+        "selector": "js-yaml@^3.13.1",
+        "name": "js-yaml",
+        "version": "3.14.1",
+        "resolved": "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.14.1.tgz#dae812fdb3825fa306609a8717383c50c36a0537",
+        "integrity": "sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g=="
+      },
+      {
+        "selector": "argparse@^1.0.7",
+        "name": "argparse",
+        "version": "1.0.10",
+        "resolved": "https://registry.yarnpkg.com/argparse/-/argparse-1.0.10.tgz#bcd6791ea5ae09725e17e5ad988134cd40b3d911",
+        "integrity": "sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg=="
+      },
+      {
+        "selector": "sprintf-js@~1.0.2",
+        "name": "sprintf-js",
+        "version": "1.0.3",
+        "resolved": "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c",
+        "integrity": "sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw="
+      },
+      {
+        "selector": "esprima@^4.0.0",
+        "name": "esprima",
+        "version": "4.0.1",
+        "resolved": "https://registry.yarnpkg.com/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71",
+        "integrity": "sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A=="
+      },
+      {
+        "selector": "parse-json@^4.0.0",
+        "name": "parse-json",
+        "version": "4.0.0",
+        "resolved": "https://registry.yarnpkg.com/parse-json/-/parse-json-4.0.0.tgz#be35f5425be1f7f6c747184f98a788cb99477ee0",
+        "integrity": "sha1-vjX1Qlvh9/bHRxhPmKeIy5lHfuA="
+      },
+      {
+        "selector": "error-ex@^1.3.1",
+        "name": "error-ex",
+        "version": "1.3.2",
+        "resolved": "https://registry.yarnpkg.com/error-ex/-/error-ex-1.3.2.tgz#b4ac40648107fdcdcfae242f428bea8a14d4f1bf",
+        "integrity": "sha512-7dFHNmqeFSEt2ZBsCriorKnn3Z2pj+fd9kmI6QoWw4//DL+icEBfc0U7qJCisqrTsKTjw4fNFy2pW9OqStD84g=="
+      },
+      {
+        "selector": "is-arrayish@^0.2.1",
+        "name": "is-arrayish",
+        "version": "0.2.1",
+        "resolved": "https://registry.yarnpkg.com/is-arrayish/-/is-arrayish-0.2.1.tgz#77c99840527aa8ecb1a8ba697b80645a7a926a9d",
+        "integrity": "sha1-d8mYQFJ6qOyxqLppe4BkWnqSap0="
+      },
+      {
+        "selector": "json-parse-better-errors@^1.0.1",
+        "name": "json-parse-better-errors",
+        "version": "1.0.2",
+        "resolved": "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9",
+        "integrity": "sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw=="
+      },
+      {
+        "selector": "cssnano-preset-default@^4.0.8",
+        "name": "cssnano-preset-default",
+        "version": "4.0.8",
+        "resolved": "https://registry.yarnpkg.com/cssnano-preset-default/-/cssnano-preset-default-4.0.8.tgz#920622b1fc1e95a34e8838203f1397a504f2d3ff",
+        "integrity": "sha512-LdAyHuq+VRyeVREFmuxUZR1TXjQm8QQU/ktoo/x7bz+SdOge1YKc5eMN6pRW7YWBmyq59CqYba1dJ5cUukEjLQ=="
+      },
+      {
+        "selector": "css-declaration-sorter@^4.0.1",
+        "name": "css-declaration-sorter",
+        "version": "4.0.1",
+        "resolved": "https://registry.yarnpkg.com/css-declaration-sorter/-/css-declaration-sorter-4.0.1.tgz#c198940f63a76d7e36c1e71018b001721054cb22",
+        "integrity": "sha512-BcxQSKTSEEQUftYpBVnsH4SF05NTuBokb19/sBt6asXGKZ/6VP7PLG1CBCkFDYOnhXhPh0jMhO6xZ71oYHXHBA=="
+      },
+      {
+        "selector": "postcss@^7.0.1",
+        "name": "postcss",
+        "version": "7.0.35",
+        "resolved": "https://registry.yarnpkg.com/postcss/-/postcss-7.0.35.tgz#d2be00b998f7f211d8a276974079f2e92b970e24",
+        "integrity": "sha512-3QT8bBJeX/S5zKTTjTCIjRF3If4avAT6kqxcASlTWEtAFCb9NH0OUxNDfgZSWdP5fJnBYCMEWkIFfWeugjzYMg=="
+      },
+      {
+        "selector": "chalk@^2.4.2",
+        "name": "chalk",
+        "version": "2.4.2",
+        "resolved": "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424",
+        "integrity": "sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ=="
+      },
+      {
+        "selector": "ansi-styles@^3.2.1",
+        "name": "ansi-styles",
+        "version": "3.2.1",
+        "resolved": "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d",
+        "integrity": "sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA=="
+      },
+      {
+        "selector": "color-convert@^1.9.0",
+        "name": "color-convert",
+        "version": "1.9.3",
+        "resolved": "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8",
+        "integrity": "sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg=="
+      },
+      {
+        "selector": "color-name@1.1.3",
+        "name": "color-name",
+        "version": "1.1.3",
+        "resolved": "https://registry.yarnpkg.com/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25",
+        "integrity": "sha1-p9BVi9icQveV3UIyj3QIMcpTvCU="
+      },
+      {
+        "selector": "escape-string-regexp@^1.0.5",
+        "name": "escape-string-regexp",
+        "version": "1.0.5",
+        "resolved": "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4",
+        "integrity": "sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ="
+      },
+      {
+        "selector": "supports-color@^5.3.0",
+        "name": "supports-color",
+        "version": "5.5.0",
+        "resolved": "https://registry.yarnpkg.com/supports-color/-/supports-color-5.5.0.tgz#e2e69a44ac8772f78a1ec0b35b689df6530efc8f",
+        "integrity": "sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow=="
+      },
+      {
+        "selector": "has-flag@^3.0.0",
+        "name": "has-flag",
+        "version": "3.0.0",
+        "resolved": "https://registry.yarnpkg.com/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd",
+        "integrity": "sha1-tdRU3CGZriJWmfNGfloH87lVuv0="
+      },
+      {
+        "selector": "source-map@^0.6.1",
+        "name": "source-map",
+        "version": "0.6.1",
+        "resolved": "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263",
+        "integrity": "sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g=="
+      },
+      {
+        "selector": "supports-color@^6.1.0",
+        "name": "supports-color",
+        "version": "6.1.0",
+        "resolved": "https://registry.yarnpkg.com/supports-color/-/supports-color-6.1.0.tgz#0764abc69c63d5ac842dd4867e8d025e880df8f3",
+        "integrity": "sha512-qe1jfm1Mg7Nq/NSh6XE24gPXROEVsWHxC1LIx//XNlD9iw7YZQGjZNjYN7xGaEG6iKdA8EtNFW6R0gjnVXp+wQ=="
+      },
+      {
+        "selector": "timsort@^0.3.0",
+        "name": "timsort",
+        "version": "0.3.0",
+        "resolved": "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4",
+        "integrity": "sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q="
+      },
+      {
+        "selector": "cssnano-util-raw-cache@^4.0.1",
+        "name": "cssnano-util-raw-cache",
+        "version": "4.0.1",
+        "resolved": "https://registry.yarnpkg.com/cssnano-util-raw-cache/-/cssnano-util-raw-cache-4.0.1.tgz#b26d5fd5f72a11dfe7a7846fb4c67260f96bf282",
+        "integrity": "sha512-qLuYtWK2b2Dy55I8ZX3ky1Z16WYsx544Q0UWViebptpwn/xDBmog2TLg4f+DBMg1rJ6JDWtn96WHbOKDWt1WQA=="
+      },
+      {
+        "selector": "postcss@^7.0.0",
+        "name": "postcss",
+        "version": "7.0.35",
+        "resolved": "https://registry.yarnpkg.com/postcss/-/postcss-7.0.35.tgz#d2be00b998f7f211d8a276974079f2e92b970e24",
+        "integrity": "sha512-3QT8bBJeX/S5zKTTjTCIjRF3If4avAT6kqxcASlTWEtAFCb9NH0OUxNDfgZSWdP5fJnBYCMEWkIFfWeugjzYMg=="
+      },
+      {
+        "selector": "postcss-calc@^7.0.1",
+        "name": "postcss-calc",
+        "version": "7.0.5",
+        "resolved": "https://registry.yarnpkg.com/postcss-calc/-/postcss-calc-7.0.5.tgz#f8a6e99f12e619c2ebc23cf6c486fdc15860933e",
+        "integrity": "sha512-1tKHutbGtLtEZF6PT4JSihCHfIVldU72mZ8SdZHIYriIZ9fh9k9aWSppaT8rHsyI3dX+KSR+W+Ix9BMY3AODrg=="
+      },
+      {
+        "selector": "postcss@^7.0.27",
+        "name": "postcss",
+        "version": "7.0.35",
+        "resolved": "https://registry.yarnpkg.com/postcss/-/postcss-7.0.35.tgz#d2be00b998f7f211d8a276974079f2e92b970e24",
+        "integrity": "sha512-3QT8bBJeX/S5zKTTjTCIjRF3If4avAT6kqxcASlTWEtAFCb9NH0OUxNDfgZSWdP5fJnBYCMEWkIFfWeugjzYMg=="
+      },
+      {
+        "selector": "postcss-selector-parser@^6.0.2",
+        "name": "postcss-selector-parser",
+        "version": "6.0.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-6.0.2.tgz#934cf799d016c83411859e09dcecade01286ec5c",
+        "integrity": "sha512-36P2QR59jDTOAiIkqEprfJDsoNrvwFei3eCqKd1Y0tUsBimsq39BLp7RD+JWny3WgB1zGhJX8XVePwm9k4wdBg=="
+      },
+      {
+        "selector": "cssesc@^3.0.0",
+        "name": "cssesc",
+        "version": "3.0.0",
+        "resolved": "https://registry.yarnpkg.com/cssesc/-/cssesc-3.0.0.tgz#37741919903b868565e1c09ea747445cd18983ee",
+        "integrity": "sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg=="
+      },
+      {
+        "selector": "indexes-of@^1.0.1",
+        "name": "indexes-of",
+        "version": "1.0.1",
+        "resolved": "https://registry.yarnpkg.com/indexes-of/-/indexes-of-1.0.1.tgz#f30f716c8e2bd346c7b67d3df3915566a7c05607",
+        "integrity": "sha1-8w9xbI4r00bHtn0985FVZqfAVgc="
+      },
+      {
+        "selector": "uniq@^1.0.1",
+        "name": "uniq",
+        "version": "1.0.1",
+        "resolved": "https://registry.yarnpkg.com/uniq/-/uniq-1.0.1.tgz#b31c5ae8254844a3a8281541ce2b04b865a734ff",
+        "integrity": "sha1-sxxa6CVIRKOoKBVBzisEuGWnNP8="
+      },
+      {
+        "selector": "postcss-value-parser@^4.0.2",
+        "name": "postcss-value-parser",
+        "version": "4.1.0",
+        "resolved": "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.1.0.tgz#443f6a20ced6481a2bda4fa8532a6e55d789a2cb",
+        "integrity": "sha512-97DXOFbQJhk71ne5/Mt6cOu6yxsSfM0QGQyl0L25Gca4yGWEGJaig7l7gbCX623VqTBNGLRLaVUCnNkcedlRSQ=="
+      },
+      {
+        "selector": "postcss-colormin@^4.0.3",
+        "name": "postcss-colormin",
+        "version": "4.0.3",
+        "resolved": "https://registry.yarnpkg.com/postcss-colormin/-/postcss-colormin-4.0.3.tgz#ae060bce93ed794ac71264f08132d550956bd381",
+        "integrity": "sha512-WyQFAdDZpExQh32j0U0feWisZ0dmOtPl44qYmJKkq9xFWY3p+4qnRzCHeNrkeRhwPHz9bQ3mo0/yVkaply0MNw=="
+      },
+      {
+        "selector": "browserslist@^4.0.0",
+        "name": "browserslist",
+        "version": "4.16.6",
+        "resolved": "https://registry.yarnpkg.com/browserslist/-/browserslist-4.16.6.tgz#d7901277a5a88e554ed305b183ec9b0c08f66fa2",
+        "integrity": "sha512-Wspk/PqO+4W9qp5iUTJsa1B/QrYn1keNCcEP5OvP7WBwT4KaDly0uONYmC6Xa3Z5IqnUgS0KcgLYu1l74x0ZXQ=="
+      },
+      {
+        "selector": "caniuse-lite@^1.0.30001219",
+        "name": "caniuse-lite",
+        "version": "1.0.30001228",
+        "resolved": "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001228.tgz#bfdc5942cd3326fa51ee0b42fbef4da9d492a7fa",
+        "integrity": "sha512-QQmLOGJ3DEgokHbMSA8cj2a+geXqmnpyOFT0lhQV6P3/YOJvGDEwoedcwxEQ30gJIwIIunHIicunJ2rzK5gB2A=="
+      },
+      {
+        "selector": "colorette@^1.2.2",
+        "name": "colorette",
+        "version": "1.2.2",
+        "resolved": "https://registry.yarnpkg.com/colorette/-/colorette-1.2.2.tgz#cbcc79d5e99caea2dbf10eb3a26fd8b3e6acfa94",
+        "integrity": "sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w=="
+      },
+      {
+        "selector": "electron-to-chromium@^1.3.723",
+        "name": "electron-to-chromium",
+        "version": "1.3.737",
+        "resolved": "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.737.tgz#196f2e9656f4f3c31930750e1899c091b72d36b5",
+        "integrity": "sha512-P/B84AgUSQXaum7a8m11HUsYL8tj9h/Pt5f7Hg7Ty6bm5DxlFq+e5+ouHUoNQMsKDJ7u4yGfI8mOErCmSH9wyg=="
+      },
+      {
+        "selector": "escalade@^3.1.1",
+        "name": "escalade",
+        "version": "3.1.1",
+        "resolved": "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40",
+        "integrity": "sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw=="
+      },
+      {
+        "selector": "node-releases@^1.1.71",
+        "name": "node-releases",
+        "version": "1.1.72",
+        "resolved": "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.72.tgz#14802ab6b1039a79a0c7d662b610a5bbd76eacbe",
+        "integrity": "sha512-LLUo+PpH3dU6XizX3iVoubUNheF/owjXCZZ5yACDxNnPtgFuludV1ZL3ayK1kVep42Rmm0+R9/Y60NQbZ2bifw=="
+      },
+      {
+        "selector": "color@^3.0.0",
+        "name": "color",
+        "version": "3.1.3",
+        "resolved": "https://registry.yarnpkg.com/color/-/color-3.1.3.tgz#ca67fb4e7b97d611dcde39eceed422067d91596e",
+        "integrity": "sha512-xgXAcTHa2HeFCGLE9Xs/R82hujGtu9Jd9x4NW3T34+OMs7VoPsjwzRczKHvTAHeJwWFwX5j15+MgAppE8ztObQ=="
+      },
+      {
+        "selector": "color-convert@^1.9.1",
+        "name": "color-convert",
+        "version": "1.9.3",
+        "resolved": "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8",
+        "integrity": "sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg=="
+      },
+      {
+        "selector": "color-string@^1.5.4",
+        "name": "color-string",
+        "version": "1.5.5",
+        "resolved": "https://registry.yarnpkg.com/color-string/-/color-string-1.5.5.tgz#65474a8f0e7439625f3d27a6a19d89fc45223014",
+        "integrity": "sha512-jgIoum0OfQfq9Whcfc2z/VhCNcmQjWbey6qBX0vqt7YICflUmBCh9E9CiQD5GSJ+Uehixm3NUwHVhqUAWRivZg=="
+      },
+      {
+        "selector": "color-name@^1.0.0",
+        "name": "color-name",
+        "version": "1.1.4",
+        "resolved": "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2",
+        "integrity": "sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA=="
+      },
+      {
+        "selector": "simple-swizzle@^0.2.2",
+        "name": "simple-swizzle",
+        "version": "0.2.2",
+        "resolved": "https://registry.yarnpkg.com/simple-swizzle/-/simple-swizzle-0.2.2.tgz#a4da6b635ffcccca33f70d17cb92592de95e557a",
+        "integrity": "sha1-pNprY1/8zMoz9w0Xy5JZLeleVXo="
+      },
+      {
+        "selector": "is-arrayish@^0.3.1",
+        "name": "is-arrayish",
+        "version": "0.3.2",
+        "resolved": "https://registry.yarnpkg.com/is-arrayish/-/is-arrayish-0.3.2.tgz#4574a2ae56f7ab206896fb431eaeed066fdf8f03",
+        "integrity": "sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ=="
+      },
+      {
+        "selector": "has@^1.0.0",
+        "name": "has",
+        "version": "1.0.3",
+        "resolved": "https://registry.yarnpkg.com/has/-/has-1.0.3.tgz#722d7cbfc1f6aa8241f16dd814e011e1f41e8796",
+        "integrity": "sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw=="
+      },
+      {
+        "selector": "function-bind@^1.1.1",
+        "name": "function-bind",
+        "version": "1.1.1",
+        "resolved": "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d",
+        "integrity": "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
+      },
+      {
+        "selector": "postcss-value-parser@^3.0.0",
+        "name": "postcss-value-parser",
+        "version": "3.3.1",
+        "resolved": "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-3.3.1.tgz#9ff822547e2893213cf1c30efa51ac5fd1ba8281",
+        "integrity": "sha512-pISE66AbVkp4fDQ7VHBwRNXzAAKJjw4Vw7nWI/+Q3vuly7SNfgYXvm6i5IgFylHGK5sP/xHAbB7N49OS4gWNyQ=="
+      },
+      {
+        "selector": "postcss-convert-values@^4.0.1",
+        "name": "postcss-convert-values",
+        "version": "4.0.1",
+        "resolved": "https://registry.yarnpkg.com/postcss-convert-values/-/postcss-convert-values-4.0.1.tgz#ca3813ed4da0f812f9d43703584e449ebe189a7f",
+        "integrity": "sha512-Kisdo1y77KUC0Jmn0OXU/COOJbzM8cImvw1ZFsBgBgMgb1iL23Zs/LXRe3r+EZqM3vGYKdQ2YJVQ5VkJI+zEJQ=="
+      },
+      {
+        "selector": "postcss-discard-comments@^4.0.2",
+        "name": "postcss-discard-comments",
+        "version": "4.0.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-discard-comments/-/postcss-discard-comments-4.0.2.tgz#1fbabd2c246bff6aaad7997b2b0918f4d7af4033",
+        "integrity": "sha512-RJutN259iuRf3IW7GZyLM5Sw4GLTOH8FmsXBnv8Ab/Tc2k4SR4qbV4DNbyyY4+Sjo362SyDmW2DQ7lBSChrpkg=="
+      },
+      {
+        "selector": "postcss-discard-duplicates@^4.0.2",
+        "name": "postcss-discard-duplicates",
+        "version": "4.0.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-discard-duplicates/-/postcss-discard-duplicates-4.0.2.tgz#3fe133cd3c82282e550fc9b239176a9207b784eb",
+        "integrity": "sha512-ZNQfR1gPNAiXZhgENFfEglF93pciw0WxMkJeVmw8eF+JZBbMD7jp6C67GqJAXVZP2BWbOztKfbsdmMp/k8c6oQ=="
+      },
+      {
+        "selector": "postcss-discard-empty@^4.0.1",
+        "name": "postcss-discard-empty",
+        "version": "4.0.1",
+        "resolved": "https://registry.yarnpkg.com/postcss-discard-empty/-/postcss-discard-empty-4.0.1.tgz#c8c951e9f73ed9428019458444a02ad90bb9f765",
+        "integrity": "sha512-B9miTzbznhDjTfjvipfHoqbWKwd0Mj+/fL5s1QOz06wufguil+Xheo4XpOnc4NqKYBCNqqEzgPv2aPBIJLox0w=="
+      },
+      {
+        "selector": "postcss-discard-overridden@^4.0.1",
+        "name": "postcss-discard-overridden",
+        "version": "4.0.1",
+        "resolved": "https://registry.yarnpkg.com/postcss-discard-overridden/-/postcss-discard-overridden-4.0.1.tgz#652aef8a96726f029f5e3e00146ee7a4e755ff57",
+        "integrity": "sha512-IYY2bEDD7g1XM1IDEsUT4//iEYCxAmP5oDSFMVU/JVvT7gh+l4fmjciLqGgwjdWpQIdb0Che2VX00QObS5+cTg=="
+      },
+      {
+        "selector": "postcss-merge-longhand@^4.0.11",
+        "name": "postcss-merge-longhand",
+        "version": "4.0.11",
+        "resolved": "https://registry.yarnpkg.com/postcss-merge-longhand/-/postcss-merge-longhand-4.0.11.tgz#62f49a13e4a0ee04e7b98f42bb16062ca2549e24",
+        "integrity": "sha512-alx/zmoeXvJjp7L4mxEMjh8lxVlDFX1gqWHzaaQewwMZiVhLo42TEClKaeHbRf6J7j82ZOdTJ808RtN0ZOZwvw=="
+      },
+      {
+        "selector": "css-color-names@0.0.4",
+        "name": "css-color-names",
+        "version": "0.0.4",
+        "resolved": "https://registry.yarnpkg.com/css-color-names/-/css-color-names-0.0.4.tgz#808adc2e79cf84738069b646cb20ec27beb629e0",
+        "integrity": "sha1-gIrcLnnPhHOAabZGyyDsJ762KeA="
+      },
+      {
+        "selector": "stylehacks@^4.0.0",
+        "name": "stylehacks",
+        "version": "4.0.3",
+        "resolved": "https://registry.yarnpkg.com/stylehacks/-/stylehacks-4.0.3.tgz#6718fcaf4d1e07d8a1318690881e8d96726a71d5",
+        "integrity": "sha512-7GlLk9JwlElY4Y6a/rmbH2MhVlTyVmiJd1PfTCqFaIBEGMYNsrO/v3SeGTdhBThLg4Z+NbOk/qFMwCa+J+3p/g=="
+      },
+      {
+        "selector": "postcss-selector-parser@^3.0.0",
+        "name": "postcss-selector-parser",
+        "version": "3.1.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-3.1.2.tgz#b310f5c4c0fdaf76f94902bbaa30db6aa84f5270",
+        "integrity": "sha512-h7fJ/5uWuRVyOtkO45pnt1Ih40CEleeyCHzipqAZO2e5H20g25Y48uYnFUiShvY4rZWNJ/Bib/KVPmanaCtOhA=="
+      },
+      {
+        "selector": "dot-prop@^5.2.0",
+        "name": "dot-prop",
+        "version": "5.3.0",
+        "resolved": "https://registry.yarnpkg.com/dot-prop/-/dot-prop-5.3.0.tgz#90ccce708cd9cd82cc4dc8c3ddd9abdd55b20e88",
+        "integrity": "sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q=="
+      },
+      {
+        "selector": "is-obj@^2.0.0",
+        "name": "is-obj",
+        "version": "2.0.0",
+        "resolved": "https://registry.yarnpkg.com/is-obj/-/is-obj-2.0.0.tgz#473fb05d973705e3fd9620545018ca8e22ef4982",
+        "integrity": "sha512-drqDG3cbczxxEJRoOXcOjtdp1J/lyp1mNn0xaznRs8+muBhgQcrnbspox5X5fOw0HnMnbfDzvnEMEtqDEJEo8w=="
+      },
+      {
+        "selector": "postcss-merge-rules@^4.0.3",
+        "name": "postcss-merge-rules",
+        "version": "4.0.3",
+        "resolved": "https://registry.yarnpkg.com/postcss-merge-rules/-/postcss-merge-rules-4.0.3.tgz#362bea4ff5a1f98e4075a713c6cb25aefef9a650",
+        "integrity": "sha512-U7e3r1SbvYzO0Jr3UT/zKBVgYYyhAz0aitvGIYOYK5CPmkNih+WDSsS5tvPrJ8YMQYlEMvsZIiqmn7HdFUaeEQ=="
+      },
+      {
+        "selector": "caniuse-api@^3.0.0",
+        "name": "caniuse-api",
+        "version": "3.0.0",
+        "resolved": "https://registry.yarnpkg.com/caniuse-api/-/caniuse-api-3.0.0.tgz#5e4d90e2274961d46291997df599e3ed008ee4c0",
+        "integrity": "sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw=="
+      },
+      {
+        "selector": "caniuse-lite@^1.0.0",
+        "name": "caniuse-lite",
+        "version": "1.0.30001228",
+        "resolved": "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001228.tgz#bfdc5942cd3326fa51ee0b42fbef4da9d492a7fa",
+        "integrity": "sha512-QQmLOGJ3DEgokHbMSA8cj2a+geXqmnpyOFT0lhQV6P3/YOJvGDEwoedcwxEQ30gJIwIIunHIicunJ2rzK5gB2A=="
+      },
+      {
+        "selector": "lodash.memoize@^4.1.2",
+        "name": "lodash.memoize",
+        "version": "4.1.2",
+        "resolved": "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe",
+        "integrity": "sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4="
+      },
+      {
+        "selector": "lodash.uniq@^4.5.0",
+        "name": "lodash.uniq",
+        "version": "4.5.0",
+        "resolved": "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773",
+        "integrity": "sha1-0CJTc662Uq3BvILklFM5qEJ1R3M="
+      },
+      {
+        "selector": "cssnano-util-same-parent@^4.0.0",
+        "name": "cssnano-util-same-parent",
+        "version": "4.0.1",
+        "resolved": "https://registry.yarnpkg.com/cssnano-util-same-parent/-/cssnano-util-same-parent-4.0.1.tgz#574082fb2859d2db433855835d9a8456ea18bbf3",
+        "integrity": "sha512-WcKx5OY+KoSIAxBW6UBBRay1U6vkYheCdjyVNDm85zt5K9mHoGOfsOsqIszfAqrQQFIIKgjh2+FDgIj/zsl21Q=="
+      },
+      {
+        "selector": "vendors@^1.0.0",
+        "name": "vendors",
+        "version": "1.0.4",
+        "resolved": "https://registry.yarnpkg.com/vendors/-/vendors-1.0.4.tgz#e2b800a53e7a29b93506c3cf41100d16c4c4ad8e",
+        "integrity": "sha512-/juG65kTL4Cy2su4P8HjtkTxk6VmJDiOPBufWniqQ6wknac6jNiXS9vU+hO3wgusiyqWlzTbVHi0dyJqRONg3w=="
+      },
+      {
+        "selector": "postcss-minify-font-values@^4.0.2",
+        "name": "postcss-minify-font-values",
+        "version": "4.0.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-minify-font-values/-/postcss-minify-font-values-4.0.2.tgz#cd4c344cce474343fac5d82206ab2cbcb8afd5a6",
+        "integrity": "sha512-j85oO6OnRU9zPf04+PZv1LYIYOprWm6IA6zkXkrJXyRveDEuQggG6tvoy8ir8ZwjLxLuGfNkCZEQG7zan+Hbtg=="
+      },
+      {
+        "selector": "postcss-minify-gradients@^4.0.2",
+        "name": "postcss-minify-gradients",
+        "version": "4.0.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-minify-gradients/-/postcss-minify-gradients-4.0.2.tgz#93b29c2ff5099c535eecda56c4aa6e665a663471",
+        "integrity": "sha512-qKPfwlONdcf/AndP1U8SJ/uzIJtowHlMaSioKzebAXSG4iJthlWC9iSWznQcX4f66gIWX44RSA841HTHj3wK+Q=="
+      },
+      {
+        "selector": "cssnano-util-get-arguments@^4.0.0",
+        "name": "cssnano-util-get-arguments",
+        "version": "4.0.0",
+        "resolved": "https://registry.yarnpkg.com/cssnano-util-get-arguments/-/cssnano-util-get-arguments-4.0.0.tgz#ed3a08299f21d75741b20f3b81f194ed49cc150f",
+        "integrity": "sha1-7ToIKZ8h11dBsg87gfGU7UnMFQ8="
+      },
+      {
+        "selector": "is-color-stop@^1.0.0",
+        "name": "is-color-stop",
+        "version": "1.1.0",
+        "resolved": "https://registry.yarnpkg.com/is-color-stop/-/is-color-stop-1.1.0.tgz#cfff471aee4dd5c9e158598fbe12967b5cdad345",
+        "integrity": "sha1-z/9HGu5N1cnhWFmPvhKWe1za00U="
+      },
+      {
+        "selector": "css-color-names@^0.0.4",
+        "name": "css-color-names",
+        "version": "0.0.4",
+        "resolved": "https://registry.yarnpkg.com/css-color-names/-/css-color-names-0.0.4.tgz#808adc2e79cf84738069b646cb20ec27beb629e0",
+        "integrity": "sha1-gIrcLnnPhHOAabZGyyDsJ762KeA="
+      },
+      {
+        "selector": "hex-color-regex@^1.1.0",
+        "name": "hex-color-regex",
+        "version": "1.1.0",
+        "resolved": "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e",
+        "integrity": "sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ=="
+      },
+      {
+        "selector": "hsl-regex@^1.0.0",
+        "name": "hsl-regex",
+        "version": "1.0.0",
+        "resolved": "https://registry.yarnpkg.com/hsl-regex/-/hsl-regex-1.0.0.tgz#d49330c789ed819e276a4c0d272dffa30b18fe6e",
+        "integrity": "sha1-1JMwx4ntgZ4nakwNJy3/owsY/m4="
+      },
+      {
+        "selector": "hsla-regex@^1.0.0",
+        "name": "hsla-regex",
+        "version": "1.0.0",
+        "resolved": "https://registry.yarnpkg.com/hsla-regex/-/hsla-regex-1.0.0.tgz#c1ce7a3168c8c6614033a4b5f7877f3b225f9c38",
+        "integrity": "sha1-wc56MWjIxmFAM6S194d/OyJfnDg="
+      },
+      {
+        "selector": "rgb-regex@^1.0.1",
+        "name": "rgb-regex",
+        "version": "1.0.1",
+        "resolved": "https://registry.yarnpkg.com/rgb-regex/-/rgb-regex-1.0.1.tgz#c0e0d6882df0e23be254a475e8edd41915feaeb1",
+        "integrity": "sha1-wODWiC3w4jviVKR16O3UGRX+rrE="
+      },
+      {
+        "selector": "rgba-regex@^1.0.0",
+        "name": "rgba-regex",
+        "version": "1.0.0",
+        "resolved": "https://registry.yarnpkg.com/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3",
+        "integrity": "sha1-QzdOLiyglosO8VI0YLfXMP8i7rM="
+      },
+      {
+        "selector": "postcss-minify-params@^4.0.2",
+        "name": "postcss-minify-params",
+        "version": "4.0.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-minify-params/-/postcss-minify-params-4.0.2.tgz#6b9cef030c11e35261f95f618c90036d680db874",
+        "integrity": "sha512-G7eWyzEx0xL4/wiBBJxJOz48zAKV2WG3iZOqVhPet/9geefm/Px5uo1fzlHu+DOjT+m0Mmiz3jkQzVHe6wxAWg=="
+      },
+      {
+        "selector": "alphanum-sort@^1.0.0",
+        "name": "alphanum-sort",
+        "version": "1.0.2",
+        "resolved": "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3",
+        "integrity": "sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM="
+      },
+      {
+        "selector": "uniqs@^2.0.0",
+        "name": "uniqs",
+        "version": "2.0.0",
+        "resolved": "https://registry.yarnpkg.com/uniqs/-/uniqs-2.0.0.tgz#ffede4b36b25290696e6e165d4a59edb998e6b02",
+        "integrity": "sha1-/+3ks2slKQaW5uFl1KWe25mOawI="
+      },
+      {
+        "selector": "postcss-minify-selectors@^4.0.2",
+        "name": "postcss-minify-selectors",
+        "version": "4.0.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-minify-selectors/-/postcss-minify-selectors-4.0.2.tgz#e2e5eb40bfee500d0cd9243500f5f8ea4262fbd8",
+        "integrity": "sha512-D5S1iViljXBj9kflQo4YutWnJmwm8VvIsU1GeXJGiG9j8CIg9zs4voPMdQDUmIxetUOh60VilsNzCiAFTOqu3g=="
+      },
+      {
+        "selector": "postcss-normalize-charset@^4.0.1",
+        "name": "postcss-normalize-charset",
+        "version": "4.0.1",
+        "resolved": "https://registry.yarnpkg.com/postcss-normalize-charset/-/postcss-normalize-charset-4.0.1.tgz#8b35add3aee83a136b0471e0d59be58a50285dd4",
+        "integrity": "sha512-gMXCrrlWh6G27U0hF3vNvR3w8I1s2wOBILvA87iNXaPvSNo5uZAMYsZG7XjCUf1eVxuPfyL4TJ7++SGZLc9A3g=="
+      },
+      {
+        "selector": "postcss-normalize-display-values@^4.0.2",
+        "name": "postcss-normalize-display-values",
+        "version": "4.0.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-normalize-display-values/-/postcss-normalize-display-values-4.0.2.tgz#0dbe04a4ce9063d4667ed2be476bb830c825935a",
+        "integrity": "sha512-3F2jcsaMW7+VtRMAqf/3m4cPFhPD3EFRgNs18u+k3lTJJlVe7d0YPO+bnwqo2xg8YiRpDXJI2u8A0wqJxMsQuQ=="
+      },
+      {
+        "selector": "cssnano-util-get-match@^4.0.0",
+        "name": "cssnano-util-get-match",
+        "version": "4.0.0",
+        "resolved": "https://registry.yarnpkg.com/cssnano-util-get-match/-/cssnano-util-get-match-4.0.0.tgz#c0e4ca07f5386bb17ec5e52250b4f5961365156d",
+        "integrity": "sha1-wOTKB/U4a7F+xeUiULT1lhNlFW0="
+      },
+      {
+        "selector": "postcss-normalize-positions@^4.0.2",
+        "name": "postcss-normalize-positions",
+        "version": "4.0.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-normalize-positions/-/postcss-normalize-positions-4.0.2.tgz#05f757f84f260437378368a91f8932d4b102917f",
+        "integrity": "sha512-Dlf3/9AxpxE+NF1fJxYDeggi5WwV35MXGFnnoccP/9qDtFrTArZ0D0R+iKcg5WsUd8nUYMIl8yXDCtcrT8JrdA=="
+      },
+      {
+        "selector": "postcss-normalize-repeat-style@^4.0.2",
+        "name": "postcss-normalize-repeat-style",
+        "version": "4.0.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-normalize-repeat-style/-/postcss-normalize-repeat-style-4.0.2.tgz#c4ebbc289f3991a028d44751cbdd11918b17910c",
+        "integrity": "sha512-qvigdYYMpSuoFs3Is/f5nHdRLJN/ITA7huIoCyqqENJe9PvPmLhNLMu7QTjPdtnVf6OcYYO5SHonx4+fbJE1+Q=="
+      },
+      {
+        "selector": "postcss-normalize-string@^4.0.2",
+        "name": "postcss-normalize-string",
+        "version": "4.0.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-normalize-string/-/postcss-normalize-string-4.0.2.tgz#cd44c40ab07a0c7a36dc5e99aace1eca4ec2690c",
+        "integrity": "sha512-RrERod97Dnwqq49WNz8qo66ps0swYZDSb6rM57kN2J+aoyEAJfZ6bMx0sx/F9TIEX0xthPGCmeyiam/jXif0eA=="
+      },
+      {
+        "selector": "postcss-normalize-timing-functions@^4.0.2",
+        "name": "postcss-normalize-timing-functions",
+        "version": "4.0.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-normalize-timing-functions/-/postcss-normalize-timing-functions-4.0.2.tgz#8e009ca2a3949cdaf8ad23e6b6ab99cb5e7d28d9",
+        "integrity": "sha512-acwJY95edP762e++00Ehq9L4sZCEcOPyaHwoaFOhIwWCDfik6YvqsYNxckee65JHLKzuNSSmAdxwD2Cud1Z54A=="
+      },
+      {
+        "selector": "postcss-normalize-unicode@^4.0.1",
+        "name": "postcss-normalize-unicode",
+        "version": "4.0.1",
+        "resolved": "https://registry.yarnpkg.com/postcss-normalize-unicode/-/postcss-normalize-unicode-4.0.1.tgz#841bd48fdcf3019ad4baa7493a3d363b52ae1cfb",
+        "integrity": "sha512-od18Uq2wCYn+vZ/qCOeutvHjB5jm57ToxRaMeNuf0nWVHaP9Hua56QyMF6fs/4FSUnVIw0CBPsU0K4LnBPwYwg=="
+      },
+      {
+        "selector": "postcss-normalize-url@^4.0.1",
+        "name": "postcss-normalize-url",
+        "version": "4.0.1",
+        "resolved": "https://registry.yarnpkg.com/postcss-normalize-url/-/postcss-normalize-url-4.0.1.tgz#10e437f86bc7c7e58f7b9652ed878daaa95faae1",
+        "integrity": "sha512-p5oVaF4+IHwu7VpMan/SSpmpYxcJMtkGppYf0VbdH5B6hN8YNmVyJLuY9FmLQTzY3fag5ESUUHDqM+heid0UVA=="
+      },
+      {
+        "selector": "is-absolute-url@^2.0.0",
+        "name": "is-absolute-url",
+        "version": "2.1.0",
+        "resolved": "https://registry.yarnpkg.com/is-absolute-url/-/is-absolute-url-2.1.0.tgz#50530dfb84fcc9aa7dbe7852e83a37b93b9f2aa6",
+        "integrity": "sha1-UFMN+4T8yap9vnhS6Do3uTufKqY="
+      },
+      {
+        "selector": "normalize-url@^3.0.0",
+        "name": "normalize-url",
+        "version": "3.3.0",
+        "resolved": "https://registry.yarnpkg.com/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559",
+        "integrity": "sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg=="
+      },
+      {
+        "selector": "postcss-normalize-whitespace@^4.0.2",
+        "name": "postcss-normalize-whitespace",
+        "version": "4.0.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-normalize-whitespace/-/postcss-normalize-whitespace-4.0.2.tgz#bf1d4070fe4fcea87d1348e825d8cc0c5faa7d82",
+        "integrity": "sha512-tO8QIgrsI3p95r8fyqKV+ufKlSHh9hMJqACqbv2XknufqEDhDvbguXGBBqxw9nsQoXWf0qOqppziKJKHMD4GtA=="
+      },
+      {
+        "selector": "postcss-ordered-values@^4.1.2",
+        "name": "postcss-ordered-values",
+        "version": "4.1.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-ordered-values/-/postcss-ordered-values-4.1.2.tgz#0cf75c820ec7d5c4d280189559e0b571ebac0eee",
+        "integrity": "sha512-2fCObh5UanxvSxeXrtLtlwVThBvHn6MQcu4ksNT2tsaV2Fg76R2CV98W7wNSlX+5/pFwEyaDwKLLoEV7uRybAw=="
+      },
+      {
+        "selector": "postcss-reduce-initial@^4.0.3",
+        "name": "postcss-reduce-initial",
+        "version": "4.0.3",
+        "resolved": "https://registry.yarnpkg.com/postcss-reduce-initial/-/postcss-reduce-initial-4.0.3.tgz#7fd42ebea5e9c814609639e2c2e84ae270ba48df",
+        "integrity": "sha512-gKWmR5aUulSjbzOfD9AlJiHCGH6AEVLaM0AV+aSioxUDd16qXP1PCh8d1/BGVvpdWn8k/HiK7n6TjeoXN1F7DA=="
+      },
+      {
+        "selector": "postcss-reduce-transforms@^4.0.2",
+        "name": "postcss-reduce-transforms",
+        "version": "4.0.2",
+        "resolved": "https://registry.yarnpkg.com/postcss-reduce-transforms/-/postcss-reduce-transforms-4.0.2.tgz#17efa405eacc6e07be3414a5ca2d1074681d4e29",
+        "integrity": "sha512-EEVig1Q2QJ4ELpJXMZR8Vt5DQx8/mo+dGWSR7vWXqcob2gQLyQGsionYcGKATXvQzMPn6DSN1vTN7yFximdIAg=="
+      },
+      {
+        "selector": "postcss-svgo@^4.0.3",
+        "name": "postcss-svgo",
+        "version": "4.0.3",
+        "resolved": "https://registry.yarnpkg.com/postcss-svgo/-/postcss-svgo-4.0.3.tgz#343a2cdbac9505d416243d496f724f38894c941e",
+        "integrity": "sha512-NoRbrcMWTtUghzuKSoIm6XV+sJdvZ7GZSc3wdBN0W19FTtp2ko8NqLsgoh/m9CzNhU3KLPvQmjIwtaNFkaFTvw=="
+      },
+      {
+        "selector": "svgo@^1.0.0",
+        "name": "svgo",
+        "version": "1.3.2",
+        "resolved": "https://registry.yarnpkg.com/svgo/-/svgo-1.3.2.tgz#b6dc511c063346c9e415b81e43401145b96d4167",
+        "integrity": "sha512-yhy/sQYxR5BkC98CY7o31VGsg014AKLEPxdfhora76l36hD9Rdy5NZA/Ocn6yayNPgSamYdtX2rFJdcv07AYVw=="
+      },
+      {
+        "selector": "chalk@^2.4.1",
+        "name": "chalk",
+        "version": "2.4.2",
+        "resolved": "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424",
+        "integrity": "sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ=="
+      },
+      {
+        "selector": "coa@^2.0.2",
+        "name": "coa",
+        "version": "2.0.2",
+        "resolved": "https://registry.yarnpkg.com/coa/-/coa-2.0.2.tgz#43f6c21151b4ef2bf57187db0d73de229e3e7ec3",
+        "integrity": "sha512-q5/jG+YQnSy4nRTV4F7lPepBJZ8qBNJJDBuJdoejDyLXgmL7IEo+Le2JDZudFTFt7mrCqIRaSjws4ygRCTCAXA=="
+      },
+      {
+        "selector": "@types/q@^1.5.1",
+        "name": "@types/q",
+        "version": "1.5.4",
+        "resolved": "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24",
+        "integrity": "sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug=="
+      },
+      {
+        "selector": "q@^1.1.2",
+        "name": "q",
+        "version": "1.5.1",
+        "resolved": "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7",
+        "integrity": "sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc="
+      },
+      {
+        "selector": "css-select@^2.0.0",
+        "name": "css-select",
+        "version": "2.1.0",
+        "resolved": "https://registry.yarnpkg.com/css-select/-/css-select-2.1.0.tgz#6a34653356635934a81baca68d0255432105dbef",
+        "integrity": "sha512-Dqk7LQKpwLoH3VovzZnkzegqNSuAziQyNZUcrdDM401iY+R5NkGBXGmtO05/yaXQziALuPogeG0b7UAgjnTJTQ=="
+      },
+      {
+        "selector": "boolbase@^1.0.0",
+        "name": "boolbase",
+        "version": "1.0.0",
+        "resolved": "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e",
+        "integrity": "sha1-aN/1++YMUes3cl6p4+0xDcwed24="
+      },
+      {
+        "selector": "css-what@^3.2.1",
+        "name": "css-what",
+        "version": "3.4.2",
+        "resolved": "https://registry.yarnpkg.com/css-what/-/css-what-3.4.2.tgz#ea7026fcb01777edbde52124e21f327e7ae950e4",
+        "integrity": "sha512-ACUm3L0/jiZTqfzRM3Hi9Q8eZqd6IK37mMWPLz9PJxkLWllYeRf+EHUSHYEtFop2Eqytaq1FizFVh7XfBnXCDQ=="
+      },
+      {
+        "selector": "domutils@^1.7.0",
+        "name": "domutils",
+        "version": "1.7.0",
+        "resolved": "https://registry.yarnpkg.com/domutils/-/domutils-1.7.0.tgz#56ea341e834e06e6748af7a1cb25da67ea9f8c2a",
+        "integrity": "sha512-Lgd2XcJ/NjEw+7tFvfKxOzCYKZsdct5lczQ2ZaQY8Djz7pfAD3Gbp8ySJWtreII/vDlMVmxwa6pHmdxIYgttDg=="
+      },
+      {
+        "selector": "dom-serializer@0",
+        "name": "dom-serializer",
+        "version": "0.2.2",
+        "resolved": "https://registry.yarnpkg.com/dom-serializer/-/dom-serializer-0.2.2.tgz#1afb81f533717175d478655debc5e332d9f9bb51",
+        "integrity": "sha512-2/xPb3ORsQ42nHYiSunXkDjPLBaEj/xTwUO4B7XCZQTRk7EBtTOPaygh10YAAh2OI1Qrp6NWfpAhzswj0ydt9g=="
+      },
+      {
+        "selector": "domelementtype@^2.0.1",
+        "name": "domelementtype",
+        "version": "2.1.0",
+        "resolved": "https://registry.yarnpkg.com/domelementtype/-/domelementtype-2.1.0.tgz#a851c080a6d1c3d94344aed151d99f669edf585e",
+        "integrity": "sha512-LsTgx/L5VpD+Q8lmsXSHW2WpA+eBlZ9HPf3erD1IoPF00/3JKHZ3BknUVA2QGDNu69ZNmyFmCWBSO45XjYKC5w=="
+      },
+      {
+        "selector": "entities@^2.0.0",
+        "name": "entities",
+        "version": "2.1.0",
+        "resolved": "https://registry.yarnpkg.com/entities/-/entities-2.1.0.tgz#992d3129cf7df6870b96c57858c249a120f8b8b5",
+        "integrity": "sha512-hCx1oky9PFrJ611mf0ifBLBRW8lUUVRlFolb5gWRfIELabBlbp9xZvrqZLZAs+NxFnbfQoeGd8wDkygjg7U85w=="
+      },
+      {
+        "selector": "domelementtype@1",
+        "name": "domelementtype",
+        "version": "1.3.1",
+        "resolved": "https://registry.yarnpkg.com/domelementtype/-/domelementtype-1.3.1.tgz#d048c44b37b0d10a7f2a3d5fee3f4333d790481f",
+        "integrity": "sha512-BSKB+TSpMpFI/HOxCNr1O8aMOTZ8hT3pM3GQ0w/mWRmkhEDSFJkkyzz4XQsBV44BChwGkrDfMyjVD0eA2aFV3w=="
+      },
+      {
+        "selector": "nth-check@^1.0.2",
+        "name": "nth-check",
+        "version": "1.0.2",
+        "resolved": "https://registry.yarnpkg.com/nth-check/-/nth-check-1.0.2.tgz#b2bd295c37e3dd58a3bf0700376663ba4d9cf05c",
+        "integrity": "sha512-WeBOdju8SnzPN5vTUJYxYUxLeXpCaVP5i5e0LF8fg7WORF2Wd7wFX/pk0tYZk7s8T+J7VLy0Da6J1+wCT0AtHg=="
+      },
+      {
+        "selector": "boolbase@~1.0.0",
+        "name": "boolbase",
+        "version": "1.0.0",
+        "resolved": "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e",
+        "integrity": "sha1-aN/1++YMUes3cl6p4+0xDcwed24="
+      },
+      {
+        "selector": "css-select-base-adapter@^0.1.1",
+        "name": "css-select-base-adapter",
+        "version": "0.1.1",
+        "resolved": "https://registry.yarnpkg.com/css-select-base-adapter/-/css-select-base-adapter-0.1.1.tgz#3b2ff4972cc362ab88561507a95408a1432135d7",
+        "integrity": "sha512-jQVeeRG70QI08vSTwf1jHxp74JoZsr2XSgETae8/xC8ovSnL2WF87GTLO86Sbwdt2lK4Umg4HnnwMO4YF3Ce7w=="
+      },
+      {
+        "selector": "css-tree@1.0.0-alpha.37",
+        "name": "css-tree",
+        "version": "1.0.0-alpha.37",
+        "resolved": "https://registry.yarnpkg.com/css-tree/-/css-tree-1.0.0-alpha.37.tgz#98bebd62c4c1d9f960ec340cf9f7522e30709a22",
+        "integrity": "sha512-DMxWJg0rnz7UgxKT0Q1HU/L9BeJI0M6ksor0OgqOnF+aRCDWg/N2641HmVyU9KVIu0OVVWOb2IpC9A+BJRnejg=="
+      },
+      {
+        "selector": "mdn-data@2.0.4",
+        "name": "mdn-data",
+        "version": "2.0.4",
+        "resolved": "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.0.4.tgz#699b3c38ac6f1d728091a64650b65d388502fd5b",
+        "integrity": "sha512-iV3XNKw06j5Q7mi6h+9vbx23Tv7JkjEVgKHW4pimwyDGWm0OIQntJJ+u1C6mg6mK1EaTv42XQ7w76yuzH7M2cA=="
+      },
+      {
+        "selector": "csso@^4.0.2",
+        "name": "csso",
+        "version": "4.2.0",
+        "resolved": "https://registry.yarnpkg.com/csso/-/csso-4.2.0.tgz#ea3a561346e8dc9f546d6febedd50187cf389529",
+        "integrity": "sha512-wvlcdIbf6pwKEk7vHj8/Bkc0B4ylXZruLvOgs9doS5eOsOpuodOV2zJChSpkp+pRpYQLQMeF04nr3Z68Sta9jA=="
+      },
+      {
+        "selector": "css-tree@^1.1.2",
+        "name": "css-tree",
+        "version": "1.1.2",
+        "resolved": "https://registry.yarnpkg.com/css-tree/-/css-tree-1.1.2.tgz#9ae393b5dafd7dae8a622475caec78d3d8fbd7b5",
+        "integrity": "sha512-wCoWush5Aeo48GLhfHPbmvZs59Z+M7k5+B1xDnXbdWNcEF423DoFdqSWE0PM5aNk5nI5cp1q7ms36zGApY/sKQ=="
+      },
+      {
+        "selector": "mdn-data@2.0.14",
+        "name": "mdn-data",
+        "version": "2.0.14",
+        "resolved": "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.0.14.tgz#7113fc4281917d63ce29b43446f701e68c25ba50",
+        "integrity": "sha512-dn6wd0uw5GsdswPFfsgMp5NSB0/aDe6fK94YJV/AJDYXL6HVLWBsxeq7js7Ad+mU2K9LAlwpk6kN2D5mwCPVow=="
+      },
+      {
+        "selector": "mkdirp@~0.5.1",
+        "name": "mkdirp",
+        "version": "0.5.5",
+        "resolved": "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.5.tgz#d91cefd62d1436ca0f41620e251288d420099def",
+        "integrity": "sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ=="
+      },
+      {
+        "selector": "minimist@^1.2.5",
+        "name": "minimist",
+        "version": "1.2.5",
+        "resolved": "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602",
+        "integrity": "sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw=="
+      },
+      {
+        "selector": "object.values@^1.1.0",
+        "name": "object.values",
+        "version": "1.1.2",
+        "resolved": "https://registry.yarnpkg.com/object.values/-/object.values-1.1.2.tgz#7a2015e06fcb0f546bd652486ce8583a4731c731",
+        "integrity": "sha512-MYC0jvJopr8EK6dPBiO8Nb9mvjdypOachO5REGk6MXzujbBrAisKo3HmdEI6kZDL6fC31Mwee/5YbtMebixeag=="
+      },
+      {
+        "selector": "call-bind@^1.0.0",
+        "name": "call-bind",
+        "version": "1.0.0",
+        "resolved": "https://registry.yarnpkg.com/call-bind/-/call-bind-1.0.0.tgz#24127054bb3f9bdcb4b1fb82418186072f77b8ce",
+        "integrity": "sha512-AEXsYIyyDY3MCzbwdhzG3Jx1R0J2wetQyUynn6dYHAO+bg8l1k7jwZtRv4ryryFs7EP+NDlikJlVe59jr0cM2w=="
+      },
+      {
+        "selector": "get-intrinsic@^1.0.0",
+        "name": "get-intrinsic",
+        "version": "1.0.1",
+        "resolved": "https://registry.yarnpkg.com/get-intrinsic/-/get-intrinsic-1.0.1.tgz#94a9768fcbdd0595a1c9273aacf4c89d075631be",
+        "integrity": "sha512-ZnWP+AmS1VUaLgTRy47+zKtjTxz+0xMpx3I52i+aalBK1QP19ggLF3Db89KJX7kjfOfP2eoa01qc++GwPgufPg=="
+      },
+      {
+        "selector": "has@^1.0.3",
+        "name": "has",
+        "version": "1.0.3",
+        "resolved": "https://registry.yarnpkg.com/has/-/has-1.0.3.tgz#722d7cbfc1f6aa8241f16dd814e011e1f41e8796",
+        "integrity": "sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw=="
+      },
+      {
+        "selector": "has-symbols@^1.0.1",
+        "name": "has-symbols",
+        "version": "1.0.1",
+        "resolved": "https://registry.yarnpkg.com/has-symbols/-/has-symbols-1.0.1.tgz#9f5214758a44196c406d9bd76cebf81ec2dd31e8",
+        "integrity": "sha512-PLcsoqu++dmEIZB+6totNFKq/7Do+Z0u4oT0zKOJNl3lYK6vGwwu2hjHs+68OEZbTjiUE9bgOABXbP/GvrS0Kg=="
+      },
+      {
+        "selector": "define-properties@^1.1.3",
+        "name": "define-properties",
+        "version": "1.1.3",
+        "resolved": "https://registry.yarnpkg.com/define-properties/-/define-properties-1.1.3.tgz#cf88da6cbee26fe6db7094f61d870cbd84cee9f1",
+        "integrity": "sha512-3MqfYKj2lLzdMSf8ZIZE/V+Zuy+BgD6f164e8K2w7dgnpKArBDerGYpM46IYYcjnkdPNMjPk9A6VFB8+3SKlXQ=="
+      },
+      {
+        "selector": "object-keys@^1.0.12",
+        "name": "object-keys",
+        "version": "1.1.1",
+        "resolved": "https://registry.yarnpkg.com/object-keys/-/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e",
+        "integrity": "sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA=="
+      },
+      {
+        "selector": "es-abstract@^1.18.0-next.1",
+        "name": "es-abstract",
+        "version": "1.18.0-next.1",
+        "resolved": "https://registry.yarnpkg.com/es-abstract/-/es-abstract-1.18.0-next.1.tgz#6e3a0a4bda717e5023ab3b8e90bec36108d22c68",
+        "integrity": "sha512-I4UGspA0wpZXWENrdA0uHbnhte683t3qT/1VFH9aX2dA5PPSf6QW5HHXf5HImaqPmjXaVeVk4RGWnaylmV7uAA=="
+      },
+      {
+        "selector": "es-to-primitive@^1.2.1",
+        "name": "es-to-primitive",
+        "version": "1.2.1",
+        "resolved": "https://registry.yarnpkg.com/es-to-primitive/-/es-to-primitive-1.2.1.tgz#e55cd4c9cdc188bcefb03b366c736323fc5c898a",
+        "integrity": "sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA=="
+      },
+      {
+        "selector": "is-callable@^1.1.4",
+        "name": "is-callable",
+        "version": "1.2.2",
+        "resolved": "https://registry.yarnpkg.com/is-callable/-/is-callable-1.2.2.tgz#c7c6715cd22d4ddb48d3e19970223aceabb080d9",
+        "integrity": "sha512-dnMqspv5nU3LoewK2N/y7KLtxtakvTuaCsU9FU50/QDmdbHNy/4/JuRtMHqRU22o3q+W89YQndQEeCVwK+3qrA=="
+      },
+      {
+        "selector": "is-date-object@^1.0.1",
+        "name": "is-date-object",
+        "version": "1.0.2",
+        "resolved": "https://registry.yarnpkg.com/is-date-object/-/is-date-object-1.0.2.tgz#bda736f2cd8fd06d32844e7743bfa7494c3bfd7e",
+        "integrity": "sha512-USlDT524woQ08aoZFzh3/Z6ch9Y/EWXEHQ/AaRN0SkKq4t2Jw2R2339tSXmwuVoY7LLlBCbOIlx2myP/L5zk0g=="
+      },
+      {
+        "selector": "is-symbol@^1.0.2",
+        "name": "is-symbol",
+        "version": "1.0.3",
+        "resolved": "https://registry.yarnpkg.com/is-symbol/-/is-symbol-1.0.3.tgz#38e1014b9e6329be0de9d24a414fd7441ec61937",
+        "integrity": "sha512-OwijhaRSgqvhm/0ZdAcXNZt9lYdKFpcRDT5ULUuYXPoT794UNOdU+gpT6Rzo7b4V2HUl/op6GqY894AZwv9faQ=="
+      },
+      {
+        "selector": "is-callable@^1.2.2",
+        "name": "is-callable",
+        "version": "1.2.2",
+        "resolved": "https://registry.yarnpkg.com/is-callable/-/is-callable-1.2.2.tgz#c7c6715cd22d4ddb48d3e19970223aceabb080d9",
+        "integrity": "sha512-dnMqspv5nU3LoewK2N/y7KLtxtakvTuaCsU9FU50/QDmdbHNy/4/JuRtMHqRU22o3q+W89YQndQEeCVwK+3qrA=="
+      },
+      {
+        "selector": "is-negative-zero@^2.0.0",
+        "name": "is-negative-zero",
+        "version": "2.0.1",
+        "resolved": "https://registry.yarnpkg.com/is-negative-zero/-/is-negative-zero-2.0.1.tgz#3de746c18dda2319241a53675908d8f766f11c24",
+        "integrity": "sha512-2z6JzQvZRa9A2Y7xC6dQQm4FSTSTNWjKIYYTt4246eMTJmIo0Q+ZyOsU66X8lxK1AbB92dFeglPLrhwpeRKO6w=="
+      },
+      {
+        "selector": "is-regex@^1.1.1",
+        "name": "is-regex",
+        "version": "1.1.1",
+        "resolved": "https://registry.yarnpkg.com/is-regex/-/is-regex-1.1.1.tgz#c6f98aacc546f6cec5468a07b7b153ab564a57b9",
+        "integrity": "sha512-1+QkEcxiLlB7VEyFtyBg94e08OAsvq7FUBgApTq/w2ymCLyKJgDPsybBENVtA7XCQEgEXxKPonG+mvYRxh/LIg=="
+      },
+      {
+        "selector": "object-inspect@^1.8.0",
+        "name": "object-inspect",
+        "version": "1.9.0",
+        "resolved": "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.9.0.tgz#c90521d74e1127b67266ded3394ad6116986533a",
+        "integrity": "sha512-i3Bp9iTqwhaLZBxGkRfo5ZbE07BQRT7MGu8+nNgwW9ItGp1TzCTw2DLEoWwjClxBjOFI/hWljTAmYGCEwmtnOw=="
+      },
+      {
+        "selector": "object-keys@^1.1.1",
+        "name": "object-keys",
+        "version": "1.1.1",
+        "resolved": "https://registry.yarnpkg.com/object-keys/-/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e",
+        "integrity": "sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA=="
+      },
+      {
+        "selector": "object.assign@^4.1.1",
+        "name": "object.assign",
+        "version": "4.1.2",
+        "resolved": "https://registry.yarnpkg.com/object.assign/-/object.assign-4.1.2.tgz#0ed54a342eceb37b38ff76eb831a0e788cb63940",
+        "integrity": "sha512-ixT2L5THXsApyiUPYKmW+2EHpXXe5Ii3M+f4e+aJFAHao5amFRW6J0OO6c/LU8Be47utCx2GL89hxGB6XSmKuQ=="
+      },
+      {
+        "selector": "string.prototype.trimend@^1.0.1",
+        "name": "string.prototype.trimend",
+        "version": "1.0.3",
+        "resolved": "https://registry.yarnpkg.com/string.prototype.trimend/-/string.prototype.trimend-1.0.3.tgz#a22bd53cca5c7cf44d7c9d5c732118873d6cd18b",
+        "integrity": "sha512-ayH0pB+uf0U28CtjlLvL7NaohvR1amUvVZk+y3DYb0Ey2PUV5zPkkKy9+U1ndVEIXO8hNg18eIv9Jntbii+dKw=="
+      },
+      {
+        "selector": "string.prototype.trimstart@^1.0.1",
+        "name": "string.prototype.trimstart",
+        "version": "1.0.3",
+        "resolved": "https://registry.yarnpkg.com/string.prototype.trimstart/-/string.prototype.trimstart-1.0.3.tgz#9b4cb590e123bb36564401d59824298de50fd5aa",
+        "integrity": "sha512-oBIBUy5lea5tt0ovtOFiEQaBkoBBkyJhZXzJYrSmDo5IUUqbOPvVezuRs/agBIdZ2p2Eo1FD6bD9USyBLfl3xg=="
+      },
+      {
+        "selector": "sax@~1.2.4",
+        "name": "sax",
+        "version": "1.2.4",
+        "resolved": "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9",
+        "integrity": "sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw=="
+      },
+      {
+        "selector": "stable@^0.1.8",
+        "name": "stable",
+        "version": "0.1.8",
+        "resolved": "https://registry.yarnpkg.com/stable/-/stable-0.1.8.tgz#836eb3c8382fe2936feaf544631017ce7d47a3cf",
+        "integrity": "sha512-ji9qxRnOVfcuLDySj9qzhGSEFVobyt1kIOSkj1qZzYLzq7Tos/oUUWvotUPQLlrsidqsK6tBH89Bc9kL5zHA6w=="
+      },
+      {
+        "selector": "unquote@~1.1.1",
+        "name": "unquote",
+        "version": "1.1.1",
+        "resolved": "https://registry.yarnpkg.com/unquote/-/unquote-1.1.1.tgz#8fded7324ec6e88a0ff8b905e7c098cdc086d544",
+        "integrity": "sha1-j97XMk7G6IoP+LkF58CYzcCG1UQ="
+      },
+      {
+        "selector": "util.promisify@~1.0.0",
+        "name": "util.promisify",
+        "version": "1.0.1",
+        "resolved": "https://registry.yarnpkg.com/util.promisify/-/util.promisify-1.0.1.tgz#6baf7774b80eeb0f7520d8b81d07982a59abbaee",
+        "integrity": "sha512-g9JpC/3He3bm38zsLupWryXHoEcS22YHthuPQSJdMy6KNrzIRzWqcsHzD/WUnqe45whVou4VIsPew37DoXWNrA=="
+      },
+      {
+        "selector": "es-abstract@^1.17.2",
+        "name": "es-abstract",
+        "version": "1.17.7",
+        "resolved": "https://registry.yarnpkg.com/es-abstract/-/es-abstract-1.17.7.tgz#a4de61b2f66989fc7421676c1cb9787573ace54c",
+        "integrity": "sha512-VBl/gnfcJ7OercKA9MVaegWsBHFjV492syMudcnQZvt/Dw8ezpcOHYZXa/J96O8vx+g4x65YKhxOwDUh63aS5g=="
+      },
+      {
+        "selector": "object.getownpropertydescriptors@^2.1.0",
+        "name": "object.getownpropertydescriptors",
+        "version": "2.1.1",
+        "resolved": "https://registry.yarnpkg.com/object.getownpropertydescriptors/-/object.getownpropertydescriptors-2.1.1.tgz#0dfda8d108074d9c563e80490c883b6661091544",
+        "integrity": "sha512-6DtXgZ/lIZ9hqx4GtZETobXLR/ZLaa0aqV0kzbn80Rf8Z2e/XFnhA0I7p07N2wH8bBBltr2xQPi6sbKWAY2Eng=="
+      },
+      {
+        "selector": "postcss-unique-selectors@^4.0.1",
+        "name": "postcss-unique-selectors",
+        "version": "4.0.1",
+        "resolved": "https://registry.yarnpkg.com/postcss-unique-selectors/-/postcss-unique-selectors-4.0.1.tgz#9446911f3289bfd64c6d680f073c03b1f9ee4bac",
+        "integrity": "sha512-+JanVaryLo9QwZjKrmJgkI4Fn8SBgRO6WXQBJi7KiAVPlmxikB5Jzc4EvXMT2H0/m0RjrVVm9rGNhZddm/8Spg=="
+      },
+      {
+        "selector": "is-resolvable@^1.0.0",
+        "name": "is-resolvable",
+        "version": "1.1.0",
+        "resolved": "https://registry.yarnpkg.com/is-resolvable/-/is-resolvable-1.1.0.tgz#fb18f87ce1feb925169c9a407c19318a3206ed88",
+        "integrity": "sha512-qgDYXFSR5WvEfuS5dMj6oTMEbrrSaM0CrFk2Yiq/gXnBvD9pMa2jGXxyhGLfvhZpuMZe18CJpFxAt3CRs42NMg=="
+      }
+    ]
+  },
+  "coreJavaScript": {
+    "archive": "monaco-editor-core-0.30.1",
+    "member": "package/dev/vs/editor/editor.main.js",
+    "sha256": "483348c3a73e86f201bc0df26ceee2c3ef610fe56c344993410fc093bac228a7"
+  },
+  "styles": [
+    {
+      "id": "vs/base/browser/ui/actionbar/actionbar",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/actionbar/actionbar.css",
+        "sha256": "5d1d96e5cc4a046eac3cfc9b27a6731690bc4342e19da20ff4b15c044e151c7c"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/aria/aria",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/aria/aria.css",
+        "sha256": "f684c3c5beccb27afc61a66c1dadc4d78900041f27879bff9186e992b4c2b5de"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/button/button",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/button/button.css",
+        "sha256": "8b2ce2b7d873f56ad8dc90b7fdfb68c06758b03cf3e34b1e991e4165b4c8dcdb"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/checkbox/checkbox",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/checkbox/checkbox.css",
+        "sha256": "4772d40bee7b19fef001c93e709169a21650c610d00651262f06f8c8eb289378"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/codicons/codicon/codicon",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/codicons/codicon/codicon.css",
+        "sha256": "290a8f8e6c8bb57ddc565bd288cd4338c43c043475cb16dc6ecb2824979d26d7"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/codicons/codicon/codicon-modifiers",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/codicons/codicon/codicon-modifiers.css",
+        "sha256": "556929c9e6bb20f4e2f55e2d4febc053fbf5eb164e4d36f43cadeadf29139592"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/contextview/contextview",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/contextview/contextview.css",
+        "sha256": "e631f5f7b76f46f668e169f4efd85d0e72a98f16383e108ebce4edd5bc0bbb1c"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/countBadge/countBadge",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/countBadge/countBadge.css",
+        "sha256": "d7d1c3b723f4954916ab8c7138e741f1ecd47f022c3fb727b13606bda80b600d"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/dropdown/dropdown",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/dropdown/dropdown.css",
+        "sha256": "781655865f06a3550b298f01bb48a4da3fd3faceb8f6b7ec5f5ecaf875abbeed"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/findinput/findInput",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/findinput/findInput.css",
+        "sha256": "12299785f7ad7f5fd5fca3dd39850756a9fa7499eb3d23c862930938e7ac8037"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/hover/hover",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/hover/hover.css",
+        "sha256": "205d557881324c7a6f18bfa92468d7987f55df1925d752b8a337558210713959"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/iconLabel/iconlabel",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/iconLabel/iconlabel.css",
+        "sha256": "9ac2adda231f1be8459af3bfc2854a216e7526c34ae89a15c150c0ae3f0f3692"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/inputbox/inputBox",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/inputbox/inputBox.css",
+        "sha256": "d52ce2226163043306fe5f953422e71013c9a0f5ebd86bd8a7e2f8ca9aa044d2"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/keybindingLabel/keybindingLabel",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/keybindingLabel/keybindingLabel.css",
+        "sha256": "23a01c4bb4b2e7a9baf99262cc69a47a3b1e5cf576bb4b3f081f5053f3fc1627"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/list/list",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/list/list.css",
+        "sha256": "5caecf03b1c3bdb3294e8dc21dddb7ce4b039d98284c9579c68c60ad97c15f49"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/mouseCursor/mouseCursor",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/mouseCursor/mouseCursor.css",
+        "sha256": "b623bcd77f4bc21e26236b2829e7009af9b4c68d93653728536bfd1d881a4c80"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/progressbar/progressbar",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/progressbar/progressbar.css",
+        "sha256": "ef85063811082752c80cdc3f6e94c96caf617547b2b518cdc0d63d4abf21b0d8"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/sash/sash",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/sash/sash.css",
+        "sha256": "84f0d9e7c8dddf8a8adcc020ada3c6e4a7cfa5b35b5c4807c43d3e6abcfbf921"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/scrollbar/media/scrollbars",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/scrollbar/media/scrollbars.css",
+        "sha256": "a5378d14e5a583315994b1ce0604633193040e8da242e7a5b149db2dfc171e91"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/splitview/splitview",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/splitview/splitview.css",
+        "sha256": "d8fe7c928757ccf073c81ca5457ddf01059851588c66f53f13261d0537f9332d"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/table/table",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/table/table.css",
+        "sha256": "8253507467c603341b6328009b53fdcd714b3cc84474e553434ae47971a53725"
+      }
+    },
+    {
+      "id": "vs/base/browser/ui/tree/media/tree",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/browser/ui/tree/media/tree.css",
+        "sha256": "736966f6c4165030ed019753cc4ea1aa0ae370b7849e61a25881908893cad5df"
+      }
+    },
+    {
+      "id": "vs/base/parts/quickinput/browser/media/quickInput",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/base/parts/quickinput/browser/media/quickInput.css",
+        "sha256": "912264ee182e99218f4c9c23ebcf86a264fabaac0c9c0229b60576a366916a97"
+      }
+    },
+    {
+      "id": "vs/editor/browser/controller/textAreaHandler",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/controller/textAreaHandler.css",
+        "sha256": "83ca140b943719f081b9d47e5ac5e6e3f9b04cbc400e3adae829d647ca3681dd"
+      }
+    },
+    {
+      "id": "vs/editor/browser/viewParts/currentLineHighlight/currentLineHighlight",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/viewParts/currentLineHighlight/currentLineHighlight.css",
+        "sha256": "0db1b60e7a96cf42f110c60dcd8df00359cbc933021cd26dfaa98d8ca8b37e80"
+      }
+    },
+    {
+      "id": "vs/editor/browser/viewParts/decorations/decorations",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/viewParts/decorations/decorations.css",
+        "sha256": "99476b89eceb85cec7ba421dda957dc22a925a103a3f205ea72b96c6fc8aa457"
+      }
+    },
+    {
+      "id": "vs/editor/browser/viewParts/glyphMargin/glyphMargin",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/viewParts/glyphMargin/glyphMargin.css",
+        "sha256": "a0f79b9999053592ca5041aca83e39528fba750b51a014d51131ad6c803e7120"
+      }
+    },
+    {
+      "id": "vs/editor/browser/viewParts/indentGuides/indentGuides",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/viewParts/indentGuides/indentGuides.css",
+        "sha256": "0661a84fa18a7e06cbdf0fc28d4f755185ea196262eef97d8fa518aef8d730ec"
+      }
+    },
+    {
+      "id": "vs/editor/browser/viewParts/lineNumbers/lineNumbers",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/viewParts/lineNumbers/lineNumbers.css",
+        "sha256": "79a36f8981b5ca61adcf765a940b0d8509a03fab3e6776c01dd5c66278ff0a04"
+      }
+    },
+    {
+      "id": "vs/editor/browser/viewParts/lines/viewLines",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/viewParts/lines/viewLines.css",
+        "sha256": "dbd41ddd3cd905392082d2d1e7e0974313b9e697f64cabe5e9cadad58e753401"
+      }
+    },
+    {
+      "id": "vs/editor/browser/viewParts/linesDecorations/linesDecorations",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/viewParts/linesDecorations/linesDecorations.css",
+        "sha256": "b62019a94802b8cf42358168f2d30bf2b8283a84257419403dd6bdf12410d05f"
+      }
+    },
+    {
+      "id": "vs/editor/browser/viewParts/marginDecorations/marginDecorations",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/viewParts/marginDecorations/marginDecorations.css",
+        "sha256": "df329935ff57eea3d2dba1d3a923e29d72175a3ae03e6fb4385c709bf514221c"
+      }
+    },
+    {
+      "id": "vs/editor/browser/viewParts/minimap/minimap",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/viewParts/minimap/minimap.css",
+        "sha256": "f8a94a5df2c82befd9bd7e68ccc54dfae35abefae141132a902628fc39ed2771"
+      }
+    },
+    {
+      "id": "vs/editor/browser/viewParts/overlayWidgets/overlayWidgets",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/viewParts/overlayWidgets/overlayWidgets.css",
+        "sha256": "f114f69d3668c20319bbf412e2078ff060698f93829dd4b749c5c74ee60a988b"
+      }
+    },
+    {
+      "id": "vs/editor/browser/viewParts/rulers/rulers",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/viewParts/rulers/rulers.css",
+        "sha256": "7f4020bdbfd26d8a60feb736bbf888cb76029d0e5c6d3e6cd62b72a4f0629d4a"
+      }
+    },
+    {
+      "id": "vs/editor/browser/viewParts/scrollDecoration/scrollDecoration",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/viewParts/scrollDecoration/scrollDecoration.css",
+        "sha256": "c5791a321e4f9b2aea29a2169c93c8f40ba293cdbea5ae487f36414bffcb1530"
+      }
+    },
+    {
+      "id": "vs/editor/browser/viewParts/selections/selections",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/viewParts/selections/selections.css",
+        "sha256": "c13de3bbadb6fb063366b634553f61741b6da4768fb3bf1ac193f6fb5fe5e983"
+      }
+    },
+    {
+      "id": "vs/editor/browser/viewParts/viewCursors/viewCursors",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/viewParts/viewCursors/viewCursors.css",
+        "sha256": "80ec5ff555a3a5aad06b154a39b6269c86cf4d02d252a227fc6e06f9257cf367"
+      }
+    },
+    {
+      "id": "vs/editor/browser/widget/media/diffEditor",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/widget/media/diffEditor.css",
+        "sha256": "0b3205897bdf8d823ff9be9abf6fef9472aecf2c11033932988f6232e0983420"
+      }
+    },
+    {
+      "id": "vs/editor/browser/widget/media/diffReview",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/widget/media/diffReview.css",
+        "sha256": "3c1b3354765e9a36cd42d3172f07e61e1ef92d670f9ebb5ca6d9d959d03cea12"
+      }
+    },
+    {
+      "id": "vs/editor/browser/widget/media/editor",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/browser/widget/media/editor.css",
+        "sha256": "c3a511718bae79ef59e219171e87ef2ccc83ff5a46ad1a444e0e062cb3fc87b4"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/anchorSelect/anchorSelect",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/anchorSelect/anchorSelect.css",
+        "sha256": "ecf6df8fc380837b9c7990c3c75fe0bef49985573fb2e129ef7beef02defb351"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/bracketMatching/bracketMatching",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/bracketMatching/bracketMatching.css",
+        "sha256": "e3be0a10c04166639c6f63215715ac5823156e262b5dea3059143f2c739859ad"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/codeAction/lightBulbWidget",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/codeAction/lightBulbWidget.css",
+        "sha256": "41ea0ce56ef86cc11b6e0cc8242ecbdd5a63c1e8d330f68311985912fbdf4f2a"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/codelens/codelensWidget",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/codelens/codelensWidget.css",
+        "sha256": "24f078ff30f51eba75077ebe48721be4395de74e8972e7e01a933ecd1d924bbb"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/colorPicker/colorPicker",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/colorPicker/colorPicker.css",
+        "sha256": "ad6aeac3b9f1bea426da22f11b679596cd981d032b3c806ef0928149013b42ee"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/dnd/dnd",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/dnd/dnd.css",
+        "sha256": "aec3494b4eb02f6e69d35c831069463f0240a90311f20c104dcba04013d45a52"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/find/findWidget",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/find/findWidget.css",
+        "sha256": "bda74e7996cfb90c5cf3fdc2d8c0ca2986ba9abfe471a207507aef5390a60e97"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/folding/folding",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/folding/folding.css",
+        "sha256": "db97b7ae1fcd3fba224d6b44f619aabedb66c443022fc794df18d24fef6857ca"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/gotoError/media/gotoErrorWidget",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/gotoError/media/gotoErrorWidget.css",
+        "sha256": "98df6bb0718bfdc28d001e1c89a73c507d614de058ab27c1e10cd327077fa4ed"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/gotoSymbol/link/goToDefinitionAtPosition",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/gotoSymbol/link/goToDefinitionAtPosition.css",
+        "sha256": "2857bdff50d749925ac7c544fa5810d3a2e02e460e31990115fe4806228c739e"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/gotoSymbol/peek/referencesWidget",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/gotoSymbol/peek/referencesWidget.css",
+        "sha256": "d446a7c5245aa93da72b3bd3a71007583ed6dbb7e497d38e2afcc4d2a5b34b1b"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/inlineCompletions/ghostText",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/inlineCompletions/ghostText.css",
+        "sha256": "3206ef1bd6e6503c4e8d6447e7b611f1f3fd5f68d0b327623d8b44da26148063"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/links/links",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/links/links.css",
+        "sha256": "a4aec41833a172509b9c086f339ec1e914fe92b3476910d005232c427c80acc8"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/message/messageController",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/message/messageController.css",
+        "sha256": "d9409fc8e307d3fcdb04a0d7aa22fdc698856b745b674ddde2c78a3c0730c7bd"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/parameterHints/parameterHints",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/parameterHints/parameterHints.css",
+        "sha256": "85f48cac1fe97d49bfc92ebfa93c46a8de74d77ed5a19f4f5004892d552b6772"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/peekView/media/peekViewWidget",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/peekView/media/peekViewWidget.css",
+        "sha256": "ea9d39370936ceeb7bbac2d7d60e7bee87bbeb8f0e449bbb2bff080b40e645e1"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/rename/renameInputField",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/rename/renameInputField.css",
+        "sha256": "5f88664636b34e9a43851c5b2d82380547a722543730deeb344c059332fed0cb"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/snippet/snippetSession",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/snippet/snippetSession.css",
+        "sha256": "3da7860e44a70cd31209ec2cbb574da365196a1df14cdaec966cf7e694773ffa"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/suggest/media/suggest",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/suggest/media/suggest.css",
+        "sha256": "3ba64ce99256cd2839fee65f2df07105d326826e35f586c2f04b6108b339d1c9"
+      }
+    },
+    {
+      "id": "vs/editor/contrib/zoneWidget/zoneWidget",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/contrib/zoneWidget/zoneWidget.css",
+        "sha256": "b1f9346f00e9767f3caf6deac9fb75e9274671f4ceaaa91c3a34609b152d55de"
+      }
+    },
+    {
+      "id": "vs/editor/standalone/browser/accessibilityHelp/accessibilityHelp",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/standalone/browser/accessibilityHelp/accessibilityHelp.css",
+        "sha256": "4b538ad4395a6839692df84dbf80886ab5635bd91580dc8f35f5067d6fdec260"
+      }
+    },
+    {
+      "id": "vs/editor/standalone/browser/iPadShowKeyboard/iPadShowKeyboard",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/standalone/browser/iPadShowKeyboard/iPadShowKeyboard.css",
+        "sha256": "996adfd5912a3984c7a90b5b712bc7df1077065e7ee605407acc99d420cc373f"
+      }
+    },
+    {
+      "id": "vs/editor/standalone/browser/inspectTokens/inspectTokens",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/standalone/browser/inspectTokens/inspectTokens.css",
+        "sha256": "5bcc093096db1c180dc4ed94e6f17d890c6a5f391619b3eca571e7101ce65a4e"
+      }
+    },
+    {
+      "id": "vs/editor/standalone/browser/quickInput/standaloneQuickInput",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/standalone/browser/quickInput/standaloneQuickInput.css",
+        "sha256": "217a2e26f107ae2a4bb16e01e98e52e79885b858406878af316302c48565939e"
+      }
+    },
+    {
+      "id": "vs/editor/standalone/browser/standalone-tokens",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/editor/standalone/browser/standalone-tokens.css",
+        "sha256": "efb287c6e9749dcdb84b45872cf82cc61be10e4521f690d8fa4ddfc2301414e5"
+      }
+    },
+    {
+      "id": "vs/platform/actions/browser/menuEntryActionViewItem",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/platform/actions/browser/menuEntryActionViewItem.css",
+        "sha256": "bdf2038bc11f092916912cbfe77768263ff08f638fe53dca6ec6b5771cad9db7"
+      }
+    },
+    {
+      "id": "vs/platform/contextview/browser/contextMenuHandler",
+      "prepared": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/esm/vs/platform/contextview/browser/contextMenuHandler.css",
+        "sha256": "8be94b314cdf88f3d3c27b5d303bb272dece1dea73049d4b36ce6a9fa667db99"
+      }
+    }
+  ],
+  "fonts": [
+    "vs/base/browser/ui/codicons/codicon/codicon.ttf"
+  ],
+  "normalizedSeparators": 70,
+  "development": {
+    "archive": "monaco-editor-core-0.30.1",
+    "member": "package/dev/vs/editor/editor.main.css",
+    "sha256": "b0d48b31b955b60d7531d0aeceaa281d0e8fb5679b6a8fed98ed00dfc71202f3"
+  },
+  "minified": {
+    "archive": "monaco-editor-core-0.30.1",
+    "member": "package/min/vs/editor/editor.main.css",
+    "sha256": "6240d544d93236ac40dd3bd1ee49afbd27cb43e056c24c04a0c2cb37f1fd4587"
+  },
+  "editor": {
+    "archive": "monaco-editor-0.30.1",
+    "member": "package/min/vs/editor/editor.main.css",
+    "sha256": "6240d544d93236ac40dd3bd1ee49afbd27cb43e056c24c04a0c2cb37f1fd4587"
+  },
+  "target": {
+    "path": "docs/assets/js/vs/editor/editor.main.css",
+    "sha256": "165d5ada907097527448677d0d0f0213578fe5cfaffcb245d7229862e849783a",
+    "crlf": 5
+  }
+}

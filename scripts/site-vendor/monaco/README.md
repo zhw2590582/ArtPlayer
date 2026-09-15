@@ -277,3 +277,51 @@ foreign modules, missing/repeated/already-injected dependencies and false entry
 strings. Browser regressions exercise real diagnostics/formatting and all pinned
 tokenizer cases. This does not close original core TS compilation, CSS reproduction,
 remaining embedded-origin review, or the broader SITE-07 release requirements.
+
+## CSS sources and historical compression
+
+`reproduce-css.ts` separately covers all 68 core stylesheets. The AMD string table
+does not give their assembly order: `coreStyleOrder` follows actual registrations.
+81 fixed VS Code Git members include styles, three inline images, the codicon font,
+original transport/build recipes, package/lock and license. Original `transportCSS`
+is extracted syntactically from the verified recipe and executed with reads limited
+to verified inputs. It removes the font query, normalizes URL quotes and embeds the
+images. Every prepared result equals the corresponding core ESM archive member;
+the copied font also matches. This harness does not run the full VS Code build.
+
+The original CSS plugin rewrites paths and joins 70 separators with CRLF. The npm
+development CSS is LF-only. That publication normalization is explicit and counted;
+its exact upstream pipeline stage has not been established. After the fixed release
+header and this documented transformation, the whole 114,942-byte development file
+matches. This is source/output equivalence with an observed newline adaptation,
+not an assertion that the original publishing command was reproduced unchanged.
+
+Historical cssnano 4.1.11 and PostCSS 7.0.35 reproduce the complete 72,052-byte
+minified file. Each run creates a fresh ignored tool directory, writes the fixed
+historical lock, installs with Yarn 1.22.22 `--frozen-lockfile --ignore-scripts`,
+and checks that the lock remains identical. The recorded closure has 153 selectors
+and 143 package versions, all with registry integrity. `--fetch` downloads/verifies
+source archives and permits registry access; the default uses cached archives and
+an offline frozen install. No project dependency or root lock changes are needed.
+
+The private manifest explicitly selects historical Browserslist defaults to prevent
+the parent project's `last 1 Chrome version` target leaking into the archived build.
+That leakage changes `transparent` to `initial`. Ambient BROWSERSLIST/config/env
+overrides are rejected. Do not update historical caniuse data to silence its age
+warning: these inputs exist only to reproduce the pinned asset. VS Code's archive
+also obeys `LICENSE.txt eol=crlf`; only that member is converted to LF for its Git
+blob check, while its frozen license bytes stay intact.
+
+The site's existing 72,057-byte CSS differs solely by five CRLF header newlines;
+the verifier requires that exact transformation and leaves the asset unchanged.
+
+```sh
+yarn verify:monaco-css --fetch
+yarn verify:monaco-css
+yarn test:browser test/browser/editor-styles.spec.js --workers=1
+```
+
+Browser checks cover light/dark theme colors, layout and resize, find-widget bounds,
+successful CSS/font requests, loaded codicon glyphs and model disposal in all three
+engines. The pinned light theme is intentionally #fffffe. Full original core TS
+compilation and further embedded-origin review remain separate open work.
