@@ -105,7 +105,20 @@ export default class Scheduler {
 
   schedule() {
     const owner = this.owner
-    if (!this.running || this.closed || this.fault || owner.art.isDestroy || owner.isStop || this.frame !== null)
+    if (!this.running || this.closed || this.fault || owner.art.isDestroy || owner.isStop)
+      return
+    try {
+      // The public playing getter requires currentTime > 0; native play can start at zero.
+      const video = owner.art.video
+      const started = owner.art.playing || (video?.paused === false && !video.ended && video.readyState > 2)
+      if (started && !owner.isHide)
+        this.sampling.begin(owner)
+    }
+    catch (error) {
+      this.fail(error)
+      return
+    }
+    if (this.frame !== null)
       return
     this.frame = window.requestAnimationFrame(() => {
       this.frame = null

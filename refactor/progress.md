@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-DANMUKU-START-01 首帧漏显修复完成
+
+已解释原安装 WebKit 的首个 readys 在CPU间隔之后才运行的漏显：私有采样窗口
+原本没有播放起点。现于实际播放开始、第一帧前建立起点，补齐第0秒的原生播放
+边界；公开 readys/playing 与回调调度规则保持。原失败轨迹及红绿均已归档。
+278项弹幕测试、严格类型、安装main/legacy各61项通过；最终源码/安装三浏览器
+时序各24项通过。最终候选核心的真实Mask负载3项均120/120显示；中间版本
+三个核心×三个引擎9项通过的范围单独注明。见[记录](changes/2026-09-16-PKG-DANMUKU-START-01-first-sample.md)、
+[证据](baselines/danmuku-start-validation.json)。
+DANMUKU-INSTALLED-GAP-01 resolved；完整CI原13失败报告保留，其余风险没有关闭。
+当前220 done、20 doing、43 todo，共283项。下一步继续包验收与版本准备；
+实施后等待用户指导复盘，不推送或发布。
+
 ## PKG-TOOL-THUMB-04 Thumbnail 策略与源码迁移完成
 
 用户批准已落实：默认保留 npm 3.5.31，显式 workspace-4.4 保留未发布工作区行为。

@@ -196,7 +196,16 @@ existing track algorithm and geometry fields until separately reviewed.
 
 RAF sampling and visible lifetime maintenance continue while `beforeVisible` or
 the Worker is pending. Public `readys` remains the instantaneous +/- 0.1 second
-query. The sampling window also recovers rows crossed between consecutive
+query. A playing, visible scheduler seeds its first observation before requesting
+RAF, so a delayed first callback cannot discard the initial playback interval.
+This records time and existing waiting identities only; it never calls the public
+readys getter or dispatches beforeVisible/visible outside RAF. Repeated play/playing
+or start calls retain that anchor until a lifecycle boundary clears it. Native
+unpaused, non-ended media with current data can seed time zero even though the
+unchanged public playing getter requires currentTime > 0. Dispatch still waits
+for the existing playing condition; paused, hidden and seeking periods do not
+become catch-up intervals.
+The sampling window also recovers rows crossed between consecutive
 forward media samples, but only if they were already waiting at the earlier
 sample and were not already selected there. It does not replay newly appended
 past rows or retry a false callback merely because time crossed that row.

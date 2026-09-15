@@ -9,6 +9,11 @@ export default class SamplingWindow {
   private document: Document | undefined
   private visibility = () => this.clear()
 
+  begin(owner: Danmuku) {
+    if (this.time === undefined)
+      this.capture(owner, [], owner.art.currentTime)
+  }
+
   capture(owner: Danmuku, rows: DanmuItem[], time: number) {
     const doc = owner.$player.ownerDocument
     if (doc !== this.document) {

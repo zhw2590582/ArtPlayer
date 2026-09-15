@@ -3642,7 +3642,8 @@
       ],
       "dependsOn": [
         "PKG-DANMUKU-07",
-        "CORE-22"
+        "CORE-22",
+        "PKG-DANMUKU-START-01"
       ],
       "status": "doing",
       "risk": "H",
@@ -3657,7 +3658,9 @@
         "changes/2026-09-14-PKG-DANMUKU-08-combined-load.md",
         "baselines/danmuku-combined-load-validation.json",
         "changes/2026-09-15-CI-01-installed-webkit.md",
-        "baselines/ci-installed-webkit-validation.json"
+        "baselines/ci-installed-webkit-validation.json",
+        "changes/2026-09-16-PKG-DANMUKU-START-01-first-sample.md",
+        "baselines/danmuku-start-validation.json"
       ]
     },
     {
@@ -3670,7 +3673,8 @@
       "dependsOn": [
         "PKG-DANMUKU-08",
         "ENG-07",
-        "PKG-DANMUKU-MASK-LOAD-01"
+        "PKG-DANMUKU-MASK-LOAD-01",
+        "PKG-DANMUKU-START-01"
       ],
       "status": "todo",
       "risk": "H",
@@ -6103,6 +6107,26 @@
         "changes/2026-09-15-DOC-REVIEW-01-user-guidance.md",
         "release-reviews.md",
         "ai-workflow.md"
+      ]
+    },
+    {
+      "id": "PKG-DANMUKU-START-01",
+      "phase": "5 包迁移：artplayer-plugin-danmuku",
+      "title": "修复首帧延迟前丢失的弹幕采样区间",
+      "scope": [
+        "artplayer-plugin-danmuku"
+      ],
+      "dependsOn": [
+        "PKG-DANMUKU-MASK-LOAD-01"
+      ],
+      "status": "done",
+      "risk": "H",
+      "deliverable": "播放起始采样修复、受控红绿及源码/安装产物真实浏览器证据",
+      "acceptance": "解释并修复安装 WebKit 首次 readys 在 CPU 间隔后才运行的漏显；保持公开查询、串行回调和 seek/暂停/隐藏取消边界",
+      "evidence": [
+        "baselines/ci-installed-webkit-validation.json",
+        "changes/2026-09-16-PKG-DANMUKU-START-01-first-sample.md",
+        "baselines/danmuku-start-validation.json"
       ]
     }
   ]

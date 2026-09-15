@@ -19,7 +19,7 @@ test.beforeAll(async () => {
 })
 
 for (const implementation of ['published', 'candidate']) {
-  for (const scenario of ['main-thread-gap', 'async-visibility-gap']) {
+  for (const scenario of ['main-thread-gap', 'initial-frame-gap', 'initial-zero-frame-gap', 'async-visibility-gap']) {
     test(`${implementation}: native ${scenario} records actual frame and eligibility gaps`, async ({ page }, testInfo) => {
       await page.goto('/test/player.html?core=candidate')
       const code = implementations.get(implementation)
@@ -29,6 +29,14 @@ for (const implementation of ['published', 'candidate']) {
       await page.click('#play')
       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)
       await page.click('#pause')
+      if (scenario === 'initial-zero-frame-gap') {
+        await page.evaluate(async () => {
+          const art = window.art
+          const seeked = new Promise(resolve => art.video.addEventListener('seeked', resolve, { once: true }))
+          art.currentTime = 0
+          await seeked
+        })
+      }
       await page.evaluate(async (scenario) => {
         const art = window.art
         const evidence = window.timingEvidence = { frames: [], eligibility: [], visible: [], callbacks: [], block: null }
@@ -68,6 +76,15 @@ for (const implementation of ['published', 'candidate']) {
           return ready
         } })
         await plugin.load(rows)
+        if (scenario.startsWith('initial-')) {
+          art.once('artplayerPluginDanmuku:start', () => {
+            const start = performance.now()
+            const before = art.currentTime
+            // Hold the real start listener after scheduling but before the first native RAF.
+            while (performance.now() - start < 1000) { /* Controlled CPU load. */ }
+            evidence.block = { start, end: performance.now(), before, after: art.currentTime }
+          })
+        }
         let blocked = false
         function observe(wall) {
           if (art.playing) {
@@ -101,8 +118,8 @@ for (const implementation of ['published', 'candidate']) {
       expect(observation.frames.length).toBeGreaterThan(2)
       expect(observation.eligibility.length).toBeGreaterThan(2)
       expect(observation.visible.some(row => row.id === 'sentinel')).toBe(true)
-      if (scenario === 'main-thread-gap')
-        expect(observation.block.end - observation.block.start).toBeGreaterThanOrEqual(800)
+      if (scenario !== 'async-visibility-gap')
+        expect(observation.block.end - observation.block.start).toBeGreaterThanOrEqual(scenario.startsWith('initial-') ? 1000 : 800)
       else
         expect(observation.callbacks.find(row => row.id === 'first').end - observation.callbacks.find(row => row.id === 'first').start).toBeGreaterThanOrEqual(550)
       if (scenario === 'async-visibility-gap') {
@@ -117,6 +134,8 @@ for (const implementation of ['published', 'candidate']) {
         expect(observation.missing).toEqual([])
         expect(observation.visible.map(row => row.id)).toEqual(['first', 'middle', 'sentinel'])
       }
+      if (scenario.startsWith('initial-'))
+        expect(observation.eligibility[0].wall).toBeGreaterThanOrEqual(observation.block.end)
       await page.evaluate(() => window.art.destroy())
     })
   }

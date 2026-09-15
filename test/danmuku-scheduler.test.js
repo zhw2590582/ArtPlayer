@@ -103,6 +103,40 @@ test(`${prefix}: non-overlap-disabled placement does not queue a Worker round tr
   assert.deepEqual([...owner.queue].map(row => row.$ref.offsetTop), [owner.marginTop, owner.marginTop + 20])
 })
 
+test(`${prefix}: playback anchors eligibility before a delayed first animation frame`, async (t) => {
+  const { env, plugin, owner } = await fixture({ antiOverlap: false })
+  t.after(() => env.destroy())
+  await plugin.load([{ text: 'first', time: 10.2, mode: 1 }, { text: 'middle', time: 10.5, mode: 1 }])
+  env.art.playing = true
+  env.art.emit('video:play')
+  assert.equal(output(env, 'visible').length, 0, 'Starting must not dispatch outside RAF')
+  env.tick(800)
+  env.art.currentTime = 10.8
+  // A repeated playing event must not move an existing start anchor forward.
+  env.art.emit('video:playing')
+  assert.equal(owner.readys.length, 0, 'The public getter stays a point-in-time query')
+  await env.frame()
+  await env.flush()
+  assert.deepEqual(output(env, 'visible').map(event => event.args[0].text), ['first', 'middle'])
+})
+
+test(`${prefix}: native playback at zero anchors before the legacy playing getter becomes true`, async (t) => {
+  const { env, plugin, owner } = await fixture({ antiOverlap: false })
+  t.after(() => env.destroy())
+  env.art.currentTime = 0
+  env.art.video = { paused: false, ended: false, readyState: 4, seeking: false }
+  await plugin.load([{ text: 'first', time: 0.2, mode: 1 }, { text: 'middle', time: 0.5, mode: 1 }])
+  env.art.emit('video:play')
+  assert.equal(output(env, 'visible').length, 0)
+  env.tick(800)
+  env.art.currentTime = 0.8
+  env.art.playing = true
+  assert.equal(owner.readys.length, 0)
+  await env.frame()
+  await env.flush()
+  assert.deepEqual(output(env, 'visible').map(event => event.args[0].text), ['first', 'middle'])
+})
+
 for (const boundary of ['continuous', 'seek', 'stop', 'hide', 'visibility']) {
   test(`${prefix}: CPU gap recovery respects ${boundary} boundaries and keeps public readys unchanged`, async (t) => {
     const { env, plugin, owner } = await fixture({}, { automatic: true })

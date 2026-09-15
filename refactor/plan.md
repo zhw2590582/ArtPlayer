@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 282 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 283 项，范围 22 个包及工作区/示例。
 
-状态：todo 43 / doing 20 / blocked 0 / done 219 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 43 / doing 20 / blocked 0 / done 220 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -22,7 +22,7 @@
 | artplayer-plugin-auto-thumbnail | 1.1.0 | PKG-AUTO-THUMB-01, PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-04, PKG-AUTO-THUMB-05, PKG-AUTO-THUMB-06, PKG-AUTO-THUMB-07, PKG-AUTO-THUMB-08, PKG-AUTO-THUMB-09, PKG-AUTO-THUMB-10, PKG-AUTO-THUMB-11, PKG-AUTO-THUMB-12, PKG-AUTO-THUMB-13 |
 | artplayer-plugin-chapter | 1.1.0 | PILOT-01, PKG-CHAPTER-01, PKG-CHAPTER-02, PKG-CHAPTER-03, PKG-CHAPTER-04, PKG-CHAPTER-05, PKG-CHAPTER-06, PKG-CHAPTER-HOVER-01 |
 | artplayer-plugin-chromecast | 1.1.0 | PKG-CAST-01, PKG-CAST-02, PKG-CAST-03, PKG-CAST-04, PKG-CAST-05, PKG-CAST-06 |
-| artplayer-plugin-danmuku | 5.3.0 | PKG-DANMUKU-01, PKG-DANMUKU-02, PKG-DANMUKU-03, PKG-DANMUKU-04, PKG-DANMUKU-05, PKG-DANMUKU-06, PKG-DANMUKU-07, PKG-DANMUKU-08, PKG-DANMUKU-09, SITE-DANMUKU-01, PKG-DANMUKU-10, PKG-DANMUKU-11, PKG-DANMUKU-12, PKG-DANMUKU-MASK-LOAD-01 |
+| artplayer-plugin-danmuku | 5.3.0 | PKG-DANMUKU-01, PKG-DANMUKU-02, PKG-DANMUKU-03, PKG-DANMUKU-04, PKG-DANMUKU-05, PKG-DANMUKU-06, PKG-DANMUKU-07, PKG-DANMUKU-08, PKG-DANMUKU-09, SITE-DANMUKU-01, PKG-DANMUKU-10, PKG-DANMUKU-11, PKG-DANMUKU-12, PKG-DANMUKU-MASK-LOAD-01, PKG-DANMUKU-START-01 |
 | artplayer-plugin-danmuku-mask | 1.1.0 | PKG-MASK-01, PKG-MASK-02, PKG-MASK-03, PKG-MASK-04, PKG-MASK-05, PKG-MASK-06, ENG-LINT-01, PKG-DANMUKU-MASK-LOAD-01 |
 | artplayer-plugin-dash-control | 1.1.0 | PKG-DASH-01, PKG-DASH-02, PKG-DASH-03, PKG-DASH-04, PKG-DASH-SEEK-01, PKG-DASH-MENU-01, PKG-DASH-05, PKG-DASH-06, SITE-DASH-01, PKG-DASH-CLEANUP-01 |
 | artplayer-plugin-document-pip | 1.1.0 | PKG-DPIP-01, PKG-DPIP-02, PKG-DPIP-03, PKG-DPIP-04, PKG-DPIP-05, PKG-DPIP-06 |
@@ -345,11 +345,12 @@
 | PKG-DANMUKU-05 | artplayer-plugin-danmuku<br>整理 DOM 渲染、设置、热力图与 worker | PKG-DANMUKU-04, CORE-14, CORE-18 | renderer/setting/heatmap/worker 职责及资源归属 | mount/icons/设置和 worker 协议保持，销毁无后台工作 | H | done |
 | PKG-DANMUKU-06 | artplayer-plugin-danmuku<br>迁移 TS 与公开声明 | PKG-DANMUKU-05, ENG-04, ENG-06 | 自有模块、worker 消息、option/item/result 类型 | 旧参数、扩展字段和事件消费通过，vendored 边界清楚 | H | done |
 | PKG-DANMUKU-07 | artplayer-plugin-danmuku<br>弹幕能力稳定性验收 | PKG-DANMUKU-06, PKG-DANMUKU-10, PKG-DANMUKU-11, PKG-DANMUKU-12 | 负载/渲染/资源对比及 mask 可依赖的稳定边界 | 在试点核心中旧插件 API 与关键帧路径通过 | H | done |
-| PKG-DANMUKU-08 | artplayer-plugin-danmuku<br>完成新旧核心与组合验收 | PKG-DANMUKU-07, CORE-22 | 最终核心/旧核心、mask/fullscreen/PiP 组合报告 | 性能无未解释退化，反复装卸无累计资源 | H | doing |
-| PKG-DANMUKU-09 | artplayer-plugin-danmuku<br>完成分发、示例与文档 | PKG-DANMUKU-08, ENG-07, PKG-DANMUKU-MASK-LOAD-01 | danmuku.js、README、声明、worker 与产物 | tarball 和静态 icons 等旧调用通过，有独立回退版本 | H | todo |
+| PKG-DANMUKU-08 | artplayer-plugin-danmuku<br>完成新旧核心与组合验收 | PKG-DANMUKU-07, CORE-22, PKG-DANMUKU-START-01 | 最终核心/旧核心、mask/fullscreen/PiP 组合报告 | 性能无未解释退化，反复装卸无累计资源 | H | doing |
+| PKG-DANMUKU-09 | artplayer-plugin-danmuku<br>完成分发、示例与文档 | PKG-DANMUKU-08, ENG-07, PKG-DANMUKU-MASK-LOAD-01, PKG-DANMUKU-START-01 | danmuku.js、README、声明、worker 与产物 | tarball 和静态 icons 等旧调用通过，有独立回退版本 | H | todo |
 | PKG-DANMUKU-10 | artplayer-plugin-danmuku<br>修复 issue958 密集热力图过高与曲线裁平 | PKG-DANMUKU-05 | 自动密度缩放与曲线边界、历史自定义坐标兼容及真实浏览器红绿证据 | 16000条三种分布在两核心三引擎和source/main/legacy不遮挡；显式轴和自定义points保持旧解释，有单独commit | M | done |
 | PKG-DANMUKU-11 | artplayer-plugin-danmuku<br>修复 Worker 隐藏等待吞掉可见寿命 | PKG-DANMUKU-06 | 成功放置时的可见计时与延迟回复回归 | 真实 Worker 延迟下完整显示寿命；保留暂停/回收/取消和公开契约 | M | done |
 | PKG-DANMUKU-12 | artplayer-plugin-danmuku<br>保持异步放置期间的原生帧采样与寿命维护 | PKG-DANMUKU-11 | 每帧采样与串行dispatcher、代际buffer及回归 | 异步等待不丢已到时采样、不延迟既有寿命维护；保留顺序、取消与公开readys窗口 | H | done |
+| PKG-DANMUKU-START-01 | artplayer-plugin-danmuku<br>修复首帧延迟前丢失的弹幕采样区间 | PKG-DANMUKU-MASK-LOAD-01 | 播放起始采样修复、受控红绿及源码/安装产物真实浏览器证据 | 解释并修复安装 WebKit 首次 readys 在 CPU 间隔后才运行的漏显；保持公开查询、串行回调和 seek/暂停/隐藏取消边界 | H | done |
 
 ## 5 包迁移：artplayer-proxy-canvas
 
@@ -650,7 +651,7 @@
 - PKG-DANMUKU-05: [记录](changes/2026-09-13-PKG-DANMUKU-05-resources.md) [记录](baselines/danmuku-resources-validation.json)
 - PKG-DANMUKU-06: [记录](changes/2026-09-13-PKG-DANMUKU-06-types.md) [记录](baselines/danmuku-types-validation.json)
 - PKG-DANMUKU-07: [记录](changes/2026-09-13-PKG-DANMUKU-07-stability.md) [记录](baselines/danmuku-stability-validation.json) [记录](danmuku-stability.md)
-- PKG-DANMUKU-08: [记录](changes/2026-09-14-PKG-DANMUKU-08-native-combinations.md) [记录](baselines/danmuku-combination-checkpoint.json) [记录](changes/2026-09-14-PKG-DANMUKU-08-fullscreen-lifetimes.md) [记录](baselines/danmuku-fullscreen-validation.json) [记录](baselines/danmuku-old-core-load-validation.json) [记录](changes/2026-09-14-PKG-DANMUKU-08-combined-load.md) [记录](baselines/danmuku-combined-load-validation.json) [记录](changes/2026-09-15-CI-01-installed-webkit.md) [记录](baselines/ci-installed-webkit-validation.json)
+- PKG-DANMUKU-08: [记录](changes/2026-09-14-PKG-DANMUKU-08-native-combinations.md) [记录](baselines/danmuku-combination-checkpoint.json) [记录](changes/2026-09-14-PKG-DANMUKU-08-fullscreen-lifetimes.md) [记录](baselines/danmuku-fullscreen-validation.json) [记录](baselines/danmuku-old-core-load-validation.json) [记录](changes/2026-09-14-PKG-DANMUKU-08-combined-load.md) [记录](baselines/danmuku-combined-load-validation.json) [记录](changes/2026-09-15-CI-01-installed-webkit.md) [记录](baselines/ci-installed-webkit-validation.json) [记录](changes/2026-09-16-PKG-DANMUKU-START-01-first-sample.md) [记录](baselines/danmuku-start-validation.json)
 - PKG-CANVAS-01: [记录](changes/2026-09-12-PKG-CANVAS-01-contract.md) [记录](baselines/canvas-contract.md) [记录](baselines/canvas-release.json) [记录](canvas-validation.md) [记录](baselines/canvas-contract-validation.json)
 - PKG-CANVAS-02: [记录](changes/2026-09-12-PKG-CANVAS-02-tests.md) [记录](baselines/canvas-behavior-validation.json) [记录](canvas-validation.md)
 - PKG-CANVAS-03: [记录](changes/2026-09-12-PKG-CANVAS-03-lifecycle.md) [记录](baselines/canvas-lifecycle-validation.json) [记录](canvas-validation.md)
@@ -740,3 +741,4 @@
 - SITE-EDITOR-VAST-01: [记录](changes/2026-09-15-SITE-EDITOR-VAST-01-consumer.md) [记录](baselines/editor-vast-consumer-validation.json) [记录](baselines/ci-source-firefox-validation.json) [记录](vast-type-decision.md)
 - CI-JASSUB-SOURCE-01: [记录](changes/2026-09-15-CI-JASSUB-SOURCE-01-native-inputs.md) [记录](baselines/jassub-source-selection-validation.json)
 - DOC-REVIEW-01: [记录](changes/2026-09-15-DOC-REVIEW-01-user-guidance.md) [记录](release-reviews.md) [记录](ai-workflow.md)
+- PKG-DANMUKU-START-01: [记录](baselines/ci-installed-webkit-validation.json) [记录](changes/2026-09-16-PKG-DANMUKU-START-01-first-sample.md) [记录](baselines/danmuku-start-validation.json)

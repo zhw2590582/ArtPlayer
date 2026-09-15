@@ -648,6 +648,10 @@ var artplayerPluginDanmuku = (function() {
       this.waiting = /* @__PURE__ */ new Set();
       this.visibility = () => this.clear();
     }
+    begin(owner) {
+      if (this.time === void 0)
+        this.capture(owner, [], owner.art.currentTime);
+    }
     capture(owner, rows, time) {
       const doc = owner.$player.ownerDocument;
       if (doc !== this.document) {
@@ -785,7 +789,18 @@ var artplayerPluginDanmuku = (function() {
     }
     schedule() {
       const owner = this.owner;
-      if (!this.running || this.closed || this.fault || owner.art.isDestroy || owner.isStop || this.frame !== null)
+      if (!this.running || this.closed || this.fault || owner.art.isDestroy || owner.isStop)
+        return;
+      try {
+        const video = owner.art.video;
+        const started = owner.art.playing || video?.paused === false && !video.ended && video.readyState > 2;
+        if (started && !owner.isHide)
+          this.sampling.begin(owner);
+      } catch (error) {
+        this.fail(error);
+        return;
+      }
+      if (this.frame !== null)
         return;
       this.frame = window.requestAnimationFrame(() => {
         this.frame = null;

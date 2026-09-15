@@ -6853,18 +6853,26 @@
       "id": "DANMUKU-INSTALLED-GAP-01",
       "title": "Windows WebKit installed Danmuku candidate misses two rows after a native main-thread gap",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
-        "PKG-DANMUKU-08"
+        "PKG-DANMUKU-08",
+        "PKG-DANMUKU-START-01"
       ],
       "evidence": [
         "test/browser/danmuku-timing-diagnostic.spec.js",
         "refactor/changes/2026-09-15-CI-01-installed-webkit.md",
-        "refactor/baselines/ci-installed-webkit-validation.json"
+        "refactor/baselines/ci-installed-webkit-validation.json",
+        "refactor/changes/2026-09-16-PKG-DANMUKU-START-01-first-sample.md",
+        "refactor/baselines/danmuku-start-validation.json"
       ],
       "compatibleResolution": "Determine why the current installed candidate misses the first eligibility interval; preserve old API and timestamp semantics and add a deterministic source/installed regression. Do not treat the candidate failure as expected or lower assertions.",
       "closureCriteria": "Explain captured800ms CPU gap, first empty readys sample and unprocessed first/middle rows; validate fix across source, installed formats and affected browsers while preserving existing sampling, seek, worker, lifecycle and load regressions.",
-      "workspaceState": "At bb2c12df3 with run-cRduve, first/middle remain wait and never enter beforeVisible; sentinel alone is visible. Chromium and Firefox complete runs pass this case. Root cause unproven and original13-failure WebKit report retained."
+      "workspaceState": "Final source and installed timing 24/24 each, 278 source tests and installed main/legacy 61/61 each pass. Final candidate-core model load 120/120 rows on all three engines; earlier pre-zero-guard nine-core/engine combinations are labeled intermediate evidence. Original full installed CI failures remain recorded; no physical-device or full-matrix completion claimed.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-16-PKG-DANMUKU-START-01-first-sample.md",
+        "refactor/baselines/danmuku-start-validation.json"
+      ],
+      "resolutionRationale": "The first sampling anchor was created only inside RAF. Reproduced in controlled first-frame and time-zero tests plus real Chromium/WebKit start-listener CPU stalls. Private playback-start anchoring preserves public queries and invalidation. Final source/installed three-engine timing, both installed runtime formats, scheduler regression and actual model load pass."
     }
   ]
 }
