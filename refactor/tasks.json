@@ -5045,7 +5045,10 @@
         "baselines/auto-thumbnail-candidate-refresh-check.json",
         "changes/2026-09-16-REL-02-thumbnail-refresh.md",
         "baselines/thumbnail-candidate-refresh.json",
-        "baselines/thumbnail-candidate-refresh-check.json"
+        "baselines/thumbnail-candidate-refresh-check.json",
+        "changes/2026-09-16-REL-02-dash-refresh.md",
+        "baselines/dash-candidate-refresh.json",
+        "baselines/dash-candidate-refresh-check.json"
       ]
     },
     {

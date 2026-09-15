@@ -147,6 +147,11 @@ licenses须覆盖所有适用vendor、SDK/外部集成及直接运行依赖ID，
 候选和收集材料，不能借分批删除项目整体要求。未来如正式拆分独立批次复盘，须按
 release-reviews.md新建任务和明确范围，并更新本台账模型及反向测试，不能删共享门槛。
 
+2026-09-16：DASH维护说明明确同步getter/formatter与异步刷新边界后，已从b029062ac
+重新构建2.0.0、隔离安装并更新候选与build封套。只有ARCHITECTURE成员变化，五组
+类型消费及全部10个归档成员核对通过。见[候选刷新](baselines/dash-candidate-refresh.json)
+及[登记复核](baselines/dash-candidate-refresh-check.json)；旧浏览器报告未重绑到新候选。
+
 ## 维护地图
 
 - `scripts/release-ledger-model.mjs`：纯门槛、范围、依赖闭包和阻断计算。

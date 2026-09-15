@@ -393,16 +393,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-dash-control.tgz",
+        "path": "refactor/.cache/dash-package-types-p4TuSa/artplayer-plugin-dash-control.tgz",
         "version": "2.0.0",
-        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
-        "inputFingerprint": "3130f6e7c49373a87b094582bcc9affbdf799c562ec688137bb96f3d7ed42157",
-        "integrity": "sha512-01z5sdzWx7zNFiUITEelZ8f9v+rSGiYH3HkxnTN0qQxQY12la0fJ1kK5YIFRzoeWcj4cakygSsvMuPqjQ6OFKQ=="
+        "sourceCommit": "b029062acef15293b759b8bcc786d37f47fdbfdb",
+        "inputFingerprint": "3f289a02d0f401e796b61c48f1a774a152b3efb5eb8fe3c97f3b0163b2315a42",
+        "integrity": "sha512-uyxD/1mEYEVSfJ4R0TvOs1V+vK/yd4qZ1PteY9uOHPuAcIhtd79gyNRjyNXYtOlaGC/ZowYd5o37i+4BJgi/WA=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-dash-control.json",
-          "sha256": "1ecc3c78adffcbc2927be782dba77b4135163353c98cb5f7f02372c10cf4250c"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-dash-control-docs.json",
+          "sha256": "47caeb2da405440e06b4b18887394c62d3f4bd3bc49c004aaa4e4e1e87028548"
         }
       }
     },

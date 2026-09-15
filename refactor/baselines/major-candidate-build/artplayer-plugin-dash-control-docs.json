@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "package": "artplayer-plugin-dash-control",
+  "version": "2.0.0",
+  "gate": "build",
+  "candidateIntegrity": "sha512-uyxD/1mEYEVSfJ4R0TvOs1V+vK/yd4qZ1PteY9uOHPuAcIhtd79gyNRjyNXYtOlaGC/ZowYd5o37i+4BJgi/WA==",
+  "inputFingerprint": "3f289a02d0f401e796b61c48f1a774a152b3efb5eb8fe3c97f3b0163b2315a42",
+  "result": "pass",
+  "checks": [
+    {
+      "id": "major-version-and-distribution-members",
+      "result": "pass",
+      "mode": "native"
+    },
+    {
+      "id": "production-build-archive-members",
+      "result": "pass",
+      "mode": "native"
+    },
+    {
+      "id": "isolated-install-and-frozen-lock",
+      "result": "pass",
+      "mode": "native"
+    },
+    {
+      "id": "unchanged-source-and-validation-inputs",
+      "result": "pass",
+      "mode": "native"
+    }
+  ],
+  "environment": [
+    {
+      "os": "Windows",
+      "node": "v24.21.0",
+      "yarn": "1.22.22",
+      "remote": false
+    }
+  ],
+  "command": "yarn build artplayer-plugin-dash-control && yarn test:dash-types-package",
+  "reviewedBy": "Codex implementation verification; formal REVIEW-01/02/03 not started",
+  "artifacts": [
+    {
+      "path": "refactor/.cache/release-ledger-0G46fa/report.json",
+      "sha256": "da83cb7cbdf587ca6f9ea9921eac9bb34b60b97bfc9ce20ca364b304cff907c6"
+    },
+    {
+      "path": "refactor/.cache/release-ledger-mGdBea/report.json",
+      "sha256": "da83cb7cbdf587ca6f9ea9921eac9bb34b60b97bfc9ce20ca364b304cff907c6"
+    },
+    {
+      "path": "refactor/.cache/dash-package-types-p4TuSa/report.json",
+      "sha256": "b92d0e9c1a905ed4af7191b00725a0eb9387a2c813d05e1ed7c2fcc9498f7328"
+    },
+    {
+      "path": "refactor/.cache/dash-package-types-p4TuSa/artplayer-plugin-dash-control.tgz",
+      "sha256": "0e628e54eedd4bc4fedb09b64593e4a03a3ab0ddc6028380c30a3211d7296621"
+    },
+    {
+      "path": "refactor/.cache/dash-package-types-p4TuSa/artplayer-plugin-dash-control-pack.log",
+      "sha256": "b955f3e0c880d1f1369fafd7a432949f78e53986038b9eecd0ea85892e8e042f"
+    },
+    {
+      "path": "refactor/.cache/dash-package-types-p4TuSa/install.log",
+      "sha256": "c3b09f4c65bfb4a1bf31ddd2e3328c22988cf52a31e36c31ea2de4d3132a89c6"
+    },
+    {
+      "path": "refactor/.cache/dash-package-types-p4TuSa/frozen-install.log",
+      "sha256": "6d8a95fad69ac94a55d176b472fc3a0f72783092e49b7e683156b6717510f4a8"
+    },
+    {
+      "path": "refactor/.cache/dash-package-types-p4TuSa/yarn.lock",
+      "sha256": "c54fb39b04dc24378c5e2f8a403b5e42a622ff05d652acb65150c8f9e6026d38"
+    },
+    {
+      "path": "refactor/.cache/rel02-dash-refresh-build.log",
+      "sha256": "de18b87a5582e33cc6ac056444229e9318d143254eeb76cfd137b3839af8ed65"
+    },
+    {
+      "path": "refactor/.cache/rel02-dash-refresh-types.log",
+      "sha256": "38162a17f45bfa1613a73ca0cf6fdbafaf798968159c8a9dc056ca8e8f14565c"
+    },
+    {
+      "path": "refactor/.cache/record-rel02-dash-refresh.mjs",
+      "sha256": "bfdb204c8a92d3421c3e9fbc4c0b998facfb12ac89140edf912217ebf63b4c6b"
+    },
+    {
+      "path": "refactor/baselines/dash-candidate-refresh.json",
+      "sha256": "b533a86df34bb16e1b32875af895c4d620c3e56a466ab7844820f3d4c9c10c3b"
+    }
+  ]
+}

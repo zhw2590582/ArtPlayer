@@ -1,0 +1,350 @@
+{
+  "task": "REL-02",
+  "sourceCommit": "b029062acef15293b759b8bcc786d37f47fdbfdb",
+  "capturedAt": "2026-09-15T20:31:35.609Z",
+  "reason": "Replace candidate after clarifying synchronous SDK getters during scheduled refresh in shipped ARCHITECTURE.md",
+  "toolchain": {
+    "node": "v24.21.0",
+    "canonicalNode": "24.21.0",
+    "packageManager": "yarn@1.22.22",
+    "observedUserAgent": "yarn/1.22.22 npm/? node/v24.21.0 win32 x64",
+    "declaredTools": {
+      "@antfu/eslint-config": "5.4.1",
+      "@playwright/test": "1.63.0",
+      "@types/markdown-it": "14.1.2",
+      "@types/node": "24.10.0",
+      "@types/react": "19.1.10",
+      "@types/react-dom": "19.1.7",
+      "@vitejs/plugin-react": "5.0.0",
+      "@vitejs/plugin-vue": "6.0.1",
+      "@vue/compiler-sfc": "3.5.28",
+      "@yarnpkg/lockfile": "1.1.0",
+      "c8": "12.0.0",
+      "cpy": "13.2.3",
+      "cross-env": "10.1.0",
+      "cross-spawn": "7.0.6",
+      "dotenv": "17.2.4",
+      "dts-bundle-generator": "9.5.1",
+      "esbuild": "0.27.7",
+      "eslint": "9.39.2",
+      "eslint-plugin-format": "2.0.1",
+      "glob": "13.0.6",
+      "lerna": "8.2.4",
+      "less": "4.5.1",
+      "linkedom": "0.18.13",
+      "monaco-editor": "0.30.1",
+      "mrmime": "2.0.1",
+      "pngjs": "7.0.0",
+      "prompts": "2.4.2",
+      "react": "19.1.1",
+      "react-dom": "19.1.1",
+      "semver": "7.7.4",
+      "servor": "4.0.2",
+      "svgo": "4.1.0",
+      "terser": "5.51.2",
+      "typescript": "5.9.3",
+      "typescript-compat": "npm:typescript@4.3.5",
+      "typescript-runtime-compat": "npm:typescript@5.1.6",
+      "vite": "7.3.6",
+      "vue": "3.5.28",
+      "vue-tsc": "3.3.11",
+      "yaml": "2.8.2"
+    },
+    "lock": {
+      "path": "yarn.lock",
+      "sha256": "aa33cfc38c7933ab53ce626a911fdafd7b14023e45f93ca37bf7f2f6a1d3ecce"
+    }
+  },
+  "previousCandidate": {
+    "kind": "npm-tarball",
+    "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-dash-control.tgz",
+    "version": "2.0.0",
+    "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+    "inputFingerprint": "3130f6e7c49373a87b094582bcc9affbdf799c562ec688137bb96f3d7ed42157",
+    "integrity": "sha512-01z5sdzWx7zNFiUITEelZ8f9v+rSGiYH3HkxnTN0qQxQY12la0fJ1kK5YIFRzoeWcj4cakygSsvMuPqjQ6OFKQ=="
+  },
+  "previousBuild": {
+    "path": "refactor/baselines/major-candidate-build/artplayer-plugin-dash-control.json",
+    "sha256": "1ecc3c78adffcbc2927be782dba77b4135163353c98cb5f7f02372c10cf4250c"
+  },
+  "candidate": {
+    "kind": "npm-tarball",
+    "path": "refactor/.cache/dash-package-types-p4TuSa/artplayer-plugin-dash-control.tgz",
+    "version": "2.0.0",
+    "sourceCommit": "b029062acef15293b759b8bcc786d37f47fdbfdb",
+    "inputFingerprint": "3f289a02d0f401e796b61c48f1a774a152b3efb5eb8fe3c97f3b0163b2315a42",
+    "integrity": "sha512-uyxD/1mEYEVSfJ4R0TvOs1V+vK/yd4qZ1PteY9uOHPuAcIhtd79gyNRjyNXYtOlaGC/ZowYd5o37i+4BJgi/WA=="
+  },
+  "unchangedInputFiles": 1469,
+  "archive": {
+    "sha256": "0e628e54eedd4bc4fedb09b64593e4a03a3ab0ddc6028380c30a3211d7296621",
+    "members": 10,
+    "changedMembers": [
+      "package/ARCHITECTURE.md"
+    ],
+    "files": {
+      "package/ARCHITECTURE.md": "e434591d7746eb14412a9cdec08b803036d88791a001235b7273709bffebd7f6",
+      "package/CHANGELOG.md": "680cde6a4112c0755db3b547305c512b7698b1bb757f1b0aa6e2317a400076dc",
+      "package/README.md": "eec2c36c1b4dab1ce97efd745482581ba59461edb88a22e1ec063f6152223b1e",
+      "package/dist/artplayer-plugin-dash-control.js": "0758643c74555d9d3439fd4f16ec8d9d82acafb6297a3673b3d3f97c2b5208d4",
+      "package/dist/artplayer-plugin-dash-control.legacy.js": "fe0ff509089e20d596d0c4d70c2ddd3cdbb20722326b17ebbd2f979b187ffaef",
+      "package/dist/artplayer-plugin-dash-control.mjs": "bee86eb5b1555314c553309033725c515468ebe34f8b5046cc0043cab36bcda1",
+      "package/package.json": "432828d663f16004d0afd8404abbb85908843233a6a8829eb7d786b9d5816d12",
+      "package/types/artplayer-plugin-dash-control.d.cts": "20cbbeed90e0cd7d7b536b945dd01f31679e4325854aa36b732cb8e6ccc70d02",
+      "package/types/artplayer-plugin-dash-control.d.mts": "f52ae616c501be0685a14cb4e48252c88a67c9d4b0a9c1138921de89521f6b81",
+      "package/types/artplayer-plugin-dash-control.d.ts": "8470943bc5f2461f8b5d7420c0fd53828279c5dd8804c044f4c3b516f433506d"
+    },
+    "allMembersMatchFreshBuildAndInstalledCopy": true
+  },
+  "types": {
+    "matrix": [
+      {
+        "compiler": "5.9.3",
+        "mode": "node10-commonjs",
+        "diagnostics": [],
+        "invalid": [
+          {
+            "code": 2322,
+            "message": "Type 'void' is not assignable to type 'Promise<void>'."
+          },
+          {
+            "code": 2554,
+            "message": "Expected 0 arguments, but got 1."
+          },
+          {
+            "code": 2322,
+            "message": "Type '\"dash\"' is not assignable to type '\"artplayerPluginDashControl\"'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Type '(value: QualityLevel, index: number) => string' is not assignable to type '(item: QualityLevel) => string'.\n      Target signature provides too few arguments. Expected 2 or more, but got 1.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Type '(value: QualityLevel, index: number) => string' is not assignable to type '(item: QualityLevel) => string'.\n      Target signature provides too few arguments. Expected 2 or more, but got 1."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Type '() => number' is not assignable to type '(item: AudioTrack) => string'.\n      Type 'number' is not assignable to type 'string'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Type '() => number' is not assignable to type '(item: AudioTrack) => string'.\n      Type 'number' is not assignable to type 'string'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Type 'string' is not assignable to type 'boolean | undefined'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Type 'string' is not assignable to type 'boolean | undefined'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Argument of type 'null' is not assignable to parameter of type 'Option<QualityLevel, AudioTrack> | undefined'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Argument of type 'null' is not assignable to parameter of type 'Option<QualityLevel, AudioTrack>'."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'unknownProperty' does not exist on type 'QualityLevel'."
+          }
+        ]
+      },
+      {
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs",
+        "diagnostics": [],
+        "invalid": [
+          {
+            "code": 2322,
+            "message": "Type 'void' is not assignable to type 'Promise<void>'."
+          },
+          {
+            "code": 2554,
+            "message": "Expected 0 arguments, but got 1."
+          },
+          {
+            "code": 2322,
+            "message": "Type '\"dash\"' is not assignable to type '\"artplayerPluginDashControl\"'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Type '(value: QualityLevel, index: number) => string' is not assignable to type '(item: QualityLevel) => string'.\n      Target signature provides too few arguments. Expected 2 or more, but got 1.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Type '(value: QualityLevel, index: number) => string' is not assignable to type '(item: QualityLevel) => string'.\n      Target signature provides too few arguments. Expected 2 or more, but got 1."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Type '() => number' is not assignable to type '(item: AudioTrack) => string'.\n      Type 'number' is not assignable to type 'string'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Type '() => number' is not assignable to type '(item: AudioTrack) => string'.\n      Type 'number' is not assignable to type 'string'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Type 'string' is not assignable to type 'boolean | undefined'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Type 'string' is not assignable to type 'boolean | undefined'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Argument of type 'null' is not assignable to parameter of type 'Option<QualityLevel, AudioTrack> | undefined'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Argument of type 'null' is not assignable to parameter of type 'Option<QualityLevel, AudioTrack>'."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'unknownProperty' does not exist on type 'QualityLevel'."
+          }
+        ]
+      },
+      {
+        "compiler": "5.9.3",
+        "mode": "nodenext-esm",
+        "diagnostics": [],
+        "invalid": [
+          {
+            "code": 2322,
+            "message": "Type 'void' is not assignable to type 'Promise<void>'."
+          },
+          {
+            "code": 2554,
+            "message": "Expected 0 arguments, but got 1."
+          },
+          {
+            "code": 2322,
+            "message": "Type '\"dash\"' is not assignable to type '\"artplayerPluginDashControl\"'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Type '(value: QualityLevel, index: number) => string' is not assignable to type '(item: QualityLevel) => string'.\n      Target signature provides too few arguments. Expected 2 or more, but got 1.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Type '(value: QualityLevel, index: number) => string' is not assignable to type '(item: QualityLevel) => string'.\n      Target signature provides too few arguments. Expected 2 or more, but got 1."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Type '() => number' is not assignable to type '(item: AudioTrack) => string'.\n      Type 'number' is not assignable to type 'string'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Type '() => number' is not assignable to type '(item: AudioTrack) => string'.\n      Type 'number' is not assignable to type 'string'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Type 'string' is not assignable to type 'boolean | undefined'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Type 'string' is not assignable to type 'boolean | undefined'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Argument of type 'null' is not assignable to parameter of type 'Option<QualityLevel, AudioTrack> | undefined'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Argument of type 'null' is not assignable to parameter of type 'Option<QualityLevel, AudioTrack>'."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'unknownProperty' does not exist on type 'QualityLevel'."
+          }
+        ]
+      },
+      {
+        "compiler": "5.9.3",
+        "mode": "bundler-esm",
+        "diagnostics": [],
+        "invalid": [
+          {
+            "code": 2322,
+            "message": "Type 'void' is not assignable to type 'Promise<void>'."
+          },
+          {
+            "code": 2554,
+            "message": "Expected 0 arguments, but got 1."
+          },
+          {
+            "code": 2322,
+            "message": "Type '\"dash\"' is not assignable to type '\"artplayerPluginDashControl\"'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Type '(value: QualityLevel, index: number) => string' is not assignable to type '(item: QualityLevel) => string'.\n      Target signature provides too few arguments. Expected 2 or more, but got 1.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Type '(value: QualityLevel, index: number) => string' is not assignable to type '(item: QualityLevel) => string'.\n      Target signature provides too few arguments. Expected 2 or more, but got 1."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Type '() => number' is not assignable to type '(item: AudioTrack) => string'.\n      Type 'number' is not assignable to type 'string'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Type '() => number' is not assignable to type '(item: AudioTrack) => string'.\n      Type 'number' is not assignable to type 'string'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Type 'string' is not assignable to type 'boolean | undefined'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Type 'string' is not assignable to type 'boolean | undefined'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Argument of type 'null' is not assignable to parameter of type 'Option<QualityLevel, AudioTrack> | undefined'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Argument of type 'null' is not assignable to parameter of type 'Option<QualityLevel, AudioTrack>'."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'unknownProperty' does not exist on type 'QualityLevel'."
+          }
+        ]
+      },
+      {
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs",
+        "diagnostics": [],
+        "invalid": [
+          {
+            "code": 2322,
+            "message": "Type 'void' is not assignable to type 'Promise<void>'."
+          },
+          {
+            "code": 2554,
+            "message": "Expected 0 arguments, but got 1."
+          },
+          {
+            "code": 2322,
+            "message": "Type '\"dash\"' is not assignable to type '\"artplayerPluginDashControl\"'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Type '(value: QualityLevel, index: number) => string' is not assignable to type '(item: QualityLevel) => string'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Type '(value: QualityLevel, index: number) => string' is not assignable to type '(item: QualityLevel) => string'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Type '() => number' is not assignable to type '(item: AudioTrack) => string'.\n      Type 'number' is not assignable to type 'string'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Type '() => number' is not assignable to type '(item: AudioTrack) => string'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Type 'string' is not assignable to type 'boolean | undefined'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Type 'string' is not assignable to type 'boolean | undefined'."
+          },
+          {
+            "code": 2769,
+            "message": "No overload matches this call.\n  Overload 1 of 2, '(option?: Option<QualityLevel, AudioTrack> | undefined): (art: Artplayer) => Result', gave the following error.\n    Argument of type 'null' is not assignable to parameter of type 'Option<QualityLevel, AudioTrack> | undefined'.\n  Overload 2 of 2, '(option: Option<QualityLevel, AudioTrack>): (art: Artplayer) => Result', gave the following error.\n    Argument of type 'null' is not assignable to parameter of type 'Option<QualityLevel, AudioTrack>'."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'unknownProperty' does not exist on type 'QualityLevel'."
+          }
+        ]
+      }
+    ],
+    "scope": "Packed current core and DASH, offline Yarn install and frozen reinstall outside workspace; isolated public type acceptance only, not complete package runtime/SDK/media release validation."
+  },
+  "attachments": [
+    {
+      "path": "refactor/.cache/release-ledger-0G46fa/report.json",
+      "sha256": "da83cb7cbdf587ca6f9ea9921eac9bb34b60b97bfc9ce20ca364b304cff907c6"
+    },
+    {
+      "path": "refactor/.cache/release-ledger-mGdBea/report.json",
+      "sha256": "da83cb7cbdf587ca6f9ea9921eac9bb34b60b97bfc9ce20ca364b304cff907c6"
+    },
+    {
+      "path": "refactor/.cache/dash-package-types-p4TuSa/report.json",
+      "sha256": "b92d0e9c1a905ed4af7191b00725a0eb9387a2c813d05e1ed7c2fcc9498f7328"
+    },
+    {
+      "path": "refactor/.cache/dash-package-types-p4TuSa/artplayer-plugin-dash-control.tgz",
+      "sha256": "0e628e54eedd4bc4fedb09b64593e4a03a3ab0ddc6028380c30a3211d7296621"
+    },
+    {
+      "path": "refactor/.cache/dash-package-types-p4TuSa/artplayer-plugin-dash-control-pack.log",
+      "sha256": "b955f3e0c880d1f1369fafd7a432949f78e53986038b9eecd0ea85892e8e042f"
+    },
+    {
+      "path": "refactor/.cache/dash-package-types-p4TuSa/install.log",
+      "sha256": "c3b09f4c65bfb4a1bf31ddd2e3328c22988cf52a31e36c31ea2de4d3132a89c6"
+    },
+    {
+      "path": "refactor/.cache/dash-package-types-p4TuSa/frozen-install.log",
+      "sha256": "6d8a95fad69ac94a55d176b472fc3a0f72783092e49b7e683156b6717510f4a8"
+    },
+    {
+      "path": "refactor/.cache/dash-package-types-p4TuSa/yarn.lock",
+      "sha256": "c54fb39b04dc24378c5e2f8a403b5e42a622ff05d652acb65150c8f9e6026d38"
+    },
+    {
+      "path": "refactor/.cache/rel02-dash-refresh-build.log",
+      "sha256": "de18b87a5582e33cc6ac056444229e9318d143254eeb76cfd137b3839af8ed65"
+    },
+    {
+      "path": "refactor/.cache/rel02-dash-refresh-types.log",
+      "sha256": "38162a17f45bfa1613a73ca0cf6fdbafaf798968159c8a9dc056ca8e8f14565c"
+    },
+    {
+      "path": "refactor/.cache/record-rel02-dash-refresh.mjs",
+      "sha256": "bfdb204c8a92d3421c3e9fbc4c0b998facfb12ac89140edf912217ebf63b4c6b"
+    }
+  ],
+  "limitations": [
+    "Only build gate registered; isolated types do not replace runtime/SDK/media/device/rollback/review gates.",
+    "No SDK/media rerun for a documentation-only archive change; historical browser evidence is not rebound.",
+    "Old archive, envelope and reports remain intact. No publication authorized."
+  ]
+}
