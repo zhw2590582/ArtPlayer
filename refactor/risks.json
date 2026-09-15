@@ -2799,7 +2799,7 @@
     },
     {
       "id": "HLS-CRASH-01",
-      "title": "Firefox Hls 1.5.17 worker 销毁可在原生 video 与候选核心复现崩溃",
+      "title": "Firefox Hls 1.5.17 worker 播放切组及销毁路径出现页面崩溃信号",
       "confirmation": "reproduced",
       "status": "open",
       "owners": [
@@ -2813,11 +2813,13 @@
         "refactor/baselines/hls-sdk-diagnostics.json",
         "refactor/scripts/hls-sdk-diagnostic.mjs",
         "refactor/changes/2026-09-14-PKG-HLS-SDK-01-http-teardown.md",
-        "refactor/baselines/hls-http-teardown-validation.json"
+        "refactor/baselines/hls-http-teardown-validation.json",
+        "refactor/changes/2026-09-15-PKG-HLS-SDK-01-sdk-sequence.md",
+        "refactor/baselines/hls-sdk-sequence-validation.json"
       ],
       "compatibleResolution": "直接原生 video（无 ArtPlayer/插件）和候选核心已有 page crashed；候选核心无观察器也复现。继续区分 SDK、Firefox/Playwright 与媒体销毁，不静默改核心 destroy 顺序或调用方 SDK 配置。",
       "closureCriteria": "取得可解释的崩溃诊断或直接 SDK 对照；验证处置和新旧核心/worker/分组销毁矩阵，不能仅以再次通过关闭。",
-      "workspaceState": "2026-09-14 direct HTTP/no ArtPlayer/plugin/Worker observer:35 diagnostics,31 passed4 failed. Worker reset-first fails1/10 and1/5; no-worker10/10 and optional pre-destroy snapshot5/5 pass. SDK-first also fails2/5. Three phase-recorded crashes occur during final-state collection after destroy returned. Installed Firefox TargetRegistry observer receives oop-frameloader-crashed; no native stack/root cause established. Do not substitute no-worker/snapshot success or change core teardown order; risk remains open."
+      "workspaceState": "2026-09-14 direct HTTP/no ArtPlayer/plugin/Worker observer:35 diagnostics,31 passed4 failed. Worker reset-first fails1/10 and1/5; no-worker10/10 and optional pre-destroy snapshot5/5 pass. SDK-first also fails2/5. Three phase-recorded crashes occur during final-state collection after destroy returned. Installed Firefox TargetRegistry observer receives oop-frameloader-crashed; no native stack/root cause established. Do not substitute no-worker/snapshot success or change core teardown order; risk remains open. 2026-09-15 sequence: direct native video first 1.5.17 case reports page crash in high-group phase before explicit destroy; no earlier SDK case, ArtPlayer, plugin, route, SDK logger or Worker observer. Three ordered sequences plus one default invocation total 8 passed/1 failed. Native cause remains unproven; do not restrict investigation to teardown or merge distinct signals into a proven shared cause."
     },
     {
       "id": "HLS-PLAYBACK-01",

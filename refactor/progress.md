@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-HLS-SDK-01 SDK顺序与销毁前崩溃
+
+新增固定SDK序列诊断入口，逐页核验版本并保存实际顺序。在同一个Firefox实例
+依次运行两个SDK的对照中，直接原生video第一项1.5.17就在high-group阶段收到
+页面崩溃信号，尚未执行destroy；此前SDK或核心/插件不是该次发生的必要前提。
+这扩展了HLS-CRASH-01的证据范围，不能继续仅围绕销毁顺序排查。
+
+四组共8通过1失败，原始报告/trace独立保留；三个CLI非法输入拒绝、lint、SDK
+来源单测和工具链通过。窄范围Windows事件查询无匹配，仍缺原生根因证据。
+见[记录](changes/2026-09-15-PKG-HLS-SDK-01-sdk-sequence.md)及
+[证据](baselines/hls-sdk-sequence-validation.json)。未修改运行时、依赖或分发。
+两项HLS风险及任务继续开放，总数203 done、21 doing、43 todo不变。
+
 ## PKG-HLS-SDK-01 分组切换与持续播放
 
 再次复现 Firefox/Hls.js 1.7.2/发布核心分组切换失败：音轨已更新，视频仍90高、

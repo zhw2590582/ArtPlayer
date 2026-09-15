@@ -2151,7 +2151,9 @@
         "changes/2026-09-14-PKG-HLS-SDK-01-http-teardown.md",
         "baselines/hls-http-teardown-validation.json",
         "changes/2026-09-15-PKG-HLS-SDK-01-switch-boundary.md",
-        "baselines/hls-switch-boundary-validation.json"
+        "baselines/hls-switch-boundary-validation.json",
+        "changes/2026-09-15-PKG-HLS-SDK-01-sdk-sequence.md",
+        "baselines/hls-sdk-sequence-validation.json"
       ]
     },
     {

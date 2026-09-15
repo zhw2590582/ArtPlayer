@@ -145,6 +145,14 @@ later control passes. Diagnostic private SDK fields are read-only, version-speci
 never read load-level getters after SDK destruction. See the 2026-09-15 switch-boundary
 checkpoint in refactor for the reproduced empty-buffer failure and remaining attribution.
 
+`--sequence 1.5.17,1.5.17,1.7.2` runs frozen SDK versions in separate contexts within
+one Firefox browser instance. It cannot be combined with explicit `--version` or
+`--iterations`; every result records and checks its actual SDK version. A first-case
+direct-video 1.5.17 run also reported a page crash while awaiting the high-group
+transition, before any explicit destroy. Keep playback and teardown evidence distinct;
+neither the previous SDK nor ArtPlayer is a necessary precondition for that occurrence.
+See the 2026-09-15 SDK sequence checkpoint for exact scope and remaining native diagnostics.
+
 ## Package file boundary
 
 The package .npmignore excludes src and tsconfig.json. The implementation config

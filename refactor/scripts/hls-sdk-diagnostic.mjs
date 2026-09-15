@@ -10,7 +10,7 @@ import { observeWorkers } from '../../test/helpers/worker-observer.js'
 import { ensureArchive, hash, readMember, refactorDir } from './releases.mjs'
 
 // Direct SDK control: no ArtPlayer or plugin is loaded, and no worker output is substituted.
-export async function diagnose({ version = '1.7.2', iterations = 5, transport = 'http', teardown = 'reset-first', worker = true, host = 'direct', plugin = false, sdkLogs = false, workerObserver = false, captureBeforeDestroy = false, switchBoundary = 'switched', prefill = false } = {}) {
+export async function diagnose({ version = '1.7.2', iterations = 5, transport = 'http', teardown = 'reset-first', worker = true, host = 'direct', plugin = false, sdkLogs = false, workerObserver = false, captureBeforeDestroy = false, switchBoundary = 'switched', prefill = false, sequence } = {}) {
   const runnerSHA256 = hash(fs.readFileSync(new URL(import.meta.url)))
   const observerSHA256 = hash(fs.readFileSync(new URL('../../test/helpers/worker-observer.js', import.meta.url)))
   assert(Number.isInteger(iterations) && iterations > 0 && iterations <= 50)
@@ -20,10 +20,13 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
   assert(['switched', 'selected', 'immediate'].includes(switchBoundary))
   assert(!plugin || host !== 'direct', 'Plugin comparison requires an ArtPlayer host')
   const matrix = JSON.parse(fs.readFileSync(path.join(refactorDir, 'baselines/hls-sdk-matrix.json')))
-  const release = matrix.releases.find(item => item.version === version)
-  assert(release, 'Use a frozen SDK version')
-  const sdk = readMember(await ensureArchive(release), 'package/dist/hls.min.js')
-  assert.equal(hash(sdk), release.files['package/dist/hls.min.js'])
+  const versions = sequence || Array.from({ length: iterations }, () => version)
+  assert(Array.isArray(versions) && versions.length > 0 && versions.length <= 50)
+  const releases = [...new Set(versions)].map((version) => {
+    const release = matrix.releases.find(item => item.version === version)
+    assert(release, 'Use a frozen SDK version')
+    return release
+  })
   const media = path.join(refactorDir, '../test/browser/media/hls')
   const manifest = JSON.parse(fs.readFileSync(path.join(media, 'manifest.json')))
   const files = new Map()
@@ -33,7 +36,11 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
     files.set(`/${name}`, bytes)
   }
   files.set('/grouped.m3u8', fs.readFileSync(path.join(refactorDir, '../test/browser/fixtures/hls-grouped.m3u8')))
-  files.set('/hls.js', sdk)
+  for (const release of releases) {
+    const sdk = readMember(await ensureArchive(release), 'package/dist/hls.min.js')
+    assert.equal(hash(sdk), release.files['package/dist/hls.min.js'])
+    files.set(`/hls-${release.version}.js`, sdk)
+  }
   if (host === 'published') {
     const baseline = JSON.parse(fs.readFileSync(path.join(refactorDir, 'baselines/releases.json')))
     const core = baseline.releases.find(item => item.name === 'artplayer')
@@ -62,12 +69,12 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
   try {
     browser = await firefox.launch({ headless: true })
     browserVersion = browser.version()
-    for (let iteration = 0; iteration < iterations; iteration++) {
+    for (let iteration = 0; iteration < versions.length; iteration++) {
       const context = await browser.newContext()
       await context.tracing.start({ screenshots: true, snapshots: true, sources: true })
       const page = await context.newPage()
       const wait = predicate => expect.poll(() => page.evaluate(predicate), { timeout: 7000 }).toBe(true)
-      const entry = { iteration, status: 'running', errors: [], requests: [], phase: 'setup', crashes: [] }
+      const entry = { iteration, version: versions[iteration], status: 'running', errors: [], requests: [], phase: 'setup', crashes: [] }
       results.push(entry)
       page.on('pageerror', error => entry.errors.push(error.message))
       page.on('crash', () => {
@@ -88,7 +95,8 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
         await page.goto(origin)
         if (workerObserver)
           await page.evaluate(observeWorkers)
-        await page.addScriptTag({ url: `${origin}/hls.js` })
+        await page.addScriptTag({ url: `${origin}/hls-${entry.version}.js` })
+        assert.equal(await page.evaluate(() => window.Hls.version), entry.version)
         if (host !== 'direct')
           await page.addScriptTag({ url: `${origin}/artplayer.js` })
         if (plugin)
@@ -280,21 +288,39 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
           entry.failure ||= entry.state.error || entry.traceError || entry.closeError || entry.errors.join('; ')
         }
       }
-      console.log(JSON.stringify({ iteration, status: entry.status, failure: entry.failure, media: entry.state.media }))
+      console.log(JSON.stringify({ iteration, version: entry.version, status: entry.status, failure: entry.failure, media: entry.state.media }))
     }
   }
   finally {
     await browser?.close()
     server.closeAllConnections()
     await new Promise(resolve => server.close(resolve))
-    fs.writeFileSync(path.join(directory, 'report.json'), `${JSON.stringify({ version, iterations, transport, teardown, worker, host, plugin, sdkLogs, workerObserver, captureBeforeDestroy, switchBoundary, prefill, runnerSHA256, observerSHA256, browserVersion, release, inputs: Object.fromEntries([...files].map(([file, bytes]) => [file, hash(bytes)])), results }, null, 2)}\n`)
+    fs.writeFileSync(path.join(directory, 'report.json'), `${JSON.stringify({ version: sequence ? undefined : version, iterations: versions.length, sequence: versions, transport, teardown, worker, host, plugin, sdkLogs, workerObserver, captureBeforeDestroy, switchBoundary, prefill, runnerSHA256, observerSHA256, browserVersion, release: sequence ? undefined : releases[0], releases, inputs: Object.fromEntries([...files].map(([file, bytes]) => [file, hash(bytes)])), results }, null, 2)}\n`)
     console.log(`Diagnostic report: ${directory}`)
   }
   return results
 }
 
-const { values } = parseArgs({ options: { 'version': { type: 'string', default: '1.7.2' }, 'iterations': { type: 'string', default: '5' }, 'transport': { type: 'string', default: 'http' }, 'teardown': { type: 'string', default: 'reset-first' }, 'host': { type: 'string', default: 'direct' }, 'no-worker': { type: 'boolean', default: false }, 'plugin': { type: 'boolean', default: false }, 'sdk-logs': { type: 'boolean', default: false }, 'observe-workers': { type: 'boolean', default: false }, 'capture-before-destroy': { type: 'boolean', default: false }, 'switch-boundary': { type: 'string', default: 'switched' }, 'prefill': { type: 'boolean', default: false } } })
-diagnose({ version: values.version, iterations: Number(values.iterations), transport: values.transport, teardown: values.teardown, worker: !values['no-worker'], host: values.host, plugin: values.plugin, sdkLogs: values['sdk-logs'], workerObserver: values['observe-workers'], captureBeforeDestroy: values['capture-before-destroy'], switchBoundary: values['switch-boundary'], prefill: values.prefill }).then((results) => {
+const { values, tokens } = parseArgs({
+  tokens: true,
+  options: {
+    'version': { type: 'string', default: '1.7.2' },
+    'iterations': { type: 'string', default: '5' },
+    'sequence': { type: 'string' },
+    'transport': { type: 'string', default: 'http' },
+    'teardown': { type: 'string', default: 'reset-first' },
+    'host': { type: 'string', default: 'direct' },
+    'no-worker': { type: 'boolean', default: false },
+    'plugin': { type: 'boolean', default: false },
+    'sdk-logs': { type: 'boolean', default: false },
+    'observe-workers': { type: 'boolean', default: false },
+    'capture-before-destroy': { type: 'boolean', default: false },
+    'switch-boundary': { type: 'string', default: 'switched' },
+    'prefill': { type: 'boolean', default: false },
+  },
+})
+assert(!values.sequence || !tokens.some(token => token.kind === 'option' && ['version', 'iterations'].includes(token.name)), 'Use --sequence or --version/--iterations, not both')
+diagnose({ version: values.version, iterations: Number(values.iterations), transport: values.transport, teardown: values.teardown, worker: !values['no-worker'], host: values.host, plugin: values.plugin, sdkLogs: values['sdk-logs'], workerObserver: values['observe-workers'], captureBeforeDestroy: values['capture-before-destroy'], switchBoundary: values['switch-boundary'], prefill: values.prefill, sequence: values.sequence?.split(',') }).then((results) => {
   process.exitCode = results.some(result => result.status !== 'passed') ? 1 : 0
 }).catch((error) => {
   console.error(error)
