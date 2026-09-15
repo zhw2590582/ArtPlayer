@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 266 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 267 项，范围 22 个包及工作区/示例。
 
-状态：todo 43 / doing 21 / blocked 0 / done 202 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 43 / doing 21 / blocked 0 / done 203 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -17,7 +17,7 @@
 | artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22, CORE-24, SITE-BUILD-01, CORE-25, ENG-12, CORE-SUBTITLE-OFFSET-01, PKG-MULTI-SUB-09, ENG-LINT-02 |
 | artplayer-plugin-ads | 2.1.0 | PKG-ADS-01, PKG-ADS-02, PKG-ADS-03, PKG-ADS-04, PKG-ADS-05, PKG-ADS-06 |
 | artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-PROXY-01, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06, PKG-FACTORY-01 |
-| artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06, PKG-ASR-07, PKG-ASR-08, PKG-ASR-09 |
+| artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06, PKG-ASR-07, PKG-ASR-08, PKG-ASR-09, PKG-ASR-10 |
 | artplayer-plugin-audio-track | 1.1.0 | PKG-AUDIO-01, PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-04, PKG-AUDIO-05, PKG-AUDIO-06 |
 | artplayer-plugin-auto-thumbnail | 1.1.0 | PKG-AUTO-THUMB-01, PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-04, PKG-AUTO-THUMB-05, PKG-AUTO-THUMB-06, PKG-AUTO-THUMB-07, PKG-AUTO-THUMB-08, PKG-AUTO-THUMB-09, PKG-AUTO-THUMB-10, PKG-AUTO-THUMB-11, PKG-AUTO-THUMB-12 |
 | artplayer-plugin-chapter | 1.1.0 | PILOT-01, PKG-CHAPTER-01, PKG-CHAPTER-02, PKG-CHAPTER-03, PKG-CHAPTER-04, PKG-CHAPTER-05, PKG-CHAPTER-06, PKG-CHAPTER-HOVER-01 |
@@ -275,11 +275,12 @@
 | PKG-ASR-02 | artplayer-plugin-asr<br>建立特有行为与错误测试 | PKG-ASR-01, ENG-03, ENG-05 | PCM/WAV、chunk 时序、回调慢/拒绝、重复初始化与停止 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-ASR-03 | artplayer-plugin-asr<br>整理内部职责与资源 | PKG-ASR-02, CORE-10, CORE-18 | AudioContext/Worklet/Stream 生命周期和背压分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-ASR-04 | artplayer-plugin-asr<br>迁移自有源码和公开类型 | PKG-ASR-03, ENG-04, ENG-06, CORE-07 | 主线程/Worklet/音频 buffer 与异步回调类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-ASR-05 | artplayer-plugin-asr<br>验证新旧核心和组合 | PKG-ASR-04, CORE-22, PKG-ASR-07, PKG-ASR-08, PKG-ASR-09 | 真实 WebAudio 分块、播放暂停/切源/销毁，不引入网络 ASR | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
+| PKG-ASR-05 | artplayer-plugin-asr<br>验证新旧核心和组合 | PKG-ASR-04, CORE-22, PKG-ASR-07, PKG-ASR-08, PKG-ASR-09, PKG-ASR-10 | 真实 WebAudio 分块、播放暂停/切源/销毁，不引入网络 ASR | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
 | PKG-ASR-06 | artplayer-plugin-asr<br>验证分发并同步文档 | PKG-ASR-05, ENG-07 | asr.js、Worklet 资源、输出格式与声明证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 | PKG-ASR-07 | artplayer-plugin-asr<br>修复原生播放音量二次衰减 | PKG-ASR-04 | 移除重复音量应用；保留新旧原生音频振幅对照及正式产物验收 | Chromium/Firefox 两核心和 source/main/legacy 输出音量线性、静音和 stop/restart 正确；旧版平方衰减单独保留；单元/类型/真实安装通过，不代替设备验收 | H | done |
 | PKG-ASR-08 | artplayer-plugin-asr<br>修复捕获回退重复播放与静音漏声 | PKG-ASR-07 | 捕获回退静音输出图、非零PCM与外部播放归属；真实红绿证据及产物验证 | 已进入回退后不产生额外输出、静音不漏声、外部播放图不被关闭、stop/restart/换源清理正确；明确Firefox受控拒绝不代表自然选择回退 | H | done |
 | PKG-ASR-09 | artplayer-plugin-asr<br>提供显式捕获归属并取消过期切源重启 | PKG-ASR-04, PKG-ASR-08 | 保留默认API的capture模式、精确runtime类型、可取消重启和原生外部归属/CORS证据 | 显式模式零直接绑定、不增加输出、拥有资源正确清理；Firefox不强制异常，CORS无绕过；旧工厂类型保持；延迟关闭期间pause/stop取消旧重启 | H | done |
+| PKG-ASR-10 | artplayer-plugin-asr<br>媒体错误取消过期识别并释放捕获资源 | PKG-ASR-09 | 原生媒体错误取消、延迟加载/关闭回归、安装产物恢复与维护文档 | 旧红新绿证明错误后旧识别不显示、无新采集；捕获图释放，直接图保留合法回放归属；新旧核心实际错误与恢复通过，销毁移除监听 | H | done |
 
 ## 5 包迁移：artplayer-plugin-ads
 
@@ -671,6 +672,7 @@
 - PKG-ASR-07: [记录](changes/2026-09-13-PKG-ASR-07-playback-volume.md) [记录](baselines/asr-volume-validation.json)
 - PKG-ASR-08: [记录](changes/2026-09-13-PKG-ASR-08-capture-output.md) [记录](baselines/asr-fallback-validation.json)
 - PKG-ASR-09: [记录](changes/2026-09-13-PKG-ASR-09-explicit-capture.md) [记录](baselines/asr-explicit-capture-validation.json)
+- PKG-ASR-10: [记录](changes/2026-09-15-PKG-ASR-10-media-error.md) [记录](baselines/asr-media-error-validation.json)
 - PKG-DANMUKU-10: [记录](changes/2026-09-13-PKG-DANMUKU-10-heatmap-density.md) [记录](baselines/danmuku-heatmap-density-validation.json)
 - PKG-DANMUKU-11: [记录](changes/2026-09-13-PKG-DANMUKU-11-visible-lifetime.md) [记录](baselines/danmuku-lifetime-validation.json)
 - PKG-DANMUKU-12: [记录](changes/2026-09-13-PKG-DANMUKU-12-frame-sampling.md) [记录](baselines/danmuku-frame-sampling-validation.json)

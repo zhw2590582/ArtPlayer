@@ -379,12 +379,14 @@ function artplayerPluginAsr(option = {}) {
       art.off("play", play);
       art.off("pause", pause);
       art.off("restart", restart);
+      art.off("video:error", stop);
       art.off("destroy", destroy);
       return capture.stop(true);
     };
     art.on("play", play);
     art.on("pause", pause);
     art.on("restart", restart);
+    art.on("video:error", stop);
     art.on("destroy", destroy);
     return { name: "artplayerPluginAsr", stop, hide: subtitles.hide, append: subtitles.append };
   };

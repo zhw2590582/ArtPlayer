@@ -84,6 +84,10 @@ root and `/legacy` option declarations remain unchanged.
 
 ## Maintenance
 
+A media error stops recognition and ignores pending results from the failed source.
+Existing subtitles keep their auto-hide behavior; playback of a valid source can
+resume recognition. ASR does not cancel a caller's own network request.
+
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the current audio flow, public behavior,
 known migration gaps and test commands.
 

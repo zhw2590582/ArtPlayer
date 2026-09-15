@@ -6579,6 +6579,28 @@
         "refactor/baselines/auto-thumbnail-metadata-validation.json"
       ],
       "resolutionRationale": "Seven regressions fail on prechange main; source 189/189, main and legacy 82/82, native main and legacy 36/36 each. Final pending-response tests observe the HTTP server directly. Existing first-frame risk stays open."
+    },
+    {
+      "id": "ASR-MEDIA-01",
+      "title": "ASR accepts obsolete recognition after native media error without pause",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-ASR-10",
+        "PKG-ASR-05"
+      ],
+      "evidence": [
+        "test/asr-media-error.test.js",
+        "test/browser/asr-media-error.spec.js",
+        "refactor/baselines/asr-media-error-validation.json"
+      ],
+      "compatibleResolution": "Use the existing nonterminal stop path on video:error; preserve direct media ownership and later playback, release capture graphs, invalidate old callbacks and remove the listener on destroy.",
+      "closureCriteria": "Prepatch failures and fixed regressions prove pending-result and initialization/close cancellation, plus native errors and recovery on supported old/candidate core inputs; missing device/WebAudio evidence stays in task05.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-15-PKG-ASR-10-media-error.md",
+        "refactor/baselines/asr-media-error-validation.json"
+      ],
+      "resolutionRationale": "Five prepatch unit failures and four native Chromium failures become passing cancellation/recovery checks. Source and actual installed main/legacy pass, including minimum5.3.0 and5.4.0 core controls; default routing and captured cleanup remain intact. WebKit capability skips and broader package acceptance are not waived."
     }
   ]
 }

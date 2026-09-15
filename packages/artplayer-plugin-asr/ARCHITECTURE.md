@@ -29,6 +29,13 @@ Rejections are logged and later ticks continue. Pause, source restart, stop and
 destroy invalidate old recognizer completions and discard obsolete queued audio.
 Each recorder also checks its own identity, rejecting messages from retired ports.
 
+`video:error` uses the same nonterminal stop path. Native source changes or decode
+failures can emit an error without a pause event, so pause alone cannot cancel old
+recognition. Error handling clears the queue/timer and invalidates pending results,
+closes captured graphs, and keeps an existing direct connection available for later
+playback. Existing subtitles retain their auto-hide deadline. Destroy also removes
+this error listener; a later play can initialize or reconnect normally.
+
 Pause detaches the recorder and cancels the interval. The direct media source
 continues through its playback gain to the destination. A source switch reuses the
 direct source and replaces the recorder; a captured-stream fallback is closed and
@@ -162,7 +169,7 @@ recognizer service as a prerequisite for local audio verification.
 
 ## Shared installed browser validation
 
-Seven browser files select verified installed ASR bytes through browser-candidate.js. The Audio Track combination independently verifies both installed plugins. Published ASR controls retain their frozen archives; attachments distinguish selected published, installed and source inputs. Tests cover native local PCM, direct/capture routing, CORS, video-only input recovery, volume/mute and ownership. Deliberately forced Firefox binding rejection remains labeled; no recognition service or physical speaker output is claimed.
+Eight browser files select verified installed ASR bytes through browser-candidate.js. The Audio Track combination independently verifies both installed plugins. Published ASR controls retain their frozen archives; attachments distinguish selected published, installed and source inputs. Tests cover native local PCM, direct/capture routing, CORS, video-only input recovery, volume/mute and ownership. Deliberately forced Firefox binding rejection remains labeled; no recognition service or physical speaker output is claimed.
 
 Use `yarn test:package --browser`, then `yarn test:browser:installed`. The common
 roster in scripts/browser-validation/scope.ts drives both preparation and required
@@ -186,3 +193,11 @@ It does not prove speaker output, malformed-media recovery, Safari or device
 support. Run `yarn test:browser asr-no-audio.spec.js --workers=1` for source mode;
 the same file is included in the installed CI roster. WebAudio capability skips
 remain visible and cannot be counted as audio processing passes.
+
+`asr-media-error.spec.js` holds a caller recognition Promise after real nonzero PCM,
+assigns non-media HTTP content through public `art.video.src`, waits for the native
+MediaError, then completes that old Promise. It verifies that obsolete subtitles
+are rejected and normal audio recognition resumes on a valid source. It does not
+simulate a network outage or every decoder error. `test/asr-media-error.test.js`
+also covers errors during Worklet loading and delayed capture closure. Both are
+required when changing capture cancellation or error listener ownership.
