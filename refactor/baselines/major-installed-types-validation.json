@@ -1,0 +1,584 @@
+{
+  "schemaVersion": 1,
+  "task": "REL-02",
+  "status": "checkpoint",
+  "verifiedAt": "2026-09-15T17:34:55.394Z",
+  "startedFrom": "aa146f07e4b05503c59110ec24836b0942221768",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "command": "yarn test:ecosystem-types",
+  "exitCode": 0,
+  "durationSeconds": 547.47,
+  "log": {
+    "path": "refactor/.cache/rel02-ecosystem-types.log",
+    "sha256": "05bd666ab74cde0312c336c7b0d27e318c32559388b0cdb0d054bb3a2a29c51c"
+  },
+  "report": {
+    "path": "refactor/.cache/ecosystem-types/run-sbfTlH/report.json",
+    "sha256": "c91d41211190bba517629e1f1a13fcfa4dbe30951e6b741197dac03cf3687a5b"
+  },
+  "preparation": [
+    {
+      "command": [
+        "build:types"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 4420,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/prepare-0.log",
+        "sha256": "e4c3144c5d4f5c5da95466e8f7757e744de2021f61471c0c97f357086b3a3a9a"
+      }
+    },
+    {
+      "command": [
+        "build",
+        "all"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 39153,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/prepare-1.log",
+        "sha256": "e4b9e1827309756a3b8421e398dc7c06e393e6d80440f3db75c2fe35959f53c2"
+      }
+    },
+    {
+      "command": [
+        "build:i18n"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 1074,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/prepare-2.log",
+        "sha256": "501b0bdea2f2e65c491fd7a67d1e6cd7d0c0b56c6f06fd7db50b4e291599cf90"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "command": [
+        "test:package",
+        "--include=artplayer-plugin-audio-track,artplayer-plugin-hls-control"
+      ],
+      "elapsedMs": 33143,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-package.log",
+        "sha256": "7528e4e1f652a72ba6b603c61dbe325cf9d51bfd43ccafdaa5ec845c7d2f4b7a"
+      },
+      "report": {
+        "path": "refactor/.cache/packages/run-wwkp4e/report.json",
+        "sha256": "bdec5755056f0b83e2509dae6f9f58c9d50b3e2001a2c41b5b54e517359c59ba"
+      },
+      "packages": [
+        {
+          "name": "artplayer",
+          "version": "6.0.0",
+          "path": "refactor/.cache/packages/run-wwkp4e/artplayer.tgz",
+          "sha256": "fb8076320b247fac7b1eae117928d640a566b1da006d261c4865612031dbe040",
+          "memberCount": 69
+        },
+        {
+          "name": "artplayer-plugin-chapter",
+          "version": "2.0.0",
+          "path": "refactor/.cache/packages/run-wwkp4e/artplayer-plugin-chapter.tgz",
+          "sha256": "c8f84cbdce606d103b9b57764babd5a0582148cc56e9131e9f2108338596c28f",
+          "memberCount": 10
+        },
+        {
+          "name": "artplayer-plugin-audio-track",
+          "version": "2.0.0",
+          "path": "refactor/.cache/packages/run-wwkp4e/artplayer-plugin-audio-track.tgz",
+          "sha256": "b9d836fe9bb7086a8b2244796f473c5217dedb7c4cc563d2c9a7d32ee51baf82",
+          "memberCount": 13
+        },
+        {
+          "name": "artplayer-plugin-hls-control",
+          "version": "2.0.0",
+          "path": "refactor/.cache/packages/run-wwkp4e/artplayer-plugin-hls-control.tgz",
+          "sha256": "4dfc3ea5c05d869e7364518c0144c7ee7b90dc2f16be9bddb9680d4e90683025",
+          "memberCount": 10
+        }
+      ],
+      "scope": {
+        "runtime": [
+          "artplayer",
+          "artplayer-plugin-chapter"
+        ],
+        "types": [
+          "artplayer",
+          "artplayer-plugin-chapter"
+        ],
+        "additionalTypes": [
+          "artplayer-plugin-audio-track",
+          "artplayer-plugin-hls-control"
+        ]
+      }
+    },
+    {
+      "command": [
+        "test:ads-types-package"
+      ],
+      "elapsedMs": 8786,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-ads-types-package.log",
+        "sha256": "bcea38e8298308bddf1436fd423ce7e81fd26daddd2ab26fab7d2ce3094d24e1"
+      },
+      "report": {
+        "path": "refactor/.cache/ads-package-types-SnPgCO/report.json",
+        "sha256": "effeb1072cdbfd680d9de6ab72ea96d3e03aa044082ea1aa2846aa326cc82bef"
+      },
+      "packages": [
+        {
+          "name": "artplayer-plugin-ads",
+          "version": "3.0.0",
+          "path": "refactor/.cache/ads-package-types-SnPgCO/artplayer-plugin-ads.tgz",
+          "sha256": "60ce9da9b6b077fbebf32ec3afde8c87114c573524b773fb34d68f55bcca38c8",
+          "memberCount": 13
+        }
+      ],
+      "scope": "Packed current core and Ads, offline Yarn install and frozen reinstall outside workspace; five type modes and Node export identity. Historical scalar inference correction accepted with scope by maintainer; not complete media or distribution release validation."
+    },
+    {
+      "command": [
+        "test:ambilight-types-package"
+      ],
+      "elapsedMs": 25729,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-ambilight-types-package.log",
+        "sha256": "cfaa6c1e8d398ace7cf3dc18f8bdc562dcbcca136eca6c3fe77852d53ffa8494"
+      },
+      "report": {
+        "path": "refactor/.cache/ambilight-package-types-70H1yg/report.json",
+        "sha256": "8859f775a47d061cfc4e63d0f175e7e8f91811e579623dc258ee930013d7bd96"
+      },
+      "packages": [
+        {
+          "name": "artplayer-plugin-ambilight",
+          "version": "2.0.0",
+          "path": "refactor/.cache/ambilight-package-types-70H1yg/artplayer-plugin-ambilight.tgz",
+          "sha256": "badb394ff26fa7e015a0f63b6238b6096641412b614c5e01d04b42e398e2ab55",
+          "memberCount": 11
+        }
+      ],
+      "scope": "Two actual published plugins and packed candidate installed outside workspace with packed candidate core; offline and frozen reinstall, exact bytes, full factory replacements and required root option; runtime optional calls and self alias. Published 1.1.0 NodeNext ESM namespace and four old direct-call diagnostics are retained. Published 1.0.0 export-assignment and required fields have documented migration. This is not proxy, device or complete distribution acceptance."
+    },
+    {
+      "command": [
+        "test:asr-types-package"
+      ],
+      "elapsedMs": 20721,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-asr-types-package.log",
+        "sha256": "3da0ac112e89fc0dfe6510112b8c613c9ea2dcaa05c8db4cb69f434613ffe7ee"
+      },
+      "report": {
+        "path": "refactor/.cache/asr-package-types-y9zOrV/report.json",
+        "sha256": "2e7469e26111a1c4c16d7ee72ba81cf26a468bd6aaf0ae47a5ded9c891e1e1c3"
+      },
+      "packages": [
+        {
+          "name": "artplayer-plugin-asr",
+          "version": "3.0.0",
+          "path": "refactor/.cache/asr-package-types-y9zOrV/artplayer-plugin-asr.tgz",
+          "sha256": "7f3feaad8e9c7ad1b542620badccaac3f4944327a2ba86e945ba8511a77901bd",
+          "memberCount": 11
+        }
+      ],
+      "scope": {}
+    },
+    {
+      "command": [
+        "test:auto-thumbnail-types-package"
+      ],
+      "elapsedMs": 24830,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-auto-thumbnail-types-package.log",
+        "sha256": "92a0bf7cef4a26053c7cdc7a0731dd807df04f1a4fb85396f046bdbd90d23c7a"
+      },
+      "report": {
+        "path": "refactor/.cache/auto-thumbnail-package-types-UgpI1V/report.json",
+        "sha256": "f53c0b2017c95ae852cd3529495d7e82cf3d2edd088f2761643ac16245fb2a27"
+      },
+      "packages": [
+        {
+          "name": "artplayer-plugin-auto-thumbnail",
+          "version": "2.0.0",
+          "path": "refactor/.cache/auto-thumbnail-package-types-UgpI1V/artplayer-plugin-auto-thumbnail.tgz",
+          "sha256": "a97c33c178e80705da8b0b4f6017604d7eba061b7ee381dc7a0494e88e520e3f",
+          "memberCount": 12
+        }
+      ],
+      "scope": "Actual npm 1.1.0 and packed candidate installed outside the workspace. Root historical type shape and conditional runtime entry are checked with exact negative lines. Registration and module identities use installed artifacts; no native extraction or device acceptance is implied."
+    },
+    {
+      "command": [
+        "test:canvas-types-package"
+      ],
+      "elapsedMs": 22757,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-canvas-types-package.log",
+        "sha256": "a9573a79eb1016a3f18c5df19591d30c0137f03db432986d8961b64a0547cace"
+      },
+      "report": {
+        "path": "refactor/.cache/canvas-package-types-YgkfKC/report.json",
+        "sha256": "6b9ba6fd53be7c93dcab04938748a2361fcb59793a3e7685b7643c3f8904172c"
+      },
+      "packages": [
+        {
+          "name": "artplayer-proxy-canvas",
+          "version": "2.0.0",
+          "path": "refactor/.cache/canvas-package-types-YgkfKC/artplayer-proxy-canvas.tgz",
+          "sha256": "d2162cd1300d9df2b84394041459693840281f9b79a0619258c6b91252cdb96e",
+          "memberCount": 13
+        }
+      ],
+      "scope": "Two actual published proxies and packed candidate installed outside workspace with packed candidate core; offline and frozen reinstall, exact bytes and root/legacy/runtime contracts. Root preserves published 1.1.0 pure factory, optional Parameters, exact HTMLCanvasElement result and NodeNext ESM namespace shape. Runtime adds accurate self identity with CommonJS/ESM and old Node10 resolution. Published 1.0.0 required callback/export= differences and 1.1.0 direct NodeNext ESM errors remain recorded. No native media, device or complete distribution acceptance."
+    },
+    {
+      "command": [
+        "test:chromecast-types-package"
+      ],
+      "elapsedMs": 26594,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-chromecast-types-package.log",
+        "sha256": "66112bb81d230e123951fcaf6d310eb47fec357dbf89136c220af012ecad520d"
+      },
+      "report": {
+        "path": "refactor/.cache/chromecast-package-types-Lox9cP/report.json",
+        "sha256": "a7097d7f28478e7548d403f1a629aaa6479d9207eed412cee8362c17e52e81af"
+      },
+      "packages": [
+        {
+          "name": "artplayer-plugin-chromecast",
+          "version": "2.0.0",
+          "path": "refactor/.cache/chromecast-package-types-Lox9cP/artplayer-plugin-chromecast.tgz",
+          "sha256": "c2822362c117b20b5c3b513c0ec039496c49874d09106209f4ab800b5e97932b",
+          "memberCount": 11
+        }
+      ],
+      "scope": "Two actual published plugins and packed candidate installed outside workspace with packed candidate core; offline and frozen reinstall, exact bytes, full factory replacements and required root argument. Runtime adds precise callbacks, asynchronous registration and self alias. Published 1.1.0 NodeNext ESM namespace and eight original direct-consumer diagnostics are retained. Published 1.0.0 export-assignment typing conflicts are recorded separately; both versions had four optional option fields. This is not real SDK, device or complete distribution acceptance."
+    },
+    {
+      "command": [
+        "test:danmuku-types-package"
+      ],
+      "elapsedMs": 41386,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-danmuku-types-package.log",
+        "sha256": "d685830a2aa9a047c63a01fbe2bf81177fe9ff4627d44ce342b2988f3293003c"
+      },
+      "report": {
+        "path": "refactor/.cache/danmuku-package-types-Y9cYCy/report.json",
+        "sha256": "a08492556156dc1a559f8ade04955a2ce5e2e7becafe9f6604c19ddf35bfadc9"
+      },
+      "packages": [
+        {
+          "name": "artplayer-plugin-danmuku",
+          "version": "6.0.0",
+          "path": "refactor/.cache/danmuku-package-types-Y9cYCy/artplayer-plugin-danmuku.tgz",
+          "sha256": "99ecc6290a2e7bd337c5f4245d6e2bed4c1137ab489e9b8227feb6ce2ba05896",
+          "memberCount": 12
+        }
+      ],
+      "scope": "Actual npm 5.3.0 and packed candidate outside workspace; offline and frozen reinstall, exact installed bytes, unchanged root declaration, full factory replacement and extraction. Old synchronous emit and object points remain root typing only. Runtime types are checked separately. NodeNext root namespace failures are compared by exact codes and line positions. This is not real playback or complete publication acceptance."
+    },
+    {
+      "command": [
+        "test:danmuku-mask-types-package"
+      ],
+      "elapsedMs": 33410,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-danmuku-mask-types-package.log",
+        "sha256": "778cc1837a9396286d68ccf0b2fddec6a7388b5e9d1dc94dd15c9a1529ce4f91"
+      },
+      "report": {
+        "path": "refactor/.cache/danmuku-mask-package-types-wtcGjM/report.json",
+        "sha256": "07e45c8509e0db3ff127c8e413aee7175191f19b8efee1c3f24ca1c1872df4a6"
+      },
+      "packages": [
+        {
+          "name": "artplayer-plugin-danmuku-mask",
+          "version": "2.0.0",
+          "path": "refactor/.cache/danmuku-mask-package-types-wtcGjM/artplayer-plugin-danmuku-mask.tgz",
+          "sha256": "9f31050b94ce421a50e757d121e8f5c4f73a27c603073a901566d51d73972a66",
+          "memberCount": 9
+        }
+      ],
+      "scope": "Actual published and candidate packages installed outside workspace, offline/frozen lock stability, byte checks, strict types and CJS/legacy registration. No model startup, native inference, ESM browser or GPU acceptance."
+    },
+    {
+      "command": [
+        "test:dash-types-package"
+      ],
+      "elapsedMs": 8798,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-dash-types-package.log",
+        "sha256": "c8593feab34233dc450bdadbeaf729d974ca7e83c5a84147afea533bf4edf06d"
+      },
+      "report": {
+        "path": "refactor/.cache/dash-package-types-E5mF2p/report.json",
+        "sha256": "722a9915a3cb9c084bca5cd1f1f3f91edd54431204f9bc7257a06173a38c60a1"
+      },
+      "packages": [
+        {
+          "name": "artplayer-plugin-dash-control",
+          "version": "2.0.0",
+          "path": "refactor/.cache/dash-package-types-E5mF2p/artplayer-plugin-dash-control.tgz",
+          "sha256": "7d0867090263f3395623316cc146da233ab88e8cb78b91be9fc85217e709affe",
+          "memberCount": 10
+        }
+      ],
+      "scope": "Packed current core and DASH, offline Yarn install and frozen reinstall outside workspace; isolated public type acceptance only, not complete package runtime/SDK/media release validation."
+    },
+    {
+      "command": [
+        "test:dpip-types-package"
+      ],
+      "elapsedMs": 23910,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-dpip-types-package.log",
+        "sha256": "972ca3ff42db1cf3eed8d776215ace434e869dc397d87314404a3ab017ce2b22"
+      },
+      "report": {
+        "path": "refactor/.cache/dpip-package-types-Mgy4Mg/report.json",
+        "sha256": "940358b05b43f9d8b3c795278ee315a67c67fd5ae1a839add0a3f0431c61fa46"
+      },
+      "packages": [
+        {
+          "name": "artplayer-plugin-document-pip",
+          "version": "2.0.0",
+          "path": "refactor/.cache/dpip-package-types-Mgy4Mg/artplayer-plugin-document-pip.tgz",
+          "sha256": "6019c211a7c3191dce4e2a53718ae653de1a828d1a155d1f00c5a43bd82952e8",
+          "memberCount": 10
+        }
+      ],
+      "scope": "Four actual published packages and packed candidate installed outside workspace with packed candidate core; offline and frozen reinstall, exact bytes, compiler/default/import= contracts. Candidate keeps required Parameters and assignable void Result while offering opt-in AsyncResult. Published 1.0.0 missing runtime is an explicit negative control; historical NodeNext ESM diagnostics are retained. This is not native Document PiP or complete distribution/device acceptance."
+    },
+    {
+      "command": [
+        "test:iframe-types-package"
+      ],
+      "elapsedMs": 14591,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-iframe-types-package.log",
+        "sha256": "50b1616c1726f43e92d347e7cda863f125bf055a0f3c5d0c48d3ca166a6eabaf"
+      },
+      "report": {
+        "path": "refactor/.cache/iframe-package-types-3FZBOo/report.json",
+        "sha256": "b7bc0aa082ba9e457843cdf576027e646f7b8977c69b7ff20d5e8ed4e43762ab"
+      },
+      "packages": [
+        {
+          "name": "artplayer-tool-iframe",
+          "version": "2.0.0",
+          "path": "refactor/.cache/iframe-package-types-3FZBOo/candidate.tgz",
+          "sha256": "4466f2a84af91d7b014772eb635fc595c339ce27ebcea9e4c737bb920320b9c4",
+          "memberCount": 10
+        }
+      ],
+      "scope": "Actual npm archive, frozen Git workspace pack and candidate Yarn tarball installed outside workspace; byte verification, offline/frozen lock and strict positive/negative consumers. Old npm CJS namespace and distinct helper are preserved observations, not claims the candidate provides old package-name/helper aliases. Native player and distribution migration remain 05/06."
+    },
+    {
+      "command": [
+        "test:jassub-types-package"
+      ],
+      "elapsedMs": 58541,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-jassub-types-package.log",
+        "sha256": "bbaaf3a424cf34256e88640474c34ecbcbc3e4f392515b8bd555b1f0bd9c0d93"
+      },
+      "report": {
+        "path": "refactor/.cache/jassub-package-types-WnTuSm/report.json",
+        "sha256": "5c5d3a03018f54b9d1c4496c73a34ec7c7160120d13838c6182a42a9a6031d6d"
+      },
+      "packages": [
+        {
+          "name": "artplayer-plugin-jassub",
+          "version": "2.0.0",
+          "path": "refactor/.cache/jassub-package-types-WnTuSm/artplayer-plugin-jassub.tgz",
+          "sha256": "3ae1d94dcd3c8ecdd8978ad53aadafacd81235de433b74ad3925b9f6faa91ce1",
+          "memberCount": 16
+        }
+      ],
+      "scope": "Actual npm 1.0.0/1.1.0 and Yarn-packed candidate/core installed outside workspace; offline installation and forced frozen reinstall with unchanged lock, strictly verified installed member hashes and non-link checks; root declaration text unchanged after CRLF normalization with both raw hashes recorded, exact old diagnostics, conditional accurate runtime declarations and Node lazy factory/legacy identity. Registrars are never invoked in Node; this is not browser Worker/WASM/font rendering or publication acceptance."
+    },
+    {
+      "command": [
+        "test:mediabunny-types-package"
+      ],
+      "elapsedMs": 37514,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-mediabunny-types-package.log",
+        "sha256": "d77de3dc2c048f4fcfca0c91b73896d85b711e1651e5b3d8ef8cfc0739007f34"
+      },
+      "report": {
+        "path": "refactor/.cache/mb-package-types-hRYQwF/report.json",
+        "sha256": "9198f329037f68b9a37bbb1c290f4003430054aabbd7daae76c3e578be78996d"
+      },
+      "packages": [
+        {
+          "name": "artplayer-proxy-mediabunny",
+          "version": "2.0.0",
+          "path": "refactor/.cache/mb-package-types-hRYQwF/artplayer-proxy-mediabunny.tgz",
+          "sha256": "60f766bed2d42d46050bb9dfb60d1f8bdd61178dd686f882ebba1d704a093caf",
+          "memberCount": 10
+        }
+      ],
+      "scope": "Two frozen published packages and packed candidate with packed candidate core, installed outside workspace; offline/frozen reinstall, exact bytes, default/legacy CJS/ESM runtime and compiler matrices. Exact optional whole-factory assignments checked against actual historical declaration bytes. New shim types are opt-in, without SDK declaration leakage. Historical NodeNext ESM failures remain explicit negative controls. Not native decoding, old-core runtime combinations or full distribution/license acceptance."
+    },
+    {
+      "command": [
+        "test:multiple-subtitles-types-package"
+      ],
+      "elapsedMs": 34765,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-multiple-subtitles-types-package.log",
+        "sha256": "958013bd63060fecff61e0f0c03ab33fc8a0e488763a54c6e96b5bc20b2b9ba8"
+      },
+      "report": {
+        "path": "refactor/.cache/multiple-subtitles-package-types-lUxU8L/report.json",
+        "sha256": "2769895ba755e26d2dbd620e8dadef2884cef57209f255ebc799e61a130b9bf1"
+      },
+      "packages": [
+        {
+          "name": "artplayer-plugin-multiple-subtitles",
+          "version": "2.0.0",
+          "path": "refactor/.cache/multiple-subtitles-package-types-lUxU8L/artplayer-plugin-multiple-subtitles.tgz",
+          "sha256": "53afbd18060d055994311647ce1e1796ca62dd5c85e3d142ba0e80d9d4c3195d",
+          "memberCount": 12
+        }
+      ],
+      "scope": "Three actual published packages in five compiler modes and packed candidate in seven modes, installed outside the workspace with packed core. Offline frozen reinstalls and byte identity verified. Latest npm 1.2.0 factory shape, synchronous result and NodeNext namespace retained under approved ADR-025; its eight old direct-consumer diagnostics are preserved. Earlier 1.0.0/1.1.0 export-assignment conflicts have documented runtime-entry migration. Runtime asynchronous result and CommonJS namespace types pass independently. Full device and distribution acceptance remains separate."
+    },
+    {
+      "command": [
+        "test:thumbnail-types-package"
+      ],
+      "elapsedMs": 12444,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-thumbnail-types-package.log",
+        "sha256": "26efb49d64b974f1f5ab38eecf8bda5f5382819a3a46465a3db9502a63fe2795"
+      },
+      "report": {
+        "path": "refactor/.cache/thumbnail-package-types-rV4UOs/report.json",
+        "sha256": "629167ac9f0666feeb558eafcbdfe6bc692d9d5364b45df1f1af0f781f6b8307"
+      },
+      "packages": [
+        {
+          "name": "artplayer-tool-thumbnail",
+          "version": "5.0.0",
+          "path": "refactor/.cache/thumbnail-package-types-rV4UOs/candidate.tgz",
+          "sha256": "f79aaa653aebb9cc61463ebf7e1f981742b5afb10cbb2021faa7d2fdc4feb7af",
+          "memberCount": 12
+        }
+      ],
+      "scope": "Frozen Git input fixture and candidate Yarn pack installed outside workspace. The frozen fixture is not an original npm archive; no recovered 3.5.31 complete archive is claimed. Candidate root/legacy runtime, offline frozen install, all files and strict consumers verified."
+    },
+    {
+      "command": [
+        "test:vast-types-package"
+      ],
+      "elapsedMs": 33461,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-vast-types-package.log",
+        "sha256": "9fadc5644f9e2b755d13fb3189edaeb55f8f003ba3b9bc63159a9783028a7673"
+      },
+      "report": {
+        "path": "refactor/.cache/vast-package-types-sMuMTY/report.json",
+        "sha256": "cd7b15f64761efea1afa96dbf8e98cc3722ff289cbeb863c035ab1ed9a657e33"
+      },
+      "packages": [
+        {
+          "name": "artplayer-plugin-vast",
+          "version": "2.0.0",
+          "path": "refactor/.cache/vast-package-types-sMuMTY/artplayer-plugin-vast.tgz",
+          "sha256": "c1f1f3423b571f3dab3bb25a52b322f9d5fc5c35a509e8767bd59a2d09a41598",
+          "memberCount": 12
+        }
+      ],
+      "scope": "Actual published and Yarn-packed candidate installed outside workspace; offline forced frozen reinstall, member hashes and declaration path isolation. No real IMA, live ad SDK registration, device or complete task06 distribution claim."
+    },
+    {
+      "command": [
+        "test:vtt-thumbnail-types-package"
+      ],
+      "elapsedMs": 41251,
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/ecosystem-types/run-sbfTlH/test-vtt-thumbnail-types-package.log",
+        "sha256": "8b71eea71868ac0ab377e269a8bdbec012de81c6baa066f910b2f89b665850e8"
+      },
+      "report": {
+        "path": "refactor/.cache/vtt-thumbnail-package-types-Z6WLah/report.json",
+        "sha256": "6eb63df00e82e827871d7285029bd05b518210aa2b811810d741e7130caf2d95"
+      },
+      "packages": [
+        {
+          "name": "artplayer-plugin-vtt-thumbnail",
+          "version": "2.0.0",
+          "path": "refactor/.cache/vtt-thumbnail-package-types-Z6WLah/artplayer-plugin-vtt-thumbnail.tgz",
+          "sha256": "62bc95cecf82bd505519ca33c6ab50157c144802945d625b98865cf253057e56",
+          "memberCount": 13
+        }
+      ],
+      "scope": "Five actual published packages in five compiler modes and packed candidate in seven modes, installed outside the workspace with packed core. Offline/frozen reinstall and byte identity are verified. Root preserves latest 1.1.0 factory and NodeNext ESM namespace, including plain module replacements. Historical raw direct-import diagnostics remain recorded. Direct/default import=require forms retain opposing 1.0.x and 1.1.0 evidence; the candidate follows 1.1.0 under approved type-compatibility-policy.md and documents earlier migration. Runtime describes Promise results, writable self identity and all named types with NodeNext and Node10 including no-interop consumers. Device and full distribution acceptance remain separate."
+    }
+  ],
+  "limitations": [
+    "All 21 libraries are covered by 18 installed consumer commands. Exact known historical diagnostics remain distinct from candidate errors.",
+    "Consumer commands produce separate archives. This is not a single frozen all-package release candidate or browser/device/review acceptance.",
+    "The input-fingerprint fix was made after this complete run. These pre-fix results are preserved without rebinding them to a new fingerprint.",
+    "No publication authorization, remote workflow execution or formal review is implied."
+  ],
+  "inputFix": {
+    "reproducedScope": {
+      "path": "refactor/.cache/rel02-input-scope-before.json",
+      "sha256": "91fdb6bfcdcd9ac8223fc19d22d191a9788f56e37b18b7435e2d893ae2902771"
+    },
+    "before": {
+      "tests": 4,
+      "pass": 0,
+      "fail": 4,
+      "log": {
+        "path": "refactor/.cache/rel02-input-tests-before.log",
+        "sha256": "ce2c60be9be950e100d6f446413dba9e6f66f18e6fb1229c4de3f89b18e4769f"
+      }
+    },
+    "after": {
+      "tests": 73,
+      "pass": 73,
+      "fail": 0,
+      "durationMs": 2208.8435,
+      "log": {
+        "path": "refactor/.cache/rel02-release-input-tests.log",
+        "sha256": "056a7f7ad7b68c511ab660666c9d3f3fcc8660e1a7cd7860c23947112def31ee"
+      }
+    },
+    "files": [
+      {
+        "path": "refactor/scripts/release-ledger.mjs",
+        "sha256": "b62466cb829d79cd2fd7455e27faa3aae3c736ed7e451dcc613dd3654d564712"
+      },
+      {
+        "path": "refactor/scripts/release-ledger.test.mjs",
+        "sha256": "158c01d2de9c3a40aa2b00900f4563157384031dee7ee1c596d8877f7a87787d"
+      }
+    ]
+  }
+}

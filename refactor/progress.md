@@ -1,5 +1,16 @@
 # 进度与证据
 
+## REL-02 全包安装类型验证与输入指纹修复
+
+21个库的18组隔离消费命令全部通过，包含核心、所有插件/proxy/工具的目标major
+tarball与适用历史/当前类型检查；3组构建准备也通过，用时547.47秒。逐包归档和
+报告摘要见[证据](baselines/major-installed-types-validation.json)。这不是完整发布准入。
+同时修复候选输入指纹遗漏refactor/scripts和fixtures的问题：4项失效回归先失败，
+修正后73项台账/交付包测试与lint通过。类型报告保留其修复前输入，不套用新指纹。
+见[记录](changes/2026-09-16-REL-02-types-inputs.md)。下一步用修正后的输入准备统一
+浏览器候选并继续组合/回退验收。REL-02 doing；224 done、21 doing、40 todo，共285项。
+没有启动复盘、远端写入或发布。
+
 ## PKG-AUDIO-BUFFER-01 断流测试等待顺序修复
 
 修正switchUrl与网络放行互相等待的问题；完整MP4元数据/无编码帧的回归用旧顺序

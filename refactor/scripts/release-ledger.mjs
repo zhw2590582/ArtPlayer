@@ -102,7 +102,7 @@ export function fingerprintInputs(directory, files, dependencies, site) {
   const selected = files.filter(file => dependencies.some(name => file.startsWith(`packages/${name}/`))
     || /^(?:scripts\/|types\/|test\/|\.github\/workflows\/)/.test(file)
     || /^(?:package\.json|yarn\.lock|\.node-version|\.gitattributes|\.yarnrc|\.npmrc|tsconfig[^/]*\.json|playwright[^/]*\.js|eslint\.config\.js|lerna\.json)$/.test(file)
-    || /^refactor\/(?:third-party\.json|scripts\/release-ledger[^/]*\.mjs)$/.test(file)
+    || /^refactor\/(?:scripts\/|fixtures\/|third-party\.json$)/.test(file)
     || /^refactor\/(?:compatibility\.md|quality-contract\.md|environment-matrix\.md|release-reviews\.md|version-policy\.md|package-inventory\.json|impact-policy\.json)$/.test(file)
     || /^refactor\/baselines\/(?:releases|.*-release|.*-sdk(?:-matrix)?|.*-core)\.json$/.test(file)
     || (site && /^(?:docs\/|example\/)/.test(file)))

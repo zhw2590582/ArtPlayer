@@ -113,6 +113,45 @@ test('Release input hashing isolates unrelated package edits but invalidates sha
   }
 })
 
+for (const file of ['refactor/scripts/ads-package-types.mjs', 'refactor/scripts/releases.mjs', 'refactor/fixtures/legacy-consumer.ts']) {
+  test(`Changed validation input invalidates previously complete candidate evidence: ${file}`, (t) => {
+    const { directory, save } = temp(t)
+    const files = ['packages/example/src/index.ts', file]
+    files.forEach(name => save(name, 'original'))
+    const fingerprint = () => fingerprintOf(fingerprintInputs(directory, files, ['example'], false))
+    const input = fixture()
+    input.fingerprint = fingerprint()
+    input.candidate.inputFingerprint = input.fingerprint
+    for (const evidence of Object.values(input.evidence))
+      evidence.inputFingerprint = input.fingerprint
+    assert.equal(evaluatePackage(input).status, 'evidence-complete')
+    save(file, 'changed validation or historical consumer')
+    input.fingerprint = fingerprint()
+    const result = evaluatePackage(input)
+    assert.equal(result.status, 'blocked')
+    assert(result.blockers.some(blocker => blocker.kind === 'stale-candidate'))
+    assert(result.blockers.some(blocker => blocker.kind === 'evidence:types'))
+  })
+}
+
+test('Validation inputs include newly discovered helpers but avoid report self-dependencies', (t) => {
+  const { directory, save } = temp(t)
+  const source = 'packages/example/src/index.ts'
+  const helper = 'refactor/scripts/helpers/consumer.ts'
+  const output = 'refactor/baselines/new-validation.json'
+  const progress = 'refactor/progress.md'
+  const cached = 'refactor/.cache/consumer/report.json'
+  for (const file of [source, helper, output, progress, cached]) save(file, 'original')
+  const fingerprint = files => fingerprintOf(fingerprintInputs(directory, files, ['example'], false))
+  const initial = fingerprint([source])
+  const withHelper = fingerprint([source, helper])
+  assert.notEqual(withHelper, initial)
+  assert.equal(fingerprint([source, helper, output, progress, cached]), withHelper)
+  for (const file of [output, progress, cached]) save(file, 'new evidence')
+  assert.equal(fingerprint([source, helper, output, progress, cached]), withHelper)
+  assert.equal(fingerprint([source, output, progress, cached]), initial)
+})
+
 test('Release input fingerprint normalizes text EOL but records raw bytes and preserves binary differences', (t) => {
   const { directory, save } = temp(t)
   const files = ['packages/core/src.ts', 'packages/core/font.woff2']

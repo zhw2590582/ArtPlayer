@@ -71,6 +71,11 @@ outputRoot必须在仓库内；目录完整文件集须等于files，新增、�
 契约以及固定release/SDK/历史core配置也参与输入指纹；不断新增的普通validation
 报告不作为构建输入，避免报告包含自己而无法完成绑定。
 
+共享验证输入也包括整个refactor/scripts/和refactor/fixtures/：实际打包/类型检查、
+历史归档校验器、辅助模块及冻结消费者均会影响结论。修改、新增或删除这些输入
+必须使旧候选/报告失效，不能只给release-ledger自身计算指纹。普通baselines验证
+结果、progress.md和被Git忽略的.cache输出继续不参与，避免报告自依赖。
+
 文本按明确扩展名和已知文本文件归一CRLF为LF，使Windows/Linux文本签出可以比较；
 报告同时保留原始字节SHA-256。字体/WASM/媒体等其他输入不作文本转换，候选SRI、
 站点实际输出、报告及其底层附件始终按原始字节校验。指纹不是单独的HEAD比较：
