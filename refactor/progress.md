@@ -1,5 +1,18 @@
 # 进度与证据
 
+## SITE-07 Monaco 历史 Unicode 数据检查点
+
+三份原生成配方在冻结依赖下复现 RTL/Emoji 正则、imprecise token 表达式和全部
+5,034 个断字整数，与固定 VS Code 源码、两份原 map 和实际交付 editor/worker
+绑定。历史输入包含 2017/2019 草案与 2021 数据，保留差异而非统一换最新版。
+新增完整 Unicode 历史条款/来源说明，正常通知交付为 90 份加索引。
+
+34/34 单测、类型/lint/工具链、联网/离线复验及三浏览器编辑/撤销/字符分类、移动
+实播和 HTTP notices 6/6 通过。见[检查点](changes/2026-09-15-SITE-07-monaco-unicode.md)
+和[证据](baselines/monaco-unicode-validation.json)。17 个旧工具依赖仅隔离复验，
+根依赖/锁和运行资产未改。SITE-07/VENDOR-06 仍开放，202 done、21 doing、43 todo；
+下一步继续剩余来源和插件兼容验收，不将这一局部检查算成整体发布完成。
+
 ## SITE-07 Monaco DOM 改编来源与通知绑定
 
 六段 DOM 声明与固定 VS Code 源码及原始 source map 精确对应，当前 editor.main.js 与原 npm 归档相同。新增 WinJS 4.4.5 固定参考源码/完整 MIT 条款和明确的未知原始改编版本说明；普通构建交付 88 份 notice 加索引。30/30 单测、类型/lint、联网/离线复验和三浏览器尺寸/滚动位置/移动实播/通知 HTTP 6/6 通过。见[记录](changes/2026-09-15-SITE-07-monaco-dom.md)和[证据](baselines/monaco-dom-origins-validation.json)。

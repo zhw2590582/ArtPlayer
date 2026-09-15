@@ -1,0 +1,25 @@
+{
+  "name": "unicode-utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fetch-data.js",
+  "dependencies": {
+    "regexpu": "^3.3.0"
+  },
+  "devDependencies": {
+    "regexpu": "^4.5.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexandrudima/unicode-utils.git"
+  },
+  "author": "Alex Dima",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexandrudima/unicode-utils/issues"
+  },
+  "homepage": "https://github.com/alexandrudima/unicode-utils#readme"
+}

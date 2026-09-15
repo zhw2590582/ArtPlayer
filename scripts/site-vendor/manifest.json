@@ -1035,6 +1035,16 @@
           "source": "refactor/baselines/site-vendor/monaco-dom/ATTRIBUTION.md.txt",
           "target": "docs/licenses/monaco-editor/core-dom/ATTRIBUTION.md",
           "sha256": "0858d19261742809cecd7174a0a06b2b0013a4b9560b78aede1edd3dd350da21"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-unicode/LICENSE.txt",
+          "target": "docs/licenses/monaco-editor/core-unicode/LICENSE.txt",
+          "sha256": "80b381b2f157c31e7f3222bdb932bda9fbd7b335e888beec56820fb2993363de"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-unicode/ATTRIBUTION.md.txt",
+          "target": "docs/licenses/monaco-editor/core-unicode/ATTRIBUTION.md",
+          "sha256": "51d583153fd1ed701a2b8810b3b1994d337002f074255e75a7d06790a381a1a6"
         }
       ],
       "review": "The complete upstream Monaco LICENSE/ThirdPartyNotices are retained. The unmodified bundled Codicons font exactly matches @vscode/codicons 0.0.26; its historical README, CC BY 4.0 content license, MIT code license and added attribution are distributed below. Other site assets remain subject to their separate provenance reviews.",
@@ -1238,6 +1248,19 @@
           "notices": [
             "docs/licenses/monaco-editor/core-dom/LICENSE.txt",
             "docs/licenses/monaco-editor/core-dom/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "Unicode data (Monaco core)",
+          "version": "mixed historical inputs: 10.0.0d5, 13.0 drafts, Emoji 13.1",
+          "tarball": "https://github.com/alexdima/unicode-utils",
+          "assets": [
+            "docs/assets/js/vs/editor/editor.main.js",
+            "docs/assets/js/vs/base/worker/workerMain.js"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/core-unicode/LICENSE.txt",
+            "docs/licenses/monaco-editor/core-unicode/ATTRIBUTION.md"
           ]
         }
       ]

@@ -125,6 +125,10 @@ Included component: WinJS-derived DOM helpers (Monaco core) unversioned adaptati
 
 Source: https://github.com/winjs/winjs/tree/4329b1133b243d9ded3b5a1f98d096ee8e80e889
 
+Included component: Unicode data (Monaco core) mixed historical inputs: 10.0.0d5, 13.0 drafts, Emoji 13.1
+
+Source: https://github.com/alexdima/unicode-utils
+
 - licenses/monaco-editor/LICENSE
 - licenses/monaco-editor/ThirdPartyNotices.txt
 - licenses/monaco-editor/codicons/LICENSE
@@ -154,6 +158,8 @@ Source: https://github.com/winjs/winjs/tree/4329b1133b243d9ded3b5a1f98d096ee8e80
 - licenses/monaco-editor/core-path/ATTRIBUTION.md
 - licenses/monaco-editor/core-dom/LICENSE.txt
 - licenses/monaco-editor/core-dom/ATTRIBUTION.md
+- licenses/monaco-editor/core-unicode/LICENSE.txt
+- licenses/monaco-editor/core-unicode/ATTRIBUTION.md
 
 ## console legacy-vendor-with-TS-adapter
 

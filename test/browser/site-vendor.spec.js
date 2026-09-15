@@ -45,6 +45,7 @@ test('mobile vConsole shows logs and upstream site notice texts are served uncha
   expect(await index.text()).toContain('Included component: @vscode/codicons 0.0.26')
   expect(await index.text()).toContain('Included component: typescript (Monaco worker) 4.4.4')
   expect(await index.text()).toContain('Included component: dompurify (Monaco core) 2.3.1')
+  expect(await index.text()).toContain('Included component: Unicode data (Monaco core) mixed historical inputs: 10.0.0d5, 13.0 drafts, Emoji 13.1')
   expect(await index.text()).toContain('Included component: marked (Monaco core) 3.0.2')
   expect(await index.text()).toContain('Included component: vscode-html-languageservice 4.1.1')
   expect(await index.text()).toContain('Included component: vscode-json-languageservice 4.1.9')

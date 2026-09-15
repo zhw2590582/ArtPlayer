@@ -6,6 +6,7 @@ import { verifyMonacoCoreNotices } from './site-vendor/monaco/core-origins.ts'
 import { verifyMonacoDomNotices } from './site-vendor/monaco/dom-origins.ts'
 import { verifyMonacoPathNotices } from './site-vendor/monaco/node-path.ts'
 import { verifyMonacoLanguageNotices } from './site-vendor/monaco/notices.ts'
+import { verifyMonacoUnicodeNotices } from './site-vendor/monaco/unicode-origins.ts'
 import { writeOrCheckNotices } from './site-vendor/notices.ts'
 
 assert(process.argv.slice(2).every(arg => arg === '--check'), 'Use yarn build:site-notices [--check]')
@@ -15,6 +16,7 @@ assert.deepEqual(manifest.groups.map(group => group.name).sort(), ['console', 'm
 assert.deepEqual(manifest.groups.filter(group => group.name !== 'console').flatMap(group => (group.components || []).map(component => component.name)).sort(), [
   '@babel/runtime',
   '@vscode/codicons',
+  'Unicode data (Monaco core)',
   'WinJS-derived DOM helpers (Monaco core)',
   'copy-text-to-clipboard',
   'core-js',
@@ -94,6 +96,7 @@ for (const name of ['LICENSE', 'MIT-LICENSE', 'ATTRIBUTION.md'])
 verifyConsoleNoticeSources(process.cwd(), manifest)
 verifyMonacoCoreNotices(process.cwd(), manifest)
 verifyMonacoDomNotices(process.cwd(), manifest)
+verifyMonacoUnicodeNotices(process.cwd(), manifest)
 verifyMonacoPathNotices(process.cwd(), manifest)
 verifyMonacoLanguageNotices(process.cwd(), manifest)
 const count = writeOrCheckNotices(process.cwd(), manifest, process.argv.includes('--check'))

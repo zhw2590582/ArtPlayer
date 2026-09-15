@@ -1,0 +1,396 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "archives": [
+    {
+      "name": "monaco-editor",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.30.1.tgz",
+      "integrity": "sha512-B/y4+b2O5G2gjuxIFtCE2EkM17R2NM7/3F8x0qcPsqy4V83bitJTIO4TIeZpYlzu/xy6INiY/+84BEm6+7Cmzg==",
+      "sha256": "d7872ab742036036eca48cd54e43d751bede56742f0689bcf4049bcf701468c7"
+    },
+    {
+      "name": "monaco-editor-core",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor-core/-/monaco-editor-core-0.30.1.tgz",
+      "integrity": "sha512-WNxfchYafMZXVfysqg/ESW4MtOpYLPaIKrzudNlgwYvfYID+O/nwSZI5X+KxW84roVzHsNgFGyOOesfHFZwYUA==",
+      "sha256": "a3b004061373a7f6217eba6399f1a1de31970bee2eee693aada289035198c5ec"
+    }
+  ],
+  "generatorArchives": [
+    {
+      "name": "ast-types",
+      "version": "0.9.6",
+      "tarball": "https://registry.npmjs.org/ast-types/-/ast-types-0.9.6.tgz",
+      "integrity": "sha512-qEdtR2UH78yyHX/AUNfXmJTlM48XoFZKBdwi1nzkI1mJL21cmbu0cvjxjpkXJ5NENMq42H+hNs8VLJcqXLerBQ==",
+      "sha256": "19c3f8d574f6005c7662238a5cea533ae54188784d25a6c28646e32f459b440b",
+      "lockedIntegrity": "sha1-ECyenpAF0+fjgpvwxPok7oYu6bk="
+    },
+    {
+      "name": "esprima",
+      "version": "3.1.3",
+      "tarball": "https://registry.npmjs.org/esprima/-/esprima-3.1.3.tgz",
+      "integrity": "sha512-AWwVMNxwhN8+NIPQzAQZCm7RkLC4RbM3B1OobMuyp3i+w73X57KCKaVIxaRZb+DYCojq7rspo+fmuQfAboyhFg==",
+      "sha256": "6ce53f45b7ccf15d62df7768a387a96ef1893014a2a7db68a3299029a6fd43cf",
+      "lockedIntegrity": "sha1-/cpRzuYTOJXjyI1TXOSdv/YqRjM="
+    },
+    {
+      "name": "jsesc",
+      "version": "0.5.0",
+      "tarball": "https://registry.npmjs.org/jsesc/-/jsesc-0.5.0.tgz",
+      "integrity": "sha512-uZz5UnB7u4T9LvwmFqXii7pZSouaRPorGs5who1Ip7VO0wxanFvBL7GkM6dTHlgX+jhBApRetaWpnDabOeTcnA==",
+      "sha256": "3e9a10467c80fe53f193fab92ae0ea5efd58decaa9a97f540fba18fd242f6674",
+      "lockedIntegrity": "sha1-597mbjXW/Bb3EP6R1c9p9w8IkR0="
+    },
+    {
+      "name": "private",
+      "version": "0.1.8",
+      "tarball": "https://registry.npmjs.org/private/-/private-0.1.8.tgz",
+      "integrity": "sha512-VvivMrbvd2nKkiG38qjULzlc+4Vx4wm/whI9pQD35YrARNnhxeiRktSOhSukRLFNlzg6Br/cJPet5J/u19r/mg==",
+      "sha256": "22ba10fa69b6ff5f28c3697594ac19b2540d9ae15b686869cfc533c3c9f23c1b",
+      "lockedIntegrity": "sha512-VvivMrbvd2nKkiG38qjULzlc+4Vx4wm/whI9pQD35YrARNnhxeiRktSOhSukRLFNlzg6Br/cJPet5J/u19r/mg=="
+    },
+    {
+      "name": "recast",
+      "version": "0.11.23",
+      "tarball": "https://registry.npmjs.org/recast/-/recast-0.11.23.tgz",
+      "integrity": "sha512-+nixG+3NugceyR8O1bLU45qs84JgI3+8EauyRZafLgC9XbdAOIVgwV1Pe2da0YzGo62KzWoZwUpVEQf6qNAXWA==",
+      "sha256": "134aa5059790cd0af1b76fcc02b758240a2cbd7608f9ba251de37fd35c6bae26",
+      "lockedIntegrity": "sha1-RR/TAEqx5N+bTktmN2sqIZEkYtM="
+    },
+    {
+      "name": "regenerate",
+      "version": "1.4.0",
+      "tarball": "https://registry.npmjs.org/regenerate/-/regenerate-1.4.0.tgz",
+      "integrity": "sha512-1G6jJVDWrt0rK99kBjvEtziZNCICAuvIPkSiUFIQxVP06RCVpq3dmDo2oi6ABpYaDYaTRr67BEhL8r1wgEZZKg==",
+      "sha256": "e90da6ab166ff03d0dcd2702e5f26c3696d6ef193a1820918ac34badc12af847",
+      "lockedIntegrity": "sha512-1G6jJVDWrt0rK99kBjvEtziZNCICAuvIPkSiUFIQxVP06RCVpq3dmDo2oi6ABpYaDYaTRr67BEhL8r1wgEZZKg=="
+    },
+    {
+      "name": "regenerate-unicode-properties",
+      "version": "2.0.0",
+      "tarball": "https://registry.npmjs.org/regenerate-unicode-properties/-/regenerate-unicode-properties-2.0.0.tgz",
+      "integrity": "sha512-nwsUrHTxYAgA6AyKvP3DBfRL6SrAL0/IRL/EXg/NYvwupss/97KYZK5B2govf5C/9GUGxKhgGtZ99v8fJTYFuQ==",
+      "sha256": "6b88e0426a53f613585573e26c6a9562a9bcd20ddff7200cb6ac5d7ab8beac6b",
+      "lockedIntegrity": "sha1-MFmsn7NIM69QpqAJgM9FwxmpF4Y="
+    },
+    {
+      "name": "regexpu",
+      "version": "3.3.0",
+      "tarball": "https://registry.npmjs.org/regexpu/-/regexpu-3.3.0.tgz",
+      "integrity": "sha512-Kcd/s6ss9yUzEhhrzsRzaZsp0Vn1CzaLyndBp7v8EsmNEiPCdith2nc3xYRuHvOiubhdLLa47O4e4ER//s4llA==",
+      "sha256": "1e35d657f807e560cbcc7e3f698c193a6e8fda45e7017884075b39b3d4aad04e",
+      "lockedIntegrity": "sha1-ib2Wh8E5o6BnpaF2+Jm7L4hnOAc="
+    },
+    {
+      "name": "regexpu-core",
+      "version": "3.3.0",
+      "tarball": "https://registry.npmjs.org/regexpu-core/-/regexpu-core-3.3.0.tgz",
+      "integrity": "sha512-yEaSrwX2BARhdZxw4bWUWbYQWCCCgngXKV/0eWS7cqh3dY0pSP6h91ZvnpLA/WscUNwFT5y57O/C5AkPJVWYKw==",
+      "sha256": "976066ff5bb73f7ba37ad97d2b3f7b9c531219b43ee7f007382013fcf5e8a44f",
+      "lockedIntegrity": "sha1-7fAAIU4osRe38JLIQAzNE9x091Q="
+    },
+    {
+      "name": "regjsgen",
+      "version": "0.3.0",
+      "tarball": "https://registry.npmjs.org/regjsgen/-/regjsgen-0.3.0.tgz",
+      "integrity": "sha512-HVnDMGSR2bwG7BQmTeyiarhsyGyfjO394lZU0T3j7nNEyqCW4SbeyW59ekcUghfruMa3vSOhFcBJ2V2OTRMotQ==",
+      "sha256": "d582217afc5615cda4f48db0809e33aecfe9ad8f6b59e0a2abce0495fdfcc1af",
+      "lockedIntegrity": "sha1-DuSj6SdkMM2iXx54nqbBW4ewy0M="
+    },
+    {
+      "name": "regjsparser",
+      "version": "0.2.1",
+      "tarball": "https://registry.npmjs.org/regjsparser/-/regjsparser-0.2.1.tgz",
+      "integrity": "sha512-tKQ9IpTLb426Y9bJ8+le9UG3miRf8vLlg2Ds9tF2wZ/5HaFv5lSRijMvy4PZYmETa260qiyyLVBFlfkf9/ATNw==",
+      "sha256": "ff4048ab6945c05307f0298503442f7d8bcc632080d7792e4c333d3fc5cc9c4a",
+      "lockedIntegrity": "sha1-w3h1U/rwTndcMCEC7zRtmVAA7Bw="
+    },
+    {
+      "name": "source-map",
+      "version": "0.5.7",
+      "tarball": "https://registry.npmjs.org/source-map/-/source-map-0.5.7.tgz",
+      "integrity": "sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==",
+      "sha256": "e1de289bc493154f00a11cb4e363e0bb37619537d44b36b8112bba4924116b67",
+      "lockedIntegrity": "sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w="
+    },
+    {
+      "name": "unicode-canonical-property-names",
+      "version": "1.0.3",
+      "tarball": "https://registry.npmjs.org/unicode-canonical-property-names/-/unicode-canonical-property-names-1.0.3.tgz",
+      "integrity": "sha512-DKdTLGSOgyvnLRHZdP7LJJFG/i0zta8ZIaqGExh+re+NQ2dxnjFaCiCC1+Ona5fPRkmb4O2uFAiTKzRNrJOa+w==",
+      "sha256": "390919055042b8c4214cae55fe589c69a79137c994d4ae7f1ad7ef20012e036a",
+      "lockedIntegrity": "sha1-Y7DwKXHEgSRT3yIevT75oWs8ouw="
+    },
+    {
+      "name": "unicode-match-property",
+      "version": "0.1.3",
+      "tarball": "https://registry.npmjs.org/unicode-match-property/-/unicode-match-property-0.1.3.tgz",
+      "integrity": "sha512-8sAYGMZ7FzXuRKAsR28EpmShqcQnR8B6VUXKGWSKxPypkx0zRIQP9N6FRDlcmWm8qDCcV9MJhKDgUBzrdz/vWQ==",
+      "sha256": "37596b06dfca35bdc7b9c58970f7d0c6c5ceff9702b7622b210bddeb0f91263a",
+      "lockedIntegrity": "sha1-NxxzCFIrZaLMTPu753UYf3eENSo="
+    },
+    {
+      "name": "unicode-match-property-value",
+      "version": "1.0.2",
+      "tarball": "https://registry.npmjs.org/unicode-match-property-value/-/unicode-match-property-value-1.0.2.tgz",
+      "integrity": "sha512-1gVylfXDNtKrI4C2bgHsQyx4XjgTfcb4YJ+DGkyFIdYW0RR842UM7GiHaZ5+4NxCuj6SntHfcqZoV11jzTDLNw==",
+      "sha256": "91847e893ca16d60ccfce052e65b4b0deeb9eb9a9a2ae24b927c1c6cb1e2a3cb",
+      "lockedIntegrity": "sha1-Vd4wCwQRKoy2Y8AQI0PAgnN3FMw="
+    },
+    {
+      "name": "unicode-property-aliases",
+      "version": "1.4.0",
+      "tarball": "https://registry.npmjs.org/unicode-property-aliases/-/unicode-property-aliases-1.4.0.tgz",
+      "integrity": "sha512-Wwwqwp89bM1GWmm/Lle7KSJKkUS0SRIK+KVHp0ryxy6k9Daa1fh/n8vt46wS5aswK7gzIWHWQBtRdXexgXdf3A==",
+      "sha256": "c26d9f8486b5622c15c826635fdd944ecd1ce94030c86f7a08740437a8b38def",
+      "lockedIntegrity": "sha512-Wwwqwp89bM1GWmm/Lle7KSJKkUS0SRIK+KVHp0ryxy6k9Daa1fh/n8vt46wS5aswK7gzIWHWQBtRdXexgXdf3A=="
+    },
+    {
+      "name": "unicode-property-value-aliases",
+      "version": "1.2.2",
+      "tarball": "https://registry.npmjs.org/unicode-property-value-aliases/-/unicode-property-value-aliases-1.2.2.tgz",
+      "integrity": "sha512-fByS+guPOhAbmjY8j1ZYOk4CBpzOAtaDcd19p5Xzg7O+4/gm3OXSdd2oEFZDfpgUalP1DJeVTSlcAkk/7L96aA==",
+      "sha256": "047566cde31e19801ea9e37bb363419ef69cc9f330facf749fca5e256de2ef89",
+      "lockedIntegrity": "sha1-EqN0b8ZvdfCKP0qNVngPifSay70="
+    }
+  ],
+  "remotes": [
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/2017-UnicodeData.txt",
+      "sha256": "52423e4d7492167b62f518f68d54db88930abbbff7f11edfcaec8f726498cab1",
+      "gitBlobSha": "d89c64f526ae6e9ec74de10006101f43535bff31",
+      "apiUrl": "https://api.github.com/repos/alexdima/unicode-utils/git/blobs/d89c64f526ae6e9ec74de10006101f43535bff31",
+      "commit": "5c256860b1e4e54b0375165b8451cf7cdabc953a",
+      "upstream": "UnicodeData.txt"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/2019-GraphemeBreakProperty.txt",
+      "sha256": "2bd3c5e2d62701ff81fb3ec318e179a4618cabb1493b1e0dd2b4e7e56c5437c4",
+      "gitBlobSha": "6ee92f6eecaa58353d1b699b1226745b7d5d2552",
+      "apiUrl": "https://api.github.com/repos/alexdima/unicode-utils/git/blobs/6ee92f6eecaa58353d1b699b1226745b7d5d2552",
+      "commit": "2068fd0695b2798d8debb3646c860f5d37ba75b2",
+      "upstream": "GraphemeBreakProperty.txt"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/2019-emoji-data.txt",
+      "sha256": "e266a4e7e644da8923e7c3abbffed78597990570eda24eaa0f00f375cbdafd45",
+      "gitBlobSha": "6c0f22cd29ee8a5e036ebdb1d204e642c0d602ea",
+      "apiUrl": "https://api.github.com/repos/alexdima/unicode-utils/git/blobs/6c0f22cd29ee8a5e036ebdb1d204e642c0d602ea",
+      "commit": "2068fd0695b2798d8debb3646c860f5d37ba75b2",
+      "upstream": "emoji-data.txt"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/2021-emoji-test.txt",
+      "sha256": "8e3cc312a2a85115184738fa7ed97b3a9b3d0d221ffdaec3b22fd0314a18cd58",
+      "gitBlobSha": "d3c6d12bd5905ef3244844f6dd510637bfb3568c",
+      "apiUrl": "https://api.github.com/repos/alexdima/unicode-utils/git/blobs/d3c6d12bd5905ef3244844f6dd510637bfb3568c",
+      "commit": "6d37cf4362203bfb5431c560cd8809b2cc3b51c1",
+      "upstream": "emoji-test.txt"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/2017-fetch-data.js.txt",
+      "sha256": "06dbdae4bb518afed4ddca7592a7f5f42373e604b9687f36736ccc2fbf5a20f5",
+      "gitBlobSha": "99f3846ef581889df38c8775e8e2819eb2873846",
+      "apiUrl": "https://api.github.com/repos/alexdima/unicode-utils/git/blobs/99f3846ef581889df38c8775e8e2819eb2873846",
+      "commit": "5c256860b1e4e54b0375165b8451cf7cdabc953a",
+      "upstream": "fetch-data.js"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/2019-fetch-data.js.txt",
+      "sha256": "864b672817de67543bfc1f976374ac0e6bfbf9cf3cb86f040fa2b583afc7b115",
+      "gitBlobSha": "b83c1c0e24b0b107e0ea2834c681eabaa076ab05",
+      "apiUrl": "https://api.github.com/repos/alexdima/unicode-utils/git/blobs/b83c1c0e24b0b107e0ea2834c681eabaa076ab05",
+      "commit": "2068fd0695b2798d8debb3646c860f5d37ba75b2",
+      "upstream": "fetch-data.js"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/2021-fetch-data.js.txt",
+      "sha256": "395cccff5b1411746a876dad97e97eddd276823eee3c98694131e562e0d96a9e",
+      "gitBlobSha": "e97728526dbbcefc91f63ee9be34039f3a8e6286",
+      "apiUrl": "https://api.github.com/repos/alexdima/unicode-utils/git/blobs/e97728526dbbcefc91f63ee9be34039f3a8e6286",
+      "commit": "6d37cf4362203bfb5431c560cd8809b2cc3b51c1",
+      "upstream": "fetch-data.js"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/generate-rtl-test.js.txt",
+      "sha256": "c913beb0b0c8e23a1f3526dcb17df36e18bf4314da510991fc86ab42a2fd56cf",
+      "gitBlobSha": "e81988bafffdeed1a59ab75cddda878438384b75",
+      "apiUrl": "https://api.github.com/repos/alexdima/unicode-utils/git/blobs/e81988bafffdeed1a59ab75cddda878438384b75",
+      "commit": "6d37cf4362203bfb5431c560cd8809b2cc3b51c1",
+      "upstream": "generate-rtl-test.js"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/generate-emoji-test.js.txt",
+      "sha256": "621f35d443ad028f87437bb93c2042a1aff2fc56db30a36dd43389abd534cab6",
+      "gitBlobSha": "eafb836ef5028b9cbc7f1032381662ba17a82bf8",
+      "apiUrl": "https://api.github.com/repos/alexdima/unicode-utils/git/blobs/eafb836ef5028b9cbc7f1032381662ba17a82bf8",
+      "commit": "6d37cf4362203bfb5431c560cd8809b2cc3b51c1",
+      "upstream": "generate-emoji-test.js"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/generate-grapheme-break.js.txt",
+      "sha256": "e94ae28730f3d78576cc763c51d1e73b1a4c4710e6bd55e4c80150bafb7d10ed",
+      "gitBlobSha": "deed60dd5f7949a15bd362efda638474f2c72566",
+      "apiUrl": "https://api.github.com/repos/alexdima/unicode-utils/git/blobs/deed60dd5f7949a15bd362efda638474f2c72566",
+      "commit": "6d37cf4362203bfb5431c560cd8809b2cc3b51c1",
+      "upstream": "generate-grapheme-break.js"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/package.json.txt",
+      "sha256": "73553f3aa39e1830eab16253aea671efaf48a3da31be56b332a451fdb082c89f",
+      "gitBlobSha": "eb40f90fb8008930216f730ea63ea1783209a5b6",
+      "apiUrl": "https://api.github.com/repos/alexdima/unicode-utils/git/blobs/eb40f90fb8008930216f730ea63ea1783209a5b6",
+      "commit": "6d37cf4362203bfb5431c560cd8809b2cc3b51c1",
+      "upstream": "package.json"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/package-lock.json.txt",
+      "sha256": "858aa319fce68e7e2f55d42c5aade5c28f13fe0fbe199c1e6cd143fc311ddc7e",
+      "gitBlobSha": "4b31cf7ad0803292df18f831e34ba6dc867822bc",
+      "apiUrl": "https://api.github.com/repos/alexdima/unicode-utils/git/blobs/4b31cf7ad0803292df18f831e34ba6dc867822bc",
+      "commit": "6d37cf4362203bfb5431c560cd8809b2cc3b51c1",
+      "upstream": "package-lock.json"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/vscode-strings.txt",
+      "sha256": "7f947760385205ed17109ccec3ec31bafefd0292a9d872c933bea6042e8d4e77",
+      "gitBlobSha": "8a6bc0c28a252c3730a01cb388d8af41f01faf19",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/git/blobs/8a6bc0c28a252c3730a01cb388d8af41f01faf19",
+      "commit": "829382514cb1065f5ebb90f436e1c6103e153953",
+      "upstream": "src/vs/base/common/strings.ts"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/LICENSE.txt",
+      "sha256": "80b381b2f157c31e7f3222bdb932bda9fbd7b335e888beec56820fb2993363de",
+      "gitBlobSha": "500dbd5463e43403fa163a8095828e7f6c1539c6",
+      "apiUrl": "https://api.github.com/repos/unicode-org/unicodetools/git/blobs/500dbd5463e43403fa163a8095828e7f6c1539c6",
+      "commit": "b1c21ef7e972ea0c783c19cf25494bde645fbf21",
+      "upstream": "LICENSE"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/2021-UnicodeData.txt",
+      "sha256": "bdbffbbfc8ad4d3a6d01b5891510458f3d36f7170422af4ea2bed3211a73e8bb",
+      "gitBlobSha": "e22f967bbab8f2477a43533a334e21ebc0728eda",
+      "apiUrl": "https://api.github.com/repos/alexdima/unicode-utils/git/blobs/e22f967bbab8f2477a43533a334e21ebc0728eda",
+      "commit": "6d37cf4362203bfb5431c560cd8809b2cc3b51c1",
+      "upstream": "UnicodeData.txt"
+    }
+  ],
+  "vscodeSource": "refactor/baselines/site-vendor/monaco-unicode/vscode-strings.txt",
+  "packageSource": "refactor/baselines/site-vendor/monaco-unicode/package.json.txt",
+  "lockSource": "refactor/baselines/site-vendor/monaco-unicode/package-lock.json.txt",
+  "generators": [
+    {
+      "kind": "rtl",
+      "source": "refactor/baselines/site-vendor/monaco-unicode/generate-rtl-test.js.txt",
+      "inputs": {
+        "./UnicodeData.txt": "refactor/baselines/site-vendor/monaco-unicode/2017-UnicodeData.txt"
+      },
+      "outputs": [
+        "rtl-codes.txt",
+        "rtl-code-ranges.txt",
+        "rtl-code-ranges-fuzzy.txt"
+      ]
+    },
+    {
+      "kind": "emoji",
+      "source": "refactor/baselines/site-vendor/monaco-unicode/generate-emoji-test.js.txt",
+      "inputs": {
+        "./emoji-test.txt": "refactor/baselines/site-vendor/monaco-unicode/2021-emoji-test.txt",
+        "./UnicodeData.txt": "refactor/baselines/site-vendor/monaco-unicode/2021-UnicodeData.txt"
+      },
+      "outputs": [
+        "emoji-codes.txt",
+        "emoji-code-ranges.txt",
+        "emoji-code-ranges-fuzzy.txt",
+        "emoji-missed.txt"
+      ]
+    },
+    {
+      "kind": "grapheme",
+      "source": "refactor/baselines/site-vendor/monaco-unicode/generate-grapheme-break.js.txt",
+      "inputs": {
+        "./GraphemeBreakProperty.txt": "refactor/baselines/site-vendor/monaco-unicode/2019-GraphemeBreakProperty.txt",
+        "./emoji-data.txt": "refactor/baselines/site-vendor/monaco-unicode/2019-emoji-data.txt"
+      },
+      "outputs": []
+    }
+  ],
+  "maps": [
+    {
+      "archive": "monaco-editor-core-0.30.1",
+      "member": "package/dev/vs/editor/editor.main.js.map",
+      "sha256": "22a1b5ff5f423adc4575004d2ae0ae231ba59516e6aa9c2fabe8a006c2730316",
+      "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/strings.ts"
+    },
+    {
+      "archive": "monaco-editor-core-0.30.1",
+      "member": "package/dev/vs/base/worker/workerMain.js.map",
+      "sha256": "9514f89d67e5baa44ddc6817edf75e675fb2371f5489bddcdb20386a72b4ef67",
+      "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/strings.ts"
+    }
+  ],
+  "shipped": [
+    {
+      "archive": "monaco-editor-0.30.1",
+      "member": "package/min/vs/editor/editor.main.js",
+      "target": "docs/assets/js/vs/editor/editor.main.js",
+      "sha256": "05a50ed50bb013b6e7a82d25686186aa7bdff8b8209c7badab00e046b5e99618"
+    },
+    {
+      "archive": "monaco-editor-core-0.30.1",
+      "member": "package/min/vs/base/worker/workerMain.js",
+      "sha256": "3ebdb68f45f9fed1c587901c9db42dd70e8a552421e330f39116fc7b078ba67e",
+      "target": "docs/assets/js/vs/base/worker/workerMain.js"
+    }
+  ],
+  "generated": {
+    "rtl": {
+      "sha256": "35fc83852ef1f0df43fab8378a534d5434858d79e27943ec932c36557c79260e",
+      "length": 488
+    },
+    "emoji": {
+      "sha256": "4f2e07efce92784638f0a8fde8d25abfef60e95517df8eb2b8ff9ba34cd6dd29",
+      "length": 173
+    },
+    "imprecise": {
+      "sha256": "233a3cb319d227bea46d424a312e9933fbef71ea0421ee0d9cde8b641609ab63",
+      "length": 350
+    },
+    "grapheme": {
+      "sha256": "3c464c0a0ccea5e151d0cb2786df211f72deb011f3fc6986b093d99242f0141c",
+      "length": 5034
+    }
+  },
+  "component": {
+    "name": "Unicode data (Monaco core)",
+    "version": "mixed historical inputs: 10.0.0d5, 13.0 drafts, Emoji 13.1",
+    "tarball": "https://github.com/alexdima/unicode-utils",
+    "assets": [
+      "docs/assets/js/vs/editor/editor.main.js",
+      "docs/assets/js/vs/base/worker/workerMain.js"
+    ],
+    "notices": [
+      "docs/licenses/monaco-editor/core-unicode/LICENSE.txt",
+      "docs/licenses/monaco-editor/core-unicode/ATTRIBUTION.md"
+    ]
+  },
+  "notices": [
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/LICENSE.txt",
+      "target": "docs/licenses/monaco-editor/core-unicode/LICENSE.txt",
+      "sha256": "80b381b2f157c31e7f3222bdb932bda9fbd7b335e888beec56820fb2993363de"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-unicode/ATTRIBUTION.md.txt",
+      "target": "docs/licenses/monaco-editor/core-unicode/ATTRIBUTION.md",
+      "sha256": "51d583153fd1ed701a2b8810b3b1994d337002f074255e75a7d06790a381a1a6"
+    }
+  ],
+  "limits": [
+    "Data source versions are frozen recipe/snapshot identities, not a uniform Unicode release.",
+    "No full Monaco compilation or complete Unicode conformance claim.",
+    "Generator metadata declares MIT; its frozen tree has no standalone license file."
+  ]
+}

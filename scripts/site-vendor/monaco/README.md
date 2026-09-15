@@ -388,7 +388,7 @@ Do not replace this distinction with a guessed version during later maintenance.
 
 The ordinary notice build binds the reference license and attribution to the
 editor asset; it rejects omitted terms or a changed source/asset relationship.
-The site now carries 88 notice files plus its index. Frozen source and delivered
+That checkpoint added two notices, bringing the site to 88 files plus its index. Frozen source and delivered
 terms preserve original bytes through Git attributes. No dependencies or editor
 runtime bytes changed; the verifier uses the existing TypeScript parser.
 
@@ -406,3 +406,50 @@ native geometry. The site test checks all notice HTTP bytes, relative links and
 real mobile-page playback. Unicode/other embedded sources, unknown original
 WinJS version, complete original core compilation and SITE-07 acceptance remain
 open. Source comments and this bounded proof are not full provenance clearance.
+
+## Historical Unicode data
+
+`unicode.ts` extracts the four top-level data expressions using TypeScript 5.9.3
+AST boundaries. It compares regex text exactly, the imprecise emoji predicate as
+tokens (ignoring formatting/comments only), and every integer of the grapheme
+tree. `unicode-origins.ts` binds the complete historical Unicode terms and
+attribution to the shipped editor and base worker. The ordinary notice build now
+delivers 90 notice files plus the index; it does not run old dependencies.
+
+`reproduce-unicode.ts` checks 15 fixed Git blobs, two npm archives, both original
+source maps and both shipped assets. It replays three original generator scripts
+against frozen inputs. Their dependency closure consists of 17 locked archives,
+including regexpu 3.3.0. Original lock integrity (SHA-1 or SHA-512) plus independent
+SHA-512/SHA-256 is verified before individual member extraction into the isolated
+`refactor/.cache/monaco-review/unicode-generator/compiler/node_modules` tree.
+No install/lifecycle scripts run, and root dependencies/yarn.lock are unchanged.
+
+The input versions deliberately differ: RTL uses the 2017 Unicode 10.0.0d5
+snapshot, emoji uses Unicode 13.0 plus Emoji 13.1, and grapheme data uses the 2019
+Unicode 13 draft snapshot. That last combination reproduces all 5,034 integers.
+Version labels come from the frozen fetch recipes and file headers; do not
+replace them with a guessed single final Unicode release. Generator package
+metadata declares MIT and Alex Dima; its frozen tree has no standalone LICENSE.
+The complete Unicode terms are a fixed 2021 official repository reference,
+explicitly identified as such rather than asserted to be an original bundled file.
+
+Generator execution allows only the recorded data reads, captures expected output
+files in memory and rejects unknown imports, unused inputs and missing/repeated
+outputs. The VM is an I/O adapter for verified historical code, not a security
+sandbox for arbitrary scripts. Never point it at unverified executable sources.
+
+```sh
+yarn verify:monaco-unicode --fetch
+yarn verify:monaco-unicode
+node --test test/monaco-unicode.test.js test/monaco-provenance.test.js test/site-notices.test.js
+yarn typecheck:docs-tools
+yarn check:site-notices
+yarn test:browser editor-unicode.spec.js site-vendor.spec.js --workers=1
+```
+
+Offline reproduction needs the verified archive cache from the first command.
+Unit tests guard data substitution, expression boundaries and recipe I/O. Browser
+tests load the actual shipped Monaco module, exercise RTL/emoji/grapheme cases and
+mixed-text model edit/undo, and verify HTTP notices plus mobile-page playback.
+These checks are not full Unicode conformance or full original Monaco compilation;
+other embedded origins and the remaining SITE-07 work stay open.
