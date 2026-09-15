@@ -4,6 +4,12 @@
 早期“未运行”不能覆盖后续证据；当前查progress和包validation。逐包契约、版本、
 测试及历史报告入口见 [契约覆盖索引](contract-coverage.md)。
 
+后续完整源码运行已覆盖本机 Chromium、Firefox、Windows WebKit，各次提交、
+范围和失败/跳过分别见[浏览器执行索引](../scripts/browser-validation/README.md)。
+最新[WebKit全量](baselines/ci-source-webkit-validation.json)仍有11失败和138能力跳过；
+早期ENV-ENGINES的“未安装/运行”是初始快照，不能作为当前执行状态引用。
+这些结果没有补齐ENV-APPLE、ENV-ANDROID或远端Actions。
+
 BASE-08；2026-09-10；来源提交 ed293231。矩阵建立完成，矩阵内未运行的检查仍待完成。版本与路径以 [发布冻结](baselines/releases.json)、[包初始快照](package-inventory.json)、[分发观察](baselines/distribution.json)、[demo 清单](baselines/demo-inventory.json) 和 [第三方清单](third-party.json) 为依据。
 
 ## 版本和分发维度

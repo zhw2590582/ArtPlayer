@@ -1,0 +1,3164 @@
+{
+  "task": "CI-01",
+  "status": "doing",
+  "sourceHead": "ae56937d3beb981e78b97f83ef557cdc62135900",
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "platform": "win32",
+    "browsers": [
+      "26.6"
+    ],
+    "remoteCI": false,
+    "physicalDevices": false
+  },
+  "directory": "refactor/.cache/ci-source-webkit-full-report",
+  "reportSha256": "47f1b046e5016d7d525eab6fbc30cc9c3e47c9d4c2a80b142a8858a02a72977c",
+  "log": {
+    "file": "refactor/.cache/ci-source-webkit-full.log",
+    "sha256": "c494aa8173a41db779237fd64f00f2c57cf715e7061e1a0e43dca38dcbb6cb94"
+  },
+  "invocation": {
+    "scope": "source",
+    "args": [
+      "test",
+      "--config=playwright.source.config.js",
+      "--project=webkit",
+      "--workers=2"
+    ],
+    "node": "24.21.0",
+    "artifactMap": null,
+    "inputs": []
+  },
+  "result": {
+    "scope": "source",
+    "exitCode": 1,
+    "signal": null,
+    "args": [
+      "test",
+      "--config=playwright.source.config.js",
+      "--project=webkit",
+      "--workers=2"
+    ]
+  },
+  "stats": {
+    "startTime": "2026-09-15T13:17:43.724Z",
+    "duration": 1816372.528,
+    "expected": 1515,
+    "skipped": 138,
+    "unexpected": 11,
+    "flaky": 0
+  },
+  "files": 174,
+  "tests": 1664,
+  "retries": 0,
+  "groups": [
+    {
+      "file": "accessibility-contextmenu.spec.js",
+      "expected": 13,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 18715
+    },
+    {
+      "file": "accessibility-controls.spec.js",
+      "expected": 9,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 11050
+    },
+    {
+      "file": "accessibility-info.spec.js",
+      "expected": 7,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7360
+    },
+    {
+      "file": "accessibility-integration.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6456
+    },
+    {
+      "file": "accessibility-lock.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7107
+    },
+    {
+      "file": "accessibility-mini.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 8274
+    },
+    {
+      "file": "accessibility-selector.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 16687
+    },
+    {
+      "file": "accessibility-setting.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 16750
+    },
+    {
+      "file": "accessibility-slider.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6375
+    },
+    {
+      "file": "accessibility.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 9598
+    },
+    {
+      "file": "ads-editor-types.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1594
+    },
+    {
+      "file": "ads-ui.spec.js",
+      "expected": 9,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 25822
+    },
+    {
+      "file": "ads.spec.js",
+      "expected": 48,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 174795
+    },
+    {
+      "file": "ambilight-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 47577
+    },
+    {
+      "file": "ambilight-proxy.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 12332
+    },
+    {
+      "file": "ambilight.spec.js",
+      "expected": 18,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 137136
+    },
+    {
+      "file": "asr-audio-track.spec.js",
+      "expected": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 4,
+      "durationMs": 1386
+    },
+    {
+      "file": "asr-audio.spec.js",
+      "expected": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 9,
+      "durationMs": 3313
+    },
+    {
+      "file": "asr-capture-cors.spec.js",
+      "expected": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 2,
+      "durationMs": 748
+    },
+    {
+      "file": "asr-cors.spec.js",
+      "expected": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 12,
+      "durationMs": 4295
+    },
+    {
+      "file": "asr-fallback.spec.js",
+      "expected": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 9,
+      "durationMs": 3422
+    },
+    {
+      "file": "asr-initial-error.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 6,
+      "durationMs": 12871
+    },
+    {
+      "file": "asr-media-error.spec.js",
+      "expected": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 6,
+      "durationMs": 2587
+    },
+    {
+      "file": "asr-no-audio.spec.js",
+      "expected": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 4,
+      "durationMs": 1706
+    },
+    {
+      "file": "asr-playback.spec.js",
+      "expected": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 6,
+      "durationMs": 2317
+    },
+    {
+      "file": "audio-buffering.spec.js",
+      "expected": 0,
+      "unexpected": 8,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 70844
+    },
+    {
+      "file": "audio-combinations.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 48358
+    },
+    {
+      "file": "audio-editor-types.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1932
+    },
+    {
+      "file": "audio-track.spec.js",
+      "expected": 14,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 49496
+    },
+    {
+      "file": "auto-playback.spec.js",
+      "expected": 15,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 18836
+    },
+    {
+      "file": "auto-thumbnail-lifecycle.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 10241
+    },
+    {
+      "file": "auto-thumbnail-pixels.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2716
+    },
+    {
+      "file": "auto-thumbnail-registration.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 976
+    },
+    {
+      "file": "auto-thumbnail.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5984
+    },
+    {
+      "file": "builtin-layers.spec.js",
+      "expected": 15,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 16176
+    },
+    {
+      "file": "canvas-dpip.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2681
+    },
+    {
+      "file": "canvas-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 12801
+    },
+    {
+      "file": "canvas-subtitles.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5317
+    },
+    {
+      "file": "canvas.spec.js",
+      "expected": 14,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 31991
+    },
+    {
+      "file": "chapter-combinations.spec.js",
+      "expected": 20,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 77932
+    },
+    {
+      "file": "chapter-hover.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7152
+    },
+    {
+      "file": "chapter.spec.js",
+      "expected": 14,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 18960
+    },
+    {
+      "file": "chromecast-lifecycle.spec.js",
+      "expected": 15,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 31336
+    },
+    {
+      "file": "components.spec.js",
+      "expected": 31,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 20510
+    },
+    {
+      "file": "danmuku-baseline.spec.js",
+      "expected": 16,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 72035
+    },
+    {
+      "file": "danmuku-dpip.spec.js",
+      "expected": 16,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7320
+    },
+    {
+      "file": "danmuku-fullscreen.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 75598
+    },
+    {
+      "file": "danmuku-heatmap-density.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 20810
+    },
+    {
+      "file": "danmuku-input.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 8759
+    },
+    {
+      "file": "danmuku-lifetime.spec.js",
+      "expected": 16,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 62877
+    },
+    {
+      "file": "danmuku-load-baseline.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 12878
+    },
+    {
+      "file": "danmuku-mask-boundary.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 4961
+    },
+    {
+      "file": "danmuku-mask-native.spec.js",
+      "expected": 9,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 139857
+    },
+    {
+      "file": "danmuku-resources.spec.js",
+      "expected": 16,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 28066
+    },
+    {
+      "file": "danmuku-scheduler.spec.js",
+      "expected": 22,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 77460
+    },
+    {
+      "file": "danmuku-stability.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 372703
+    },
+    {
+      "file": "danmuku-timing-diagnostic.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 20133
+    },
+    {
+      "file": "dash-control.spec.js",
+      "expected": 32,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 85194
+    },
+    {
+      "file": "dash-editor-types.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1236
+    },
+    {
+      "file": "dash-sdk.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 48,
+      "durationMs": 24916
+    },
+    {
+      "file": "declarations.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5475
+    },
+    {
+      "file": "display-mini.spec.js",
+      "expected": 20,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 22411
+    },
+    {
+      "file": "display-native.spec.js",
+      "expected": 15,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 20714
+    },
+    {
+      "file": "display-orientation.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 10415
+    },
+    {
+      "file": "display-pip-webkit.spec.js",
+      "expected": 7,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7619
+    },
+    {
+      "file": "display-pip.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 10581
+    },
+    {
+      "file": "display-sizing.spec.js",
+      "expected": 11,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 12182
+    },
+    {
+      "file": "display-video-fullscreen.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6781
+    },
+    {
+      "file": "display-web.spec.js",
+      "expected": 22,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 22879
+    },
+    {
+      "file": "docs-smoke.spec.js",
+      "expected": 11,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 14584
+    },
+    {
+      "file": "document-audio.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7732
+    },
+    {
+      "file": "document-danmuku.spec.js",
+      "expected": 18,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 22177
+    },
+    {
+      "file": "document-dash.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2960
+    },
+    {
+      "file": "document-hls.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6036
+    },
+    {
+      "file": "document-site.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 15683
+    },
+    {
+      "file": "document-vtt.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6575
+    },
+    {
+      "file": "dom-boundaries.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1309
+    },
+    {
+      "file": "dpip-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 9313
+    },
+    {
+      "file": "dpip-native.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2257
+    },
+    {
+      "file": "dpip.spec.js",
+      "expected": 16,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 22559
+    },
+    {
+      "file": "editor-basic-languages.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1431
+    },
+    {
+      "file": "editor-core.spec.js",
+      "expected": 11,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 13789
+    },
+    {
+      "file": "editor-declarations.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1787
+    },
+    {
+      "file": "editor-dom.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 617
+    },
+    {
+      "file": "editor-languages.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 894
+    },
+    {
+      "file": "editor-markdown.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 629
+    },
+    {
+      "file": "editor-modes.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5335
+    },
+    {
+      "file": "editor-path.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 705
+    },
+    {
+      "file": "editor-styles.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1015
+    },
+    {
+      "file": "editor-types.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1803
+    },
+    {
+      "file": "editor-unicode.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 647
+    },
+    {
+      "file": "emitter.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 635
+    },
+    {
+      "file": "event-scheduling.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 11680
+    },
+    {
+      "file": "fast-forward.spec.js",
+      "expected": 11,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 16431
+    },
+    {
+      "file": "gesture.spec.js",
+      "expected": 18,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 37236
+    },
+    {
+      "file": "global-events.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6204
+    },
+    {
+      "file": "hls-control.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 16,
+      "durationMs": 901
+    },
+    {
+      "file": "hls-editor-types.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1493
+    },
+    {
+      "file": "hls-sdk.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 16,
+      "durationMs": 1277
+    },
+    {
+      "file": "hotkey.spec.js",
+      "expected": 17,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 19786
+    },
+    {
+      "file": "iframe-boundaries.spec.js",
+      "expected": 20,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 17071
+    },
+    {
+      "file": "iframe-editor.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7353
+    },
+    {
+      "file": "iframe-navigation.spec.js",
+      "expected": 39,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 39970
+    },
+    {
+      "file": "iframe-player.spec.js",
+      "expected": 24,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 161699
+    },
+    {
+      "file": "iframe.spec.js",
+      "expected": 58,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 47745
+    },
+    {
+      "file": "initialization.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5099
+    },
+    {
+      "file": "input-closeout.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 8312
+    },
+    {
+      "file": "jassub-hybrid.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2408
+    },
+    {
+      "file": "jassub-lifecycle.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6652
+    },
+    {
+      "file": "jassub-native.spec.js",
+      "expected": 0,
+      "unexpected": 3,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 27512
+    },
+    {
+      "file": "jassub-platform.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6211
+    },
+    {
+      "file": "jassub-render-failure.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1903
+    },
+    {
+      "file": "library-development.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 9146
+    },
+    {
+      "file": "lifecycle.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6650
+    },
+    {
+      "file": "listener-registry.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 13095
+    },
+    {
+      "file": "media-events.spec.js",
+      "expected": 9,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 8835
+    },
+    {
+      "file": "media-gate-native.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 19917
+    },
+    {
+      "file": "media-hosts.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3361
+    },
+    {
+      "file": "mediabunny-audio.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5445
+    },
+    {
+      "file": "mediabunny-capability.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 11249
+    },
+    {
+      "file": "mediabunny-dpip.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6878
+    },
+    {
+      "file": "mediabunny-entry.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2737
+    },
+    {
+      "file": "mediabunny-hls.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 9405
+    },
+    {
+      "file": "mediabunny-inputs.spec.js",
+      "expected": 18,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 11644
+    },
+    {
+      "file": "mediabunny-load.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3762
+    },
+    {
+      "file": "mediabunny-shim.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1371
+    },
+    {
+      "file": "mediabunny-video.spec.js",
+      "expected": 5,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2834
+    },
+    {
+      "file": "mediabunny.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2110
+    },
+    {
+      "file": "multiple-subtitles-ass.spec.js",
+      "expected": 5,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 15543
+    },
+    {
+      "file": "multiple-subtitles-combinations.spec.js",
+      "expected": 19,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 58732
+    },
+    {
+      "file": "multiple-subtitles-entities.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5360
+    },
+    {
+      "file": "multiple-subtitles-history.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 10129
+    },
+    {
+      "file": "multiple-subtitles-legacy.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5208
+    },
+    {
+      "file": "multiple-subtitles-lifecycle.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 20791
+    },
+    {
+      "file": "multiple-subtitles-switch.spec.js",
+      "expected": 9,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 38884
+    },
+    {
+      "file": "notice.spec.js",
+      "expected": 13,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 14231
+    },
+    {
+      "file": "options.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5186
+    },
+    {
+      "file": "playback-properties.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 4516
+    },
+    {
+      "file": "playback.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 9987
+    },
+    {
+      "file": "plugins.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2552
+    },
+    {
+      "file": "pointer-events.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 12041
+    },
+    {
+      "file": "progress-quality.spec.js",
+      "expected": 14,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 28610
+    },
+    {
+      "file": "prompt-components.spec.js",
+      "expected": 15,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 15567
+    },
+    {
+      "file": "resource-scope.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 595
+    },
+    {
+      "file": "runtime-types.spec.js",
+      "expected": 5,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 4078
+    },
+    {
+      "file": "screenshot.spec.js",
+      "expected": 13,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 25501
+    },
+    {
+      "file": "setting-interaction.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7412
+    },
+    {
+      "file": "setting-ownership.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3374
+    },
+    {
+      "file": "setting-update.spec.js",
+      "expected": 16,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7507
+    },
+    {
+      "file": "setting.spec.js",
+      "expected": 29,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 19061
+    },
+    {
+      "file": "site-console.spec.js",
+      "expected": 16,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 12560
+    },
+    {
+      "file": "site-editor.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 19866
+    },
+    {
+      "file": "site-loading.spec.js",
+      "expected": 7,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 9460
+    },
+    {
+      "file": "site-vendor.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 4071
+    },
+    {
+      "file": "slider-updates.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 8169
+    },
+    {
+      "file": "source-intent.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 16426
+    },
+    {
+      "file": "source.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 14367
+    },
+    {
+      "file": "storage-performance.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6241
+    },
+    {
+      "file": "subtitle-lifecycle.spec.js",
+      "expected": 27,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 33737
+    },
+    {
+      "file": "subtitle-offset-native.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3571
+    },
+    {
+      "file": "subtitle-offset.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6428
+    },
+    {
+      "file": "template-resources.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7975
+    },
+    {
+      "file": "thumbnail-editor-types.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1341
+    },
+    {
+      "file": "thumbnail-emitter.spec.js",
+      "expected": 5,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2303
+    },
+    {
+      "file": "thumbnail-input.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 627
+    },
+    {
+      "file": "thumbnail-native.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2160
+    },
+    {
+      "file": "thumbnail-tool.spec.js",
+      "expected": 17,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 19767
+    },
+    {
+      "file": "thumbnails.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 10419
+    },
+    {
+      "file": "utils.spec.js",
+      "expected": 5,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1878
+    },
+    {
+      "file": "vast-package.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 15375
+    },
+    {
+      "file": "vast.spec.js",
+      "expected": 54,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 68903
+    },
+    {
+      "file": "vconsole-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2840
+    },
+    {
+      "file": "vtt-thumbnail-combinations.spec.js",
+      "expected": 17,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 51938
+    },
+    {
+      "file": "vtt-thumbnail-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7868
+    }
+  ],
+  "skippedReasons": [
+    {
+      "file": "asr-audio-track.spec.js",
+      "reason": "Windows WebKit lacks native AudioContext/AudioWorklet; Safari and physical-device composition remain unverified",
+      "count": 4
+    },
+    {
+      "file": "asr-audio.spec.js",
+      "reason": "Windows WebKit 26.6 has no AudioContext/AudioWorkletNode; native ASR acceptance remains open",
+      "count": 9
+    },
+    {
+      "file": "asr-capture-cors.spec.js",
+      "reason": "Windows WebKit lacks AudioContext/AudioWorklet; this is not Safari/device CORS acceptance",
+      "count": 2
+    },
+    {
+      "file": "asr-cors.spec.js",
+      "reason": "Windows WebKit lacks native WebAudio; this is not Safari CORS acceptance",
+      "count": 12
+    },
+    {
+      "file": "asr-fallback.spec.js",
+      "reason": "Windows WebKit has no native WebAudio",
+      "count": 9
+    },
+    {
+      "file": "asr-initial-error.spec.js",
+      "reason": "Initial failure checked; WebKit lacks WebAudio for recovery, not Safari acceptance",
+      "count": 6
+    },
+    {
+      "file": "asr-media-error.spec.js",
+      "reason": "Windows WebKit lacks native WebAudio; not Safari/device ASR acceptance",
+      "count": 6
+    },
+    {
+      "file": "asr-no-audio.spec.js",
+      "reason": "Windows WebKit has no WebAudio; not an Apple-device ASR acceptance",
+      "count": 4
+    },
+    {
+      "file": "asr-playback.spec.js",
+      "reason": "Windows WebKit lacks native AudioContext/AudioWorkletNode",
+      "count": 6
+    },
+    {
+      "file": "dash-sdk.spec.js",
+      "reason": "Actual SDK reports no MediaSource support; this engine has no DASH playback acceptance",
+      "count": 46
+    },
+    {
+      "file": "dash-sdk.spec.js",
+      "reason": "Actual SDK reports no MediaSource support; no native DASH playback acceptance",
+      "count": 2
+    },
+    {
+      "file": "hls-control.spec.js",
+      "reason": "Bundled Windows WebKit exposes neither MediaSource nor ManagedMediaSource; this is an unverified playback environment, not compatibility approval",
+      "count": 16
+    },
+    {
+      "file": "hls-sdk.spec.js",
+      "reason": "Windows WebKit has no MSE; explicit capability/error cleanup is tested separately",
+      "count": 16
+    }
+  ],
+  "failures": [
+    {
+      "file": "audio-buffering.spec.js",
+      "title": "published core + published audio: real video starvation resumes after network release",
+      "project": "webkit",
+      "status": "failed",
+      "retry": 0,
+      "risk": "AUDIO-BUFFER-01",
+      "errors": [
+        {
+          "message": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  28 |           if (owner === 'video')\n  29 |             await page.evaluate(url => window.art.switchUrl(url), gate.url)\n> 30 |           await expect.poll(() => page.evaluate(() => window.starvation.some(event => event.trusted && event.time > 0.3 && event.readyState < 3))).toBe(true)\n     |                                                                                                                                                    ^\n  31 |           expect(gate.blocked).toBeGreaterThan(0)\n  32 |           const stalled = await page.evaluate(() => ({ audio: window.audioPlugin.audio.currentTime, video: window.art.currentTime }))\n  33 |           if (owner === 'video') {\n    at D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js:30:148",
+          "location": {
+            "file": "D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js",
+            "column": 148,
+            "line": 30
+          }
+        }
+      ],
+      "details": {
+        "audio-inputs": {
+          "release": {
+            "name": "artplayer-plugin-audio-track",
+            "version": "1.1.0",
+            "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-audio-track/1.1.0",
+            "tarball": "https://registry.npmjs.org/artplayer-plugin-audio-track/-/artplayer-plugin-audio-track-1.1.0.tgz",
+            "integrity": "sha512-pvvHvTSqC2+sBelwYyjAv2CVmaQgG9KpX+i96t/e8oyZRX/JuepC9iSVIp7GzB3AtliFzhVamksT+8lXvD3RCg==",
+            "sha256": "7e84f6a2f4bfada428a77ef04b749bf3db53e0149fa1afe7bf5749d925e801ff",
+            "archiveBytes": 2205,
+            "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+            "files": {
+              "package/README.md": "9a03352433ae90cb9d3198e17571c9bb598334b84a77a3a1df2c4b000ce8347d",
+              "package/dist/artplayer-plugin-audio-track.js": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683",
+              "package/dist/artplayer-plugin-audio-track.legacy.js": "d8dc74bce76112d7430c98e3165605e32fde5d3c603be4b496eac58f574576cb",
+              "package/dist/artplayer-plugin-audio-track.mjs": "4ac599bc5a1a6ecb0cb1942d4269528bfb2cd9d047f988de61fe671a77ad14cd",
+              "package/package.json": "c466ae55c40e8f6bdd97bec20fcf916c8c4f44eef3e47694638be005eb445df7",
+              "package/types/artplayer-plugin-audio-track.d.ts": "27bc0dfedacb7e0188cb668ac8708874a86b00d489f1636037c2465d3344437e"
+            },
+            "manifest": {
+              "name": "artplayer-plugin-audio-track",
+              "version": "1.1.0",
+              "description": "audio-track plugin for ArtPlayer",
+              "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+              "license": "MIT",
+              "homepage": "https://artplayer.org",
+              "repository": {
+                "type": "git",
+                "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+              },
+              "bugs": {
+                "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+              },
+              "keywords": [
+                "html5",
+                "video",
+                "player"
+              ],
+              "exports": {
+                ".": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.mjs",
+                  "require": "./dist/artplayer-plugin-audio-track.js"
+                },
+                "./legacy": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.legacy.js",
+                  "require": "./dist/artplayer-plugin-audio-track.legacy.js"
+                }
+              },
+              "main": "dist/artplayer-plugin-audio-track.js",
+              "module": "./dist/artplayer-plugin-audio-track.mjs",
+              "types": "types/artplayer-plugin-audio-track.d.ts",
+              "legacy": "dist/artplayer-plugin-audio-track.legacy.js",
+              "browserslist": "last 1 Chrome version"
+            }
+          },
+          "sourceSHA256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713",
+          "candidate": {
+            "kind": "source-build",
+            "file": null,
+            "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+          },
+          "audio": {
+            "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "bytes": 132436,
+            "format": "AAC mono 48000 Hz, 16 seconds, 440 Hz tone in MP4"
+          },
+          "wav": {
+            "sha256": "3150fc69aa2b94a4b556e2e6d9d67fb52c2926cd144fdd8694a7f8ddfd2f15ff",
+            "bytes": 512044,
+            "format": "PCM16LE mono 16000 Hz, 16 seconds, integer square wave 200 Hz"
+          },
+          "scope": "Desktop browser media checks; candidate provenance identifies installed, source or explicit artifact. No physical device acceptance.",
+          "core": "published",
+          "plugin": "published",
+          "selected": {
+            "kind": "published",
+            "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+          }
+        },
+        "media-gate": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 98304,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "events": []
+        }
+      },
+      "artifacts": [
+        {
+          "name": "screenshot",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-published--1e5a7-sumes-after-network-release-webkit\\test-failed-1.png",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-published--1e5a7-sumes-after-network-release-webkit/test-failed-1.png",
+          "sha256": "15e92313f9ed0a95b430ba03acdf74b85feeedeacd23febe2fab02cd13c12f88"
+        },
+        {
+          "name": "error-context",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-published--1e5a7-sumes-after-network-release-webkit\\error-context.md",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-published--1e5a7-sumes-after-network-release-webkit/error-context.md",
+          "sha256": "de9a075786a6521f3988adbb1b942b611030a69e0d1eac58553bab58e5f53020"
+        },
+        {
+          "name": "trace",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-published--1e5a7-sumes-after-network-release-webkit\\trace.zip",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-published--1e5a7-sumes-after-network-release-webkit/trace.zip",
+          "sha256": "a439a7756887270738df82e790495d7bfaaa9ad7fe74059793c0212985fd79ab"
+        }
+      ]
+    },
+    {
+      "file": "audio-buffering.spec.js",
+      "title": "published core + published audio: real audio starvation resumes after network release",
+      "project": "webkit",
+      "status": "failed",
+      "retry": 0,
+      "risk": "AUDIO-BUFFER-01",
+      "errors": [
+        {
+          "message": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  28 |           if (owner === 'video')\n  29 |             await page.evaluate(url => window.art.switchUrl(url), gate.url)\n> 30 |           await expect.poll(() => page.evaluate(() => window.starvation.some(event => event.trusted && event.time > 0.3 && event.readyState < 3))).toBe(true)\n     |                                                                                                                                                    ^\n  31 |           expect(gate.blocked).toBeGreaterThan(0)\n  32 |           const stalled = await page.evaluate(() => ({ audio: window.audioPlugin.audio.currentTime, video: window.art.currentTime }))\n  33 |           if (owner === 'video') {\n    at D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js:30:148",
+          "location": {
+            "file": "D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js",
+            "column": 148,
+            "line": 30
+          }
+        }
+      ],
+      "details": {
+        "audio-inputs": {
+          "release": {
+            "name": "artplayer-plugin-audio-track",
+            "version": "1.1.0",
+            "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-audio-track/1.1.0",
+            "tarball": "https://registry.npmjs.org/artplayer-plugin-audio-track/-/artplayer-plugin-audio-track-1.1.0.tgz",
+            "integrity": "sha512-pvvHvTSqC2+sBelwYyjAv2CVmaQgG9KpX+i96t/e8oyZRX/JuepC9iSVIp7GzB3AtliFzhVamksT+8lXvD3RCg==",
+            "sha256": "7e84f6a2f4bfada428a77ef04b749bf3db53e0149fa1afe7bf5749d925e801ff",
+            "archiveBytes": 2205,
+            "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+            "files": {
+              "package/README.md": "9a03352433ae90cb9d3198e17571c9bb598334b84a77a3a1df2c4b000ce8347d",
+              "package/dist/artplayer-plugin-audio-track.js": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683",
+              "package/dist/artplayer-plugin-audio-track.legacy.js": "d8dc74bce76112d7430c98e3165605e32fde5d3c603be4b496eac58f574576cb",
+              "package/dist/artplayer-plugin-audio-track.mjs": "4ac599bc5a1a6ecb0cb1942d4269528bfb2cd9d047f988de61fe671a77ad14cd",
+              "package/package.json": "c466ae55c40e8f6bdd97bec20fcf916c8c4f44eef3e47694638be005eb445df7",
+              "package/types/artplayer-plugin-audio-track.d.ts": "27bc0dfedacb7e0188cb668ac8708874a86b00d489f1636037c2465d3344437e"
+            },
+            "manifest": {
+              "name": "artplayer-plugin-audio-track",
+              "version": "1.1.0",
+              "description": "audio-track plugin for ArtPlayer",
+              "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+              "license": "MIT",
+              "homepage": "https://artplayer.org",
+              "repository": {
+                "type": "git",
+                "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+              },
+              "bugs": {
+                "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+              },
+              "keywords": [
+                "html5",
+                "video",
+                "player"
+              ],
+              "exports": {
+                ".": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.mjs",
+                  "require": "./dist/artplayer-plugin-audio-track.js"
+                },
+                "./legacy": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.legacy.js",
+                  "require": "./dist/artplayer-plugin-audio-track.legacy.js"
+                }
+              },
+              "main": "dist/artplayer-plugin-audio-track.js",
+              "module": "./dist/artplayer-plugin-audio-track.mjs",
+              "types": "types/artplayer-plugin-audio-track.d.ts",
+              "legacy": "dist/artplayer-plugin-audio-track.legacy.js",
+              "browserslist": "last 1 Chrome version"
+            }
+          },
+          "sourceSHA256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713",
+          "candidate": {
+            "kind": "source-build",
+            "file": null,
+            "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+          },
+          "audio": {
+            "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "bytes": 132436,
+            "format": "AAC mono 48000 Hz, 16 seconds, 440 Hz tone in MP4"
+          },
+          "wav": {
+            "sha256": "3150fc69aa2b94a4b556e2e6d9d67fb52c2926cd144fdd8694a7f8ddfd2f15ff",
+            "bytes": 512044,
+            "format": "PCM16LE mono 16000 Hz, 16 seconds, integer square wave 200 Hz"
+          },
+          "scope": "Desktop browser media checks; candidate provenance identifies installed, source or explicit artifact. No physical device acceptance.",
+          "core": "published",
+          "plugin": "published",
+          "selected": {
+            "kind": "published",
+            "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+          }
+        },
+        "media-gate": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 32768,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "events": []
+        }
+      },
+      "artifacts": [
+        {
+          "name": "screenshot",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-published--1b27a-sumes-after-network-release-webkit\\test-failed-1.png",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-published--1b27a-sumes-after-network-release-webkit/test-failed-1.png",
+          "sha256": "15e92313f9ed0a95b430ba03acdf74b85feeedeacd23febe2fab02cd13c12f88"
+        },
+        {
+          "name": "error-context",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-published--1b27a-sumes-after-network-release-webkit\\error-context.md",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-published--1b27a-sumes-after-network-release-webkit/error-context.md",
+          "sha256": "bb26fa4e2855e14bbc0109036ba7d2b20ef58fae79ac9a0f8be27d2e1a8fc319"
+        },
+        {
+          "name": "trace",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-published--1b27a-sumes-after-network-release-webkit\\trace.zip",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-published--1b27a-sumes-after-network-release-webkit/trace.zip",
+          "sha256": "20490faac646c3af110001fe66b85a7e5caf9202e10ac3547b768d518b5b6bf9"
+        }
+      ]
+    },
+    {
+      "file": "audio-buffering.spec.js",
+      "title": "published core + source audio: real video starvation resumes after network release",
+      "project": "webkit",
+      "status": "failed",
+      "retry": 0,
+      "risk": "AUDIO-BUFFER-01",
+      "errors": [
+        {
+          "message": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  28 |           if (owner === 'video')\n  29 |             await page.evaluate(url => window.art.switchUrl(url), gate.url)\n> 30 |           await expect.poll(() => page.evaluate(() => window.starvation.some(event => event.trusted && event.time > 0.3 && event.readyState < 3))).toBe(true)\n     |                                                                                                                                                    ^\n  31 |           expect(gate.blocked).toBeGreaterThan(0)\n  32 |           const stalled = await page.evaluate(() => ({ audio: window.audioPlugin.audio.currentTime, video: window.art.currentTime }))\n  33 |           if (owner === 'video') {\n    at D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js:30:148",
+          "location": {
+            "file": "D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js",
+            "column": 148,
+            "line": 30
+          }
+        }
+      ],
+      "details": {
+        "audio-inputs": {
+          "release": {
+            "name": "artplayer-plugin-audio-track",
+            "version": "1.1.0",
+            "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-audio-track/1.1.0",
+            "tarball": "https://registry.npmjs.org/artplayer-plugin-audio-track/-/artplayer-plugin-audio-track-1.1.0.tgz",
+            "integrity": "sha512-pvvHvTSqC2+sBelwYyjAv2CVmaQgG9KpX+i96t/e8oyZRX/JuepC9iSVIp7GzB3AtliFzhVamksT+8lXvD3RCg==",
+            "sha256": "7e84f6a2f4bfada428a77ef04b749bf3db53e0149fa1afe7bf5749d925e801ff",
+            "archiveBytes": 2205,
+            "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+            "files": {
+              "package/README.md": "9a03352433ae90cb9d3198e17571c9bb598334b84a77a3a1df2c4b000ce8347d",
+              "package/dist/artplayer-plugin-audio-track.js": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683",
+              "package/dist/artplayer-plugin-audio-track.legacy.js": "d8dc74bce76112d7430c98e3165605e32fde5d3c603be4b496eac58f574576cb",
+              "package/dist/artplayer-plugin-audio-track.mjs": "4ac599bc5a1a6ecb0cb1942d4269528bfb2cd9d047f988de61fe671a77ad14cd",
+              "package/package.json": "c466ae55c40e8f6bdd97bec20fcf916c8c4f44eef3e47694638be005eb445df7",
+              "package/types/artplayer-plugin-audio-track.d.ts": "27bc0dfedacb7e0188cb668ac8708874a86b00d489f1636037c2465d3344437e"
+            },
+            "manifest": {
+              "name": "artplayer-plugin-audio-track",
+              "version": "1.1.0",
+              "description": "audio-track plugin for ArtPlayer",
+              "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+              "license": "MIT",
+              "homepage": "https://artplayer.org",
+              "repository": {
+                "type": "git",
+                "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+              },
+              "bugs": {
+                "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+              },
+              "keywords": [
+                "html5",
+                "video",
+                "player"
+              ],
+              "exports": {
+                ".": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.mjs",
+                  "require": "./dist/artplayer-plugin-audio-track.js"
+                },
+                "./legacy": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.legacy.js",
+                  "require": "./dist/artplayer-plugin-audio-track.legacy.js"
+                }
+              },
+              "main": "dist/artplayer-plugin-audio-track.js",
+              "module": "./dist/artplayer-plugin-audio-track.mjs",
+              "types": "types/artplayer-plugin-audio-track.d.ts",
+              "legacy": "dist/artplayer-plugin-audio-track.legacy.js",
+              "browserslist": "last 1 Chrome version"
+            }
+          },
+          "sourceSHA256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713",
+          "candidate": {
+            "kind": "source-build",
+            "file": null,
+            "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+          },
+          "audio": {
+            "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "bytes": 132436,
+            "format": "AAC mono 48000 Hz, 16 seconds, 440 Hz tone in MP4"
+          },
+          "wav": {
+            "sha256": "3150fc69aa2b94a4b556e2e6d9d67fb52c2926cd144fdd8694a7f8ddfd2f15ff",
+            "bytes": 512044,
+            "format": "PCM16LE mono 16000 Hz, 16 seconds, integer square wave 200 Hz"
+          },
+          "scope": "Desktop browser media checks; candidate provenance identifies installed, source or explicit artifact. No physical device acceptance.",
+          "core": "published",
+          "plugin": "source",
+          "selected": {
+            "kind": "source-build",
+            "file": null,
+            "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+          }
+        },
+        "media-gate": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 98304,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "events": []
+        }
+      },
+      "artifacts": [
+        {
+          "name": "screenshot",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-published--fce9e-sumes-after-network-release-webkit\\test-failed-1.png",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-published--fce9e-sumes-after-network-release-webkit/test-failed-1.png",
+          "sha256": "15e92313f9ed0a95b430ba03acdf74b85feeedeacd23febe2fab02cd13c12f88"
+        },
+        {
+          "name": "error-context",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-published--fce9e-sumes-after-network-release-webkit\\error-context.md",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-published--fce9e-sumes-after-network-release-webkit/error-context.md",
+          "sha256": "979bf0bf87d2a0d377b999a847bde6f6949156d6e32ce1b5c1ad5852e3aab1ac"
+        },
+        {
+          "name": "trace",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-published--fce9e-sumes-after-network-release-webkit\\trace.zip",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-published--fce9e-sumes-after-network-release-webkit/trace.zip",
+          "sha256": "da4a7e2878ea8a2efb605b7aff68334f19349c522be2271eda44e207ba5a8dcf"
+        }
+      ]
+    },
+    {
+      "file": "audio-buffering.spec.js",
+      "title": "published core + source audio: real audio starvation resumes after network release",
+      "project": "webkit",
+      "status": "failed",
+      "retry": 0,
+      "risk": "AUDIO-BUFFER-01",
+      "errors": [
+        {
+          "message": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  28 |           if (owner === 'video')\n  29 |             await page.evaluate(url => window.art.switchUrl(url), gate.url)\n> 30 |           await expect.poll(() => page.evaluate(() => window.starvation.some(event => event.trusted && event.time > 0.3 && event.readyState < 3))).toBe(true)\n     |                                                                                                                                                    ^\n  31 |           expect(gate.blocked).toBeGreaterThan(0)\n  32 |           const stalled = await page.evaluate(() => ({ audio: window.audioPlugin.audio.currentTime, video: window.art.currentTime }))\n  33 |           if (owner === 'video') {\n    at D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js:30:148",
+          "location": {
+            "file": "D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js",
+            "column": 148,
+            "line": 30
+          }
+        }
+      ],
+      "details": {
+        "audio-inputs": {
+          "release": {
+            "name": "artplayer-plugin-audio-track",
+            "version": "1.1.0",
+            "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-audio-track/1.1.0",
+            "tarball": "https://registry.npmjs.org/artplayer-plugin-audio-track/-/artplayer-plugin-audio-track-1.1.0.tgz",
+            "integrity": "sha512-pvvHvTSqC2+sBelwYyjAv2CVmaQgG9KpX+i96t/e8oyZRX/JuepC9iSVIp7GzB3AtliFzhVamksT+8lXvD3RCg==",
+            "sha256": "7e84f6a2f4bfada428a77ef04b749bf3db53e0149fa1afe7bf5749d925e801ff",
+            "archiveBytes": 2205,
+            "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+            "files": {
+              "package/README.md": "9a03352433ae90cb9d3198e17571c9bb598334b84a77a3a1df2c4b000ce8347d",
+              "package/dist/artplayer-plugin-audio-track.js": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683",
+              "package/dist/artplayer-plugin-audio-track.legacy.js": "d8dc74bce76112d7430c98e3165605e32fde5d3c603be4b496eac58f574576cb",
+              "package/dist/artplayer-plugin-audio-track.mjs": "4ac599bc5a1a6ecb0cb1942d4269528bfb2cd9d047f988de61fe671a77ad14cd",
+              "package/package.json": "c466ae55c40e8f6bdd97bec20fcf916c8c4f44eef3e47694638be005eb445df7",
+              "package/types/artplayer-plugin-audio-track.d.ts": "27bc0dfedacb7e0188cb668ac8708874a86b00d489f1636037c2465d3344437e"
+            },
+            "manifest": {
+              "name": "artplayer-plugin-audio-track",
+              "version": "1.1.0",
+              "description": "audio-track plugin for ArtPlayer",
+              "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+              "license": "MIT",
+              "homepage": "https://artplayer.org",
+              "repository": {
+                "type": "git",
+                "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+              },
+              "bugs": {
+                "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+              },
+              "keywords": [
+                "html5",
+                "video",
+                "player"
+              ],
+              "exports": {
+                ".": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.mjs",
+                  "require": "./dist/artplayer-plugin-audio-track.js"
+                },
+                "./legacy": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.legacy.js",
+                  "require": "./dist/artplayer-plugin-audio-track.legacy.js"
+                }
+              },
+              "main": "dist/artplayer-plugin-audio-track.js",
+              "module": "./dist/artplayer-plugin-audio-track.mjs",
+              "types": "types/artplayer-plugin-audio-track.d.ts",
+              "legacy": "dist/artplayer-plugin-audio-track.legacy.js",
+              "browserslist": "last 1 Chrome version"
+            }
+          },
+          "sourceSHA256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713",
+          "candidate": {
+            "kind": "source-build",
+            "file": null,
+            "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+          },
+          "audio": {
+            "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "bytes": 132436,
+            "format": "AAC mono 48000 Hz, 16 seconds, 440 Hz tone in MP4"
+          },
+          "wav": {
+            "sha256": "3150fc69aa2b94a4b556e2e6d9d67fb52c2926cd144fdd8694a7f8ddfd2f15ff",
+            "bytes": 512044,
+            "format": "PCM16LE mono 16000 Hz, 16 seconds, integer square wave 200 Hz"
+          },
+          "scope": "Desktop browser media checks; candidate provenance identifies installed, source or explicit artifact. No physical device acceptance.",
+          "core": "published",
+          "plugin": "source",
+          "selected": {
+            "kind": "source-build",
+            "file": null,
+            "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+          }
+        },
+        "media-gate": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 32768,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "events": []
+        }
+      },
+      "artifacts": [
+        {
+          "name": "screenshot",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-published--becc4-sumes-after-network-release-webkit\\test-failed-1.png",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-published--becc4-sumes-after-network-release-webkit/test-failed-1.png",
+          "sha256": "15e92313f9ed0a95b430ba03acdf74b85feeedeacd23febe2fab02cd13c12f88"
+        },
+        {
+          "name": "error-context",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-published--becc4-sumes-after-network-release-webkit\\error-context.md",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-published--becc4-sumes-after-network-release-webkit/error-context.md",
+          "sha256": "c9b78daebe8fa8e83c82d46afcd7f5339763a795029b6377f57d9a8e7565c2da"
+        },
+        {
+          "name": "trace",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-published--becc4-sumes-after-network-release-webkit\\trace.zip",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-published--becc4-sumes-after-network-release-webkit/trace.zip",
+          "sha256": "0ab8e893e5b6165faaefb2f87118f63643533069272c1c9f5fd913b61ba31ff7"
+        }
+      ]
+    },
+    {
+      "file": "audio-buffering.spec.js",
+      "title": "candidate core + published audio: real video starvation resumes after network release",
+      "project": "webkit",
+      "status": "failed",
+      "retry": 0,
+      "risk": "AUDIO-BUFFER-01",
+      "errors": [
+        {
+          "message": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  28 |           if (owner === 'video')\n  29 |             await page.evaluate(url => window.art.switchUrl(url), gate.url)\n> 30 |           await expect.poll(() => page.evaluate(() => window.starvation.some(event => event.trusted && event.time > 0.3 && event.readyState < 3))).toBe(true)\n     |                                                                                                                                                    ^\n  31 |           expect(gate.blocked).toBeGreaterThan(0)\n  32 |           const stalled = await page.evaluate(() => ({ audio: window.audioPlugin.audio.currentTime, video: window.art.currentTime }))\n  33 |           if (owner === 'video') {\n    at D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js:30:148",
+          "location": {
+            "file": "D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js",
+            "column": 148,
+            "line": 30
+          }
+        }
+      ],
+      "details": {
+        "audio-inputs": {
+          "release": {
+            "name": "artplayer-plugin-audio-track",
+            "version": "1.1.0",
+            "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-audio-track/1.1.0",
+            "tarball": "https://registry.npmjs.org/artplayer-plugin-audio-track/-/artplayer-plugin-audio-track-1.1.0.tgz",
+            "integrity": "sha512-pvvHvTSqC2+sBelwYyjAv2CVmaQgG9KpX+i96t/e8oyZRX/JuepC9iSVIp7GzB3AtliFzhVamksT+8lXvD3RCg==",
+            "sha256": "7e84f6a2f4bfada428a77ef04b749bf3db53e0149fa1afe7bf5749d925e801ff",
+            "archiveBytes": 2205,
+            "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+            "files": {
+              "package/README.md": "9a03352433ae90cb9d3198e17571c9bb598334b84a77a3a1df2c4b000ce8347d",
+              "package/dist/artplayer-plugin-audio-track.js": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683",
+              "package/dist/artplayer-plugin-audio-track.legacy.js": "d8dc74bce76112d7430c98e3165605e32fde5d3c603be4b496eac58f574576cb",
+              "package/dist/artplayer-plugin-audio-track.mjs": "4ac599bc5a1a6ecb0cb1942d4269528bfb2cd9d047f988de61fe671a77ad14cd",
+              "package/package.json": "c466ae55c40e8f6bdd97bec20fcf916c8c4f44eef3e47694638be005eb445df7",
+              "package/types/artplayer-plugin-audio-track.d.ts": "27bc0dfedacb7e0188cb668ac8708874a86b00d489f1636037c2465d3344437e"
+            },
+            "manifest": {
+              "name": "artplayer-plugin-audio-track",
+              "version": "1.1.0",
+              "description": "audio-track plugin for ArtPlayer",
+              "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+              "license": "MIT",
+              "homepage": "https://artplayer.org",
+              "repository": {
+                "type": "git",
+                "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+              },
+              "bugs": {
+                "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+              },
+              "keywords": [
+                "html5",
+                "video",
+                "player"
+              ],
+              "exports": {
+                ".": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.mjs",
+                  "require": "./dist/artplayer-plugin-audio-track.js"
+                },
+                "./legacy": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.legacy.js",
+                  "require": "./dist/artplayer-plugin-audio-track.legacy.js"
+                }
+              },
+              "main": "dist/artplayer-plugin-audio-track.js",
+              "module": "./dist/artplayer-plugin-audio-track.mjs",
+              "types": "types/artplayer-plugin-audio-track.d.ts",
+              "legacy": "dist/artplayer-plugin-audio-track.legacy.js",
+              "browserslist": "last 1 Chrome version"
+            }
+          },
+          "sourceSHA256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713",
+          "candidate": {
+            "kind": "source-build",
+            "file": null,
+            "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+          },
+          "audio": {
+            "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "bytes": 132436,
+            "format": "AAC mono 48000 Hz, 16 seconds, 440 Hz tone in MP4"
+          },
+          "wav": {
+            "sha256": "3150fc69aa2b94a4b556e2e6d9d67fb52c2926cd144fdd8694a7f8ddfd2f15ff",
+            "bytes": 512044,
+            "format": "PCM16LE mono 16000 Hz, 16 seconds, integer square wave 200 Hz"
+          },
+          "scope": "Desktop browser media checks; candidate provenance identifies installed, source or explicit artifact. No physical device acceptance.",
+          "core": "candidate",
+          "plugin": "published",
+          "selected": {
+            "kind": "published",
+            "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+          }
+        },
+        "media-gate": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 98304,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "events": []
+        }
+      },
+      "artifacts": [
+        {
+          "name": "screenshot",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-candidate--ddee5-sumes-after-network-release-webkit\\test-failed-1.png",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-candidate--ddee5-sumes-after-network-release-webkit/test-failed-1.png",
+          "sha256": "15e92313f9ed0a95b430ba03acdf74b85feeedeacd23febe2fab02cd13c12f88"
+        },
+        {
+          "name": "error-context",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-candidate--ddee5-sumes-after-network-release-webkit\\error-context.md",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-candidate--ddee5-sumes-after-network-release-webkit/error-context.md",
+          "sha256": "64d7128e9c921512be5d85aa847c5f2b42b376cf8512edf76cf39b0a9dbe260d"
+        },
+        {
+          "name": "trace",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-candidate--ddee5-sumes-after-network-release-webkit\\trace.zip",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-candidate--ddee5-sumes-after-network-release-webkit/trace.zip",
+          "sha256": "89018d024cb1965d81777dc42b8eb2a350bb7f5a3ab84606f6293986c88867f7"
+        }
+      ]
+    },
+    {
+      "file": "audio-buffering.spec.js",
+      "title": "candidate core + published audio: real audio starvation resumes after network release",
+      "project": "webkit",
+      "status": "failed",
+      "retry": 0,
+      "risk": "AUDIO-BUFFER-01",
+      "errors": [
+        {
+          "message": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  28 |           if (owner === 'video')\n  29 |             await page.evaluate(url => window.art.switchUrl(url), gate.url)\n> 30 |           await expect.poll(() => page.evaluate(() => window.starvation.some(event => event.trusted && event.time > 0.3 && event.readyState < 3))).toBe(true)\n     |                                                                                                                                                    ^\n  31 |           expect(gate.blocked).toBeGreaterThan(0)\n  32 |           const stalled = await page.evaluate(() => ({ audio: window.audioPlugin.audio.currentTime, video: window.art.currentTime }))\n  33 |           if (owner === 'video') {\n    at D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js:30:148",
+          "location": {
+            "file": "D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js",
+            "column": 148,
+            "line": 30
+          }
+        }
+      ],
+      "details": {
+        "audio-inputs": {
+          "release": {
+            "name": "artplayer-plugin-audio-track",
+            "version": "1.1.0",
+            "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-audio-track/1.1.0",
+            "tarball": "https://registry.npmjs.org/artplayer-plugin-audio-track/-/artplayer-plugin-audio-track-1.1.0.tgz",
+            "integrity": "sha512-pvvHvTSqC2+sBelwYyjAv2CVmaQgG9KpX+i96t/e8oyZRX/JuepC9iSVIp7GzB3AtliFzhVamksT+8lXvD3RCg==",
+            "sha256": "7e84f6a2f4bfada428a77ef04b749bf3db53e0149fa1afe7bf5749d925e801ff",
+            "archiveBytes": 2205,
+            "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+            "files": {
+              "package/README.md": "9a03352433ae90cb9d3198e17571c9bb598334b84a77a3a1df2c4b000ce8347d",
+              "package/dist/artplayer-plugin-audio-track.js": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683",
+              "package/dist/artplayer-plugin-audio-track.legacy.js": "d8dc74bce76112d7430c98e3165605e32fde5d3c603be4b496eac58f574576cb",
+              "package/dist/artplayer-plugin-audio-track.mjs": "4ac599bc5a1a6ecb0cb1942d4269528bfb2cd9d047f988de61fe671a77ad14cd",
+              "package/package.json": "c466ae55c40e8f6bdd97bec20fcf916c8c4f44eef3e47694638be005eb445df7",
+              "package/types/artplayer-plugin-audio-track.d.ts": "27bc0dfedacb7e0188cb668ac8708874a86b00d489f1636037c2465d3344437e"
+            },
+            "manifest": {
+              "name": "artplayer-plugin-audio-track",
+              "version": "1.1.0",
+              "description": "audio-track plugin for ArtPlayer",
+              "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+              "license": "MIT",
+              "homepage": "https://artplayer.org",
+              "repository": {
+                "type": "git",
+                "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+              },
+              "bugs": {
+                "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+              },
+              "keywords": [
+                "html5",
+                "video",
+                "player"
+              ],
+              "exports": {
+                ".": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.mjs",
+                  "require": "./dist/artplayer-plugin-audio-track.js"
+                },
+                "./legacy": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.legacy.js",
+                  "require": "./dist/artplayer-plugin-audio-track.legacy.js"
+                }
+              },
+              "main": "dist/artplayer-plugin-audio-track.js",
+              "module": "./dist/artplayer-plugin-audio-track.mjs",
+              "types": "types/artplayer-plugin-audio-track.d.ts",
+              "legacy": "dist/artplayer-plugin-audio-track.legacy.js",
+              "browserslist": "last 1 Chrome version"
+            }
+          },
+          "sourceSHA256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713",
+          "candidate": {
+            "kind": "source-build",
+            "file": null,
+            "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+          },
+          "audio": {
+            "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "bytes": 132436,
+            "format": "AAC mono 48000 Hz, 16 seconds, 440 Hz tone in MP4"
+          },
+          "wav": {
+            "sha256": "3150fc69aa2b94a4b556e2e6d9d67fb52c2926cd144fdd8694a7f8ddfd2f15ff",
+            "bytes": 512044,
+            "format": "PCM16LE mono 16000 Hz, 16 seconds, integer square wave 200 Hz"
+          },
+          "scope": "Desktop browser media checks; candidate provenance identifies installed, source or explicit artifact. No physical device acceptance.",
+          "core": "candidate",
+          "plugin": "published",
+          "selected": {
+            "kind": "published",
+            "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+          }
+        },
+        "media-gate": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 32768,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "events": [
+            {
+              "trusted": true,
+              "time": 0,
+              "readyState": 2,
+              "audioPaused": false,
+              "videoTime": 0.0199179
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "name": "screenshot",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-candidate--4df36-sumes-after-network-release-webkit\\test-failed-1.png",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-candidate--4df36-sumes-after-network-release-webkit/test-failed-1.png",
+          "sha256": "15e92313f9ed0a95b430ba03acdf74b85feeedeacd23febe2fab02cd13c12f88"
+        },
+        {
+          "name": "error-context",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-candidate--4df36-sumes-after-network-release-webkit\\error-context.md",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-candidate--4df36-sumes-after-network-release-webkit/error-context.md",
+          "sha256": "7860660772ab6e4bc28f5f1338fe8955089cc6ca5caefe10463ba6e7bc3b7601"
+        },
+        {
+          "name": "trace",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-candidate--4df36-sumes-after-network-release-webkit\\trace.zip",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-candidate--4df36-sumes-after-network-release-webkit/trace.zip",
+          "sha256": "590fa65821287d233b905f258c4f3375be0dd0fd93179ba1f9d0511fc0945f18"
+        }
+      ]
+    },
+    {
+      "file": "audio-buffering.spec.js",
+      "title": "candidate core + source audio: real video starvation resumes after network release",
+      "project": "webkit",
+      "status": "failed",
+      "retry": 0,
+      "risk": "AUDIO-BUFFER-01",
+      "errors": [
+        {
+          "message": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  28 |           if (owner === 'video')\n  29 |             await page.evaluate(url => window.art.switchUrl(url), gate.url)\n> 30 |           await expect.poll(() => page.evaluate(() => window.starvation.some(event => event.trusted && event.time > 0.3 && event.readyState < 3))).toBe(true)\n     |                                                                                                                                                    ^\n  31 |           expect(gate.blocked).toBeGreaterThan(0)\n  32 |           const stalled = await page.evaluate(() => ({ audio: window.audioPlugin.audio.currentTime, video: window.art.currentTime }))\n  33 |           if (owner === 'video') {\n    at D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js:30:148",
+          "location": {
+            "file": "D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js",
+            "column": 148,
+            "line": 30
+          }
+        }
+      ],
+      "details": {
+        "audio-inputs": {
+          "release": {
+            "name": "artplayer-plugin-audio-track",
+            "version": "1.1.0",
+            "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-audio-track/1.1.0",
+            "tarball": "https://registry.npmjs.org/artplayer-plugin-audio-track/-/artplayer-plugin-audio-track-1.1.0.tgz",
+            "integrity": "sha512-pvvHvTSqC2+sBelwYyjAv2CVmaQgG9KpX+i96t/e8oyZRX/JuepC9iSVIp7GzB3AtliFzhVamksT+8lXvD3RCg==",
+            "sha256": "7e84f6a2f4bfada428a77ef04b749bf3db53e0149fa1afe7bf5749d925e801ff",
+            "archiveBytes": 2205,
+            "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+            "files": {
+              "package/README.md": "9a03352433ae90cb9d3198e17571c9bb598334b84a77a3a1df2c4b000ce8347d",
+              "package/dist/artplayer-plugin-audio-track.js": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683",
+              "package/dist/artplayer-plugin-audio-track.legacy.js": "d8dc74bce76112d7430c98e3165605e32fde5d3c603be4b496eac58f574576cb",
+              "package/dist/artplayer-plugin-audio-track.mjs": "4ac599bc5a1a6ecb0cb1942d4269528bfb2cd9d047f988de61fe671a77ad14cd",
+              "package/package.json": "c466ae55c40e8f6bdd97bec20fcf916c8c4f44eef3e47694638be005eb445df7",
+              "package/types/artplayer-plugin-audio-track.d.ts": "27bc0dfedacb7e0188cb668ac8708874a86b00d489f1636037c2465d3344437e"
+            },
+            "manifest": {
+              "name": "artplayer-plugin-audio-track",
+              "version": "1.1.0",
+              "description": "audio-track plugin for ArtPlayer",
+              "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+              "license": "MIT",
+              "homepage": "https://artplayer.org",
+              "repository": {
+                "type": "git",
+                "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+              },
+              "bugs": {
+                "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+              },
+              "keywords": [
+                "html5",
+                "video",
+                "player"
+              ],
+              "exports": {
+                ".": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.mjs",
+                  "require": "./dist/artplayer-plugin-audio-track.js"
+                },
+                "./legacy": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.legacy.js",
+                  "require": "./dist/artplayer-plugin-audio-track.legacy.js"
+                }
+              },
+              "main": "dist/artplayer-plugin-audio-track.js",
+              "module": "./dist/artplayer-plugin-audio-track.mjs",
+              "types": "types/artplayer-plugin-audio-track.d.ts",
+              "legacy": "dist/artplayer-plugin-audio-track.legacy.js",
+              "browserslist": "last 1 Chrome version"
+            }
+          },
+          "sourceSHA256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713",
+          "candidate": {
+            "kind": "source-build",
+            "file": null,
+            "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+          },
+          "audio": {
+            "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "bytes": 132436,
+            "format": "AAC mono 48000 Hz, 16 seconds, 440 Hz tone in MP4"
+          },
+          "wav": {
+            "sha256": "3150fc69aa2b94a4b556e2e6d9d67fb52c2926cd144fdd8694a7f8ddfd2f15ff",
+            "bytes": 512044,
+            "format": "PCM16LE mono 16000 Hz, 16 seconds, integer square wave 200 Hz"
+          },
+          "scope": "Desktop browser media checks; candidate provenance identifies installed, source or explicit artifact. No physical device acceptance.",
+          "core": "candidate",
+          "plugin": "source",
+          "selected": {
+            "kind": "source-build",
+            "file": null,
+            "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+          }
+        },
+        "media-gate": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 98304,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "events": []
+        }
+      },
+      "artifacts": [
+        {
+          "name": "screenshot",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-candidate--3c8b9-sumes-after-network-release-webkit\\test-failed-1.png",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-candidate--3c8b9-sumes-after-network-release-webkit/test-failed-1.png",
+          "sha256": "15e92313f9ed0a95b430ba03acdf74b85feeedeacd23febe2fab02cd13c12f88"
+        },
+        {
+          "name": "error-context",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-candidate--3c8b9-sumes-after-network-release-webkit\\error-context.md",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-candidate--3c8b9-sumes-after-network-release-webkit/error-context.md",
+          "sha256": "a64a6af6c83b3426c9e7ee92d2b2cfa36464eec4dfa206edc5ad07fe3784f983"
+        },
+        {
+          "name": "trace",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-candidate--3c8b9-sumes-after-network-release-webkit\\trace.zip",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-candidate--3c8b9-sumes-after-network-release-webkit/trace.zip",
+          "sha256": "02c0c60aac8dc815635292b565793f645d84bb68a7dfdf9cdc38c8b0e2c413a5"
+        }
+      ]
+    },
+    {
+      "file": "audio-buffering.spec.js",
+      "title": "candidate core + source audio: real audio starvation resumes after network release",
+      "project": "webkit",
+      "status": "failed",
+      "retry": 0,
+      "risk": "AUDIO-BUFFER-01",
+      "errors": [
+        {
+          "message": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  28 |           if (owner === 'video')\n  29 |             await page.evaluate(url => window.art.switchUrl(url), gate.url)\n> 30 |           await expect.poll(() => page.evaluate(() => window.starvation.some(event => event.trusted && event.time > 0.3 && event.readyState < 3))).toBe(true)\n     |                                                                                                                                                    ^\n  31 |           expect(gate.blocked).toBeGreaterThan(0)\n  32 |           const stalled = await page.evaluate(() => ({ audio: window.audioPlugin.audio.currentTime, video: window.art.currentTime }))\n  33 |           if (owner === 'video') {\n    at D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js:30:148",
+          "location": {
+            "file": "D:\\github\\ArtPlayer\\test\\browser\\audio-buffering.spec.js",
+            "column": 148,
+            "line": 30
+          }
+        }
+      ],
+      "details": {
+        "audio-inputs": {
+          "release": {
+            "name": "artplayer-plugin-audio-track",
+            "version": "1.1.0",
+            "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-audio-track/1.1.0",
+            "tarball": "https://registry.npmjs.org/artplayer-plugin-audio-track/-/artplayer-plugin-audio-track-1.1.0.tgz",
+            "integrity": "sha512-pvvHvTSqC2+sBelwYyjAv2CVmaQgG9KpX+i96t/e8oyZRX/JuepC9iSVIp7GzB3AtliFzhVamksT+8lXvD3RCg==",
+            "sha256": "7e84f6a2f4bfada428a77ef04b749bf3db53e0149fa1afe7bf5749d925e801ff",
+            "archiveBytes": 2205,
+            "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+            "files": {
+              "package/README.md": "9a03352433ae90cb9d3198e17571c9bb598334b84a77a3a1df2c4b000ce8347d",
+              "package/dist/artplayer-plugin-audio-track.js": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683",
+              "package/dist/artplayer-plugin-audio-track.legacy.js": "d8dc74bce76112d7430c98e3165605e32fde5d3c603be4b496eac58f574576cb",
+              "package/dist/artplayer-plugin-audio-track.mjs": "4ac599bc5a1a6ecb0cb1942d4269528bfb2cd9d047f988de61fe671a77ad14cd",
+              "package/package.json": "c466ae55c40e8f6bdd97bec20fcf916c8c4f44eef3e47694638be005eb445df7",
+              "package/types/artplayer-plugin-audio-track.d.ts": "27bc0dfedacb7e0188cb668ac8708874a86b00d489f1636037c2465d3344437e"
+            },
+            "manifest": {
+              "name": "artplayer-plugin-audio-track",
+              "version": "1.1.0",
+              "description": "audio-track plugin for ArtPlayer",
+              "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+              "license": "MIT",
+              "homepage": "https://artplayer.org",
+              "repository": {
+                "type": "git",
+                "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+              },
+              "bugs": {
+                "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+              },
+              "keywords": [
+                "html5",
+                "video",
+                "player"
+              ],
+              "exports": {
+                ".": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.mjs",
+                  "require": "./dist/artplayer-plugin-audio-track.js"
+                },
+                "./legacy": {
+                  "types": "./types/artplayer-plugin-audio-track.d.ts",
+                  "import": "./dist/artplayer-plugin-audio-track.legacy.js",
+                  "require": "./dist/artplayer-plugin-audio-track.legacy.js"
+                }
+              },
+              "main": "dist/artplayer-plugin-audio-track.js",
+              "module": "./dist/artplayer-plugin-audio-track.mjs",
+              "types": "types/artplayer-plugin-audio-track.d.ts",
+              "legacy": "dist/artplayer-plugin-audio-track.legacy.js",
+              "browserslist": "last 1 Chrome version"
+            }
+          },
+          "sourceSHA256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713",
+          "candidate": {
+            "kind": "source-build",
+            "file": null,
+            "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+          },
+          "audio": {
+            "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "bytes": 132436,
+            "format": "AAC mono 48000 Hz, 16 seconds, 440 Hz tone in MP4"
+          },
+          "wav": {
+            "sha256": "3150fc69aa2b94a4b556e2e6d9d67fb52c2926cd144fdd8694a7f8ddfd2f15ff",
+            "bytes": 512044,
+            "format": "PCM16LE mono 16000 Hz, 16 seconds, integer square wave 200 Hz"
+          },
+          "scope": "Desktop browser media checks; candidate provenance identifies installed, source or explicit artifact. No physical device acceptance.",
+          "core": "candidate",
+          "plugin": "source",
+          "selected": {
+            "kind": "source-build",
+            "file": null,
+            "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+          }
+        },
+        "media-gate": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 32768,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "events": []
+        }
+      },
+      "artifacts": [
+        {
+          "name": "screenshot",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-candidate--b2b3b-sumes-after-network-release-webkit\\test-failed-1.png",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-candidate--b2b3b-sumes-after-network-release-webkit/test-failed-1.png",
+          "sha256": "15e92313f9ed0a95b430ba03acdf74b85feeedeacd23febe2fab02cd13c12f88"
+        },
+        {
+          "name": "error-context",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-candidate--b2b3b-sumes-after-network-release-webkit\\error-context.md",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-candidate--b2b3b-sumes-after-network-release-webkit/error-context.md",
+          "sha256": "26d16196037b4a216706ff7a8087a2ca77e241a3e238e6303d7c7cfcdd7a5555"
+        },
+        {
+          "name": "trace",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\audio-buffering-candidate--b2b3b-sumes-after-network-release-webkit\\trace.zip",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/audio-buffering-candidate--b2b3b-sumes-after-network-release-webkit/trace.zip",
+          "sha256": "0cef7e8aaa29bb769f9201c9b05ecd5bd8c3cd82c1b89e620d2084024b451fc4"
+        }
+      ]
+    },
+    {
+      "file": "jassub-native.spec.js",
+      "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with candidate core, customCanvas=false, defaultOffscreen=false",
+      "project": "webkit",
+      "status": "failed",
+      "retry": 0,
+      "risk": "JASSUB-NATIVE-FRAME-01",
+      "errors": [
+        {
+          "message": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 100\nReceived:   0\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  191 |         expect(offscreen.selected).toBe(defaultOffscreen && !customCanvas && offscreen.available)\n  192 |         await page.locator('#play').click()\n> 193 |         await expect.poll(async () => (await pixels(page)).visible).toBeGreaterThan(100)\n      |                                                                     ^\n  194 |         const before = await pixels(page, 'before-seek')\n  195 |         expect(before.connected).toBe(true)\n  196 |         if (screenshotReadback) {\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:193:69",
+          "location": {
+            "file": "D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js",
+            "column": 69,
+            "line": 193
+          }
+        }
+      ],
+      "details": {
+        "jassub-selected-input": {
+          "core": "candidate",
+          "provenance": {
+            "kind": "published",
+            "version": "1.1.0",
+            "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+            "member": "package/dist/artplayer-plugin-jassub.js",
+            "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+          }
+        },
+        "actual-jassub-evidence": {
+          "core": "candidate",
+          "onDemandRender": true,
+          "customCanvas": false,
+          "defaultOffscreen": false,
+          "source": {
+            "kind": "published",
+            "version": "1.1.0",
+            "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+            "member": "package/dist/artplayer-plugin-jassub.js",
+            "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+          },
+          "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+          "resources": [
+            {
+              "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+              "status": 200,
+              "contentType": "text/javascript"
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+              "status": 200,
+              "contentType": "application/wasm"
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+              "status": 200,
+              "contentType": "font/woff2"
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+              "status": 200,
+              "contentType": "font/woff2"
+            }
+          ],
+          "external": [],
+          "state": {
+            "workers": [
+              {
+                "url": "/assets/jassub/jassub-worker.js",
+                "terminated": 0,
+                "sent": [
+                  {
+                    "target": "init",
+                    "width": 300,
+                    "height": 150,
+                    "asyncRender": true
+                  },
+                  {
+                    "target": "canvas",
+                    "width": 1280,
+                    "height": 720
+                  },
+                  {
+                    "target": "canvas",
+                    "width": 1280,
+                    "height": 720
+                  }
+                ],
+                "received": [
+                  {
+                    "target": "ready"
+                  },
+                  {
+                    "target": "verifyColorSpace"
+                  },
+                  {
+                    "target": "render",
+                    "images": 0,
+                    "width": 1280,
+                    "height": 720
+                  }
+                ]
+              }
+            ],
+            "snapshots": [],
+            "errors": [],
+            "frames": {
+              "before": "undefined",
+              "registered": 1,
+              "delivered": 0,
+              "after": "function"
+            },
+            "renderCalls": [
+              {
+                "context": true,
+                "images": 0
+              }
+            ],
+            "offscreen": {
+              "available": false,
+              "selected": false
+            },
+            "lastPixel": {
+              "visible": 0,
+              "signature": 0,
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 6.7169803,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true
+            },
+            "readbackFrame": false,
+            "synchronousRender": false,
+            "screenshotReadback": false
+          },
+          "limitation": "Actual worker, WASM and local font; offscreen option explicitly false. Canvas pixels are read from a separate canvas copying the native display bitmap. No full failure recovery, sustained GPU/memory or physical-device acceptance; candidate adds direct-then-host destruction."
+        }
+      },
+      "artifacts": [
+        {
+          "name": "screenshot",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\jassub-native-JASSUB-publi-d686f-alse-defaultOffscreen-false-webkit\\test-failed-1.png",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/jassub-native-JASSUB-publi-d686f-alse-defaultOffscreen-false-webkit/test-failed-1.png",
+          "sha256": "15e92313f9ed0a95b430ba03acdf74b85feeedeacd23febe2fab02cd13c12f88"
+        },
+        {
+          "name": "error-context",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\jassub-native-JASSUB-publi-d686f-alse-defaultOffscreen-false-webkit\\error-context.md",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/jassub-native-JASSUB-publi-d686f-alse-defaultOffscreen-false-webkit/error-context.md",
+          "sha256": "c90e2e79f1faea3e91ac6cb294508ad0ad2ef5f044eace49111f83d48c7141a4"
+        },
+        {
+          "name": "trace",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\jassub-native-JASSUB-publi-d686f-alse-defaultOffscreen-false-webkit\\trace.zip",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/jassub-native-JASSUB-publi-d686f-alse-defaultOffscreen-false-webkit/trace.zip",
+          "sha256": "e469a13e2c07ab1f4b7234dbefe86fcf04e378d0d8d5a420499e8e49854ef486"
+        }
+      ]
+    },
+    {
+      "file": "jassub-native.spec.js",
+      "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with published core, customCanvas=false, defaultOffscreen=false",
+      "project": "webkit",
+      "status": "failed",
+      "retry": 0,
+      "risk": "JASSUB-NATIVE-FRAME-01",
+      "errors": [
+        {
+          "message": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 100\nReceived:   0\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  191 |         expect(offscreen.selected).toBe(defaultOffscreen && !customCanvas && offscreen.available)\n  192 |         await page.locator('#play').click()\n> 193 |         await expect.poll(async () => (await pixels(page)).visible).toBeGreaterThan(100)\n      |                                                                     ^\n  194 |         const before = await pixels(page, 'before-seek')\n  195 |         expect(before.connected).toBe(true)\n  196 |         if (screenshotReadback) {\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:193:69",
+          "location": {
+            "file": "D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js",
+            "column": 69,
+            "line": 193
+          }
+        }
+      ],
+      "details": {
+        "jassub-selected-input": {
+          "core": "published",
+          "provenance": {
+            "kind": "published",
+            "version": "1.1.0",
+            "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+            "member": "package/dist/artplayer-plugin-jassub.js",
+            "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+          }
+        },
+        "actual-jassub-evidence": {
+          "core": "published",
+          "onDemandRender": true,
+          "customCanvas": false,
+          "defaultOffscreen": false,
+          "source": {
+            "kind": "published",
+            "version": "1.1.0",
+            "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+            "member": "package/dist/artplayer-plugin-jassub.js",
+            "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+          },
+          "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+          "resources": [
+            {
+              "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+              "status": 200,
+              "contentType": "text/javascript"
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+              "status": 200,
+              "contentType": "application/wasm"
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+              "status": 200,
+              "contentType": "font/woff2"
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+              "status": 200,
+              "contentType": "font/woff2"
+            }
+          ],
+          "external": [],
+          "state": {
+            "workers": [
+              {
+                "url": "/assets/jassub/jassub-worker.js",
+                "terminated": 0,
+                "sent": [
+                  {
+                    "target": "init",
+                    "width": 300,
+                    "height": 150,
+                    "asyncRender": true
+                  },
+                  {
+                    "target": "canvas",
+                    "width": 1280,
+                    "height": 720
+                  },
+                  {
+                    "target": "canvas",
+                    "width": 1280,
+                    "height": 720
+                  }
+                ],
+                "received": [
+                  {
+                    "target": "ready"
+                  },
+                  {
+                    "target": "verifyColorSpace"
+                  },
+                  {
+                    "target": "render",
+                    "images": 0,
+                    "width": 1280,
+                    "height": 720
+                  }
+                ]
+              }
+            ],
+            "snapshots": [],
+            "errors": [],
+            "frames": {
+              "before": "undefined",
+              "registered": 1,
+              "delivered": 0,
+              "after": "function"
+            },
+            "renderCalls": [
+              {
+                "context": true,
+                "images": 0
+              }
+            ],
+            "offscreen": {
+              "available": false,
+              "selected": false
+            },
+            "lastPixel": {
+              "visible": 0,
+              "signature": 0,
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 6.6994594,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true
+            },
+            "readbackFrame": false,
+            "synchronousRender": false,
+            "screenshotReadback": false
+          },
+          "limitation": "Actual worker, WASM and local font; offscreen option explicitly false. Canvas pixels are read from a separate canvas copying the native display bitmap. No full failure recovery, sustained GPU/memory or physical-device acceptance; candidate adds direct-then-host destruction."
+        }
+      },
+      "artifacts": [
+        {
+          "name": "screenshot",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\jassub-native-JASSUB-publi-70a6b-alse-defaultOffscreen-false-webkit\\test-failed-1.png",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/jassub-native-JASSUB-publi-70a6b-alse-defaultOffscreen-false-webkit/test-failed-1.png",
+          "sha256": "15e92313f9ed0a95b430ba03acdf74b85feeedeacd23febe2fab02cd13c12f88"
+        },
+        {
+          "name": "error-context",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\jassub-native-JASSUB-publi-70a6b-alse-defaultOffscreen-false-webkit\\error-context.md",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/jassub-native-JASSUB-publi-70a6b-alse-defaultOffscreen-false-webkit/error-context.md",
+          "sha256": "4e231fbc002e9a42d981554d3ef95c417473966dbc6bbe208f5321e95a0bac50"
+        },
+        {
+          "name": "trace",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\jassub-native-JASSUB-publi-70a6b-alse-defaultOffscreen-false-webkit\\trace.zip",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/jassub-native-JASSUB-publi-70a6b-alse-defaultOffscreen-false-webkit/trace.zip",
+          "sha256": "4be3b5d18362267c0e42c021b68802ad5d99fc77bc006699ef591b1c097132ba"
+        }
+      ]
+    },
+    {
+      "file": "jassub-native.spec.js",
+      "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core, customCanvas=false, defaultOffscreen=false",
+      "project": "webkit",
+      "status": "failed",
+      "retry": 0,
+      "risk": "JASSUB-NATIVE-FRAME-01",
+      "errors": [
+        {
+          "message": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 100\nReceived:   0\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  191 |         expect(offscreen.selected).toBe(defaultOffscreen && !customCanvas && offscreen.available)\n  192 |         await page.locator('#play').click()\n> 193 |         await expect.poll(async () => (await pixels(page)).visible).toBeGreaterThan(100)\n      |                                                                     ^\n  194 |         const before = await pixels(page, 'before-seek')\n  195 |         expect(before.connected).toBe(true)\n  196 |         if (screenshotReadback) {\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:193:69",
+          "location": {
+            "file": "D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js",
+            "column": 69,
+            "line": 193
+          }
+        }
+      ],
+      "details": {
+        "jassub-selected-input": {
+          "core": "published-5.3.1-beta.1",
+          "provenance": {
+            "kind": "published",
+            "version": "1.1.0",
+            "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+            "member": "package/dist/artplayer-plugin-jassub.js",
+            "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+          }
+        },
+        "actual-jassub-evidence": {
+          "core": "published-5.3.1-beta.1",
+          "onDemandRender": true,
+          "customCanvas": false,
+          "defaultOffscreen": false,
+          "source": {
+            "kind": "published",
+            "version": "1.1.0",
+            "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+            "member": "package/dist/artplayer-plugin-jassub.js",
+            "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+          },
+          "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+          "resources": [
+            {
+              "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+              "status": 200,
+              "contentType": "text/javascript"
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+              "status": 200,
+              "contentType": "application/wasm"
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+              "status": 200,
+              "contentType": "font/woff2"
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+              "status": 200,
+              "contentType": "font/woff2"
+            }
+          ],
+          "external": [],
+          "state": {
+            "workers": [
+              {
+                "url": "/assets/jassub/jassub-worker.js",
+                "terminated": 0,
+                "sent": [
+                  {
+                    "target": "init",
+                    "width": 300,
+                    "height": 150,
+                    "asyncRender": true
+                  },
+                  {
+                    "target": "canvas",
+                    "width": 1280,
+                    "height": 720
+                  },
+                  {
+                    "target": "canvas",
+                    "width": 1280,
+                    "height": 720
+                  }
+                ],
+                "received": [
+                  {
+                    "target": "ready"
+                  },
+                  {
+                    "target": "verifyColorSpace"
+                  },
+                  {
+                    "target": "render",
+                    "images": 0,
+                    "width": 1280,
+                    "height": 720
+                  }
+                ]
+              }
+            ],
+            "snapshots": [],
+            "errors": [],
+            "frames": {
+              "before": "undefined",
+              "registered": 1,
+              "delivered": 0,
+              "after": "function"
+            },
+            "renderCalls": [
+              {
+                "context": true,
+                "images": 0
+              }
+            ],
+            "offscreen": {
+              "available": false,
+              "selected": false
+            },
+            "lastPixel": {
+              "visible": 0,
+              "signature": 0,
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 6.8075428,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true
+            },
+            "readbackFrame": false,
+            "synchronousRender": false,
+            "screenshotReadback": false
+          },
+          "limitation": "Actual worker, WASM and local font; offscreen option explicitly false. Canvas pixels are read from a separate canvas copying the native display bitmap. No full failure recovery, sustained GPU/memory or physical-device acceptance; candidate adds direct-then-host destruction."
+        }
+      },
+      "artifacts": [
+        {
+          "name": "screenshot",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\jassub-native-JASSUB-publi-dd2ae-alse-defaultOffscreen-false-webkit\\test-failed-1.png",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/jassub-native-JASSUB-publi-dd2ae-alse-defaultOffscreen-false-webkit/test-failed-1.png",
+          "sha256": "15e92313f9ed0a95b430ba03acdf74b85feeedeacd23febe2fab02cd13c12f88"
+        },
+        {
+          "name": "error-context",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\jassub-native-JASSUB-publi-dd2ae-alse-defaultOffscreen-false-webkit\\error-context.md",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/jassub-native-JASSUB-publi-dd2ae-alse-defaultOffscreen-false-webkit/error-context.md",
+          "sha256": "d616f3d5c11e10ff9dea30c70e84f1e553d9f290ca8bd1355a7cf0a68f6ca315"
+        },
+        {
+          "name": "trace",
+          "originalPath": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser-source\\results\\jassub-native-JASSUB-publi-dd2ae-alse-defaultOffscreen-false-webkit\\trace.zip",
+          "archiveFile": "refactor/.cache/ci-source-webkit-full-report/results/jassub-native-JASSUB-publi-dd2ae-alse-defaultOffscreen-false-webkit/trace.zip",
+          "sha256": "a7a3fe31d6895bc9f9e0356933b3fcefcb8e3fe92310cb74ceebb8131498ab56"
+        }
+      ]
+    }
+  ],
+  "scope": "Complete source collection, no file/grep filter, retries or diagnostic overrides, with unchanged tracked inputs throughout execution. Includes explicitly frozen historical packages/SDKs, committed artifacts, controlled hosts and unsupported-capability assertions. Passed tests are not a count of native supported playback features.",
+  "disposition": {
+    "audio": "All eight failures are the trusted waiting assertion at line30, after the initial dual-clock assertion passed. Seven recorded no waiting; one recorded a trusted event at time0, below the original required time. Neither initial clocks nor held bytes prove starvation or recovery. AUDIO-BUFFER-01 stays open.",
+    "jassub": "The native source default selects published1.1.0, not the candidate. All three cores load worker/WASM/font, advance video, register one polyfilled callback but deliver zero, with zero quality counters and no subtitle demand. This matches the preserved historical defect. The existing candidate frame fix is not reopened or newly proved by those failures; candidate lifecycle and installed evidence remain separately scoped.",
+    "skipped": "58 ASR WebAudio, 48 DASH MSE and 32 HLS MSE checks skipped with explicit recorded reasons. They are unverified capability cells, not passing playback or Safari/device acceptance."
+  },
+  "limits": [
+    "No full installed-browser, remote Actions or physical-device acceptance.",
+    "No failure was skipped, marked expected, retried or relaxed in this run.",
+    "Earlier intermittent Chapter/HLS/JASSUB/Multiple Subtitles and Auto Thumbnail first-frame risks are not closed by passing cases in this run."
+  ]
+}

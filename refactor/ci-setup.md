@@ -1,5 +1,13 @@
 # PR 检查和 Pages 操作说明
 
+本地完整源码回归现分别有 Chromium、Firefox 和 Windows WebKit 的记录，
+对应不同提交与测试集合，不能拼成同一候选的绿色矩阵。最新 WebKit 在 ae56937d3
+执行174文件/1664项：1515通过、11失败、138能力跳过、0重试，1816.373秒。
+8项真实音频缓冲失败与3项冻结JASSUB渲染失败保留；58项ASR、48项DASH和32项HLS
+缺能力，不计播放通过。详见[本轮记录](changes/2026-09-15-CI-01-source-webkit.md)
+及[各引擎入口](../scripts/browser-validation/README.md)。CI-01/CI-04仍未完成，
+本地报告不代替远端Actions、完整安装候选及物理设备。
+
 CI-TYPES-02 增加 `yarn test:ecosystem-types`：四包共享消费者加十七个独立
 类型检查命令覆盖全部二十一库包，先重建声明/分发/i18n，再逐包隔离安装验证。
 browser-consumers 在恢复标准 Node 并完成原消费步骤后执行；类型失败使作业失败，

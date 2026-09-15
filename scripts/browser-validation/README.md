@@ -5,13 +5,27 @@ three-engine configuration. The launcher clears only ARTPLAYER_BROWSER_ARTIFACTS
 from the child environment, so an installed-core map inherited from CI cannot
 mislabel source/explicit-vendor SDK tests. The caller's environment is untouched.
 Other deliberate fixture switches retain their existing meaning.
-The complete Chromium source collection at the recorded checkpoint executed
-1,481 cases in 152 files: 1,480 passed and the original dash.js 4.5.2 native seek
-control failed with exit 1. See
-`../../refactor/baselines/ci-source-chromium-validation.json`; this is evidence of
-the open DASH-SEEK-01 issue, not a green full CI or all-engine result. Source scope
-also retains explicit historical and committed-artifact cases; its name does not
-promise that every dependency is rebuilt from current source in every test.
+Complete Windows source runs are recorded separately:
+
+| Engine | Source HEAD | Files / cases | Passed / failed / skipped | Record under refactor/baselines |
+| --- | --- | --- | --- | --- |
+| Chromium 153.0.8010.12 | fc566f14d | 152 / 1481 | 1480 / 1 / 0 | ci-source-chromium-validation.json |
+| Firefox 155.0 | 4545c4367 | 174 / 1664 | 1662 / 2 / 0 | ci-source-firefox-validation.json |
+| Windows WebKit 26.6 | ae56937d3 | 174 / 1664 | 1515 / 11 / 138 | ci-source-webkit-validation.json |
+
+All ran with two workers and zero retries; each returned exit 1. These are different
+commits and collections, not a single candidate's green matrix. Firefox's obsolete
+VAST editor consumer was fixed by SITE-EDITOR-VAST-01 and passed in all three
+engines; it also passes in the subsequent complete WebKit run. Bare SDK 4.5.2 seek,
+WebKit trusted starvation events, and published JASSUB zero-counter playback keep
+their original failing reports. WebKit skips are 58 ASR WebAudio, 48 DASH MSE and 32
+HLS MSE cases, with per-file reasons in the record. Passed counts also include
+controlled hosts, capability boundaries and historical-defect assertions.
+Source scope retains explicit historical and committed-artifact cases; its name
+does not promise every dependency is rebuilt from current source in every test.
+The native JASSUB source default still selects the published artifact; its three
+failures cannot be presented as candidate-native failures or candidate acceptance.
+Full installed, remote Actions and physical-device acceptance remain separate.
 
 `yarn test:browser:installed` requires ARTPLAYER_BROWSER_ARTIFACTS from
 `yarn test:package --browser`.
