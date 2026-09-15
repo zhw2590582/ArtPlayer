@@ -385,6 +385,18 @@ The report records these distinctions and never infers a JASSUB fix from a contr
 pass. Preserve each raw report/results directory before the next browser command.
 See [the isolation record](../../refactor/changes/2026-09-14-PKG-JASSUB-09-firefox-diagnostics.md).
 
+`ARTPLAYER_JASSUB_CONTROL_SINGLE_FLIGHT=true` submits at most one unacknowledged
+draw, without pausing readback. It records skipped video callbacks and the maximum
+outstanding count; this opt-in control also rejects individual canvas reads taking
+7 seconds or more, even if expect.poll eventually receives the expected pixels.
+Worker messages distinguish entry/return of createImageBitmap from Promise
+settlement, and include IDs plus pending-task timer observations. Main-thread
+samples separately time canvas copying and pixel reading. A native script-free
+host has exhibited a roughly ten-second stall despite a green eventual-pixel
+result; a single outstanding task does not eliminate the Firefox issue. These
+timings identify API boundaries, not a native stack or the underlying cause.
+See [the native-call record](../../refactor/changes/2026-09-15-PKG-JASSUB-09-native-call.md).
+
 `ARTPLAYER_JASSUB_SCREENSHOT=true` adds a separate observation path to the native
 JASSUB spec. `jassub-display.js` decodes a clipped composited page PNG using the
 pinned root-only pngjs development dependency; it never copies the transferred

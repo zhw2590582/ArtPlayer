@@ -1,5 +1,11 @@
 # PKG-JASSUB-09 Firefox 绘制诊断检查点
 
+后续更精确的调用边界计时见
+[2026-09-15 原生调用记录](2026-09-15-PKG-JASSUB-09-native-call.md)。新证据已在
+不加载核心的原生页面观察到停顿，并将一次等待定位到 createImageBitmap 返回
+Promise 之前。本页“Promise 等待”和“纯原生迄今通过”只描述当时的观测粒度，
+不能继续用于排除原生停顿或认定异步等待阶段。
+
 任务保持 doing。本轮未修改生产源码、默认选项、公开类型或发布产物；没有把一次
 对照通过当作修复。接续 HEAD `7f185f698dbd303b00ca7bc0c21f51cf65c69a04` 的 hybrid
 修复检查点，调查 JASSUB-FIREFOX-OFFSCREEN-01。

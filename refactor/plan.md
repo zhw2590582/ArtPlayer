@@ -691,7 +691,7 @@
 - PKG-DANMUKU-11: [记录](changes/2026-09-13-PKG-DANMUKU-11-visible-lifetime.md) [记录](baselines/danmuku-lifetime-validation.json)
 - PKG-DANMUKU-12: [记录](changes/2026-09-13-PKG-DANMUKU-12-frame-sampling.md) [记录](baselines/danmuku-frame-sampling-validation.json)
 - PKG-JASSUB-08: [记录](changes/2026-09-14-PKG-JASSUB-08-offscreen.md) [记录](baselines/jassub-offscreen-validation.json) [记录](baselines/jassub-offscreen-patch.json)
-- PKG-JASSUB-09: [记录](changes/2026-09-14-PKG-JASSUB-09-hybrid.md) [记录](baselines/jassub-hybrid-validation.json) [记录](baselines/jassub-hybrid-patch.json) [记录](changes/2026-09-14-PKG-JASSUB-09-firefox-diagnostics.md) [记录](changes/2026-09-14-PKG-JASSUB-09-display.md) [记录](baselines/jassub-display-validation.json)
+- PKG-JASSUB-09: [记录](changes/2026-09-14-PKG-JASSUB-09-hybrid.md) [记录](baselines/jassub-hybrid-validation.json) [记录](baselines/jassub-hybrid-patch.json) [记录](changes/2026-09-14-PKG-JASSUB-09-firefox-diagnostics.md) [记录](changes/2026-09-14-PKG-JASSUB-09-display.md) [记录](baselines/jassub-display-validation.json) [记录](changes/2026-09-15-PKG-JASSUB-09-native-call.md) [记录](baselines/jassub-native-call-validation.json)
 - PKG-AUTO-THUMB-07: [记录](changes/2026-09-14-PKG-AUTO-THUMB-07-canvas.md) [记录](baselines/auto-thumbnail-canvas-validation.json)
 - PKG-AUTO-THUMB-08: [记录](changes/2026-09-14-PKG-AUTO-THUMB-08-types.md) [记录](baselines/auto-thumbnail-types-validation.json)
 - PKG-AUTO-THUMB-09: [记录](changes/2026-09-14-PKG-AUTO-THUMB-09-alias.md) [记录](baselines/auto-thumbnail-alias-validation.json)

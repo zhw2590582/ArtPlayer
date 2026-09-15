@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-JASSUB-09 原生调用阻塞证据
+
+单个未确认绘制任务仍复现Firefox停顿；精确计时显示createImageBitmap约10秒后
+才返回Promise，主线程drawImage也阻塞约10秒。完全无核心脚本的原生宿主在
+一次旧观测运行中亦停顿，却因最终颜色正确而显示pass；现增加显式读取耗时约束。
+不能继续把该pass当作无原生停顿，或将这次等待归因于Promise已返回后的结算。
+
+最终三浏览器控制8通过/1失败；读取前等待Worker的Firefox控制3通过；默认
+fillRect控制9通过。失败和中间证据全部保留，详见[记录](changes/2026-09-15-PKG-JASSUB-09-native-call.md)及[摘要](baselines/jassub-native-call-validation.json)。
+本轮只改诊断测试和维护文档，未修复底层Firefox问题；09/05与风险继续未完成。
+任务总数不变：209 done、21 doing、43 todo。无生产源码、类型、版本或依赖变化。
+
+
 ## SITE-DASH-01 双语指南与示例修复
 
 原DASH示例三项回归均失败：换源累积destroy监听器、不支持MSE仍创建控制插件、

@@ -5366,7 +5366,9 @@
         "baselines/jassub-hybrid-patch.json",
         "changes/2026-09-14-PKG-JASSUB-09-firefox-diagnostics.md",
         "changes/2026-09-14-PKG-JASSUB-09-display.md",
-        "baselines/jassub-display-validation.json"
+        "baselines/jassub-display-validation.json",
+        "changes/2026-09-15-PKG-JASSUB-09-native-call.md",
+        "baselines/jassub-native-call-validation.json"
       ]
     },
     {

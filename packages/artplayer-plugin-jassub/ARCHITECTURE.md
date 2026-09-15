@@ -178,6 +178,13 @@ core versions. Lifecycle, hybrid and render-failure suites use the verified
 installed candidate; without a map they build current source, unless an explicit
 artifact is selected. The native-render suite retains its historical default in
 source mode. The platform suite has no JASSUB wrapper/WASM and is a control only.
+Its optional `ARTPLAYER_JASSUB_CONTROL_SINGLE_FLIGHT=true` bounds the native
+Worker queue to one draw while retaining concurrent canvas readback. It measures
+the synchronous createImageBitmap call separately from Promise settlement and
+rejects readback stalls hidden by eventual pixels. Firefox has stalled with this
+bound and on the script-free host; neither a smaller queue nor successful reruns
+establishes a vendor fix. The native-call checkpoint in refactor records the
+remaining rendering boundary without changing production rendering defaults.
 
 The browser server maps the three worker/WASM URLs to installed package files,
 checking archive digests and frozen resource baselines. The font remains a separate
