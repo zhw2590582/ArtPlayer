@@ -4,9 +4,9 @@
   "note": "Read-only source inventory. Heading matches are candidates, never semantic API coverage. Asset identity is not permission. No runtime, remote Pages or npm acceptance is implied.",
   "counts": {
     "packages": 22,
-    "markdown": 30,
+    "markdown": 32,
     "examples": 30,
-    "html": 39,
+    "html": 41,
     "declarationMembers": 963,
     "assets": 204
   },
@@ -2014,6 +2014,53 @@
       "translationOwner": null
     },
     {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
+      "sha256Lf": "0ccfc925832c7e0643d1e6a0927390742f4640a3ac2f1eeeed6b40df3409007b",
+      "language": "en",
+      "route": "/document/en/plugin/dash-control.html",
+      "headings": [
+        {
+          "text": "DASH Control",
+          "line": 1
+        },
+        {
+          "text": "Installation",
+          "line": 9
+        },
+        {
+          "text": "Complete example",
+          "line": 23
+        },
+        {
+          "text": "Configuration",
+          "line": 99
+        },
+        {
+          "text": "Quality and audio selection",
+          "line": 115
+        },
+        {
+          "text": "Refresh after external changes",
+          "line": 130
+        },
+        {
+          "text": "SDK ownership and source switching",
+          "line": 146
+        },
+        {
+          "text": "TypeScript",
+          "line": 152
+        },
+        {
+          "text": "Validation scope",
+          "line": 176
+        }
+      ],
+      "runCodeMarkers": 1,
+      "translation": "packages/artplayer-vitepress/docs/plugin/dash-control.md",
+      "translationOwner": null
+    },
+    {
       "file": "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
       "sha256Lf": "c0271b386e44fcc47c9aad017b3b02f75bb3baec830bca9634edcb2060cd91d3",
       "language": "en",
@@ -2470,6 +2517,53 @@
       ],
       "runCodeMarkers": 14,
       "translation": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+      "translationOwner": null
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/plugin/dash-control.md",
+      "sha256Lf": "a2471f6e3a7b3a91f9f8feca45228e9817862d8625bc852f77dc76fa61c48fc4",
+      "language": "zh",
+      "route": "/document/plugin/dash-control.html",
+      "headings": [
+        {
+          "text": "DASH 控制",
+          "line": 1
+        },
+        {
+          "text": "安装",
+          "line": 9
+        },
+        {
+          "text": "完整示例",
+          "line": 23
+        },
+        {
+          "text": "配置",
+          "line": 99
+        },
+        {
+          "text": "画质和音轨选择",
+          "line": 115
+        },
+        {
+          "text": "外部修改后的刷新",
+          "line": 130
+        },
+        {
+          "text": "SDK 所有权与换源",
+          "line": 146
+        },
+        {
+          "text": "TypeScript",
+          "line": 152
+        },
+        {
+          "text": "验证范围",
+          "line": 176
+        }
+      ],
+      "runCodeMarkers": 1,
+      "translation": "packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
       "translationOwner": null
     },
     {
@@ -16952,11 +17046,13 @@
         "packages/artplayer-vitepress/docs/en/component/setting.md",
         "packages/artplayer-vitepress/docs/en/index.md",
         "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+        "packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
         "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
         "packages/artplayer-vitepress/docs/en/start/i18n.md",
         "packages/artplayer-vitepress/docs/en/start/option.md",
         "packages/artplayer-vitepress/docs/index.md",
         "packages/artplayer-vitepress/docs/plugin/danmuku.md",
+        "packages/artplayer-vitepress/docs/plugin/dash-control.md",
         "packages/artplayer-vitepress/docs/plugin/hls-control.md",
         "packages/artplayer-vitepress/docs/start/i18n.md",
         "packages/artplayer-vitepress/docs/start/option.md"
@@ -17083,8 +17179,11 @@
       "examples": [
         "dash.control"
       ],
-      "sidebarMentionsPackage": true,
-      "dedicatedPages": [],
+      "sidebarMentionsPackage": false,
+      "dedicatedPages": [
+        "packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
+        "packages/artplayer-vitepress/docs/plugin/dash-control.md"
+      ],
       "contentReviewOwner": "SITE-04",
       "demoExecutionOwner": "EX-03"
     },
@@ -17240,11 +17339,13 @@
         "packages/artplayer-vitepress/docs/en/component/setting.md",
         "packages/artplayer-vitepress/docs/en/index.md",
         "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+        "packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
         "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
         "packages/artplayer-vitepress/docs/en/start/i18n.md",
         "packages/artplayer-vitepress/docs/en/start/option.md",
         "packages/artplayer-vitepress/docs/index.md",
         "packages/artplayer-vitepress/docs/plugin/danmuku.md",
+        "packages/artplayer-vitepress/docs/plugin/dash-control.md",
         "packages/artplayer-vitepress/docs/plugin/hls-control.md",
         "packages/artplayer-vitepress/docs/start/i18n.md",
         "packages/artplayer-vitepress/docs/start/option.md"
@@ -17419,7 +17520,7 @@
     {
       "name": "dash.control",
       "source": "docs/assets/example/dash.control.js",
-      "sha256Lf": "edc4326f03262a222e06bb780aab05c903ee162829dec60970e738c1e260eef2",
+      "sha256Lf": "1738bc47c13de1227cd4be091f881249180235904d12631f6334579fc146293a",
       "menuLinks": [
         "/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/5.2.1/modern/umd/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control"
       ],
@@ -17692,10 +17793,10 @@
     {
       "source": "docs/document/404.html",
       "route": "/document/404.html",
-      "sha256Lf": "739031d99373696e852520d1f747f4570398ac462c1576c0a7d233b590a517cb",
+      "sha256Lf": "b5f027ae6538c6fc1ea1125c7136be1d67ae92ee2e2b999b565f91b2a22a7980",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17705,10 +17806,10 @@
     {
       "source": "docs/document/advanced/built-in.html",
       "route": "/document/advanced/built-in.html",
-      "sha256Lf": "2cf8b8bc26ee8bfb34dadf740a3c8ae4b0ed5ee50314b3f6bbe5b3dfd709c538",
+      "sha256Lf": "785285d50a8bbea91f52618004692b13051b0cddb846d174c007b93aadbb1b8e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17718,10 +17819,10 @@
     {
       "source": "docs/document/advanced/class.html",
       "route": "/document/advanced/class.html",
-      "sha256Lf": "7de71fe06d19ca56fb229363f621ddb76dac4ea86582851b6597be4ab510e29b",
+      "sha256Lf": "dc47d08602d5d2b7ffb42d447585e16890acf76c71c54f99cbfc274bb0f7b672",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17731,10 +17832,10 @@
     {
       "source": "docs/document/advanced/event.html",
       "route": "/document/advanced/event.html",
-      "sha256Lf": "6d1912bd53e8640e2e003156d367b15680cf9f1f8aa9c784e83f4bbc0710fb84",
+      "sha256Lf": "5f309844bb0cff048bfa8206e1cc6764b118cb433e4c935af5a24f62707f9070",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17744,10 +17845,10 @@
     {
       "source": "docs/document/advanced/global.html",
       "route": "/document/advanced/global.html",
-      "sha256Lf": "d0b3e638cc56125aa28ed5c0d788dbb327162f30cf198af3a11efb58c30d640b",
+      "sha256Lf": "19839d3efd05cb0435296b2bf0f4b6bc59fdcc377cf6107b71317dc285eb235e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17757,10 +17858,10 @@
     {
       "source": "docs/document/advanced/plugin.html",
       "route": "/document/advanced/plugin.html",
-      "sha256Lf": "4d539395bcf9f92cbbf679236f73ad46e0951ad67e169cccd176c8db0e172327",
+      "sha256Lf": "6f06b91f79020e93290622101e77460f9fa20113144cd32d2c7e933dce8f5e50",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17770,10 +17871,10 @@
     {
       "source": "docs/document/advanced/property.html",
       "route": "/document/advanced/property.html",
-      "sha256Lf": "585490a60cb2bb854a0b6040d10d4bb1800dd5faf5c5c95dfcf780f024a09ced",
+      "sha256Lf": "df590666d0a52b7b30521f2bef9e0705150eca93de02b4b6698c580ccffff1ad",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17783,10 +17884,10 @@
     {
       "source": "docs/document/component/contextmenu.html",
       "route": "/document/component/contextmenu.html",
-      "sha256Lf": "1ea119dc7d15b9be4ada73e393a7356406f84112a3da4ac271b8657371c55313",
+      "sha256Lf": "71c4d1a7f68e3e8a49f0d4883bf9f6f0c62c12a954e4fa557d7fb6bcfbe3d2b4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17796,10 +17897,10 @@
     {
       "source": "docs/document/component/controls.html",
       "route": "/document/component/controls.html",
-      "sha256Lf": "d5a698c705f2cbddcb67f3d05016d19f7c34b4fd5177c1f79e3f3a839f73030f",
+      "sha256Lf": "006a087831263e50c8280a2430bf1777fc5b362e5742aa8addc44503e7a227b6",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17809,10 +17910,10 @@
     {
       "source": "docs/document/component/layers.html",
       "route": "/document/component/layers.html",
-      "sha256Lf": "e9f5129cb516ec4f2d3ea07b84fac4ac689d979d189815d01eba194c4a257982",
+      "sha256Lf": "f0ff350f70dec5cc9bc396e0437ba3e855fb48e11138473aa246aa3235145978",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17822,10 +17923,10 @@
     {
       "source": "docs/document/component/setting.html",
       "route": "/document/component/setting.html",
-      "sha256Lf": "10284ef177093ed786e0b0600e6ee5184724a46444b2e614b6447f26fb68b711",
+      "sha256Lf": "0b9c264bd5939d060bb72524c9af4d0c6ee1a21a538f29139c799d09f8d5a6ce",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17835,10 +17936,10 @@
     {
       "source": "docs/document/en/advanced/built-in.html",
       "route": "/document/en/advanced/built-in.html",
-      "sha256Lf": "f47472d88db0a05eb70a91c14c270e4978afcf55a3777db6d3876dbeb7ef391a",
+      "sha256Lf": "30d6ccb661f69232b9c105da0ded1589c38484a27b58aae9ad791cb07ae0f775",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17848,10 +17949,10 @@
     {
       "source": "docs/document/en/advanced/class.html",
       "route": "/document/en/advanced/class.html",
-      "sha256Lf": "eec757fc67c53ebefb0c50b40e21097d7c893a3b76b4aa0170fe7a8906afa676",
+      "sha256Lf": "9a1f8a6a8582f3893dfad2ebcde77c45752af187e28d289cec7d614bf52b6cd8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17861,10 +17962,10 @@
     {
       "source": "docs/document/en/advanced/event.html",
       "route": "/document/en/advanced/event.html",
-      "sha256Lf": "01c77788e99f4ec477db05a976200bd1ee4d769cb215d6686011a6e86eca7ac3",
+      "sha256Lf": "6e4d27d830a6ad7c5163d1c014af085129d1476a6d745c4fffea7c28bf1e3dd9",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17874,10 +17975,10 @@
     {
       "source": "docs/document/en/advanced/global.html",
       "route": "/document/en/advanced/global.html",
-      "sha256Lf": "7e09ba52c4ca4dbf3261844b77f488c768d2e075b4999e4e9599cbef87ada913",
+      "sha256Lf": "ce8d6a08cf05f3d104f154880d4d4b4bf965d8892c6a135e9bce9e67fe8d0923",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17887,10 +17988,10 @@
     {
       "source": "docs/document/en/advanced/plugin.html",
       "route": "/document/en/advanced/plugin.html",
-      "sha256Lf": "a40604fdb0bbed13360b9f4c1a69cc67c875d66adc1875576e2828884e71bd64",
+      "sha256Lf": "f1482ba777db85ed170637ec8a447b77e6a5d8cd0745e52f0ec1034c5fb9bd5c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17900,10 +18001,10 @@
     {
       "source": "docs/document/en/advanced/property.html",
       "route": "/document/en/advanced/property.html",
-      "sha256Lf": "47c24a65c95436fa44dd0c35879cccb48527b7d4a7e6abfd062e3b4d1923fb36",
+      "sha256Lf": "8676ac25a09b634b4415d84a42212b2a6015b34bf9fe3483909325a9dcbca603",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17913,10 +18014,10 @@
     {
       "source": "docs/document/en/component/contextmenu.html",
       "route": "/document/en/component/contextmenu.html",
-      "sha256Lf": "9ab3fe20e8f246ee9e481c73c88479cdf18551451a75b644add3734ff18b431d",
+      "sha256Lf": "33688005fd0559181b5bc9ff4039840539ae3909900e1e166600b56c3ffdb9d7",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17926,10 +18027,10 @@
     {
       "source": "docs/document/en/component/controls.html",
       "route": "/document/en/component/controls.html",
-      "sha256Lf": "5ca63fbc78fa0beb96ca5f46e0f2e8ccef8622d8ab4cd2b24b72df619fd5a165",
+      "sha256Lf": "c3555cd37aa81d27a4175c6de620a2891c805aa129668e3e82f63b681022c146",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17939,10 +18040,10 @@
     {
       "source": "docs/document/en/component/layers.html",
       "route": "/document/en/component/layers.html",
-      "sha256Lf": "e5a27278d4264ec855d9785bb455a2be9eac3bf5b9add73fd36da3dea60508ec",
+      "sha256Lf": "952685ef63d98213c471a00a9117064dd024111e9396392dcb721877e2000bec",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17952,10 +18053,10 @@
     {
       "source": "docs/document/en/component/setting.html",
       "route": "/document/en/component/setting.html",
-      "sha256Lf": "fb64ad2c748396701ef1e30c5b6051129ce6d96c7e1715f43bf97dd95a5c93cd",
+      "sha256Lf": "fdc34800f473cdc3476afc279e38cc33607c12a47ef3d88535c4a2619bcd5789",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17965,10 +18066,10 @@
     {
       "source": "docs/document/en/index.html",
       "route": "/document/en/",
-      "sha256Lf": "f49b25ac62fd3867e955d3d42f45e366233d470b7f34111a4550a5c54ace200c",
+      "sha256Lf": "17a881f211e9d0b631d456cc694095d2f90b21e20bb8831fd47ab42141561848",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17978,10 +18079,23 @@
     {
       "source": "docs/document/en/plugin/danmuku.html",
       "route": "/document/en/plugin/danmuku.html",
-      "sha256Lf": "7fecb59004df7b7d1589998f421258e62777875160e559777627b85c7dfa2a14",
+      "sha256Lf": "fbea17aecdaf51daa7c161fd79cd157caa707d5c317b784679077b17f964abaa",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/plugin/dash-control.html",
+      "route": "/document/en/plugin/dash-control.html",
+      "sha256Lf": "3da4d74ea6748c515cfba378f363e77bf5b896fb84a71be011eff0e38b004e15",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17991,10 +18105,10 @@
     {
       "source": "docs/document/en/plugin/hls-control.html",
       "route": "/document/en/plugin/hls-control.html",
-      "sha256Lf": "a6ac6504b7a348ad20524c56521e5e563de295b87995e14226f4638972f040f0",
+      "sha256Lf": "239a4c77e5e5df8f61e3add871ee9c183d16bed789f757422043c1a8b5666b81",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18004,10 +18118,10 @@
     {
       "source": "docs/document/en/start/i18n.html",
       "route": "/document/en/start/i18n.html",
-      "sha256Lf": "95694df09bca853c0eeb8883c4b2db02c042ee29971503dad1fcd0e4a22595fe",
+      "sha256Lf": "a4dd63421375706c7a5612f26c0a26da77b1ae9ac7b1a922243889c116c1c065",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18017,10 +18131,10 @@
     {
       "source": "docs/document/en/start/option.html",
       "route": "/document/en/start/option.html",
-      "sha256Lf": "23718b0df3dd56492e62635bacd55e504082d02585ebed88ad165b82fecd2ea8",
+      "sha256Lf": "e265594e9ea6fd628a6f00c8925a25ee1e84478944db627213206425aa07c7f3",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18030,10 +18144,10 @@
     {
       "source": "docs/document/index.html",
       "route": "/document/",
-      "sha256Lf": "6fdc034c61750bf4da6de85d405a176fcea9046c81143bd4333593a080863c1e",
+      "sha256Lf": "34eabea907870f2764581f1fa212f99e8a9c6f5b227c8884e073f481ae9526ca",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18043,10 +18157,23 @@
     {
       "source": "docs/document/plugin/danmuku.html",
       "route": "/document/plugin/danmuku.html",
-      "sha256Lf": "c1bf198386743ba8a659dd56f520059a960d53791b2c5898634822d9a3330fee",
+      "sha256Lf": "cbbcab068f10d8af9c44819f7f224108af7abd8fb0e27796a80a6f811817025b",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/plugin/dash-control.html",
+      "route": "/document/plugin/dash-control.html",
+      "sha256Lf": "610593a5a6e6b67e64ee2e74f0eee4a5584f3859140c0767f17a606826dea203",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18056,10 +18183,10 @@
     {
       "source": "docs/document/plugin/hls-control.html",
       "route": "/document/plugin/hls-control.html",
-      "sha256Lf": "f4715b9fb6c4e7b7b5447e56dd26c546bc48b1446c1e2d3fd155dc03f97b4686",
+      "sha256Lf": "aa21e8079cf454e66b1a178f2cac00acb868eacf8f9b7a80755771aa3fc1d698",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18069,10 +18196,10 @@
     {
       "source": "docs/document/start/i18n.html",
       "route": "/document/start/i18n.html",
-      "sha256Lf": "6e6371436fbb1b48936e3a789272f55617a92aa6506fd6f0d4b23cb97deea876",
+      "sha256Lf": "f1c1dbcee903d009bfa051cbf7a714bdb06242dbf7a2c8951cb09e9cba98b32d",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18082,10 +18209,10 @@
     {
       "source": "docs/document/start/option.html",
       "route": "/document/start/option.html",
-      "sha256Lf": "5228248a85b0c6e85a4ce617c847c5b61e855181b1bce1dc93662f0c5599f997",
+      "sha256Lf": "9a229b8204c0e37babb4054fd016feee2a61d7cb971021c287037b2b24ba4a4f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.C4kTwhag.js",
+        "/document/assets/app.dBfz83xG.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18217,7 +18344,9 @@
     "examplesRemoved": [],
     "htmlAdded": [
       "docs/document/en/plugin/danmuku.html",
+      "docs/document/en/plugin/dash-control.html",
       "docs/document/en/plugin/hls-control.html",
+      "docs/document/plugin/dash-control.html",
       "docs/document/plugin/hls-control.html"
     ],
     "htmlRemoved": []
@@ -18385,7 +18514,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/public/main.js",
-      "sha256Lf": "387e6b4d0dd4251b18fd1d45b45656e63aeba25e2a67cdb26da5f185e7359fb1"
+      "sha256Lf": "4675ef05347d3c71359b043b65975294a8d2be90ff3cce52715fead9ac6928b9"
     },
     {
       "file": "packages/artplayer-vitepress/docs/vite.config.ts",
@@ -18393,7 +18522,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/.vitepress/config.js",
-      "sha256Lf": "2c31669093e62bac0d59d874ea0181455e9117824712807ff64c04ce7d5eb693"
+      "sha256Lf": "0ff54baa7992a840a530b7dba259b7b67552642fc15ebf5b03150f9444096c25"
     },
     {
       "file": "scripts/build-site-assets.mjs",

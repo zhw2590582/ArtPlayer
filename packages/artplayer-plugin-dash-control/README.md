@@ -2,6 +2,11 @@
 
 Dash control plugin for ArtPlayer
 
+Complete usage and SDK ownership:
+[English guide](../artplayer-vitepress/docs/en/plugin/dash-control.md) /
+[中文指南](../artplayer-vitepress/docs/plugin/dash-control.md).
+These guides describe the current refactor branch; its fixes are not published yet.
+
 Accepts a caller-owned dash.js instance at `art.dash`. Quality selection adapts to the
 dash.js 4.x quality methods or 5.x representation methods. Version 5 selection uses
 representation IDs so bitrate filtering does not change the selected quality.

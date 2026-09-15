@@ -51,6 +51,10 @@
       "sha256Lf": "a563349b064adac119dac943060ffc5bc82a8ccbd6e20d2d7b5a1e1cb4d66ba2"
     },
     {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
+      "sha256Lf": "0ccfc925832c7e0643d1e6a0927390742f4640a3ac2f1eeeed6b40df3409007b"
+    },
+    {
       "file": "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
       "sha256Lf": "c0271b386e44fcc47c9aad017b3b02f75bb3baec830bca9634edcb2060cd91d3"
     },
@@ -196,7 +200,7 @@
     },
     {
       "file": "docs/assets/example/dash.control.js",
-      "sha256Lf": "edc4326f03262a222e06bb780aab05c903ee162829dec60970e738c1e260eef2"
+      "sha256Lf": "1738bc47c13de1227cd4be091f881249180235904d12631f6334579fc146293a"
     },
     {
       "file": "docs/assets/example/dash.js",
@@ -275,5 +279,5 @@
       "sha256Lf": "967db6e5026a2fd3cc24d8a04e5c78859f543d0c0f6d4f9599c103e4e93c9b29"
     }
   ],
-  "outputSha256Lf": "3d907bba5a29e7e856ecdd3c387ced645dc60328999b686104c01884eb6aad4c"
+  "outputSha256Lf": "d2b41d68719734e09881cccc194609e9646bd5085483bb2e8dec516a74908b76"
 }

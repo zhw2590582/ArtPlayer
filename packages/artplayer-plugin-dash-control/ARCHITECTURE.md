@@ -148,6 +148,20 @@ and checked standalone against both TS 4.3.5 and 5.9.3, then consumed by real Mo
 
 ## Validation and next work
 
+The bilingual `artplayer-vitepress/docs/{en/,}plugin/dash-control.md` guides contain
+the exact `docs/assets/example/dash.control.js` setup. The example keeps one final
+SDK cleanup listener, releases replaced instances once, skips SDK-dependent controls
+when MediaSource is unsupported, and formats nullable language metadata safely.
+`test/dash-example.test.js` exercises the actual source against these old failures.
+`document-dash.spec.js` requires both guides to match that source, then runs it with
+both frozen SDK generations and published/candidate core. WebKit's unsupported
+branch is capability evidence only. The original SDK initialization settings and
+plugin APIs are unchanged; full SDK/device/DRM acceptance remains separate.
+
+When changing the example, update both guides, run the example and browser tests,
+rebuild the LLM corpus/docs and refresh the site inventory. `document-site.spec.js`
+checks guide navigation and the two-library Run Code parameters in both languages.
+
 Run at the workspace root with pinned Node and Yarn:
 
 ```sh

@@ -4459,6 +4459,27 @@
       ]
     },
     {
+      "id": "SITE-DASH-01",
+      "phase": "6 文档和示例",
+      "title": "补齐DASH双语指南并修复示例SDK生命周期",
+      "scope": [
+        "artplayer-plugin-dash-control",
+        "artplayer-vitepress"
+      ],
+      "dependsOn": [
+        "SITE-03",
+        "PKG-DASH-04"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "双语DASH配置/SDK适配/刷新/类型指南，原示例换源清理与空语言回退，生成站点和证据",
+      "acceptance": "旧示例回归复现并修复，新旧核心与两代真实SDK播放/换源/清理及双语导航验证，保留设备/完整矩阵门槛",
+      "evidence": [
+        "changes/2026-09-15-SITE-DASH-01-guides.md",
+        "baselines/dash-docs-validation.json"
+      ]
+    },
+    {
       "id": "SITE-04",
       "phase": "6 文档与消费者",
       "title": "交叉核对逐包持续维护的文档",
@@ -4489,7 +4510,8 @@
         "PKG-DANMUKU-06",
         "PKG-MB-08",
         "SITE-DANMUKU-01",
-        "SITE-HLS-01"
+        "SITE-HLS-01",
+        "SITE-DASH-01"
       ],
       "status": "todo",
       "risk": "M",

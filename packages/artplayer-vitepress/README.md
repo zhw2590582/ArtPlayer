@@ -12,14 +12,15 @@ not a VitePress page. Keep both URL surfaces compatible.
 | `docs/en` | English counterparts | `/document/en/` |
 | `docs/plugin/danmuku.md`, `docs/en/plugin/danmuku.md` | Danmuku options, callbacks, commands, heatmap and types in both languages | `/document/plugin/danmuku.html`, `/document/en/plugin/danmuku.html` |
 | `docs/plugin/hls-control.md`, `docs/en/plugin/hls-control.md` | HLS SDK setup, menus, lifecycle and types | `/document/plugin/hls-control.html`, `/document/en/plugin/hls-control.html` |
+| `docs/plugin/dash-control.md`, `docs/en/plugin/dash-control.md` | DASH SDK generations, menus, lifecycle and types | `/document/plugin/dash-control.html`, `/document/en/plugin/dash-control.html` |
 | `docs/.vitepress/config.js` | Navigation, base URL, output path, page head | Repository `docs/document/` |
 | `docs/vite.config.ts` | Search plugin configuration | VitePress/Vite integration; real search acceptance remains pending |
 | `docs/public/main.js` | Run Code links and first-visit language redirect | Copied into the built site |
 | `docs/public/style.css` | Documentation presentation | Copied into the built site |
 
 Edit Markdown and public sources here. Do not edit the generated repository
-`docs/document/`. The current inventory contains 30 Markdown pages: 15 Chinese
-and 15 English. Danmuku and HLS have dedicated guides and navigation in both languages. Other plugins currently
+`docs/document/`. The current inventory contains 32 Markdown pages: 16 Chinese
+and 16 English. Danmuku, HLS and DASH have dedicated guides and navigation in both languages. Other plugins currently
 use their package README, architecture notes and linked editor examples;
 navigation links alone are not complete API documentation.
 
@@ -131,3 +132,8 @@ root. `test/browser/document-hls.spec.js` enforces that parity and checks the
 source lifecycle with frozen real SDKs. `document-site.spec.js` checks both sidebar
 links and the two-library Run Code destination. Preserve the native-HLS capability
 boundary and SDK ownership explanation when editing either language.
+
+The DASH guides use the same exact-example rule with `docs/assets/example/dash.control.js`
+and `test/browser/document-dash.spec.js`. Their formatter has one argument, unlike
+the optional HLS list index. Preserve the distinction between SDK 4 qualityIndex
+and SDK 5 representation IDs, nullable language fields, and synchronous update.

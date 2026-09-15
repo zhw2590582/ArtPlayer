@@ -75,5 +75,19 @@ for (const language of ['zh', 'en']) {
     expect(hlsTarget.searchParams.get('code')).toContain('art.on(\'destroy\', destroyHls)')
     expect(failedAssets).toEqual([])
     await hlsExample.close()
+    await page.locator(`.VPSidebar a[href="${prefix}/plugin/dash-control.html"]`).click()
+    await expect(page.locator('h1')).toContainText(language === 'en' ? 'DASH Control' : 'DASH 控制')
+    const dashPopup = context.waitForEvent('page')
+    await page.locator('.run-code, [classname="run-code"]').first().click()
+    const dashExample = await dashPopup
+    await dashExample.waitForLoadState('domcontentloaded')
+    const dashTarget = new URL(dashExample.url())
+    expect(dashTarget.searchParams.get('libs').split('\n')).toEqual([
+      'https://cdnjs.cloudflare.com/ajax/libs/dashjs/5.2.1/modern/umd/dash.all.min.js',
+      './uncompiled/artplayer-plugin-dash-control/index.js',
+    ])
+    expect(dashTarget.searchParams.get('code')).toContain('art.on(\'destroy\', destroyDash)')
+    expect(failedAssets).toEqual([])
+    await dashExample.close()
   })
 }

@@ -6685,6 +6685,31 @@
         "refactor/baselines/hls-docs-validation.json"
       ],
       "resolutionRationale": "Actual demo code is used by regression and both runnable guides. Each replaced/final SDK is destroyed once; when Hls.js is unsupported no incompatible control plugin is installed. Local 8082 connected-browser readiness also observed. Separate Firefox native crashes, grouped playback stall and device acceptance remain open."
+    },
+    {
+      "id": "DASH-EXAMPLE-01",
+      "title": "DASH示例重复销毁SDK、无MSE仍注册插件且空语言回调抛错",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "SITE-DASH-01",
+        "EX-03"
+      ],
+      "evidence": [
+        "docs/assets/example/dash.control.js",
+        "test/dash-example.test.js",
+        "test/browser/document-dash.spec.js",
+        "refactor/changes/2026-09-15-SITE-DASH-01-guides.md",
+        "refactor/baselines/dash-docs-validation.json"
+      ],
+      "compatibleResolution": "示例使用局部SDK所有权、单个最终清理监听器和固定能力分支；音轨语言为空时保留0值并转为字符串ID/Audio回退。插件API和SDK默认初始化设置不变。",
+      "closureCriteria": "旧示例回归复现，修复后每实例一次销毁、不支持路径与空语言标签正确，真实SDK两代和新旧核心播放/换源/清理有证据；设备/完整矩阵不因此完成。",
+      "workspaceState": "Old demo 3 fail; corrected example regression 3 pass. Browser: eight actual SDK playback/replacement, four unsupported WebKit setup, six bilingual navigation cases pass. Connected local example metadata/menus observed.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-15-SITE-DASH-01-guides.md",
+        "refactor/baselines/dash-docs-validation.json"
+      ],
+      "resolutionRationale": "Tests execute the actual example and both guides enforce byte-equivalent code. Replaced and final SDKs each receive one destroy call, unsupported setup creates no SDK or plugin, nullable language formatting retains existing language labels and numeric ID zero. This closes the example defects only; complete package/device/DRM acceptance remains separate."
     }
   ]
 }

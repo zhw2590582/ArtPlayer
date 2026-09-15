@@ -1,0 +1,833 @@
+{
+  "task": "SITE-DASH-01",
+  "sourceHead": "4ea0ba94ae51d14d353bc57a3222a8c19b11ac66",
+  "recordedAt": "2026-09-15T10:08:15.280Z",
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "typescript": "5.9.3",
+    "platform": "Windows"
+  },
+  "scope": "Bilingual DASH guide, exact shared demo source, SDK lifecycle and nullable language corrections; not full DASH package/device acceptance",
+  "sources": [
+    {
+      "file": "docs/assets/example/dash.control.js",
+      "sha256": "1738bc47c13de1227cd4be091f881249180235904d12631f6334579fc146293a"
+    },
+    {
+      "file": "test/dash-example.test.js",
+      "sha256": "9b762b7f037d51aa857b879b372e417dcf7c1a13932777f8b384d26258e26a71"
+    },
+    {
+      "file": "test/browser/document-dash.spec.js",
+      "sha256": "d4021e8c35c9ab980dc1a38ba88b4905bce46fece370bf0ea088b8d238bc088f"
+    },
+    {
+      "file": "test/browser/document-site.spec.js",
+      "sha256": "b4ea5944da181a748fc1335c5fc93477a474be58fe288b485ff8ed51f8e3efc3"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/plugin/dash-control.md",
+      "sha256": "a2471f6e3a7b3a91f9f8feca45228e9817862d8625bc852f77dc76fa61c48fc4"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
+      "sha256": "0ccfc925832c7e0643d1e6a0927390742f4640a3ac2f1eeeed6b40df3409007b"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/.vitepress/config.js",
+      "sha256": "0ff54baa7992a840a530b7dba259b7b67552642fc15ebf5b03150f9444096c25"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/public/main.js",
+      "sha256": "4675ef05347d3c71359b043b65975294a8d2be90ff3cce52715fead9ac6928b9"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/README.md",
+      "sha256": "eec2c36c1b4dab1ce97efd745482581ba59461edb88a22e1ec063f6152223b1e"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/ARCHITECTURE.md",
+      "sha256": "a13644c35087976f7f13db1e04e552f5fcd282c2651b1924f79f7f538ae3eea0"
+    },
+    {
+      "file": "packages/artplayer-vitepress/README.md",
+      "sha256": "1aeaa7355d7f3cc3dcaa4ce0b4dcaee94d17536786befe7d40b6b3c0e67620e3"
+    },
+    {
+      "file": "package.json",
+      "sha256": "f057b20067f3e571b43cc4739ddef4bde5387ba67878cf402db8a9c05479bd6f"
+    }
+  ],
+  "originalExample": {
+    "sourceHead": "4ea0ba94ae51d14d353bc57a3222a8c19b11ac66",
+    "sha256": "edc4326f03262a222e06bb780aab05c903ee162829dec60970e738c1e260eef2",
+    "tests": {
+      "passed": 0,
+      "failed": 3,
+      "log": {
+        "file": "refactor/.cache/dash-example-before.log",
+        "sha256": "52fd27fa2cb5bc57a4ad577418ab58476dae6a5cbac60ddd8a313952f9a7c1fa"
+      }
+    }
+  },
+  "checks": {
+    "node": {
+      "passed": 20,
+      "failed": 0,
+      "log": {
+        "file": "refactor/.cache/dash-docs-node-tests.log",
+        "sha256": "f54759fec7f1dc108186423fe2b277caae9ae6ce26b4efc6c1e200d22adadec6"
+      }
+    },
+    "siteBuildTests": {
+      "passed": 7,
+      "failed": 0,
+      "log": {
+        "file": "refactor/.cache/dash-docs-site-tests.log",
+        "sha256": "ddae3c158e6857b88c01f3fafbb71ba069ea63f72570c969d2b8bc5f50a5402a"
+      }
+    },
+    "lint": {
+      "exitCode": 0,
+      "log": {
+        "file": "refactor/.cache/dash-docs-lint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "build": {
+      "exitCode": 0,
+      "log": {
+        "file": "refactor/.cache/dash-docs-build.log",
+        "sha256": "1ebae50eecb618b33b256f607fafa21fbc3fc3f74a309b5604dffb1bce6cb20f"
+      }
+    },
+    "llm": {
+      "exitCode": 0,
+      "log": {
+        "file": "refactor/.cache/dash-docs-llm.log",
+        "sha256": "7ae9c408d87af8142cc9f7fa87f19427a12025e7c9bd9f15fcd899fe91d6eded"
+      }
+    },
+    "static": {
+      "typescript": "5.9.3",
+      "options": {
+        "strict": true,
+        "noEmit": true,
+        "skipLibCheck": false,
+        "types": [],
+        "module": "NodeNext"
+      },
+      "directory": "D:\\github\\ArtPlayer\\refactor\\.cache\\dash-docs-types-2XJ30S",
+      "results": [
+        {
+          "source": "packages/artplayer-vitepress/docs/plugin/dash-control.md",
+          "sourceSHA256": "a2471f6e3a7b3a91f9f8feca45228e9817862d8625bc852f77dc76fa61c48fc4",
+          "built": "docs/document/plugin/dash-control.html",
+          "builtSHA256": "610593a5a6e6b67e64ee2e74f0eee4a5584f3859140c0767f17a606826dea203",
+          "title": "DASH 控制 ​",
+          "snippetSHA256": "b8efc3b50b1eaad374d8a2773e85b4e771bf62a725b958b1f83bdeb0d818f945",
+          "diagnostics": 0,
+          "localLinks": 20,
+          "runCode": 1
+        },
+        {
+          "source": "packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
+          "sourceSHA256": "0ccfc925832c7e0643d1e6a0927390742f4640a3ac2f1eeeed6b40df3409007b",
+          "built": "docs/document/en/plugin/dash-control.html",
+          "builtSHA256": "3da4d74ea6748c515cfba378f363e77bf5b896fb84a71be011eff0e38b004e15",
+          "title": "DASH Control ​",
+          "snippetSHA256": "b8efc3b50b1eaad374d8a2773e85b4e771bf62a725b958b1f83bdeb0d818f945",
+          "diagnostics": 0,
+          "localLinks": 20,
+          "runCode": 1
+        }
+      ]
+    },
+    "riskTests": {
+      "passed": 2,
+      "failed": 0,
+      "log": {
+        "file": "refactor/.cache/dash-docs-risk-tests.log",
+        "sha256": "804d496e7a04c8820556a2fd292a2cdae565c4f758bf36292df5b20c1e172df6"
+      }
+    },
+    "whitespace": {
+      "sourcePassed": true,
+      "generatedHtmlWarnings": 4,
+      "reason": "Two VitePress indentation-only lines per new HTML page; generated output retained"
+    }
+  },
+  "browser": {
+    "file": "refactor/.cache/dash-docs-browser-final.json",
+    "sha256": "37ec2eb54211720dd66e8ae113340926d827228ddeb29a948ef483ca0c4e7049",
+    "stats": {
+      "startTime": "2026-09-15T10:03:34.544Z",
+      "duration": 47883.710999999996,
+      "expected": 18,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "documented DASH setup and source lifecycle: SDK 4.5.2, published core",
+        "project": "chromium",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "inputs": {
+              "documents": [
+                "plugin/dash-control.md",
+                "en/plugin/dash-control.md"
+              ],
+              "core": "published",
+              "sdk": {
+                "metadataUrl": "https://registry.npmjs.org/dashjs/4.5.2",
+                "codeMember": "package/dist/dash.all.min.js",
+                "release": {
+                  "name": "dashjs",
+                  "version": "4.5.2",
+                  "tarball": "https://registry.npmjs.org/dashjs/-/dashjs-4.5.2.tgz",
+                  "integrity": "sha512-WXPk0lPDSaHjiSVoVRh2jQPiMmB1alKUH8hV2CVmaI0vPUeT1wIY7madVE38SthfOmwS9IJViv1RrxrxdGjElg==",
+                  "sha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+                  "files": {
+                    "package/package.json": "62b2295c4a92ec996ff066f7e5739893c46fce44d80c940c61ced9d5710226d1",
+                    "package/LICENSE.md": "f7cc4ba24850cc564766c75923d07c3d22fa27f304285f4d25ecffeaec964e28",
+                    "package/index.d.ts": "13e6bd0a3c77e2db9378e355915929ed3dda5d8de9c48f446c9d3e9fb7154dbd",
+                    "package/dist/dash.all.min.js": "17849c05872997095a63d74bde3fed6f79c14c6a48cdf904833d880b93a476da"
+                  }
+                }
+              },
+              "sdkSHA256": "17849c05872997095a63d74bde3fed6f79c14c6a48cdf904833d880b93a476da",
+              "pluginSHA256": "02784a47302ab9bdefae878ffb8a2f2ed23d773defa20f0903eb53a3a78eed57",
+              "sourceSHA256": "a7296a516176076e34f5a7aed7388eb6c8b87bc12cfd4eb879b7e1abcf4a126e",
+              "supported": true,
+              "scope": "real SDK with original settings, local routed MPD, playback and replacement cleanup"
+            },
+            "browser": "153.0.8010.12",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "documented DASH setup and source lifecycle: SDK 4.5.2, candidate core",
+        "project": "chromium",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "inputs": {
+              "documents": [
+                "plugin/dash-control.md",
+                "en/plugin/dash-control.md"
+              ],
+              "core": "candidate",
+              "sdk": {
+                "metadataUrl": "https://registry.npmjs.org/dashjs/4.5.2",
+                "codeMember": "package/dist/dash.all.min.js",
+                "release": {
+                  "name": "dashjs",
+                  "version": "4.5.2",
+                  "tarball": "https://registry.npmjs.org/dashjs/-/dashjs-4.5.2.tgz",
+                  "integrity": "sha512-WXPk0lPDSaHjiSVoVRh2jQPiMmB1alKUH8hV2CVmaI0vPUeT1wIY7madVE38SthfOmwS9IJViv1RrxrxdGjElg==",
+                  "sha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+                  "files": {
+                    "package/package.json": "62b2295c4a92ec996ff066f7e5739893c46fce44d80c940c61ced9d5710226d1",
+                    "package/LICENSE.md": "f7cc4ba24850cc564766c75923d07c3d22fa27f304285f4d25ecffeaec964e28",
+                    "package/index.d.ts": "13e6bd0a3c77e2db9378e355915929ed3dda5d8de9c48f446c9d3e9fb7154dbd",
+                    "package/dist/dash.all.min.js": "17849c05872997095a63d74bde3fed6f79c14c6a48cdf904833d880b93a476da"
+                  }
+                }
+              },
+              "sdkSHA256": "17849c05872997095a63d74bde3fed6f79c14c6a48cdf904833d880b93a476da",
+              "pluginSHA256": "02784a47302ab9bdefae878ffb8a2f2ed23d773defa20f0903eb53a3a78eed57",
+              "sourceSHA256": "a7296a516176076e34f5a7aed7388eb6c8b87bc12cfd4eb879b7e1abcf4a126e",
+              "supported": true,
+              "scope": "real SDK with original settings, local routed MPD, playback and replacement cleanup"
+            },
+            "browser": "153.0.8010.12",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "documented DASH setup and source lifecycle: SDK 5.2.1, published core",
+        "project": "chromium",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "inputs": {
+              "documents": [
+                "plugin/dash-control.md",
+                "en/plugin/dash-control.md"
+              ],
+              "core": "published",
+              "sdk": {
+                "metadataUrl": "https://registry.npmjs.org/dashjs/5.2.1",
+                "codeMember": "package/dist/modern/umd/dash.all.min.js",
+                "release": {
+                  "name": "dashjs",
+                  "version": "5.2.1",
+                  "tarball": "https://registry.npmjs.org/dashjs/-/dashjs-5.2.1.tgz",
+                  "integrity": "sha512-axcJmLeJCTJMLUfQRErUJB1KOiU5iHF+DMLBc3FKeox1HPYtGUQlC6Xm5Mm6vhBUR3CHHLIPOqw0JDIqMtP+Dw==",
+                  "sha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+                  "files": {
+                    "package/package.json": "f89fa389855d2a21b380fa69c84735da25bd93e3b9d7c39bd0d634493425fd8c",
+                    "package/LICENSE.md": "f7cc4ba24850cc564766c75923d07c3d22fa27f304285f4d25ecffeaec964e28",
+                    "package/index.d.ts": "03b420509a480f893bf8253232cfd28428dc0be5f254fefe99a91e65847c010e",
+                    "package/dist/modern/umd/dash.all.min.js": "3a22b1f4576ab294f41e56f156cec7972a5f83edda379416778293ff22d2eb49"
+                  }
+                }
+              },
+              "sdkSHA256": "3a22b1f4576ab294f41e56f156cec7972a5f83edda379416778293ff22d2eb49",
+              "pluginSHA256": "02784a47302ab9bdefae878ffb8a2f2ed23d773defa20f0903eb53a3a78eed57",
+              "sourceSHA256": "a7296a516176076e34f5a7aed7388eb6c8b87bc12cfd4eb879b7e1abcf4a126e",
+              "supported": true,
+              "scope": "real SDK with original settings, local routed MPD, playback and replacement cleanup"
+            },
+            "browser": "153.0.8010.12",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "documented DASH setup and source lifecycle: SDK 5.2.1, candidate core",
+        "project": "chromium",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "inputs": {
+              "documents": [
+                "plugin/dash-control.md",
+                "en/plugin/dash-control.md"
+              ],
+              "core": "candidate",
+              "sdk": {
+                "metadataUrl": "https://registry.npmjs.org/dashjs/5.2.1",
+                "codeMember": "package/dist/modern/umd/dash.all.min.js",
+                "release": {
+                  "name": "dashjs",
+                  "version": "5.2.1",
+                  "tarball": "https://registry.npmjs.org/dashjs/-/dashjs-5.2.1.tgz",
+                  "integrity": "sha512-axcJmLeJCTJMLUfQRErUJB1KOiU5iHF+DMLBc3FKeox1HPYtGUQlC6Xm5Mm6vhBUR3CHHLIPOqw0JDIqMtP+Dw==",
+                  "sha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+                  "files": {
+                    "package/package.json": "f89fa389855d2a21b380fa69c84735da25bd93e3b9d7c39bd0d634493425fd8c",
+                    "package/LICENSE.md": "f7cc4ba24850cc564766c75923d07c3d22fa27f304285f4d25ecffeaec964e28",
+                    "package/index.d.ts": "03b420509a480f893bf8253232cfd28428dc0be5f254fefe99a91e65847c010e",
+                    "package/dist/modern/umd/dash.all.min.js": "3a22b1f4576ab294f41e56f156cec7972a5f83edda379416778293ff22d2eb49"
+                  }
+                }
+              },
+              "sdkSHA256": "3a22b1f4576ab294f41e56f156cec7972a5f83edda379416778293ff22d2eb49",
+              "pluginSHA256": "02784a47302ab9bdefae878ffb8a2f2ed23d773defa20f0903eb53a3a78eed57",
+              "sourceSHA256": "a7296a516176076e34f5a7aed7388eb6c8b87bc12cfd4eb879b7e1abcf4a126e",
+              "supported": true,
+              "scope": "real SDK with original settings, local routed MPD, playback and replacement cleanup"
+            },
+            "browser": "153.0.8010.12",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "documented DASH setup and source lifecycle: SDK 4.5.2, published core",
+        "project": "firefox",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "inputs": {
+              "documents": [
+                "plugin/dash-control.md",
+                "en/plugin/dash-control.md"
+              ],
+              "core": "published",
+              "sdk": {
+                "metadataUrl": "https://registry.npmjs.org/dashjs/4.5.2",
+                "codeMember": "package/dist/dash.all.min.js",
+                "release": {
+                  "name": "dashjs",
+                  "version": "4.5.2",
+                  "tarball": "https://registry.npmjs.org/dashjs/-/dashjs-4.5.2.tgz",
+                  "integrity": "sha512-WXPk0lPDSaHjiSVoVRh2jQPiMmB1alKUH8hV2CVmaI0vPUeT1wIY7madVE38SthfOmwS9IJViv1RrxrxdGjElg==",
+                  "sha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+                  "files": {
+                    "package/package.json": "62b2295c4a92ec996ff066f7e5739893c46fce44d80c940c61ced9d5710226d1",
+                    "package/LICENSE.md": "f7cc4ba24850cc564766c75923d07c3d22fa27f304285f4d25ecffeaec964e28",
+                    "package/index.d.ts": "13e6bd0a3c77e2db9378e355915929ed3dda5d8de9c48f446c9d3e9fb7154dbd",
+                    "package/dist/dash.all.min.js": "17849c05872997095a63d74bde3fed6f79c14c6a48cdf904833d880b93a476da"
+                  }
+                }
+              },
+              "sdkSHA256": "17849c05872997095a63d74bde3fed6f79c14c6a48cdf904833d880b93a476da",
+              "pluginSHA256": "02784a47302ab9bdefae878ffb8a2f2ed23d773defa20f0903eb53a3a78eed57",
+              "sourceSHA256": "a7296a516176076e34f5a7aed7388eb6c8b87bc12cfd4eb879b7e1abcf4a126e",
+              "supported": true,
+              "scope": "real SDK with original settings, local routed MPD, playback and replacement cleanup"
+            },
+            "browser": "155.0",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "documented DASH setup and source lifecycle: SDK 4.5.2, candidate core",
+        "project": "firefox",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "inputs": {
+              "documents": [
+                "plugin/dash-control.md",
+                "en/plugin/dash-control.md"
+              ],
+              "core": "candidate",
+              "sdk": {
+                "metadataUrl": "https://registry.npmjs.org/dashjs/4.5.2",
+                "codeMember": "package/dist/dash.all.min.js",
+                "release": {
+                  "name": "dashjs",
+                  "version": "4.5.2",
+                  "tarball": "https://registry.npmjs.org/dashjs/-/dashjs-4.5.2.tgz",
+                  "integrity": "sha512-WXPk0lPDSaHjiSVoVRh2jQPiMmB1alKUH8hV2CVmaI0vPUeT1wIY7madVE38SthfOmwS9IJViv1RrxrxdGjElg==",
+                  "sha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+                  "files": {
+                    "package/package.json": "62b2295c4a92ec996ff066f7e5739893c46fce44d80c940c61ced9d5710226d1",
+                    "package/LICENSE.md": "f7cc4ba24850cc564766c75923d07c3d22fa27f304285f4d25ecffeaec964e28",
+                    "package/index.d.ts": "13e6bd0a3c77e2db9378e355915929ed3dda5d8de9c48f446c9d3e9fb7154dbd",
+                    "package/dist/dash.all.min.js": "17849c05872997095a63d74bde3fed6f79c14c6a48cdf904833d880b93a476da"
+                  }
+                }
+              },
+              "sdkSHA256": "17849c05872997095a63d74bde3fed6f79c14c6a48cdf904833d880b93a476da",
+              "pluginSHA256": "02784a47302ab9bdefae878ffb8a2f2ed23d773defa20f0903eb53a3a78eed57",
+              "sourceSHA256": "a7296a516176076e34f5a7aed7388eb6c8b87bc12cfd4eb879b7e1abcf4a126e",
+              "supported": true,
+              "scope": "real SDK with original settings, local routed MPD, playback and replacement cleanup"
+            },
+            "browser": "155.0",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "documented DASH setup and source lifecycle: SDK 5.2.1, published core",
+        "project": "firefox",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "inputs": {
+              "documents": [
+                "plugin/dash-control.md",
+                "en/plugin/dash-control.md"
+              ],
+              "core": "published",
+              "sdk": {
+                "metadataUrl": "https://registry.npmjs.org/dashjs/5.2.1",
+                "codeMember": "package/dist/modern/umd/dash.all.min.js",
+                "release": {
+                  "name": "dashjs",
+                  "version": "5.2.1",
+                  "tarball": "https://registry.npmjs.org/dashjs/-/dashjs-5.2.1.tgz",
+                  "integrity": "sha512-axcJmLeJCTJMLUfQRErUJB1KOiU5iHF+DMLBc3FKeox1HPYtGUQlC6Xm5Mm6vhBUR3CHHLIPOqw0JDIqMtP+Dw==",
+                  "sha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+                  "files": {
+                    "package/package.json": "f89fa389855d2a21b380fa69c84735da25bd93e3b9d7c39bd0d634493425fd8c",
+                    "package/LICENSE.md": "f7cc4ba24850cc564766c75923d07c3d22fa27f304285f4d25ecffeaec964e28",
+                    "package/index.d.ts": "03b420509a480f893bf8253232cfd28428dc0be5f254fefe99a91e65847c010e",
+                    "package/dist/modern/umd/dash.all.min.js": "3a22b1f4576ab294f41e56f156cec7972a5f83edda379416778293ff22d2eb49"
+                  }
+                }
+              },
+              "sdkSHA256": "3a22b1f4576ab294f41e56f156cec7972a5f83edda379416778293ff22d2eb49",
+              "pluginSHA256": "02784a47302ab9bdefae878ffb8a2f2ed23d773defa20f0903eb53a3a78eed57",
+              "sourceSHA256": "a7296a516176076e34f5a7aed7388eb6c8b87bc12cfd4eb879b7e1abcf4a126e",
+              "supported": true,
+              "scope": "real SDK with original settings, local routed MPD, playback and replacement cleanup"
+            },
+            "browser": "155.0",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "documented DASH setup and source lifecycle: SDK 5.2.1, candidate core",
+        "project": "firefox",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "inputs": {
+              "documents": [
+                "plugin/dash-control.md",
+                "en/plugin/dash-control.md"
+              ],
+              "core": "candidate",
+              "sdk": {
+                "metadataUrl": "https://registry.npmjs.org/dashjs/5.2.1",
+                "codeMember": "package/dist/modern/umd/dash.all.min.js",
+                "release": {
+                  "name": "dashjs",
+                  "version": "5.2.1",
+                  "tarball": "https://registry.npmjs.org/dashjs/-/dashjs-5.2.1.tgz",
+                  "integrity": "sha512-axcJmLeJCTJMLUfQRErUJB1KOiU5iHF+DMLBc3FKeox1HPYtGUQlC6Xm5Mm6vhBUR3CHHLIPOqw0JDIqMtP+Dw==",
+                  "sha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+                  "files": {
+                    "package/package.json": "f89fa389855d2a21b380fa69c84735da25bd93e3b9d7c39bd0d634493425fd8c",
+                    "package/LICENSE.md": "f7cc4ba24850cc564766c75923d07c3d22fa27f304285f4d25ecffeaec964e28",
+                    "package/index.d.ts": "03b420509a480f893bf8253232cfd28428dc0be5f254fefe99a91e65847c010e",
+                    "package/dist/modern/umd/dash.all.min.js": "3a22b1f4576ab294f41e56f156cec7972a5f83edda379416778293ff22d2eb49"
+                  }
+                }
+              },
+              "sdkSHA256": "3a22b1f4576ab294f41e56f156cec7972a5f83edda379416778293ff22d2eb49",
+              "pluginSHA256": "02784a47302ab9bdefae878ffb8a2f2ed23d773defa20f0903eb53a3a78eed57",
+              "sourceSHA256": "a7296a516176076e34f5a7aed7388eb6c8b87bc12cfd4eb879b7e1abcf4a126e",
+              "supported": true,
+              "scope": "real SDK with original settings, local routed MPD, playback and replacement cleanup"
+            },
+            "browser": "155.0",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "documented DASH setup and source lifecycle: SDK 4.5.2, published core",
+        "project": "webkit",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "inputs": {
+              "documents": [
+                "plugin/dash-control.md",
+                "en/plugin/dash-control.md"
+              ],
+              "core": "published",
+              "sdk": {
+                "metadataUrl": "https://registry.npmjs.org/dashjs/4.5.2",
+                "codeMember": "package/dist/dash.all.min.js",
+                "release": {
+                  "name": "dashjs",
+                  "version": "4.5.2",
+                  "tarball": "https://registry.npmjs.org/dashjs/-/dashjs-4.5.2.tgz",
+                  "integrity": "sha512-WXPk0lPDSaHjiSVoVRh2jQPiMmB1alKUH8hV2CVmaI0vPUeT1wIY7madVE38SthfOmwS9IJViv1RrxrxdGjElg==",
+                  "sha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+                  "files": {
+                    "package/package.json": "62b2295c4a92ec996ff066f7e5739893c46fce44d80c940c61ced9d5710226d1",
+                    "package/LICENSE.md": "f7cc4ba24850cc564766c75923d07c3d22fa27f304285f4d25ecffeaec964e28",
+                    "package/index.d.ts": "13e6bd0a3c77e2db9378e355915929ed3dda5d8de9c48f446c9d3e9fb7154dbd",
+                    "package/dist/dash.all.min.js": "17849c05872997095a63d74bde3fed6f79c14c6a48cdf904833d880b93a476da"
+                  }
+                }
+              },
+              "sdkSHA256": "17849c05872997095a63d74bde3fed6f79c14c6a48cdf904833d880b93a476da",
+              "pluginSHA256": "02784a47302ab9bdefae878ffb8a2f2ed23d773defa20f0903eb53a3a78eed57",
+              "sourceSHA256": "a7296a516176076e34f5a7aed7388eb6c8b87bc12cfd4eb879b7e1abcf4a126e",
+              "supported": false,
+              "scope": "actual unsupported setup only"
+            },
+            "browser": "26.6",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "documented DASH setup and source lifecycle: SDK 4.5.2, candidate core",
+        "project": "webkit",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "inputs": {
+              "documents": [
+                "plugin/dash-control.md",
+                "en/plugin/dash-control.md"
+              ],
+              "core": "candidate",
+              "sdk": {
+                "metadataUrl": "https://registry.npmjs.org/dashjs/4.5.2",
+                "codeMember": "package/dist/dash.all.min.js",
+                "release": {
+                  "name": "dashjs",
+                  "version": "4.5.2",
+                  "tarball": "https://registry.npmjs.org/dashjs/-/dashjs-4.5.2.tgz",
+                  "integrity": "sha512-WXPk0lPDSaHjiSVoVRh2jQPiMmB1alKUH8hV2CVmaI0vPUeT1wIY7madVE38SthfOmwS9IJViv1RrxrxdGjElg==",
+                  "sha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+                  "files": {
+                    "package/package.json": "62b2295c4a92ec996ff066f7e5739893c46fce44d80c940c61ced9d5710226d1",
+                    "package/LICENSE.md": "f7cc4ba24850cc564766c75923d07c3d22fa27f304285f4d25ecffeaec964e28",
+                    "package/index.d.ts": "13e6bd0a3c77e2db9378e355915929ed3dda5d8de9c48f446c9d3e9fb7154dbd",
+                    "package/dist/dash.all.min.js": "17849c05872997095a63d74bde3fed6f79c14c6a48cdf904833d880b93a476da"
+                  }
+                }
+              },
+              "sdkSHA256": "17849c05872997095a63d74bde3fed6f79c14c6a48cdf904833d880b93a476da",
+              "pluginSHA256": "02784a47302ab9bdefae878ffb8a2f2ed23d773defa20f0903eb53a3a78eed57",
+              "sourceSHA256": "a7296a516176076e34f5a7aed7388eb6c8b87bc12cfd4eb879b7e1abcf4a126e",
+              "supported": false,
+              "scope": "actual unsupported setup only"
+            },
+            "browser": "26.6",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "documented DASH setup and source lifecycle: SDK 5.2.1, published core",
+        "project": "webkit",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "inputs": {
+              "documents": [
+                "plugin/dash-control.md",
+                "en/plugin/dash-control.md"
+              ],
+              "core": "published",
+              "sdk": {
+                "metadataUrl": "https://registry.npmjs.org/dashjs/5.2.1",
+                "codeMember": "package/dist/modern/umd/dash.all.min.js",
+                "release": {
+                  "name": "dashjs",
+                  "version": "5.2.1",
+                  "tarball": "https://registry.npmjs.org/dashjs/-/dashjs-5.2.1.tgz",
+                  "integrity": "sha512-axcJmLeJCTJMLUfQRErUJB1KOiU5iHF+DMLBc3FKeox1HPYtGUQlC6Xm5Mm6vhBUR3CHHLIPOqw0JDIqMtP+Dw==",
+                  "sha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+                  "files": {
+                    "package/package.json": "f89fa389855d2a21b380fa69c84735da25bd93e3b9d7c39bd0d634493425fd8c",
+                    "package/LICENSE.md": "f7cc4ba24850cc564766c75923d07c3d22fa27f304285f4d25ecffeaec964e28",
+                    "package/index.d.ts": "03b420509a480f893bf8253232cfd28428dc0be5f254fefe99a91e65847c010e",
+                    "package/dist/modern/umd/dash.all.min.js": "3a22b1f4576ab294f41e56f156cec7972a5f83edda379416778293ff22d2eb49"
+                  }
+                }
+              },
+              "sdkSHA256": "3a22b1f4576ab294f41e56f156cec7972a5f83edda379416778293ff22d2eb49",
+              "pluginSHA256": "02784a47302ab9bdefae878ffb8a2f2ed23d773defa20f0903eb53a3a78eed57",
+              "sourceSHA256": "a7296a516176076e34f5a7aed7388eb6c8b87bc12cfd4eb879b7e1abcf4a126e",
+              "supported": false,
+              "scope": "actual unsupported setup only"
+            },
+            "browser": "26.6",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "documented DASH setup and source lifecycle: SDK 5.2.1, candidate core",
+        "project": "webkit",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "inputs": {
+              "documents": [
+                "plugin/dash-control.md",
+                "en/plugin/dash-control.md"
+              ],
+              "core": "candidate",
+              "sdk": {
+                "metadataUrl": "https://registry.npmjs.org/dashjs/5.2.1",
+                "codeMember": "package/dist/modern/umd/dash.all.min.js",
+                "release": {
+                  "name": "dashjs",
+                  "version": "5.2.1",
+                  "tarball": "https://registry.npmjs.org/dashjs/-/dashjs-5.2.1.tgz",
+                  "integrity": "sha512-axcJmLeJCTJMLUfQRErUJB1KOiU5iHF+DMLBc3FKeox1HPYtGUQlC6Xm5Mm6vhBUR3CHHLIPOqw0JDIqMtP+Dw==",
+                  "sha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+                  "files": {
+                    "package/package.json": "f89fa389855d2a21b380fa69c84735da25bd93e3b9d7c39bd0d634493425fd8c",
+                    "package/LICENSE.md": "f7cc4ba24850cc564766c75923d07c3d22fa27f304285f4d25ecffeaec964e28",
+                    "package/index.d.ts": "03b420509a480f893bf8253232cfd28428dc0be5f254fefe99a91e65847c010e",
+                    "package/dist/modern/umd/dash.all.min.js": "3a22b1f4576ab294f41e56f156cec7972a5f83edda379416778293ff22d2eb49"
+                  }
+                }
+              },
+              "sdkSHA256": "3a22b1f4576ab294f41e56f156cec7972a5f83edda379416778293ff22d2eb49",
+              "pluginSHA256": "02784a47302ab9bdefae878ffb8a2f2ed23d773defa20f0903eb53a3a78eed57",
+              "sourceSHA256": "a7296a516176076e34f5a7aed7388eb6c8b87bc12cfd4eb879b7e1abcf4a126e",
+              "supported": false,
+              "scope": "actual unsupported setup only"
+            },
+            "browser": "26.6",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+        "project": "chromium",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "browser": "153.0.8010.12",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+        "project": "chromium",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "browser": "153.0.8010.12",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+        "project": "firefox",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "browser": "155.0",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+        "project": "firefox",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "browser": "155.0",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+        "project": "webkit",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "browser": "26.6",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+            "unhandledErrors": []
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+        "project": "webkit",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": [],
+            "browser": "26.6",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+            "unhandledErrors": []
+          }
+        ]
+      }
+    ],
+    "interpretation": {
+      "realSdkPlaybackAndReplacement": 8,
+      "unsupportedWebKitSetup": 4,
+      "navigationAndRunCode": 6,
+      "realDeviceValidated": false
+    },
+    "resultsDirectory": "refactor/.cache/dash-docs-browser-final-results",
+    "log": {
+      "file": "refactor/.cache/dash-docs-browser-first.log",
+      "sha256": "0dd8e8d701f0170b1f4b9d69f544b41f3f55995bbae8f9cc6b6e5ee8d5f3ca31"
+    },
+    "note": "One run passed; first log is also the final run. Both guide snippets match the same actual source before executing one runtime case per SDK/core/engine."
+  },
+  "connectedBrowser": {
+    "provider": "Codex in-app browser",
+    "version": null,
+    "tabId": "11",
+    "url": "http://localhost:8082/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/5.2.1/modern/umd/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control",
+    "observed": [
+      "editor contains updated useDash/destroyDash setup",
+      "video metadata duration 12:14",
+      "quality choices 1080P/720P/480P/360P/288P/Auto",
+      "audio choices EN/EN-AU/ET-ET",
+      "loadedmetadata/loadeddata/canplay events"
+    ],
+    "limitation": "No playback click or source/destroy interaction; version was not returned. This is readiness/menu observation only."
+  },
+  "inventory": {
+    "packages": 22,
+    "markdown": 32,
+    "examples": 30,
+    "html": 41,
+    "declarationMembers": 963,
+    "assets": 204
+  },
+  "unchanged": {
+    "lock": true,
+    "pluginRuntimeAndTypes": true,
+    "packageVersions": true
+  },
+  "publication": false
+}

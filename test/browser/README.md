@@ -489,3 +489,14 @@ replacement and one destroy call per SDK are asserted. Windows WebKit exercises 
 unsupported setup/notice/cleanup. Worker configuration stays enabled, but this suite
 does not observe worker output or establish native-HLS playback. The separate
 `document-site.spec.js` checks both guide links and Run Code library/source parameters.
+
+## DASH documentation examples
+
+`document-dash.spec.js` requires both guide snippets to match the actual
+`docs/assets/example/dash.control.js`. That shared source runs once per frozen
+dash.js 4.5.2/5.2.1, published/candidate core and browser combination. Local MPD
+media is hash-checked; initial/replacement playback and one SDK destroy per instance
+are asserted with the original SDK initialization settings. WebKit without MSE
+checks only unsupported setup/notice/cleanup. `document-site.spec.js` also verifies
+the two guide links and Run Code libraries/source; full SDK/device acceptance stays
+separate. Unit nullable-language and repeated-cleanup cases run via test:unit.
