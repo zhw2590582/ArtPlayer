@@ -228,16 +228,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-auto-thumbnail.tgz",
+        "path": "refactor/.cache/auto-thumbnail-package-types-I6JsR1/artplayer-plugin-auto-thumbnail.tgz",
         "version": "2.0.0",
-        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
-        "inputFingerprint": "03b31364d6b6ef6802213802031c1e4a811e1cd590e12468d882fbb4f0f7945d",
-        "integrity": "sha512-dcsPHwFqulFreP1myyXF9mkdy+LDeaJI33gl0QOnZ/VGNIXZAbuhskmAowTFw2PErj1C7saxmg3ArElLZqkfbA=="
+        "sourceCommit": "3317230f2ece7df65e75e02f093da4b72d5f77d3",
+        "inputFingerprint": "fa1ac932fb279f6de85856d98d649ea6b12b39c221a8e54d63d5a46d28ed25eb",
+        "integrity": "sha512-wf+nJO2HCdyHH0RRMeo6Xv2IADQXKvrETpLuea43kCk+vtnnLnQi3tsRFqAuniyGCniHj+sMAlptmAkpEnzRDA=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-auto-thumbnail.json",
-          "sha256": "12918e779e3c555ac6dce672fd9de55337cf8843a58a73230fef5fb6847511c9"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-auto-thumbnail-docs.json",
+          "sha256": "e517b55cdbb65be6f6860776daec88fe04f4d973e287675f9729258fb9a84b50"
         }
       }
     },

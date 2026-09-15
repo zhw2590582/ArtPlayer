@@ -5029,7 +5029,10 @@
         "changes/2026-09-16-REL-02-yarn-candidate-archives.md",
         "baselines/major-candidate-archive-validation.json",
         "changes/2026-09-16-REL-02-candidate-registration.md",
-        "baselines/major-candidate-preparation.json"
+        "baselines/major-candidate-preparation.json",
+        "changes/2026-09-16-REL-02-auto-thumbnail-refresh.md",
+        "baselines/auto-thumbnail-candidate-refresh.json",
+        "baselines/auto-thumbnail-candidate-refresh-check.json"
       ]
     },
     {

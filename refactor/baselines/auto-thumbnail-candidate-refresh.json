@@ -1,0 +1,265 @@
+{
+  "task": "REL-02",
+  "sourceCommit": "3317230f2ece7df65e75e02f093da4b72d5f77d3",
+  "capturedAt": "2026-09-15T19:01:51.955Z",
+  "reason": "Replace candidate after correcting shipped ARCHITECTURE.md version statement",
+  "toolchain": {
+    "node": "v24.21.0",
+    "canonicalNode": "24.21.0",
+    "packageManager": "yarn@1.22.22",
+    "observedUserAgent": "yarn/1.22.22 npm/? node/v24.21.0 win32 x64",
+    "declaredTools": {
+      "@antfu/eslint-config": "5.4.1",
+      "@playwright/test": "1.63.0",
+      "@types/markdown-it": "14.1.2",
+      "@types/node": "24.10.0",
+      "@types/react": "19.1.10",
+      "@types/react-dom": "19.1.7",
+      "@vitejs/plugin-react": "5.0.0",
+      "@vitejs/plugin-vue": "6.0.1",
+      "@vue/compiler-sfc": "3.5.28",
+      "@yarnpkg/lockfile": "1.1.0",
+      "c8": "12.0.0",
+      "cpy": "13.2.3",
+      "cross-env": "10.1.0",
+      "cross-spawn": "7.0.6",
+      "dotenv": "17.2.4",
+      "dts-bundle-generator": "9.5.1",
+      "esbuild": "0.27.7",
+      "eslint": "9.39.2",
+      "eslint-plugin-format": "2.0.1",
+      "glob": "13.0.6",
+      "lerna": "8.2.4",
+      "less": "4.5.1",
+      "linkedom": "0.18.13",
+      "monaco-editor": "0.30.1",
+      "mrmime": "2.0.1",
+      "pngjs": "7.0.0",
+      "prompts": "2.4.2",
+      "react": "19.1.1",
+      "react-dom": "19.1.1",
+      "semver": "7.7.4",
+      "servor": "4.0.2",
+      "svgo": "4.1.0",
+      "terser": "5.51.2",
+      "typescript": "5.9.3",
+      "typescript-compat": "npm:typescript@4.3.5",
+      "typescript-runtime-compat": "npm:typescript@5.1.6",
+      "vite": "7.3.6",
+      "vue": "3.5.28",
+      "vue-tsc": "3.3.11",
+      "yaml": "2.8.2"
+    },
+    "lock": {
+      "path": "yarn.lock",
+      "sha256": "aa33cfc38c7933ab53ce626a911fdafd7b14023e45f93ca37bf7f2f6a1d3ecce"
+    }
+  },
+  "previousCandidate": {
+    "kind": "npm-tarball",
+    "path": "refactor/.cache/packages/run-XvHA8v/artplayer-plugin-auto-thumbnail.tgz",
+    "version": "2.0.0",
+    "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+    "inputFingerprint": "03b31364d6b6ef6802213802031c1e4a811e1cd590e12468d882fbb4f0f7945d",
+    "integrity": "sha512-dcsPHwFqulFreP1myyXF9mkdy+LDeaJI33gl0QOnZ/VGNIXZAbuhskmAowTFw2PErj1C7saxmg3ArElLZqkfbA=="
+  },
+  "previousBuild": {
+    "path": "refactor/baselines/major-candidate-build/artplayer-plugin-auto-thumbnail.json",
+    "sha256": "12918e779e3c555ac6dce672fd9de55337cf8843a58a73230fef5fb6847511c9"
+  },
+  "candidate": {
+    "kind": "npm-tarball",
+    "path": "refactor/.cache/auto-thumbnail-package-types-I6JsR1/artplayer-plugin-auto-thumbnail.tgz",
+    "version": "2.0.0",
+    "sourceCommit": "3317230f2ece7df65e75e02f093da4b72d5f77d3",
+    "inputFingerprint": "fa1ac932fb279f6de85856d98d649ea6b12b39c221a8e54d63d5a46d28ed25eb",
+    "integrity": "sha512-wf+nJO2HCdyHH0RRMeo6Xv2IADQXKvrETpLuea43kCk+vtnnLnQi3tsRFqAuniyGCniHj+sMAlptmAkpEnzRDA=="
+  },
+  "unchangedInputFiles": 1469,
+  "archive": {
+    "sha256": "6b512d80ace6aea92f240de17cbbc1fcb30a3f6f58f1fb5c0d641eb4bad8e5ca",
+    "members": 12,
+    "changedMembers": [
+      "package/ARCHITECTURE.md"
+    ],
+    "files": {
+      "package/ARCHITECTURE.md": "e180144469a711522ab9e489fea864e600202e57a2eda70b29193f158360ee1c",
+      "package/CHANGELOG.md": "98d7270c85b530ed3edd7dc7c31e2b1beff40a124b72e576b325a3d60b25c609",
+      "package/README.md": "bb9c18ea93428b28e84f061240508d2fed1e8c31a4a189d06a0e4711c49e86b5",
+      "package/dist/artplayer-plugin-auto-thumbnail.js": "186a64cc377e028570d9634d188595352433ad81778dd7cc7f617d4d37dafdb4",
+      "package/dist/artplayer-plugin-auto-thumbnail.legacy.js": "aa20044bc9ea842e4798d783cca81d8f3bf96433c1b42d0a3454dd5284454b66",
+      "package/dist/artplayer-plugin-auto-thumbnail.mjs": "72bac6db0a6b23bdfcc603ba5924a7e4418c04120d800068e906dad2833f14a2",
+      "package/package.json": "3952f5e7421e5e2a36a438d6ca640fd3a3df0a3f45956358850326abbefd0449",
+      "package/types/artplayer-plugin-auto-thumbnail.d.ts": "b3fd5197b2d1de81bd80a871103821fc38f5af8faa432265ee1fc04ff3e1e51d",
+      "package/types/runtime-api.d.ts": "4398071bd85d2010576fd1293c629c93bd5f986ba16bfcc1c8e7efa03baf4e34",
+      "package/types/runtime.d.cts": "6a0213bf1ea69e1ab0a41e55305a4ded2561dc363676ebf9b3c355d5825fa653",
+      "package/types/runtime.d.mts": "2c828bf3616a6967d3d4d3c3339ab2707fae24aa9fffedf5f86d777a04bd74d4",
+      "package/types/runtime.d.ts": "6a0213bf1ea69e1ab0a41e55305a4ded2561dc363676ebf9b3c355d5825fa653"
+    },
+    "allMembersMatchFreshBuild": true,
+    "installedMembersVerifiedBy": "auto-thumbnail-package-types.mjs",
+    "coreConsumerMatchesRegisteredCoreMembers": true
+  },
+  "types": {
+    "matrix": [
+      {
+        "plugin": "published-1.1.0",
+        "compiler": "5.9.3",
+        "mode": "node10-commonjs",
+        "publicDiagnostics": 1,
+        "rootOnlyDiagnostics": 0,
+        "publicNegativeDiagnostics": 6
+      },
+      {
+        "plugin": "published-1.1.0",
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs",
+        "publicDiagnostics": 0,
+        "publicNegativeDiagnostics": 6
+      },
+      {
+        "plugin": "published-1.1.0",
+        "compiler": "5.9.3",
+        "mode": "nodenext-esm",
+        "publicDiagnostics": 0,
+        "publicNegativeDiagnostics": 6
+      },
+      {
+        "plugin": "published-1.1.0",
+        "compiler": "5.9.3",
+        "mode": "bundler-esm",
+        "publicDiagnostics": 0,
+        "publicNegativeDiagnostics": 6
+      },
+      {
+        "plugin": "published-1.1.0",
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs",
+        "publicDiagnostics": 2,
+        "rootOnlyDiagnostics": 0,
+        "publicNegativeDiagnostics": 6
+      },
+      {
+        "plugin": "candidate",
+        "compiler": "5.9.3",
+        "mode": "node10-commonjs",
+        "publicDiagnostics": 0,
+        "runtimeDiagnostics": 0,
+        "publicNegativeDiagnostics": 6,
+        "runtimeNegativeDiagnostics": 14,
+        "noInteropDiagnostics": 0
+      },
+      {
+        "plugin": "candidate",
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs",
+        "publicDiagnostics": 0,
+        "runtimeDiagnostics": 0,
+        "publicNegativeDiagnostics": 6,
+        "runtimeNegativeDiagnostics": 14,
+        "noInteropDiagnostics": 0
+      },
+      {
+        "plugin": "candidate",
+        "compiler": "5.9.3",
+        "mode": "nodenext-esm",
+        "publicDiagnostics": 0,
+        "runtimeDiagnostics": 0,
+        "publicNegativeDiagnostics": 6,
+        "runtimeNegativeDiagnostics": 14
+      },
+      {
+        "plugin": "candidate",
+        "compiler": "5.9.3",
+        "mode": "bundler-esm",
+        "publicDiagnostics": 0,
+        "runtimeDiagnostics": 0,
+        "publicNegativeDiagnostics": 6,
+        "runtimeNegativeDiagnostics": 14
+      },
+      {
+        "plugin": "candidate",
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs",
+        "publicDiagnostics": 0,
+        "runtimeDiagnostics": 0,
+        "publicNegativeDiagnostics": 6,
+        "runtimeNegativeDiagnostics": 14,
+        "noInteropDiagnostics": 0
+      }
+    ],
+    "historicalRuntime": [
+      {
+        "version": "1.0.1",
+        "missingRuntime": false,
+        "passed": true
+      },
+      {
+        "version": "1.0.0",
+        "missingRuntime": true,
+        "passed": true
+      }
+    ],
+    "scope": "Actual npm 1.1.0 and packed candidate installed outside the workspace. Root historical type shape and conditional runtime entry are checked with exact negative lines. Registration and module identities use installed artifacts; no native extraction or device acceptance is implied."
+  },
+  "attachments": [
+    {
+      "path": "refactor/.cache/release-ledger-tO5Y3Z/report.json",
+      "sha256": "72cbd0403eb16d62497071f7f76e45e25cbb525fd6ecd0a0da05d2fb8d27aca6"
+    },
+    {
+      "path": "refactor/.cache/release-ledger-dXrKfj/report.json",
+      "sha256": "72cbd0403eb16d62497071f7f76e45e25cbb525fd6ecd0a0da05d2fb8d27aca6"
+    },
+    {
+      "path": "refactor/.cache/auto-thumbnail-package-types-I6JsR1/report.json",
+      "sha256": "38747a3b9c6971faaeffadcac961991c34528a1a792cd041326ccb66cce61298"
+    },
+    {
+      "path": "refactor/.cache/auto-thumbnail-package-types-I6JsR1/artplayer-plugin-auto-thumbnail.tgz",
+      "sha256": "6b512d80ace6aea92f240de17cbbc1fcb30a3f6f58f1fb5c0d641eb4bad8e5ca"
+    },
+    {
+      "path": "refactor/.cache/auto-thumbnail-package-types-I6JsR1/artplayer-plugin-auto-thumbnail-pack.log",
+      "sha256": "06dbc38c47a0abf988b99069db007d38c21458301136a77b5e5bb9f55448b276"
+    },
+    {
+      "path": "refactor/.cache/auto-thumbnail-package-types-I6JsR1/candidate-install.log",
+      "sha256": "c3b09f4c65bfb4a1bf31ddd2e3328c22988cf52a31e36c31ea2de4d3132a89c6"
+    },
+    {
+      "path": "refactor/.cache/auto-thumbnail-package-types-I6JsR1/candidate-frozen.log",
+      "sha256": "526fef4d0e8dfda40bfd2383247e571c7672e9bdc49a9f0645675f6a093c0c07"
+    },
+    {
+      "path": "refactor/.cache/auto-thumbnail-package-types-I6JsR1/candidate-yarn.lock",
+      "sha256": "54096ef77f9d45e94d9c8503cddb96bb5ef763077c98e0ab77859cfb09e2c2fa"
+    },
+    {
+      "path": "refactor/.cache/auto-thumbnail-package-types-I6JsR1/candidate-runtime.log",
+      "sha256": "b73c2c6cf92036f1c2843adc0dd96a8b7df0b5b878930bae32d590ae2c961467"
+    },
+    {
+      "path": "refactor/.cache/auto-thumbnail-package-types-I6JsR1/published-1.1.0-runtime.log",
+      "sha256": "b73c2c6cf92036f1c2843adc0dd96a8b7df0b5b878930bae32d590ae2c961467"
+    },
+    {
+      "path": "refactor/.cache/rel02-auto-refresh-build.log",
+      "sha256": "3983854641a6c89e9b7afaff7a02b0a3a415796b02cd590a81f0b6d3fd9566fb"
+    },
+    {
+      "path": "refactor/.cache/rel02-auto-refresh-types.log",
+      "sha256": "f57a0dad16358b9f7d783f5d8b37fa8aae4e93a93962c1ca48eb47be20269f84"
+    },
+    {
+      "path": "refactor/.cache/record-rel02-auto-refresh.mjs",
+      "sha256": "df747fd8368723d516ece50680bac35a276b633bf72c92033088710260eb570c"
+    }
+  ],
+  "limitations": [
+    "Only build gate registered; narrow registration/module/type checks do not complete all native runtime/combinations/devices/rollback/release acceptance.",
+    "Published 1.0.0 missing runtime and 1.1.0 legacy type failures are exact historical negative cases, not runnable/green historical APIs.",
+    "No first-frame pixel or physical-device test rerun for a documentation-only shipped change.",
+    "Old archive, envelope and reports remain intact. No publication authorized."
+  ]
+}

@@ -45,6 +45,11 @@ integrity、输入指纹不一致的 rollback 报告仍被拒绝，远端恢复�
 
 ## 候选绑定
 
+2026-09-16：Auto Thumbnail的随包维护说明修正后，已从实际提交重新构建、打包、
+冻结安装并单独替换其候选/build封套；旧证据保留不改写。见
+[更新记录](changes/2026-09-16-REL-02-auto-thumbnail-refresh.md)。其余20库候选不变，
+21库build指纹重新有效；旧共享浏览器安装映射不自动变成这个新候选的播放证据。
+
 初始candidate均为null，evidence为空。REL-02已登记21库的目标major候选及build
 封套，见[实际准备记录](changes/2026-09-16-REL-02-candidate-registration.md)；站点
 candidate仍为null，其他门槛未由这次构建代替。先完成目标版本准备和对应实际构建/pack，

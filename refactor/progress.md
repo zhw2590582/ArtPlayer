@@ -1,5 +1,16 @@
 # 进度与证据
 
+## REL-02 Auto Thumbnail候选重新准备
+
+从3317230f2重建2.0.0并重新隔离安装，10组编译器消费通过；1469个相关输入在
+前后保持一致，12个归档成员与构建一致，相较旧候选只有ARCHITECTURE.md改变。
+新候选及独立build封套已登记，21库build重新有效，旧tarball/封套/报告完整保留。
+见[记录](changes/2026-09-16-REL-02-auto-thumbnail-refresh.md)、
+[准备证据](baselines/auto-thumbnail-candidate-refresh.json)和
+[台账检查](baselines/auto-thumbnail-candidate-refresh-check.json)。未用新指纹标记旧
+浏览器报告，Windows WebKit首帧/真机和其他发布缺口继续保留；REL-02为doing。
+继续剩余文档与实施，224/22/39不变，不进入用户保留的正式复盘。
+
 ## SITE-04 Auto Thumbnail/Multiple Subtitles双语指南
 
 补齐四份指南、原始示例和本地导航，覆盖渐进截图、异步注册、字幕选择、共享配置、
