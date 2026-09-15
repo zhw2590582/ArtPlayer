@@ -478,3 +478,14 @@ playback passes; native attachment can affect timing and permission failures lea
 All dumps stay in ignored local cache. `firefox-minidump.mjs` reads exception/module/thread
 metadata but does not resolve a native stack. See
 [the native evidence and commands](../../refactor/changes/2026-09-15-PKG-HLS-SDK-01-native-exception.md).
+
+## HLS documentation examples
+
+`document-hls.spec.js` extracts the single Run Code from each bilingual HLS guide
+and requires exact parity with `docs/assets/example/hls.control.js`. It loads frozen
+Hls.js 1.5.17/1.7.2 and the actual plugin distribution with published/candidate core.
+The external example URL is routed to hash-checked local HLS media; playback, source
+replacement and one destroy call per SDK are asserted. Windows WebKit exercises only
+unsupported setup/notice/cleanup. Worker configuration stays enabled, but this suite
+does not observe worker output or establish native-HLS playback. The separate
+`document-site.spec.js` checks both guide links and Run Code library/source parameters.

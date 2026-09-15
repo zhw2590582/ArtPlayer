@@ -86,6 +86,24 @@ The plugin owns its two reserved menu names. Applications should use distinct na
 entries. Hls instances and third-party SDK listeners remain owned by their callers. No minimum
 core/SDK version has been newly imposed; the tested historical core is 5.4.0 and SDK is 1.5.17.
 
+## Documentation and example ownership
+
+The bilingual `artplayer-vitepress/docs/{en/,}plugin/hls-control.md` guides contain
+the exact `docs/assets/example/hls.control.js` setup. The example selects Hls.js
+versus native HLS once per player, installs controls only for the Hls.js path,
+releases each replaced SDK and registers one final player cleanup listener.
+`test/hls-example.test.js` guards the previously duplicated destroy calls and the
+invalid native-fallback plugin registration. `document-hls.spec.js` checks exact
+example parity and real SDK playback/replacement against published/candidate core;
+its WebKit no-MSE branch is capability evidence, not native HLS playback.
+
+Update both guides whenever changing the example. Run the Node regression,
+`yarn test:browser document-hls.spec.js document-site.spec.js --workers=1`,
+`yarn build:llm`, `yarn build:docs`, and refresh/check the site inventory.
+Full source-topology, native-device and intermittent Firefox acceptance remain
+separate tasks. The native crash checkpoint now has xul.dll exception metadata;
+it still does not have a resolved stack or proven cause.
+
 ## Validation and next changes
 
 Use the repository's pinned Node and Yarn:

@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 271 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 272 项，范围 22 个包及工作区/示例。
 
-状态：todo 43 / doing 21 / blocked 0 / done 207 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 43 / doing 21 / blocked 0 / done 208 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -26,7 +26,7 @@
 | artplayer-plugin-danmuku-mask | 1.1.0 | PKG-MASK-01, PKG-MASK-02, PKG-MASK-03, PKG-MASK-04, PKG-MASK-05, PKG-MASK-06, ENG-LINT-01, PKG-DANMUKU-MASK-LOAD-01 |
 | artplayer-plugin-dash-control | 1.1.0 | PKG-DASH-01, PKG-DASH-02, PKG-DASH-03, PKG-DASH-04, PKG-DASH-SEEK-01, PKG-DASH-MENU-01, PKG-DASH-05, PKG-DASH-06, PKG-DASH-CLEANUP-01 |
 | artplayer-plugin-document-pip | 1.1.0 | PKG-DPIP-01, PKG-DPIP-02, PKG-DPIP-03, PKG-DPIP-04, PKG-DPIP-05, PKG-DPIP-06 |
-| artplayer-plugin-hls-control | 1.1.0 | PKG-HLS-01, PKG-HLS-02, PKG-HLS-03, PKG-HLS-04, PKG-HLS-SDK-01, PKG-HLS-05, PKG-HLS-06, PKG-HLS-PACK-01 |
+| artplayer-plugin-hls-control | 1.1.0 | PKG-HLS-01, PKG-HLS-02, PKG-HLS-03, PKG-HLS-04, PKG-HLS-SDK-01, PKG-HLS-05, PKG-HLS-06, SITE-HLS-01, PKG-HLS-PACK-01 |
 | artplayer-plugin-jassub | 1.1.0 | PKG-JASSUB-01, PKG-JASSUB-02, PKG-JASSUB-03, PKG-JASSUB-04, PKG-JASSUB-05, PKG-JASSUB-06, PKG-JASSUB-07, PKG-JASSUB-08, PKG-JASSUB-09, PKG-JASSUB-10 |
 | artplayer-plugin-multiple-subtitles | 1.2.0 | PKG-MULTI-SUB-01, PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-04, PKG-MULTI-SUB-07, PKG-MULTI-SUB-08, PKG-MULTI-SUB-05, PKG-MULTI-SUB-06, PKG-MULTI-SUB-09, PKG-MULTI-SUB-10, PKG-MULTI-SUB-11 |
 | artplayer-plugin-vast | 1.2.0 | PKG-VAST-01, PKG-VAST-02, PKG-VAST-03, PKG-VAST-04, PKG-VAST-05, PKG-VAST-06, PKG-VAST-07, ENG-LINT-02 |
@@ -35,7 +35,7 @@
 | artplayer-proxy-mediabunny | 1.2.0 | PKG-MB-01, PKG-MB-02, PKG-MB-03, PKG-MB-04, PKG-MB-05, PKG-MB-06, PKG-MB-07, PKG-MB-08, PKG-MB-09, PKG-MB-10 |
 | artplayer-tool-iframe | 1.1.0 | PKG-IFRAME-01, PKG-IFRAME-02, PKG-IFRAME-03, PKG-IFRAME-04, PKG-IFRAME-05, PKG-IFRAME-06 |
 | artplayer-tool-thumbnail | 4.4.0 | PKG-TOOL-THUMB-01, PKG-TOOL-THUMB-02, PKG-TOOL-THUMB-03, PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-05, PKG-TOOL-THUMB-06, PKG-TOOL-THUMB-07 |
-| artplayer-vitepress | 1.1.0 | SITE-01, SITE-SMOKE-01, SITE-02, SITE-LOAD-01, SITE-AI-DOCS-01, SITE-BUILD-01, SITE-03, SITE-DANMUKU-01, SITE-04, SITE-05, SITE-06, SITE-07, SITE-VCONSOLE-01, ENG-LINT-02, SITE-CONSOLE-01 |
+| artplayer-vitepress | 1.1.0 | SITE-01, SITE-SMOKE-01, SITE-02, SITE-LOAD-01, SITE-AI-DOCS-01, SITE-BUILD-01, SITE-03, SITE-DANMUKU-01, SITE-HLS-01, SITE-04, SITE-05, SITE-06, SITE-07, SITE-VCONSOLE-01, ENG-LINT-02, SITE-CONSOLE-01 |
 
 ## 0 规划
 
@@ -408,7 +408,7 @@
 | SITE-BUILD-01 | artplayer, artplayer-vitepress, workspace<br>重构 i18n 与文档构建的暂存、替换和 Yarn 编排 | SITE-AI-DOCS-01 | 严格 TS 构建模块、编译后替换产物与失败回退，固定 Yarn 子进程和旧构建入口 | 旧 i18n 删除后失败有复现；失败不改变既有产物；语言集合、UMD/ESM/历史别名兼容；文档子进程退出码准确并完成真实 VitePress 构建；不隐式翻译、不修改播放器 API | M | done |
 | SITE-03 | artplayer-vitepress<br>整理 i18n/文档/LLM 生成流程 | SITE-02, SITE-LOAD-01, SITE-AI-DOCS-01, SITE-BUILD-01 | build-i18n/build-docs/build-llm/trans-docs 的任务边界和错误处理；桌面 common.js 自有 UI 的 TS 迁移与模块拆分 | 原命令兼容、生成可复现，翻译步骤不隐式运行远程服务；覆盖移动 loader 失败恢复 define、脚本依赖顺序、localhost/127.0.0.1 Run Code 目标和语言重定向；桌面剩余 UI 完成 TS 职责拆分并回归运行、导入与持久设置 | M | done |
 | SITE-DANMUKU-01 | artplayer-vitepress, artplayer-plugin-danmuku<br>核对弹幕双语指南并补齐英文入口 | SITE-03, PKG-DANMUKU-07 | 按实现修正中文调用说明，新增英文完整选项/API/热力图/类型指南和导航；同步生成站点与LLM资料，新增双语示例浏览器验收 | 旧中文URL和标题保留；实际方法返回、加载语义、回调与points边界准确；双语页面、Run Code及示例实测，完整插件组合和设备验收不冒充完成 | L | done |
-| SITE-04 | artplayer-vitepress<br>交叉核对逐包持续维护的文档 | CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08, SITE-DANMUKU-01 | 已随实现更新的中文/英文 API、包内实现地图、旧 JS 示例及已知能力限制的全包核对 | 未把缺环境的能力写成已验证，静态核对不等待设备任务；最终 demo 仍由 EX-03 验收；按 SITE-01 声明成员/候选标题清单逐项语义核对，补齐缺失的双语插件说明和 Danmuku 英文入口 | M | todo |
+| SITE-04 | artplayer-vitepress<br>交叉核对逐包持续维护的文档 | CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08, SITE-DANMUKU-01, SITE-HLS-01 | 已随实现更新的中文/英文 API、包内实现地图、旧 JS 示例及已知能力限制的全包核对 | 未把缺环境的能力写成已验证，静态核对不等待设备任务；最终 demo 仍由 EX-03 验收；按 SITE-01 声明成员/候选标题清单逐项语义核对，补齐缺失的双语插件说明和 Danmuku 英文入口 | M | todo |
 | SITE-05 | artplayer-vitepress<br>构建文档站和验证链接/示例 | SITE-04, EX-01, EX-02, SITE-07, SITE-VCONSOLE-01, SITE-CONSOLE-01 | VitePress 构建、链接与嵌入 demo 检查 | 文档构建、链接、嵌入路径与声明注入通过；真实完整 demo 保留 EX-03 独立门槛；核对 ENG-PM-01 登记的搜索 peer 范围和真实搜索行为 | M | todo |
 | SITE-06 | artplayer-vitepress<br>文档站交付验收 | SITE-05 | 维护指南和站点变更记录 | 未手改 generated 目录，旧 URL 可用、部署与检查分离 | M | todo |
 | SITE-07 | artplayer-vitepress, workspace<br>整理站点第三方资产与来源说明 | SITE-01 | Monaco/vConsole/console bundle/字体和样本的冻结来源、可复现构建或替代与站点 notices | 接续 SITE-01 的字节与换行差异证据；完整许可随实际分发，consoleLog/global/CSS/worker 与旧 URL 兼容；缺字体/媒体使用依据明确处置；资产变更后执行编辑器/移动/字幕/示例回归，不以来源指纹替代授权或运行证据 | H | doing |
@@ -417,6 +417,12 @@
 | EX-03 | workspace<br>验证全部原生 demo 与外部播放集成 | EX-01, EX-02, PKG-CHAPTER-06, PKG-AMBILIGHT-06, PKG-AUDIO-06, PKG-AUTO-THUMB-06, PKG-VTT-THUMB-06, PKG-HLS-06, PKG-DASH-06, PKG-MULTI-SUB-06, PKG-JASSUB-06, PKG-MASK-06, PKG-ASR-06, PKG-ADS-06, PKG-VAST-06, PKG-CAST-06, PKG-DPIP-06, PKG-DANMUKU-09, PKG-CANVAS-06, PKG-MB-10, PKG-IFRAME-06, PKG-TOOL-THUMB-06 | 8082 全 demo、HLS/DASH/FLV/MPEGTS/WebTorrent 集成记录 | 旧 URL/参数/脚本加载保持；网络/SDK 限制明确，不静默跳过；覆盖编辑器重复 Run 和 ESM/i18n/mobile/iframe，记录实际候选脚本及状态隔离证据；依据 BASE-04 路径台账逐项消除 not-run，处理 BASE-DEMO-01 | H | todo |
 | SITE-VCONSOLE-01 | artplayer-vitepress, workspace<br>修复 vConsole 日志帧与延迟面板销毁竞态 | SITE-01 | 冻结上游 bundle 的可复现 TS 生命周期补丁、旧红新绿回归、来源及生成检查；销毁后虚拟列表布局续段停止 | 最后日志插件移除后取消 RAF 并隔离旧队列；延迟面板不得写入已销毁或替换插件；三引擎移动页与 UMD 入口通过，维护声明与原有许可缺口分别记录；原生 ResizeObserver 布局与挂起 timer 旧红新绿 | M | done |
 | SITE-CONSOLE-01 | artplayer-vitepress, workspace<br>迁移控制台自有 TS 源码并修复日志生命周期 | SITE-03 | 从冻结 console.js 恢复自有入口/视图的 TS 模块、受控第三方边界与可验证构建；修复滚动回调、多容器 hook 所有权和原生 Error 消息丢失 | 保留 consoleLog 返回组件、React/ReactDOM/Parcel 全局及 DOM/CSS/日志对象语义；旧版复现与候选正确行为分开验证；多容器、卸载/重挂、外部 hook、错误/滚动及真实编辑器组合通过；架构与生成文档同批更新，不以冻结 vendor 代替 SITE-07 许可闭环 | H | done |
+
+## 6 文档和示例
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| SITE-HLS-01 | artplayer-plugin-hls-control, artplayer-vitepress<br>补齐HLS双语指南并修复示例SDK生命周期 | SITE-03, PKG-HLS-04 | 双语HLS配置/类型/刷新/所有权指南，原示例换源清理和原生回退修复，生成站点与证据 | 同源示例回归复现旧问题并通过，真实SDK播放/换源/销毁与文档导航验证，保留HLS原生异常和设备门槛 | M | done |
 
 ## 7 工具链与性能
 
@@ -661,6 +667,7 @@
 - SITE-BUILD-01: [记录](changes/2026-09-14-SITE-BUILD-01-staged-builds.md) [记录](baselines/site-build-validation.json)
 - SITE-03: [记录](changes/2026-09-14-SITE-03-desktop-editor.md) [记录](baselines/site-editor-validation.json)
 - SITE-DANMUKU-01: [记录](changes/2026-09-15-SITE-DANMUKU-01-guides.md) [记录](baselines/danmuku-docs-validation.json)
+- SITE-HLS-01: [记录](changes/2026-09-15-SITE-HLS-01-guides.md) [记录](baselines/hls-docs-validation.json)
 - SITE-07: [记录](site-inventory.md) [记录](baselines/site-provenance.json) [记录](changes/2026-09-14-SITE-07-vendor-notices.md) [记录](baselines/site-notices-checkpoint.json) [记录](baselines/site-codicons-provenance.json) [记录](baselines/site-codicons-validation.json) [记录](changes/2026-09-15-SITE-07-codicons.md) [记录](baselines/vconsole-notices-provenance.json) [记录](baselines/vconsole-notices-validation.json) [记录](changes/2026-09-15-SITE-07-vconsole-notices.md) [记录](console-modernization.md) [记录](baselines/site-console-inventory.json) [记录](baselines/site-console-validation.json) [记录](changes/2026-09-15-SITE-07-console-baseline.md) [记录](baselines/console-feed-provenance.json) [记录](changes/2026-09-15-SITE-07-console-feed-source.md) [记录](baselines/console-commonjs-provenance.json) [记录](changes/2026-09-15-SITE-07-console-commonjs.md) [记录](baselines/console-esm-provenance.json) [记录](changes/2026-09-15-SITE-07-console-esm.md) [记录](baselines/console-embedded-notices.json) [记录](baselines/console-notices-validation.json) [记录](changes/2026-09-15-SITE-07-console-notices.md) [记录](baselines/console-embedded-sources.json) [记录](baselines/console-embedded-validation.json) [记录](changes/2026-09-15-SITE-07-console-embedded-sources.md) [记录](baselines/console-derived-attribution.json) [记录](baselines/console-derived-validation.json) [记录](changes/2026-09-15-SITE-07-console-derived-attribution.md) [记录](baselines/console-stackoverflow-provenance.json) [记录](baselines/console-stackoverflow-validation.json) [记录](changes/2026-09-15-SITE-07-console-stackoverflow.md) [记录](baselines/console-shallowequal-validation.json) [记录](changes/2026-09-15-SITE-07-console-shallowequal.md) [记录](console-notice-review.md) [记录](baselines/console-notice-review-validation.json) [记录](changes/2026-09-15-SITE-07-console-notice-review.md) [记录](baselines/monaco-typescript-provenance.json) [记录](baselines/monaco-typescript-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-typescript.md) [记录](baselines/monaco-languages-provenance.json) [记录](baselines/monaco-languages-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-languages.md) [记录](baselines/monaco-language-notices.json) [记录](baselines/monaco-language-notices-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-language-notices.md) [记录](baselines/monaco-modes-provenance.json) [记录](baselines/monaco-modes-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-modes.md) [记录](baselines/monaco-basic-provenance.json) [记录](baselines/monaco-basic-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-basic.md) [记录](baselines/monaco-core-origins-provenance.json) [记录](baselines/monaco-core-origins-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-core-origins.md) [记录](baselines/monaco-core-build-provenance.json) [记录](baselines/monaco-core-build-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-core-build.md) [记录](baselines/monaco-contributions-provenance.json) [记录](baselines/monaco-contributions-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-contributions.md) [记录](baselines/monaco-css-build-provenance.json) [记录](baselines/monaco-css-build-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-css.md) [记录](baselines/monaco-node-path-provenance.json) [记录](baselines/monaco-node-path-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-node-path.md) [记录](changes/2026-09-15-SITE-07-monaco-dom.md) [记录](baselines/monaco-dom-origins-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-unicode.md) [记录](baselines/monaco-unicode-provenance.json) [记录](baselines/monaco-unicode-validation.json)
 - EX-01: [记录](changes/2026-09-14-EX-01-react-consumer.md) [记录](baselines/react-consumer-validation.json) [记录](scripts/react-consumer.mjs)
 - EX-02: [记录](changes/2026-09-14-EX-02-vue-consumer.md) [记录](baselines/vue-consumer-validation.json) [记录](scripts/vue-consumer.mjs)

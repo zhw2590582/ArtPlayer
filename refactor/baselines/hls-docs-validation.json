@@ -1,0 +1,2185 @@
+{
+  "task": "SITE-HLS-01",
+  "sourceHead": "2802cbacc5af0fade1f6172eeeed754f4086e1ac",
+  "recordedAt": "2026-09-15T09:53:52.721Z",
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "typescript": "5.9.3",
+    "platform": "Windows"
+  },
+  "scope": "Bilingual HLS guide, exact shared demo source, SDK lifecycle correction and native fallback registration; not full HLS package/device acceptance",
+  "sources": [
+    {
+      "file": "docs/assets/example/hls.control.js",
+      "sha256": "a80c48da4ddecccfddd7962ed2b3f9315b47204768bd3f709de14501cff3851e"
+    },
+    {
+      "file": "test/hls-example.test.js",
+      "sha256": "08234b30500227236dae1c48367aef87bb73ee28deb06556607fff1bb47de177"
+    },
+    {
+      "file": "test/browser/document-hls.spec.js",
+      "sha256": "3e81bcd200926d19db73ce3d7a6d1860397c8ec84a72a0976e42d765d0730c3e"
+    },
+    {
+      "file": "test/browser/document-site.spec.js",
+      "sha256": "cf99fe8984f7fc52a5a5642990b19d707a209452d7bcf318e5364a22ee9f8aee"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/plugin/hls-control.md",
+      "sha256": "262df6632861f93e8b313db229416a3a70399c94380dcc4ecb9c405ea4b17aba"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
+      "sha256": "c0271b386e44fcc47c9aad017b3b02f75bb3baec830bca9634edcb2060cd91d3"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/.vitepress/config.js",
+      "sha256": "2c31669093e62bac0d59d874ea0181455e9117824712807ff64c04ce7d5eb693"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/public/main.js",
+      "sha256": "387e6b4d0dd4251b18fd1d45b45656e63aeba25e2a67cdb26da5f185e7359fb1"
+    },
+    {
+      "file": "packages/artplayer-plugin-hls-control/README.md",
+      "sha256": "d5b3c8838b37b1114c7477c4978f67d2ee55a378ea4902081cc0be1896ed3ed0"
+    },
+    {
+      "file": "packages/artplayer-plugin-hls-control/ARCHITECTURE.md",
+      "sha256": "57ffe5b86cc81d1cd2c0974d1009f237b23c9b67a93c11efd73176382dbd38e6"
+    },
+    {
+      "file": "packages/artplayer-vitepress/README.md",
+      "sha256": "9d758fbce425d4a42864121b7a45623917457d83b94c0e2e1c7de96a8089de6a"
+    },
+    {
+      "file": "package.json",
+      "sha256": "b1659aac5f444e469c760da8d3b6bcde94010521c58a143471d2f1a35183874f"
+    }
+  ],
+  "originalExample": {
+    "sourceHead": "2802cbacc5af0fade1f6172eeeed754f4086e1ac",
+    "sha256": "b02fd290d79999790501447fad95736642344b9b30af3ccdbe353f80c7d53a6e",
+    "tests": {
+      "passed": 1,
+      "failed": 2,
+      "log": {
+        "file": "refactor/.cache/hls-example-before.log",
+        "sha256": "98a9c409b672ac20995e1216271d8e576b9328be348b4fc9652d954703644275"
+      }
+    }
+  },
+  "checks": {
+    "node": {
+      "passed": 20,
+      "failed": 0,
+      "log": {
+        "file": "refactor/.cache/hls-docs-node-tests.log",
+        "sha256": "571bdbdf24fa3ceb0269e37b013d89449e7ea227d7c9b3b99162d48ef15de7f4"
+      }
+    },
+    "siteBuildTests": {
+      "passed": 7,
+      "failed": 0,
+      "log": {
+        "file": "refactor/.cache/hls-docs-site-tests.log",
+        "sha256": "9bc2b65b72aaf4e5e14ac536b8a531b35fa517a6f3d558f2cbea8ebfbfca08e0"
+      }
+    },
+    "lint": {
+      "exitCode": 0,
+      "log": {
+        "file": "refactor/.cache/hls-docs-lint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "build": {
+      "exitCode": 0,
+      "log": {
+        "file": "refactor/.cache/hls-docs-build.log",
+        "sha256": "8fb32b432b40dfbd68d293af489c9eeac2f50d1765eaa81f9460e6149d56f9df"
+      }
+    },
+    "llm": {
+      "exitCode": 0,
+      "log": {
+        "file": "refactor/.cache/hls-docs-llm.log",
+        "sha256": "65b9270de911860917ff44f95347ba9ee1c2078755e9dcab63cf86b7a58428d9"
+      }
+    },
+    "static": {
+      "typescript": "5.9.3",
+      "options": {
+        "strict": true,
+        "noEmit": true,
+        "skipLibCheck": false,
+        "types": [],
+        "module": "NodeNext"
+      },
+      "directory": "D:\\github\\ArtPlayer\\refactor\\.cache\\hls-docs-types-9usqW9",
+      "results": [
+        {
+          "source": "packages/artplayer-vitepress/docs/plugin/hls-control.md",
+          "sourceSHA256": "262df6632861f93e8b313db229416a3a70399c94380dcc4ecb9c405ea4b17aba",
+          "built": "docs/document/plugin/hls-control.html",
+          "builtSHA256": "f4715b9fb6c4e7b7b5447e56dd26c546bc48b1446c1e2d3fd155dc03f97b4686",
+          "title": "HLS 控制 ​",
+          "snippetSHA256": "4afc8ca561558c47aa4b3354ebbfdabaae3971d551cffb9eb305429dab7722a2",
+          "diagnostics": 0,
+          "localLinks": 18,
+          "runCode": 1
+        },
+        {
+          "source": "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
+          "sourceSHA256": "c0271b386e44fcc47c9aad017b3b02f75bb3baec830bca9634edcb2060cd91d3",
+          "built": "docs/document/en/plugin/hls-control.html",
+          "builtSHA256": "a6ac6504b7a348ad20524c56521e5e563de295b87995e14226f4638972f040f0",
+          "title": "HLS Control ​",
+          "snippetSHA256": "4afc8ca561558c47aa4b3354ebbfdabaae3971d551cffb9eb305429dab7722a2",
+          "diagnostics": 0,
+          "localLinks": 18,
+          "runCode": 1
+        }
+      ]
+    },
+    "riskTests": {
+      "passed": 2,
+      "failed": 0,
+      "log": {
+        "file": "refactor/.cache/hls-docs-risk-tests.log",
+        "sha256": "0cad842ddd17d184526d5412d931523535fe7f18134e2b70a4d414f786b69cf9"
+      }
+    },
+    "whitespace": {
+      "sourcePassed": true,
+      "generatedHtmlWarnings": 4,
+      "reason": "Two VitePress-produced indentation-only lines per new HTML page; generated output retained"
+    }
+  },
+  "browser": {
+    "before": {
+      "file": "refactor/.cache/hls-docs-browser-first.json",
+      "sha256": "42a4732e9f513510b21322da7799cb229e571e49a09a1b078368df12323bc1ef",
+      "stats": {
+        "startTime": "2026-09-15T09:42:59.482Z",
+        "duration": 91008.603,
+        "expected": 16,
+        "skipped": 0,
+        "unexpected": 8,
+        "flaky": 0
+      },
+      "tests": [
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.5.17, published core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.5.17, candidate core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.7.2, published core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.7.2, candidate core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.5.17, published core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.5.17, candidate core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.7.2, published core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.7.2, candidate core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.5.17, published core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.5.17, candidate core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.7.2, published core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.7.2, candidate core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.5.17, published core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.5.17, candidate core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.7.2, published core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.7.2, candidate core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.5.17, published core",
+          "project": "webkit",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"Unsupported playback format: m3u8\"\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  63 |           // Windows WebKit has neither the tested MSE path nor native HLS support.\n  64 |           expect(await page.evaluate(() => window.art.video.canPlayType('application/vnd.apple.mpegurl'))).toBe('')\n> 65 |           await expect.poll(() => page.evaluate(() => window.art.notice.show)).toBe('Unsupported playback format: m3u8')\n     |                                                                                ^\n  66 |           await page.evaluate(() => window.art.destroy())\n  67 |           return\n  68 |         }\n    at D:\\github\\ArtPlayer\\test\\browser\\document-hls.spec.js:65:80"
+              ],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.5.17, candidate core",
+          "project": "webkit",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"Unsupported playback format: m3u8\"\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  63 |           // Windows WebKit has neither the tested MSE path nor native HLS support.\n  64 |           expect(await page.evaluate(() => window.art.video.canPlayType('application/vnd.apple.mpegurl'))).toBe('')\n> 65 |           await expect.poll(() => page.evaluate(() => window.art.notice.show)).toBe('Unsupported playback format: m3u8')\n     |                                                                                ^\n  66 |           await page.evaluate(() => window.art.destroy())\n  67 |           return\n  68 |         }\n    at D:\\github\\ArtPlayer\\test\\browser\\document-hls.spec.js:65:80"
+              ],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.7.2, published core",
+          "project": "webkit",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"Unsupported playback format: m3u8\"\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  63 |           // Windows WebKit has neither the tested MSE path nor native HLS support.\n  64 |           expect(await page.evaluate(() => window.art.video.canPlayType('application/vnd.apple.mpegurl'))).toBe('')\n> 65 |           await expect.poll(() => page.evaluate(() => window.art.notice.show)).toBe('Unsupported playback format: m3u8')\n     |                                                                                ^\n  66 |           await page.evaluate(() => window.art.destroy())\n  67 |           return\n  68 |         }\n    at D:\\github\\ArtPlayer\\test\\browser\\document-hls.spec.js:65:80"
+              ],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.7.2, candidate core",
+          "project": "webkit",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"Unsupported playback format: m3u8\"\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  63 |           // Windows WebKit has neither the tested MSE path nor native HLS support.\n  64 |           expect(await page.evaluate(() => window.art.video.canPlayType('application/vnd.apple.mpegurl'))).toBe('')\n> 65 |           await expect.poll(() => page.evaluate(() => window.art.notice.show)).toBe('Unsupported playback format: m3u8')\n     |                                                                                ^\n  66 |           await page.evaluate(() => window.art.destroy())\n  67 |           return\n  68 |         }\n    at D:\\github\\ArtPlayer\\test\\browser\\document-hls.spec.js:65:80"
+              ],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.5.17, published core",
+          "project": "webkit",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"Unsupported playback format: m3u8\"\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  63 |           // Windows WebKit has neither the tested MSE path nor native HLS support.\n  64 |           expect(await page.evaluate(() => window.art.video.canPlayType('application/vnd.apple.mpegurl'))).toBe('')\n> 65 |           await expect.poll(() => page.evaluate(() => window.art.notice.show)).toBe('Unsupported playback format: m3u8')\n     |                                                                                ^\n  66 |           await page.evaluate(() => window.art.destroy())\n  67 |           return\n  68 |         }\n    at D:\\github\\ArtPlayer\\test\\browser\\document-hls.spec.js:65:80"
+              ],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.5.17, candidate core",
+          "project": "webkit",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"Unsupported playback format: m3u8\"\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  63 |           // Windows WebKit has neither the tested MSE path nor native HLS support.\n  64 |           expect(await page.evaluate(() => window.art.video.canPlayType('application/vnd.apple.mpegurl'))).toBe('')\n> 65 |           await expect.poll(() => page.evaluate(() => window.art.notice.show)).toBe('Unsupported playback format: m3u8')\n     |                                                                                ^\n  66 |           await page.evaluate(() => window.art.destroy())\n  67 |           return\n  68 |         }\n    at D:\\github\\ArtPlayer\\test\\browser\\document-hls.spec.js:65:80"
+              ],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.7.2, published core",
+          "project": "webkit",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"Unsupported playback format: m3u8\"\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  63 |           // Windows WebKit has neither the tested MSE path nor native HLS support.\n  64 |           expect(await page.evaluate(() => window.art.video.canPlayType('application/vnd.apple.mpegurl'))).toBe('')\n> 65 |           await expect.poll(() => page.evaluate(() => window.art.notice.show)).toBe('Unsupported playback format: m3u8')\n     |                                                                                ^\n  66 |           await page.evaluate(() => window.art.destroy())\n  67 |           return\n  68 |         }\n    at D:\\github\\ArtPlayer\\test\\browser\\document-hls.spec.js:65:80"
+              ],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.7.2, candidate core",
+          "project": "webkit",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"Unsupported playback format: m3u8\"\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  63 |           // Windows WebKit has neither the tested MSE path nor native HLS support.\n  64 |           expect(await page.evaluate(() => window.art.video.canPlayType('application/vnd.apple.mpegurl'))).toBe('')\n> 65 |           await expect.poll(() => page.evaluate(() => window.art.notice.show)).toBe('Unsupported playback format: m3u8')\n     |                                                                                ^\n  66 |           await page.evaluate(() => window.art.destroy())\n  67 |           return\n  68 |         }\n    at D:\\github\\ArtPlayer\\test\\browser\\document-hls.spec.js:65:80"
+              ],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        }
+      ]
+    },
+    "final": {
+      "file": "refactor/.cache/hls-docs-browser-final.json",
+      "sha256": "089abbba8f0364a4edae617e526fc21d6eba31ddb5562643977c0cfe0c924311",
+      "stats": {
+        "startTime": "2026-09-15T09:45:37.453Z",
+        "duration": 61482.596999999994,
+        "expected": 30,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "tests": [
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.5.17, published core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.5.17, candidate core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.7.2, published core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.7.2, candidate core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.5.17, published core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.5.17, candidate core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.7.2, published core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.7.2, candidate core",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.5.17, published core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.5.17, candidate core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.7.2, published core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.7.2, candidate core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.5.17, published core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.5.17, candidate core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.7.2, published core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.7.2, candidate core",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": true,
+                "scope": "real SDK default worker, local routed stream, playback and replacement cleanup"
+              },
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.5.17, published core",
+          "project": "webkit",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.5.17, candidate core",
+          "project": "webkit",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.7.2, published core",
+          "project": "webkit",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: plugin/hls-control.md, SDK 1.7.2, candidate core",
+          "project": "webkit",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.5.17, published core",
+          "project": "webkit",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.5.17, candidate core",
+          "project": "webkit",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.5.17",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+                  "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+                  "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+                  "files": {
+                    "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                    "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+                    "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+                  }
+                },
+                "sdkSHA256": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.7.2, published core",
+          "project": "webkit",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "published",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "documented HLS setup and source lifecycle: en/plugin/hls-control.md, SDK 1.7.2, candidate core",
+          "project": "webkit",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "inputs": {
+                "document": "en/plugin/hls-control.md",
+                "core": "candidate",
+                "sdk": {
+                  "name": "hls.js",
+                  "version": "1.7.2",
+                  "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+                  "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+                  "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+                  "files": {
+                    "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+                    "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+                    "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                    "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+                    "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+                    "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+                  }
+                },
+                "sdkSHA256": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+                "pluginSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+                "sourceSHA256": "0e681a2fa8de82a62fa580f942be8e4da0ea11b3a08a3e3d332e5fde74771960",
+                "supported": false,
+                "scope": "actual unsupported setup; native fallback is only unit-tested"
+              },
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+          "project": "chromium",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "browser": "153.0.8010.12",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+          "project": "firefox",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "browser": "155.0",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+          "project": "webkit",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        },
+        {
+          "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+          "project": "webkit",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": [],
+              "browser": "26.6",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+              "unhandledErrors": []
+            }
+          ]
+        }
+      ]
+    },
+    "interpretation": {
+      "realSdkPlaybackAndReplacement": 16,
+      "unsupportedWebKitSetup": 8,
+      "navigationAndRunCode": 6,
+      "workerOutputObserved": false,
+      "nativeHlsPlaybackValidated": false
+    },
+    "resultsDirectories": [
+      "refactor/.cache/hls-docs-browser-first-results",
+      "refactor/.cache/hls-docs-browser-final-results"
+    ],
+    "testSourceChangeAfterFinal": "Only the equivalent string quote style in document-site.spec.js changed after successful execution; no assertion semantics changed"
+  },
+  "connectedBrowser": {
+    "provider": "Codex in-app browser",
+    "version": null,
+    "tabId": "10",
+    "url": "http://localhost:8082/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control",
+    "observed": [
+      "editor contains updated useHls/destroyHls setup",
+      "video metadata duration 10:48",
+      "quality choices 720P/432P/252P/160P/Auto",
+      "audio choices English/Spanish/Commentary",
+      "loadedmetadata/loadeddata/canplay events"
+    ],
+    "limitation": "One getState failed; selecting the same tab recovered. No playback click or source/destroy interaction; version was not returned. This is readiness/menu observation only."
+  },
+  "inventory": {
+    "packages": 22,
+    "markdown": 30,
+    "examples": 30,
+    "html": 39,
+    "declarationMembers": 963,
+    "assets": 204
+  },
+  "unchanged": {
+    "lock": true,
+    "pluginRuntimeAndTypes": true,
+    "packageVersions": true
+  },
+  "publication": false
+}

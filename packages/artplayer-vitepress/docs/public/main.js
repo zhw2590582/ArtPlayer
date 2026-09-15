@@ -50,5 +50,5 @@
   }
 
   // <stdin>
-  installNavigation(window, ["advanced/built-in.html", "advanced/built-in", "advanced/class.html", "advanced/class", "advanced/event.html", "advanced/event", "advanced/global.html", "advanced/global", "advanced/plugin.html", "advanced/plugin", "advanced/property.html", "advanced/property", "component/contextmenu.html", "component/contextmenu", "component/controls.html", "component/controls", "component/layers.html", "component/layers", "component/setting.html", "component/setting", "", "index.html", "plugin/danmuku.html", "plugin/danmuku", "start/i18n.html", "start/i18n", "start/option.html", "start/option"]);
+  installNavigation(window, ["advanced/built-in.html", "advanced/built-in", "advanced/class.html", "advanced/class", "advanced/event.html", "advanced/event", "advanced/global.html", "advanced/global", "advanced/plugin.html", "advanced/plugin", "advanced/property.html", "advanced/property", "component/contextmenu.html", "component/contextmenu", "component/controls.html", "component/controls", "component/layers.html", "component/layers", "component/setting.html", "component/setting", "", "index.html", "plugin/danmuku.html", "plugin/danmuku", "plugin/hls-control.html", "plugin/hls-control", "start/i18n.html", "start/i18n", "start/option.html", "start/option"]);
 })();

@@ -4438,6 +4438,27 @@
       ]
     },
     {
+      "id": "SITE-HLS-01",
+      "phase": "6 文档和示例",
+      "title": "补齐HLS双语指南并修复示例SDK生命周期",
+      "scope": [
+        "artplayer-plugin-hls-control",
+        "artplayer-vitepress"
+      ],
+      "dependsOn": [
+        "SITE-03",
+        "PKG-HLS-04"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "双语HLS配置/类型/刷新/所有权指南，原示例换源清理和原生回退修复，生成站点与证据",
+      "acceptance": "同源示例回归复现旧问题并通过，真实SDK播放/换源/销毁与文档导航验证，保留HLS原生异常和设备门槛",
+      "evidence": [
+        "changes/2026-09-15-SITE-HLS-01-guides.md",
+        "baselines/hls-docs-validation.json"
+      ]
+    },
+    {
       "id": "SITE-04",
       "phase": "6 文档与消费者",
       "title": "交叉核对逐包持续维护的文档",
@@ -4467,7 +4488,8 @@
         "PKG-TOOL-THUMB-04",
         "PKG-DANMUKU-06",
         "PKG-MB-08",
-        "SITE-DANMUKU-01"
+        "SITE-DANMUKU-01",
+        "SITE-HLS-01"
       ],
       "status": "todo",
       "risk": "M",

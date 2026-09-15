@@ -61,5 +61,19 @@ for (const language of ['zh', 'en']) {
     expect(exampleUrl.searchParams.get('code')).toContain('artplayerPluginDanmuku({')
     expect(failedAssets).toEqual([])
     await example.close()
+    await page.locator(`.VPSidebar a[href="${prefix}/plugin/hls-control.html"]`).click()
+    await expect(page.locator('h1')).toContainText(language === 'en' ? 'HLS Control' : 'HLS 控制')
+    const hlsPopup = context.waitForEvent('page')
+    await page.locator('.run-code, [classname="run-code"]').first().click()
+    const hlsExample = await hlsPopup
+    await hlsExample.waitForLoadState('domcontentloaded')
+    const hlsTarget = new URL(hlsExample.url())
+    expect(hlsTarget.searchParams.get('libs').split('\n')).toEqual([
+      'https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js',
+      './uncompiled/artplayer-plugin-hls-control/index.js',
+    ])
+    expect(hlsTarget.searchParams.get('code')).toContain('art.on(\'destroy\', destroyHls)')
+    expect(failedAssets).toEqual([])
+    await hlsExample.close()
   })
 }

@@ -6660,6 +6660,31 @@
         "refactor/baselines/dash-cleanup-errors-validation.json"
       ],
       "resolutionRationale": "Corrected public beforeUnmount input reproduces swallowed values against the prepatch artifact. Separate threw and Object.is assertions cover all seven values. Rebuilt and independently installed artifacts pass lifecycle/DOM/SDK regressions; public declarations are unchanged. This resolves the cleanup defect only, not full package device/release acceptance."
+    },
+    {
+      "id": "HLS-EXAMPLE-01",
+      "title": "HLS示例换源累积销毁监听器且原生回退仍安装SDK控制插件",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "SITE-HLS-01",
+        "EX-03"
+      ],
+      "evidence": [
+        "docs/assets/example/hls.control.js",
+        "test/hls-example.test.js",
+        "test/browser/document-hls.spec.js",
+        "refactor/changes/2026-09-15-SITE-HLS-01-guides.md",
+        "refactor/baselines/hls-docs-validation.json"
+      ],
+      "compatibleResolution": "仅修正示例：固定能力分支决定是否注册插件，局部SDK变量负责替换释放，一个播放器销毁监听器释放当前SDK；旧插件API/错误语义和SDK默认配置不变。",
+      "closureCriteria": "原示例可复现重复清理与错误插件注册；修复后受控回归和真实SDK新旧核心播放/换源/销毁通过；原生播放设备范围单独保留。",
+      "workspaceState": "Old demo 2 fail/1 pass; corrected regression 3 pass. Real SDK/browser replacement checks 16 pass, Windows WebKit unsupported setup 8 pass, docs navigation 6 pass. Native HLS branch uses a controlled unit host, not a Safari device.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-15-SITE-HLS-01-guides.md",
+        "refactor/baselines/hls-docs-validation.json"
+      ],
+      "resolutionRationale": "Actual demo code is used by regression and both runnable guides. Each replaced/final SDK is destroyed once; when Hls.js is unsupported no incompatible control plugin is installed. Local 8082 connected-browser readiness also observed. Separate Firefox native crashes, grouped playback stall and device acceptance remain open."
     }
   ]
 }

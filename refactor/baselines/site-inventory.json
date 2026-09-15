@@ -4,9 +4,9 @@
   "note": "Read-only source inventory. Heading matches are candidates, never semantic API coverage. Asset identity is not permission. No runtime, remote Pages or npm acceptance is implied.",
   "counts": {
     "packages": 22,
-    "markdown": 28,
+    "markdown": 30,
     "examples": 30,
-    "html": 37,
+    "html": 39,
     "declarationMembers": 963,
     "assets": 204
   },
@@ -2014,6 +2014,49 @@
       "translationOwner": null
     },
     {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
+      "sha256Lf": "c0271b386e44fcc47c9aad017b3b02f75bb3baec830bca9634edcb2060cd91d3",
+      "language": "en",
+      "route": "/document/en/plugin/hls-control.html",
+      "headings": [
+        {
+          "text": "HLS Control",
+          "line": 1
+        },
+        {
+          "text": "Installation",
+          "line": 9
+        },
+        {
+          "text": "Complete example",
+          "line": 23
+        },
+        {
+          "text": "Configuration",
+          "line": 103
+        },
+        {
+          "text": "Refresh after external changes",
+          "line": 121
+        },
+        {
+          "text": "SDK ownership and source switching",
+          "line": 133
+        },
+        {
+          "text": "TypeScript",
+          "line": 139
+        },
+        {
+          "text": "Validation scope",
+          "line": 163
+        }
+      ],
+      "runCodeMarkers": 1,
+      "translation": "packages/artplayer-vitepress/docs/plugin/hls-control.md",
+      "translationOwner": null
+    },
+    {
       "file": "packages/artplayer-vitepress/docs/en/start/i18n.md",
       "sha256Lf": "1551bf939aab1ee942d8480df891640109d18aa9adc016adf1d075bee5ef1de9",
       "language": "en",
@@ -2427,6 +2470,49 @@
       ],
       "runCodeMarkers": 14,
       "translation": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+      "translationOwner": null
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/plugin/hls-control.md",
+      "sha256Lf": "262df6632861f93e8b313db229416a3a70399c94380dcc4ecb9c405ea4b17aba",
+      "language": "zh",
+      "route": "/document/plugin/hls-control.html",
+      "headings": [
+        {
+          "text": "HLS 控制",
+          "line": 1
+        },
+        {
+          "text": "安装",
+          "line": 9
+        },
+        {
+          "text": "完整示例",
+          "line": 23
+        },
+        {
+          "text": "配置",
+          "line": 103
+        },
+        {
+          "text": "外部修改后的刷新",
+          "line": 121
+        },
+        {
+          "text": "SDK 所有权与换源",
+          "line": 133
+        },
+        {
+          "text": "TypeScript",
+          "line": 139
+        },
+        {
+          "text": "验证范围",
+          "line": 163
+        }
+      ],
+      "runCodeMarkers": 1,
+      "translation": "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
       "translationOwner": null
     },
     {
@@ -16866,10 +16952,12 @@
         "packages/artplayer-vitepress/docs/en/component/setting.md",
         "packages/artplayer-vitepress/docs/en/index.md",
         "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+        "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
         "packages/artplayer-vitepress/docs/en/start/i18n.md",
         "packages/artplayer-vitepress/docs/en/start/option.md",
         "packages/artplayer-vitepress/docs/index.md",
         "packages/artplayer-vitepress/docs/plugin/danmuku.md",
+        "packages/artplayer-vitepress/docs/plugin/hls-control.md",
         "packages/artplayer-vitepress/docs/start/i18n.md",
         "packages/artplayer-vitepress/docs/start/option.md"
       ],
@@ -17019,8 +17107,11 @@
       "examples": [
         "hls.control"
       ],
-      "sidebarMentionsPackage": true,
-      "dedicatedPages": [],
+      "sidebarMentionsPackage": false,
+      "dedicatedPages": [
+        "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
+        "packages/artplayer-vitepress/docs/plugin/hls-control.md"
+      ],
       "contentReviewOwner": "SITE-04",
       "demoExecutionOwner": "EX-03"
     },
@@ -17149,10 +17240,12 @@
         "packages/artplayer-vitepress/docs/en/component/setting.md",
         "packages/artplayer-vitepress/docs/en/index.md",
         "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+        "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
         "packages/artplayer-vitepress/docs/en/start/i18n.md",
         "packages/artplayer-vitepress/docs/en/start/option.md",
         "packages/artplayer-vitepress/docs/index.md",
         "packages/artplayer-vitepress/docs/plugin/danmuku.md",
+        "packages/artplayer-vitepress/docs/plugin/hls-control.md",
         "packages/artplayer-vitepress/docs/start/i18n.md",
         "packages/artplayer-vitepress/docs/start/option.md"
       ],
@@ -17387,7 +17480,7 @@
     {
       "name": "hls.control",
       "source": "docs/assets/example/hls.control.js",
-      "sha256Lf": "b02fd290d79999790501447fad95736642344b9b30af3ccdbe353f80c7d53a6e",
+      "sha256Lf": "a80c48da4ddecccfddd7962ed2b3f9315b47204768bd3f709de14501cff3851e",
       "menuLinks": [
         "/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control"
       ],
@@ -17599,10 +17692,10 @@
     {
       "source": "docs/document/404.html",
       "route": "/document/404.html",
-      "sha256Lf": "3717d17f8ed125c4781ef3663b7b7d2bb72f579d6043a406ea5459010caa08e3",
+      "sha256Lf": "739031d99373696e852520d1f747f4570398ac462c1576c0a7d233b590a517cb",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17612,10 +17705,10 @@
     {
       "source": "docs/document/advanced/built-in.html",
       "route": "/document/advanced/built-in.html",
-      "sha256Lf": "70c42ca5bb8c524b56c7ebbb8eaf72f5be14fc41ebc5bf4ec790d0bfa7263097",
+      "sha256Lf": "2cf8b8bc26ee8bfb34dadf740a3c8ae4b0ed5ee50314b3f6bbe5b3dfd709c538",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17625,10 +17718,10 @@
     {
       "source": "docs/document/advanced/class.html",
       "route": "/document/advanced/class.html",
-      "sha256Lf": "9d5cd62993d6baf1300181830b2a780e2167bdcee0eeee683736c3d5b43baf24",
+      "sha256Lf": "7de71fe06d19ca56fb229363f621ddb76dac4ea86582851b6597be4ab510e29b",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17638,10 +17731,10 @@
     {
       "source": "docs/document/advanced/event.html",
       "route": "/document/advanced/event.html",
-      "sha256Lf": "a4624a2b6a7b68186ab03a4780fa795b97682ca5415c4022e56e8a36db1b49b2",
+      "sha256Lf": "6d1912bd53e8640e2e003156d367b15680cf9f1f8aa9c784e83f4bbc0710fb84",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17651,10 +17744,10 @@
     {
       "source": "docs/document/advanced/global.html",
       "route": "/document/advanced/global.html",
-      "sha256Lf": "1003ceb4ee253f71e0da816a4bded4fef25b4cab690c77273b2dd5b4ec459943",
+      "sha256Lf": "d0b3e638cc56125aa28ed5c0d788dbb327162f30cf198af3a11efb58c30d640b",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17664,10 +17757,10 @@
     {
       "source": "docs/document/advanced/plugin.html",
       "route": "/document/advanced/plugin.html",
-      "sha256Lf": "68792c9def7906427a8e47f682d1f2f55ee96e420531428622a4339a7ca18e0f",
+      "sha256Lf": "4d539395bcf9f92cbbf679236f73ad46e0951ad67e169cccd176c8db0e172327",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17677,10 +17770,10 @@
     {
       "source": "docs/document/advanced/property.html",
       "route": "/document/advanced/property.html",
-      "sha256Lf": "0b15099f0a6c754cb05e2b5173b491960cb9e8b0b61e5c2de47589dc27d871b3",
+      "sha256Lf": "585490a60cb2bb854a0b6040d10d4bb1800dd5faf5c5c95dfcf780f024a09ced",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17690,10 +17783,10 @@
     {
       "source": "docs/document/component/contextmenu.html",
       "route": "/document/component/contextmenu.html",
-      "sha256Lf": "e6fe13021fe8e092e0c6588322c2f647bc16fff9b3f890b01398104f519cc8ce",
+      "sha256Lf": "1ea119dc7d15b9be4ada73e393a7356406f84112a3da4ac271b8657371c55313",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17703,10 +17796,10 @@
     {
       "source": "docs/document/component/controls.html",
       "route": "/document/component/controls.html",
-      "sha256Lf": "00134da8fcd9f14c21d0f3bc6dd1fe4a0e44f146c57d63a6db4255d0365007c6",
+      "sha256Lf": "d5a698c705f2cbddcb67f3d05016d19f7c34b4fd5177c1f79e3f3a839f73030f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17716,10 +17809,10 @@
     {
       "source": "docs/document/component/layers.html",
       "route": "/document/component/layers.html",
-      "sha256Lf": "9b5c25d8d9faa9a3a35815a1606ffea4a1ab127f12214ba2b5f3caac9eac2428",
+      "sha256Lf": "e9f5129cb516ec4f2d3ea07b84fac4ac689d979d189815d01eba194c4a257982",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17729,10 +17822,10 @@
     {
       "source": "docs/document/component/setting.html",
       "route": "/document/component/setting.html",
-      "sha256Lf": "eaa3c6e752df873f6839888c5c6a163a91142697939954af61ee6526f9aab50f",
+      "sha256Lf": "10284ef177093ed786e0b0600e6ee5184724a46444b2e614b6447f26fb68b711",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17742,10 +17835,10 @@
     {
       "source": "docs/document/en/advanced/built-in.html",
       "route": "/document/en/advanced/built-in.html",
-      "sha256Lf": "5fc6b3db2706c3214f2e540cc5ebc46f87abbbbf9cd7770b5fe7f8ec0cdfd67b",
+      "sha256Lf": "f47472d88db0a05eb70a91c14c270e4978afcf55a3777db6d3876dbeb7ef391a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17755,10 +17848,10 @@
     {
       "source": "docs/document/en/advanced/class.html",
       "route": "/document/en/advanced/class.html",
-      "sha256Lf": "ae3117b42d654f5c14d62923c7fe7198eae616895dd19885391265d5f11349fb",
+      "sha256Lf": "eec757fc67c53ebefb0c50b40e21097d7c893a3b76b4aa0170fe7a8906afa676",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17768,10 +17861,10 @@
     {
       "source": "docs/document/en/advanced/event.html",
       "route": "/document/en/advanced/event.html",
-      "sha256Lf": "4514bf9c007728a1b9b0ec70a7c2a558754fcfafdb879901b1410fd5bc2d5b5b",
+      "sha256Lf": "01c77788e99f4ec477db05a976200bd1ee4d769cb215d6686011a6e86eca7ac3",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17781,10 +17874,10 @@
     {
       "source": "docs/document/en/advanced/global.html",
       "route": "/document/en/advanced/global.html",
-      "sha256Lf": "edeb817d22b3726d8acfb3c23dd08b9aeeb64db0d8433a691f0087e05cf7b885",
+      "sha256Lf": "7e09ba52c4ca4dbf3261844b77f488c768d2e075b4999e4e9599cbef87ada913",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17794,10 +17887,10 @@
     {
       "source": "docs/document/en/advanced/plugin.html",
       "route": "/document/en/advanced/plugin.html",
-      "sha256Lf": "056784cf908fd500cf3404178916a9f104ccfa398ca2252513a6b630d813fdd0",
+      "sha256Lf": "a40604fdb0bbed13360b9f4c1a69cc67c875d66adc1875576e2828884e71bd64",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17807,10 +17900,10 @@
     {
       "source": "docs/document/en/advanced/property.html",
       "route": "/document/en/advanced/property.html",
-      "sha256Lf": "5fb1b32907c402c28d41d137e94867bc78e21fc386004be0c91b76b4ed7a78d0",
+      "sha256Lf": "47c24a65c95436fa44dd0c35879cccb48527b7d4a7e6abfd062e3b4d1923fb36",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17820,10 +17913,10 @@
     {
       "source": "docs/document/en/component/contextmenu.html",
       "route": "/document/en/component/contextmenu.html",
-      "sha256Lf": "5d627e52eaa6eb5e23a4e457413075da44891d86ceeca5bfc7abf82323cc565f",
+      "sha256Lf": "9ab3fe20e8f246ee9e481c73c88479cdf18551451a75b644add3734ff18b431d",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17833,10 +17926,10 @@
     {
       "source": "docs/document/en/component/controls.html",
       "route": "/document/en/component/controls.html",
-      "sha256Lf": "51d1d91c55ab2037dc5369f01671268147bc378f234f28d37431dd3ea10619c4",
+      "sha256Lf": "5ca63fbc78fa0beb96ca5f46e0f2e8ccef8622d8ab4cd2b24b72df619fd5a165",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17846,10 +17939,10 @@
     {
       "source": "docs/document/en/component/layers.html",
       "route": "/document/en/component/layers.html",
-      "sha256Lf": "db32aa21944b2fede614cb334e10e851be477db41e15d2f278984aaf78d811bb",
+      "sha256Lf": "e5a27278d4264ec855d9785bb455a2be9eac3bf5b9add73fd36da3dea60508ec",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17859,10 +17952,10 @@
     {
       "source": "docs/document/en/component/setting.html",
       "route": "/document/en/component/setting.html",
-      "sha256Lf": "f93d37f4e55b63b9104db19d23036fd85834ed4912f096d37424c29cf46307ad",
+      "sha256Lf": "fb64ad2c748396701ef1e30c5b6051129ce6d96c7e1715f43bf97dd95a5c93cd",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17872,10 +17965,10 @@
     {
       "source": "docs/document/en/index.html",
       "route": "/document/en/",
-      "sha256Lf": "87c123295fda463867a49c51100efe6f7cceba3c782f5b382ac74ab84d6e1f30",
+      "sha256Lf": "f49b25ac62fd3867e955d3d42f45e366233d470b7f34111a4550a5c54ace200c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17885,10 +17978,23 @@
     {
       "source": "docs/document/en/plugin/danmuku.html",
       "route": "/document/en/plugin/danmuku.html",
-      "sha256Lf": "86621ce3fb3405c95218723fd6cbbc2cf5a6d891fb3ddb6b84c59b6b3c89e87b",
+      "sha256Lf": "7fecb59004df7b7d1589998f421258e62777875160e559777627b85c7dfa2a14",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/plugin/hls-control.html",
+      "route": "/document/en/plugin/hls-control.html",
+      "sha256Lf": "a6ac6504b7a348ad20524c56521e5e563de295b87995e14226f4638972f040f0",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17898,10 +18004,10 @@
     {
       "source": "docs/document/en/start/i18n.html",
       "route": "/document/en/start/i18n.html",
-      "sha256Lf": "992222ce0409b150179d6a0550af3c9246d788b8f12f77f2bdb2037492657fcc",
+      "sha256Lf": "95694df09bca853c0eeb8883c4b2db02c042ee29971503dad1fcd0e4a22595fe",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17911,10 +18017,10 @@
     {
       "source": "docs/document/en/start/option.html",
       "route": "/document/en/start/option.html",
-      "sha256Lf": "0ffd030e774f314402529cf4c091b13d73d0530e0a8fb9772285cb39622ef9ec",
+      "sha256Lf": "23718b0df3dd56492e62635bacd55e504082d02585ebed88ad165b82fecd2ea8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17924,10 +18030,10 @@
     {
       "source": "docs/document/index.html",
       "route": "/document/",
-      "sha256Lf": "d538b202da9fa5543c5e54e5fb76907e133a0d33edf273f3eb360cb0a2623160",
+      "sha256Lf": "6fdc034c61750bf4da6de85d405a176fcea9046c81143bd4333593a080863c1e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17937,10 +18043,23 @@
     {
       "source": "docs/document/plugin/danmuku.html",
       "route": "/document/plugin/danmuku.html",
-      "sha256Lf": "bbcdebc4df8b3feb86b46d565f731a72c02bf367ec00c8e893b9745693bf5db1",
+      "sha256Lf": "c1bf198386743ba8a659dd56f520059a960d53791b2c5898634822d9a3330fee",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/plugin/hls-control.html",
+      "route": "/document/plugin/hls-control.html",
+      "sha256Lf": "f4715b9fb6c4e7b7b5447e56dd26c546bc48b1446c1e2d3fd155dc03f97b4686",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17950,10 +18069,10 @@
     {
       "source": "docs/document/start/i18n.html",
       "route": "/document/start/i18n.html",
-      "sha256Lf": "f40445700bc315b34b0d51a876d906954a302691259f66efcf3aa237f3791297",
+      "sha256Lf": "6e6371436fbb1b48936e3a789272f55617a92aa6506fd6f0d4b23cb97deea876",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -17963,10 +18082,10 @@
     {
       "source": "docs/document/start/option.html",
       "route": "/document/start/option.html",
-      "sha256Lf": "9b8d61e7546ee088785c29dbf85b2f37f62e90d7b97d58ac9c934fccba46dd0f",
+      "sha256Lf": "5228248a85b0c6e85a4ce617c847c5b61e855181b1bce1dc93662f0c5599f997",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CUpGwB5x.js",
+        "/document/assets/app.C4kTwhag.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18097,7 +18216,9 @@
     ],
     "examplesRemoved": [],
     "htmlAdded": [
-      "docs/document/en/plugin/danmuku.html"
+      "docs/document/en/plugin/danmuku.html",
+      "docs/document/en/plugin/hls-control.html",
+      "docs/document/plugin/hls-control.html"
     ],
     "htmlRemoved": []
   },
@@ -18264,7 +18385,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/public/main.js",
-      "sha256Lf": "44b388d74b23e241b534498f53b615dbf2e91be077336ed31971aa09e65a8fd4"
+      "sha256Lf": "387e6b4d0dd4251b18fd1d45b45656e63aeba25e2a67cdb26da5f185e7359fb1"
     },
     {
       "file": "packages/artplayer-vitepress/docs/vite.config.ts",
@@ -18272,7 +18393,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/.vitepress/config.js",
-      "sha256Lf": "2363e83274e7f1cb0af335fb10a2933a65fd9eadd30a15facc844f83ef9a46a5"
+      "sha256Lf": "2c31669093e62bac0d59d874ea0181455e9117824712807ff64c04ce7d5eb693"
     },
     {
       "file": "scripts/build-site-assets.mjs",

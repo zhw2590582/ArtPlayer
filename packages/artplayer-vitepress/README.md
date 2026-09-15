@@ -11,14 +11,15 @@ not a VitePress page. Keep both URL surfaces compatible.
 | `docs/index.md`, `docs/start`, `docs/component`, `docs/advanced` | Chinese API documentation | `/document/` |
 | `docs/en` | English counterparts | `/document/en/` |
 | `docs/plugin/danmuku.md`, `docs/en/plugin/danmuku.md` | Danmuku options, callbacks, commands, heatmap and types in both languages | `/document/plugin/danmuku.html`, `/document/en/plugin/danmuku.html` |
+| `docs/plugin/hls-control.md`, `docs/en/plugin/hls-control.md` | HLS SDK setup, menus, lifecycle and types | `/document/plugin/hls-control.html`, `/document/en/plugin/hls-control.html` |
 | `docs/.vitepress/config.js` | Navigation, base URL, output path, page head | Repository `docs/document/` |
 | `docs/vite.config.ts` | Search plugin configuration | VitePress/Vite integration; real search acceptance remains pending |
 | `docs/public/main.js` | Run Code links and first-visit language redirect | Copied into the built site |
 | `docs/public/style.css` | Documentation presentation | Copied into the built site |
 
 Edit Markdown and public sources here. Do not edit the generated repository
-`docs/document/`. The current inventory contains 28 Markdown pages: 14 Chinese
-and 14 English. Danmuku has a dedicated guide and navigation in both languages. Other plugins currently
+`docs/document/`. The current inventory contains 30 Markdown pages: 15 Chinese
+and 15 English. Danmuku and HLS have dedicated guides and navigation in both languages. Other plugins currently
 use their package README, architecture notes and linked editor examples;
 navigation links alone are not complete API documentation.
 
@@ -123,3 +124,10 @@ SITE-02/03 own generators and browser source organization; SITE-04 owns bilingua
 API completeness; SITE-05 owns build, links and real search; SITE-07 owns vendor
 provenance and distribution notices; EX-03 owns complete demo execution. Three
 release review rounds and remote CI/Pages evidence remain separate requirements.
+
+The HLS guides at `docs/plugin/hls-control.md` and `docs/en/plugin/hls-control.md`
+share the exact runnable `docs/assets/example/hls.control.js` source at repository
+root. `test/browser/document-hls.spec.js` enforces that parity and checks the
+source lifecycle with frozen real SDKs. `document-site.spec.js` checks both sidebar
+links and the two-library Run Code destination. Preserve the native-HLS capability
+boundary and SDK ownership explanation when editing either language.
