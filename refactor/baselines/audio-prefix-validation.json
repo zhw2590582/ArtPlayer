@@ -1,0 +1,4038 @@
+{
+  "task": "PKG-AUDIO-05",
+  "status": "checkpoint",
+  "source": "bf56d091787bc32c1aacc84ac96904e0349bb0a8",
+  "capturedAt": "2026-09-15T05:11:24.644Z",
+  "toolchain": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "platform": "win32"
+  },
+  "scope": "Native media prefix observations, not plugin buffering acceptance or a production fix.",
+  "inputs": [
+    {
+      "path": "test/browser/media-gate-native.spec.js",
+      "sha256": "862ad2627ce2f88107eec4a710598c7123bb9e1f80cdd4a11d44d28c3879b385"
+    },
+    {
+      "path": "test/helpers/media-gate.js",
+      "sha256": "b9bc0e8550739902ed4d94674b53d6c5b35795cd25ddf3e567ed22eed591f385"
+    },
+    {
+      "path": "test/media-gate.test.js",
+      "sha256": "2f27f469011eb13fe451c0ecae27ffa2ede0510ebf011b0f9dc2bf6c8c3dc60b"
+    },
+    {
+      "path": "test/browser/audio-buffering.spec.js",
+      "sha256": "cd651c1f16610cde1329770d8e65fbb3c08879e2487e27bdceb1f362d9d259aa"
+    },
+    {
+      "path": "test/browser/media/pattern.mp4",
+      "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233"
+    },
+    {
+      "path": "test/browser/media/audio-tone.m4a",
+      "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56"
+    }
+  ],
+  "defaults": {
+    "report": {
+      "path": "refactor/.cache/audio-prefix-default-report.json",
+      "sha256": "809d40949b3416515216cc4d43c634660ecb32e7285b1bc449c77bf52c14a420"
+    },
+    "stats": {
+      "startTime": "2026-09-15T05:08:29.675Z",
+      "duration": 57502.562,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "native video streamed response capability without ArtPlayer instances",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "completeRanges": false,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.043876,
+            "duration": 8,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.014475,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.043876,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                0,
+                3.126
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 98304,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "completeRanges": false,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.043876,
+            "duration": 8,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.014475,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.043876,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                0,
+                3.126
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 98304,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 3.480982,
+            "readyState": 4,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 251538,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      },
+      {
+        "title": "native video complete ranges capability without ArtPlayer instances",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "completeRanges": true,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.044956,
+            "duration": 8,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.013249,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.044956,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                0,
+                3.126
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 98303,
+              "sent": 98304,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=98304-",
+              "start": 98304,
+              "end": 251537,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "completeRanges": true,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.044956,
+            "duration": 8,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.013249,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.044956,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                0,
+                3.126
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 98303,
+              "sent": 98304,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=98304-",
+              "start": 98304,
+              "end": 251537,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 3.453119,
+            "readyState": 4,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 98303,
+              "sent": 98304,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=98304-",
+              "start": 98304,
+              "end": 251537,
+              "sent": 153234,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      },
+      {
+        "title": "native audio streamed response capability without ArtPlayer instances",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "completeRanges": false,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.520088,
+            "duration": 16,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.013057,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.520088,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                -0.021333,
+                3.958
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 32768,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "completeRanges": false,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.520088,
+            "duration": 16,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.013057,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.520088,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                -0.021333,
+                3.958
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 32768,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 3.929605,
+            "readyState": 4,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 132436,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      },
+      {
+        "title": "native audio complete ranges capability without ArtPlayer instances",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "completeRanges": true,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.52009,
+            "duration": 16,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.012739,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.52009,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                -0.021333,
+                3.958
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 32767,
+              "sent": 32768,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=32768-",
+              "start": 32768,
+              "end": 132435,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "completeRanges": true,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.52009,
+            "duration": 16,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.012739,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.52009,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                -0.021333,
+                3.958
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 32767,
+              "sent": 32768,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=32768-",
+              "start": 32768,
+              "end": 132435,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 3.937932,
+            "readyState": 4,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 32767,
+              "sent": 32768,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=32768-",
+              "start": 32768,
+              "end": 132435,
+              "sent": 99668,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      },
+      {
+        "title": "native video streamed response capability without ArtPlayer instances",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "155.0",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "completeRanges": false,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.087391,
+            "duration": 8,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "stalled",
+                "trusted": true,
+                "time": 3.006482,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.087391,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                0,
+                3.125
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 98304,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "completeRanges": false,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.087391,
+            "duration": 8,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "stalled",
+                "trusted": true,
+                "time": 3.006482,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.087391,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                0,
+                3.125
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 98304,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 3.49921,
+            "readyState": 4,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 251538,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      },
+      {
+        "title": "native video complete ranges capability without ArtPlayer instances",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "155.0",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "completeRanges": true,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.089666,
+            "duration": 8,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "stalled",
+                "trusted": true,
+                "time": 2.968226,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.089666,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                0,
+                3.125
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 98303,
+              "sent": 98304,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=98304-",
+              "start": 98304,
+              "end": 251537,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "completeRanges": true,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.089666,
+            "duration": 8,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "stalled",
+                "trusted": true,
+                "time": 2.968226,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.089666,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                0,
+                3.125
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 98303,
+              "sent": 98304,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=98304-",
+              "start": 98304,
+              "end": 251537,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 3.499052,
+            "readyState": 4,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 98303,
+              "sent": 98304,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=98304-",
+              "start": 98304,
+              "end": 251537,
+              "sent": 153234,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      },
+      {
+        "title": "native audio streamed response capability without ArtPlayer instances",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "155.0",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "completeRanges": false,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.48171,
+            "duration": 16,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "stalled",
+                "trusted": true,
+                "time": 2.996685,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.48171,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                0,
+                3.562666
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 32768,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "completeRanges": false,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.48171,
+            "duration": 16,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "stalled",
+                "trusted": true,
+                "time": 2.996685,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.48171,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                0,
+                3.562666
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 32768,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 3.885968,
+            "readyState": 4,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 132436,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      },
+      {
+        "title": "native audio complete ranges capability without ArtPlayer instances",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "155.0",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "completeRanges": true,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.484031,
+            "duration": 16,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "stalled",
+                "trusted": true,
+                "time": 2.997649,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.484031,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                0,
+                3.562666
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 32767,
+              "sent": 32768,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=32768-",
+              "start": 32768,
+              "end": 132435,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "completeRanges": true,
+          "configuredLimit": null,
+          "progressed": true,
+          "waiting": true,
+          "before": {
+            "time": 3.484031,
+            "duration": 16,
+            "ended": false,
+            "readyState": 2,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 1
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "stalled",
+                "trusted": true,
+                "time": 2.997649,
+                "readyState": 3
+              },
+              {
+                "event": "waiting",
+                "trusted": true,
+                "time": 3.484031,
+                "readyState": 2
+              }
+            ],
+            "buffered": [
+              [
+                0,
+                3.562666
+              ]
+            ]
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 32767,
+              "sent": 32768,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=32768-",
+              "start": 32768,
+              "end": 132435,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 3.88782,
+            "readyState": 4,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 32767,
+              "sent": 32768,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=32768-",
+              "start": 32768,
+              "end": 132435,
+              "sent": 99668,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      },
+      {
+        "title": "native video streamed response capability without ArtPlayer instances",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "completeRanges": false,
+          "configuredLimit": null,
+          "progressed": false,
+          "waiting": false,
+          "before": {
+            "time": 0,
+            "duration": 8,
+            "ended": false,
+            "readyState": 3,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 98304,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "completeRanges": false,
+          "configuredLimit": null,
+          "progressed": false,
+          "waiting": false,
+          "before": {
+            "time": 0,
+            "duration": 8,
+            "ended": false,
+            "readyState": 3,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 98304,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 0.5276401,
+            "readyState": 4,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 251538,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      },
+      {
+        "title": "native video complete ranges capability without ArtPlayer instances",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "completeRanges": true,
+          "configuredLimit": null,
+          "progressed": false,
+          "waiting": false,
+          "before": {
+            "time": 0.0016847,
+            "duration": 8,
+            "ended": false,
+            "readyState": 4,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.0016847,
+                "readyState": 4
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 98303,
+              "sent": 98304,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=98304-251537",
+              "start": 98304,
+              "end": 251537,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "completeRanges": true,
+          "configuredLimit": null,
+          "progressed": false,
+          "waiting": false,
+          "before": {
+            "time": 0.0016847,
+            "duration": 8,
+            "ended": false,
+            "readyState": 4,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.0016847,
+                "readyState": 4
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 98303,
+              "sent": 98304,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=98304-251537",
+              "start": 98304,
+              "end": 251537,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 0.5512229,
+            "readyState": 4,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 98303,
+              "sent": 98304,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=98304-251537",
+              "start": 98304,
+              "end": 251537,
+              "sent": 153234,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      },
+      {
+        "title": "native audio streamed response capability without ArtPlayer instances",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "completeRanges": false,
+          "configuredLimit": null,
+          "progressed": false,
+          "waiting": false,
+          "before": {
+            "time": 0,
+            "duration": 16,
+            "ended": false,
+            "readyState": 3,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 32768,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "completeRanges": false,
+          "configuredLimit": null,
+          "progressed": false,
+          "waiting": false,
+          "before": {
+            "time": 0,
+            "duration": 16,
+            "ended": false,
+            "readyState": 3,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 32768,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 0.5514367,
+            "readyState": 4,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 132436,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      },
+      {
+        "title": "native audio complete ranges capability without ArtPlayer instances",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "completeRanges": true,
+          "configuredLimit": null,
+          "progressed": false,
+          "waiting": false,
+          "before": {
+            "time": 0,
+            "duration": 16,
+            "ended": false,
+            "readyState": 4,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 32767,
+              "sent": 32768,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=32768-132435",
+              "start": 32768,
+              "end": 132435,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "completeRanges": true,
+          "configuredLimit": null,
+          "progressed": false,
+          "waiting": false,
+          "before": {
+            "time": 0,
+            "duration": 16,
+            "ended": false,
+            "readyState": 4,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 32767,
+              "sent": 32768,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=32768-132435",
+              "start": 32768,
+              "end": 132435,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 0.4877493,
+            "readyState": 4,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 32767,
+              "sent": 32768,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=32768-132435",
+              "start": 32768,
+              "end": 132435,
+              "sent": 99668,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "extended": {
+    "report": {
+      "path": "refactor/.cache/audio-prefix-extended-report.json",
+      "sha256": "67ff266b1bfb6120db9f0e20b3b6b662bc20190f0a3d5abea918580cd2d93852"
+    },
+    "stats": {
+      "startTime": "2026-09-15T05:07:21.642Z",
+      "duration": 38672.797999999995,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "native video streamed response capability without ArtPlayer instances",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 188653,
+          "completeRanges": false,
+          "configuredLimit": "188653",
+          "progressed": true,
+          "waiting": false,
+          "before": {
+            "time": 7.3785978,
+            "duration": 8,
+            "ended": false,
+            "readyState": 4,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.0013158,
+                "readyState": 4
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 188653,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 188653,
+          "completeRanges": false,
+          "configuredLimit": "188653",
+          "progressed": true,
+          "waiting": false,
+          "before": {
+            "time": 7.3785978,
+            "duration": 8,
+            "ended": false,
+            "readyState": 4,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.0013158,
+                "readyState": 4
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 188653,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 7.7152115,
+            "readyState": 3,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 251538,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      },
+      {
+        "title": "native video complete ranges capability without ArtPlayer instances",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 188653,
+          "completeRanges": true,
+          "configuredLimit": "188653",
+          "progressed": true,
+          "waiting": false,
+          "before": {
+            "time": 7.3337076,
+            "duration": 8,
+            "ended": false,
+            "readyState": 4,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.0023507,
+                "readyState": 4
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 188652,
+              "sent": 188653,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=188653-251537",
+              "start": 188653,
+              "end": 251537,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 188653,
+          "completeRanges": true,
+          "configuredLimit": "188653",
+          "progressed": true,
+          "waiting": false,
+          "before": {
+            "time": 7.3337076,
+            "duration": 8,
+            "ended": false,
+            "readyState": 4,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.0023507,
+                "readyState": 4
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 188652,
+              "sent": 188653,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=188653-251537",
+              "start": 188653,
+              "end": 251537,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 7.6590518,
+            "readyState": 3,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 188652,
+              "sent": 188653,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=188653-251537",
+              "start": 188653,
+              "end": 251537,
+              "sent": 62885,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      },
+      {
+        "title": "native audio streamed response capability without ArtPlayer instances",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 65536,
+          "completeRanges": false,
+          "configuredLimit": "65536",
+          "progressed": true,
+          "waiting": false,
+          "before": {
+            "time": 5.6106579,
+            "duration": 16,
+            "ended": false,
+            "readyState": 4,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.01,
+                "readyState": 4
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 65536,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 65536,
+          "completeRanges": false,
+          "configuredLimit": "65536",
+          "progressed": true,
+          "waiting": false,
+          "before": {
+            "time": 5.6106579,
+            "duration": 16,
+            "ended": false,
+            "readyState": 4,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0.01,
+                "readyState": 4
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 65536,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 6.0783326,
+            "readyState": 4,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 132436,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      },
+      {
+        "title": "native audio complete ranges capability without ArtPlayer instances",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "errors": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "before": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 65536,
+          "completeRanges": true,
+          "configuredLimit": "65536",
+          "progressed": true,
+          "waiting": false,
+          "before": {
+            "time": 7.3142686,
+            "duration": 16,
+            "ended": false,
+            "readyState": 4,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 65535,
+              "sent": 65536,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=65536-132435",
+              "start": 65536,
+              "end": 132435,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ]
+        },
+        "capability": {
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 65536,
+          "completeRanges": true,
+          "configuredLimit": "65536",
+          "progressed": true,
+          "waiting": false,
+          "before": {
+            "time": 7.3142686,
+            "duration": 16,
+            "ended": false,
+            "readyState": 4,
+            "paused": false,
+            "error": null,
+            "instances": 0,
+            "events": [
+              {
+                "event": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4
+              },
+              {
+                "event": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4
+              },
+              {
+                "event": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4
+              },
+              {
+                "event": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4
+              }
+            ],
+            "buffered": []
+          },
+          "requestsBeforeRelease": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 65535,
+              "sent": 65536,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=65536-132435",
+              "start": 65536,
+              "end": 132435,
+              "sent": 0,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 7.849247,
+            "readyState": 4,
+            "paused": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 65535,
+              "sent": 65536,
+              "wasHeld": false,
+              "closed": true
+            },
+            {
+              "method": "GET",
+              "range": "bytes=65536-132435",
+              "start": 65536,
+              "end": 132435,
+              "sent": 66900,
+              "wasHeld": true,
+              "closed": true
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "exploratoryProbes": [
+    {
+      "script": {
+        "path": "refactor/.cache/audio-prefix-probe.mjs",
+        "sha256": "e1867ec14f196a62e989522e59d40a13a251414e19b76ef95a0b0cbe3a3196ed"
+      },
+      "report": {
+        "path": "refactor/.cache/audio-prefix-probe.json",
+        "sha256": "2a11cb1095bfe90b22e82fa57b69b1ae3405b45425036b62bcc45350b36cc75e"
+      },
+      "browser": "26.6",
+      "platform": "win32",
+      "cases": [
+        {
+          "owner": "video",
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 98304,
+          "progressed": false,
+          "before": {
+            "time": 0,
+            "readyState": 3,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 452
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 452
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 452
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 620
+              }
+            ]
+          },
+          "requestsBefore": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 98304,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 0.3228454,
+            "readyState": 4,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 452
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 452
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 452
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 620
+              }
+            ]
+          },
+          "requestsAfter": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 251538,
+              "wasHeld": true,
+              "closed": true
+            }
+          ],
+          "errors": []
+        },
+        {
+          "owner": "video",
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 188653,
+          "progressed": true,
+          "before": {
+            "time": 0.3055213,
+            "readyState": 4,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 494
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 494
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 494
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0.0011051,
+                "readyState": 4,
+                "at": 646
+              }
+            ]
+          },
+          "requestsBefore": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 188653,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 0.6223848,
+            "readyState": 4,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 494
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 494
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 494
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0.0011051,
+                "readyState": 4,
+                "at": 646
+              }
+            ]
+          },
+          "requestsAfter": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 251538,
+              "wasHeld": true,
+              "closed": true
+            }
+          ],
+          "errors": []
+        },
+        {
+          "owner": "video",
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 251537,
+          "progressed": true,
+          "before": {
+            "time": 0.3053764,
+            "readyState": 4,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 506
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 506
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 506
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0.0157899,
+                "readyState": 4,
+                "at": 657
+              }
+            ]
+          },
+          "requestsBefore": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 251537,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 0.6095782,
+            "readyState": 4,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 506
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 506
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 506
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0.0157899,
+                "readyState": 4,
+                "at": 657
+              }
+            ]
+          },
+          "requestsAfter": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 251538,
+              "wasHeld": true,
+              "closed": true
+            }
+          ],
+          "errors": []
+        },
+        {
+          "owner": "audio",
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 32768,
+          "progressed": false,
+          "before": {
+            "time": 0,
+            "readyState": 3,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 146
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 146
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 146
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 317
+              }
+            ]
+          },
+          "requestsBefore": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 32768,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 0.310937,
+            "readyState": 4,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 146
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 146
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 146
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 317
+              }
+            ]
+          },
+          "requestsAfter": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 132436,
+              "wasHeld": true,
+              "closed": true
+            }
+          ],
+          "errors": []
+        },
+        {
+          "owner": "audio",
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 99327,
+          "progressed": true,
+          "before": {
+            "time": 0.3136037,
+            "readyState": 4,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 139
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 139
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 139
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4,
+                "at": 284
+              }
+            ]
+          },
+          "requestsBefore": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 99327,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 0.6213532,
+            "readyState": 4,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 139
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 139
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 139
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4,
+                "at": 284
+              }
+            ]
+          },
+          "requestsAfter": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 132436,
+              "wasHeld": true,
+              "closed": true
+            }
+          ],
+          "errors": []
+        },
+        {
+          "owner": "audio",
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 132435,
+          "progressed": true,
+          "before": {
+            "time": 0.3022495,
+            "readyState": 4,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 140
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 140
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 140
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4,
+                "at": 315
+              }
+            ]
+          },
+          "requestsBefore": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 132435,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 0.6074157,
+            "readyState": 4,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 140
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 140
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 140
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4,
+                "at": 315
+              }
+            ]
+          },
+          "requestsAfter": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 132436,
+              "wasHeld": true,
+              "closed": true
+            }
+          ],
+          "errors": []
+        }
+      ]
+    },
+    {
+      "script": {
+        "path": "refactor/.cache/audio-prefix-starvation-probe.mjs",
+        "sha256": "be4eafd29e0e449a65056557d8303588b340be6ff38e97bfdc9a4c6101b0ccbe"
+      },
+      "report": {
+        "path": "refactor/.cache/audio-prefix-starvation-probe.json",
+        "sha256": "8706f53e56b357f6aff3d5ac63b19b91ac16195464fc57970e52a8906bf45d8d"
+      },
+      "browser": "26.6",
+      "platform": "win32",
+      "cases": [
+        {
+          "owner": "video",
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 131072,
+          "progressed": false,
+          "waiting": false,
+          "before": {
+            "time": 0.0014543,
+            "readyState": 4,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 432
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 433
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 433
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0.0014543,
+                "readyState": 4,
+                "at": 596
+              }
+            ]
+          },
+          "requestsBefore": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 131072,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 0.3076027,
+            "readyState": 4,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 432
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 433
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 433
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0.0014543,
+                "readyState": 4,
+                "at": 596
+              }
+            ]
+          },
+          "requestsAfter": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 251538,
+              "wasHeld": true,
+              "closed": true
+            }
+          ],
+          "errors": []
+        },
+        {
+          "owner": "audio",
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 49152,
+          "progressed": false,
+          "waiting": false,
+          "before": {
+            "time": 0,
+            "readyState": 4,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 132
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 132
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 132
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4,
+                "at": 316
+              }
+            ]
+          },
+          "requestsBefore": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 49152,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 0.3243953,
+            "readyState": 4,
+            "paused": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 132
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 132
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 132
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4,
+                "at": 316
+              }
+            ]
+          },
+          "requestsAfter": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 132436,
+              "wasHeld": true,
+              "closed": true
+            }
+          ],
+          "errors": []
+        }
+      ]
+    },
+    {
+      "script": {
+        "path": "refactor/.cache/audio-prefix-larger-probe.mjs",
+        "sha256": "3888462ff4d4236e2546872dd61f626319e1e0ff280ddfcc47b86884ef49667f"
+      },
+      "report": {
+        "path": "refactor/.cache/audio-prefix-larger-probe.json",
+        "sha256": "ff18643493bd8b2b6f00d93851b0488537636a0c0182b71640179c3d358f6daa"
+      },
+      "browser": "26.6",
+      "platform": "win32",
+      "cases": [
+        {
+          "recoveryError": "page.waitForFunction: Timeout 7000ms exceeded.",
+          "owner": "video",
+          "file": "pattern.mp4",
+          "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+          "bytes": 251538,
+          "limit": 188653,
+          "progressed": true,
+          "waiting": false,
+          "before": {
+            "time": 9.3192592,
+            "readyState": 4,
+            "paused": false,
+            "ended": true,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 541
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 541
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 541
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0.0033973,
+                "readyState": 4,
+                "at": 670
+              }
+            ]
+          },
+          "requestsBefore": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 188653,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 9.3305807,
+            "readyState": 3,
+            "paused": false,
+            "ended": true,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 541
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 541
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 3,
+                "at": 541
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0.0033973,
+                "readyState": 4,
+                "at": 670
+              }
+            ]
+          },
+          "requestsAfter": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 251537,
+              "sent": 251538,
+              "wasHeld": true,
+              "closed": true
+            }
+          ],
+          "errors": []
+        },
+        {
+          "recoveryError": null,
+          "owner": "audio",
+          "file": "audio-tone.m4a",
+          "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "bytes": 132436,
+          "limit": 65536,
+          "progressed": true,
+          "waiting": false,
+          "before": {
+            "time": 5.6106579,
+            "readyState": 4,
+            "paused": false,
+            "ended": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4,
+                "at": 132
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4,
+                "at": 132
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4,
+                "at": 132
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4,
+                "at": 315
+              }
+            ]
+          },
+          "requestsBefore": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 65536,
+              "wasHeld": true,
+              "closed": false
+            }
+          ],
+          "after": {
+            "time": 5.9158745,
+            "readyState": 4,
+            "paused": false,
+            "ended": false,
+            "buffered": [],
+            "events": [
+              {
+                "name": "loadedmetadata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4,
+                "at": 132
+              },
+              {
+                "name": "loadeddata",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4,
+                "at": 132
+              },
+              {
+                "name": "canplay",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4,
+                "at": 132
+              },
+              {
+                "name": "playing",
+                "trusted": true,
+                "time": 0,
+                "readyState": 4,
+                "at": 315
+              }
+            ]
+          },
+          "requestsAfter": [
+            {
+              "method": "GET",
+              "range": "bytes=0-",
+              "start": 0,
+              "end": 132435,
+              "sent": 132436,
+              "wasHeld": true,
+              "closed": true
+            }
+          ],
+          "errors": []
+        }
+      ]
+    }
+  ],
+  "initialExtendedFailure": {
+    "exitCode": 1,
+    "error": "page.waitForFunction: Timeout 7000ms exceeded.",
+    "stage": "post-release clock greater than pre-release time plus 0.3",
+    "scope": "Nine-second independent observation. It failed before attaching the case; subsequent probe adds before-release checkpoint and preserves recoveryError. This is not a plugin regression or a passing buffering test."
+  },
+  "packetInspection": [
+    {
+      "owner": "video",
+      "report": {
+        "path": "refactor/.cache/audio-prefix-video-packets.json",
+        "sha256": "1469c50c08e9763bbab7e57e75d919aaf418ce1277e529ce21f72ff49608bf09"
+      },
+      "format": {
+        "duration": "8.000000",
+        "size": "251538"
+      },
+      "boundaries": [
+        {
+          "limit": 32768,
+          "lastCompletePacket": {
+            "pts_time": "0.875000",
+            "size": "1033",
+            "pos": "30991"
+          }
+        },
+        {
+          "limit": 49152,
+          "lastCompletePacket": {
+            "pts_time": "1.458333",
+            "size": "992",
+            "pos": "46978"
+          }
+        },
+        {
+          "limit": 65536,
+          "lastCompletePacket": {
+            "pts_time": "2.000000",
+            "size": "1541",
+            "pos": "62723"
+          }
+        },
+        {
+          "limit": 98304,
+          "lastCompletePacket": {
+            "pts_time": "3.083333",
+            "size": "1110",
+            "pos": "95960"
+          }
+        },
+        {
+          "limit": 131072,
+          "lastCompletePacket": {
+            "pts_time": "4.041667",
+            "size": "1521",
+            "pos": "129166"
+          }
+        },
+        {
+          "limit": 188653,
+          "lastCompletePacket": {
+            "pts_time": "6.000000",
+            "size": "1511",
+            "pos": "186473"
+          }
+        }
+      ]
+    },
+    {
+      "owner": "audio",
+      "report": {
+        "path": "refactor/.cache/audio-prefix-audio-packets.json",
+        "sha256": "6d003d59af0d565b5373bdf1254bd0729576e15956a960fb6672654f200a6b62"
+      },
+      "format": {
+        "duration": "16.000000",
+        "size": "132436"
+      },
+      "boundaries": [
+        {
+          "limit": 32768,
+          "lastCompletePacket": {
+            "pts_time": "3.541333",
+            "size": "152",
+            "pos": "32559"
+          }
+        },
+        {
+          "limit": 49152,
+          "lastCompletePacket": {
+            "pts_time": "5.589333",
+            "size": "170",
+            "pos": "48944"
+          }
+        },
+        {
+          "limit": 65536,
+          "lastCompletePacket": {
+            "pts_time": "7.637333",
+            "size": "167",
+            "pos": "65342"
+          }
+        },
+        {
+          "limit": 98304,
+          "lastCompletePacket": {
+            "pts_time": "11.712000",
+            "size": "176",
+            "pos": "97967"
+          }
+        },
+        {
+          "limit": 131072,
+          "lastCompletePacket": {
+            "pts_time": "15.808000",
+            "size": "165",
+            "pos": "130897"
+          }
+        },
+        {
+          "limit": 188653,
+          "lastCompletePacket": {
+            "pts_time": "15.978667",
+            "size": "182",
+            "pos": "132254"
+          }
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "command": "yarn test:browser media-gate-native.spec.js --project=webkit --workers=1",
+      "environment": {
+        "ARTPLAYER_MEDIA_GATE_VIDEO_LIMIT": "188653",
+        "ARTPLAYER_MEDIA_GATE_AUDIO_LIMIT": "65536"
+      },
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/audio-prefix-extended.log",
+        "sha256": "c91db5e4a2784922ca00ad5f347fafe9adfd837df5383950080c89ebdce4951a"
+      }
+    },
+    {
+      "command": "yarn test:browser media-gate-native.spec.js --workers=1",
+      "environment": {
+        "prefixOverrides": "unset"
+      },
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/audio-prefix-default.log",
+        "sha256": "86ee3987bdbf9cb24bd8ba21c88c62a4c947dfe5ef1d8570bee2e56d87722bcf"
+      }
+    },
+    {
+      "command": "node --test test/media-gate.test.js",
+      "exitCode": 0,
+      "passed": 3
+    },
+    {
+      "command": "node node_modules/eslint/bin/eslint.js test/browser/media-gate-native.spec.js --no-fix",
+      "exitCode": 0
+    }
+  ],
+  "limitations": [
+    "No trusted waiting in any tested Windows WebKit prefix profile.",
+    "The original plugin integration assertions and timeouts are unchanged and the Windows WebKit failures remain open.",
+    "Clock movement does not by itself prove decoded frame progression or audible output.",
+    "No exact installed WebKit backend source attribution or threshold established.",
+    "Physical Safari, Linux/macOS, full plugin combinations and remote CI remain unverified here.",
+    "No production source, artifacts, dependencies, public API or publication state changed."
+  ]
+}

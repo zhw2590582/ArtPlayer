@@ -1744,7 +1744,9 @@
         "changes/2026-09-12-PKG-AUDIO-05-combinations.md",
         "baselines/audio-combinations-first.json",
         "baselines/audio-combinations-checkpoint.json",
-        "audio-validation.md"
+        "audio-validation.md",
+        "changes/2026-09-15-PKG-AUDIO-05-prefix.md",
+        "baselines/audio-prefix-validation.json"
       ]
     },
     {

@@ -124,3 +124,15 @@ Chromium/Firefox 的八种组合都观测到推进与可信 waiting，Windows We
 不支持缓冲；更不能为候选忽略 failing 用例。AUDIO-BUFFER-01 保持 open，Audio-05
 仍 doing；需要其他可实际执行的原生环境/输入路径补齐。当前没有已安装 WSL 发行版或
 可用 Docker 命令。物理设备、声音输出、自动播放策略和 Audio-06 的安装/demo 仍未验收。
+
+### PKG-AUDIO-05 同文件字节前缀对照
+
+后续[前缀诊断](changes/2026-09-15-PKG-AUDIO-05-prefix.md)保留相同 MP4/AAC、
+媒体哈希和原有集成断言。原生 Windows WebKit 在更大的前缀下可以于尾部仍被扣住时
+推进时钟，说明之前的“不推进”不是这两个格式一概不能渐进起播。四个完整模式
+诊断仍未见可信 waiting；起播不能作为缓冲成功。保持 AUDIO-BUFFER-01 和任务05开放。
+
+`media-gate-native.spec.js` 新增可选字节参数和放行前独立请求快照，并在恢复失败时
+仍保存阶段证据。默认参数、观察时限和 `audio-buffering.spec.js` 均未改变。
+明确比较原生时钟、readyState、buffered 与实际已发送字节，不只看最终请求的
+sent（放行后该数值已变成完整正文）。复跑参数和原始失败限制见检查点。

@@ -2976,11 +2976,13 @@
         "refactor/baselines/audio-combinations-checkpoint.json",
         "refactor/audio-validation.md",
         "refactor/changes/2026-09-15-CI-01-subtitles-installed.md",
-        "refactor/baselines/ci-subtitles-installed-validation.json"
+        "refactor/baselines/ci-subtitles-installed-validation.json",
+        "refactor/changes/2026-09-15-PKG-AUDIO-05-prefix.md",
+        "refactor/baselines/audio-prefix-validation.json"
       ],
       "compatibleResolution": "保留真实 waiting 断言；使用独立原生对照和其他实际支持环境/输入继续验证，不将没有播放推进的诊断当成缓冲通过，也不凭此改变插件 API 或否定真实 Safari 支持。",
       "closureCriteria": "受影响的缓冲/恢复得到真实媒体证据；与原生能力和测试夹具差异分开，发布环境的剩余范围经显式处理。",
-      "workspaceState": "CI-01 九包安装扩展的首轮 336 项中，Windows WebKit 八项新旧音频受限媒体组合继续失败。七项未观察到目标可信 waiting，一项受限视频路径耗尽整体时间并在最终状态读取中报页面关闭。其他引擎均通过；保留原始失败，不以销毁后状态反推初始解码错误，不推断新的共同底层原因。"
+      "workspaceState": "CI-01 九包安装扩展的首轮 336 项中，Windows WebKit 八项新旧音频受限媒体组合继续失败。七项未观察到目标可信 waiting，一项受限视频路径耗尽整体时间并在最终状态读取中报页面关闭。其他引擎均通过；保留原始失败，不以销毁后状态反推初始解码错误，不推断新的共同底层原因。 Same-file prefix controls now show Windows WebKit can start before releasing the tail with larger prefixes (video188653/audio65536), but four committed native diagnostics still record no trusted waiting. Default three-engine diagnostics retain Chromium/Firefox8 progression+waiting and WebKit4 no progression/no waiting. Before-release request copies distinguish held bytes from final sent counters; no production fix or waiver."
     },
     {
       "id": "CHAPTER-LAYOUT-01",

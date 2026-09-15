@@ -1,5 +1,11 @@
 # 进度与证据
 
+## PKG-AUDIO-05 同文件前缀与原生缓冲检查点
+
+仅改变同一 MP4/AAC 的 HTTP 放行前缀，Windows WebKit 能起播，但四项较大前缀诊断仍没有可信 waiting。默认三引擎 12 项诊断通过，实际 progressed/waiting 为 Chromium/Firefox 8/8、WebKit 0/4；诊断退出成功不算缓冲验收。新增参数只影响 native spec，放行前请求字节/媒体状态独立保存，恢复失败也保留观察。原插件集成断言、超时和运行字节均未改。见[检查点](changes/2026-09-15-PKG-AUDIO-05-prefix.md)及[证据](baselines/audio-prefix-validation.json)。
+
+AUDIO-BUFFER-01 继续 open、任务05继续 doing；未以原生时钟代替实际画面/声音证据，未定位已安装媒体后端的精确根因。202/266 done、21 doing、43 todo 不变。接续需同输入的实际支持环境/后端证据，同时继续其他可实施任务；未推送或发布。
+
 ## REL-04 完成早期回退与主线同步演练
 
 当前 HEAD 隔离重建后，七步连续安装/回退 237 项、五种状态三浏览器实播 15/15、iframe 更名恢复和 Git 冲突同步/中止均通过。旧站点恢复实现未改，本轮复核全部 538 文件、12 条 HTTP 路径和 6 项播放；未重复破坏/恢复，未验证远端部署。发布门槛负例及文件检查 34/34。见[验收](changes/2026-09-15-REL-04-acceptance.md)和[证据](baselines/rollback-acceptance-validation.json)。

@@ -230,6 +230,17 @@ playback after release; inspect its progressed/waiting flags before claiming buf
 These capability observation timeouts do not relax the integration assertions.
 Archive the report and results (including traces) before starting another browser suite.
 
+For byte-prefix diagnostics, set `ARTPLAYER_MEDIA_GATE_VIDEO_LIMIT` and/or
+`ARTPLAYER_MEDIA_GATE_AUDIO_LIMIT` to an integer byte count strictly between zero
+and the corresponding file size. Unset them for the unchanged 96 KiB video / 32 KiB
+audio defaults. These variables only affect the native diagnostic, never the audio
+plugin integration test. `native-gate-before-release` retains the media state and
+an immutable request snapshot before releasing the tail; `native-gate-capability`
+also survives failures after that observation and records any successful recovery.
+Check `progressed` and `waiting` independently. Larger prefixes can start Windows
+WebKit playback without yielding a trusted waiting event; this does not prove the
+integration buffering contract. See the audio prefix checkpoint in refactor.
+
 Danmuku input, scheduler, resources and heatmap-density specs accept
 `ARTPLAYER_DANMUKU_ARTIFACT` for a built main/legacy file; unset it to compile the
 current JS/TS entry. Run each format sequentially and wait for the command's final
