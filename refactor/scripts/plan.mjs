@@ -81,6 +81,7 @@ for (const device of ['PKG-CAST-05', 'PKG-VAST-05', 'PKG-DPIP-05', 'PKG-MASK-05'
   requireAncestor('REVIEW-02', device)
 }
 requireAncestor('REL-02', 'REL-09')
+requireAncestor('REL-02', 'REL-04')
 requireAncestor('PKG-AUTO-THUMB-05', 'PKG-AUTO-THUMB-03')
 for (const release of ['REL-05', 'REL-06']) {
   for (const gate of ['REVIEW-01', 'REVIEW-02', 'REVIEW-03', 'CI-04', 'REL-03', 'REL-04', 'REL-09']) {

@@ -4868,12 +4868,13 @@
         "REL-01",
         "CORE-22",
         "ENG-07",
-        "REL-09"
+        "REL-09",
+        "REL-04"
       ],
       "status": "todo",
       "risk": "H",
       "deliverable": "各候选本地 tarball/integrity 与新旧核心/插件消费者验证报告，外部门槛单独标注",
-      "acceptance": "隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容；在目标 major 版本确定后构建 pack，不在测试后改版本",
+      "acceptance": "隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容；在目标 major 版本确定后构建 pack，不在测试后改版本；逐包核验完整回退产物、实际候选版本/integrity、应用导入与冻结锁，重跑对应回退并保留报告；缺失历史分发不准入",
       "evidence": []
     },
     {
@@ -4906,7 +4907,7 @@
         "REL-08",
         "ENG-07"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "分包旧版本/tag/依赖回退方案与 master 差异",
       "acceptance": "隔离包演练可回退，主线修复同步流程可执行；正式每批再核对其实际回退产物",
@@ -4918,7 +4919,9 @@
         "rollback-inventory.md",
         "baselines/rollback-workflows-validation.json",
         "changes/2026-09-15-REL-04-pages-recovery.md",
-        "baselines/pages-recovery-validation.json"
+        "baselines/pages-recovery-validation.json",
+        "changes/2026-09-15-REL-04-acceptance.md",
+        "baselines/rollback-acceptance-validation.json"
       ]
     },
     {

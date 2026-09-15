@@ -1,5 +1,11 @@
 # 进度与证据
 
+## REL-04 完成早期回退与主线同步演练
+
+当前 HEAD 隔离重建后，七步连续安装/回退 237 项、五种状态三浏览器实播 15/15、iframe 更名恢复和 Git 冲突同步/中止均通过。旧站点恢复实现未改，本轮复核全部 538 文件、12 条 HTTP 路径和 6 项播放；未重复破坏/恢复，未验证远端部署。发布门槛负例及文件检查 34/34。见[验收](changes/2026-09-15-REL-04-acceptance.md)和[证据](baselines/rollback-acceptance-validation.json)。
+
+原验收仍区分早期演练与正式每批核对；REL-02 显式承接最终逐包回退并依赖 REL-04，缺失 Thumbnail 完整归档、错误候选报告和远端/设备缺口仍阻止准入。20 份历史 archive 验证不等于全部包已回退。状态 202/266 done、21 doing、43 todo；CI-01 完整矩阵保持，后续继续现有实施及验收缺口，未推送或发布。
+
 ## PKG-AUTO-THUMB-04 完成源码与公开类型迁移验收
 
 八个自有模块均为严格 TS，当前包及真实核心接入 fixture 编译/lint 通过；当前 tarball 与 npm 旧包在仓库外完成 10 组 TS/模块解析、精确负例、导出身份和 Promise 注册检查，编辑器 24 个声明输出只读检查通过。运行字节未改，与任务12的189项源码、两份产物各82项及各36项浏览器证据指纹相同。见[记录](changes/2026-09-15-PKG-AUTO-THUMB-04-migration.md)及[证据](baselines/auto-thumbnail-migration-validation.json)。

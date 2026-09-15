@@ -32,12 +32,15 @@ REL-08 建立台账及机械校验，不代表任何包已经可以发布。唯�
 - iframe明确关联旧发布名`artplayer-plugin-iframe`和改名记录。新候选仍核验现有
   workspace名`artplayer-tool-iframe`；改名范围、目标可用性和回退演练不能省略。
 - Thumbnail工具只有恢复的CDN/Git内容，旧tarball和完整归档缺失。历史分发门槛保持
-  blocked，不能将缺失CSS/归档解释为从未发布；REL-04需要完整、已验证的回退方案。
+  blocked，不能将缺失CSS/归档解释为从未发布；REL-02 的正式逐包候选验收需要完整、已验证的回退方案。
 - artplayer-vitepress按站点构建、URL、编辑器、资源和设备验收。列入版本策略不授权
   新增npm发布。站点候选是构建文件清单，不能绑定一个npm tarball冒充站点验收。
 
 历史依据映射不联网刷新，也不代替现有冻结归档验证器、registry检查或回退演练。
 每包都有rollback.basis和strategy；严格准入另要求候选绑定的rollback执行报告。
+REL-04 完成的是提前演练。REL-02 直接依赖它，并负责正式每批实际候选的逐包回退；
+REVIEW-03 复核相同候选内容。早期任务完成不会补齐缺失历史归档或报告，候选版本、
+integrity、输入指纹不一致的 rollback 报告仍被拒绝，远端恢复仍受 CI-04 约束。
 
 ## 候选绑定
 
