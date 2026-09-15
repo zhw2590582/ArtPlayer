@@ -2,6 +2,54 @@
 
 这里的 `全局属性` 也是指挂载在 `构造函数` 的 `一级属性`，属性名字全部都是大写的形式，未来容易发生变动，基本上用不到
 
+## 修改范围与生效时机 {#global-contract}
+
+这些字段属于构造函数，供同一份 Artplayer 模块的实例共享；它们不是每个实例的 option，也不会自动校验赋值。建议在创建实例前配置。播放器有的地方在初始化时读取，有的地方在事件触发时读取；修改字段不会重建已有菜单、监听器或已经开始的定时器。不同版本/副本的构造函数不共享这些字段。
+
+### 初始化与界面 {#global-initialization}
+
+| 字段 | 默认值与读取时机 |
+| --- | --- |
+| `STYLE` | 构建内嵌的 CSS 字符串。导入时已注入 artplayer-style；之后修改 STYLE 本身不会更新该 style 节点 |
+| `DEBUG` | false；构造时决定是否添加日志监听器。之后设为false不会移除已安装的日志 |
+| `CONTEXTMENU` | true；桌面打开菜单时检查，不会删除菜单内容，也不拦截手动设置 contextmenu.show |
+| `PLAYBACK_RATE` / `ASPECT_RATIO` / `FLIP` | 下方各节列出默认数组。构建设置项/右键项时读取；改数组不会更新已有条目 |
+| `SETTING_ITEM_WIDTH` | 200px；创建内置子菜单配置时读取，显式条目宽度可覆盖 |
+| `SETTING_ITEM_HEIGHT` | 35px；创建条目/返回行与面板布局时读取，已有节点高度不会仅因字段修改就重写 |
+| `SETTING_WIDTH` | 250px；面板布局时读取根宽度，实际宽度仍受容器约束 |
+| `USE_RAF` | false；初始化时决定是否安装 raf 循环及进度监听分支，不是可热切换的开关。raf 播放中发出，不代替原生媒体事件 |
+| `LOG_VERSION` | true；模块导入约100ms后的回调读取；不是每个实例创建都打印 |
+| `REMOVE_SRC_WHEN_DESTROY` | true；每次destroy读取。false只跳过removeAttribute('src')/load()，监听器、请求、UI和插件生命周期仍会清理；保留DOM是单独的destroy(false)参数 |
+
+### 定时与交互 {#global-timing}
+
+时间默认以毫秒为单位；已排队的任务保留排队时的延迟。
+
+| 字段 | 默认值与读取时机 |
+| --- | --- |
+| `NOTICE_TIME` | 2000；显示通知时读取，不重新安排已有通知 |
+| `RESIZE_TIME` | 200；每次resize/orientation通知重新排队时读取，连续通知取消前次任务，属于trailing防抖 |
+| `SCROLL_TIME` / `SCROLL_GAP` | 200 / 50px；SCROLL_TIME在事件系统初始化时捕获，SCROLL_GAP在可处理的滚动事件中读取。leading节流产生view布尔事件；原始事件是window:scroll |
+| `CONTROL_HIDE_TIME` | 3000；video:timeupdate中比较上次显示时间。仅满足正在播放、未操作设置/输入/控件等条件时隐藏，不是独立定时器 |
+| `DBCLICK_TIME` | 300；每次视频点击统计时间窗口，不延迟第一次单击以等待第二击 |
+| `DBCLICK_FULLSCREEN` / `MOBILE_DBCLICK_PLAY` / `MOBILE_CLICK_PLAY` | true / true / false；每次视频点击读取，分别控制桌面双击全屏、移动端双击/单击播放；移动端仍受锁定状态约束 |
+| `FAST_FORWARD_TIME` / `FAST_FORWARD_VALUE` | 1000 / 3倍；长按开始排队时读取时间，触发时读取倍速；必须满足插件启用、播放中且未锁定等条件 |
+| `TOUCH_MOVE_RATIO` | 0.5；视频手势处理时读取，进度条自身拖动不应用该视频倍率 |
+| `VOLUME_STEP` / `SEEK_STEP` | 0.1 / 5秒；快捷键以及可访问的音量/进度滑块操作时读取 |
+| `FULLSCREEN_WEB_IN_BODY` | true；进入网页全屏时读取，退出仍恢复当次保存的位置 |
+| `AUTO_ORIENTATION_TIME` | 200；网页全屏需要旋转时排队读取，不是强制设备旋转能力 |
+| `INFO_LOOP_TIME` | 1000；可见信息面板每次安排下一次更新时读取 |
+
+### 恢复进度与重连 {#global-recovery}
+
+| 字段 | 默认值与读取时机 |
+| --- | --- |
+| `AUTO_PLAYBACK_MAX` | 10；播放中的timeupdate写记录时读取。历史逻辑只在写入前数量大于阈值时删除一个最早枚举的键，不是严格最多10条，也不是LRU |
+| `AUTO_PLAYBACK_MIN` | 5秒；决定已保存进度是否值得显示恢复提示，不是低于5秒就不保存 |
+| `AUTO_PLAYBACK_TIMEOUT` | 3000；恢复提示建立后首次timeupdate安排隐藏时读取 |
+| `RECONNECT_TIME_MAX` / `RECONNECT_SLEEP_TIME` | 5次 / 1000；媒体错误处理决定是否重试并安排等待时读取。重连范围受当前源和销毁生命周期管理，不是HLS/DASH SDK自身重试配置 |
+
+
 ## DEBUG
 
 是否开始 `debug` 模式，可以打印出视频全部的内置事件，默认关闭
@@ -119,7 +167,7 @@ var art = new Artplayer({
 
 ## RESIZE_TIME
 
-`resize` 事件的节流时间，单位为毫秒，默认为 `200`
+`resize` 事件的防抖延迟，单位为毫秒，默认为 `200`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -150,8 +198,8 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-art.on('scroll', () => {
-    console.log('scroll');
+art.on('view', (visible) => {
+    console.log('view', visible);
 });
 ```
 
@@ -169,8 +217,8 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-art.on('scroll', () => {
-    console.log('scroll');
+art.on('view', (visible) => {
+    console.log('view', visible);
 });
 ```
 
@@ -192,7 +240,7 @@ var art = new Artplayer({
 
 ## AUTO_PLAYBACK_MIN
 
-自动回放功能的最小记录时长，单位为秒，默认为 `5`
+显示恢复播放提示所需的最小已保存进度，单位为秒，默认为 `5`；不限制低于该值的记录写入。
 
 <div className="run-code">▶ Run Code</div>
 
@@ -552,7 +600,7 @@ var art = new Artplayer({
 
 在销毁播放器时，是否同时移除视频的 `src` 属性并调用 `load()` 以主动释放媒体资源，默认为 `true`。
 
-开启后可以在单页应用或频繁创建/销毁播放器的场景下，减少视频资源占用；如果你希望保留 video 元素的状态，仅移除界面，可将其设置为 `false`。
+开启后可以在单页应用或频繁创建/销毁播放器的场景下，减少视频资源占用；设置为 `false` 只跳过显式媒体重置，其余销毁清理仍会执行。
 
 <div className="run-code">▶ Run Code</div>
 
@@ -564,6 +612,6 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-// 只销毁界面，不主动清空 src
+// 正常销毁清理，但不显式重置 src
 art.destroy();
 ```

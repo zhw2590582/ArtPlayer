@@ -112,7 +112,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-      "sha256Lf": "3b36c40e62b61f9f1fc7f73b4a776bd6abac0c7fb0227fce04bc8408072f8805",
+      "sha256Lf": "d2049b845786c6fddfbe605c88d1f2c13452910ea7dee308f621874024c58762",
       "language": "zh",
       "route": "/document/advanced/class.html",
       "headings": [
@@ -141,52 +141,56 @@
           "line": 52
         },
         {
+          "text": "媒体接口清单 {#config-contract}",
+          "line": 56
+        },
+        {
           "text": "`utils`",
-          "line": 62
+          "line": 79
         },
         {
           "text": "环境与类型 {#utils-contract}",
-          "line": 78
+          "line": 95
         },
         {
           "text": "DOM 与样式 {#utils-dom}",
-          "line": 86
+          "line": 103
         },
         {
           "text": "事件与测量 {#utils-measure}",
-          "line": 105
+          "line": 122
         },
         {
           "text": "字幕、图片与文件 {#utils-resources}",
-          "line": 115
+          "line": 132
         },
         {
           "text": "数据、错误与调度 {#utils-data}",
-          "line": 127
+          "line": 144
         },
         {
           "text": "`scheme`",
-          "line": 164
+          "line": 181
         },
         {
           "text": "`Emitter`",
-          "line": 174
+          "line": 191
         },
         {
           "text": "`validator`",
-          "line": 184
+          "line": 201
         },
         {
           "text": "`kindOf`",
-          "line": 194
+          "line": 211
         },
         {
           "text": "`html`",
-          "line": 204
+          "line": 221
         },
         {
           "text": "`option`",
-          "line": 216
+          "line": 233
         }
       ],
       "runCodeMarkers": 12,
@@ -458,7 +462,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-      "sha256Lf": "d9990b5c0293df1a8ded04044efbd59bdea6d9977bcf2bc0b0f8ee7d3df7d2ba",
+      "sha256Lf": "147ed57b7effb5579c6cc2a90abeeec1c127decbfc4a82596259e357fad64f24",
       "language": "zh",
       "route": "/document/advanced/global.html",
       "headings": [
@@ -467,140 +471,156 @@
           "line": 1
         },
         {
-          "text": "DEBUG",
+          "text": "修改范围与生效时机 {#global-contract}",
           "line": 5
         },
         {
+          "text": "初始化与界面 {#global-initialization}",
+          "line": 9
+        },
+        {
+          "text": "定时与交互 {#global-timing}",
+          "line": 24
+        },
+        {
+          "text": "恢复进度与重连 {#global-recovery}",
+          "line": 43
+        },
+        {
+          "text": "DEBUG",
+          "line": 53
+        },
+        {
           "text": "STYLE",
-          "line": 20
+          "line": 68
         },
         {
           "text": "CONTEXTMENU",
-          "line": 30
+          "line": 78
         },
         {
           "text": "NOTICE_TIME",
-          "line": 45
+          "line": 93
         },
         {
           "text": "SETTING_WIDTH",
-          "line": 60
+          "line": 108
         },
         {
           "text": "SETTING_ITEM_WIDTH",
-          "line": 80
+          "line": 128
         },
         {
           "text": "SETTING_ITEM_HEIGHT",
-          "line": 100
+          "line": 148
         },
         {
           "text": "RESIZE_TIME",
-          "line": 120
+          "line": 168
         },
         {
           "text": "SCROLL_TIME",
-          "line": 139
+          "line": 187
         },
         {
           "text": "SCROLL_GAP",
-          "line": 158
+          "line": 206
         },
         {
           "text": "AUTO_PLAYBACK_MAX",
-          "line": 177
-        },
-        {
-          "text": "AUTO_PLAYBACK_MIN",
-          "line": 193
-        },
-        {
-          "text": "AUTO_PLAYBACK_TIMEOUT",
-          "line": 209
-        },
-        {
-          "text": "RECONNECT_TIME_MAX",
           "line": 225
         },
         {
+          "text": "AUTO_PLAYBACK_MIN",
+          "line": 241
+        },
+        {
+          "text": "AUTO_PLAYBACK_TIMEOUT",
+          "line": 257
+        },
+        {
+          "text": "RECONNECT_TIME_MAX",
+          "line": 273
+        },
+        {
           "text": "RECONNECT_SLEEP_TIME",
-          "line": 240
+          "line": 288
         },
         {
           "text": "CONTROL_HIDE_TIME",
-          "line": 255
+          "line": 303
         },
         {
           "text": "DBCLICK_TIME",
-          "line": 270
+          "line": 318
         },
         {
           "text": "DBCLICK_FULLSCREEN",
-          "line": 289
+          "line": 337
         },
         {
           "text": "MOBILE_DBCLICK_PLAY",
-          "line": 304
+          "line": 352
         },
         {
           "text": "MOBILE_CLICK_PLAY",
-          "line": 319
-        },
-        {
-          "text": "AUTO_ORIENTATION_TIME",
-          "line": 334
-        },
-        {
-          "text": "INFO_LOOP_TIME",
-          "line": 350
-        },
-        {
-          "text": "FAST_FORWARD_VALUE",
           "line": 367
         },
         {
+          "text": "AUTO_ORIENTATION_TIME",
+          "line": 382
+        },
+        {
+          "text": "INFO_LOOP_TIME",
+          "line": 398
+        },
+        {
+          "text": "FAST_FORWARD_VALUE",
+          "line": 415
+        },
+        {
           "text": "FAST_FORWARD_TIME",
-          "line": 383
+          "line": 431
         },
         {
           "text": "TOUCH_MOVE_RATIO",
-          "line": 399
+          "line": 447
         },
         {
           "text": "VOLUME_STEP",
-          "line": 414
+          "line": 462
         },
         {
           "text": "SEEK_STEP",
-          "line": 429
+          "line": 477
         },
         {
           "text": "PLAYBACK_RATE",
-          "line": 444
+          "line": 492
         },
         {
           "text": "ASPECT_RATIO",
-          "line": 464
+          "line": 512
         },
         {
           "text": "FLIP",
-          "line": 484
+          "line": 532
         },
         {
           "text": "FULLSCREEN_WEB_IN_BODY",
-          "line": 504
+          "line": 552
         },
         {
           "text": "LOG_VERSION",
-          "line": 520
+          "line": 568
         },
         {
           "text": "USE_RAF",
-          "line": 535
+          "line": 583
         },
         {
           "text": "REMOVE_SRC_WHEN_DESTROY",
-          "line": 551
+          "line": 599
         }
       ],
       "runCodeMarkers": 34,
@@ -1130,7 +1150,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-      "sha256Lf": "1b4754150147a338c56de9475dd90065b72279edac2d7a087b53afe017839e4e",
+      "sha256Lf": "3e5d7f6cfaca13793d2ca02d0d6f18845bedd6de85c224ef781651399b387eb8",
       "language": "en",
       "route": "/document/en/advanced/class.html",
       "headings": [
@@ -1159,52 +1179,56 @@
           "line": 52
         },
         {
+          "text": "Media surface inventory {#config-contract}",
+          "line": 56
+        },
+        {
           "text": "`utils`",
-          "line": 62
+          "line": 79
         },
         {
           "text": "Environment and types {#utils-contract}",
-          "line": 78
+          "line": 95
         },
         {
           "text": "DOM and styles {#utils-dom}",
-          "line": 86
+          "line": 103
         },
         {
           "text": "Events and measurement {#utils-measure}",
-          "line": 105
+          "line": 122
         },
         {
           "text": "Subtitles, images, and files {#utils-resources}",
-          "line": 115
+          "line": 132
         },
         {
           "text": "Data, errors, and scheduling {#utils-data}",
-          "line": 127
+          "line": 144
         },
         {
           "text": "`scheme`",
-          "line": 164
+          "line": 181
         },
         {
           "text": "`Emitter`",
-          "line": 174
+          "line": 191
         },
         {
           "text": "`validator`",
-          "line": 184
+          "line": 201
         },
         {
           "text": "`kindOf`",
-          "line": 194
+          "line": 211
         },
         {
           "text": "`html`",
-          "line": 204
+          "line": 221
         },
         {
           "text": "`option`",
-          "line": 216
+          "line": 233
         }
       ],
       "runCodeMarkers": 12,
@@ -1476,7 +1500,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-      "sha256Lf": "01380ae04fedd94dd91f5f31c51d4894c458dad3268cf38119b54a8fe73ee46c",
+      "sha256Lf": "f1c249e52a3edbab7ad48a1a652eab2d03b47879bb5eac28d0c61c13dcc0a75c",
       "language": "en",
       "route": "/document/en/advanced/global.html",
       "headings": [
@@ -1485,140 +1509,156 @@
           "line": 1
         },
         {
-          "text": "DEBUG",
+          "text": "Scope and effective timing {#global-contract}",
           "line": 5
         },
         {
+          "text": "Initialization and UI {#global-initialization}",
+          "line": 9
+        },
+        {
+          "text": "Scheduling and interaction {#global-timing}",
+          "line": 24
+        },
+        {
+          "text": "Resume records and reconnection {#global-recovery}",
+          "line": 43
+        },
+        {
+          "text": "DEBUG",
+          "line": 53
+        },
+        {
           "text": "STYLE",
-          "line": 20
+          "line": 68
         },
         {
           "text": "CONTEXTMENU",
-          "line": 30
+          "line": 78
         },
         {
           "text": "NOTICE_TIME",
-          "line": 45
+          "line": 93
         },
         {
           "text": "SETTING_WIDTH",
-          "line": 60
+          "line": 108
         },
         {
           "text": "SETTING_ITEM_WIDTH",
-          "line": 80
+          "line": 128
         },
         {
           "text": "SETTING_ITEM_HEIGHT",
-          "line": 100
+          "line": 148
         },
         {
           "text": "RESIZE_TIME",
-          "line": 120
+          "line": 168
         },
         {
           "text": "SCROLL_TIME",
-          "line": 139
+          "line": 187
         },
         {
           "text": "SCROLL_GAP",
-          "line": 158
+          "line": 206
         },
         {
           "text": "AUTO_PLAYBACK_MAX",
-          "line": 177
-        },
-        {
-          "text": "AUTO_PLAYBACK_MIN",
-          "line": 193
-        },
-        {
-          "text": "AUTO_PLAYBACK_TIMEOUT",
-          "line": 209
-        },
-        {
-          "text": "RECONNECT_TIME_MAX",
           "line": 225
         },
         {
+          "text": "AUTO_PLAYBACK_MIN",
+          "line": 241
+        },
+        {
+          "text": "AUTO_PLAYBACK_TIMEOUT",
+          "line": 257
+        },
+        {
+          "text": "RECONNECT_TIME_MAX",
+          "line": 273
+        },
+        {
           "text": "RECONNECT_SLEEP_TIME",
-          "line": 240
+          "line": 288
         },
         {
           "text": "CONTROL_HIDE_TIME",
-          "line": 256
+          "line": 304
         },
         {
           "text": "DBCLICK_TIME",
-          "line": 271
+          "line": 319
         },
         {
           "text": "DBCLICK_FULLSCREEN",
-          "line": 290
+          "line": 338
         },
         {
           "text": "MOBILE_DBCLICK_PLAY",
-          "line": 305
+          "line": 353
         },
         {
           "text": "MOBILE_CLICK_PLAY",
-          "line": 320
-        },
-        {
-          "text": "AUTO_ORIENTATION_TIME",
-          "line": 335
-        },
-        {
-          "text": "INFO_LOOP_TIME",
-          "line": 351
-        },
-        {
-          "text": "FAST_FORWARD_VALUE",
           "line": 368
         },
         {
+          "text": "AUTO_ORIENTATION_TIME",
+          "line": 383
+        },
+        {
+          "text": "INFO_LOOP_TIME",
+          "line": 399
+        },
+        {
+          "text": "FAST_FORWARD_VALUE",
+          "line": 416
+        },
+        {
           "text": "FAST_FORWARD_TIME",
-          "line": 384
+          "line": 432
         },
         {
           "text": "TOUCH_MOVE_RATIO",
-          "line": 400
+          "line": 448
         },
         {
           "text": "VOLUME_STEP",
-          "line": 415
+          "line": 463
         },
         {
           "text": "SEEK_STEP",
-          "line": 430
+          "line": 478
         },
         {
           "text": "PLAYBACK_RATE",
-          "line": 445
+          "line": 493
         },
         {
           "text": "ASPECT_RATIO",
-          "line": 465
+          "line": 513
         },
         {
           "text": "FLIP",
-          "line": 485
+          "line": 533
         },
         {
           "text": "FULLSCREEN_WEB_IN_BODY",
-          "line": 506
+          "line": 554
         },
         {
           "text": "LOG_VERSION",
-          "line": 522
+          "line": 570
         },
         {
           "text": "USE_RAF",
-          "line": 537
+          "line": 585
         },
         {
           "text": "REMOVE_SRC_WHEN_DESTROY",
-          "line": 553
+          "line": 601
         }
       ],
       "runCodeMarkers": 34,
@@ -4340,11 +4380,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 62
+          "line": 79
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 62
+          "line": 79
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4357,11 +4397,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 164
+          "line": 181
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 164
+          "line": 181
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4374,11 +4414,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 174
+          "line": 191
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 174
+          "line": 191
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4391,11 +4431,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 184
+          "line": 201
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 184
+          "line": 201
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4408,11 +4448,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 194
+          "line": 211
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 194
+          "line": 211
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4425,11 +4465,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 204
+          "line": 221
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 204
+          "line": 221
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4446,7 +4486,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 216
+          "line": 233
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -4454,7 +4494,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 216
+          "line": 233
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -4471,11 +4511,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 20
+          "line": 68
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 20
+          "line": 68
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4488,11 +4528,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 5
+          "line": 53
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 5
+          "line": 53
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4505,11 +4545,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 30
+          "line": 78
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 30
+          "line": 78
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4522,11 +4562,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 45
+          "line": 93
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 45
+          "line": 93
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4539,11 +4579,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 60
+          "line": 108
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 60
+          "line": 108
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4556,11 +4596,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 80
+          "line": 128
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 80
+          "line": 128
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4573,11 +4613,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 100
+          "line": 148
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 100
+          "line": 148
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4590,11 +4630,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 120
+          "line": 168
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 120
+          "line": 168
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4607,11 +4647,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 139
+          "line": 187
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 139
+          "line": 187
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4624,11 +4664,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 158
+          "line": 206
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 158
+          "line": 206
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4641,11 +4681,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 177
+          "line": 225
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 177
+          "line": 225
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4658,11 +4698,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 193
+          "line": 241
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 193
+          "line": 241
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4675,11 +4715,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 209
+          "line": 257
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 209
+          "line": 257
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4692,11 +4732,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 225
+          "line": 273
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 225
+          "line": 273
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4709,11 +4749,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 240
+          "line": 288
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 240
+          "line": 288
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4726,11 +4766,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 255
+          "line": 303
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 256
+          "line": 304
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4743,11 +4783,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 270
+          "line": 318
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 271
+          "line": 319
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4760,11 +4800,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 289
+          "line": 337
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 290
+          "line": 338
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4777,11 +4817,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 304
+          "line": 352
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 305
+          "line": 353
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4791,57 +4831,6 @@
       "declaration": "Artplayer",
       "name": "MOBILE_CLICK_PLAY",
       "line": 72,
-      "candidateHeadings": [
-        {
-          "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 319
-        },
-        {
-          "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 320
-        }
-      ],
-      "semanticReviewOwner": "SITE-04"
-    },
-    {
-      "file": "packages/artplayer/public/artplayer.ts",
-      "declaration": "Artplayer",
-      "name": "AUTO_ORIENTATION_TIME",
-      "line": 73,
-      "candidateHeadings": [
-        {
-          "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 334
-        },
-        {
-          "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 335
-        }
-      ],
-      "semanticReviewOwner": "SITE-04"
-    },
-    {
-      "file": "packages/artplayer/public/artplayer.ts",
-      "declaration": "Artplayer",
-      "name": "INFO_LOOP_TIME",
-      "line": 74,
-      "candidateHeadings": [
-        {
-          "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 350
-        },
-        {
-          "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 351
-        }
-      ],
-      "semanticReviewOwner": "SITE-04"
-    },
-    {
-      "file": "packages/artplayer/public/artplayer.ts",
-      "declaration": "Artplayer",
-      "name": "FAST_FORWARD_VALUE",
-      "line": 75,
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
@@ -4857,16 +4846,67 @@
     {
       "file": "packages/artplayer/public/artplayer.ts",
       "declaration": "Artplayer",
+      "name": "AUTO_ORIENTATION_TIME",
+      "line": 73,
+      "candidateHeadings": [
+        {
+          "file": "packages/artplayer-vitepress/docs/advanced/global.md",
+          "line": 382
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
+          "line": 383
+        }
+      ],
+      "semanticReviewOwner": "SITE-04"
+    },
+    {
+      "file": "packages/artplayer/public/artplayer.ts",
+      "declaration": "Artplayer",
+      "name": "INFO_LOOP_TIME",
+      "line": 74,
+      "candidateHeadings": [
+        {
+          "file": "packages/artplayer-vitepress/docs/advanced/global.md",
+          "line": 398
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
+          "line": 399
+        }
+      ],
+      "semanticReviewOwner": "SITE-04"
+    },
+    {
+      "file": "packages/artplayer/public/artplayer.ts",
+      "declaration": "Artplayer",
+      "name": "FAST_FORWARD_VALUE",
+      "line": 75,
+      "candidateHeadings": [
+        {
+          "file": "packages/artplayer-vitepress/docs/advanced/global.md",
+          "line": 415
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
+          "line": 416
+        }
+      ],
+      "semanticReviewOwner": "SITE-04"
+    },
+    {
+      "file": "packages/artplayer/public/artplayer.ts",
+      "declaration": "Artplayer",
       "name": "FAST_FORWARD_TIME",
       "line": 76,
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 383
+          "line": 431
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 384
+          "line": 432
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4879,11 +4919,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 399
+          "line": 447
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 400
+          "line": 448
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4896,11 +4936,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 414
+          "line": 462
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 415
+          "line": 463
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4913,11 +4953,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 429
+          "line": 477
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 430
+          "line": 478
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4930,11 +4970,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 444
+          "line": 492
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 445
+          "line": 493
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4947,11 +4987,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 464
+          "line": 512
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 465
+          "line": 513
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4964,11 +5004,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 484
+          "line": 532
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 485
+          "line": 533
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4981,11 +5021,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 504
+          "line": 552
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 506
+          "line": 554
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4998,11 +5038,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 520
+          "line": 568
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 522
+          "line": 570
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -5015,11 +5055,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 535
+          "line": 583
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 537
+          "line": 585
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -5032,11 +5072,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/global.md",
-          "line": 551
+          "line": 599
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-          "line": 553
+          "line": 601
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -5070,7 +5110,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 216
+          "line": 233
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -5078,7 +5118,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 216
+          "line": 233
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -5851,11 +5891,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 204
+          "line": 221
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 204
+          "line": 221
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -5876,11 +5916,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 204
+          "line": 221
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 204
+          "line": 221
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6000,11 +6040,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 204
+          "line": 221
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 204
+          "line": 221
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12168,11 +12208,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 204
+          "line": 221
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 204
+          "line": 221
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12413,7 +12453,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 216
+          "line": 233
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -12421,7 +12461,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 216
+          "line": 233
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -13162,11 +13202,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 62
+          "line": 79
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 62
+          "line": 79
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13179,11 +13219,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 164
+          "line": 181
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 164
+          "line": 181
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13196,11 +13236,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 174
+          "line": 191
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 174
+          "line": 191
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13213,11 +13253,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 184
+          "line": 201
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 184
+          "line": 201
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13230,11 +13270,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 194
+          "line": 211
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 194
+          "line": 211
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13247,11 +13287,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 204
+          "line": 221
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 204
+          "line": 221
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13268,7 +13308,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 216
+          "line": 233
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -13276,7 +13316,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 216
+          "line": 233
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -13293,11 +13333,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 204
+          "line": 221
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 204
+          "line": 221
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13350,11 +13390,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 204
+          "line": 221
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 204
+          "line": 221
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13518,7 +13558,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 216
+          "line": 233
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -13526,7 +13566,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 216
+          "line": 233
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -14546,11 +14586,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 204
+          "line": 221
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 204
+          "line": 221
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -16278,11 +16318,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 204
+          "line": 221
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 204
+          "line": 221
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -16584,7 +16624,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 216
+          "line": 233
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -16592,7 +16632,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 216
+          "line": 233
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -16805,7 +16845,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 216
+          "line": 233
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -16813,7 +16853,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 216
+          "line": 233
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -17719,11 +17759,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 204
+          "line": 221
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 204
+          "line": 221
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -17845,11 +17885,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 204
+          "line": 221
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 204
+          "line": 221
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -18084,11 +18124,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 204
+          "line": 221
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 204
+          "line": 221
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -19588,10 +19628,10 @@
     {
       "source": "docs/document/404.html",
       "route": "/document/404.html",
-      "sha256Lf": "f9f3333d4f78131d5caaeb8ad0e1398264b6a479e7f3227b800f362dac0ea521",
+      "sha256Lf": "ef480ed59bbe1bea5f8d680767c8879e231e8b8da558a1d7d5dbf8234ed91571",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19601,10 +19641,10 @@
     {
       "source": "docs/document/advanced/built-in.html",
       "route": "/document/advanced/built-in.html",
-      "sha256Lf": "92558aa00d9e5eaa09ec71837f785dce8fdf1ce48602fd54ab928254591cd3ce",
+      "sha256Lf": "f6cfba6c91583d4c26394e256aa4413ff7603959ffa5ee27d577f7e6dbb13006",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19614,10 +19654,10 @@
     {
       "source": "docs/document/advanced/class.html",
       "route": "/document/advanced/class.html",
-      "sha256Lf": "fb32dbc11be42d36342b08a2a01f0413551a8f92e91c63a619deca5bd3007390",
+      "sha256Lf": "ba933562b3f68fe51d5e7d1d784a91ccde5c2a50a2d85567421ec150fda0d204",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19627,10 +19667,10 @@
     {
       "source": "docs/document/advanced/event.html",
       "route": "/document/advanced/event.html",
-      "sha256Lf": "4e626ac4d5b7fa3876051031d1d559426fbe4c8b062c2aa634840a98a6a3b45e",
+      "sha256Lf": "44bffc7916fcffadf7dd17a5ebb2d5b9e99eb42beca05edf2818560134f8d529",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19640,10 +19680,10 @@
     {
       "source": "docs/document/advanced/global.html",
       "route": "/document/advanced/global.html",
-      "sha256Lf": "f98b5c91354c78f212a305df8d9160520a61930d5b967b280abc4f969146b1fc",
+      "sha256Lf": "3c30b646bfaec74bd703fa9467fd1fef86fb6ae251a06f98edb7221859676584",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19653,10 +19693,10 @@
     {
       "source": "docs/document/advanced/plugin.html",
       "route": "/document/advanced/plugin.html",
-      "sha256Lf": "c7d313408dca114c053956d91306f124df0de4890779dc7faf6fff636a6469a3",
+      "sha256Lf": "6cff6dee81b286123a17822cba9a77bcdbc39d4dd9294025bc4c4abbe3d314ba",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19666,10 +19706,10 @@
     {
       "source": "docs/document/advanced/property.html",
       "route": "/document/advanced/property.html",
-      "sha256Lf": "84941fe6103e65e9c93bdaa826c4b1ee179c7a06622f9955ecb083125152b540",
+      "sha256Lf": "bd350da4cc8cbe833e42e55519c1844ff54bd6569403e80a8a69961b14fea85a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19679,10 +19719,10 @@
     {
       "source": "docs/document/component/contextmenu.html",
       "route": "/document/component/contextmenu.html",
-      "sha256Lf": "f8e324dc1cfdfc7cdce2e1ce4431d0ba49b8a3b4674cc40214b5b5e9461fed23",
+      "sha256Lf": "34ce883236eaaf1f683c4aa831d5c0e3063838b19c08a2fd7447e06ce2dfa2ea",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19692,10 +19732,10 @@
     {
       "source": "docs/document/component/controls.html",
       "route": "/document/component/controls.html",
-      "sha256Lf": "9a6d6f4355e54e4ad510645ed341eb3e07d6b9d0e797f2300f5893d37a21e321",
+      "sha256Lf": "52ef554f46018b063e5ee1cabdca2bf79e7577760a221d19a9874019e15a587f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19705,10 +19745,10 @@
     {
       "source": "docs/document/component/layers.html",
       "route": "/document/component/layers.html",
-      "sha256Lf": "5a831b2c4b1657a23c06fc91d7db328e6194b6d69f8868b6b32b70bdf28a4b93",
+      "sha256Lf": "1362a35b4ec3cd7b5edce398ecc068b04bac59085d4231b1fe78089cee2f8618",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19718,10 +19758,10 @@
     {
       "source": "docs/document/component/setting.html",
       "route": "/document/component/setting.html",
-      "sha256Lf": "857b432d70a614685fe8b672ac33d95e0ab47399e98b83f16744fdbbbe440a60",
+      "sha256Lf": "b25ab1c63efd57f21befc6d99fb260d9ed3962c362483edfd232fac86a6022c8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19731,10 +19771,10 @@
     {
       "source": "docs/document/en/advanced/built-in.html",
       "route": "/document/en/advanced/built-in.html",
-      "sha256Lf": "8d3806b1b32bf623c3c9dd06686f09f6275095bd83efb13f0ae36ff1b307150b",
+      "sha256Lf": "a7954f35beca880a2ff44d2251701efb16199f82f2ee6f9a1ff8d4bc81e4be43",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19744,10 +19784,10 @@
     {
       "source": "docs/document/en/advanced/class.html",
       "route": "/document/en/advanced/class.html",
-      "sha256Lf": "70d8d136d4de3cfa6bc55e39a397982440a1354fa2fbfb600043eeb76ae2691f",
+      "sha256Lf": "ce81e271689ccaa1eec8a637263c8e9f47260fb3b6d51397261c4c4ac5b77538",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19757,10 +19797,10 @@
     {
       "source": "docs/document/en/advanced/event.html",
       "route": "/document/en/advanced/event.html",
-      "sha256Lf": "cae8977621117fd60544434c09708b71c7f56735740880d8b4bb7a57f63bd486",
+      "sha256Lf": "27ff38c0eb0d9310d1011dc4f9c2cb1fc3aa25a65f3894cc5210f9bfc47ce282",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19770,10 +19810,10 @@
     {
       "source": "docs/document/en/advanced/global.html",
       "route": "/document/en/advanced/global.html",
-      "sha256Lf": "35fd1d148b42284410608880fbcf6d08ce7d9605068c19d940d47843a641ee63",
+      "sha256Lf": "f2e0c07ed7133f8de420af1e1498cdfdd8646f4a5088a60d67be9e4b3beab306",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19783,10 +19823,10 @@
     {
       "source": "docs/document/en/advanced/plugin.html",
       "route": "/document/en/advanced/plugin.html",
-      "sha256Lf": "6d66f38591dd258c6223f3cc312c9eae7d30827478f3020ce0cfb6c60646b5ab",
+      "sha256Lf": "79d49b1f5ea77dfb41078405199374fbc0f6c69ffc649b305ebdd93880fafe41",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19796,10 +19836,10 @@
     {
       "source": "docs/document/en/advanced/property.html",
       "route": "/document/en/advanced/property.html",
-      "sha256Lf": "ff5b4921d4128ac798b0a79eda6b612508c562cd77f31716d7eba005255ff633",
+      "sha256Lf": "65b35459faeaa34011e2a180313ed93f96551f98cb47bc341ebfac617b099c73",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19809,10 +19849,10 @@
     {
       "source": "docs/document/en/component/contextmenu.html",
       "route": "/document/en/component/contextmenu.html",
-      "sha256Lf": "b191c0f2159013128942e554b78b4bd782d738da38c9719cb67293fec48419d4",
+      "sha256Lf": "2e0995090e839df75475d40f5e4857a25f29832150c8d4d06f95ac75393b8db3",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19822,10 +19862,10 @@
     {
       "source": "docs/document/en/component/controls.html",
       "route": "/document/en/component/controls.html",
-      "sha256Lf": "616282ccffae9fb96a4dc4524bb52369cc9522f5ce1a000f026deca71bd8f643",
+      "sha256Lf": "0da9c006746cdecbfc6448374dca763a5e32417c1c1a83392b45727e697a7b7f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19835,10 +19875,10 @@
     {
       "source": "docs/document/en/component/layers.html",
       "route": "/document/en/component/layers.html",
-      "sha256Lf": "8312d15e418ee498cf68edcb6d32f7555e67a6020d75c481d53bc259e9a71a7f",
+      "sha256Lf": "ad6d5a1ec00e95dfd62c901c2b913c5da64ac5e18076b6692cff2277b567a422",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19848,10 +19888,10 @@
     {
       "source": "docs/document/en/component/setting.html",
       "route": "/document/en/component/setting.html",
-      "sha256Lf": "59fe70481af00540004df2a88b5d7ca9fed2f42f662f4282293d5d8262b6e28e",
+      "sha256Lf": "1740d0f206d9e5f833c891e3b74504ff9e38597b09c29c92016ceaefdc5b912e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19861,10 +19901,10 @@
     {
       "source": "docs/document/en/index.html",
       "route": "/document/en/",
-      "sha256Lf": "23e306f139405b487d6d6519ce1b559632b8cb10d9c1392a0f06c81f263eb1da",
+      "sha256Lf": "41bcaec99b4a9f27150d7ebb60331b2eaf78bb9a4cf84b23ab2b30647fc3f57a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19874,10 +19914,10 @@
     {
       "source": "docs/document/en/plugin/ads.html",
       "route": "/document/en/plugin/ads.html",
-      "sha256Lf": "045142f521f6d859526620e454cd15611722bc6f3a4d50d8d98a51aa8d962805",
+      "sha256Lf": "c80d2f420883beb741268592c6ec770fa088232060be7a07b659ef15bafa9495",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19887,10 +19927,10 @@
     {
       "source": "docs/document/en/plugin/ambilight.html",
       "route": "/document/en/plugin/ambilight.html",
-      "sha256Lf": "cc4e6415dd447a3666fdb9cc0e064051396faa535cea905940977f56da69e727",
+      "sha256Lf": "cac7fb018b6e2d331c7f19c1444b1a8006039ac3dfb0c591d5655063b625bac5",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19900,10 +19940,10 @@
     {
       "source": "docs/document/en/plugin/asr.html",
       "route": "/document/en/plugin/asr.html",
-      "sha256Lf": "5c00b21a3125993e8cb7e8170b8ac3726415f8941c5e738592d60c7e3390e39c",
+      "sha256Lf": "3a26a155c339f5a9836829b8fc823ae3bfe6746fb0994488286c83e3d9b81948",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19913,10 +19953,10 @@
     {
       "source": "docs/document/en/plugin/audio-track.html",
       "route": "/document/en/plugin/audio-track.html",
-      "sha256Lf": "a9ccecea4a76f52663e7cae7f616ea684e95d870d9d61c9145e523d85d5f39df",
+      "sha256Lf": "dc66b1ce7e8d22f0ea7f15c2592a6768a515f60bcaa2dc82456cbb3bf5178d2a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19926,10 +19966,10 @@
     {
       "source": "docs/document/en/plugin/auto-thumbnail.html",
       "route": "/document/en/plugin/auto-thumbnail.html",
-      "sha256Lf": "0f8b06a6b30a3d5971f90ef4cd1ccdb95865c52dc71e042d0b963911fc9f022e",
+      "sha256Lf": "9a4e6d9ebdb5ac6954b19f0ac46433f1d427c44154a8dfdc21d28ade51fe0744",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19939,10 +19979,10 @@
     {
       "source": "docs/document/en/plugin/chapter.html",
       "route": "/document/en/plugin/chapter.html",
-      "sha256Lf": "1246f2b4c68f7876394a783bba516b674e1d0144635bb9093d9998e5b0a9a28c",
+      "sha256Lf": "2de2d2070eea976d0bcbe1ef943e41b1c7c8dfb7ea824084f8a746fb91af127a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19952,10 +19992,10 @@
     {
       "source": "docs/document/en/plugin/chromecast.html",
       "route": "/document/en/plugin/chromecast.html",
-      "sha256Lf": "28951ed2469ce17ebafe28e60727a2d0dd613da75989acf6d59e894e115837c2",
+      "sha256Lf": "bc4503b19db24345c561f896ca8b2a4087eea0ae989bb037acd9f1f960c47214",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19965,10 +20005,10 @@
     {
       "source": "docs/document/en/plugin/danmuku-mask.html",
       "route": "/document/en/plugin/danmuku-mask.html",
-      "sha256Lf": "fad5cf668c3dac148fe3317dc141083744c8682b3f16f0b0123502de1c7ccf69",
+      "sha256Lf": "e591132eed5c312c95c50fdc59ae50f56ffc25887fb096e3d5042c484bbb6a85",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19978,10 +20018,10 @@
     {
       "source": "docs/document/en/plugin/danmuku.html",
       "route": "/document/en/plugin/danmuku.html",
-      "sha256Lf": "02c55d97b91593115785b7357761546bc77b208e3b7f58a1153782207b1e986f",
+      "sha256Lf": "909873a6b0fd9775021ef1dc0e2946df0b28c4da5858206189c7010ba4b1c381",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19991,10 +20031,10 @@
     {
       "source": "docs/document/en/plugin/dash-control.html",
       "route": "/document/en/plugin/dash-control.html",
-      "sha256Lf": "9b2122e8dd3044bb55a0aa8a4c194034a3c37ed0c2d234089bf2e209275f3a6e",
+      "sha256Lf": "fb1044b26b7f571d7187c685044e1107dbd6daea29d292e9524ccad7bfbbc6a0",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20004,10 +20044,10 @@
     {
       "source": "docs/document/en/plugin/document-pip.html",
       "route": "/document/en/plugin/document-pip.html",
-      "sha256Lf": "8242b2dfe2b441269baf4048303f86e21c955379cfd8b9811d060f6a8c673ea8",
+      "sha256Lf": "7700e4079bc64e0cb841bd18fa633162548d5ee41bee7828f277ab3fb7d117c4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20017,10 +20057,10 @@
     {
       "source": "docs/document/en/plugin/hls-control.html",
       "route": "/document/en/plugin/hls-control.html",
-      "sha256Lf": "7aeb68d01eca25cc32b4494977768e65ea1312e5a5bd0b00b8c636831de2813e",
+      "sha256Lf": "6b50046b317b08e94883dddd72152d59afc13b77ce9c658d8fb2e9aee44d1526",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20030,10 +20070,10 @@
     {
       "source": "docs/document/en/plugin/jassub.html",
       "route": "/document/en/plugin/jassub.html",
-      "sha256Lf": "f5ea4489c3e17e9ada6ede8f7a08dad4f52d7e25f6307d1fc1f13becafd7bbf8",
+      "sha256Lf": "82305468e15e75e4be4e7bc3b9f8ee59395bc675ecb5cd60251f4f01d4db9f64",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20043,10 +20083,10 @@
     {
       "source": "docs/document/en/plugin/multiple-subtitles.html",
       "route": "/document/en/plugin/multiple-subtitles.html",
-      "sha256Lf": "07fe6784bd981ece24cf0e1092d42330d4ac5f1ee02115107c783290c65ba1d4",
+      "sha256Lf": "0d4e1db4a353890815b6c499ef5fec7fbde96848161aab739babde84801423ab",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20056,10 +20096,10 @@
     {
       "source": "docs/document/en/plugin/vast.html",
       "route": "/document/en/plugin/vast.html",
-      "sha256Lf": "a0dc5c56588520d26bf3c3c9bbf7f52c613b429e31d7bd96dee0b21d6060fe9a",
+      "sha256Lf": "cef636754db83c76fe0b57e8a5428e2a9f166500e0fc66ba5060d9787669f203",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20069,10 +20109,10 @@
     {
       "source": "docs/document/en/plugin/vtt-thumbnail.html",
       "route": "/document/en/plugin/vtt-thumbnail.html",
-      "sha256Lf": "76a79866b0ba0a79dbf34d625d12e9ff6d3978772ac2294cb1810e85f3e42558",
+      "sha256Lf": "c2bf79ab0f6ce171bb27d96db5fb89a163f943b278f968e9fa5c33758f0e5c8a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20082,10 +20122,10 @@
     {
       "source": "docs/document/en/proxy/canvas.html",
       "route": "/document/en/proxy/canvas.html",
-      "sha256Lf": "3d8f24b03d2257c5a1765f5103854d159e06ae91e90c2473fc519e039a714dd2",
+      "sha256Lf": "4004774240a10d0b5647cc92c663175473f979f2df92b74a74095f3c322cf000",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20095,10 +20135,10 @@
     {
       "source": "docs/document/en/proxy/mediabunny.html",
       "route": "/document/en/proxy/mediabunny.html",
-      "sha256Lf": "215d998162e020345bf1aa12e173eb1e283b3a2948d1d7e1e15114c74d9e2965",
+      "sha256Lf": "554e5432a56ae092c431b7618faf1646b5d68f2169d63bb5e8aaf0abf3b06fe8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20108,10 +20148,10 @@
     {
       "source": "docs/document/en/start/i18n.html",
       "route": "/document/en/start/i18n.html",
-      "sha256Lf": "f7c62c61dc13dd89770af2e8a9095594ffdb1c250d9f3294a970248dcccf59e4",
+      "sha256Lf": "fcb8a0b5207580ea0131654c5c5e2459b0b49ee680e3929fda9785e58b57110c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20121,10 +20161,10 @@
     {
       "source": "docs/document/en/start/option.html",
       "route": "/document/en/start/option.html",
-      "sha256Lf": "ae12274bf65984e33bf3e198011b055d4c348a0f6925b66f444bfd047a9db968",
+      "sha256Lf": "259e84a4a9379ac0500986de40888c438d2dcba19487d22adce87484797e0a1a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20134,10 +20174,10 @@
     {
       "source": "docs/document/en/tool/iframe.html",
       "route": "/document/en/tool/iframe.html",
-      "sha256Lf": "5253a332b6c4e62fc0ba36ef3b699480f6aea98f40efebd40e81c0ec52725d78",
+      "sha256Lf": "b08fc8110628d20694099ef3eafa3edb02b850c182afb22c0c42f062c5ca7377",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20147,10 +20187,10 @@
     {
       "source": "docs/document/en/tool/thumbnail.html",
       "route": "/document/en/tool/thumbnail.html",
-      "sha256Lf": "a3712c04aa9fa4121b82927bd2edd574542e68cdbef41866e8f0a9bfb4fd6adb",
+      "sha256Lf": "d0bd20d2ed5872710f3e01b333db79deb5f030d107fb6b116c172c926c1f672a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20160,10 +20200,10 @@
     {
       "source": "docs/document/index.html",
       "route": "/document/",
-      "sha256Lf": "ecf891e8c0cac17a996d73a48e6ced7cecb5966156aba4875e5fd8f2f77c7efa",
+      "sha256Lf": "e20723c85c04c8c460411f7ca4fac78a7bc4c1087bd3b408e139c4498de69a3e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20173,10 +20213,10 @@
     {
       "source": "docs/document/plugin/ads.html",
       "route": "/document/plugin/ads.html",
-      "sha256Lf": "09bb7024c735ce53e5bf8912a971c5a09609e2fbd5276e354f7103e1b0840816",
+      "sha256Lf": "005e69f97a0dbe2139420b5d1908c7bdbc337452666526d7074a6ecae555d6d1",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20186,10 +20226,10 @@
     {
       "source": "docs/document/plugin/ambilight.html",
       "route": "/document/plugin/ambilight.html",
-      "sha256Lf": "a0b48a55c9caa841d1b6a36f7790e4c1bde876733098cde7056841b2b808a9a8",
+      "sha256Lf": "504c721bb39aeb7d21e594ac33562f5a2ba8d833287e522b8019412c5f8f634f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20199,10 +20239,10 @@
     {
       "source": "docs/document/plugin/asr.html",
       "route": "/document/plugin/asr.html",
-      "sha256Lf": "5b41640fcb33fb34459bf91f470f17f49e1ee881cf09875683982f4d16382958",
+      "sha256Lf": "ce200b32276496d7425012c685f93476aa231014ff8d522134aacaa53198134d",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20212,10 +20252,10 @@
     {
       "source": "docs/document/plugin/audio-track.html",
       "route": "/document/plugin/audio-track.html",
-      "sha256Lf": "ae1b204be174edc981ea04de5894e9a6025bde4014951bec5f3a3fae7a62ce78",
+      "sha256Lf": "6451e6a811665217bbc05fcb2bb05f0da0b5287a1fd07363a008fae5c27000c8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20225,10 +20265,10 @@
     {
       "source": "docs/document/plugin/auto-thumbnail.html",
       "route": "/document/plugin/auto-thumbnail.html",
-      "sha256Lf": "85c25d7f5b4e51878f5aba472b04622018ae337cff02802d0c5e1c03f8fbe823",
+      "sha256Lf": "5635bda03d48de8d790121f699c8161759c6cbfafd54581c40b094869f795986",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20238,10 +20278,10 @@
     {
       "source": "docs/document/plugin/chapter.html",
       "route": "/document/plugin/chapter.html",
-      "sha256Lf": "63346fb91ca89c9783d067249667f99d0fb3fbdf0d2f35763a746e4963affda2",
+      "sha256Lf": "8b451c037e20b1cf6cf45843fd194ece01c221676cd23f2f09c0433ba5b1a5e3",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20251,10 +20291,10 @@
     {
       "source": "docs/document/plugin/chromecast.html",
       "route": "/document/plugin/chromecast.html",
-      "sha256Lf": "734e949eb345fafcefcf47df88e3ba0a7e22fe71c269965b62edfdecdff9aeff",
+      "sha256Lf": "0d1ee5e838cfd251eb0c931d61884bb20625e58ce4703a29e029dcc48a829935",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20264,10 +20304,10 @@
     {
       "source": "docs/document/plugin/danmuku-mask.html",
       "route": "/document/plugin/danmuku-mask.html",
-      "sha256Lf": "65fe68ffa3209d4f0bae66db09b6629ef65be6c175d2a4b583971948bda95128",
+      "sha256Lf": "5f9469e082a7fbaab240e56d08acf455be71db3778391a1da8016f792d1a5b54",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20277,10 +20317,10 @@
     {
       "source": "docs/document/plugin/danmuku.html",
       "route": "/document/plugin/danmuku.html",
-      "sha256Lf": "e2351f78b1552b893980101b535e976ed2aea40c7fd1c8339be383d2757287de",
+      "sha256Lf": "d460c189160737e8f7461a60aa607212e18866e94b1ced1870146ec6e393c0b8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20290,10 +20330,10 @@
     {
       "source": "docs/document/plugin/dash-control.html",
       "route": "/document/plugin/dash-control.html",
-      "sha256Lf": "72ca92e8bc59398f55435a5c43df5b47c0a5736667d8266c1364fbde2cfc5ea0",
+      "sha256Lf": "7330f13ad2f0ef4eddd1133aef2801de8ad632df107bcf441868785fcbea42c4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20303,10 +20343,10 @@
     {
       "source": "docs/document/plugin/document-pip.html",
       "route": "/document/plugin/document-pip.html",
-      "sha256Lf": "0f958b5c90b66fa06bfad2b518eeea89b96390cc32a5a57974891bfae37b9312",
+      "sha256Lf": "76940cff03ad76ed0928cfebede59d40ef8935c5a442798af013c4f1e986945e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20316,10 +20356,10 @@
     {
       "source": "docs/document/plugin/hls-control.html",
       "route": "/document/plugin/hls-control.html",
-      "sha256Lf": "a4f8f367f498562d08590475875a8d91c340d83fb22cf392380ccfbc35f2d1e1",
+      "sha256Lf": "a194775427b239c06360e365d5557d5cbb4001c5eefa013c41bd618f8972dc9a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20329,10 +20369,10 @@
     {
       "source": "docs/document/plugin/jassub.html",
       "route": "/document/plugin/jassub.html",
-      "sha256Lf": "5b9ae5c00dd980044564c2f55924c3cf097a62663943e088fa4f12c10612c406",
+      "sha256Lf": "510a9c731f17ba5e0dce821a9f0e75efcb5fd8c176588920f548bee008b9979c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20342,10 +20382,10 @@
     {
       "source": "docs/document/plugin/multiple-subtitles.html",
       "route": "/document/plugin/multiple-subtitles.html",
-      "sha256Lf": "92a428fd4533304e716f20edf278b37cfcaa2aa779512c1d877a1758782aa00c",
+      "sha256Lf": "16028491c483befeb697903ff2312075e322053c6826e80b16adddb6b629624c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20355,10 +20395,10 @@
     {
       "source": "docs/document/plugin/vast.html",
       "route": "/document/plugin/vast.html",
-      "sha256Lf": "dcfd09115751e86c8c77f76bd307574f19b47c75c053312bb743e2b318eb4bbe",
+      "sha256Lf": "e6dfc4bde300e7a7346dea6aed51c28f7a15bb2dd6c92b7ca1c1cd9dba56911e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20368,10 +20408,10 @@
     {
       "source": "docs/document/plugin/vtt-thumbnail.html",
       "route": "/document/plugin/vtt-thumbnail.html",
-      "sha256Lf": "6b9a42c14ff2e5b8b538baa80663e791ec49d511f0cbc523cc4d6683d86ec49d",
+      "sha256Lf": "c75ad7017bcd687b644e8ddfe5a3b154384f1a9e96ec868aab7a6488b1972ca6",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20381,10 +20421,10 @@
     {
       "source": "docs/document/proxy/canvas.html",
       "route": "/document/proxy/canvas.html",
-      "sha256Lf": "b4220b52f99e0709a9f1215753916347f938f80e123c3772edb8dd52f16f313f",
+      "sha256Lf": "75a00bd6a56d7a35ded81e18415d14a421bdab740be5ec4d5c2d70376bf878d2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20394,10 +20434,10 @@
     {
       "source": "docs/document/proxy/mediabunny.html",
       "route": "/document/proxy/mediabunny.html",
-      "sha256Lf": "ab96d91cf815263b8371cad229752036ce5abe448cf1da4b86e13a181622c85a",
+      "sha256Lf": "f60a294bbc5174e66ee87e2280114d98330f9f08cfeb5e1a14d20b12fd2fcf63",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20407,10 +20447,10 @@
     {
       "source": "docs/document/start/i18n.html",
       "route": "/document/start/i18n.html",
-      "sha256Lf": "5b4516db7efa932dff9d737451b0df2524916ddc253b9d912a92c28498875bc3",
+      "sha256Lf": "1ac3f17a5a2457ccc6d4ab7b1ad6b45d1dfa3d18338f55350635a7f4a765a3f4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20420,10 +20460,10 @@
     {
       "source": "docs/document/start/option.html",
       "route": "/document/start/option.html",
-      "sha256Lf": "c119ffed8284decd642d2d16593c1ab0d3d216ad3b85777f6d896a474f743139",
+      "sha256Lf": "a2fcf7d3f5b2cbf4de91681a4fdd6d5dd28c523fd59dd1f6d172e0d3d33928b9",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20433,10 +20473,10 @@
     {
       "source": "docs/document/tool/iframe.html",
       "route": "/document/tool/iframe.html",
-      "sha256Lf": "bed67d33427173683ab48906708f6214ef79410129e163a3b3ec0db9e8d359aa",
+      "sha256Lf": "4cccb60f77ce823ed8a11c222ad27823827c9bce572f11691e8664d47681ebc2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20446,10 +20486,10 @@
     {
       "source": "docs/document/tool/thumbnail.html",
       "route": "/document/tool/thumbnail.html",
-      "sha256Lf": "c6cdddb1397ef5a5cc6ca9f87c48f141d1255a83b2d29997656d94c51223ccd1",
+      "sha256Lf": "49eb9530026b7586c399fa6e0cc5224484a534e96e8563c660046388f6c54192",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BkCzoTr1.js",
+        "/document/assets/app.CEYmLzTJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],

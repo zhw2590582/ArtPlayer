@@ -8,7 +8,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-      "sha256Lf": "1b4754150147a338c56de9475dd90065b72279edac2d7a087b53afe017839e4e"
+      "sha256Lf": "3e5d7f6cfaca13793d2ca02d0d6f18845bedd6de85c224ef781651399b387eb8"
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -16,7 +16,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
-      "sha256Lf": "01380ae04fedd94dd91f5f31c51d4894c458dad3268cf38119b54a8fe73ee46c"
+      "sha256Lf": "f1c249e52a3edbab7ad48a1a652eab2d03b47879bb5eac28d0c61c13dcc0a75c"
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/advanced/plugin.md",
@@ -347,5 +347,5 @@
       "sha256Lf": "967db6e5026a2fd3cc24d8a04e5c78859f543d0c0f6d4f9599c103e4e93c9b29"
     }
   ],
-  "outputSha256Lf": "3a06a8d0a1bae67c5e3a445555e1f413c8e8add91ab12598989d5f0e5fc30ac4"
+  "outputSha256Lf": "ac15bf23803f9f4fac230239df7f50dfe29394825f6d4e1ff469a1b9d3005104"
 }

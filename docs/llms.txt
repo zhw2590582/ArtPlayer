@@ -765,12 +765,29 @@ console.info(Artplayer.build);
 
 ## `config`
 
-Returns the default configuration for videos.
+Returns the shared media-surface inventory, not the default player options (those are in Artplayer.option).
+
+### Media surface inventory {#config-contract}
+
+The getter returns the same object each time. Its properties, methods, events, and prototypes arrays describe media property names, callable methods, native events, and additional video-specific surface members. They are inventories, not capability guarantees: proxies and browsers may support only part of the surface.
+
+The core reads config.events when installing native event forwarding, then forwards those events as video:eventName. Changing the array later does not add/remove listeners on existing players. Debug logging and proxy adapters also consume this inventory; editing it does not create the corresponding native methods or properties. The root Config type retains historical readonly tuples; runtime Config accurately exposes mutable string arrays. Mutation affects shared consumers, so preserve order and restore temporary test changes.
 
 <div className="run-code">▶ Run Code</div>
 
 ```js
 console.info(Artplayer.config);
+```
+
+
+```ts
+import Artplayer from 'artplayer/runtime';
+import type { Config } from 'artplayer/runtime';
+
+const config: Config = Artplayer.config;
+const nativeNames: string[] = config.events.slice();
+const shared: boolean = Artplayer.config === config;
+void [nativeNames, shared];
 ```
 
 ## `utils`
@@ -1845,6 +1862,54 @@ Playback has stopped because of a temporary lack of data.
 
 The `global properties` here refer to the `top-level properties` mounted on the `constructor`. All property names are in uppercase. These are subject to change in the future and are rarely used.
 
+## Scope and effective timing {#global-contract}
+
+These fields belong to the constructor and are shared by instances from that Artplayer module. They are not per-instance options and assignments are not automatically validated. Configure them before constructing players when possible. Some consumers read them at initialization, others at event time; changing a field does not rebuild existing menus, listeners, or pending timers. Separate module copies have separate constructors and fields.
+
+### Initialization and UI {#global-initialization}
+
+| Field | Default and reading point |
+| --- | --- |
+| `STYLE` | Embedded CSS text. Import has already injected artplayer-style; assigning STYLE later does not update that node |
+| `DEBUG` | false; constructor decides whether to install logging listeners. Setting false later does not remove them |
+| `CONTEXTMENU` | true; checked when opening the desktop menu. Does not remove entries or prevent setting contextmenu.show manually |
+| `PLAYBACK_RATE` / `ASPECT_RATIO` / `FLIP` | Default arrays are listed below. Read when constructing setting/context-menu entries; changing them does not refresh existing entries |
+| `SETTING_ITEM_WIDTH` | 200px; read when constructing built-in submenu options. Explicit item widths can override it |
+| `SETTING_ITEM_HEIGHT` | 35px; read when creating items/back rows and laying out panels. Existing node heights are not rewritten merely by assigning this field |
+| `SETTING_WIDTH` | 250px; root width read during panel layout, still constrained by the container |
+| `USE_RAF` | false; initialization selects the raf loop and progress listener branch. Not a live mode toggle; raf emits during playback and does not replace native media events |
+| `LOG_VERSION` | true; read by the callback about 100ms after module import, not once per player construction |
+| `REMOVE_SRC_WHEN_DESTROY` | true; read by each destroy call. false only skips removeAttribute('src')/load(); listeners, requests, UI, and plugin lifecycle still clean up. Preserving DOM uses the separate destroy(false) argument |
+
+### Scheduling and interaction {#global-timing}
+
+Time values below use milliseconds unless stated otherwise. Already queued work retains the delay used when scheduled.
+
+| Field | Default and reading point |
+| --- | --- |
+| `NOTICE_TIME` | 2000; read when showing a notice, without rescheduling an existing one |
+| `RESIZE_TIME` | 200; read when resize/orientation queues a new task, canceling the previous task. This is trailing debounce |
+| `SCROLL_TIME` / `SCROLL_GAP` | 200 / 50px. The delay is captured when the event system initializes; the gap is read on accepted scroll events. Leading throttle emits a boolean view event; the raw event is window:scroll |
+| `CONTROL_HIDE_TIME` | 3000; checked against last-show time in video:timeupdate, while playing and without active setting/input/control interaction. Not a standalone timer |
+| `DBCLICK_TIME` | 300; click-count window read on each video click. The first single click is not delayed while awaiting another |
+| `DBCLICK_FULLSCREEN` / `MOBILE_DBCLICK_PLAY` / `MOBILE_CLICK_PLAY` | true / true / false; read on each video click for desktop double-click fullscreen and mobile double/single-click playback. Mobile playback remains subject to the lock state |
+| `FAST_FORWARD_TIME` / `FAST_FORWARD_VALUE` | 1000 / 3x; delay read when a long press is queued, rate when it activates. Requires the plugin to be enabled, playback active, and the player unlocked |
+| `TOUCH_MOVE_RATIO` | 0.5; read during video gestures. Progress-bar dragging does not apply this video multiplier |
+| `VOLUME_STEP` / `SEEK_STEP` | 0.1 / 5 seconds; read by shortcuts and accessible volume/progress slider actions |
+| `FULLSCREEN_WEB_IN_BODY` | true; read when entering web fullscreen. Exit restores that session's saved placement |
+| `AUTO_ORIENTATION_TIME` | 200; read when a required web-fullscreen rotation is queued. Does not force device rotation capability |
+| `INFO_LOOP_TIME` | 1000; read each time the visible info panel queues its next update |
+
+### Resume records and reconnection {#global-recovery}
+
+| Field | Default and reading point |
+| --- | --- |
+| `AUTO_PLAYBACK_MAX` | 10; read when playing timeupdate writes a record. Historical logic removes one first-enumerated key only if the count already exceeds the threshold before writing; not a strict 10-entry cap or LRU |
+| `AUTO_PLAYBACK_MIN` | 5 seconds; decides whether saved progress merits a resume prompt, rather than preventing storage below 5 seconds |
+| `AUTO_PLAYBACK_TIMEOUT` | 3000; read on the first timeupdate after a resume prompt is created, when hiding is scheduled |
+| `RECONNECT_TIME_MAX` / `RECONNECT_SLEEP_TIME` | 5 attempts / 1000; read when handling a media error to decide retry and queue its delay. Retries belong to the current source/lifecycle; these do not configure HLS/DASH SDK retry policies |
+
+
 ## DEBUG
 
 Whether to enable `debug` mode, which can print all built-in video events. Default is off.
@@ -1962,7 +2027,7 @@ var art = new Artplayer({
 
 ## RESIZE_TIME
 
-The throttle time for the `resize` event, in milliseconds. Default is `200`.
+The debounce delay for the `resize` event, in milliseconds. Default is `200`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1993,8 +2058,8 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-art.on('scroll', () => {
-    console.log('scroll');
+art.on('view', (visible) => {
+    console.log('view', visible);
 });
 ```
 
@@ -2012,8 +2077,8 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-art.on('scroll', () => {
-    console.log('scroll');
+art.on('view', (visible) => {
+    console.log('view', visible);
 });
 ```
 
@@ -2035,7 +2100,7 @@ var art = new Artplayer({
 
 ## AUTO_PLAYBACK_MIN
 
-The minimum record duration for the auto-playback feature, in seconds. Default is `5`.
+The minimum saved progress for showing the auto-playback resume prompt, in seconds. Default is `5`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -2397,7 +2462,7 @@ var art = new Artplayer({
 
 Whether to remove the video's `src` attribute and call `load()` to actively release media resources when destroying the player. Default is `true`.
 
-Enabling this can reduce video resource usage in single-page applications or scenarios where players are frequently created/destroyed. If you wish to preserve the state of the video element and only remove the UI, you can set this to `false`.
+Enabling this can reduce video resource usage in single-page applications or scenarios where players are frequently created/destroyed. Setting this to `false` skips this explicit media reset; the other destroy cleanup still runs.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -2409,7 +2474,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-// Only destroy the UI, do not actively clear the src
+// Run destroy cleanup without explicitly resetting src
 art.destroy();
 ```
 

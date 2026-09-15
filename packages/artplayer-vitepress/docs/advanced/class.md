@@ -51,12 +51,29 @@ console.info(Artplayer.build);
 
 ## `config`
 
-返回视频的默认配置
+返回共享的媒体接口清单，不是播放器默认选项（默认选项见 Artplayer.option）。
+
+### 媒体接口清单 {#config-contract}
+
+该getter每次返回同一个对象。properties、methods、events、prototypes数组分别列出媒体属性名、可调用方法、原生事件、其他video专用成员。它们是名称清单而非能力保证；代理和浏览器可能只支持其中一部分。
+
+核心在安装原生事件转发时读取config.events，随后转发为video:事件名；之后改数组不会增删已有实例的监听器。调试日志和代理适配器也会使用清单，修改名称不会创建对应的原生方法/属性。根Config保留历史readonly tuple类型，runtime Config准确描述可变字符串数组；修改会影响共享使用者，应保留顺序并还原临时测试修改。
 
 <div className="run-code">▶ Run Code</div>
 
 ```js
 console.info(Artplayer.config);
+```
+
+
+```ts
+import Artplayer from 'artplayer/runtime';
+import type { Config } from 'artplayer/runtime';
+
+const config: Config = Artplayer.config;
+const nativeNames: string[] = config.events.slice();
+const shared: boolean = Artplayer.config === config;
+void [nativeNames, shared];
 ```
 
 ## `utils`

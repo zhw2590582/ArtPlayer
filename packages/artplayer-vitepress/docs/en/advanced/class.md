@@ -51,12 +51,29 @@ console.info(Artplayer.build);
 
 ## `config`
 
-Returns the default configuration for videos.
+Returns the shared media-surface inventory, not the default player options (those are in Artplayer.option).
+
+### Media surface inventory {#config-contract}
+
+The getter returns the same object each time. Its properties, methods, events, and prototypes arrays describe media property names, callable methods, native events, and additional video-specific surface members. They are inventories, not capability guarantees: proxies and browsers may support only part of the surface.
+
+The core reads config.events when installing native event forwarding, then forwards those events as video:eventName. Changing the array later does not add/remove listeners on existing players. Debug logging and proxy adapters also consume this inventory; editing it does not create the corresponding native methods or properties. The root Config type retains historical readonly tuples; runtime Config accurately exposes mutable string arrays. Mutation affects shared consumers, so preserve order and restore temporary test changes.
 
 <div className="run-code">▶ Run Code</div>
 
 ```js
 console.info(Artplayer.config);
+```
+
+
+```ts
+import Artplayer from 'artplayer/runtime';
+import type { Config } from 'artplayer/runtime';
+
+const config: Config = Artplayer.config;
+const nativeNames: string[] = config.events.slice();
+const shared: boolean = Artplayer.config === config;
+void [nativeNames, shared];
 ```
 
 ## `utils`

@@ -1,0 +1,1428 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "doing",
+  "sourceBefore": "9afbf9940dd019191aa6680b00812bb1c7d8e8b1",
+  "capturedAt": "2026-09-15T23:37:15.009Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "static": [
+      {
+        "language": "zh",
+        "name": "class",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/advanced/class.md",
+          "sha256": "52dc8eae7ad8cb17cb63b03dd99596898f16187773466bc4874f042ee535006e"
+        },
+        "html": {
+          "path": "docs/document/advanced/class.html",
+          "sha256": "ba933562b3f68fe51d5e7d1d784a91ccde5c2a50a2d85567421ec150fda0d204"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-globals/zh-class-0.mts",
+            "sha256": "ccae1533ae6278b9be0db92b25544da24c65eb2d0557b46127c86281889bbfe6"
+          },
+          {
+            "path": "refactor/.cache/site04-globals/zh-class-1.mts",
+            "sha256": "6072147d2ee9124fe55695e822b82b8277a0083ec3ef562cf5db0188a5ec46bd"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "advanced/class.md:12",
+            "sha256": "f6116dd700782b3a3abdd82af44d7ba67a81355012efdc0f18d73e1cab65f80d"
+          },
+          {
+            "id": "advanced/class.md:29",
+            "sha256": "4699bde73558d763e96a388404adaaff25d6a78051cf4937bde949bf5a80aa9d"
+          },
+          {
+            "id": "advanced/class.md:39",
+            "sha256": "85a4e9a47cd740b98bfa08b6747b26ce87aeadafc522fbb2d2f67a8ca448a471"
+          },
+          {
+            "id": "advanced/class.md:49",
+            "sha256": "cc3a5dae8a05a2f46cb882b095229e6d1f4937b2b0c476cb387e8d3bf6c63e5e"
+          },
+          {
+            "id": "advanced/class.md:65",
+            "sha256": "7e5d31329eb55513625162d8044132caa33109972cf6bb61b1e44fe777d77005"
+          },
+          {
+            "id": "advanced/class.md:86",
+            "sha256": "015b6d015ed056fbc4493875348a6067a8abd1e1fe65299210a6b7210808ae7f"
+          },
+          {
+            "id": "advanced/class.md:188",
+            "sha256": "84260b064bc33095f95a2e4ea2da71176821c749b03186a59b9c878f382aa082"
+          },
+          {
+            "id": "advanced/class.md:198",
+            "sha256": "e4c70c3d623e35cb18a7ad1fb8b7388442666d00bdf38f0732ee074460a1579a"
+          },
+          {
+            "id": "advanced/class.md:208",
+            "sha256": "717c32a8c00f52626868d840910b93a744f24d5bfe283434d2462510efbccbe3"
+          },
+          {
+            "id": "advanced/class.md:218",
+            "sha256": "4402e4041ca0d5e807aa334fd36b292296c0e65510b98811cfc41dfea9c125d4"
+          },
+          {
+            "id": "advanced/class.md:228",
+            "sha256": "e66ec4191c93c9c3f81530d765fd68edf702c265448e5a2602a5f06e1bc5b91c"
+          },
+          {
+            "id": "advanced/class.md:240",
+            "sha256": "479b94070bf574ba7e495d1a15e5bcd006e1fe8b04699d85af17faac9b64640a"
+          }
+        ],
+        "localLinks": [
+          "/document/advanced/class.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/advanced/class.html#%E9%9D%99%E6%80%81%E5%B1%9E%E6%80%A7",
+          "/document/advanced/class.html#instances",
+          "/document/advanced/class.html#version",
+          "/document/advanced/class.html#env",
+          "/document/advanced/class.html#build",
+          "/document/advanced/class.html#config",
+          "/document/advanced/class.html#config-contract",
+          "/document/advanced/class.html#utils",
+          "/document/advanced/class.html#utils-contract",
+          "/document/advanced/class.html#utils-dom",
+          "/document/advanced/class.html#utils-measure",
+          "/document/advanced/class.html#utils-resources",
+          "/document/advanced/class.html#utils-data",
+          "/document/advanced/class.html#scheme",
+          "/document/advanced/class.html#emitter",
+          "/document/advanced/class.html#validator",
+          "/document/advanced/class.html#kindof",
+          "/document/advanced/class.html#html",
+          "/document/advanced/class.html#option"
+        ]
+      },
+      {
+        "language": "zh",
+        "name": "global",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/advanced/global.md",
+          "sha256": "38e1b425227f877436c106451510537b15f4f4d418b0ae8f351e39ce2232745d"
+        },
+        "html": {
+          "path": "docs/document/advanced/global.html",
+          "sha256": "3c30b646bfaec74bd703fa9467fd1fef86fb6ae251a06f98edb7221859676584"
+        },
+        "typeFixtures": [],
+        "snippets": [
+          {
+            "id": "advanced/global.md:60",
+            "sha256": "e79eda05269a675c4c4ce8507b3b9e4057c17c4ec909167585afdf7fd91ec4dc"
+          },
+          {
+            "id": "advanced/global.md:75",
+            "sha256": "88c70c7ce410a7d02a5b47b6c430fc3559af7e6f7857d9abe3ac44e841529735"
+          },
+          {
+            "id": "advanced/global.md:85",
+            "sha256": "8c780d585c07df6e40e8a0b3ce7c8f64ed2ab5be93f6db20a2957f37db486c94"
+          },
+          {
+            "id": "advanced/global.md:100",
+            "sha256": "a781771a12248475d22117a16a0bfc8b005f6393d53c12daed41eac0031ff079"
+          },
+          {
+            "id": "advanced/global.md:115",
+            "sha256": "16899fcd8548e38212f32545b0194ecea7b3487287e79a5e206304d60d5e5594"
+          },
+          {
+            "id": "advanced/global.md:135",
+            "sha256": "f467fb6db17d51ba11476a94e6e7ff4dea631a28118116d7734bd23e126bf60c"
+          },
+          {
+            "id": "advanced/global.md:155",
+            "sha256": "cef1d7b53dbca4d7fbc61d43ddb5bbfb88346629ff44a1bd8df457c8b2bf0b17"
+          },
+          {
+            "id": "advanced/global.md:175",
+            "sha256": "5c3a324c48a92ad738d436f4995f44429fd5c05968744325d33f8340523bdbcf"
+          },
+          {
+            "id": "advanced/global.md:194",
+            "sha256": "db02141ace4ff11d02df35726c76a2fa5b56191c6f1105d84a0cdce8dda59f54"
+          },
+          {
+            "id": "advanced/global.md:213",
+            "sha256": "f2b05f203fb5e98a308cd4cc4c03d17658fb288b6d1b178445578cb14d0b3093"
+          },
+          {
+            "id": "advanced/global.md:232",
+            "sha256": "d6d593701fbadb41c71769bf6e4fdb2502e508325aa7a6f9eb989cc2dce6ba80"
+          },
+          {
+            "id": "advanced/global.md:248",
+            "sha256": "45f5bcaab1f1d6c0b064a8ca7b584be22a137a6e8928791b39606e67c5f8f1e7"
+          },
+          {
+            "id": "advanced/global.md:264",
+            "sha256": "0d63e85f649b01dc0496644ac605578d28695783be935e7268712a5cd6df1672"
+          },
+          {
+            "id": "advanced/global.md:280",
+            "sha256": "baeff6ec7a99abb7be3d74132ec1b55632d04ff10fed855aaa9a7414dc298fda"
+          },
+          {
+            "id": "advanced/global.md:295",
+            "sha256": "c05b252918dc642eefaf56d707f6c450d076f775490dd09849a578b640201cd6"
+          },
+          {
+            "id": "advanced/global.md:310",
+            "sha256": "f6e8a9976af88201bd6b86dbd3f3f63ddafef00613f60ae2e33f159e58cf8cdf"
+          },
+          {
+            "id": "advanced/global.md:325",
+            "sha256": "3f0a5365971c30a740b48612186b84ee8d0aa3fd683f9cf9deabd84647790007"
+          },
+          {
+            "id": "advanced/global.md:344",
+            "sha256": "527d96c02e666df04dfb91b8c58803dbb29cba5b3b7b408d7741fe10b1df2de4"
+          },
+          {
+            "id": "advanced/global.md:359",
+            "sha256": "40535a9a1afb2f9e1e05f9211c0f1afca3a2a229d8b3b9fb348de7a21101e5f4"
+          },
+          {
+            "id": "advanced/global.md:374",
+            "sha256": "e9e82d9d11605357a25fbab951aa61b022bb01db77951af7403478f38f5088e2"
+          },
+          {
+            "id": "advanced/global.md:389",
+            "sha256": "1eca689e0fc91b1f74259d6a7bfa88ab2d9a0edb0271d758a54a9e4f2ce257d7"
+          },
+          {
+            "id": "advanced/global.md:405",
+            "sha256": "4fb671f3d2b0ea3fe880adbd18e69ca6f8a787eea22fad454ae36fa51c561740"
+          },
+          {
+            "id": "advanced/global.md:422",
+            "sha256": "91513a23bef7c294d1671dfac6953a06fb6c2d571f984e81f9da2255185da5c8"
+          },
+          {
+            "id": "advanced/global.md:438",
+            "sha256": "a76f045db2f31a257834da122ec7b930af8e7e8eda04fd0bf8273323c5fa8ea8"
+          },
+          {
+            "id": "advanced/global.md:454",
+            "sha256": "71bea4964117a51d9fa40fa7b6ea6dcb0a09b13bd76d4969bf5079ce84b7494f"
+          },
+          {
+            "id": "advanced/global.md:469",
+            "sha256": "6af27d3ba9c23a8cec6cd0a0a6b2784bf7a63056dade3d81982be691a7570b65"
+          },
+          {
+            "id": "advanced/global.md:484",
+            "sha256": "7ed0759edb1fb6a6cc1a61e69963abd5dadb51b51f0ebd186a08dbb9228d2204"
+          },
+          {
+            "id": "advanced/global.md:499",
+            "sha256": "89a4c0f6d80d8e0b4bac6a56f12d7251951325f8d18e7a2d1dc5ec32eb6a2ab8"
+          },
+          {
+            "id": "advanced/global.md:519",
+            "sha256": "6854639b64dea3f8073a84e03df293383584d584c3e12972388e9731c43b6dfc"
+          },
+          {
+            "id": "advanced/global.md:539",
+            "sha256": "09f24687c564bda6e1f00b47b1b501e794524513ff1d706f4963f541db1054df"
+          },
+          {
+            "id": "advanced/global.md:559",
+            "sha256": "e4872fb74c9200f783d5478fdae2e4126cd03a98368f7d1d9a9668de526577fb"
+          },
+          {
+            "id": "advanced/global.md:575",
+            "sha256": "b6eae9955c19e0c135995aecc714eec8874de5e13c3303222c4fa3d6ab5fd2a9"
+          },
+          {
+            "id": "advanced/global.md:590",
+            "sha256": "c784e06943df5473a8522a7d14d4b57df0fcf0d7f33aeb03cef7eb150f922680"
+          },
+          {
+            "id": "advanced/global.md:608",
+            "sha256": "9724bb8641d3f797c7668aa3ec984732644b68641f7ef8085c0fbd4385eb7ef8"
+          }
+        ],
+        "localLinks": [
+          "/document/advanced/global.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/advanced/global.html#%E5%85%A8%E5%B1%80%E5%B1%9E%E6%80%A7",
+          "/document/advanced/global.html#global-contract",
+          "/document/advanced/global.html#global-initialization",
+          "/document/advanced/global.html#global-timing",
+          "/document/advanced/global.html#global-recovery",
+          "/document/advanced/global.html#debug",
+          "/document/advanced/global.html#style",
+          "/document/advanced/global.html#contextmenu",
+          "/document/advanced/global.html#notice-time",
+          "/document/advanced/global.html#setting-width",
+          "/document/advanced/global.html#setting-item-width",
+          "/document/advanced/global.html#setting-item-height",
+          "/document/advanced/global.html#resize-time",
+          "/document/advanced/global.html#scroll-time",
+          "/document/advanced/global.html#scroll-gap",
+          "/document/advanced/global.html#auto-playback-max",
+          "/document/advanced/global.html#auto-playback-min",
+          "/document/advanced/global.html#auto-playback-timeout",
+          "/document/advanced/global.html#reconnect-time-max",
+          "/document/advanced/global.html#reconnect-sleep-time",
+          "/document/advanced/global.html#control-hide-time",
+          "/document/advanced/global.html#dbclick-time",
+          "/document/advanced/global.html#dbclick-fullscreen",
+          "/document/advanced/global.html#mobile-dbclick-play",
+          "/document/advanced/global.html#mobile-click-play",
+          "/document/advanced/global.html#auto-orientation-time",
+          "/document/advanced/global.html#info-loop-time",
+          "/document/advanced/global.html#fast-forward-value",
+          "/document/advanced/global.html#fast-forward-time",
+          "/document/advanced/global.html#touch-move-ratio",
+          "/document/advanced/global.html#volume-step",
+          "/document/advanced/global.html#seek-step",
+          "/document/advanced/global.html#playback-rate",
+          "/document/advanced/global.html#aspect-ratio",
+          "/document/advanced/global.html#flip",
+          "/document/advanced/global.html#fullscreen-web-in-body",
+          "/document/advanced/global.html#log-version",
+          "/document/advanced/global.html#use-raf",
+          "/document/advanced/global.html#remove-src-when-destroy"
+        ]
+      },
+      {
+        "language": "en",
+        "name": "class",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+          "sha256": "72a1edcbd4d0ed5bfca1850cee5d0d2473a2a38096c10d248f457685e9b420d9"
+        },
+        "html": {
+          "path": "docs/document/en/advanced/class.html",
+          "sha256": "ce81e271689ccaa1eec8a637263c8e9f47260fb3b6d51397261c4c4ac5b77538"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-globals/en-class-0.mts",
+            "sha256": "ccae1533ae6278b9be0db92b25544da24c65eb2d0557b46127c86281889bbfe6"
+          },
+          {
+            "path": "refactor/.cache/site04-globals/en-class-1.mts",
+            "sha256": "6072147d2ee9124fe55695e822b82b8277a0083ec3ef562cf5db0188a5ec46bd"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "en/advanced/class.md:12",
+            "sha256": "f6116dd700782b3a3abdd82af44d7ba67a81355012efdc0f18d73e1cab65f80d"
+          },
+          {
+            "id": "en/advanced/class.md:29",
+            "sha256": "4699bde73558d763e96a388404adaaff25d6a78051cf4937bde949bf5a80aa9d"
+          },
+          {
+            "id": "en/advanced/class.md:39",
+            "sha256": "85a4e9a47cd740b98bfa08b6747b26ce87aeadafc522fbb2d2f67a8ca448a471"
+          },
+          {
+            "id": "en/advanced/class.md:49",
+            "sha256": "cc3a5dae8a05a2f46cb882b095229e6d1f4937b2b0c476cb387e8d3bf6c63e5e"
+          },
+          {
+            "id": "en/advanced/class.md:65",
+            "sha256": "7e5d31329eb55513625162d8044132caa33109972cf6bb61b1e44fe777d77005"
+          },
+          {
+            "id": "en/advanced/class.md:86",
+            "sha256": "015b6d015ed056fbc4493875348a6067a8abd1e1fe65299210a6b7210808ae7f"
+          },
+          {
+            "id": "en/advanced/class.md:188",
+            "sha256": "84260b064bc33095f95a2e4ea2da71176821c749b03186a59b9c878f382aa082"
+          },
+          {
+            "id": "en/advanced/class.md:198",
+            "sha256": "e4c70c3d623e35cb18a7ad1fb8b7388442666d00bdf38f0732ee074460a1579a"
+          },
+          {
+            "id": "en/advanced/class.md:208",
+            "sha256": "717c32a8c00f52626868d840910b93a744f24d5bfe283434d2462510efbccbe3"
+          },
+          {
+            "id": "en/advanced/class.md:218",
+            "sha256": "4402e4041ca0d5e807aa334fd36b292296c0e65510b98811cfc41dfea9c125d4"
+          },
+          {
+            "id": "en/advanced/class.md:228",
+            "sha256": "e66ec4191c93c9c3f81530d765fd68edf702c265448e5a2602a5f06e1bc5b91c"
+          },
+          {
+            "id": "en/advanced/class.md:240",
+            "sha256": "479b94070bf574ba7e495d1a15e5bcd006e1fe8b04699d85af17faac9b64640a"
+          }
+        ],
+        "localLinks": [
+          "/document/en/advanced/class.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/advanced/class.html#static-properties",
+          "/document/en/advanced/class.html#instances",
+          "/document/en/advanced/class.html#version",
+          "/document/en/advanced/class.html#env",
+          "/document/en/advanced/class.html#build",
+          "/document/en/advanced/class.html#config",
+          "/document/en/advanced/class.html#config-contract",
+          "/document/en/advanced/class.html#utils",
+          "/document/en/advanced/class.html#utils-contract",
+          "/document/en/advanced/class.html#utils-dom",
+          "/document/en/advanced/class.html#utils-measure",
+          "/document/en/advanced/class.html#utils-resources",
+          "/document/en/advanced/class.html#utils-data",
+          "/document/en/advanced/class.html#scheme",
+          "/document/en/advanced/class.html#emitter",
+          "/document/en/advanced/class.html#validator",
+          "/document/en/advanced/class.html#kindof",
+          "/document/en/advanced/class.html#html",
+          "/document/en/advanced/class.html#option"
+        ]
+      },
+      {
+        "language": "en",
+        "name": "global",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/global.md",
+          "sha256": "bbca6ce913c15223c5d591cbb3344d3bc0b0d5d4a8024ed8b82c9c4dcc14e790"
+        },
+        "html": {
+          "path": "docs/document/en/advanced/global.html",
+          "sha256": "f2e0c07ed7133f8de420af1e1498cdfdd8646f4a5088a60d67be9e4b3beab306"
+        },
+        "typeFixtures": [],
+        "snippets": [
+          {
+            "id": "en/advanced/global.md:60",
+            "sha256": "e79eda05269a675c4c4ce8507b3b9e4057c17c4ec909167585afdf7fd91ec4dc"
+          },
+          {
+            "id": "en/advanced/global.md:75",
+            "sha256": "88c70c7ce410a7d02a5b47b6c430fc3559af7e6f7857d9abe3ac44e841529735"
+          },
+          {
+            "id": "en/advanced/global.md:85",
+            "sha256": "8c780d585c07df6e40e8a0b3ce7c8f64ed2ab5be93f6db20a2957f37db486c94"
+          },
+          {
+            "id": "en/advanced/global.md:100",
+            "sha256": "a781771a12248475d22117a16a0bfc8b005f6393d53c12daed41eac0031ff079"
+          },
+          {
+            "id": "en/advanced/global.md:115",
+            "sha256": "16899fcd8548e38212f32545b0194ecea7b3487287e79a5e206304d60d5e5594"
+          },
+          {
+            "id": "en/advanced/global.md:135",
+            "sha256": "f467fb6db17d51ba11476a94e6e7ff4dea631a28118116d7734bd23e126bf60c"
+          },
+          {
+            "id": "en/advanced/global.md:155",
+            "sha256": "cef1d7b53dbca4d7fbc61d43ddb5bbfb88346629ff44a1bd8df457c8b2bf0b17"
+          },
+          {
+            "id": "en/advanced/global.md:175",
+            "sha256": "5c3a324c48a92ad738d436f4995f44429fd5c05968744325d33f8340523bdbcf"
+          },
+          {
+            "id": "en/advanced/global.md:194",
+            "sha256": "db02141ace4ff11d02df35726c76a2fa5b56191c6f1105d84a0cdce8dda59f54"
+          },
+          {
+            "id": "en/advanced/global.md:213",
+            "sha256": "f2b05f203fb5e98a308cd4cc4c03d17658fb288b6d1b178445578cb14d0b3093"
+          },
+          {
+            "id": "en/advanced/global.md:232",
+            "sha256": "d6d593701fbadb41c71769bf6e4fdb2502e508325aa7a6f9eb989cc2dce6ba80"
+          },
+          {
+            "id": "en/advanced/global.md:248",
+            "sha256": "45f5bcaab1f1d6c0b064a8ca7b584be22a137a6e8928791b39606e67c5f8f1e7"
+          },
+          {
+            "id": "en/advanced/global.md:264",
+            "sha256": "0d63e85f649b01dc0496644ac605578d28695783be935e7268712a5cd6df1672"
+          },
+          {
+            "id": "en/advanced/global.md:280",
+            "sha256": "baeff6ec7a99abb7be3d74132ec1b55632d04ff10fed855aaa9a7414dc298fda"
+          },
+          {
+            "id": "en/advanced/global.md:295",
+            "sha256": "c05b252918dc642eefaf56d707f6c450d076f775490dd09849a578b640201cd6"
+          },
+          {
+            "id": "en/advanced/global.md:311",
+            "sha256": "f6e8a9976af88201bd6b86dbd3f3f63ddafef00613f60ae2e33f159e58cf8cdf"
+          },
+          {
+            "id": "en/advanced/global.md:326",
+            "sha256": "3f0a5365971c30a740b48612186b84ee8d0aa3fd683f9cf9deabd84647790007"
+          },
+          {
+            "id": "en/advanced/global.md:345",
+            "sha256": "527d96c02e666df04dfb91b8c58803dbb29cba5b3b7b408d7741fe10b1df2de4"
+          },
+          {
+            "id": "en/advanced/global.md:360",
+            "sha256": "40535a9a1afb2f9e1e05f9211c0f1afca3a2a229d8b3b9fb348de7a21101e5f4"
+          },
+          {
+            "id": "en/advanced/global.md:375",
+            "sha256": "e9e82d9d11605357a25fbab951aa61b022bb01db77951af7403478f38f5088e2"
+          },
+          {
+            "id": "en/advanced/global.md:390",
+            "sha256": "1eca689e0fc91b1f74259d6a7bfa88ab2d9a0edb0271d758a54a9e4f2ce257d7"
+          },
+          {
+            "id": "en/advanced/global.md:406",
+            "sha256": "4fb671f3d2b0ea3fe880adbd18e69ca6f8a787eea22fad454ae36fa51c561740"
+          },
+          {
+            "id": "en/advanced/global.md:423",
+            "sha256": "91513a23bef7c294d1671dfac6953a06fb6c2d571f984e81f9da2255185da5c8"
+          },
+          {
+            "id": "en/advanced/global.md:439",
+            "sha256": "a76f045db2f31a257834da122ec7b930af8e7e8eda04fd0bf8273323c5fa8ea8"
+          },
+          {
+            "id": "en/advanced/global.md:455",
+            "sha256": "71bea4964117a51d9fa40fa7b6ea6dcb0a09b13bd76d4969bf5079ce84b7494f"
+          },
+          {
+            "id": "en/advanced/global.md:470",
+            "sha256": "6af27d3ba9c23a8cec6cd0a0a6b2784bf7a63056dade3d81982be691a7570b65"
+          },
+          {
+            "id": "en/advanced/global.md:485",
+            "sha256": "7ed0759edb1fb6a6cc1a61e69963abd5dadb51b51f0ebd186a08dbb9228d2204"
+          },
+          {
+            "id": "en/advanced/global.md:500",
+            "sha256": "89a4c0f6d80d8e0b4bac6a56f12d7251951325f8d18e7a2d1dc5ec32eb6a2ab8"
+          },
+          {
+            "id": "en/advanced/global.md:520",
+            "sha256": "6854639b64dea3f8073a84e03df293383584d584c3e12972388e9731c43b6dfc"
+          },
+          {
+            "id": "en/advanced/global.md:540",
+            "sha256": "09f24687c564bda6e1f00b47b1b501e794524513ff1d706f4963f541db1054df"
+          },
+          {
+            "id": "en/advanced/global.md:561",
+            "sha256": "e4872fb74c9200f783d5478fdae2e4126cd03a98368f7d1d9a9668de526577fb"
+          },
+          {
+            "id": "en/advanced/global.md:577",
+            "sha256": "b6eae9955c19e0c135995aecc714eec8874de5e13c3303222c4fa3d6ab5fd2a9"
+          },
+          {
+            "id": "en/advanced/global.md:592",
+            "sha256": "c784e06943df5473a8522a7d14d4b57df0fcf0d7f33aeb03cef7eb150f922680"
+          },
+          {
+            "id": "en/advanced/global.md:610",
+            "sha256": "efc7e6057da970cae20cc11b04fed597857231ee43e3626252204901f0c7a09a"
+          }
+        ],
+        "localLinks": [
+          "/document/en/advanced/global.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/advanced/global.html#global-properties",
+          "/document/en/advanced/global.html#global-contract",
+          "/document/en/advanced/global.html#global-initialization",
+          "/document/en/advanced/global.html#global-timing",
+          "/document/en/advanced/global.html#global-recovery",
+          "/document/en/advanced/global.html#debug",
+          "/document/en/advanced/global.html#style",
+          "/document/en/advanced/global.html#contextmenu",
+          "/document/en/advanced/global.html#notice-time",
+          "/document/en/advanced/global.html#setting-width",
+          "/document/en/advanced/global.html#setting-item-width",
+          "/document/en/advanced/global.html#setting-item-height",
+          "/document/en/advanced/global.html#resize-time",
+          "/document/en/advanced/global.html#scroll-time",
+          "/document/en/advanced/global.html#scroll-gap",
+          "/document/en/advanced/global.html#auto-playback-max",
+          "/document/en/advanced/global.html#auto-playback-min",
+          "/document/en/advanced/global.html#auto-playback-timeout",
+          "/document/en/advanced/global.html#reconnect-time-max",
+          "/document/en/advanced/global.html#reconnect-sleep-time",
+          "/document/en/advanced/global.html#control-hide-time",
+          "/document/en/advanced/global.html#dbclick-time",
+          "/document/en/advanced/global.html#dbclick-fullscreen",
+          "/document/en/advanced/global.html#mobile-dbclick-play",
+          "/document/en/advanced/global.html#mobile-click-play",
+          "/document/en/advanced/global.html#auto-orientation-time",
+          "/document/en/advanced/global.html#info-loop-time",
+          "/document/en/advanced/global.html#fast-forward-value",
+          "/document/en/advanced/global.html#fast-forward-time",
+          "/document/en/advanced/global.html#touch-move-ratio",
+          "/document/en/advanced/global.html#volume-step",
+          "/document/en/advanced/global.html#seek-step",
+          "/document/en/advanced/global.html#playback-rate",
+          "/document/en/advanced/global.html#aspect-ratio",
+          "/document/en/advanced/global.html#flip",
+          "/document/en/advanced/global.html#fullscreen-web-in-body",
+          "/document/en/advanced/global.html#log-version",
+          "/document/en/advanced/global.html#use-raf",
+          "/document/en/advanced/global.html#remove-src-when-destroy"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "zh",
+        "name": "class",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "7e5d31329eb55513625162d8044132caa33109972cf6bb61b1e44fe777d77005"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-globals/chromium-zh-class.png",
+          "sha256": "36958d7e4e3e2ed96a1f5d39cfa3e7218d3af5b65e69ee59d34aeebe374cd9f9"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "zh",
+        "name": "global",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "db02141ace4ff11d02df35726c76a2fa5b56191c6f1105d84a0cdce8dda59f54",
+          "f2b05f203fb5e98a308cd4cc4c03d17658fb288b6d1b178445578cb14d0b3093"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-globals/chromium-zh-global.png",
+          "sha256": "4762f7774cbf3b463c7b82be04e8b96774574f75e7bc5f5266562b6761901e5a"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "en",
+        "name": "class",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "7e5d31329eb55513625162d8044132caa33109972cf6bb61b1e44fe777d77005"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-globals/chromium-en-class.png",
+          "sha256": "28e78be42f78db6469775b42085ff63e0b253e3b8da784de0d3d8efd7246598a"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "en",
+        "name": "global",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "db02141ace4ff11d02df35726c76a2fa5b56191c6f1105d84a0cdce8dda59f54",
+          "f2b05f203fb5e98a308cd4cc4c03d17658fb288b6d1b178445578cb14d0b3093"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-globals/chromium-en-global.png",
+          "sha256": "67648976d93ff89530f4a1b0160de1284c4675646b7cd7904d04402f7fce68c7"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "zh",
+        "name": "class",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "7e5d31329eb55513625162d8044132caa33109972cf6bb61b1e44fe777d77005"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-globals/firefox-zh-class.png",
+          "sha256": "cc071280706d54a3a25e8bdf696f1b86800c21b6d456dcf5c22655d6c5a7e065"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "zh",
+        "name": "global",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "db02141ace4ff11d02df35726c76a2fa5b56191c6f1105d84a0cdce8dda59f54",
+          "f2b05f203fb5e98a308cd4cc4c03d17658fb288b6d1b178445578cb14d0b3093"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-globals/firefox-zh-global.png",
+          "sha256": "bfe4a95ff49811d2697acc79cf0ce723b616ed000e710b5a7a9334d86e0de6a8"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "en",
+        "name": "class",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "7e5d31329eb55513625162d8044132caa33109972cf6bb61b1e44fe777d77005"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-globals/firefox-en-class.png",
+          "sha256": "aa3c3284e15f26bdff8029871bfb9734b98151ea650ea4d7c49dddc166236a4b"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "en",
+        "name": "global",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "db02141ace4ff11d02df35726c76a2fa5b56191c6f1105d84a0cdce8dda59f54",
+          "f2b05f203fb5e98a308cd4cc4c03d17658fb288b6d1b178445578cb14d0b3093"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-globals/firefox-en-global.png",
+          "sha256": "cdb5cdb75134920ecf3bef985598480d9c21fda5cfa0d0fa512bea5ae60c1b9d"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "zh",
+        "name": "class",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "7e5d31329eb55513625162d8044132caa33109972cf6bb61b1e44fe777d77005"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-globals/webkit-zh-class.png",
+          "sha256": "9349dc1599b1cc75341cca34fb420cb56a3dbdf645132dd4338c7631343f467a"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "zh",
+        "name": "global",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "db02141ace4ff11d02df35726c76a2fa5b56191c6f1105d84a0cdce8dda59f54",
+          "f2b05f203fb5e98a308cd4cc4c03d17658fb288b6d1b178445578cb14d0b3093"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-globals/webkit-zh-global.png",
+          "sha256": "b3afcbe4b20608f27826bf0cd24f639941f179e1a6d664009226260cad51d1cb"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "en",
+        "name": "class",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "7e5d31329eb55513625162d8044132caa33109972cf6bb61b1e44fe777d77005"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-globals/webkit-en-class.png",
+          "sha256": "69614076c81c02cd76ac577094b00b55cddabaca9a24ae22adb4ec9ea943a7e2"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "en",
+        "name": "global",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "db02141ace4ff11d02df35726c76a2fa5b56191c6f1105d84a0cdce8dda59f54",
+          "f2b05f203fb5e98a308cd4cc4c03d17658fb288b6d1b178445578cb14d0b3093"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-globals/webkit-en-global.png",
+          "sha256": "a96a3561c25c6cec5233bc6c7da240a9514048e51aac11eee26d84da25062605"
+        }
+      }
+    ],
+    "dom": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "default DEBUG",
+          "default CONTEXTMENU",
+          "default NOTICE_TIME",
+          "default SETTING_WIDTH",
+          "default SETTING_ITEM_WIDTH",
+          "default SETTING_ITEM_HEIGHT",
+          "default RESIZE_TIME",
+          "default SCROLL_TIME",
+          "default SCROLL_GAP",
+          "default AUTO_PLAYBACK_MAX",
+          "default AUTO_PLAYBACK_MIN",
+          "default AUTO_PLAYBACK_TIMEOUT",
+          "default RECONNECT_TIME_MAX",
+          "default RECONNECT_SLEEP_TIME",
+          "default CONTROL_HIDE_TIME",
+          "default DBCLICK_TIME",
+          "default DBCLICK_FULLSCREEN",
+          "default MOBILE_DBCLICK_PLAY",
+          "default MOBILE_CLICK_PLAY",
+          "default AUTO_ORIENTATION_TIME",
+          "default INFO_LOOP_TIME",
+          "default FAST_FORWARD_VALUE",
+          "default FAST_FORWARD_TIME",
+          "default TOUCH_MOVE_RATIO",
+          "default VOLUME_STEP",
+          "default SEEK_STEP",
+          "default PLAYBACK_RATE",
+          "default ASPECT_RATIO",
+          "default FLIP",
+          "default FULLSCREEN_WEB_IN_BODY",
+          "default LOG_VERSION",
+          "default USE_RAF",
+          "default REMOVE_SRC_WHEN_DESTROY",
+          "STYLE contains bundled CSS",
+          "config shared identity and mutable arrays",
+          "config event forwarding snapshots installation",
+          "config event additions affect future instance",
+          "existing setting choices retain initial list",
+          "new setting choices use changed globals",
+          "STYLE reassignment does not inject CSS",
+          "CONTEXTMENU false blocks pointer open",
+          "CONTEXTMENU false does not block direct show",
+          "CONTEXTMENU changed flag read by existing instance",
+          "view event boolean",
+          "native scroll forwards raw and view events",
+          "web fullscreen uses current global",
+          "exit restores saved placement despite changed global",
+          "subsequent entry uses changed placement flag",
+          "false media reset flag retains src and destroy false retains DOM",
+          "other destroy lifecycle still runs",
+          "destroy removed native global listeners despite flag",
+          "true media reset flag removes src and default removes DOM"
+        ]
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "default DEBUG",
+          "default CONTEXTMENU",
+          "default NOTICE_TIME",
+          "default SETTING_WIDTH",
+          "default SETTING_ITEM_WIDTH",
+          "default SETTING_ITEM_HEIGHT",
+          "default RESIZE_TIME",
+          "default SCROLL_TIME",
+          "default SCROLL_GAP",
+          "default AUTO_PLAYBACK_MAX",
+          "default AUTO_PLAYBACK_MIN",
+          "default AUTO_PLAYBACK_TIMEOUT",
+          "default RECONNECT_TIME_MAX",
+          "default RECONNECT_SLEEP_TIME",
+          "default CONTROL_HIDE_TIME",
+          "default DBCLICK_TIME",
+          "default DBCLICK_FULLSCREEN",
+          "default MOBILE_DBCLICK_PLAY",
+          "default MOBILE_CLICK_PLAY",
+          "default AUTO_ORIENTATION_TIME",
+          "default INFO_LOOP_TIME",
+          "default FAST_FORWARD_VALUE",
+          "default FAST_FORWARD_TIME",
+          "default TOUCH_MOVE_RATIO",
+          "default VOLUME_STEP",
+          "default SEEK_STEP",
+          "default PLAYBACK_RATE",
+          "default ASPECT_RATIO",
+          "default FLIP",
+          "default FULLSCREEN_WEB_IN_BODY",
+          "default LOG_VERSION",
+          "default USE_RAF",
+          "default REMOVE_SRC_WHEN_DESTROY",
+          "STYLE contains bundled CSS",
+          "config shared identity and mutable arrays",
+          "config event forwarding snapshots installation",
+          "config event additions affect future instance",
+          "existing setting choices retain initial list",
+          "new setting choices use changed globals",
+          "STYLE reassignment does not inject CSS",
+          "CONTEXTMENU false blocks pointer open",
+          "CONTEXTMENU false does not block direct show",
+          "CONTEXTMENU changed flag read by existing instance",
+          "view event boolean",
+          "native scroll forwards raw and view events",
+          "web fullscreen uses current global",
+          "exit restores saved placement despite changed global",
+          "subsequent entry uses changed placement flag",
+          "false media reset flag retains src and destroy false retains DOM",
+          "other destroy lifecycle still runs",
+          "destroy removed native global listeners despite flag",
+          "true media reset flag removes src and default removes DOM"
+        ]
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "default DEBUG",
+          "default CONTEXTMENU",
+          "default NOTICE_TIME",
+          "default SETTING_WIDTH",
+          "default SETTING_ITEM_WIDTH",
+          "default SETTING_ITEM_HEIGHT",
+          "default RESIZE_TIME",
+          "default SCROLL_TIME",
+          "default SCROLL_GAP",
+          "default AUTO_PLAYBACK_MAX",
+          "default AUTO_PLAYBACK_MIN",
+          "default AUTO_PLAYBACK_TIMEOUT",
+          "default RECONNECT_TIME_MAX",
+          "default RECONNECT_SLEEP_TIME",
+          "default CONTROL_HIDE_TIME",
+          "default DBCLICK_TIME",
+          "default DBCLICK_FULLSCREEN",
+          "default MOBILE_DBCLICK_PLAY",
+          "default MOBILE_CLICK_PLAY",
+          "default AUTO_ORIENTATION_TIME",
+          "default INFO_LOOP_TIME",
+          "default FAST_FORWARD_VALUE",
+          "default FAST_FORWARD_TIME",
+          "default TOUCH_MOVE_RATIO",
+          "default VOLUME_STEP",
+          "default SEEK_STEP",
+          "default PLAYBACK_RATE",
+          "default ASPECT_RATIO",
+          "default FLIP",
+          "default FULLSCREEN_WEB_IN_BODY",
+          "default LOG_VERSION",
+          "default USE_RAF",
+          "default REMOVE_SRC_WHEN_DESTROY",
+          "STYLE contains bundled CSS",
+          "config shared identity and mutable arrays",
+          "config event forwarding snapshots installation",
+          "config event additions affect future instance",
+          "existing setting choices retain initial list",
+          "new setting choices use changed globals",
+          "STYLE reassignment does not inject CSS",
+          "CONTEXTMENU false blocks pointer open",
+          "CONTEXTMENU false does not block direct show",
+          "CONTEXTMENU changed flag read by existing instance",
+          "view event boolean",
+          "native scroll forwards raw and view events",
+          "web fullscreen uses current global",
+          "exit restores saved placement despite changed global",
+          "subsequent entry uses changed placement flag",
+          "false media reset flag retains src and destroy false retains DOM",
+          "other destroy lifecycle still runs",
+          "destroy removed native global listeners despite flag",
+          "true media reset flag removes src and default removes DOM"
+        ]
+      }
+    ],
+    "complete": true,
+    "limitations": [
+      "Page navigation and DOM contracts only; no playback, codec, physical-device or release acceptance."
+    ],
+    "core": {
+      "artifact": {
+        "path": "packages/artplayer/dist/artplayer.js",
+        "sha256": "8a4caaa50a069875b3898a83765457b3c502700f4731d0c38988d6c463c3d20a"
+      },
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-qQwwPA/artplayer.tgz",
+        "version": "6.0.0",
+        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
+        "inputFingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "integrity": "sha512-+2+VWecKb9CbI3wTCs0sV7au8SNShyXahpwDAmGgZhDr22wbdv51QZnLnkPwgMgfNpVuTbsZ6A26Lpj3eY7NbQ=="
+      }
+    }
+  },
+  "semanticMapping": {
+    "addedRecords": 44,
+    "totalRecords": 507,
+    "remainingInventoryRecords": 456,
+    "unchanged": [
+      {
+        "group": "template",
+        "path": "packages/artplayer-vitepress/docs/advanced/class.md",
+        "nonConfigSha256": "fda98e3d0c8e7ffe36ccb69bb3f88e0a0bb2dcb4207b3d4d5b3e33c3de56dcdb"
+      },
+      {
+        "group": "template",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+        "nonConfigSha256": "b4dbb19e0b7d714b8876ca34f9877a8702c46adbc27dcfa53a0871cfdb06b0ea"
+      },
+      {
+        "group": "utils",
+        "path": "packages/artplayer-vitepress/docs/advanced/class.md",
+        "nonConfigSha256": "fda98e3d0c8e7ffe36ccb69bb3f88e0a0bb2dcb4207b3d4d5b3e33c3de56dcdb"
+      },
+      {
+        "group": "utils",
+        "path": "packages/artplayer-vitepress/docs/advanced/class.md",
+        "nonConfigSha256": "fda98e3d0c8e7ffe36ccb69bb3f88e0a0bb2dcb4207b3d4d5b3e33c3de56dcdb"
+      },
+      {
+        "group": "utils",
+        "path": "packages/artplayer-vitepress/docs/advanced/class.md",
+        "nonConfigSha256": "fda98e3d0c8e7ffe36ccb69bb3f88e0a0bb2dcb4207b3d4d5b3e33c3de56dcdb"
+      },
+      {
+        "group": "utils",
+        "path": "packages/artplayer-vitepress/docs/advanced/class.md",
+        "nonConfigSha256": "fda98e3d0c8e7ffe36ccb69bb3f88e0a0bb2dcb4207b3d4d5b3e33c3de56dcdb"
+      },
+      {
+        "group": "utils",
+        "path": "packages/artplayer-vitepress/docs/advanced/class.md",
+        "nonConfigSha256": "fda98e3d0c8e7ffe36ccb69bb3f88e0a0bb2dcb4207b3d4d5b3e33c3de56dcdb"
+      },
+      {
+        "group": "utils",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+        "nonConfigSha256": "b4dbb19e0b7d714b8876ca34f9877a8702c46adbc27dcfa53a0871cfdb06b0ea"
+      },
+      {
+        "group": "utils",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+        "nonConfigSha256": "b4dbb19e0b7d714b8876ca34f9877a8702c46adbc27dcfa53a0871cfdb06b0ea"
+      },
+      {
+        "group": "utils",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+        "nonConfigSha256": "b4dbb19e0b7d714b8876ca34f9877a8702c46adbc27dcfa53a0871cfdb06b0ea"
+      },
+      {
+        "group": "utils",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+        "nonConfigSha256": "b4dbb19e0b7d714b8876ca34f9877a8702c46adbc27dcfa53a0871cfdb06b0ea"
+      },
+      {
+        "group": "utils",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+        "nonConfigSha256": "b4dbb19e0b7d714b8876ca34f9877a8702c46adbc27dcfa53a0871cfdb06b0ea"
+      }
+    ]
+  },
+  "tests": {
+    "count": 117,
+    "pass": 117,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 1640.9033,
+    "suites": [
+      "entry",
+      "event-scheduling",
+      "auto-playback",
+      "fast-forward",
+      "notice",
+      "setting-layout",
+      "pointer-events",
+      "gesture",
+      "media-events",
+      "instance-lifecycle",
+      "display-orientation",
+      "site-loading",
+      "documentation-pipeline"
+    ]
+  },
+  "build": {
+    "vitepressSeconds": 9.66,
+    "yarnSeconds": 11.16,
+    "checked": [
+      "build:docs",
+      "build:llm",
+      "check:llm",
+      "site-inventory --write/--check",
+      "demos --check"
+    ]
+  },
+  "ledger": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-xQdgfs/report.json",
+      "sha256": "163501c887e1f7ab1a8c11d0995beaab23c508cd1ec0ab026018185863b2770b"
+    },
+    "libraries": [
+      {
+        "name": "artplayer",
+        "fingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "fingerprint": "55236854b94ac7b0dd91b4107dcb60e97ac6f1a5e8b6b8a9dcb63bba66c6509a",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "fingerprint": "f88a6a2f1c5548389cae293614f648d72077ed03a7be6c81ad017a1155a839a3",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "fingerprint": "7fa3ca9577b53f3bb90e2c23fec9e6e70fbbb0c089ccae2923084b9059bcbdf9",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "fingerprint": "0c73b970872fe56df1c669e5badfa91f9cd7ec3c73070a9852cfea076cc8923f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "fingerprint": "9ced9b18e4b260ccbcf6ac016b32ec0852040cb5c0f57be72718a03d40d598bf",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "fingerprint": "f1dd73097e43df504f686f18a6ca30bcb1f57ab74d3cc62909db20505c994072",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "fingerprint": "d6d79d4b47afaefa66d32c5b1709f412ed9d32c636462723918c268a6601e631",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "fingerprint": "3d32a4c6d94d9eaa31cd982ec43ae2b710a4c923e5076f357ba4c902be48d729",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "fingerprint": "ceb17cbb235a42438c28df15ddf830d104a749b58515333c43da2b18534b166c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "fingerprint": "6716002b92bb12b54d17772d87a560bb9e863da35abfa37988907d54e02cdf74",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "fingerprint": "a3a56ecc218c8e180621d1bc00684950cca4ada8d483334b0cb91fd783c10831",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "fingerprint": "00a07f33277bae211a553e9fb2e924ade219513135bc54921886f4518dd27964",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "fingerprint": "cc9304759ff3cdd84767eee38fcbb9cf70e234f2449946536fd1da972cde679f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "fingerprint": "43825f602514c9e6a0bd8f0a270a54a03d1cb76f821b99d1e736d0150dafc190",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "fingerprint": "3503e145a591a406105eb953f9ac75c8373992c9f3f1f23b713de65c85a3bb3d",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "fingerprint": "b7932e08a086cfe16ed5e78872e274fb897931d0653dbf7ac61a19b404ddec85",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "fingerprint": "a0a8efb762e823fe4dd8c8de9601f74ac873ade8c6953a7e5305297608c71a12",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "fingerprint": "9fd7e62c56ae78866267cdd5650dc4e4af4aad76dd6ff8466b68908bc25d661c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "fingerprint": "00dc477ad56d12cfa6cd0d1e071e80f4120afed23f44af0393e23e5dac516a3b",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "fingerprint": "78bf5be3b2b5656a0b95ce2ce3cf1a635b6df609361a840b8298476f65af9d52",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      }
+    ],
+    "publicationAuthorized": false
+  },
+  "limitations": [
+    "52 browser assertions include34 default-field comparisons; they are not52 separate behavior scenarios.",
+    "Only config and corrected scroll examples forwarded per engine; all92 original snippets parsed and compared, with exactly two scroll callback changes plus one destroy comment change per language. Other examples unchanged.",
+    "No physical mobile gesture/rotation/fullscreen, decoder, SDK reconnect or full playback acceptance from this documentation task."
+  ],
+  "visualInspection": "chromium-zh-global.png",
+  "attachments": [
+    {
+      "path": "refactor/.cache/site04-globals-validate.mjs",
+      "sha256": "afc286225f03b83ff556f8e9b80b3c4bd0b1f436b906e194e927de640908756c"
+    },
+    {
+      "path": "refactor/.cache/site04-globals-probe.js",
+      "sha256": "a355ea45735f0f25f755f7b2bedf03c282ed60f9c2635af5f5cf213e563eefb6"
+    },
+    {
+      "path": "refactor/.cache/site04-globals/report.json",
+      "sha256": "17078b061ac4810acfa996c56904d7a8515c7ae1284a8bb76c1450eafce6efa1"
+    },
+    {
+      "path": "refactor/.cache/site04-globals-build.log",
+      "sha256": "5a2684181ad33d6e5b10ffec7cf8e7aaf5666c5cb67dad88b33dc8881033c4e2"
+    },
+    {
+      "path": "refactor/.cache/site04-globals-llm.log",
+      "sha256": "2b54523880a508bc575ed684c569f95839ef1291244b4122d91e4226e44e1db3"
+    },
+    {
+      "path": "refactor/.cache/site04-globals-tests.log",
+      "sha256": "57a885d2ba4986defd8e5251557317eeddb84605a346a766f62b19f0bdc3ae3c"
+    },
+    {
+      "path": "refactor/.cache/site04-globals-validate.log",
+      "sha256": "a8b07ab08b868a2b6b963119edaf2ff501996af49e09ab155904572b1d751076"
+    },
+    {
+      "path": "refactor/.cache/site04-globals-ledger.log",
+      "sha256": "90415a85dc7683f1253a1712f79f93a481198a5cbe0fff799ed07ecb3be7886f"
+    }
+  ]
+}

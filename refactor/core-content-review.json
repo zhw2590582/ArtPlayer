@@ -3,13 +3,13 @@
   "task": "SITE-04",
   "inventory": {
     "path": "refactor/baselines/site-inventory.json",
-    "sha256": "d2716e432d8c41620f75c7596cdd1562345eeb629dc8ffc33c5ae0f4374fdf6f"
+    "sha256": "99cacdc8f51451c2dd55fa9bd867b2b62114f6d8b32590ec9ac087c3c5001a05"
   },
-  "reviewedAt": "2026-09-15T23:27:14.203Z",
+  "reviewedAt": "2026-09-15T23:37:15.006Z",
   "counts": {
     "inventoryRecords": 963,
-    "reviewedRecords": 463,
-    "unreviewedRecords": 500
+    "reviewedRecords": 507,
+    "unreviewedRecords": 456
   },
   "note": "Explicit declaration-record semantic mapping, including overload/getter/setter rows and root/runtime aliases. Counts are not overall API or release completion. Recheck affected groups if their source/document hashes drift. Other declarations and inline members are not implicitly covered.",
   "groups": [
@@ -1333,7 +1333,7 @@
         },
         {
           "path": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "sha256": "ed2f823700ddac69a625514cb688fcb0124a2d42db51bac438c7e4cfca255c1d",
+          "sha256": "52dc8eae7ad8cb17cb63b03dd99596898f16187773466bc4874f042ee535006e",
           "anchor": "html"
         },
         {
@@ -1343,15 +1343,15 @@
         },
         {
           "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "sha256": "9c34e8c1efa6eeb118072a41d7cae8b5f9a78dcfe33a3491b7ffb2fcc2aa9bbd",
+          "sha256": "72a1edcbd4d0ed5bfca1850cee5d0d2473a2a38096c10d248f457685e9b420d9",
           "anchor": "html"
         }
       ],
       "evidence": "baselines/site04-template-icons.json",
       "documentHashRevalidation": {
-        "sourceBefore": "bd3f3c0689abda6b3f5a40ea30e68ff82e001e78",
-        "evidence": "baselines/site04-utils.json",
-        "reason": "Whole-guide hash changed for utils section only. All content outside it is byte-identical after LF normalization; source hashes remain unchanged."
+        "sourceBefore": "9afbf9940dd019191aa6680b00812bb1c7d8e8b1",
+        "evidence": "baselines/site04-globals.json",
+        "reason": "Whole-guide hash changed for config section only. All content outside it is byte-identical after LF normalization; source hashes remain unchanged."
       }
     },
     {
@@ -4186,56 +4186,591 @@
       "docs": [
         {
           "path": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "sha256": "ed2f823700ddac69a625514cb688fcb0124a2d42db51bac438c7e4cfca255c1d",
+          "sha256": "52dc8eae7ad8cb17cb63b03dd99596898f16187773466bc4874f042ee535006e",
           "anchor": "utils-contract"
         },
         {
           "path": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "sha256": "ed2f823700ddac69a625514cb688fcb0124a2d42db51bac438c7e4cfca255c1d",
+          "sha256": "52dc8eae7ad8cb17cb63b03dd99596898f16187773466bc4874f042ee535006e",
           "anchor": "utils-dom"
         },
         {
           "path": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "sha256": "ed2f823700ddac69a625514cb688fcb0124a2d42db51bac438c7e4cfca255c1d",
+          "sha256": "52dc8eae7ad8cb17cb63b03dd99596898f16187773466bc4874f042ee535006e",
           "anchor": "utils-measure"
         },
         {
           "path": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "sha256": "ed2f823700ddac69a625514cb688fcb0124a2d42db51bac438c7e4cfca255c1d",
+          "sha256": "52dc8eae7ad8cb17cb63b03dd99596898f16187773466bc4874f042ee535006e",
           "anchor": "utils-resources"
         },
         {
           "path": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "sha256": "ed2f823700ddac69a625514cb688fcb0124a2d42db51bac438c7e4cfca255c1d",
+          "sha256": "52dc8eae7ad8cb17cb63b03dd99596898f16187773466bc4874f042ee535006e",
           "anchor": "utils-data"
         },
         {
           "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "sha256": "9c34e8c1efa6eeb118072a41d7cae8b5f9a78dcfe33a3491b7ffb2fcc2aa9bbd",
+          "sha256": "72a1edcbd4d0ed5bfca1850cee5d0d2473a2a38096c10d248f457685e9b420d9",
           "anchor": "utils-contract"
         },
         {
           "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "sha256": "9c34e8c1efa6eeb118072a41d7cae8b5f9a78dcfe33a3491b7ffb2fcc2aa9bbd",
+          "sha256": "72a1edcbd4d0ed5bfca1850cee5d0d2473a2a38096c10d248f457685e9b420d9",
           "anchor": "utils-dom"
         },
         {
           "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "sha256": "9c34e8c1efa6eeb118072a41d7cae8b5f9a78dcfe33a3491b7ffb2fcc2aa9bbd",
+          "sha256": "72a1edcbd4d0ed5bfca1850cee5d0d2473a2a38096c10d248f457685e9b420d9",
           "anchor": "utils-measure"
         },
         {
           "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "sha256": "9c34e8c1efa6eeb118072a41d7cae8b5f9a78dcfe33a3491b7ffb2fcc2aa9bbd",
+          "sha256": "72a1edcbd4d0ed5bfca1850cee5d0d2473a2a38096c10d248f457685e9b420d9",
           "anchor": "utils-resources"
         },
         {
           "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "sha256": "9c34e8c1efa6eeb118072a41d7cae8b5f9a78dcfe33a3491b7ffb2fcc2aa9bbd",
+          "sha256": "72a1edcbd4d0ed5bfca1850cee5d0d2473a2a38096c10d248f457685e9b420d9",
           "anchor": "utils-data"
         }
       ],
-      "evidence": "baselines/site04-utils.json"
+      "evidence": "baselines/site04-utils.json",
+      "documentHashRevalidation": {
+        "sourceBefore": "9afbf9940dd019191aa6680b00812bb1c7d8e8b1",
+        "evidence": "baselines/site04-globals.json",
+        "reason": "Whole-guide hash changed for config section only. All content outside it is byte-identical after LF normalization; source hashes remain unchanged."
+      }
+    },
+    {
+      "id": "globals-config",
+      "status": "semantic-reviewed",
+      "conclusion": "34 public globals with defaults and initialization/event/scheduling read points; shared mutability, no automatic UI/timer rebuilding, STYLE injection distinction, resume threshold/pruning, reconnection and destroy reset boundary. Four media inventory arrays across root/runtime and constructor getters: shared mutable object, native-forwarding snapshot, readonly legacy tuples versus runtime arrays. Scroll examples corrected to view, resize described as debounce; no native-device/SDK acceptance implied.",
+      "records": [
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.config@44",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "config",
+          "line": 44
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.STYLE@53",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "STYLE",
+          "line": 53
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.DEBUG@54",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "DEBUG",
+          "line": 54
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.CONTEXTMENU@55",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "CONTEXTMENU",
+          "line": 55
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.NOTICE_TIME@56",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "NOTICE_TIME",
+          "line": 56
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.SETTING_WIDTH@57",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "SETTING_WIDTH",
+          "line": 57
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.SETTING_ITEM_WIDTH@58",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "SETTING_ITEM_WIDTH",
+          "line": 58
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.SETTING_ITEM_HEIGHT@59",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "SETTING_ITEM_HEIGHT",
+          "line": 59
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.RESIZE_TIME@60",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "RESIZE_TIME",
+          "line": 60
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.SCROLL_TIME@61",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "SCROLL_TIME",
+          "line": 61
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.SCROLL_GAP@62",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "SCROLL_GAP",
+          "line": 62
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.AUTO_PLAYBACK_MAX@63",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "AUTO_PLAYBACK_MAX",
+          "line": 63
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.AUTO_PLAYBACK_MIN@64",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "AUTO_PLAYBACK_MIN",
+          "line": 64
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.AUTO_PLAYBACK_TIMEOUT@65",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "AUTO_PLAYBACK_TIMEOUT",
+          "line": 65
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.RECONNECT_TIME_MAX@66",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "RECONNECT_TIME_MAX",
+          "line": 66
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.RECONNECT_SLEEP_TIME@67",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "RECONNECT_SLEEP_TIME",
+          "line": 67
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.CONTROL_HIDE_TIME@68",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "CONTROL_HIDE_TIME",
+          "line": 68
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.DBCLICK_TIME@69",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "DBCLICK_TIME",
+          "line": 69
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.DBCLICK_FULLSCREEN@70",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "DBCLICK_FULLSCREEN",
+          "line": 70
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.MOBILE_DBCLICK_PLAY@71",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "MOBILE_DBCLICK_PLAY",
+          "line": 71
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.MOBILE_CLICK_PLAY@72",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "MOBILE_CLICK_PLAY",
+          "line": 72
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.AUTO_ORIENTATION_TIME@73",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "AUTO_ORIENTATION_TIME",
+          "line": 73
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.INFO_LOOP_TIME@74",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "INFO_LOOP_TIME",
+          "line": 74
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.FAST_FORWARD_VALUE@75",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "FAST_FORWARD_VALUE",
+          "line": 75
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.FAST_FORWARD_TIME@76",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "FAST_FORWARD_TIME",
+          "line": 76
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.TOUCH_MOVE_RATIO@77",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "TOUCH_MOVE_RATIO",
+          "line": 77
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.VOLUME_STEP@78",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "VOLUME_STEP",
+          "line": 78
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.SEEK_STEP@79",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "SEEK_STEP",
+          "line": 79
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.PLAYBACK_RATE@80",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "PLAYBACK_RATE",
+          "line": 80
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.ASPECT_RATIO@81",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "ASPECT_RATIO",
+          "line": 81
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.FLIP@82",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "FLIP",
+          "line": 82
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.FULLSCREEN_WEB_IN_BODY@83",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "FULLSCREEN_WEB_IN_BODY",
+          "line": 83
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.LOG_VERSION@84",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "LOG_VERSION",
+          "line": 84
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.USE_RAF@85",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "USE_RAF",
+          "line": 85
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.REMOVE_SRC_WHEN_DESTROY@86",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "REMOVE_SRC_WHEN_DESTROY",
+          "line": 86
+        },
+        {
+          "id": "packages/artplayer/public/config.ts#Config.properties@2",
+          "file": "packages/artplayer/public/config.ts",
+          "declaration": "Config",
+          "name": "properties",
+          "line": 2
+        },
+        {
+          "id": "packages/artplayer/public/config.ts#Config.methods@33",
+          "file": "packages/artplayer/public/config.ts",
+          "declaration": "Config",
+          "name": "methods",
+          "line": 33
+        },
+        {
+          "id": "packages/artplayer/public/config.ts#Config.events@34",
+          "file": "packages/artplayer/public/config.ts",
+          "declaration": "Config",
+          "name": "events",
+          "line": 34
+        },
+        {
+          "id": "packages/artplayer/public/config.ts#Config.prototypes@58",
+          "file": "packages/artplayer/public/config.ts",
+          "declaration": "Config",
+          "name": "prototypes",
+          "line": 58
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#ArtplayerConstructor.config@112",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "ArtplayerConstructor",
+          "name": "config",
+          "line": 112
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#Config.properties@2",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "Config",
+          "name": "properties",
+          "line": 2
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#Config.methods@3",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "Config",
+          "name": "methods",
+          "line": 3
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#Config.events@4",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "Config",
+          "name": "events",
+          "line": 4
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#Config.prototypes@5",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "Config",
+          "name": "prototypes",
+          "line": 5
+        }
+      ],
+      "sources": [
+        {
+          "path": "packages/artplayer/src/index.ts",
+          "sha256": "20cfe3738b3ce7e11b69721a5f0bdad9db77807417d8e421397a40dfade4c047"
+        },
+        {
+          "path": "packages/artplayer/src/config/index.ts",
+          "sha256": "a56b4d3d6942cfa3e2b47f909fc5ad87e6e3202fd61b29c7afd7649049e31d05"
+        },
+        {
+          "path": "packages/artplayer/src/bootstrap/browser.ts",
+          "sha256": "8d401627e8ea1c87fb44204227b04177a70cc7a0f79f95fb5dc73fe828e46a8c"
+        },
+        {
+          "path": "packages/artplayer/src/style/inject.ts",
+          "sha256": "9cddbe51b5de0da74f27c045ab982b509c3854cc6b81eeb02a6b974914760a4d"
+        },
+        {
+          "path": "packages/artplayer/src/events/viewInit.ts",
+          "sha256": "d77b83eab802ff0046a4966e28b810a25592bcada49f526adae37556c1e4c3e9"
+        },
+        {
+          "path": "packages/artplayer/src/events/resizeInit.ts",
+          "sha256": "719e27d11d2f93fcbe8368393c9190e251fc86dd0c3c2919f60e9b3b1edd0192"
+        },
+        {
+          "path": "packages/artplayer/src/events/updateInit.ts",
+          "sha256": "6f174db14d20319f03a76e6ea267a3d71973faac44a92483badfa4420791817a"
+        },
+        {
+          "path": "packages/artplayer/src/events/clickInit.ts",
+          "sha256": "bd1ba29fe0af4332ceb19297797c4c942a3a74bfd901998d6b93293f1b309300"
+        },
+        {
+          "path": "packages/artplayer/src/events/viewport.ts",
+          "sha256": "6196fccb8b08ae22bde732c4389d9aceb5d727a63efd87b6d3914e338aadc46f"
+        },
+        {
+          "path": "packages/artplayer/src/contextmenu/index.ts",
+          "sha256": "7532165d162fa463f1fe3c538d6bda0f579b5907b05137382efeb0018719b011"
+        },
+        {
+          "path": "packages/artplayer/src/contextmenu/keyboard.ts",
+          "sha256": "eaa1af6b1abf8947d957208a0535f1b34f6c88e95394efd56cae905ccdea564c"
+        },
+        {
+          "path": "packages/artplayer/src/contextmenu/playbackRate.ts",
+          "sha256": "7e06bb6fab3acdd71fb3ed63f77083172af517b49c1ecaefa3ee6a9068bdfe54"
+        },
+        {
+          "path": "packages/artplayer/src/contextmenu/aspectRatio.ts",
+          "sha256": "18ab60c9acee1e0cecd76c0b6cf750763eed7cfbede4220328b5200154c5c478"
+        },
+        {
+          "path": "packages/artplayer/src/contextmenu/flip.ts",
+          "sha256": "a7a4ac375da45dc7b6c996d4534098838646a078abfc4438f688e91e14ef0b38"
+        },
+        {
+          "path": "packages/artplayer/src/control/index.ts",
+          "sha256": "0d8e5a281f2eeba06c4cc4ac5a042847df53db1a19fdf140efea17d6ab2c0b78"
+        },
+        {
+          "path": "packages/artplayer/src/control/progress/view.ts",
+          "sha256": "60ee16d5170be81b8132bb56dd0bc0eaf23e50f5c268d0697c9187b38a14aba9"
+        },
+        {
+          "path": "packages/artplayer/src/control/progress/keyboard.ts",
+          "sha256": "03d1d47e6641ea08f765d731f10a6aad35f7c3edc16aa97df822c5f9a7f75eb0"
+        },
+        {
+          "path": "packages/artplayer/src/control/volume.ts",
+          "sha256": "45474d8d7f43d59263aa42e774eaaafeb45530ec24b81a5f589f6c906954568b"
+        },
+        {
+          "path": "packages/artplayer/src/setting/layout.ts",
+          "sha256": "584604e8fffaeaf1d633d1ed45e64d94595c2a56976e3a3f7ede01839b83a37d"
+        },
+        {
+          "path": "packages/artplayer/src/setting/render.ts",
+          "sha256": "ed73745f2c7e2d76bbe8ce7202336e5f4de217dc8f0806b769127cb25316faba"
+        },
+        {
+          "path": "packages/artplayer/src/setting/playbackRate.ts",
+          "sha256": "2e70e0d2a33cb0ec9fcdd6d22424979fed7b2e01f87015d6be4e520d5cf4e88a"
+        },
+        {
+          "path": "packages/artplayer/src/setting/aspectRatio.ts",
+          "sha256": "a16eb58fadf77f0a9009cf162d957ffd59d9b8fde83cc193d510fd642e3456cb"
+        },
+        {
+          "path": "packages/artplayer/src/setting/flip.ts",
+          "sha256": "e72a4ae33300d9e48880897a4f85a04fa6d9a5fff7b06ecaf9081cfb1bb14404"
+        },
+        {
+          "path": "packages/artplayer/src/setting/subtitleOffset.ts",
+          "sha256": "86513835d4e542ac39e9d551507473e3e14c71fd0d5ea725267008ecbff6ab83"
+        },
+        {
+          "path": "packages/artplayer/src/notice.ts",
+          "sha256": "4faa700323a8fdfd91a59491a5f57da2dee9bd1f2de0d900ed16e9809a208c94"
+        },
+        {
+          "path": "packages/artplayer/src/input/hotkey-defaults.ts",
+          "sha256": "c28e14821e5c7f7ac92a302e92439ab68fe77d5ef7d90a36b147b7c979ab96c6"
+        },
+        {
+          "path": "packages/artplayer/src/input/long-press.ts",
+          "sha256": "110cf16cf9dae845597377ebbc43249e103cbc0ece56f89e44ec6ecc7f3819b0"
+        },
+        {
+          "path": "packages/artplayer/src/input/gesture-controller.ts",
+          "sha256": "1ebbd18184771a623b02ec19c363f84dcc72fdb7cd82bcf2adc97f4a138cb2b4"
+        },
+        {
+          "path": "packages/artplayer/src/info/poll.ts",
+          "sha256": "d26ff67d9eadf1e032445371dde6f15293a7fc0b2ae6b87c3815e4b4e1ed5dda"
+        },
+        {
+          "path": "packages/artplayer/src/display/web-fullscreen.ts",
+          "sha256": "13f901d20a31a7b8e4ebfbcceac5d3e0737df6335b71f0dfed638785bc413a5a"
+        },
+        {
+          "path": "packages/artplayer/src/display/orientation-web.ts",
+          "sha256": "aea55c3b9e8c708fe5559f07cf8f0afd7ad37ac5b1a43bf519245c3072ec4129"
+        },
+        {
+          "path": "packages/artplayer/src/plugins/auto-playback/records.ts",
+          "sha256": "133a4ba2fd2d3df724d96eb203d05cffb0b82ecb8de72403974f7979bd37ce01"
+        },
+        {
+          "path": "packages/artplayer/src/plugins/auto-playback/prompt.ts",
+          "sha256": "58c6dcaf540296ee6f6bdeeda38ee7302aca2b06ddb152b716c0c2bf9c6c96b4"
+        },
+        {
+          "path": "packages/artplayer/src/media/events/forward.ts",
+          "sha256": "6b1b7e80036bfb523b51843dc6ec6d83c2b949cefb9cef085b2d679a444e46d8"
+        },
+        {
+          "path": "packages/artplayer/src/media/events/reconnect.ts",
+          "sha256": "876027b5116d0d3628755705682b30630f4b713199ed8015541932d81d2944be"
+        },
+        {
+          "path": "packages/artplayer/src/lifecycle/instance.ts",
+          "sha256": "3168f7db4271bae7a242e80798546b755ac15443e15dd9ebb7675f5a259299d8"
+        },
+        {
+          "path": "packages/artplayer/public/artplayer.ts",
+          "sha256": "26a42ac66811e70f68a8ebe62cbf304eb1993451b3e658961be98e7106162527"
+        },
+        {
+          "path": "packages/artplayer/public/config.ts",
+          "sha256": "c4fd8681bf32b10c743e3e561c532520c8f32e43fd765524850b15e55cb91c72"
+        },
+        {
+          "path": "packages/artplayer/public/runtime.ts",
+          "sha256": "ec4b1d56993eb482a77eb0f94b701047549d009e6ba6433f27e7d464fef30c2b"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/services.ts",
+          "sha256": "8e4648d8c61bff47343f9e1c2b995af69fc00947264b826109ceadcbaf553254"
+        }
+      ],
+      "docs": [
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/class.md",
+          "sha256": "52dc8eae7ad8cb17cb63b03dd99596898f16187773466bc4874f042ee535006e",
+          "anchor": "config-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/global.md",
+          "sha256": "38e1b425227f877436c106451510537b15f4f4d418b0ae8f351e39ce2232745d",
+          "anchor": "global-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/global.md",
+          "sha256": "38e1b425227f877436c106451510537b15f4f4d418b0ae8f351e39ce2232745d",
+          "anchor": "global-initialization"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/global.md",
+          "sha256": "38e1b425227f877436c106451510537b15f4f4d418b0ae8f351e39ce2232745d",
+          "anchor": "global-timing"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/global.md",
+          "sha256": "38e1b425227f877436c106451510537b15f4f4d418b0ae8f351e39ce2232745d",
+          "anchor": "global-recovery"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+          "sha256": "72a1edcbd4d0ed5bfca1850cee5d0d2473a2a38096c10d248f457685e9b420d9",
+          "anchor": "config-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/global.md",
+          "sha256": "bbca6ce913c15223c5d591cbb3344d3bc0b0d5d4a8024ed8b82c9c4dcc14e790",
+          "anchor": "global-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/global.md",
+          "sha256": "bbca6ce913c15223c5d591cbb3344d3bc0b0d5d4a8024ed8b82c9c4dcc14e790",
+          "anchor": "global-initialization"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/global.md",
+          "sha256": "bbca6ce913c15223c5d591cbb3344d3bc0b0d5d4a8024ed8b82c9c4dcc14e790",
+          "anchor": "global-timing"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/global.md",
+          "sha256": "bbca6ce913c15223c5d591cbb3344d3bc0b0d5d4a8024ed8b82c9c4dcc14e790",
+          "anchor": "global-recovery"
+        }
+      ],
+      "evidence": "baselines/site04-globals.json"
     }
   ]
 }
