@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 273 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 274 项，范围 22 个包及工作区/示例。
 
-状态：todo 43 / doing 21 / blocked 0 / done 209 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 43 / doing 21 / blocked 0 / done 210 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -18,7 +18,7 @@
 | artplayer-plugin-ads | 2.1.0 | PKG-ADS-01, PKG-ADS-02, PKG-ADS-03, PKG-ADS-04, PKG-ADS-05, PKG-ADS-06 |
 | artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-PROXY-01, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06, PKG-FACTORY-01 |
 | artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06, PKG-ASR-07, PKG-ASR-08, PKG-ASR-09, PKG-ASR-10 |
-| artplayer-plugin-audio-track | 1.1.0 | PKG-AUDIO-01, PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-04, PKG-AUDIO-05, PKG-AUDIO-06 |
+| artplayer-plugin-audio-track | 1.1.0 | PKG-AUDIO-01, PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-04, PKG-AUDIO-05, PKG-AUDIO-06, SITE-AUDIO-01 |
 | artplayer-plugin-auto-thumbnail | 1.1.0 | PKG-AUTO-THUMB-01, PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-04, PKG-AUTO-THUMB-05, PKG-AUTO-THUMB-06, PKG-AUTO-THUMB-07, PKG-AUTO-THUMB-08, PKG-AUTO-THUMB-09, PKG-AUTO-THUMB-10, PKG-AUTO-THUMB-11, PKG-AUTO-THUMB-12 |
 | artplayer-plugin-chapter | 1.1.0 | PILOT-01, PKG-CHAPTER-01, PKG-CHAPTER-02, PKG-CHAPTER-03, PKG-CHAPTER-04, PKG-CHAPTER-05, PKG-CHAPTER-06, PKG-CHAPTER-HOVER-01 |
 | artplayer-plugin-chromecast | 1.1.0 | PKG-CAST-01, PKG-CAST-02, PKG-CAST-03, PKG-CAST-04, PKG-CAST-05, PKG-CAST-06 |
@@ -35,7 +35,7 @@
 | artplayer-proxy-mediabunny | 1.2.0 | PKG-MB-01, PKG-MB-02, PKG-MB-03, PKG-MB-04, PKG-MB-05, PKG-MB-06, PKG-MB-07, PKG-MB-08, PKG-MB-09, PKG-MB-10 |
 | artplayer-tool-iframe | 1.1.0 | PKG-IFRAME-01, PKG-IFRAME-02, PKG-IFRAME-03, PKG-IFRAME-04, PKG-IFRAME-05, PKG-IFRAME-06 |
 | artplayer-tool-thumbnail | 4.4.0 | PKG-TOOL-THUMB-01, PKG-TOOL-THUMB-02, PKG-TOOL-THUMB-03, PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-05, PKG-TOOL-THUMB-06, PKG-TOOL-THUMB-07 |
-| artplayer-vitepress | 1.1.0 | SITE-01, SITE-SMOKE-01, SITE-02, SITE-LOAD-01, SITE-AI-DOCS-01, SITE-BUILD-01, SITE-03, SITE-DANMUKU-01, SITE-HLS-01, SITE-DASH-01, SITE-04, SITE-05, SITE-06, SITE-07, SITE-VCONSOLE-01, ENG-LINT-02, SITE-CONSOLE-01 |
+| artplayer-vitepress | 1.1.0 | SITE-01, SITE-SMOKE-01, SITE-02, SITE-LOAD-01, SITE-AI-DOCS-01, SITE-BUILD-01, SITE-03, SITE-DANMUKU-01, SITE-HLS-01, SITE-DASH-01, SITE-04, SITE-05, SITE-06, SITE-07, SITE-VCONSOLE-01, ENG-LINT-02, SITE-CONSOLE-01, SITE-AUDIO-01 |
 
 ## 0 规划
 
@@ -408,7 +408,7 @@
 | SITE-BUILD-01 | artplayer, artplayer-vitepress, workspace<br>重构 i18n 与文档构建的暂存、替换和 Yarn 编排 | SITE-AI-DOCS-01 | 严格 TS 构建模块、编译后替换产物与失败回退，固定 Yarn 子进程和旧构建入口 | 旧 i18n 删除后失败有复现；失败不改变既有产物；语言集合、UMD/ESM/历史别名兼容；文档子进程退出码准确并完成真实 VitePress 构建；不隐式翻译、不修改播放器 API | M | done |
 | SITE-03 | artplayer-vitepress<br>整理 i18n/文档/LLM 生成流程 | SITE-02, SITE-LOAD-01, SITE-AI-DOCS-01, SITE-BUILD-01 | build-i18n/build-docs/build-llm/trans-docs 的任务边界和错误处理；桌面 common.js 自有 UI 的 TS 迁移与模块拆分 | 原命令兼容、生成可复现，翻译步骤不隐式运行远程服务；覆盖移动 loader 失败恢复 define、脚本依赖顺序、localhost/127.0.0.1 Run Code 目标和语言重定向；桌面剩余 UI 完成 TS 职责拆分并回归运行、导入与持久设置 | M | done |
 | SITE-DANMUKU-01 | artplayer-vitepress, artplayer-plugin-danmuku<br>核对弹幕双语指南并补齐英文入口 | SITE-03, PKG-DANMUKU-07 | 按实现修正中文调用说明，新增英文完整选项/API/热力图/类型指南和导航；同步生成站点与LLM资料，新增双语示例浏览器验收 | 旧中文URL和标题保留；实际方法返回、加载语义、回调与points边界准确；双语页面、Run Code及示例实测，完整插件组合和设备验收不冒充完成 | L | done |
-| SITE-04 | artplayer-vitepress<br>交叉核对逐包持续维护的文档 | CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08, SITE-DANMUKU-01, SITE-HLS-01, SITE-DASH-01 | 已随实现更新的中文/英文 API、包内实现地图、旧 JS 示例及已知能力限制的全包核对 | 未把缺环境的能力写成已验证，静态核对不等待设备任务；最终 demo 仍由 EX-03 验收；按 SITE-01 声明成员/候选标题清单逐项语义核对，补齐缺失的双语插件说明和 Danmuku 英文入口 | M | todo |
+| SITE-04 | artplayer-vitepress<br>交叉核对逐包持续维护的文档 | CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08, SITE-DANMUKU-01, SITE-HLS-01, SITE-DASH-01, SITE-AUDIO-01 | 已随实现更新的中文/英文 API、包内实现地图、旧 JS 示例及已知能力限制的全包核对 | 未把缺环境的能力写成已验证，静态核对不等待设备任务；最终 demo 仍由 EX-03 验收；按 SITE-01 声明成员/候选标题清单逐项语义核对，补齐缺失的双语插件说明和 Danmuku 英文入口 | M | todo |
 | SITE-05 | artplayer-vitepress<br>构建文档站和验证链接/示例 | SITE-04, EX-01, EX-02, SITE-07, SITE-VCONSOLE-01, SITE-CONSOLE-01 | VitePress 构建、链接与嵌入 demo 检查 | 文档构建、链接、嵌入路径与声明注入通过；真实完整 demo 保留 EX-03 独立门槛；核对 ENG-PM-01 登记的搜索 peer 范围和真实搜索行为 | M | todo |
 | SITE-06 | artplayer-vitepress<br>文档站交付验收 | SITE-05 | 维护指南和站点变更记录 | 未手改 generated 目录，旧 URL 可用、部署与检查分离 | M | todo |
 | SITE-07 | artplayer-vitepress, workspace<br>整理站点第三方资产与来源说明 | SITE-01 | Monaco/vConsole/console bundle/字体和样本的冻结来源、可复现构建或替代与站点 notices | 接续 SITE-01 的字节与换行差异证据；完整许可随实际分发，consoleLog/global/CSS/worker 与旧 URL 兼容；缺字体/媒体使用依据明确处置；资产变更后执行编辑器/移动/字幕/示例回归，不以来源指纹替代授权或运行证据 | H | doing |
@@ -484,6 +484,12 @@
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | PKG-DANMUKU-MASK-LOAD-01 | artplayer-plugin-danmuku, artplayer-plugin-danmuku-mask<br>修复真实Mask组合下的弹幕未采样与放置积压 | PKG-DANMUKU-12, PKG-MASK-04, CORE-22 | 分阶段性能/采样诊断、兼容实现修复及新旧核心/产物回归 | 关闭真实模型组合5项密集负载失败和1项负载前漏显，保持回调顺序、显示寿命与生命周期取消；不能以降低负载或关闭模型制造通过 | H | done |
+
+## 6 文档与示例
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| SITE-AUDIO-01 | artplayer-plugin-audio-track, artplayer-vitepress<br>补齐独立音轨双语指南和真实示例验证 | SITE-03, PKG-AUDIO-04 | 配置、同步/更新/媒体所有权及类型迁移的中英文指南、原样Run Code与浏览器证据 | 对照严格源码和历史类型；文档示例与实际demo一致，原生AAC与视频播放/暂停/seek/更新/销毁有验证；旧URL保留且不提前关闭全包设备门槛 | M | done |
 
 ## 完成证据与阻塞
 
@@ -717,3 +723,4 @@
 - PKG-TOOL-THUMB-07: [记录](changes/2026-09-15-PKG-TOOL-THUMB-07-cleanup-errors.md) [记录](baselines/thumbnail-cleanup-errors-validation.json)
 - PKG-DASH-CLEANUP-01: [记录](changes/2026-09-15-PKG-DASH-CLEANUP-01-errors.md) [记录](baselines/dash-cleanup-errors-validation.json)
 - CI-NPM-01: [记录](changes/2026-09-15-CI-NPM-01-bundle.md) [记录](baselines/npm-bundle-validation.json)
+- SITE-AUDIO-01: [记录](changes/2026-09-15-SITE-AUDIO-01-guides.md) [记录](baselines/audio-docs-validation.json)

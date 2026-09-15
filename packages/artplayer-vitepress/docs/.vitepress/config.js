@@ -80,7 +80,7 @@ const config = {
             { text: '视频章节', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter' },
             { text: '视频背光', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight' },
             { text: '文档画中画', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-document-pip/index.js&example=document.pip' },
-            { text: '独立音轨', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-audio-track/index.js&example=audio.track' },
+            { text: '独立音轨', link: '/plugin/audio-track' },
           ],
         },
         {
@@ -152,7 +152,7 @@ const config = {
             { text: 'Video Chapters', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter' },
             { text: 'Video Ambilight', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight' },
             { text: 'Document PIP', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-document-pip/index.js&example=document.pip' },
-            { text: 'Audio Track', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-audio-track/index.js&example=audio.track' },
+            { text: 'Audio Track', link: '/en/plugin/audio-track' },
           ],
         },
         {

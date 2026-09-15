@@ -13,16 +13,24 @@ not a VitePress page. Keep both URL surfaces compatible.
 | `docs/plugin/danmuku.md`, `docs/en/plugin/danmuku.md` | Danmuku options, callbacks, commands, heatmap and types in both languages | `/document/plugin/danmuku.html`, `/document/en/plugin/danmuku.html` |
 | `docs/plugin/hls-control.md`, `docs/en/plugin/hls-control.md` | HLS SDK setup, menus, lifecycle and types | `/document/plugin/hls-control.html`, `/document/en/plugin/hls-control.html` |
 | `docs/plugin/dash-control.md`, `docs/en/plugin/dash-control.md` | DASH SDK generations, menus, lifecycle and types | `/document/plugin/dash-control.html`, `/document/en/plugin/dash-control.html` |
+| `docs/plugin/audio-track.md`, `docs/en/plugin/audio-track.md` | Separate audio synchronization, ownership and update types | `/document/plugin/audio-track.html`, `/document/en/plugin/audio-track.html` |
 | `docs/.vitepress/config.js` | Navigation, base URL, output path, page head | Repository `docs/document/` |
 | `docs/vite.config.ts` | Search plugin configuration | VitePress/Vite integration; real search acceptance remains pending |
 | `docs/public/main.js` | Run Code links and first-visit language redirect | Copied into the built site |
 | `docs/public/style.css` | Documentation presentation | Copied into the built site |
 
 Edit Markdown and public sources here. Do not edit the generated repository
-`docs/document/`. The current inventory contains 32 Markdown pages: 16 Chinese
-and 16 English. Danmuku, HLS and DASH have dedicated guides and navigation in both languages. Other plugins currently
+`docs/document/`. The current inventory contains 34 Markdown pages: 17 Chinese
+and 17 English. Danmuku, HLS, DASH and Audio Track have dedicated guides and navigation in both languages. Other plugins currently
 use their package README, architecture notes and linked editor examples;
 navigation links alone are not complete API documentation.
+
+Audio Track guide examples match the actual audio.track demo. The dedicated
+document-audio browser suite substitutes local Range-served media, then checks
+native video pixels and AAC playback, pause, offset seek, volume/rate, source
+updates and teardown with both core generations. The navigation suite separately
+checks both generated guide URLs and the Run Code destination. Tests do not
+measure physical audibility or replace the package's full device matrix.
 
 Danmuku guides describe the refactor branch and explicitly distinguish unpublished
 `/runtime` declarations from current CDN releases. Preserve old Chinese heading

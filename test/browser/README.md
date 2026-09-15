@@ -516,3 +516,15 @@ are asserted with the original SDK initialization settings. WebKit without MSE
 checks only unsupported setup/notice/cleanup. `document-site.spec.js` also verifies
 the two guide links and Run Code libraries/source; full SDK/device acceptance stays
 separate. Unit nullable-language and repeated-cleanup cases run via test:unit.
+
+## Audio Track documentation examples
+
+`document-audio.spec.js` requires both guides' Run Code to match the unchanged
+`docs/assets/example/audio.track.js`. It loads the actual local plugin distribution
+with published/candidate cores, routes the demo media URLs to native Range-served
+H264/AAC fixtures, and checks decoded video pixels plus independent audio time,
+pause, offset seek, volume/rate, URL replacement, element identity and terminal
+cleanup. Pixel readiness uses the existing polling deadline, not media time alone.
+The first immediate-pixel WebKit failure remains in the refactor evidence.
+This is native desktop media playback, not physical audibility or full devices.
+`document-site.spec.js` also checks generated guide links and Run Code parameters.

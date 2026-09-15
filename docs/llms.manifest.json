@@ -47,6 +47,10 @@
       "sha256Lf": "adec563b74e5d690f97a710bf58478d04092f0de199674152e68da817f412ee5"
     },
     {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/audio-track.md",
+      "sha256Lf": "9da86cbb6dd4edb97056344deadd176a609b4a49a41e3437c9e9839aa2fb4865"
+    },
+    {
       "file": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
       "sha256Lf": "a563349b064adac119dac943060ffc5bc82a8ccbd6e20d2d7b5a1e1cb4d66ba2"
     },
@@ -279,5 +283,5 @@
       "sha256Lf": "967db6e5026a2fd3cc24d8a04e5c78859f543d0c0f6d4f9599c103e4e93c9b29"
     }
   ],
-  "outputSha256Lf": "d2b41d68719734e09881cccc194609e9646bd5085483bb2e8dec516a74908b76"
+  "outputSha256Lf": "ddb04cf3fc115d09fe87350d7d39097e5b67b4e17918ccd10b7b1bedf8d670fa"
 }

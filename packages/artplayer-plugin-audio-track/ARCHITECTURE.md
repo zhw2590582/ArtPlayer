@@ -65,6 +65,13 @@ source failure recovery, and old/native pause/end plus corrected candidate clean
 See refactor/audio-validation.md for failed baseline probes, Windows WebKit WAV/size limits,
 physical-device gaps and the remaining 05/06 combination/distribution gates.
 
+The bilingual VitePress audio-track guides explain the actual deferred update,
+strict drift threshold, URL truthiness and shared mute behavior. Keep their Run Code
+source identical to docs/assets/example/audio.track.js. document-audio.spec.js
+executes that source with local Range-served video/AAC, checking playback, pause,
+offset seek, rate/volume, source replacement with stable audio identity and terminal
+updates. This example coverage complements, rather than completes, 05/06 acceptance.
+
 ## Public type compatibility
 
 The default and /legacy entries preserve the original Result.update(Option) signature,

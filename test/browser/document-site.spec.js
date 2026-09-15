@@ -89,5 +89,16 @@ for (const language of ['zh', 'en']) {
     expect(dashTarget.searchParams.get('code')).toContain('art.on(\'destroy\', destroyDash)')
     expect(failedAssets).toEqual([])
     await dashExample.close()
+    await page.locator(`.VPSidebar a[href="${prefix}/plugin/audio-track.html"]`).click()
+    await expect(page.locator('h1')).toContainText(language === 'en' ? 'Audio Track' : '独立音轨')
+    const audioPopup = context.waitForEvent('page')
+    await page.locator('.run-code, [classname="run-code"]').first().click()
+    const audioExample = await audioPopup
+    await audioExample.waitForLoadState('domcontentloaded')
+    const audioTarget = new URL(audioExample.url())
+    expect(audioTarget.searchParams.get('libs')).toBe('./uncompiled/artplayer-plugin-audio-track/index.js')
+    expect(audioTarget.searchParams.get('code')).toContain('artplayerPluginAudioTrack({')
+    expect(failedAssets).toEqual([])
+    await audioExample.close()
   })
 }

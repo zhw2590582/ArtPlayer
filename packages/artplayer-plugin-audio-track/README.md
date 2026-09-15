@@ -6,6 +6,11 @@ audio-track plugin for ArtPlayer
 
 [https://artplayer.org](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-audio-track/index.js&example=audio.track)
 
+The refactor branch includes complete [Chinese](../artplayer-vitepress/docs/plugin/audio-track.md)
+and [English](../artplayer-vitepress/docs/en/plugin/audio-track.md) guides. They cover
+time offsets, synchronous partial updates, shared mute/volume, source ownership
+and the legacy/runtime type split. Their runnable example matches the demo above.
+
 ## TypeScript
 
 The default import and `/legacy` preserve existing TypeScript behavior, including the

@@ -4513,7 +4513,8 @@
         "PKG-MB-08",
         "SITE-DANMUKU-01",
         "SITE-HLS-01",
-        "SITE-DASH-01"
+        "SITE-DASH-01",
+        "SITE-AUDIO-01"
       ],
       "status": "todo",
       "risk": "M",
@@ -5881,6 +5882,27 @@
       "evidence": [
         "changes/2026-09-15-CI-NPM-01-bundle.md",
         "baselines/npm-bundle-validation.json"
+      ]
+    },
+    {
+      "id": "SITE-AUDIO-01",
+      "phase": "6 文档与示例",
+      "title": "补齐独立音轨双语指南和真实示例验证",
+      "scope": [
+        "artplayer-plugin-audio-track",
+        "artplayer-vitepress"
+      ],
+      "dependsOn": [
+        "SITE-03",
+        "PKG-AUDIO-04"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "配置、同步/更新/媒体所有权及类型迁移的中英文指南、原样Run Code与浏览器证据",
+      "acceptance": "对照严格源码和历史类型；文档示例与实际demo一致，原生AAC与视频播放/暂停/seek/更新/销毁有验证；旧URL保留且不提前关闭全包设备门槛",
+      "evidence": [
+        "changes/2026-09-15-SITE-AUDIO-01-guides.md",
+        "baselines/audio-docs-validation.json"
       ]
     }
   ]

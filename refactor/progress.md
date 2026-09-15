@@ -1,5 +1,20 @@
 # 进度与证据
 
+## SITE-AUDIO-01 独立音轨双语指南
+
+新增中英文完整指南与侧栏，说明同步阈值、deferred offset更新、同步update、
+音轨URL所有权、共同静音、销毁及根/legacy/runtime类型。两页Run Code与原demo
+逐字一致，未改变插件源码/API或示例。
+
+最终12项浏览器通过：新旧核心×三引擎的真实视频/AAC生命周期6项，双语
+导航/Run Code6项。首轮WebKit即时黑帧记录保留，改用既定期限内等待真实像素；
+17项文档工具、7项站点测试、两份严格TS、生成/链接/lint通过。内置浏览器
+观察原demo10:29元数据和ready事件，仅计加载。见[记录](changes/2026-09-15-SITE-AUDIO-01-guides.md)和[证据](baselines/audio-docs-validation.json)。
+
+站点34 Markdown/43 HTML，中英各17页。210 done、21 doing、43 todo，共274。
+SITE-04和Audio05/06的原门槛保留；无依赖/版本变更，无推送、部署或发布。
+
+
 ## CI-01 安装验收环境策略修复
 
 原入口允许十个渲染/恢复诊断替换，直接installed配置还绕开部分既有策略。
