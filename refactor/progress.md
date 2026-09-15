@@ -1,5 +1,22 @@
 # 进度与证据
 
+## PKG-HLS-SDK-01 控制器与原生诊断检查点
+
+原Firefox1.7.2切组测试20次通过，不关闭历史停滞。新增可选controller-state，
+读取固定SDK两版的控制器、独立音视频缓冲与片段跟踪，异步保留到Node队列。
+最终直接宿主/发布核心各两次通过并取得两版完整字段，默认模式一次通过；回归与
+SDK来源测试5项、lint通过。早期缺tracker/旧缓冲/音频字段的记录保留为部分证据。
+
+本轮另两次直接1.5.17在destroy之前页面崩溃，无ArtPlayer/插件，其中一次是该
+浏览器序列首项；新增Node采集在第二次保住97条事件，最后处于audio/video flush
+与切高组阶段。仍无原生异常代码或堆栈，不将该崩溃和1.7.2停滞合并为同一根因。
+本机Firefox归档确认--disable-crashreporter，后续需限定任务进程的原生异常取证。
+详见[记录](changes/2026-09-15-PKG-HLS-SDK-01-controller-state.md)与
+[证据](baselines/hls-controller-validation.json)。
+
+本任务继续doing，两项HLS风险继续open；207 done、21 doing、43 todo，总271不变。
+没有生产代码、公开API、依赖、版本或分发修改，没有推送或发布。
+
 ## SITE-DANMUKU-01 双语指南和示例验证
 
 新增 Danmuku 英文指南/侧栏，按源码修正中文 Promise/owner、加载、回调、mount、

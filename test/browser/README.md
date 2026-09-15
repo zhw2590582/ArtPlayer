@@ -146,6 +146,16 @@ one explicit capability/error-cleanup test covers that limitation and its 14 pla
 skipped with a reason. Chromium/Firefox run the full four-combination HLS matrix. This is not
 Safari playback approval; see [HLS validation](../../refactor/hls-validation.md) for evidence and open gates.
 
+The standalone `refactor/scripts/hls-sdk-diagnostic.mjs --controller-state` option
+installs `helpers/hls-controller-state.js` only for a fixed-SDK diagnostic. It reads
+the 1.5.17 buffer dictionary or 1.7.2 buffer array and the controllers' shared
+fragment tracker, keeping cyclic loaded objects out of JSON. The 1.5 audio stream
+controller is located by playlistType in networkControllers. Observations are also
+copied asynchronously into a bounded Node queue, retaining received events after
+a page crash; the last undelivered events may be lost. Default diagnostics
+do not enable this observer. A missing or errored snapshot is incomplete evidence;
+neither transient empty media ranges nor repeated success resolves HLS-PLAYBACK-01.
+
 `playback.spec.js` tests published/current core with current chapter, real decoded frame colors,
 media time advancing, pause, seek, source change to the existing docs video, destroy and real
 HTTP failure. These are initial smoke contracts, not full chapter or lifecycle coverage.

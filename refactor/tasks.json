@@ -2154,7 +2154,9 @@
         "changes/2026-09-15-PKG-HLS-SDK-01-switch-boundary.md",
         "baselines/hls-switch-boundary-validation.json",
         "changes/2026-09-15-PKG-HLS-SDK-01-sdk-sequence.md",
-        "baselines/hls-sdk-sequence-validation.json"
+        "baselines/hls-sdk-sequence-validation.json",
+        "changes/2026-09-15-PKG-HLS-SDK-01-controller-state.md",
+        "baselines/hls-controller-validation.json"
       ]
     },
     {

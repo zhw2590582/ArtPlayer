@@ -6,13 +6,15 @@ import path from 'node:path'
 import process from 'node:process'
 import { parseArgs } from 'node:util'
 import { expect, firefox } from '@playwright/test'
+import { snapshotHlsControllers } from '../../test/helpers/hls-controller-state.js'
 import { observeWorkers } from '../../test/helpers/worker-observer.js'
 import { ensureArchive, hash, readMember, refactorDir } from './releases.mjs'
 
 // Direct SDK control: no ArtPlayer or plugin is loaded, and no worker output is substituted.
-export async function diagnose({ version = '1.7.2', iterations = 5, transport = 'http', teardown = 'reset-first', worker = true, host = 'direct', plugin = false, sdkLogs = false, workerObserver = false, captureBeforeDestroy = false, switchBoundary = 'switched', prefill = false, sequence } = {}) {
+export async function diagnose({ version = '1.7.2', iterations = 5, transport = 'http', teardown = 'reset-first', worker = true, host = 'direct', plugin = false, sdkLogs = false, workerObserver = false, controllerState = false, captureBeforeDestroy = false, switchBoundary = 'switched', prefill = false, sequence } = {}) {
   const runnerSHA256 = hash(fs.readFileSync(new URL(import.meta.url)))
   const observerSHA256 = hash(fs.readFileSync(new URL('../../test/helpers/worker-observer.js', import.meta.url)))
+  const controllerObserverSHA256 = hash(fs.readFileSync(new URL('../../test/helpers/hls-controller-state.js', import.meta.url)))
   assert(Number.isInteger(iterations) && iterations > 0 && iterations <= 50)
   assert(['http', 'route'].includes(transport))
   assert(['reset-first', 'sdk-first'].includes(teardown))
@@ -76,6 +78,14 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
       const wait = predicate => expect.poll(() => page.evaluate(predicate), { timeout: 7000 }).toBe(true)
       const entry = { iteration, version: versions[iteration], status: 'running', errors: [], requests: [], phase: 'setup', crashes: [] }
       results.push(entry)
+      if (controllerState) {
+        entry.observedEvents = []
+        await page.exposeFunction('__recordHlsControllerState', (event) => {
+          entry.observedEvents.push({ receivedDuring: entry.phase, ...event })
+          if (entry.observedEvents.length > 400)
+            entry.observedEvents.shift()
+        })
+      }
       page.on('pageerror', error => entry.errors.push(error.message))
       page.on('crash', () => {
         entry.errors.push('page crashed')
@@ -93,6 +103,8 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
       }
       try {
         await page.goto(origin)
+        if (controllerState)
+          await page.addScriptTag({ content: `window.snapshotHlsControllers = ${snapshotHlsControllers.toString()};` })
         if (workerObserver)
           await page.evaluate(observeWorkers)
         await page.addScriptTag({ url: `${origin}/hls-${entry.version}.js` })
@@ -101,7 +113,7 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
           await page.addScriptTag({ url: `${origin}/artplayer.js` })
         if (plugin)
           await page.addScriptTag({ url: `${origin}/plugin.js` })
-        await page.evaluate(({ worker, teardown, host, plugin, sdkLogs }) => {
+        await page.evaluate(({ worker, teardown, host, plugin, sdkLogs, controllerState }) => {
           let video
           let hls
           let art
@@ -109,7 +121,10 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
           const buffer = ranges => Array.from({ length: ranges.length }, (_, index) => [ranges.start(index), ranges.end(index)])
           const state = () => ({ time: video.currentTime, readyState: video.readyState, height: video.videoHeight, paused: video.paused, frames: video.getVideoPlaybackQuality().totalVideoFrames, buffered: buffer(video.buffered), seekable: buffer(video.seekable) })
           const record = (event, data) => {
-            records.push({ at: performance.now(), event, data, media: state() })
+            const snapshot = { at: performance.now(), event, data, media: state(), ...(controllerState ? { controllers: window.snapshotHlsControllers(hls) } : {}) }
+            records.push(snapshot)
+            if (controllerState)
+              window.__recordHlsControllerState(snapshot).catch(() => {})
             if (records.length > 400)
               records.shift()
           }
@@ -117,8 +132,11 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
           function attach(element) {
             video = element
             hls = new window.Hls({ enableWorker: worker, startLevel: 0, debug: sdkLogs ? logger : false })
-            for (const key of ['ERROR', 'AUDIO_TRACKS_UPDATED', 'AUDIO_TRACK_SWITCHING', 'AUDIO_TRACK_SWITCHED', 'LEVEL_SWITCHING', 'LEVEL_SWITCHED', 'FRAG_BUFFERED', 'BUFFER_FLUSHED']) {
-              hls.on(window.Hls.Events[key], (_, data) => record(key, { id: data.id, level: typeof data.level === 'number' ? data.level : undefined, fatal: data.fatal, details: typeof data.details === 'string' ? data.details : undefined, frag: data.frag && { type: data.frag.type, sn: data.frag.sn, level: data.frag.level }, tracks: data.audioTracks?.map(track => ({ id: track.id, name: track.name, group: track.groupId })) }))
+            const eventKeys = ['ERROR', 'AUDIO_TRACKS_UPDATED', 'AUDIO_TRACK_SWITCHING', 'AUDIO_TRACK_SWITCHED', 'LEVEL_SWITCHING', 'LEVEL_SWITCHED', 'FRAG_BUFFERED', 'BUFFER_FLUSHED']
+            if (controllerState)
+              eventKeys.push('BUFFER_FLUSHING', 'FRAG_LOADING', 'FRAG_LOADED', 'BUFFER_APPENDED')
+            for (const key of eventKeys) {
+              hls.on(window.Hls.Events[key], (_, data) => record(key, { id: data.id, type: data.type, startOffset: data.startOffset, endOffset: typeof data.endOffset === 'number' && !Number.isFinite(data.endOffset) ? String(data.endOffset) : data.endOffset, level: typeof data.level === 'number' ? data.level : undefined, fatal: data.fatal, details: typeof data.details === 'string' ? data.details : undefined, frag: data.frag && { type: data.frag.type, sn: data.frag.sn, level: data.frag.level }, tracks: data.audioTracks?.map(track => ({ id: track.id, name: track.name, group: track.groupId })) }))
             }
             for (const name of ['waiting', 'stalled', 'seeking', 'seeked', 'playing', 'pause', 'ended', 'loadedmetadata', 'canplay', 'error'])
               video.addEventListener(name, () => record(name))
@@ -175,7 +193,7 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
               record('destroy:end')
             },
           }
-        }, { worker, teardown, host, plugin, sdkLogs })
+        }, { worker, teardown, host, plugin, sdkLogs, controllerState })
         entry.phase = 'initial-playback'
         await wait(() => window.direct.video?.readyState >= 3)
         await page.evaluate(() => window.direct.video.play())
@@ -273,7 +291,7 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
       finally {
         entry.failurePhase = entry.status === 'failed' ? entry.phase : undefined
         entry.phase = 'final-state'
-        entry.state = await page.evaluate(() => ({ coreLoaded: typeof window.Artplayer, pluginLoaded: typeof window.artplayerPluginHlsControl, workers: window.workerEvidence, media: window.direct?.state(), events: window.direct?.records, sdk: { version: window.Hls?.version, level: window.direct?.hls.currentLevel, audioTrack: window.direct?.hls.audioTrack, mainState: window.direct?.hls.streamController?.state, audioState: window.direct?.hls.audioStreamController?.state } })).catch(error => ({ error: error.message }))
+        entry.state = await page.evaluate(() => ({ coreLoaded: typeof window.Artplayer, pluginLoaded: typeof window.artplayerPluginHlsControl, workers: window.workerEvidence, media: window.direct?.state(), events: window.direct?.records, controllers: window.snapshotHlsControllers?.(window.direct?.hls), sdk: { version: window.Hls?.version, level: window.direct?.hls.currentLevel, audioTrack: window.direct?.hls.audioTrack, mainState: window.direct?.hls.streamController?.state, audioState: window.direct?.hls.audioStreamController?.state } })).catch(error => ({ error: error.message }))
         entry.phase = 'trace-stop'
         await context.tracing.stop({ path: path.join(directory, `${iteration}.zip`) }).catch((error) => {
           entry.traceError = error.message
@@ -295,7 +313,7 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
     await browser?.close()
     server.closeAllConnections()
     await new Promise(resolve => server.close(resolve))
-    fs.writeFileSync(path.join(directory, 'report.json'), `${JSON.stringify({ version: sequence ? undefined : version, iterations: versions.length, sequence: versions, transport, teardown, worker, host, plugin, sdkLogs, workerObserver, captureBeforeDestroy, switchBoundary, prefill, runnerSHA256, observerSHA256, browserVersion, release: sequence ? undefined : releases[0], releases, inputs: Object.fromEntries([...files].map(([file, bytes]) => [file, hash(bytes)])), results }, null, 2)}\n`)
+    fs.writeFileSync(path.join(directory, 'report.json'), `${JSON.stringify({ version: sequence ? undefined : version, iterations: versions.length, sequence: versions, transport, teardown, worker, host, plugin, sdkLogs, workerObserver, controllerState, captureBeforeDestroy, switchBoundary, prefill, runnerSHA256, observerSHA256, controllerObserverSHA256, browserVersion, release: sequence ? undefined : releases[0], releases, inputs: Object.fromEntries([...files].map(([file, bytes]) => [file, hash(bytes)])), results }, null, 2)}\n`)
     console.log(`Diagnostic report: ${directory}`)
   }
   return results
@@ -314,13 +332,14 @@ const { values, tokens } = parseArgs({
     'plugin': { type: 'boolean', default: false },
     'sdk-logs': { type: 'boolean', default: false },
     'observe-workers': { type: 'boolean', default: false },
+    'controller-state': { type: 'boolean', default: false },
     'capture-before-destroy': { type: 'boolean', default: false },
     'switch-boundary': { type: 'string', default: 'switched' },
     'prefill': { type: 'boolean', default: false },
   },
 })
 assert(!values.sequence || !tokens.some(token => token.kind === 'option' && ['version', 'iterations'].includes(token.name)), 'Use --sequence or --version/--iterations, not both')
-diagnose({ version: values.version, iterations: Number(values.iterations), transport: values.transport, teardown: values.teardown, worker: !values['no-worker'], host: values.host, plugin: values.plugin, sdkLogs: values['sdk-logs'], workerObserver: values['observe-workers'], captureBeforeDestroy: values['capture-before-destroy'], switchBoundary: values['switch-boundary'], prefill: values.prefill, sequence: values.sequence?.split(',') }).then((results) => {
+diagnose({ version: values.version, iterations: Number(values.iterations), transport: values.transport, teardown: values.teardown, worker: !values['no-worker'], host: values.host, plugin: values.plugin, sdkLogs: values['sdk-logs'], workerObserver: values['observe-workers'], controllerState: values['controller-state'], captureBeforeDestroy: values['capture-before-destroy'], switchBoundary: values['switch-boundary'], prefill: values.prefill, sequence: values.sequence?.split(',') }).then((results) => {
   process.exitCode = results.some(result => result.status !== 'passed') ? 1 : 0
 }).catch((error) => {
   console.error(error)

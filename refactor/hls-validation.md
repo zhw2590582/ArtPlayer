@@ -99,3 +99,13 @@ worker 切源/清理覆盖两个 SDK 与新旧核心/插件四组合；候选插
 本子任务暂未完成：一次 Firefox 分组切换后的销毁出现 Target crashed，HLS-CRASH-01
 仍待定位。后续完整矩阵和重复通过不能抹去首次失败；详见
 [进行中记录](changes/2026-09-12-PKG-HLS-SDK-01-integration.md)。
+
+后续的分组停滞与原生崩溃保持独立风险。固定 SDK 诊断现在可加
+`--controller-state` 同时记录控制器、音视频 SourceBuffer 和片段追踪；该观察器
+位于 test/helpers/hls-controller-state.js，不进入生产插件。默认不开启，避免把
+额外观察导致的时序变化当修复。2026-09-15 的20次原测试通过仍不关闭风险；
+成功对照也能短暂出现 ENDED+空媒体缓冲，必须看独立缓冲和后续恢复。
+本机 Firefox 编译参数禁用了 crash reporter，不能承诺环境变量能生成 minidump。
+随后直接1.5.17两次切组崩溃均在destroy之前；可选观察器向Node复制事件后，
+其中一次页面失联仍保留97条事件。此处有最后收到的音视频flush状态，尚无原生堆栈。
+详情及后续取证方向见[控制器检查点](changes/2026-09-15-PKG-HLS-SDK-01-controller-state.md)。
