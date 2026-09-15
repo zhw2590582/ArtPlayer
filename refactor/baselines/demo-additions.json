@@ -21,6 +21,14 @@
       "note": "Generated bilingual guide added during SITE-04 implementation; content/navigation evidence does not complete full demo or release acceptance."
     },
     {
+      "source": "docs/document/en/plugin/asr.html",
+      "route": "/document/en/plugin/asr.html",
+      "introducedAfter": "31388126103a14834dc37051a5b3c6daaf9afb05",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated bilingual guide; scoped content/navigation checks do not establish playback, device or release acceptance."
+    },
+    {
       "source": "docs/document/en/plugin/audio-track.html",
       "route": "/document/en/plugin/audio-track.html",
       "introducedBy": "d3349e83f24fdea3fa55fdfa6254cb1587fc5a26",
@@ -53,6 +61,14 @@
       "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
     },
     {
+      "source": "docs/document/en/plugin/document-pip.html",
+      "route": "/document/en/plugin/document-pip.html",
+      "introducedAfter": "31388126103a14834dc37051a5b3c6daaf9afb05",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated bilingual guide; scoped content/navigation checks do not establish playback, device or release acceptance."
+    },
+    {
       "source": "docs/document/en/plugin/hls-control.html",
       "route": "/document/en/plugin/hls-control.html",
       "introducedBy": "4ea0ba94ae51d14d353bc57a3222a8c19b11ac66",
@@ -77,6 +93,14 @@
       "note": "Generated bilingual guide added during SITE-04 implementation; content/navigation evidence does not complete full demo or release acceptance."
     },
     {
+      "source": "docs/document/plugin/asr.html",
+      "route": "/document/plugin/asr.html",
+      "introducedAfter": "31388126103a14834dc37051a5b3c6daaf9afb05",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated bilingual guide; scoped content/navigation checks do not establish playback, device or release acceptance."
+    },
+    {
       "source": "docs/document/plugin/audio-track.html",
       "route": "/document/plugin/audio-track.html",
       "introducedBy": "d3349e83f24fdea3fa55fdfa6254cb1587fc5a26",
@@ -99,6 +123,14 @@
       "owner": "SITE-DASH-01",
       "finalDemoOwner": "EX-03",
       "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
+    },
+    {
+      "source": "docs/document/plugin/document-pip.html",
+      "route": "/document/plugin/document-pip.html",
+      "introducedAfter": "31388126103a14834dc37051a5b3c6daaf9afb05",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated bilingual guide; scoped content/navigation checks do not establish playback, device or release acceptance."
     },
     {
       "source": "docs/document/plugin/hls-control.html",

@@ -1,5 +1,9 @@
 # 文档站、示例与生成链清单
 
+2026-09-16 SITE-04后续：新增Document PiP/ASR双语指南和本地入口，当前44 Markdown、
+53 HTML、中英各22页；四页类型/链接及12组浏览器导航通过，完整语义和播放验收
+仍独立保留。见[本次记录](changes/2026-09-16-SITE-04-dpip-asr-guides.md)。
+
 2026-09-16 SITE-04检查点：Chapter/Ambilight已补独立双语指南、原样示例与本地导航；
 当前40 Markdown、49 HTML，中英各20页。八处空Run Code控件补上可见标签，导航
 版本同步6.0.0并标注unreleased。逐包内容核对见[跟踪表](site-content-review.md)；

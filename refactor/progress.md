@@ -1,5 +1,15 @@
 # 进度与证据
 
+## SITE-04 Document PiP/ASR双语指南
+
+补齐四份指南、本地导航与原样Run Code示例。说明PiP异步/只读实际行为与旧类型、
+视频降级和窗口归属；ASR说明音频片段、字幕HTML、stop重启、两种音频图及CORS。
+四份严格TS片段、本地链接、三浏览器12组导航和17项既有工具测试通过，构建和
+目录检查通过。当前44 Markdown/53 HTML；21库候选build指纹继续有效。见
+[记录](changes/2026-09-16-SITE-04-dpip-asr-guides.md)和
+[证据](baselines/site04-dpip-asr-guides.json)。SITE-04保持doing，总计224/22/39；
+继续其余包和核心语义核对，不将导航计作播放验收，不进入用户保留的复盘。
+
 ## SITE-04 Chapter/Ambilight双语内容核对
 
 新增两包四份指南，覆盖真实参数、生命周期、数组修改/采样行为和兼容类型入口，

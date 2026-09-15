@@ -51,6 +51,10 @@
       "sha256Lf": "d3362744c24d26e8d9c045cb73e54984cc47c9173b4612421b431bcfbde1b65c"
     },
     {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/asr.md",
+      "sha256Lf": "d214f61365f3e78542edd8709f5fab322661793df84c849f1cd084ece6d0b21c"
+    },
+    {
       "file": "packages/artplayer-vitepress/docs/en/plugin/audio-track.md",
       "sha256Lf": "6bca6009903dcc933689f69b48cf8611a63057e74ea0e1d782fba644eada178f"
     },
@@ -65,6 +69,10 @@
     {
       "file": "packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
       "sha256Lf": "0ccfc925832c7e0643d1e6a0927390742f4640a3ac2f1eeeed6b40df3409007b"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/document-pip.md",
+      "sha256Lf": "143c9a582207c121247c4f56b9e9f1bc5a9c254c4b41f11932558be03554f808"
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
@@ -295,5 +303,5 @@
       "sha256Lf": "967db6e5026a2fd3cc24d8a04e5c78859f543d0c0f6d4f9599c103e4e93c9b29"
     }
   ],
-  "outputSha256Lf": "073a81799d395af6911d7df3315d267f28f3d1756b43cc37b540c0c0eeb23adc"
+  "outputSha256Lf": "00a87936ed888fe9cf5aec1df23eab3c00006ff48a1a456bff571e8035b379af"
 }
