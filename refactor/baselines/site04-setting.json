@@ -1,0 +1,923 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "doing",
+  "sourceBefore": "bb2fec8dd1df02fdf8260c04a73d060806da9adc",
+  "capturedAt": "2026-09-15T22:51:07.858Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "static": [
+      {
+        "language": "zh",
+        "name": "setting",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/component/setting.md",
+          "sha256": "807b5b22aba0be97602b4af92a7d855232377e8e8375ae07c10727a2900f36a3"
+        },
+        "html": {
+          "path": "docs/document/component/setting.html",
+          "sha256": "3a349be8768839d915529306144c8d69825449f12b0676ca57c691b49af91418"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-setting/zh-setting-0.mts",
+            "sha256": "02cb7c2e86067658a20836fde68bbe12d3e337d9bcf7b1c63788e8c4e6fe9c50"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "component/setting.md:10",
+            "sha256": "405d7f54fd3d4d9da5a7416f0fb0515791a0c709e5ce76d2456eff3f33027075"
+          },
+          {
+            "id": "component/setting.md:34",
+            "sha256": "4206c181079c44f6bfcaa56c3b41cba6b57115d099c7461a1209c1b7f4a7fd96"
+          },
+          {
+            "id": "component/setting.md:66",
+            "sha256": "a07430adb133d38aecf21a2710067c4434fd5c4fc9719e90e7bd3572b992192d"
+          },
+          {
+            "id": "component/setting.md:126",
+            "sha256": "fdbebe73f79ae9e3b297fea7bf71d85191679cf6421ce6981434d5a767450b11"
+          },
+          {
+            "id": "component/setting.md:185",
+            "sha256": "a6f62bc729156f5f5eb3a456d1f0b54e40f0e8ea69e2b6854ce217cc999a417e"
+          },
+          {
+            "id": "component/setting.md:229",
+            "sha256": "2b7b9f57090e6d71a5bfeee99e6249271d985be605351b13727ef164b28a380d"
+          },
+          {
+            "id": "component/setting.md:253",
+            "sha256": "4df1b60413c555dee8ed069dd28cf1412dfefd65f6d63ff5f0c52997132a3a85"
+          },
+          {
+            "id": "component/setting.md:274",
+            "sha256": "8f197061216843a4793a26c72ed3e41119b718e5fbda4cf8296ff9d4fbf09866"
+          },
+          {
+            "id": "component/setting.md:305",
+            "sha256": "5628cdb66583e138af48d88506143313057236511268ad98b16d0ed9335e3df5"
+          }
+        ],
+        "localLinks": [
+          "/document/component/setting.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/component/setting.html#%E8%AE%BE%E7%BD%AE%E9%9D%A2%E6%9D%BF",
+          "/document/component/setting.html#%E5%86%85%E7%BD%AE",
+          "/document/component/setting.html#%E5%88%9B%E5%BB%BA-%E6%8C%89%E9%92%AE",
+          "/document/component/setting.html#%E5%88%9B%E5%BB%BA-%E9%80%89%E6%8B%A9%E5%88%97%E8%A1%A8",
+          "/document/component/setting.html#%E5%88%9B%E5%BB%BA-%E5%88%97%E8%A1%A8%E5%B5%8C%E5%A5%97",
+          "/document/component/setting.html#%E5%88%9B%E5%BB%BA-%E5%88%87%E6%8D%A2%E6%8C%89%E9%92%AE",
+          "/document/component/setting.html#%E5%88%9B%E5%BB%BA-%E8%8C%83%E5%9B%B4%E6%BB%91%E5%9D%97",
+          "/document/component/setting.html#%E6%B7%BB%E5%8A%A0",
+          "/document/component/setting.html#%E5%88%A0%E9%99%A4",
+          "/document/component/setting.html#%E6%9B%B4%E6%96%B0",
+          "/document/component/setting.html#setting-contract",
+          "/document/component/setting.html#setting-manager",
+          "/document/component/setting.html#typescript-%E5%87%86%E7%A1%AE%E7%B1%BB%E5%9E%8B%E7%A4%BA%E4%BE%8B"
+        ]
+      },
+      {
+        "language": "en",
+        "name": "setting",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/component/setting.md",
+          "sha256": "ac14505706fac4604d25b94546fbe87edfbd833b86cb10db59af92dacbe08bf5"
+        },
+        "html": {
+          "path": "docs/document/en/component/setting.html",
+          "sha256": "a2a80a0b151816e93e70857e6d979c51b3e77db5829323a4c77f7003e966127b"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-setting/en-setting-0.mts",
+            "sha256": "02cb7c2e86067658a20836fde68bbe12d3e337d9bcf7b1c63788e8c4e6fe9c50"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "en/component/setting.md:10",
+            "sha256": "3c6d269aae3ca4580c2a3368255cd8cc8b64776cec00d85170e04c63cf568386"
+          },
+          {
+            "id": "en/component/setting.md:34",
+            "sha256": "6561b27298b2c1dc1daf81023e60ba11ec1f65ce9090bc5ecec6c0a5be1bfe23"
+          },
+          {
+            "id": "en/component/setting.md:66",
+            "sha256": "a07430adb133d38aecf21a2710067c4434fd5c4fc9719e90e7bd3572b992192d"
+          },
+          {
+            "id": "en/component/setting.md:126",
+            "sha256": "fdbebe73f79ae9e3b297fea7bf71d85191679cf6421ce6981434d5a767450b11"
+          },
+          {
+            "id": "en/component/setting.md:186",
+            "sha256": "a6f62bc729156f5f5eb3a456d1f0b54e40f0e8ea69e2b6854ce217cc999a417e"
+          },
+          {
+            "id": "en/component/setting.md:230",
+            "sha256": "2b7b9f57090e6d71a5bfeee99e6249271d985be605351b13727ef164b28a380d"
+          },
+          {
+            "id": "en/component/setting.md:254",
+            "sha256": "4df1b60413c555dee8ed069dd28cf1412dfefd65f6d63ff5f0c52997132a3a85"
+          },
+          {
+            "id": "en/component/setting.md:275",
+            "sha256": "8f197061216843a4793a26c72ed3e41119b718e5fbda4cf8296ff9d4fbf09866"
+          },
+          {
+            "id": "en/component/setting.md:306",
+            "sha256": "5628cdb66583e138af48d88506143313057236511268ad98b16d0ed9335e3df5"
+          }
+        ],
+        "localLinks": [
+          "/document/en/component/setting.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/component/setting.html#settings-panel",
+          "/document/en/component/setting.html#built-in",
+          "/document/en/component/setting.html#create-button",
+          "/document/en/component/setting.html#create-selection-list",
+          "/document/en/component/setting.html#create-nested-list",
+          "/document/en/component/setting.html#create-toggle-button",
+          "/document/en/component/setting.html#create-range-slider",
+          "/document/en/component/setting.html#add",
+          "/document/en/component/setting.html#remove",
+          "/document/en/component/setting.html#update",
+          "/document/en/component/setting.html#setting-contract",
+          "/document/en/component/setting.html#setting-manager",
+          "/document/en/component/setting.html#typescript-accurate-type-example"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "zh",
+        "name": "setting",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "405d7f54fd3d4d9da5a7416f0fb0515791a0c709e5ce76d2456eff3f33027075",
+          "4206c181079c44f6bfcaa56c3b41cba6b57115d099c7461a1209c1b7f4a7fd96",
+          "a07430adb133d38aecf21a2710067c4434fd5c4fc9719e90e7bd3572b992192d",
+          "fdbebe73f79ae9e3b297fea7bf71d85191679cf6421ce6981434d5a767450b11",
+          "a6f62bc729156f5f5eb3a456d1f0b54e40f0e8ea69e2b6854ce217cc999a417e",
+          "2b7b9f57090e6d71a5bfeee99e6249271d985be605351b13727ef164b28a380d",
+          "4df1b60413c555dee8ed069dd28cf1412dfefd65f6d63ff5f0c52997132a3a85",
+          "8f197061216843a4793a26c72ed3e41119b718e5fbda4cf8296ff9d4fbf09866",
+          "5628cdb66583e138af48d88506143313057236511268ad98b16d0ed9335e3df5"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-setting/chromium-zh-setting.png",
+          "sha256": "9232cb003e8ba428551fa7b63dc12cf0af5fca9d0c751208933560c3af299757"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "en",
+        "name": "setting",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "3c6d269aae3ca4580c2a3368255cd8cc8b64776cec00d85170e04c63cf568386",
+          "6561b27298b2c1dc1daf81023e60ba11ec1f65ce9090bc5ecec6c0a5be1bfe23",
+          "a07430adb133d38aecf21a2710067c4434fd5c4fc9719e90e7bd3572b992192d",
+          "fdbebe73f79ae9e3b297fea7bf71d85191679cf6421ce6981434d5a767450b11",
+          "a6f62bc729156f5f5eb3a456d1f0b54e40f0e8ea69e2b6854ce217cc999a417e",
+          "2b7b9f57090e6d71a5bfeee99e6249271d985be605351b13727ef164b28a380d",
+          "4df1b60413c555dee8ed069dd28cf1412dfefd65f6d63ff5f0c52997132a3a85",
+          "8f197061216843a4793a26c72ed3e41119b718e5fbda4cf8296ff9d4fbf09866",
+          "5628cdb66583e138af48d88506143313057236511268ad98b16d0ed9335e3df5"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-setting/chromium-en-setting.png",
+          "sha256": "343786cea5720787fce57f23cf2a9da4047c7b96c93dec6d6de6fc5107c1675a"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "zh",
+        "name": "setting",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "405d7f54fd3d4d9da5a7416f0fb0515791a0c709e5ce76d2456eff3f33027075",
+          "4206c181079c44f6bfcaa56c3b41cba6b57115d099c7461a1209c1b7f4a7fd96",
+          "a07430adb133d38aecf21a2710067c4434fd5c4fc9719e90e7bd3572b992192d",
+          "fdbebe73f79ae9e3b297fea7bf71d85191679cf6421ce6981434d5a767450b11",
+          "a6f62bc729156f5f5eb3a456d1f0b54e40f0e8ea69e2b6854ce217cc999a417e",
+          "2b7b9f57090e6d71a5bfeee99e6249271d985be605351b13727ef164b28a380d",
+          "4df1b60413c555dee8ed069dd28cf1412dfefd65f6d63ff5f0c52997132a3a85",
+          "8f197061216843a4793a26c72ed3e41119b718e5fbda4cf8296ff9d4fbf09866",
+          "5628cdb66583e138af48d88506143313057236511268ad98b16d0ed9335e3df5"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-setting/firefox-zh-setting.png",
+          "sha256": "d5c3871cbb5bbaa87f190346e2ca50b1fb5824323ae945a71a5afd0b8e78c8ab"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "en",
+        "name": "setting",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "3c6d269aae3ca4580c2a3368255cd8cc8b64776cec00d85170e04c63cf568386",
+          "6561b27298b2c1dc1daf81023e60ba11ec1f65ce9090bc5ecec6c0a5be1bfe23",
+          "a07430adb133d38aecf21a2710067c4434fd5c4fc9719e90e7bd3572b992192d",
+          "fdbebe73f79ae9e3b297fea7bf71d85191679cf6421ce6981434d5a767450b11",
+          "a6f62bc729156f5f5eb3a456d1f0b54e40f0e8ea69e2b6854ce217cc999a417e",
+          "2b7b9f57090e6d71a5bfeee99e6249271d985be605351b13727ef164b28a380d",
+          "4df1b60413c555dee8ed069dd28cf1412dfefd65f6d63ff5f0c52997132a3a85",
+          "8f197061216843a4793a26c72ed3e41119b718e5fbda4cf8296ff9d4fbf09866",
+          "5628cdb66583e138af48d88506143313057236511268ad98b16d0ed9335e3df5"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-setting/firefox-en-setting.png",
+          "sha256": "694f9f75f7cfe55be32d3e78b91931700e8bf398b0c38de5c41875ac66da09d6"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "zh",
+        "name": "setting",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "405d7f54fd3d4d9da5a7416f0fb0515791a0c709e5ce76d2456eff3f33027075",
+          "4206c181079c44f6bfcaa56c3b41cba6b57115d099c7461a1209c1b7f4a7fd96",
+          "a07430adb133d38aecf21a2710067c4434fd5c4fc9719e90e7bd3572b992192d",
+          "fdbebe73f79ae9e3b297fea7bf71d85191679cf6421ce6981434d5a767450b11",
+          "a6f62bc729156f5f5eb3a456d1f0b54e40f0e8ea69e2b6854ce217cc999a417e",
+          "2b7b9f57090e6d71a5bfeee99e6249271d985be605351b13727ef164b28a380d",
+          "4df1b60413c555dee8ed069dd28cf1412dfefd65f6d63ff5f0c52997132a3a85",
+          "8f197061216843a4793a26c72ed3e41119b718e5fbda4cf8296ff9d4fbf09866",
+          "5628cdb66583e138af48d88506143313057236511268ad98b16d0ed9335e3df5"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-setting/webkit-zh-setting.png",
+          "sha256": "551b421617dcec670c6f551b8a9ceb8bd636308e91d8a15b4cdc066ee3aadde8"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "en",
+        "name": "setting",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "3c6d269aae3ca4580c2a3368255cd8cc8b64776cec00d85170e04c63cf568386",
+          "6561b27298b2c1dc1daf81023e60ba11ec1f65ce9090bc5ecec6c0a5be1bfe23",
+          "a07430adb133d38aecf21a2710067c4434fd5c4fc9719e90e7bd3572b992192d",
+          "fdbebe73f79ae9e3b297fea7bf71d85191679cf6421ce6981434d5a767450b11",
+          "a6f62bc729156f5f5eb3a456d1f0b54e40f0e8ea69e2b6854ce217cc999a417e",
+          "2b7b9f57090e6d71a5bfeee99e6249271d985be605351b13727ef164b28a380d",
+          "4df1b60413c555dee8ed069dd28cf1412dfefd65f6d63ff5f0c52997132a3a85",
+          "8f197061216843a4793a26c72ed3e41119b718e5fbda4cf8296ff9d4fbf09866",
+          "5628cdb66583e138af48d88506143313057236511268ad98b16d0ed9335e3df5"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-setting/webkit-en-setting.png",
+          "sha256": "23a68986f160f0b0e15920cc8ef32577ab052df30886f7ffd791978a2da9ee5c"
+        }
+      }
+    ],
+    "dom": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "manager root array copied with shared items",
+          "mounted deferred",
+          "deferred mounted receiver and node",
+          "mounted runs once",
+          "missing find and obsolete method",
+          "tree metadata and unrendered submenu",
+          "metadata readonly nonenumerable",
+          "preorder traversal",
+          "button writes tooltip",
+          "switch callback reads old state",
+          "switch result sets state",
+          "switch has no automatic toggle",
+          "input callback syncs value and tooltip",
+          "change callback commits value",
+          "range element mutation does not sync input",
+          "range assignment updates input",
+          "no callback leaves model value unchanged",
+          "submenu navigation and cache identity",
+          "selection callback receiver one",
+          "selection navigates before async result",
+          "selection callback receiver two",
+          "latest selection result owns parent tooltip",
+          "root/no argument check no-op",
+          "content setter moves element and getter reads HTML",
+          "update retains item and replaces node",
+          "old node listeners released",
+          "failed synchronous update restores item and node",
+          "failed update restores original listener",
+          "add returns original item",
+          "update missing returns added item",
+          "duplicate name rejected without extra entry",
+          "cyclic tree rejected",
+          "deferred mounted receiver and node",
+          "removed pending mounted canceled",
+          "old example reproduces range precedence",
+          "removing old kind field permits switch update",
+          "remove returns undefined",
+          "remove releases descendant and panel",
+          "missing removal throws",
+          "destroy closes panels and instance"
+        ],
+        "updateExample": {
+          "ready": true,
+          "role": "switch",
+          "inputs": 0,
+          "codeSha256": "5628cdb66583e138af48d88506143313057236511268ad98b16d0ed9335e3df5"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "manager root array copied with shared items",
+          "mounted deferred",
+          "deferred mounted receiver and node",
+          "mounted runs once",
+          "missing find and obsolete method",
+          "tree metadata and unrendered submenu",
+          "metadata readonly nonenumerable",
+          "preorder traversal",
+          "button writes tooltip",
+          "switch callback reads old state",
+          "switch result sets state",
+          "switch has no automatic toggle",
+          "input callback syncs value and tooltip",
+          "change callback commits value",
+          "range element mutation does not sync input",
+          "range assignment updates input",
+          "no callback leaves model value unchanged",
+          "submenu navigation and cache identity",
+          "selection callback receiver one",
+          "selection navigates before async result",
+          "selection callback receiver two",
+          "latest selection result owns parent tooltip",
+          "root/no argument check no-op",
+          "content setter moves element and getter reads HTML",
+          "update retains item and replaces node",
+          "old node listeners released",
+          "failed synchronous update restores item and node",
+          "failed update restores original listener",
+          "add returns original item",
+          "update missing returns added item",
+          "duplicate name rejected without extra entry",
+          "cyclic tree rejected",
+          "deferred mounted receiver and node",
+          "removed pending mounted canceled",
+          "old example reproduces range precedence",
+          "removing old kind field permits switch update",
+          "remove returns undefined",
+          "remove releases descendant and panel",
+          "missing removal throws",
+          "destroy closes panels and instance"
+        ],
+        "updateExample": {
+          "ready": true,
+          "role": "switch",
+          "inputs": 0,
+          "codeSha256": "5628cdb66583e138af48d88506143313057236511268ad98b16d0ed9335e3df5"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "manager root array copied with shared items",
+          "mounted deferred",
+          "deferred mounted receiver and node",
+          "mounted runs once",
+          "missing find and obsolete method",
+          "tree metadata and unrendered submenu",
+          "metadata readonly nonenumerable",
+          "preorder traversal",
+          "button writes tooltip",
+          "switch callback reads old state",
+          "switch result sets state",
+          "switch has no automatic toggle",
+          "input callback syncs value and tooltip",
+          "change callback commits value",
+          "range element mutation does not sync input",
+          "range assignment updates input",
+          "no callback leaves model value unchanged",
+          "submenu navigation and cache identity",
+          "selection callback receiver one",
+          "selection navigates before async result",
+          "selection callback receiver two",
+          "latest selection result owns parent tooltip",
+          "root/no argument check no-op",
+          "content setter moves element and getter reads HTML",
+          "update retains item and replaces node",
+          "old node listeners released",
+          "failed synchronous update restores item and node",
+          "failed update restores original listener",
+          "add returns original item",
+          "update missing returns added item",
+          "duplicate name rejected without extra entry",
+          "cyclic tree rejected",
+          "deferred mounted receiver and node",
+          "removed pending mounted canceled",
+          "old example reproduces range precedence",
+          "removing old kind field permits switch update",
+          "remove returns undefined",
+          "remove releases descendant and panel",
+          "missing removal throws",
+          "destroy closes panels and instance"
+        ],
+        "updateExample": {
+          "ready": true,
+          "role": "switch",
+          "inputs": 0,
+          "codeSha256": "5628cdb66583e138af48d88506143313057236511268ad98b16d0ed9335e3df5"
+        }
+      }
+    ],
+    "complete": true,
+    "limitations": [
+      "Page navigation and DOM contracts only; no playback, codec, physical-device or release acceptance."
+    ],
+    "core": {
+      "artifact": {
+        "path": "packages/artplayer/dist/artplayer.js",
+        "sha256": "8a4caaa50a069875b3898a83765457b3c502700f4731d0c38988d6c463c3d20a"
+      },
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer.tgz",
+        "version": "6.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "896b9f1f57feb447e9baef3b02c2c04e51b79eadef858b01a921e2b2146ff75a",
+        "integrity": "sha512-b2Sl/KMnRriJH4/TKsksknoCmLtPDduL6t9RROlzInp6CC1YN4L7t4EYGl/kdmpcgzAJsH0Fz6k4YUFmrDaPQw=="
+      }
+    }
+  },
+  "semanticMapping": {
+    "file": "refactor/core-content-review.json",
+    "addedRecords": 79,
+    "totalRecords": 324,
+    "remainingInventoryRecords": 639,
+    "previousGroups": "All existing source and document hashes verified unchanged."
+  },
+  "tests": {
+    "count": 42,
+    "pass": 42,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 1276.5411,
+    "suites": [
+      "setting-model",
+      "setting-layout",
+      "setting-resources",
+      "site-loading",
+      "documentation-pipeline"
+    ],
+    "initialRun": {
+      "tests": 40,
+      "pass": 39,
+      "fail": 1,
+      "reason": "New setting table crossed a translator chunk boundary; structure-preservation test exposed the splitter defect. Failure log retained; source fixed and two focused regressions added."
+    }
+  },
+  "translationFix": {
+    "files": [
+      {
+        "path": "scripts/documentation/markdown.ts",
+        "sha256": "b8c0eb08bca76c5ec7fa7b5a1e5a5bdd9af2523adb07855b270823e7149d3264"
+      },
+      {
+        "path": "scripts/documentation/README.md",
+        "sha256": "8b09b45c59356845aec768bb9bf7a80c3de6ff0b80dea705fffa262062a75189"
+      },
+      {
+        "path": "test/documentation-pipeline.test.js",
+        "sha256": "9ca4e50b34d381339783b4f02de8a48224f3ec4e045073bacd12aa28b8d0f7b7"
+      }
+    ],
+    "reproduction": {
+      "sourceBefore": "bb2fec8dd1df02fdf8260c04a73d060806da9adc",
+      "oldFailure": "Translation changed code, HTML, links or Markdown structure",
+      "candidate": "restored structure passes",
+      "chunks": [
+        3655,
+        2464
+      ],
+      "limit": 4000
+    },
+    "behavior": "Tables, nested ordered/unordered lists and blockquotes remain atomic. Oversized structural blocks fail explicitly instead of exceeding the size limit or damaging Markdown. No validation weakening or remote translation used."
+  },
+  "build": {
+    "vitepressSeconds": 9.18,
+    "yarnSeconds": 10.82,
+    "checked": [
+      "build:docs",
+      "build:llm",
+      "check:llm",
+      "typecheck:docs-tools",
+      "lint",
+      "site-inventory --write/--check",
+      "demos --check"
+    ],
+    "typecheckSeconds": 3.52,
+    "lintSeconds": 12.32
+  },
+  "visualInspections": [
+    "chromium-zh-setting.png",
+    "chromium-en-setting.png"
+  ],
+  "ledger": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-ehMqdO/report.json",
+      "sha256": "c46b39b10cb9845700e24f7cb4e0fb2b1980596a07439813b3cec689aab3fba5"
+    },
+    "libraries": [
+      {
+        "name": "artplayer",
+        "fingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "fingerprint": "55236854b94ac7b0dd91b4107dcb60e97ac6f1a5e8b6b8a9dcb63bba66c6509a",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "fingerprint": "f88a6a2f1c5548389cae293614f648d72077ed03a7be6c81ad017a1155a839a3",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "fingerprint": "7fa3ca9577b53f3bb90e2c23fec9e6e70fbbb0c089ccae2923084b9059bcbdf9",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "fingerprint": "0c73b970872fe56df1c669e5badfa91f9cd7ec3c73070a9852cfea076cc8923f",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "fingerprint": "9ced9b18e4b260ccbcf6ac016b32ec0852040cb5c0f57be72718a03d40d598bf",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "fingerprint": "f1dd73097e43df504f686f18a6ca30bcb1f57ab74d3cc62909db20505c994072",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "fingerprint": "d6d79d4b47afaefa66d32c5b1709f412ed9d32c636462723918c268a6601e631",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "fingerprint": "3d32a4c6d94d9eaa31cd982ec43ae2b710a4c923e5076f357ba4c902be48d729",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "fingerprint": "ceb17cbb235a42438c28df15ddf830d104a749b58515333c43da2b18534b166c",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "fingerprint": "6716002b92bb12b54d17772d87a560bb9e863da35abfa37988907d54e02cdf74",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "fingerprint": "a3a56ecc218c8e180621d1bc00684950cca4ada8d483334b0cb91fd783c10831",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "fingerprint": "00a07f33277bae211a553e9fb2e924ade219513135bc54921886f4518dd27964",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "fingerprint": "cc9304759ff3cdd84767eee38fcbb9cf70e234f2449946536fd1da972cde679f",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "fingerprint": "43825f602514c9e6a0bd8f0a270a54a03d1cb76f821b99d1e736d0150dafc190",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "fingerprint": "3503e145a591a406105eb953f9ac75c8373992c9f3f1f23b713de65c85a3bb3d",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "fingerprint": "b7932e08a086cfe16ed5e78872e274fb897931d0653dbf7ac61a19b404ddec85",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "fingerprint": "a0a8efb762e823fe4dd8c8de9601f74ac873ade8c6953a7e5305297608c71a12",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "fingerprint": "9fd7e62c56ae78866267cdd5650dc4e4af4aad76dd6ff8466b68908bc25d661c",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "fingerprint": "00dc477ad56d12cfa6cd0d1e071e80f4120afed23f44af0393e23e5dac516a3b",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "fingerprint": "78bf5be3b2b5656a0b95ce2ce3cf1a635b6df609361a840b8298476f65af9d52",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      }
+    ],
+    "note": "All21 previous build input fingerprints are stale after the shared documentation script/test changes. Core bytes exercised by this bounded DOM probe still match its recorded archive; no old candidate evidence was relabeled. REL-02 must prepare and verify fresh candidates.",
+    "publicationAuthorized": false
+  },
+  "attachments": [
+    {
+      "path": "refactor/.cache/site04-setting-validate.mjs",
+      "sha256": "3ab369d78d88938c0317b0fcc8e2652877f85d4f6ed75544a9cfae4ddba06b23"
+    },
+    {
+      "path": "refactor/.cache/site04-setting-probe.js",
+      "sha256": "bb5b68e2833db63d5cd3e0caee818b0bb7f42785220eb816a0fa02610de0e4b1"
+    },
+    {
+      "path": "refactor/.cache/site04-setting/report.json",
+      "sha256": "dcb727a141a387176a79b45f69a59a1a27b8df8d4d97c82109412d5b40a59a3f"
+    },
+    {
+      "path": "refactor/.cache/site04-setting-validate.log",
+      "sha256": "de8331a5369e263c4b746fd78ea3814ef6708dde739e23622d8ac2961f75cba1"
+    },
+    {
+      "path": "refactor/.cache/site04-setting-tests.log",
+      "sha256": "1555506b49a472d6afa83588f86d015e26a6770bec0ee2f88c4174689ebcc0dc"
+    },
+    {
+      "path": "refactor/.cache/site04-setting-tests-final.log",
+      "sha256": "4b17f833633248bd0864cb31e4d994b5a0a832afdd2c0fd279c438f5584ce1cd"
+    },
+    {
+      "path": "refactor/.cache/site04-setting-build.log",
+      "sha256": "13e6327dc767309907c4e6838d668804cd0cde3999effbcae363d4299c7d34e4"
+    },
+    {
+      "path": "refactor/.cache/site04-setting-build-final.log",
+      "sha256": "9408ba64cebc052f86a0d6b4f4eac83804bf77e596d723f51439e5d38a8d6a65"
+    },
+    {
+      "path": "refactor/.cache/site04-setting-llm-final.log",
+      "sha256": "a8a29f87f3303695b8d3343e00364eb0c294aef2f5d7ec8f3b969447f174b780"
+    },
+    {
+      "path": "refactor/.cache/site04-setting-typecheck.log",
+      "sha256": "55af625f4dcb786e8177127aa537b8ea5ab23347d72edf013d80226604fa9c47"
+    },
+    {
+      "path": "refactor/.cache/site04-setting-lint.log",
+      "sha256": "e8aae80f628792ca02a96a3d315d98a5b9697d4b8549fc261681240fad051420"
+    },
+    {
+      "path": "refactor/.cache/site04-setting-chunk-repro.mjs",
+      "sha256": "e0f0cabb81471ab3eae4310bc1fe49d1848ed4bdd5bdbbe1737ec1ddabe5f417"
+    },
+    {
+      "path": "refactor/.cache/site04-setting-chunk-repro.log",
+      "sha256": "e234153a1bd06033c23de032dfe6d20cf31317091dcf20a9f58e9ee6a009617d"
+    },
+    {
+      "path": "refactor/.cache/site04-setting-inventory.log",
+      "sha256": "169be07a163f65cc208cda3973ca34be5363158ac310ef6155446dd5bd517870"
+    },
+    {
+      "path": "refactor/.cache/site04-setting-ledger.log",
+      "sha256": "1ebb2e1b8cbefbe51049a5d7616342aed979f591e5204cb8cf7bca681f8ba93e"
+    }
+  ]
+}

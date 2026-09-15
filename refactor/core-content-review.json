@@ -3,13 +3,13 @@
   "task": "SITE-04",
   "inventory": {
     "path": "refactor/baselines/site-inventory.json",
-    "sha256": "9fd886d897e4df9aacac7fb494dd3737fbc2bc935f7b6ec12964136a22570e2f"
+    "sha256": "1311e2d331a2cbd3ed9a563d6a3dc3acf792034b5983027771b1dbbccbe8858e"
   },
-  "reviewedAt": "2026-09-15T21:13:25.985Z",
+  "reviewedAt": "2026-09-15T22:51:07.856Z",
   "counts": {
     "inventoryRecords": 963,
-    "reviewedRecords": 245,
-    "unreviewedRecords": 718
+    "reviewedRecords": 324,
+    "unreviewedRecords": 639
   },
   "note": "Explicit declaration-record semantic mapping, including overload/getter/setter rows and root/runtime aliases. Counts are not overall API or release completion. Recheck affected groups if their source/document hashes drift. Other declarations and inline members are not implicitly covered.",
   "groups": [
@@ -2242,6 +2242,679 @@
         }
       ],
       "evidence": "baselines/site04-components.json"
+    },
+    {
+      "id": "setting",
+      "status": "semantic-reviewed",
+      "conclusion": "Tree-wide identity/names, lazy panel nodes and metadata; manager versus item types, actual returns/null and absent legacy updateStyle; deferred mounted, property-kind precedence, content/range accessors and callback result ownership; selection navigation, synchronous replacement recovery, removal/cleanup, built-in factory identity, constrained sizing and low-level renderer boundaries. Original range-to-switch example corrected by removing the old range field before update.",
+      "records": [
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.setting@200",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "setting",
+          "line": 200
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.setting@95",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "setting",
+          "line": 95
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.name@6",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "name",
+          "line": 6
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.html@7",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "html",
+          "line": 7
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.icon@8",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "icon",
+          "line": 8
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.tooltip@9",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "tooltip",
+          "line": 9
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.width@10",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "width",
+          "line": 10
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.value@11",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "value",
+          "line": 11
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.default@12",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "default",
+          "line": 12
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.switch@13",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "switch",
+          "line": 13
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.range@14",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "range",
+          "line": 14
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.selector@15",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "selector",
+          "line": 15
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.mounted@16",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "mounted",
+          "line": 16
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.onClick@17",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "onClick",
+          "line": 17
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.onSwitch@18",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "onSwitch",
+          "line": 18
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.onRange@19",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "onRange",
+          "line": 19
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.onChange@20",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "onChange",
+          "line": 20
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.onSelect@21",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "onSelect",
+          "line": 21
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.$parent@22",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "$parent",
+          "line": 22
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.$parents@23",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "$parents",
+          "line": 23
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.$option@24",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "$option",
+          "line": 24
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.$events@25",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "$events",
+          "line": 25
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.$formatted@26",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "$formatted",
+          "line": 26
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.$item@27",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "$item",
+          "line": 27
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.$icon@28",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "$icon",
+          "line": 28
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.$html@29",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "$html",
+          "line": 29
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.$tooltip@30",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "$tooltip",
+          "line": 30
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.$switch@31",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "$switch",
+          "line": 31
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#SettingItem.$range@32",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "SettingItem",
+          "name": "$range",
+          "line": 32
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.id@36",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "id",
+          "line": 36
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.art@37",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "art",
+          "line": 37
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.name@38",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "name",
+          "line": 38
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.$parent@39",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "$parent",
+          "line": 39
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.cache@40",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "cache",
+          "line": 40
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.active@41",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "active",
+          "line": 41
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.option@42",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "option",
+          "line": 42
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.builtin@43",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "builtin",
+          "line": 43
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.show@44",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "show",
+          "line": 44
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.toggle@45",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "toggle",
+          "line": 45
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.traverse@46",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "traverse",
+          "line": 46
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.check@47",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "check",
+          "line": 47
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.format@48",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "format",
+          "line": 48
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.find@49",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "find",
+          "line": 49
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.resize@50",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "resize",
+          "line": 50
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.inactivate@51",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "inactivate",
+          "line": 51
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.remove@52",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "remove",
+          "line": 52
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.update@53",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "update",
+          "line": 53
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.add@54",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "add",
+          "line": 54
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.createHeader@55",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "createHeader",
+          "line": 55
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.createItem@56",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "createItem",
+          "line": 56
+        },
+        {
+          "id": "packages/artplayer/public/runtime/setting.ts#Setting.render@57",
+          "file": "packages/artplayer/public/runtime/setting.ts",
+          "declaration": "Setting",
+          "name": "render",
+          "line": 57
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#SettingOption.html@4",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "SettingOption",
+          "name": "html",
+          "line": 4
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#SettingOption.icon@5",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "SettingOption",
+          "name": "icon",
+          "line": 5
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#SettingOption.tooltip@6",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "SettingOption",
+          "name": "tooltip",
+          "line": 6
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#SettingOption.$item@7",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "SettingOption",
+          "name": "$item",
+          "line": 7
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#SettingOption.$icon@8",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "SettingOption",
+          "name": "$icon",
+          "line": 8
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#SettingOption.$html@9",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "SettingOption",
+          "name": "$html",
+          "line": 9
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#SettingOption.$tooltip@10",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "SettingOption",
+          "name": "$tooltip",
+          "line": 10
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#SettingOption.$switch@11",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "SettingOption",
+          "name": "$switch",
+          "line": 11
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#SettingOption.$range@12",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "SettingOption",
+          "name": "$range",
+          "line": 12
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#SettingOption.$parent@13",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "SettingOption",
+          "name": "$parent",
+          "line": 13
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#SettingOption.$parents@14",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "SettingOption",
+          "name": "$parents",
+          "line": 14
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#SettingOption.$option@15",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "SettingOption",
+          "name": "$option",
+          "line": 15
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#SettingOption.$events@16",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "SettingOption",
+          "name": "$events",
+          "line": 16
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#SettingOption.$formatted@17",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "SettingOption",
+          "name": "$formatted",
+          "line": 17
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#Setting.html@24",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "Setting",
+          "name": "html",
+          "line": 24
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#Setting.icon@29",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "Setting",
+          "name": "icon",
+          "line": 29
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#Setting.width@34",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "Setting",
+          "name": "width",
+          "line": 34
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#Setting.tooltip@39",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "Setting",
+          "name": "tooltip",
+          "line": 39
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#Setting.default@44",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "Setting",
+          "name": "default",
+          "line": 44
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#Setting.selector@49",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "Setting",
+          "name": "selector",
+          "line": 49
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#Setting.mounted@54",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "Setting",
+          "name": "mounted",
+          "line": 54
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#Setting.onSelect@59",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "Setting",
+          "name": "onSelect",
+          "line": 59
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#Setting.switch@64",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "Setting",
+          "name": "switch",
+          "line": 64
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#Setting.onSwitch@69",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "Setting",
+          "name": "onSwitch",
+          "line": 69
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#Setting.range@74",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "Setting",
+          "name": "range",
+          "line": 74
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#Setting.onRange@79",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "Setting",
+          "name": "onRange",
+          "line": 79
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#Setting.onChange@84",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "Setting",
+          "name": "onChange",
+          "line": 84
+        },
+        {
+          "id": "packages/artplayer/public/setting.ts#Setting.onClick@89",
+          "file": "packages/artplayer/public/setting.ts",
+          "declaration": "Setting",
+          "name": "onClick",
+          "line": 89
+        }
+      ],
+      "sources": [
+        {
+          "path": "packages/artplayer/src/setting/index.ts",
+          "sha256": "f6319af15ebe3600a466123dd9d343b86a8d6ed201693ac7ac86dc1d674d477f"
+        },
+        {
+          "path": "packages/artplayer/src/setting/types.ts",
+          "sha256": "21a07d75a28bbbe20b3e107b6f1a09cb6f8ef2773ea10a4bd7caa88956e9b99c"
+        },
+        {
+          "path": "packages/artplayer/src/setting/model.ts",
+          "sha256": "c47348f0f9494c4ce8ea5561bcde6eb698fb11e9197ccdc1ca1359a6d5e370dd"
+        },
+        {
+          "path": "packages/artplayer/src/setting/render.ts",
+          "sha256": "ed73745f2c7e2d76bbe8ce7202336e5f4de217dc8f0806b769127cb25316faba"
+        },
+        {
+          "path": "packages/artplayer/src/setting/selection.ts",
+          "sha256": "a642e630924eaf4ad91705fad1fa6e6dc946b32970d809a23da274399fce20ef"
+        },
+        {
+          "path": "packages/artplayer/src/setting/update.ts",
+          "sha256": "79326cb55c52243a7aa8df347a3b081dcd84eb7932fc6162061cc0d9f7078add"
+        },
+        {
+          "path": "packages/artplayer/src/setting/resources.ts",
+          "sha256": "64c28cc2cb08cb87b0864ab957d7999bc94931be4788f282d6f190b8806a81fd"
+        },
+        {
+          "path": "packages/artplayer/src/setting/checkpoint.ts",
+          "sha256": "9d3bff311f9b15c067ca49661af4f48de939f266b8077e7c2f0d66edef22dde6"
+        },
+        {
+          "path": "packages/artplayer/src/setting/panels.ts",
+          "sha256": "64d48720971763985a2a652a18c2ed2f32300c3553d56b52049ae40c4dfceae1"
+        },
+        {
+          "path": "packages/artplayer/src/setting/layout.ts",
+          "sha256": "584604e8fffaeaf1d633d1ed45e64d94595c2a56976e3a3f7ede01839b83a37d"
+        },
+        {
+          "path": "packages/artplayer/src/setting/events.ts",
+          "sha256": "f7a3347ca146232caf2a8c9a5a18731cf7bc91dca4cd36370e0265c6eb70df53"
+        },
+        {
+          "path": "packages/artplayer/src/setting/keyboard-item.ts",
+          "sha256": "d94bfc0266486615ddb79b9eee3886f48891ebb2e5f465652ef98f142ada89d2"
+        },
+        {
+          "path": "packages/artplayer/src/setting/playbackRate.ts",
+          "sha256": "2e70e0d2a33cb0ec9fcdd6d22424979fed7b2e01f87015d6be4e520d5cf4e88a"
+        },
+        {
+          "path": "packages/artplayer/src/setting/aspectRatio.ts",
+          "sha256": "a16eb58fadf77f0a9009cf162d957ffd59d9b8fde83cc193d510fd642e3456cb"
+        },
+        {
+          "path": "packages/artplayer/src/setting/flip.ts",
+          "sha256": "e72a4ae33300d9e48880897a4f85a04fa6d9a5fff7b06ecaf9081cfb1bb14404"
+        },
+        {
+          "path": "packages/artplayer/src/setting/subtitleOffset.ts",
+          "sha256": "86513835d4e542ac39e9d551507473e3e14c71fd0d5ea725267008ecbff6ab83"
+        },
+        {
+          "path": "packages/artplayer/src/utils/property.ts",
+          "sha256": "c737d4582a4382f4038d12dafdf8b43418e508c9b8b859b2f0cc17c20f370343"
+        },
+        {
+          "path": "packages/artplayer/src/utils/component.ts",
+          "sha256": "c3fa96467e8b315d974a42a19591aa4a4a7514853db796135b2acbcdcb160ea3"
+        },
+        {
+          "path": "packages/artplayer/public/artplayer.ts",
+          "sha256": "26a42ac66811e70f68a8ebe62cbf304eb1993451b3e658961be98e7106162527"
+        },
+        {
+          "path": "packages/artplayer/public/runtime.ts",
+          "sha256": "ec4b1d56993eb482a77eb0f94b701047549d009e6ba6433f27e7d464fef30c2b"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/setting.ts",
+          "sha256": "c48d20957b57f79f985ef76a2950cc8a5cfa25dafa8ec5939e562661778e6218"
+        },
+        {
+          "path": "packages/artplayer/public/setting.ts",
+          "sha256": "d12a75b656fff70cbb30be4bffec46d9c4273636e8722bce971a4d2b188712a1"
+        }
+      ],
+      "docs": [
+        {
+          "path": "packages/artplayer-vitepress/docs/component/setting.md",
+          "sha256": "807b5b22aba0be97602b4af92a7d855232377e8e8375ae07c10727a2900f36a3",
+          "anchor": "setting-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/component/setting.md",
+          "sha256": "807b5b22aba0be97602b4af92a7d855232377e8e8375ae07c10727a2900f36a3",
+          "anchor": "setting-manager"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/component/setting.md",
+          "sha256": "ac14505706fac4604d25b94546fbe87edfbd833b86cb10db59af92dacbe08bf5",
+          "anchor": "setting-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/component/setting.md",
+          "sha256": "ac14505706fac4604d25b94546fbe87edfbd833b86cb10db59af92dacbe08bf5",
+          "anchor": "setting-manager"
+        }
+      ],
+      "evidence": "baselines/site04-setting.json"
     }
   ]
 }

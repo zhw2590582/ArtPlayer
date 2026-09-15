@@ -67,6 +67,11 @@ timer is cleared and rejected HTTP bodies are cancelled.
 Code, inline code, HTML, links and structural Markdown tokens must survive.
 Fenced blocks and directives are restored from local originals, not model text.
 An invalid result is rejected instead of heuristically inserting code fences.
+Chunking keeps each table, list (including nested items), and blockquote together;
+joining translated chunks must not insert paragraph breaks inside those structures.
+A structural block larger than the requested chunk limit fails explicitly instead
+of being split or silently exceeding the limit. Split that source block into
+independent sections, or choose a larger limit when calling the chunking helper.
 Unusual Markdown or a chunk boundary may be rejected; inspect the retained
 draft and improve protection rather than weakening validation. This is not a
 Markdown sanitizer or proof that prose preserves meaning.

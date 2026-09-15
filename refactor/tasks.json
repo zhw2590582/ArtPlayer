@@ -4579,7 +4579,9 @@
         "baselines/site04-template-icons.json",
         "changes/2026-09-16-SITE-04-template-icons.md",
         "baselines/site04-components.json",
-        "changes/2026-09-16-SITE-04-components.md"
+        "changes/2026-09-16-SITE-04-components.md",
+        "baselines/site04-setting.json",
+        "changes/2026-09-16-SITE-04-setting.md"
       ]
     },
     {

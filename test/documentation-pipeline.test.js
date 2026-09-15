@@ -168,6 +168,36 @@ test('Markdown protection preserves code and rejects lost markers or inline code
   assert(chunks.some(chunk => chunk.includes('ARTPLAYER_KEEP_')))
 })
 
+test('translation chunks preserve tables and nested lists at a size boundary', () => {
+  const blocks = [
+    '| Field | Meaning |\n| --- | --- |\n| first | one |\n| second | two |\n| third | three |',
+    '- first\n  - nested one\n  - nested two\n- second\n- third',
+    '1. first\n   1. nested\n2. second\n3. third',
+    '> first\n>\n> - nested one\n> - nested two\n>\n> last',
+  ]
+  for (const block of blocks) {
+    const input = `${'prefix '.repeat(13)}\n\n${block}\n\nAfterwards.\n`
+    const protectedSource = protectMarkdown(input)
+    const chunks = splitTranslation(protectedSource.masked, 128)
+    assert(chunks.every(chunk => chunk.length <= 128))
+    assert(chunks.some(chunk => chunk.includes(block)), 'Keep the whole structural block in one chunk')
+    assert.doesNotThrow(() => protectedSource.restore(chunks.join('\n\n')))
+  }
+})
+
+test('oversized structural blocks fail explicitly instead of emitting damaged chunks', () => {
+  for (const block of [
+    `| Field | Meaning |\n| --- | --- |\n${'| name | value |\n'.repeat(20)}`,
+    '- entry\n'.repeat(30),
+    '1. entry\n'.repeat(30),
+    '> paragraph\n'.repeat(30),
+  ]) {
+    assert.throws(() => splitTranslation(block, 128), /structural block exceeds translation chunk limit/)
+    const protectedSource = protectMarkdown(block)
+    assert.doesNotThrow(() => protectedSource.restore(splitTranslation(protectedSource.masked, 1024).join('\n\n')))
+  }
+})
+
 test('failed or damaged translation only leaves a failed draft and never changes existing English', async () => {
   for (const translate of [
     async () => {

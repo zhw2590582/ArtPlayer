@@ -124,9 +124,23 @@ export function splitTranslation(masked: string, limit = 4000): string[] {
     Number.isInteger(limit) && limit >= 128,
     'Invalid translation chunk limit',
   )
+  const lines = masked.split('\n')
+  const structuralEnds = new Map<number, number>()
+  for (const token of parser.parse(masked, {})) {
+    if (token.map && ['table_open', 'bullet_list_open', 'ordered_list_open', 'blockquote_open'].includes(token.type)) {
+      const [start, end] = token.map
+      structuralEnds.set(start, Math.max(end, structuralEnds.get(start) || 0))
+    }
+  }
   const chunks: string[] = []
   let current = ''
-  for (let line of masked.split('\n')) {
+  for (let index = 0; index < lines.length; index++) {
+    const end = structuralEnds.get(index)
+    let line = end ? lines.slice(index, end).join('\n') : lines[index]!
+    if (end) {
+      assert(line.length <= limit, 'Markdown structural block exceeds translation chunk limit; split the source block or increase the limit')
+      index = end - 1
+    }
     while (line.length > limit) {
       if (current.trim())
         chunks.push(current)
