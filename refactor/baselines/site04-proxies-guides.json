@@ -1,0 +1,774 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "doing",
+  "scope": "Four bilingual Canvas/Mediabunny proxy guides, not native media or device acceptance",
+  "sourceBefore": "e2bd7c97424df216cbf1486bb6c60ccd70af5c2f",
+  "capturedAt": "2026-09-15T20:06:14.386Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "platform": "win32",
+    "static": [
+      {
+        "name": "canvas",
+        "language": "zh",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/proxy/canvas.md",
+          "sha256": "56f03babf6dcaa307e685755d9520aff8a15b12c39559b17ef6ff5b89d603bf8"
+        },
+        "html": {
+          "path": "docs/document/proxy/canvas.html",
+          "sha256": "5d0fc74652156896984cb7027c99f888db5ddeaa443d8c6a909f9bb44fa5e09b"
+        },
+        "example": {
+          "path": "docs/assets/example/canvas.js",
+          "sha256": "cb92730640913cdc8f03e01cce9d7c877537177950491449d48817e77960f458"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-proxies/canvas-zh.mts",
+          "sha256": "37a8fb7b2c6b4b345f943e50c09e41e581611a3bc44ddac0f1d2dcc8230603c7"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/proxy/canvas.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/proxy/canvas.html#canvas-%E8%A7%86%E9%A2%91%E4%BB%A3%E7%90%86",
+          "/document/en/proxy/canvas.html",
+          "/document/proxy/canvas.html#%E5%AE%89%E8%A3%85%E4%B8%8E%E7%A4%BA%E4%BE%8B",
+          "/document/proxy/canvas.html#%E8%BF%94%E5%9B%9E%E5%85%83%E7%B4%A0%E4%B8%8E%E5%AA%92%E4%BD%93%E6%8E%A5%E5%8F%A3",
+          "/document/proxy/canvas.html#%E7%BB%98%E5%88%B6%E3%80%81%E5%B0%BA%E5%AF%B8%E5%92%8C%E4%BA%8B%E4%BB%B6",
+          "/document/proxy/canvas.html#%E6%B8%85%E7%90%86%E4%B8%8E%E8%83%BD%E5%8A%9B%E8%BE%B9%E7%95%8C",
+          "/document/proxy/canvas.html#typescript-%E4%B8%8E%E6%97%A7%E7%B1%BB%E5%9E%8B"
+        ]
+      },
+      {
+        "name": "canvas",
+        "language": "en",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/proxy/canvas.md",
+          "sha256": "89a35c2f61b39cc2cfe4f14d24b23be36c73a1ec4a116bbba6075b3ede6e5bdc"
+        },
+        "html": {
+          "path": "docs/document/en/proxy/canvas.html",
+          "sha256": "59e92155d7c09598db9caf7ad1edf6faeaa4c9815e274b28f034bb845a5adc8c"
+        },
+        "example": {
+          "path": "docs/assets/example/canvas.js",
+          "sha256": "cb92730640913cdc8f03e01cce9d7c877537177950491449d48817e77960f458"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-proxies/canvas-en.mts",
+          "sha256": "37a8fb7b2c6b4b345f943e50c09e41e581611a3bc44ddac0f1d2dcc8230603c7"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/en/proxy/canvas.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/proxy/canvas.html#canvas-video-proxy",
+          "/document/proxy/canvas.html",
+          "/document/en/proxy/canvas.html#install-and-example",
+          "/document/en/proxy/canvas.html#returned-element-and-media-surface",
+          "/document/en/proxy/canvas.html#drawing-dimensions-and-events",
+          "/document/en/proxy/canvas.html#cleanup-and-capabilities",
+          "/document/en/proxy/canvas.html#typescript-and-historical-types"
+        ]
+      },
+      {
+        "name": "mediabunny",
+        "language": "zh",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/proxy/mediabunny.md",
+          "sha256": "9a3786f09e1f7fde6554d48facec0e67f8b7b08dd4c5a4f10f036459288f6473"
+        },
+        "html": {
+          "path": "docs/document/proxy/mediabunny.html",
+          "sha256": "7109e5f898021dcffc928fbedccaca4ac6c310a0fb26e354ee51bdcf8afef73d"
+        },
+        "example": {
+          "path": "docs/assets/example/mediabunny.js",
+          "sha256": "dad4cecb76b2e5ce9164a4da715793911123e8fd2bc4b93f4bcc86a7053bad7d"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-proxies/mediabunny-zh.mts",
+          "sha256": "7f3e6d0c5da138610353d570f9ccfce1ba8fd09c5b598abcc7c1b89cd681b005"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/proxy/mediabunny.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/proxy/mediabunny.html#mediabunny-%E8%A7%86%E9%A2%91%E4%BB%A3%E7%90%86",
+          "/document/en/proxy/mediabunny.html",
+          "/document/proxy/mediabunny.html#%E5%AE%89%E8%A3%85%E5%92%8C%E7%A4%BA%E4%BE%8B",
+          "/document/proxy/mediabunny.html#%E8%BE%93%E5%85%A5%E5%92%8C%E9%85%8D%E7%BD%AE",
+          "/document/proxy/mediabunny.html#hls-%E8%8F%9C%E5%8D%95%E4%B8%8E%E9%80%89%E6%8B%A9",
+          "/document/proxy/mediabunny.html#shim-%E6%88%90%E5%91%98",
+          "/document/proxy/mediabunny.html#%E4%BA%8B%E4%BB%B6%E3%80%81%E5%B8%A7%E5%9B%9E%E8%B0%83%E4%B8%8E%E6%B8%85%E7%90%86",
+          "/document/proxy/mediabunny.html#typescript"
+        ]
+      },
+      {
+        "name": "mediabunny",
+        "language": "en",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/proxy/mediabunny.md",
+          "sha256": "f1fa76ef2554969f4e3365676cee1e10eec3bb417d75786a3699653a8dbd976b"
+        },
+        "html": {
+          "path": "docs/document/en/proxy/mediabunny.html",
+          "sha256": "e27e25b488daf3a7e2a07af66220a0557471da1643f6ab40b9f87d1e30e6211d"
+        },
+        "example": {
+          "path": "docs/assets/example/mediabunny.js",
+          "sha256": "dad4cecb76b2e5ce9164a4da715793911123e8fd2bc4b93f4bcc86a7053bad7d"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-proxies/mediabunny-en.mts",
+          "sha256": "7f3e6d0c5da138610353d570f9ccfce1ba8fd09c5b598abcc7c1b89cd681b005"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/en/proxy/mediabunny.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/proxy/mediabunny.html#mediabunny-video-proxy",
+          "/document/proxy/mediabunny.html",
+          "/document/en/proxy/mediabunny.html#install-and-example",
+          "/document/en/proxy/mediabunny.html#inputs-and-options",
+          "/document/en/proxy/mediabunny.html#hls-menus-and-selection",
+          "/document/en/proxy/mediabunny.html#shim-members",
+          "/document/en/proxy/mediabunny.html#events-frame-callbacks-and-cleanup",
+          "/document/en/proxy/mediabunny.html#typescript"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "proxy/canvas.md",
+        "passed": true,
+        "errors": [],
+        "title": "Canvas 视频代理\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-proxy-canvas/index.js",
+          "codeSha256": "3b5f64fb20da5ae61ebc9880f20189a710ff8ecbf210175a1bab529f8156401e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-proxies/chromium-canvas-zh.png",
+          "sha256": "c5c53542ab05e06d830618c749bf1ffc734d75b04b5a084c9c0166696f0940fa"
+        },
+        "translation": "/document/en/proxy/canvas.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "en/proxy/canvas.md",
+        "passed": true,
+        "errors": [],
+        "title": "Canvas video proxy\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-proxy-canvas/index.js",
+          "codeSha256": "3b5f64fb20da5ae61ebc9880f20189a710ff8ecbf210175a1bab529f8156401e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-proxies/chromium-canvas-en.png",
+          "sha256": "275c968cab159e660df3963bfa1092b5ceaf6c019063605afa32847fff476f2a"
+        },
+        "translation": "/document/proxy/canvas.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "proxy/mediabunny.md",
+        "passed": true,
+        "errors": [],
+        "title": "Mediabunny 视频代理\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-proxy-mediabunny/index.js",
+          "codeSha256": "4c92e8baedafe782b43df76d5520d0694f7923f23964c96cc4dcd4218bce668e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-proxies/chromium-mediabunny-zh.png",
+          "sha256": "c8ca96103f2ca0f876a3a16e4bc00c0c2550bb1e199c234b884a69f644713f6c"
+        },
+        "translation": "/document/en/proxy/mediabunny.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "en/proxy/mediabunny.md",
+        "passed": true,
+        "errors": [],
+        "title": "Mediabunny video proxy\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-proxy-mediabunny/index.js",
+          "codeSha256": "4c92e8baedafe782b43df76d5520d0694f7923f23964c96cc4dcd4218bce668e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-proxies/chromium-mediabunny-en.png",
+          "sha256": "326d7632440874a77b7c01ef514749fbd0bdb01a1182d1a27ba283632f98081f"
+        },
+        "translation": "/document/proxy/mediabunny.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "proxy/canvas.md",
+        "passed": true,
+        "errors": [],
+        "title": "Canvas 视频代理\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-proxy-canvas/index.js",
+          "codeSha256": "3b5f64fb20da5ae61ebc9880f20189a710ff8ecbf210175a1bab529f8156401e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-proxies/firefox-canvas-zh.png",
+          "sha256": "025da4e57a09280633a2dad44a2e51b2d2ef2fbfda72993a47f0a3200c250edd"
+        },
+        "translation": "/document/en/proxy/canvas.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "en/proxy/canvas.md",
+        "passed": true,
+        "errors": [],
+        "title": "Canvas video proxy\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-proxy-canvas/index.js",
+          "codeSha256": "3b5f64fb20da5ae61ebc9880f20189a710ff8ecbf210175a1bab529f8156401e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-proxies/firefox-canvas-en.png",
+          "sha256": "761d281bb7c399a47a9ef97eada6effc30ffc95903dc8de0b88b79838871e250"
+        },
+        "translation": "/document/proxy/canvas.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "proxy/mediabunny.md",
+        "passed": true,
+        "errors": [],
+        "title": "Mediabunny 视频代理\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-proxy-mediabunny/index.js",
+          "codeSha256": "4c92e8baedafe782b43df76d5520d0694f7923f23964c96cc4dcd4218bce668e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-proxies/firefox-mediabunny-zh.png",
+          "sha256": "451596bf94eb117497229965901628fd09a0263048a00cd41733680a7a94d14d"
+        },
+        "translation": "/document/en/proxy/mediabunny.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "en/proxy/mediabunny.md",
+        "passed": true,
+        "errors": [],
+        "title": "Mediabunny video proxy\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-proxy-mediabunny/index.js",
+          "codeSha256": "4c92e8baedafe782b43df76d5520d0694f7923f23964c96cc4dcd4218bce668e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-proxies/firefox-mediabunny-en.png",
+          "sha256": "73e1dab6eaac50c5c666ef9d247af282bb73b60e49d9f3b5480078a77512a1ca"
+        },
+        "translation": "/document/proxy/mediabunny.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "proxy/canvas.md",
+        "passed": true,
+        "errors": [],
+        "title": "Canvas 视频代理 ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-proxy-canvas/index.js",
+          "codeSha256": "3b5f64fb20da5ae61ebc9880f20189a710ff8ecbf210175a1bab529f8156401e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-proxies/webkit-canvas-zh.png",
+          "sha256": "e13ce21726df1cc7f4947c5a15bcad99b9981363ebd73fc6cec9fdde22c34852"
+        },
+        "translation": "/document/en/proxy/canvas.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "en/proxy/canvas.md",
+        "passed": true,
+        "errors": [],
+        "title": "Canvas video proxy ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-proxy-canvas/index.js",
+          "codeSha256": "3b5f64fb20da5ae61ebc9880f20189a710ff8ecbf210175a1bab529f8156401e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-proxies/webkit-canvas-en.png",
+          "sha256": "885f253e4d9dfaf439267ddb2b67cd4b69815d7baf78c449b0e5e1c56b22f906"
+        },
+        "translation": "/document/proxy/canvas.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "proxy/mediabunny.md",
+        "passed": true,
+        "errors": [],
+        "title": "Mediabunny 视频代理 ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-proxy-mediabunny/index.js",
+          "codeSha256": "4c92e8baedafe782b43df76d5520d0694f7923f23964c96cc4dcd4218bce668e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-proxies/webkit-mediabunny-zh.png",
+          "sha256": "d9b7573c3fa376f1b4d28f724af78c8735c6b8e6bc997a0888c1659b108c96f1"
+        },
+        "translation": "/document/en/proxy/mediabunny.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "en/proxy/mediabunny.md",
+        "passed": true,
+        "errors": [],
+        "title": "Mediabunny video proxy ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-proxy-mediabunny/index.js",
+          "codeSha256": "4c92e8baedafe782b43df76d5520d0694f7923f23964c96cc4dcd4218bce668e"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-proxies/webkit-mediabunny-en.png",
+          "sha256": "09571047378b26e36d03ed06fbfaad1b4501ff657faef196368b8f28d076f004"
+        },
+        "translation": "/document/proxy/mediabunny.html"
+      }
+    ],
+    "controls": [],
+    "complete": true,
+    "limitations": [
+      "Guide rendering/navigation and original-code forwarding only; popup editor response is isolated, not media playback.",
+      "Does not complete SITE-04 core/member coverage, SITE-05, EX-03 or physical-device validation."
+    ]
+  },
+  "tools": {
+    "tests": 17,
+    "pass": 17,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 1302.5949,
+    "checksPassed": [
+      "build:llm",
+      "build:docs",
+      "check:llm",
+      "config eslint",
+      "site-inventory --write/--check",
+      "demos --check"
+    ],
+    "buildSeconds": 9.12,
+    "yarnBuildSeconds": 10.66
+  },
+  "inventory": {
+    "markdown": 66,
+    "html": 75,
+    "examples": 30,
+    "declarationMembers": 963,
+    "assets": 204
+  },
+  "ledger": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-ZlFb3z/report.json",
+      "sha256": "3c130308c44937d8d58eadec1b6eb76963924b6ffeb8f6e5b67598e483d2968a"
+    },
+    "libraries": [
+      {
+        "name": "artplayer",
+        "fingerprint": "896b9f1f57feb447e9baef3b02c2c04e51b79eadef858b01a921e2b2146ff75a",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "fingerprint": "a7c85c3cbd5893306c50af3e5ab2ae900838633184e2b5509a7790a346e63277",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "fingerprint": "58b3de027f6da9358927a032585af2db0b98ece514263062e61a26c0b0a60d69",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "fingerprint": "e99563e05cf2fa5cb687bee25bbec5f663dadb39cd7a780ae506121a069f3288",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "fingerprint": "68251599fb975857e5124b3a7804e2e7edbd9de6b3b22eef2882ae9cf38c3560",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "fingerprint": "fa1ac932fb279f6de85856d98d649ea6b12b39c221a8e54d63d5a46d28ed25eb",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "fingerprint": "4dcc9e5c4e127edbc17ab1e59e3fb973ac9733125cff744c3031b43b98476e02",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "fingerprint": "e16de620bd4770b4ab717291af29d5a2f450025ae8bdf22815f6efd51e40056e",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "fingerprint": "90d09ab98a1ca36575a5ed38332d518c03265bcd4ad95524170394b1e67209c0",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "fingerprint": "71b4367caed8ad8cbe4a171abb3bb4be3955c15dea4694255c1448c85d6dfb17",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "fingerprint": "3130f6e7c49373a87b094582bcc9affbdf799c562ec688137bb96f3d7ed42157",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "fingerprint": "3507d1d5e0de702173c25a2e5caddac6e245046d9cd1249728b76e6dea9b8b77",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "fingerprint": "3210ec59c5b8440d584d509e214f4021a0a5117639a1e883d617e95e2ac9a49b",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "fingerprint": "e0391ecf1e2c9da0a622bb933a857f718bb370ecfb63ecc4b5e3ef1261e84371",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "fingerprint": "d2b9e3f04560bcb5a5e6028166c7f92d23554290be6ae29fc632bf1eb82d1f87",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "fingerprint": "07e23e4b5ad201e2b33afd0f8b689161c6228d0c0e0621487e48b04457fef766",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "fingerprint": "4a7cbdb38d5d876a68bc74a3a785402a2989b3730638b0654c358275bcffc423",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "fingerprint": "3cad2e085d0cf960508f5ed75ed62731c245e741246659a0f882fd73f2ed5430",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "fingerprint": "adca4dc42d1a1bfe05ba81ebb397b607eb548ca6ec02856f1312dd41ea96a232",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "fingerprint": "a0808c48db68a5d433ebb983348cf28130552e5bea99c38a1335b90b4b302d3c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "fingerprint": "431eb2caf41a434a8fdb516bf5d73b71df8b4d306530036ead7c1ee460076b81",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      }
+    ],
+    "publicationAuthorized": false
+  },
+  "visualInspections": [
+    "chromium-canvas-zh.png"
+  ],
+  "attachments": [
+    {
+      "path": "refactor/.cache/site04-proxies-validate.mjs",
+      "sha256": "9fefd420439676f61b9b4b2bb92516f0f65f41ab7b4895d06c7960576ca69b9f"
+    },
+    {
+      "path": "refactor/.cache/site04-proxies/report.json",
+      "sha256": "bcb58b4da67592da226255a107bb6f5dfe64a7cadc658979a6babc876b9ab072"
+    },
+    {
+      "path": "refactor/.cache/site04-proxies-validate.log",
+      "sha256": "8521c763dbe08f06bbe2d17711550629c4acc9041650344f229c0e7a120da3b8"
+    },
+    {
+      "path": "refactor/.cache/site04-proxies-tools.log",
+      "sha256": "f28ff10e3c5a558c78ebeecc88f8825b1392ecefc1b41d1e8f9ee8c2c2578eac"
+    },
+    {
+      "path": "refactor/.cache/site04-proxies-build.log",
+      "sha256": "bd5b018675fbcedd8b3f0b6f7ec184acaf47f02fdd74dfc23ce19f77c1f0efc4"
+    },
+    {
+      "path": "refactor/.cache/site04-proxies-llm.log",
+      "sha256": "2716b7545138755ecc385a1ffe86438ec6b588f2bf93b30d4e28e43338deafba"
+    },
+    {
+      "path": "refactor/.cache/site04-proxies-ledger.log",
+      "sha256": "bb6d1b91c1309c8396ff212e0863001fac31ea2cf7b3e98fd4371c63ff77f4f2"
+    }
+  ],
+  "whitespace": {
+    "fullExit": 2,
+    "findings": [
+      {
+        "file": "docs/document/en/proxy/canvas.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/en/proxy/canvas.html",
+        "line": 74
+      },
+      {
+        "file": "docs/document/en/proxy/mediabunny.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/en/proxy/mediabunny.html",
+        "line": 80
+      },
+      {
+        "file": "docs/document/proxy/canvas.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/proxy/canvas.html",
+        "line": 74
+      },
+      {
+        "file": "docs/document/proxy/mediabunny.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/proxy/mediabunny.html",
+        "line": 80
+      }
+    ],
+    "remainingExit": 0,
+    "note": "Only blank VitePress template lines; generated HTML preserved and full check not reported as passing."
+  }
+}

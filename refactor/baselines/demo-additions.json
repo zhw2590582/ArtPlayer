@@ -291,6 +291,38 @@
       "owner": "SITE-04",
       "finalDemoOwner": "EX-03",
       "note": "Bilingual standalone tool guide, preserving original example; navigation is not cross-window player or thumbnail extraction acceptance."
+    },
+    {
+      "source": "docs/document/proxy/canvas.html",
+      "route": "/document/proxy/canvas.html",
+      "introducedAfter": "e2bd7c97424df216cbf1486bb6c60ccd70af5c2f",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Bilingual proxy guide and original example; navigation is not native decoding, HLS or device acceptance."
+    },
+    {
+      "source": "docs/document/en/proxy/canvas.html",
+      "route": "/document/en/proxy/canvas.html",
+      "introducedAfter": "e2bd7c97424df216cbf1486bb6c60ccd70af5c2f",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Bilingual proxy guide and original example; navigation is not native decoding, HLS or device acceptance."
+    },
+    {
+      "source": "docs/document/proxy/mediabunny.html",
+      "route": "/document/proxy/mediabunny.html",
+      "introducedAfter": "e2bd7c97424df216cbf1486bb6c60ccd70af5c2f",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Bilingual proxy guide and original example; navigation is not native decoding, HLS or device acceptance."
+    },
+    {
+      "source": "docs/document/en/proxy/mediabunny.html",
+      "route": "/document/en/proxy/mediabunny.html",
+      "introducedAfter": "e2bd7c97424df216cbf1486bb6c60ccd70af5c2f",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Bilingual proxy guide and original example; navigation is not native decoding, HLS or device acceptance."
     }
   ]
 }

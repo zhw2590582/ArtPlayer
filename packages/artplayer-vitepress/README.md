@@ -28,6 +28,8 @@ not a VitePress page. Keep both URL surfaces compatible.
 | `docs/plugin/chromecast.md`, `docs/en/plugin/chromecast.md` | SDK loading, callbacks, shared sessions, receiver limitations and runtime types | `/document/plugin/chromecast.html`, `/document/en/plugin/chromecast.html` |
 | `docs/tool/iframe.md`, `docs/en/tool/iframe.md` | Parent/child setup, serialized requests, navigation cancellation, trust and type views | `/document/tool/iframe.html`, `/document/en/tool/iframe.html` |
 | `docs/tool/thumbnail.md`, `docs/en/tool/thumbnail.md` | Local file extraction, approved defaults, PNG sheets, events and URL ownership | `/document/tool/thumbnail.html`, `/document/en/tool/thumbnail.html` |
+| `docs/proxy/canvas.md`, `docs/en/proxy/canvas.md` | Backing video, draw callbacks/events, Canvas priority, subtitles and compatible types | `/document/proxy/canvas.html`, `/document/en/proxy/canvas.html` |
+| `docs/proxy/mediabunny.md`, `docs/en/proxy/mediabunny.md` | Input, HLS pairing, synthetic media state, lifecycle and explicit type views | `/document/proxy/mediabunny.html`, `/document/en/proxy/mediabunny.html` |
 | `docs/.vitepress/config.js` | Navigation, base URL, output path, page head | Repository `docs/document/` |
 | `docs/vite.config.ts` | Search plugin configuration | VitePress/Vite integration; real search acceptance remains pending |
 | `docs/public/main.js` | Run Code links and first-visit language redirect | Copied into the built site |
@@ -41,9 +43,9 @@ and run `node refactor/scripts/demos.mjs --check`. Preserve the frozen BASE-04
 inventory. Also refresh and check the current site inventory; the two inventories
 serve different purposes. Neither path check replaces browser navigation tests.
 
-The generated site lives in `docs/document/`. The current inventory contains 62 Markdown pages: 31 Chinese
-and 31 English. All 16 plugins and both tools have dedicated guides and navigation in both languages.
-The two proxies still need dedicated bilingual guides. Core member
+The generated site lives in `docs/document/`. The current inventory contains 66 Markdown pages: 33 Chinese
+and 33 English. All 16 plugins, both tools and both proxies have dedicated guides and navigation in both languages.
+Core member
 mapping and the current cross-check of earlier guides remain in SITE-04;
 navigation links alone are not complete API documentation.
 
@@ -54,6 +56,12 @@ defaults, explicit workspace mode, synchronous failures, density limits and owne
 Blob URLs. Original examples are retained; their navigation is not extraction or
 cross-window player acceptance. The thumbnail package's stale default-behavior
 sentence was corrected alongside these guides, requiring its candidate refresh.
+
+Canvas documents its real backing video and synchronous post-draw callback;
+Mediabunny documents SDK input, pairable HLS selections and synthetic ranges/frame
+metadata. Native Canvas members take precedence in both proxies. An Auto menu or
+canPlayType result is not an adaptive-bitrate or decoder-capability guarantee.
+Proxy guide navigation does not establish media playback or device acceptance.
 
 JASSUB documents actual resize argument order, query callbacks and resource
 ownership separately from preserved historical declarations. Danmuku Mask keeps

@@ -47,14 +47,21 @@ JASSUB、弹幕遮罩和 Chromecast 的本次核对：
 | Iframe | [入口](../packages/artplayer-tool-iframe/src/index.ts)、requests.ts、protocol.ts、connection.ts、navigation/child-session协议及ARCHITECTURE、公开声明、原始父子页面 | [中文](../packages/artplayer-vitepress/docs/tool/iframe.md) / [English](../packages/artplayer-vitepress/docs/en/tool/iframe.md)：构造两项、全部实例/静态方法与字段、12个命名类型、父子接入与完整原示例 | 函数体串行化/字面resolve/无闭包；200ms等待无默认timeout、忽略输入id、resove拼写、回调this、销毁拒绝但不移除iframe；窗口校验非origin白名单、旧peer导航限制；类型视图不验证数据，历史包/helper不是当前工具别名 |
 | Thumbnail tool | [入口](../packages/artplayer-tool-thumbnail/src/index.ts)、policy/input/source/extraction/sheet/lifecycle/emitter/utils、公开声明与types说明、README/ARCHITECTURE、已批准默认决策 | [中文](../packages/artplayer-vitepress/docs/tool/thumbnail.md) / [English](../packages/artplayer-vitepress/docs/en/tool/thumbnail.md)：九项配置、全部类方法/状态、八个事件、10个公开类型、PNG布局/下载与默认模式表 | fileInput运行时必需、number/秒<=1、同步抛错与Promise拒绝、video不保证metadata、creat历史拼写、30px页脚、URL归属、输入/任务销毁及旧声明缺失。维护文档一处旧默认句同步修正，需要REL-02候选更新 |
 
+两个代理包的本次核对：
+
+| 包 | 对照源码与声明 | 双语指南覆盖 | 保留边界 |
+| --- | --- | --- | --- |
+| Canvas | [入口](../packages/artplayer-proxy-canvas/src/index.ts)、adapter/media/renderer/scheduler/geometry/subtitles、根/runtime声明、README/ARCHITECTURE | [中文](../packages/artplayer-vitepress/docs/proxy/canvas.md) / [English](../packages/artplayer-vitepress/docs/en/proxy/canvas.md)：可选回调、Canvas返回/媒体转发、draw/error、尺寸/字幕/生命周期、六个类型 | Canvas原生成员优先、真实video回调、位图先释放再同步回调、无Promise回调等待、首帧特例、调用方stream tracks不停止；旧根/runtime分离，无额外公开控制对象或设备能力保证 |
+| Mediabunny | [入口](../packages/artplayer-proxy-mediabunny/src/index.ts)、VideoShim/canvas-bridge/entry-lifecycle、input/preflight/tracks/hls-state/hls-selection/m3u8菜单、coordinator/playback/readiness、shim-values/frames、公开声明、README/ARCHITECTURE | [中文](../packages/artplayer-vitepress/docs/proxy/mediabunny.md) / [English](../packages/artplayer-vitepress/docs/en/proxy/mediabunny.md)：13项顶层配置、两组五项菜单配置、shim全部公开成员、HLS字段、合成帧字段、11个公开类型 | 字符串后缀HLS检测、Range独立错误路径、配对/实际选中、Auto不保证ABR、兼容字段空setter、SDK fetch不由crossOrigin控制、合成TimeRanges/RVFC、全部不可解码code4与部分播放、过期操作/终止资源；设备/长期/真实SDK证据独立 |
+
 ## 接续范围
 
 - 核心：依据 site-inventory.json 的 963 条成员逐项或按明确的共享声明分组核对；
   必须记录对应文档及语义结论，不能仅按同名标题匹配标为通过。
 - 已有 Danmuku、HLS、DASH、Audio、VTT 双语指南：继承各 SITE-* 任务的证据，但
   仍需在本轮全包核对中检查其当前声明、示例和能力边界。
-- 16个插件和两个tool现均有独立双语指南；两个 proxy：包内 README/ARCHITECTURE 不能替代缺失的
-  双语使用说明。按实际能力分组补入口，不机械复制维护文档。
+- 16个插件、两个tool、两个proxy现均有独立双语指南；新增页面的参数和限制已对照
+  当前源码。包内维护地图与用户指南用途不同，继续维护二者的一致性。
 - SITE-05 和 EX-03 负责后续完整页面与实际 demo 验收；静态内容核对不等待真机，
   也不能据此关闭真机、外部 SDK、发布或复盘门槛。
 

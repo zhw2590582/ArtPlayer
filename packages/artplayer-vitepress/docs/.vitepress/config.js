@@ -107,8 +107,8 @@ const config = {
           text: '代理',
           collapsible: true,
           items: [
-            { text: 'Canvas', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas' },
-            { text: 'Mediabunny', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-proxy-mediabunny/index.js&example=mediabunny' },
+            { text: 'Canvas', link: '/proxy/canvas' },
+            { text: 'Mediabunny', link: '/proxy/mediabunny' },
           ],
         },
       ],
@@ -189,8 +189,8 @@ const config = {
           text: 'Proxys',
           collapsible: true,
           items: [
-            { text: 'Canvas', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas' },
-            { text: 'Mediabunny', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-proxy-mediabunny/index.js&example=mediabunny' },
+            { text: 'Canvas', link: '/en/proxy/canvas' },
+            { text: 'Mediabunny', link: '/en/proxy/mediabunny' },
           ],
         },
       ],

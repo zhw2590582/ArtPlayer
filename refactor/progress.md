@@ -1,5 +1,15 @@
 # 进度与证据
 
+## SITE-04 Canvas/Mediabunny代理双语指南
+
+补齐四份代理指南、本地导航和原样示例；Canvas说明真实video/绘制/字幕/类型，
+Mediabunny说明全部配置与shim、HLS配对/实际选中、合成范围/帧、空setter及资源边界。
+四份TS片段、42/43个页面链接、三浏览器12组导航与17项工具测试通过，构建/清单/
+LLM通过，21库build仍有效。见[记录](changes/2026-09-16-SITE-04-proxies-guides.md)
+和[证据](baselines/site04-proxies-guides.json)。当前66 Markdown/75 HTML，20个生态包
+均有双语指南；SITE-04仍doing、224/22/39不变。继续早期五个指南的当前语义核对和
+核心963条成员的明确映射，未把导航计为解码/SDK/真机验收，不进入用户保留的复盘。
+
 ## REL-02 Thumbnail工具候选重新准备
 
 从484a8c903重建5.0.0并隔离安装。七组候选类型消费通过，五组冻结工作区缺失声明
