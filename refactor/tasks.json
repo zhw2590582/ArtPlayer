@@ -4205,7 +4205,8 @@
         "PKG-TOOL-THUMB-03",
         "ENG-04",
         "ENG-06",
-        "CORE-07"
+        "CORE-07",
+        "PKG-TOOL-THUMB-07"
       ],
       "status": "doing",
       "risk": "H",
@@ -5745,6 +5746,25 @@
       "evidence": [
         "changes/2026-09-15-PKG-AUTO-THUMB-12-metadata.md",
         "baselines/auto-thumbnail-metadata-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-TOOL-THUMB-07",
+      "phase": "5 包迁移：artplayer-tool-thumbnail",
+      "title": "恢复清理和销毁中的原始异常传播",
+      "scope": [
+        "artplayer-tool-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-TOOL-THUMB-03"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "清理记录与异常值分离，保留首个 falsy 抛出值并继续释放资源；历史对照、真实DOM、分发验证及维护记录",
+      "acceptance": "恢复旧 destroy 监听器同步异常语义，0/false/undefined/NaN等不被吞掉或覆盖；后续清理、重复销毁与正常抽帧回归通过，默认兼容决策不受影响",
+      "evidence": [
+        "changes/2026-09-15-PKG-TOOL-THUMB-07-cleanup-errors.md",
+        "baselines/thumbnail-cleanup-errors-validation.json"
       ]
     }
   ]

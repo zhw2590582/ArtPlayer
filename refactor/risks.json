@@ -6605,6 +6605,30 @@
         "refactor/baselines/asr-media-error-validation.json"
       ],
       "resolutionRationale": "Five prepatch unit failures and four native Chromium failures become passing cancellation/recovery checks. Source and actual installed main/legacy pass, including minimum5.3.0 and5.4.0 core controls; default routing and captured cleanup remain intact. WebKit capability skips and broader package acceptance are not waived."
+    },
+    {
+      "id": "THUMB-CLEANUP-01",
+      "title": "Thumbnail 清理吞掉 falsy 监听器异常或覆盖第一个异常值",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-TOOL-THUMB-07",
+        "PKG-TOOL-THUMB-04"
+      ],
+      "evidence": [
+        "test/thumbnail-cleanup-errors.test.js",
+        "test/browser/thumbnail-emitter.spec.js",
+        "refactor/changes/2026-09-15-PKG-TOOL-THUMB-07-cleanup-errors.md",
+        "refactor/baselines/thumbnail-cleanup-errors-validation.json"
+      ],
+      "compatibleResolution": "独立标记是否发生异常，保留首个值并完成其余清理，再原样抛出；普通事件派发遇错停止，重复销毁保持幂等。",
+      "closureCriteria": "历史/未修复/修复候选对照、七种falsy原值身份、资源释放与真实DOM验证通过；三格式和隔离安装消费者通过，默认兼容冲突独立保留。",
+      "workspaceState": "PKG-TOOL-THUMB-07: before 1 pass/2 fail; source 123 pass, main/legacy 49 each; browser 57 passed reports include 10 explicit Windows WebKit Blob capability controls. Installed candidate positive/negative types and byte identity verified; no public types or defaults changed.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-15-PKG-TOOL-THUMB-07-cleanup-errors.md",
+        "refactor/baselines/thumbnail-cleanup-errors-validation.json"
+      ],
+      "resolutionRationale": "Frozen historical destroy contracts preserve all seven falsy values; the prepatch candidate fails exception propagation and first-value ownership. Fixed source and rebuilt main/legacy pass cleanup/resource and actual browser DOM regressions. Installed artifact and type checks pass; historical defaults and WebKit media capability gaps remain outside this narrowly resolved regression."
     }
   ]
 }

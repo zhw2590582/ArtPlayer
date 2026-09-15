@@ -115,14 +115,18 @@ function revoke(urls, url) {
 }
 function cleanupAll(callbacks) {
   let failure;
+  let failed = false;
   for (const callback of callbacks) {
     try {
       callback();
     } catch (error) {
-      failure || (failure = error);
+      if (!failed) {
+        failed = true;
+        failure = error;
+      }
     }
   }
-  if (failure)
+  if (failed)
     throw failure;
 }
 function closeState(tool, reason = "destroyed") {

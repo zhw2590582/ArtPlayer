@@ -50,6 +50,16 @@ were overwritten. Current public URLs are also revoked, preserving historical
 destroy behavior. The video is paused, its src removed, load resets its decoder
 state, and its node is removed. Registration checks for reentrant closure/replacement.
 
+Cleanup records whether an exception occurred separately from its value. It attempts
+all remaining cleanup callbacks and then rethrows the first value unchanged, including
+undefined, null, false, zero, an empty string or NaN. In particular, a destroy listener
+must not have its exception swallowed just because it is falsy. The instance remains
+closed after a failed destroy; a repeated destroy is a no-op. This is distinct from
+emitter dispatch: an exception still stops the remaining listeners in that dispatch.
+`test/thumbnail-cleanup-errors.test.js` compares recovered 3.5.31 and frozen workspace
+behavior, checks first-error identity across nested cleanup and verifies resource release.
+`test/browser/thumbnail-emitter.spec.js` repeats the listener contract with real DOM.
+
 ## Extraction and event ordering
 
 Loading emits file before assigning video.src, then video synchronously as in

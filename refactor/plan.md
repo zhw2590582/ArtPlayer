@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 267 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 268 项，范围 22 个包及工作区/示例。
 
-状态：todo 43 / doing 21 / blocked 0 / done 203 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 43 / doing 21 / blocked 0 / done 204 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -34,7 +34,7 @@
 | artplayer-proxy-canvas | 1.1.0 | PKG-AMBILIGHT-PROXY-01, PKG-CANVAS-01, PKG-CANVAS-02, PKG-CANVAS-03, PKG-CANVAS-04, PKG-CANVAS-05, PKG-CANVAS-06, PKG-FACTORY-01, PKG-CANVAS-SUBTITLE-01 |
 | artplayer-proxy-mediabunny | 1.2.0 | PKG-MB-01, PKG-MB-02, PKG-MB-03, PKG-MB-04, PKG-MB-05, PKG-MB-06, PKG-MB-07, PKG-MB-08, PKG-MB-09, PKG-MB-10 |
 | artplayer-tool-iframe | 1.1.0 | PKG-IFRAME-01, PKG-IFRAME-02, PKG-IFRAME-03, PKG-IFRAME-04, PKG-IFRAME-05, PKG-IFRAME-06 |
-| artplayer-tool-thumbnail | 4.4.0 | PKG-TOOL-THUMB-01, PKG-TOOL-THUMB-02, PKG-TOOL-THUMB-03, PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-05, PKG-TOOL-THUMB-06 |
+| artplayer-tool-thumbnail | 4.4.0 | PKG-TOOL-THUMB-01, PKG-TOOL-THUMB-02, PKG-TOOL-THUMB-03, PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-05, PKG-TOOL-THUMB-06, PKG-TOOL-THUMB-07 |
 | artplayer-vitepress | 1.1.0 | SITE-01, SITE-SMOKE-01, SITE-02, SITE-LOAD-01, SITE-AI-DOCS-01, SITE-BUILD-01, SITE-03, SITE-04, SITE-05, SITE-06, SITE-07, SITE-VCONSOLE-01, ENG-LINT-02, SITE-CONSOLE-01 |
 
 ## 0 规划
@@ -389,9 +389,10 @@
 | PKG-TOOL-THUMB-01 | artplayer-tool-thumbnail<br>核对包契约与历史用法 | BASE-05 | 构造/defaults/事件/方法/历史拼写、.esm.js 入口和缺失 types | 源码/声明/README/demo/可恢复发布内容差异已登记；公开形状和版本范围冻结；区分旧 npm 的 main/CSS 与当前工作区无 main、.esm.js/类型缺失，不把工作区状态冒称旧 npm 发布事实 | H | done |
 | PKG-TOOL-THUMB-02 | artplayer-tool-thumbnail<br>建立特有行为与错误测试 | PKG-TOOL-THUMB-01, ENG-03, ENG-05 | 文件输入/拖放、抽帧网格、begin/end、进度/失败/重复任务 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-TOOL-THUMB-03 | artplayer-tool-thumbnail<br>整理内部职责与资源 | PKG-TOOL-THUMB-02, CORE-01 | 输入、抽帧队列、网格导出、URL/监听清理分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
-| PKG-TOOL-THUMB-04 | artplayer-tool-thumbnail<br>迁移自有源码和公开类型 | PKG-TOOL-THUMB-03, ENG-04, ENG-06, CORE-07 | 补齐真实 API 声明，自有 emitter/utils TS 化 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容；为 BASE-DIST-01 提供兼容入口/声明及消费者验证 | H | doing |
+| PKG-TOOL-THUMB-04 | artplayer-tool-thumbnail<br>迁移自有源码和公开类型 | PKG-TOOL-THUMB-03, ENG-04, ENG-06, CORE-07, PKG-TOOL-THUMB-07 | 补齐真实 API 声明，自有 emitter/utils TS 化 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容；为 BASE-DIST-01 提供兼容入口/声明及消费者验证 | H | doing |
 | PKG-TOOL-THUMB-05 | artplayer-tool-thumbnail<br>验证新旧核心和组合 | PKG-TOOL-THUMB-04, CORE-22 | 工具独立浏览器使用，生成缩略图在核心中显示 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
 | PKG-TOOL-THUMB-06 | artplayer-tool-thumbnail<br>验证分发并同步文档 | PKG-TOOL-THUMB-05, ENG-07 | tool.thumbnail.js、历史 ESM 兼容文件、types 路径和 tarball | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-TOOL-THUMB-07 | artplayer-tool-thumbnail<br>恢复清理和销毁中的原始异常传播 | PKG-TOOL-THUMB-03 | 清理记录与异常值分离，保留首个 falsy 抛出值并继续释放资源；历史对照、真实DOM、分发验证及维护记录 | 恢复旧 destroy 监听器同步异常语义，0/false/undefined/NaN等不被吞掉或覆盖；后续清理、重复销毁与正常抽帧回归通过，默认兼容决策不受影响 | M | done |
 
 ## 6 文档与消费者
 
@@ -700,3 +701,4 @@
 - ENG-LINT-02: [记录](changes/2026-09-15-ENG-LINT-02-clean-checks.md) [记录](baselines/eng-lint02-validation.json)
 - SITE-CONSOLE-01: [记录](console-modernization.md) [记录](changes/2026-09-15-SITE-CONSOLE-01-typescript.md) [记录](baselines/site-console01-validation.json)
 - PKG-AUTO-THUMB-12: [记录](changes/2026-09-15-PKG-AUTO-THUMB-12-metadata.md) [记录](baselines/auto-thumbnail-metadata-validation.json)
+- PKG-TOOL-THUMB-07: [记录](changes/2026-09-15-PKG-TOOL-THUMB-07-cleanup-errors.md) [记录](baselines/thumbnail-cleanup-errors-validation.json)

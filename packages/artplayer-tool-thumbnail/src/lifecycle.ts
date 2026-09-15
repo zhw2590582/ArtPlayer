@@ -37,15 +37,19 @@ export function revoke(urls: Set<string>, url: string | undefined) {
 
 export function cleanupAll(callbacks: Cleanup[]) {
   let failure: unknown
+  let failed = false
   for (const callback of callbacks) {
     try {
       callback()
     }
     catch (error) {
-      failure ||= error
+      if (!failed) {
+        failed = true
+        failure = error
+      }
     }
   }
-  if (failure)
+  if (failed)
     throw failure
 }
 

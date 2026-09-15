@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-TOOL-THUMB-07 清理异常传播修复
+
+修复cleanupAll吞掉destroy监听器抛出的falsy值、或被后续异常覆盖的兼容回归。
+历史3.5.31/工作区保留原值，未修复候选1通过2失败；修复后继续释放资源，保留
+第一个原始异常，重复销毁仍不执行，普通事件派发遇错仍停止。
+
+123源码专项、main/legacy各49专项通过；源码及实际安装产物共57浏览器报告
+通过，其中10项是明确的Windows WebKit Blob能力对照，不计抽帧成功。7项安装
+类型正例、52预期负例诊断、5历史缺入口/声明对照成立；三格式/文档副本字节
+一致。详见[记录](changes/2026-09-15-PKG-TOOL-THUMB-07-cleanup-errors.md)和
+[证据](baselines/thumbnail-cleanup-errors-validation.json)。
+新增独立任务07完成，04的默认兼容决策保持待处理；204 done、21 doing、43 todo，
+共268项。无新依赖、版本变更或发布操作。
+
 ## PKG-HLS-SDK-01 SDK顺序与销毁前崩溃
 
 新增固定SDK序列诊断入口，逐页核验版本并保存实际顺序。在同一个Firefox实例
