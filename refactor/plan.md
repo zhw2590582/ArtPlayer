@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 269 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 270 项，范围 22 个包及工作区/示例。
 
-状态：todo 43 / doing 21 / blocked 0 / done 205 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 43 / doing 21 / blocked 0 / done 206 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -95,9 +95,10 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | CI-01 | workspace<br>增强兼容矩阵、并发缓存与 CI 报告 | DOC-10, ENG-08, ENG-09, ENG-10 | OS/Node/TS/浏览器与影响范围矩阵、缓存、超时、汇总检查和 artifact 报告 | 固定安装、失败/取消不误报、核心影响全生态；检查只读，失败证据可追溯 | H | doing |
 | CI-02 | workspace<br>分离并改进 GitHub Pages 部署 | DOC-10, ENG-02, SITE-03 | Pages artifact 部署配置、旧路径/域名核对、预检和迁移恢复指南 | 部署只取受信任已验证产物；本地实现可验收，远端 source/环境和实际部署状态单独登记 | H | done |
-| CI-03 | workspace<br>建立 npm 分包候选与发布工作流 | DOC-10, CI-01, REL-08, REL-04 | 候选准备、精确 artifact 发布配置、OIDC 评估、版本/tag/registry 预检和部分失败恢复 | 不自动发布；明确逐包信任前置和 dry run 限制，不能重建未验证内容或重发冲突版本；按版本清单校验各包下一 major 和预发布/正式 tag，保留旧核心支持范围 | H | todo |
+| CI-03 | workspace<br>建立 npm 分包候选与发布工作流 | DOC-10, CI-01, REL-08, REL-04, CI-NPM-01 | 候选准备、精确 artifact 发布配置、OIDC 评估、版本/tag/registry 预检和部分失败恢复 | 不自动发布；明确逐包信任前置和 dry run 限制，不能重建未验证内容或重发冲突版本；按版本清单校验各包下一 major 和预发布/正式 tag，保留旧核心支持范围 | H | todo |
 | CI-04 | workspace<br>验收 GitHub 流水线与远端发布准入 | CI-01, CI-02, CI-03, SITE-06, CI-BROWSER-01 | 静态/干净环境检查、真实 PR 正反例、候选 dry run、required checks/Pages/npm 必需配置状态及运维指南 | 必要 Actions 证据和远端配置核对齐全；缺失保持未完成，真实 publish/deploy 仍在授权发布步骤执行 | H | todo |
 | CI-BROWSER-01 | workspace<br>分离源码与已安装产物浏览器验证范围 | ENG-05, ENG-07 | 完整源码入口、明确已安装包子集、分开的报告目录与失败传播 | 混用输入旧红新绿；源码默认保留所有spec，已安装入口严格校验四包来源；两类报告都保留，源码失败不能误报全绿；不代表完整远端或全包验收 | M | done |
+| CI-NPM-01 | workspace<br>从已验收候选准备不可重建的npm交付包 | DOC-10, REL-08, REL-04 | 复用严格准入台账、复制精确tarball、绑定源码/工具链/证据/摘要的本地准备命令及反向测试；供CI-03后续受信任artifact工作流使用 | 缺候选或任一准入缺口即拒绝；不构建、不安装、不联网或发布；阻止路径越界、脏源码、复制期间漂移及半成品冒充完成，声明远端信任/OIDC/registry预检仍未实现 | H | done |
 
 ## 2.1 早期试点
 
@@ -704,3 +705,4 @@
 - PKG-AUTO-THUMB-12: [记录](changes/2026-09-15-PKG-AUTO-THUMB-12-metadata.md) [记录](baselines/auto-thumbnail-metadata-validation.json)
 - PKG-TOOL-THUMB-07: [记录](changes/2026-09-15-PKG-TOOL-THUMB-07-cleanup-errors.md) [记录](baselines/thumbnail-cleanup-errors-validation.json)
 - PKG-DASH-CLEANUP-01: [记录](changes/2026-09-15-PKG-DASH-CLEANUP-01-errors.md) [记录](baselines/dash-cleanup-errors-validation.json)
+- CI-NPM-01: [记录](changes/2026-09-15-CI-NPM-01-bundle.md) [记录](baselines/npm-bundle-validation.json)

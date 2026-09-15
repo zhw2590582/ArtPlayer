@@ -1,5 +1,20 @@
 # 进度与证据
 
+## CI-NPM-01 精确候选的本地交付准备
+
+新增严格 TS 准备模块和 yarn release:bundle：干净 Git 状态、两次完整准入读取、
+精确 tarball 复制及输入/输出哈希复核；完成标记最后写入，失败清理仅限本次目录。
+不构建、安装、联网或发布。CLI 不接受外部绿色 JSON 报告；输出仍为
+publicationAuthorized=false，后续 artifact 来源信任/OIDC/registry/发布恢复由 CI-03 负责。
+
+新回归25、既有准入33、CI77项全部通过，TS/lint/CI静态/影响检查通过。
+合成完整报告只验证工具；实际仓库的脏状态拒绝和 artplayer 严格预检退出1已核验，
+核心仍有33项准入缺口，没有准备实际发布交付包。详见
+[记录](changes/2026-09-15-CI-NPM-01-bundle.md)和[证据](baselines/npm-bundle-validation.json)。
+
+CI-NPM-01 独立完成，CI-03 原有依赖和发布门槛全部保留；206 done、21 doing、
+43 todo，共270项。没有包版本、公开API、依赖或锁文件变化，未推送或发布。
+
 ## PKG-DASH-CLEANUP-01 清理异常与职责归一
 
 四处清理循环改为私有 cleanup.ts，保留首个原始异常值、剩余资源释放和重入保护。

@@ -53,6 +53,13 @@ npm 保持 Lerna independent 的分包版本；用户已要求全部包分别升
 
 ## 任务归属
 
+CI-NPM-01 从 CI-03 拆出本地精确候选交付准备，供后续 artifact 工作流复用。
+`yarn release:bundle --packages ... --tag next` 只复制严格准入已通过的登记 tarball，
+保留 publicationAuthorized=false。Git 必须干净，复制前后状态和文件哈希必须一致。
+它不构建、安装或发布，也不证明 artifact 来源可信；CI-03 原依赖和远端/发布
+验收全部保留。当前包仍被准入门槛阻止，详见[记录](changes/2026-09-15-CI-NPM-01-bundle.md)
+及[实现维护](../scripts/release/README.md)。
+
 | 任务 | 交付 |
 | --- | --- |
 | ENG-02 | 只读脚本、PR/主线检查及部署隔离基础 |

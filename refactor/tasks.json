@@ -818,7 +818,8 @@
         "DOC-10",
         "CI-01",
         "REL-08",
-        "REL-04"
+        "REL-04",
+        "CI-NPM-01"
       ],
       "status": "todo",
       "risk": "H",
@@ -5785,6 +5786,27 @@
       "evidence": [
         "changes/2026-09-15-PKG-DASH-CLEANUP-01-errors.md",
         "baselines/dash-cleanup-errors-validation.json"
+      ]
+    },
+    {
+      "id": "CI-NPM-01",
+      "phase": "2.2 GitHub CI/CD",
+      "title": "从已验收候选准备不可重建的npm交付包",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-10",
+        "REL-08",
+        "REL-04"
+      ],
+      "status": "done",
+      "risk": "H",
+      "deliverable": "复用严格准入台账、复制精确tarball、绑定源码/工具链/证据/摘要的本地准备命令及反向测试；供CI-03后续受信任artifact工作流使用",
+      "acceptance": "缺候选或任一准入缺口即拒绝；不构建、不安装、不联网或发布；阻止路径越界、脏源码、复制期间漂移及半成品冒充完成，声明远端信任/OIDC/registry预检仍未实现",
+      "evidence": [
+        "changes/2026-09-15-CI-NPM-01-bundle.md",
+        "baselines/npm-bundle-validation.json"
       ]
     }
   ]

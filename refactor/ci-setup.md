@@ -29,6 +29,8 @@ history 仍保留源码/显式工具加核心 map 的独立语义，不因新增
 | `yarn lint:fix` | 显式自动修复相同范围 |
 | `yarn check:release-ledger` | ci:check中的逐包准入登记结构检查；当前blocked不导致结构检查失败，不是发布准入通过 |
 | `yarn release:preflight --packages ...` | 严格候选/证据/任务/设备/许可预检，任一缺口退出1；CI-03后续发布工作流使用此入口 |
+| `yarn release:bundle --packages ... --tag next` | 干净源码下重新执行准入检查，仅复制已验证候选并绑定完整报告/文件摘要；不构建、不联网、不发布，当前缺口仍阻止输出 |
+| `yarn typecheck:release` / `yarn test:release-bundle` | 严格检查候选交付 TS 模块及字节身份、输入漂移、路径和失败清理回归；分别接入 ci:check/test:baseline |
 | `yarn typecheck` | 根/迁移包严格检查、当前与兼容 TS 消费；历史 NodeNext ESM 错误单独核对，见 typechecking.md |
 | `yarn typecheck:react` / `yarn typecheck:vue` | 原 React TSX / Vue SFC 示例严格检查，ci:check 同时执行对应 lint |
 | `yarn typecheck:docs-tools` / `yarn check:docs-smoke` | 严格检查 TS 示例/声明生成器及 JS/MJS 门面；只读核对确定性生成的 readiness smoke，ci:check 执行 |

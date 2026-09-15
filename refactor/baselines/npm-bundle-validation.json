@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 1,
+  "task": "CI-NPM-01",
+  "sourceCommit": "25faf88e80ab1fec5c1623c6bfb01655ede6c457",
+  "capturedAt": "2026-09-15T08:18:57.486Z",
+  "status": "local-preparation-tool-verified",
+  "sourceHashesLF": {
+    "scripts/release/bundle.ts": "e9c59d8ded3ca0e893660aee5c57bed011f222255f90425dfb6f88b6633cc7dc",
+    "scripts/release/prepare.ts": "f4e5ed9b251e82a56e2730c02dcc6d1361ea78caf7251611f9a0b17574cc770e",
+    "scripts/prepare-release.mjs": "4e77956cc63f27f0b7abf28c5335dd41fb6e63e7f3be2856d97083b0a23edd04",
+    "scripts/tsconfig.release.json": "d39021762f220055e9f09eba5ae4c0817dd1f936958353ea518cb96d21f7ebf3",
+    "scripts/release/README.md": "5aa556c16021e6afbfb7812c183b210032f25a2d77cc75e55a826adf18ffb3d8",
+    "refactor/scripts/release-bundle.test.mjs": "ea7af0e748fccc83ed2dc3583b09760f361a668dda8d0d84cc5bcde823c142f8",
+    "package.json": "4d8efdc523f6e840434276ff2dde4e3d433499bcf2fe8bee213e4ba71b3537c7"
+  },
+  "environment": {
+    "platform": "win32",
+    "node": "v24.21.0",
+    "yarn": "1.22.22",
+    "tar": "bsdtar 3.8.8 - libarchive 3.8.8 zlib/1.2.13.1-motley liblzma/5.8.1 bz2lib/1.0.8 libzstd/1.5.7 cng/2.0 libb2/bundled",
+    "git": "git version 2.51.0.windows.1"
+  },
+  "checks": {
+    "tests-verified": {
+      "file": "refactor/.cache/npm-bundle-tests-verified.log",
+      "sha256": "9b0939dc62e26ca2de8cde20dc4ee2cb6c652c47d0fab518d41b613a7e8234b2",
+      "bytes": 2814,
+      "passed": 25,
+      "failed": 0
+    },
+    "ledger-tests": {
+      "file": "refactor/.cache/npm-bundle-ledger-tests.log",
+      "sha256": "6c7281c2f3afba7eeb21482adc741331a60a3e8cda20772d744e1de9ae38c1de",
+      "bytes": 2942,
+      "passed": 33,
+      "failed": 0
+    },
+    "ci-tests": {
+      "file": "refactor/.cache/npm-bundle-ci-tests.log",
+      "sha256": "a8a08a0d5590fa8b4c71b54e5023f13ec13b1aa3d3fb22fff0841e233ed357b4",
+      "bytes": 6153,
+      "passed": 77,
+      "failed": 0
+    },
+    "types-verified": {
+      "file": "refactor/.cache/npm-bundle-types-verified.log",
+      "sha256": "8f544f353837c45b656b9490b87cc27967b8469e779dd1f6e104602535a21139",
+      "bytes": 420,
+      "exitCode": 0
+    },
+    "lint-verified": {
+      "file": "refactor/.cache/npm-bundle-lint-verified.log",
+      "sha256": "a22111786cefa1418493bfdd62d93153720da0661b2c00f949dddf5c82d1dd9b",
+      "bytes": 493,
+      "exitCode": 0
+    },
+    "ci-check": {
+      "file": "refactor/.cache/npm-bundle-ci-check.log",
+      "sha256": "13f80b8fb2e0b52caaa95f76dd4564793f9c51642007105954bab2835e0f2979",
+      "bytes": 849,
+      "exitCode": 0
+    },
+    "impact-check": {
+      "file": "refactor/.cache/npm-bundle-impact-check.log",
+      "sha256": "7a6909df622329496ac673901289a9199c929e81565d6de9e133d0bcd9296992",
+      "bytes": 702,
+      "exitCode": 0
+    }
+  },
+  "priorLintFailure": {
+    "file": "refactor/.cache/npm-bundle-lint-first.log",
+    "sha256": "1fb8a79063e265fbffbd91e1933c29c1f6071470d691fa2ac92fb8d0565b21fe",
+    "bytes": 1493,
+    "errors": 7,
+    "resolution": "Explicit Node Buffer import and Node test-runner rationale, multiline formatting and documented intentional undefined throw; final lint rerun passes."
+  },
+  "actualWorkspace": {
+    "cli": {
+      "file": "refactor/.cache/npm-bundle-cli-dirty.log",
+      "sha256": "14909cdbae6ff6b7c01b0fb36e69c048a49b886ebb4eec0154041a28a66fb60e",
+      "bytes": 1339,
+      "exitCode": 1,
+      "reason": "Source/evidence modifications are not committed; no bundle was prepared. This earlier log includes the assertion diff before the error message was simplified."
+    },
+    "preflight": {
+      "file": "refactor/.cache/npm-bundle-current-preflight.log",
+      "sha256": "573d02b0e542f8ada1e5219c4486b81e42c6c1247d88893915c51cecfa7e4923",
+      "bytes": 1221,
+      "exitCode": 1
+    },
+    "report": {
+      "file": "refactor/.cache/release-ledger-FBF47r/report.json",
+      "sha256": "94618a9675cb6aca49b7e5a30f9f7b49fa7887b54fdeaccaa08aada2f7492066",
+      "bytes": 460005
+    },
+    "sourceCommit": "25faf88e80ab1fec5c1623c6bfb01655ede6c457",
+    "packages": [
+      {
+        "name": "artplayer",
+        "version": "5.4.1",
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "5.4.1 must be prepared as 6.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ]
+      }
+    ],
+    "evidenceComplete": false,
+    "publicationAuthorized": false
+  },
+  "scope": [
+    "Small real tar archives and synthetic complete ledger reports exercise exact copies, metadata hashes and failure behavior. These synthetic reports do not certify any actual ArtPlayer candidate, hardware, remote CI or review.",
+    "Temporary real Git repositories verify clean, ignored-output, untracked, staged and unstaged conditions. Windows directory junctions verify resolved candidate/cache escapes are refused without changing the external target.",
+    "The CLI recomputes the existing repository ledger twice with clean-source guards; it has no JSON-report override. The internal inspector argument is a unit-test seam, not a CLI trust bypass.",
+    "Preparation does not build, pack, install, contact a registry or publish. The registry string and allowed tags are output policy only. Copied archives are not reconstructed, and missing/stale inputs are not replaced with workspace builds.",
+    "CI-03 still needs trusted workflow/run artifact provenance, registry occupancy checks, OIDC/permissions, exact publication, partial-failure recovery and post-publication verification. Parent dependencies, physical device and all review gates remain unchanged.",
+    "No player package source, public API, version, dependency or lockfile changed. This tool is strict TypeScript with a thin MJS CLI; ci:check, lint and test:baseline include its checks. There was no remote run, push, deployment or publication."
+  ]
+}
