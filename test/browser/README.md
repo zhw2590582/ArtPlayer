@@ -326,10 +326,14 @@ candidate plugins to the exact main/legacy files being tested.
 Frozen-plugin retained DOM, candidate cleanup and unsupported API outcomes remain
 distinct; the old plugin's observed loss is not complete-delivery acceptance.
 
-`jassub-native.spec.js` runs actual published JASSUB 1.1.0, its native Worker,
-fixed local WASM/font and authored ASS cues with offscreenRender=false. It checks
-real canvas pixels before/after seek, CSS web fullscreen and normal destruction.
-Windows WebKit currently fails the default frame-clock path; the explicitly
+`jassub-native.spec.js` runs both published JASSUB 1.1.0 and current source by
+default, each on three cores, with native Worker, fixed local WASM/font and
+authored ASS cues with offscreenRender=false. It checks real canvas pixels
+before/after seek, CSS web fullscreen and destruction. Source candidates use
+direct instance destruction before host cleanup, just like explicit/installed
+candidates. Selected-input attachments distinguish source-build from published
+and installed artifacts; a missing source file path is not a historical identity.
+Windows WebKit currently fails the published default frame-clock path; the explicitly
 selected ARTPLAYER_JASSUB_ON_DEMAND=false diagnostic passes on the candidate core.
 This is a retained historical failure, not a waived browser gate. The server must
 serve WASM as application/wasm for native streaming compilation. Archive failed
@@ -339,8 +343,10 @@ For candidate registration regressions, set ARTPLAYER_JASSUB_ARTIFACT to a built
 main/legacy global file. Those runs also destroy the exposed instance before host
 cleanup. ARTPLAYER_JASSUB_CUSTOM_CANVAS=true supplies a caller-owned canvas and
 asserts it remains connected after destroy(false). The native report records the
-artifact hash and both mode choices. This does not change the default published
-baseline or establish ESM/offscreen/device acceptance.
+artifact hash and both mode choices. An explicit file selects that input alone;
+normal source/installed runs retain the historical control alongside the candidate.
+The original historical failure is not waived. These checks do not establish
+ESM/offscreen/device acceptance.
 
 `jassub-render-failure.spec.js` uses an actual Worker/WASM bitmap and native copies.
 It intentionally closes one bitmap to provoke native Canvas InvalidStateError,

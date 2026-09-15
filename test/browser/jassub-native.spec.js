@@ -14,8 +14,8 @@ const publishedCode = readMember(archive, member).toString()
 if (hash(publishedCode) !== release.files[member])
   throw new Error('Published JASSUB artifact changed')
 const published = { code: publishedCode, provenance: { kind: 'published', version: release.version, integrity: release.integrity, member, sha256: hash(publishedCode) } }
-const candidate = process.env.ARTPLAYER_BROWSER_ARTIFACTS || explicitArtifact ? await browserCandidate('artplayer-plugin-jassub', explicitArtifact) : null
-const inputs = process.env.ARTPLAYER_BROWSER_ARTIFACTS ? [published, candidate] : [candidate || published]
+const candidate = await browserCandidate('artplayer-plugin-jassub', explicitArtifact)
+const inputs = explicitArtifact ? [candidate] : [published, candidate]
 const customCanvas = process.env.ARTPLAYER_JASSUB_CUSTOM_CANVAS === 'true'
 const onDemandRender = process.env.ARTPLAYER_JASSUB_ON_DEMAND !== 'false'
 const defaultOffscreen = process.env.ARTPLAYER_JASSUB_OFFSCREEN === 'default'
@@ -57,9 +57,10 @@ Dialogue: 0,${screenshotReadback ? '0:00:40.00,0:01:50.00' : '0:00:05.00,0:00:30
 const testedSubtitles = screenshotReadback ? subtitles.replace('&H00FFFFFF', '&H0000FF00') : subtitles
 
 for (const { code, provenance } of inputs) {
-  const artifact = provenance.kind !== 'published' ? provenance.file : null
+  const isCandidate = provenance.kind !== 'published'
+  const label = isCandidate ? (provenance.kind === 'source-build' ? 'candidate source-build' : 'candidate artifact') : `published ${release.version}`
   for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
-    test(`JASSUB ${artifact ? 'candidate artifact' : `published ${release.version}`} renders actual WASM subtitles through seek and layout with ${core} core, customCanvas=${customCanvas}, defaultOffscreen=${defaultOffscreen}`, async ({ page, context }, testInfo) => {
+    test(`JASSUB ${label} renders actual WASM subtitles through seek and layout with ${core} core, customCanvas=${customCanvas}, defaultOffscreen=${defaultOffscreen}`, async ({ page, context }, testInfo) => {
       await testInfo.attach('jassub-selected-input', { contentType: 'application/json', body: JSON.stringify({ core, provenance }) })
       const resources = []
       const external = []
@@ -228,8 +229,18 @@ for (const { code, provenance } of inputs) {
           await pixels(page, 'restored')
         }
         await testInfo.attach('actual-jassub-page', { body: await page.screenshot(), contentType: 'image/png' })
-        if (artifact)
-          await page.evaluate(() => window.jassub.destroy())
+        if (isCandidate) {
+          const directDestroy = await page.evaluate(() => {
+            window.jassub.destroy()
+            return {
+              coreAlive: !window.art.isDestroy && window.Artplayer.instances.includes(window.art),
+              workers: window.jassubNative.workers.map(worker => worker.terminated),
+              canvases: document.querySelectorAll('.JASSUB').length,
+            }
+          })
+          await testInfo.attach('jassub-direct-destroy', { body: JSON.stringify(directDestroy), contentType: 'application/json' })
+          expect(directDestroy).toEqual({ coreAlive: true, workers: [1], canvases: 0 })
+        }
         await page.evaluate(() => window.art.destroy(false))
         if (customCanvas)
           expect(await page.evaluate(() => window.jassubUserCanvas.isConnected)).toBe(true)

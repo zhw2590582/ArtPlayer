@@ -289,3 +289,4 @@
 | AUTO-THUMB-REGISTRATION-01 | resolved / 已复现 | Delayed direct factory installation on a destroyed host retains subscriptions and can restart hidden decoding | PKG-AUTO-THUMB-13 |
 | SITE-HTML-INVENTORY-01 | resolved / 已复现 | New documentation HTML is missing from historical demo route coverage, failing the complete local CI check | SITE-ROUTES-01 |
 | SITE-EDITOR-VAST-01 | resolved / 已复现 | Monaco browser consumer still assumes the workspace VAST namespace after the approved npm-root restoration | SITE-EDITOR-VAST-01 |
+| CI-JASSUB-SOURCE-01 | resolved / 已复现 | Default native JASSUB source runs select only the published plugin and omit the current source | CI-JASSUB-SOURCE-01 |

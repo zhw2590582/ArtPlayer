@@ -8,6 +8,46 @@ import process from 'node:process'
 import test from 'node:test'
 import { browserInvocation, browserScopeConfig, installedTests } from '../scripts/browser-validation/scope.ts'
 
+function collectNativeJassub(overrides = {}) {
+  const env = { ...process.env }
+  for (const name of Object.keys(env)) {
+    if (name.startsWith('ARTPLAYER_JASSUB_') || name === 'ARTPLAYER_BROWSER_ARTIFACTS' || name.startsWith('PLAYWRIGHT_JSON_OUTPUT'))
+      delete env[name]
+  }
+  return spawnSync(process.execPath, ['node_modules/@playwright/test/cli.js', 'test', '--config=playwright.config.js', 'test/browser/jassub-native.spec.js', '--list', '--reporter=json', '--project=chromium'], {
+    encoding: 'utf8',
+    env: { ...env, ...overrides },
+    windowsHide: true,
+    timeout: 60000,
+    maxBuffer: 8 * 1024 * 1024,
+  })
+}
+
+test('Native JASSUB collection includes current source and published controls for every core', () => {
+  const source = collectNativeJassub()
+  assert.equal(source.status, 0, source.stderr || source.stdout)
+  const titles = JSON.parse(source.stdout).suites.flatMap(suite => suite.specs.map(spec => spec.title)).sort()
+  const cores = ['candidate', 'published', 'published-5.3.1-beta.1']
+  const expected = ['candidate source-build', 'published 1.1.0'].flatMap(input => cores.map(core => `JASSUB ${input} renders actual WASM subtitles through seek and layout with ${core} core, customCanvas=false, defaultOffscreen=false`)).sort()
+  assert.deepEqual(titles, expected)
+
+  const explicit = collectNativeJassub({ ARTPLAYER_JASSUB_ARTIFACT: path.resolve('packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js') })
+  assert.equal(explicit.status, 0, explicit.stderr || explicit.stdout)
+  const selected = JSON.parse(explicit.stdout).suites.flatMap(suite => suite.specs.map(spec => spec.title)).sort()
+  assert.deepEqual(selected, cores.map(core => `JASSUB candidate artifact renders actual WASM subtitles through seek and layout with ${core} core, customCanvas=false, defaultOffscreen=false`).sort())
+})
+
+test('Native JASSUB rejects missing explicit artifacts and mixed installed selection without fallback', () => {
+  const missing = path.resolve('refactor/.cache/absent-jassub-native-artifact.js')
+  assert(!fs.existsSync(missing))
+  const explicit = collectNativeJassub({ ARTPLAYER_JASSUB_ARTIFACT: missing })
+  assert.equal(explicit.status, 1)
+  assert.match(explicit.stdout + explicit.stderr, /ENOENT/)
+  const mixed = collectNativeJassub({ ARTPLAYER_JASSUB_ARTIFACT: missing, ARTPLAYER_BROWSER_ARTIFACTS: '/unused/installed-map.json' })
+  assert.equal(mixed.status, 1)
+  assert.match(mixed.stdout + mixed.stderr, /Installed browser checks cannot override artplayer-plugin-jassub artifact/)
+})
+
 test('Source invocation clears inherited artifact selection without changing caller environment', () => {
   const environment = { ARTPLAYER_BROWSER_ARTIFACTS: '/installed/map.json', KEEP: 'value' }
   const source = browserInvocation('source', ['--project=chromium'], environment)

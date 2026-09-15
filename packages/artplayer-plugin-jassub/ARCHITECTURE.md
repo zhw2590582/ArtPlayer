@@ -145,11 +145,16 @@ failure, stale video frames and incorrect fallback ratechange payloads. They ass
 the old failures, not candidate fixes. Candidate lifecycle and polyfill tests separately
 verify the local patch. PKG-JASSUB-05 retains complete combination/device acceptance.
 
-`yarn test:browser test/browser/jassub-native.spec.js --workers=1` loads the actual
-published wrapper, Worker, WASM and default font with offscreenRender=false.
-Without ARTPLAYER_JASSUB_ARTIFACT this remains a historical test: the published wrapper
-still fails Windows WebKit when its quality counters stay zero. Set that variable to
-the normal candidate build to test the fix. Native RVFC and increasing quality counters
+`yarn test:browser test/browser/jassub-native.spec.js --workers=1` loads both the
+published wrapper and an in-memory build of current source, with actual Worker,
+WASM and default font and offscreenRender=false. Each input runs against three
+core versions. Source candidates are named and recorded as source-build even though
+they have no artifact file path; direct instance destruction followed by host
+destruction applies to every candidate. The published wrapper still fails Windows
+WebKit when its quality counters stay zero, and that failure remains observable.
+ARTPLAYER_JASSUB_ARTIFACT selects only the explicit build for focused diagnostics;
+an installed map retains the published/installed pair and rejects explicit overrides.
+Native RVFC and increasing quality counters
 retain their existing behavior. Only the polyfill's observed all-zero counters can use
 finite changed media time with readyState >= 2 and no active seek; this approximate path
 limits each continuous callback chain to 30 Hz and still reports zero presented frames.
@@ -186,8 +191,11 @@ ARTPLAYER_BROWSER_ARTIFACTS to the generated map and run
 the published native-render control and adds the installed candidate for all three
 core versions. Lifecycle, hybrid and render-failure suites use the verified
 installed candidate; without a map they build current source, unless an explicit
-artifact is selected. The native-render suite retains its historical default in
-source mode. The platform suite has no JASSUB wrapper/WASM and is a control only.
+artifact is selected. The native-render suite also includes both published and
+source candidates by default. CLI collection regressions in
+`test/browser-validation.test.js` protect all three cores, explicit-file selection
+and rejection of missing/mixed inputs. The platform suite has no JASSUB
+wrapper/WASM and is a control only.
 Its optional `ARTPLAYER_JASSUB_CONTROL_SINGLE_FLIGHT=true` bounds the native
 Worker queue to one draw while retaining concurrent canvas readback. It measures
 the synchronous createImageBitmap call separately from Promise settlement and

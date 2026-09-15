@@ -23,8 +23,10 @@ HLS MSE cases, with per-file reasons in the record. Passed counts also include
 controlled hosts, capability boundaries and historical-defect assertions.
 Source scope retains explicit historical and committed-artifact cases; its name
 does not promise every dependency is rebuilt from current source in every test.
-The native JASSUB source default still selects the published artifact; its three
-failures cannot be presented as candidate-native failures or candidate acceptance.
+At those checkpoints the native JASSUB source default selected only the published
+artifact; its three failures are not candidate-native failures or acceptance.
+CI-JASSUB-SOURCE-01 subsequently adds current-source candidates on all three cores
+while retaining the original published controls and their unaltered assertions.
 Full installed, remote Actions and physical-device acceptance remain separate.
 
 `yarn test:browser:installed` requires ARTPLAYER_BROWSER_ARTIFACTS from
@@ -166,7 +168,12 @@ and physical/long-run verification remain separate. See
 
 JASSUB adds its native rendering, lifecycle, hybrid, render-failure and platform
 control files. The native-render file retains published inputs and adds installed
-candidates; its source-mode historical default stays unchanged. Three other
+candidates; its source default now builds and checks current source alongside
+published controls. Explicit ARTPLAYER_JASSUB_ARTIFACT selects only that file for
+focused diagnostics; missing files and installed overrides fail without fallback.
+Candidate identity, test naming and direct-then-host destruction use provenance
+kind rather than the existence of a file path. The source collector is protected
+by real Playwright --list tests, not a duplicate hard-coded suite roster. Three other
 wrapper suites build source unless an installed map or explicit artifact selects
 them. Installed worker JS and both WASM files are served at the existing URLs,
 with archived-member and frozen-resource hashes verified before serving. The

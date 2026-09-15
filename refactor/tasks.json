@@ -790,7 +790,9 @@
         "baselines/ci-source-firefox-validation.json",
         "changes/2026-09-15-SITE-EDITOR-VAST-01-consumer.md",
         "changes/2026-09-15-CI-01-source-webkit.md",
-        "baselines/ci-source-webkit-validation.json"
+        "baselines/ci-source-webkit-validation.json",
+        "changes/2026-09-15-CI-JASSUB-SOURCE-01-native-inputs.md",
+        "baselines/jassub-source-selection-validation.json"
       ]
     },
     {
@@ -850,7 +852,8 @@
         "CI-BROWSER-01",
         "CI-TYPES-01",
         "CI-TYPES-02",
-        "SITE-EDITOR-VAST-01"
+        "SITE-EDITOR-VAST-01",
+        "CI-JASSUB-SOURCE-01"
       ],
       "status": "todo",
       "risk": "H",
@@ -2677,7 +2680,8 @@
       ],
       "dependsOn": [
         "PKG-JASSUB-05",
-        "ENG-07"
+        "ENG-07",
+        "CI-JASSUB-SOURCE-01"
       ],
       "status": "todo",
       "risk": "H",
@@ -6047,6 +6051,27 @@
         "baselines/editor-vast-consumer-validation.json",
         "baselines/ci-source-firefox-validation.json",
         "vast-type-decision.md"
+      ]
+    },
+    {
+      "id": "CI-JASSUB-SOURCE-01",
+      "phase": "2.2 GitHub CI/CD",
+      "title": "将当前源码纳入 JASSUB 原生字幕默认验证",
+      "scope": [
+        "workspace",
+        "artplayer-plugin-jassub"
+      ],
+      "dependsOn": [
+        "CI-BROWSER-01",
+        "PKG-JASSUB-07"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "源码与发布包原生字幕配对、来源标识及独立销毁验证，真实 CLI 收集回归和三引擎证据",
+      "acceptance": "默认各三核心覆盖当前源码和发布包，明确显式诊断与安装映射边界；候选九项真实 WASM 绘制和清理通过；保留旧版失败，不冒充全量或真机验收",
+      "evidence": [
+        "changes/2026-09-15-CI-JASSUB-SOURCE-01-native-inputs.md",
+        "baselines/jassub-source-selection-validation.json"
       ]
     }
   ]

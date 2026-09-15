@@ -6809,6 +6809,27 @@
         "test/browser/editor-declarations.spec.js"
       ],
       "resolutionRationale": "The full Firefox collection exposed an obsolete test contract. The corrected consumer passes in Chromium, Firefox and Windows WebKit with five exact negative diagnostics and zero positive/declaration errors; four generator tests still pass. No production declaration or SDK behavior changed."
+    },
+    {
+      "id": "CI-JASSUB-SOURCE-01",
+      "title": "Default native JASSUB source runs select only the published plugin and omit the current source",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CI-JASSUB-SOURCE-01"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-15-CI-JASSUB-SOURCE-01-native-inputs.md",
+        "refactor/baselines/jassub-source-selection-validation.json",
+        "test/browser/jassub-native.spec.js",
+        "test/browser-validation.test.js"
+      ],
+      "compatibleResolution": "Always build/select the current candidate and pair it with the immutable published control unless an explicit diagnostic artifact was selected. Identify candidates by provenance kind rather than a nullable file.",
+      "closureCriteria": "Real CLI collection regression, source candidate across three cores and three engines with actual WASM pixels and direct cleanup before host destruction; retain historical failures and installed selection guards.",
+      "resolutionEvidence": [
+        "refactor/baselines/jassub-source-selection-validation.json"
+      ],
+      "resolutionRationale": "Old collection omits three source cases. Twenty Node checks pass after correction; all nine source browser combinations render, seek and clean workers/canvases before host destruction. Three published WebKit failures remain visible; no production contract changed."
     }
   ]
 }
