@@ -421,6 +421,51 @@ art.on('ready', () => {
 
 Manages the player's subtitle functionality
 
+### Loading and switching {#subtitle-contract}
+
+`switch(url, option?)` shallowly merges this call's options over `art.option.subtitle`, then overrides the URL with its first argument. It does not write the options back to `art.option.subtitle` or inherit options from the previous switch. `subtitle.option` holds the complete options for the most recently started load, which may still be pending or may have failed.
+
+| Option | Default | Behavior |
+| --- | --- | --- |
+| `url` | `''` | Request URL; an empty value does not clear the existing track |
+| `name` | `''` | Switch notice after a successful submission; the track label still uses `art.option.subtitle.name` or `Artplayer` |
+| `type` | `''` | Explicit `vtt`, `srt`, or `ass`, otherwise inferred from the URL, not the response MIME type |
+| `style` | `{}` | Subtitle container CSS; later assignments do not automatically clear earlier styles |
+| `encoding` | `'utf-8'` | TextDecoder encoding |
+| `escape` | `true` | Rendering reads `art.option.subtitle.escape`; a switch-only override does not change that setting |
+| `onVttLoad` | Return the text unchanged | Synchronously transforms VTT text; an ordinary function receives the complete options as this |
+
+Recognized SRT/ASS is converted to WebVTT before `onVttLoad`; VTT is passed directly to it. The callback must return a string; promises are not awaited. ASS conversion retains basic text and timing, not full ASS layout. Unrecognized types still undergo fetch and decoding, but skip the callback and pass the original URL to the native track.
+
+`switch` returns `Promise<string | null | undefined>`: the submitted URL on success (usually a Blob URL after conversion), null without an available native text track, or undefined for an empty URL, superseded request, or cancellation on destruction. Fulfillment does not mean native cues have loaded. Subscribe to `subtitleLoad(cues, option)` before switching. The `subtitle.url` getter returns the current track URL; its setter starts a switch without exposing a Promise.
+
+A new request cancels its predecessor and prevents late results from replacing current subtitles; destruction also settles pending requests. Active fetch, decoding, or conversion errors reject direct calls and update the notice. Construction and the URL setter observe their internal rejections. A later native track failure only updates the notice; it cannot reject an already fulfilled switch. Errors and empty URLs do not guarantee removal of the old track. Use `subtitle.show = false` to hide subtitles.
+
+### Tracks, rendering, and cleanup {#subtitle-runtime}
+
+`textTrack` reads the video's first TextTrack rather than searching by language or kind; proxy media without that capability may return undefined. `cues` and `activeCues` return fresh arrays containing the original cue objects, or empty arrays when unavailable or disabled. `SubtitleCue.text` contains the caption; `originalStartTime`/`originalEndTime` preserve the original times when adjusting an offset, and the track's optional `offset` holds the current offset. Reading an array does not clone this metadata.
+
+`update()` synchronously redraws active cues. It is not the generic component update method and does not download subtitles again. With no active cues it only clears the view; otherwise it emits `subtitleBeforeUpdate`, creates `.art-subtitle-line[data-group]` elements for nonempty lines, then emits `subtitleAfterUpdate`. Rendering uses the player's escape setting. With escaping disabled, cue contents are inserted as trusted HTML. Switching, redrawing, or destroying inside a listener prevents the stale outer render from committing.
+
+`show`/`toggle()` control the player's `art-subtitle-show` class and emit the boolean `subtitle` event; they do not stop downloads or the track. `style(object)` and `style(key, value)` return the subtitle container. The manager's `name` is `subtitle`. `destroyEvent` cleans up the current cuechange listener; it does not destroy the entire subtitle manager.
+
+Low-level `init(fullOption)` does not fill in missing configuration; normally use `switch`. `createTrack(kind, url)` directly replaces the native track without downloading, converting, or merging options, and returns undefined. The new track uses hidden mode and its load event emits `subtitleLoad`. Replacement releases old listeners. Core-generated Blob URLs are revoked on replacement or player destruction; caller-supplied URLs remain caller-owned. Do not revoke a core-returned Blob URL as soon as switch fulfills. WebKit native fullscreen transitions may recreate the track and trigger another load, so loading is not a one-time event.
+
+The root entry retains historical void style returns, `Promise<string>` switch returns, and the inherited component update declaration. Use `artplayer/runtime` for accurate returns and `update()`. Its `Subtitle` describes the manager; the root `Subtitle` describes configuration. Inherited members do not imply support for adding custom entries as with layers.
+
+```ts
+import Artplayer from 'artplayer/runtime';
+import type { SubtitleCue } from 'artplayer/runtime';
+
+const art = new Artplayer({ container: '.artplayer-app', url: '/assets/sample/video.mp4' });
+art.on('subtitleLoad', (cues: SubtitleCue[]) => console.info(cues.length));
+const node: HTMLDivElement = art.subtitle.style({ color: 'red' });
+const loading: Promise<string | null | undefined> = art.subtitle.switch('/assets/sample/subtitle.srt');
+void loading.catch(console.error);
+art.subtitle.update();
+void node;
+```
+
 - The `url` property sets and returns the current subtitle URL
 - The `style` method sets the style of the current subtitle
 - The `switch` method sets the current subtitle URL and options

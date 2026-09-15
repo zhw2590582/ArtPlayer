@@ -420,6 +420,51 @@ art.on('ready', () => {
 
 管理播放器的字幕功能
 
+### 加载与切换 {#subtitle-contract}
+
+`switch(url, option?)` 将本次选项浅合并到 `art.option.subtitle` 的配置之上，再以第一个参数覆盖 URL。它不会把本次选项写回 `art.option.subtitle`，也不会继承上一次 `switch` 的选项。`subtitle.option` 则保存最近一次开始加载的完整选项，可能对应尚未完成或失败的请求。
+
+| 配置 | 默认值 | 实际作用 |
+| --- | --- | --- |
+| `url` | `''` | 请求地址；空值不清除已加载的轨道 |
+| `name` | `''` | `switch` 成功提交后显示切换提示；轨道 label 仍取 `art.option.subtitle.name` 或 `Artplayer` |
+| `type` | `''` | 显式 `vtt`、`srt`、`ass`，否则从 URL 推断；不按响应 MIME 推断 |
+| `style` | `{}` | 设置字幕容器 CSS；后续设置不会自动清除旧 CSS |
+| `encoding` | `'utf-8'` | `TextDecoder` 解码方式 |
+| `escape` | `true` | 渲染读取 `art.option.subtitle.escape`；仅在本次 switch 中传入不会改变这个全局配置 |
+| `onVttLoad` | 原样返回文本 | 同步转换 VTT 文本；普通函数的 this 为本次完整选项 |
+
+识别的 SRT/ASS 先转为 WebVTT，再调用 `onVttLoad`，VTT 直接传入该回调；回调必须返回字符串，不等待 Promise。ASS 转换只保留基础文本与时间，不是完整 ASS 排版。未识别的类型仍会先 fetch/解码，但跳过回调并把原地址交给原生 track。
+
+`switch` 返回 `Promise<string | null | undefined>`：成功返回提交的地址（转换后通常为 Blob URL），没有可用原生文本轨时为 null，空地址、被下一次请求替代或销毁取消时为 undefined。Promise 完成不等于原生 cue 已加载；需要在切换前订阅 `subtitleLoad(cues, option)`。`subtitle.url` 的 getter 返回当前 track 的地址，setter 启动异步切换但不能等待结果。
+
+新请求取消旧请求，并阻止迟到结果覆盖当前字幕；销毁也会结算等待中的请求。活动请求的 fetch、解码、转换错误会拒绝直接调用的 Promise，并更新提示；构造和 URL setter 会处理其内部拒绝。原生 track 后续加载失败只更新提示，不会追溯拒绝已经完成的 switch。失败或空 URL 不保证删除旧轨道，因此隐藏字幕请用 `subtitle.show = false`。
+
+### 轨道、渲染和清理 {#subtitle-runtime}
+
+`textTrack` 读取视频的第一个 TextTrack，而不是按语言或 kind 搜索；代理媒体没有该能力时可能为 undefined。`cues` 和 `activeCues` 每次返回新数组，cue 对象本身保持引用；不可用或禁用时为空数组。`SubtitleCue.text` 是字幕文本，`originalStartTime`/`originalEndTime` 是调整偏移时保存的原时间；track 上的可选 `offset` 保存当前偏移。这些元数据不会因读取数组而复制。
+
+`update()` 同步重绘当前活动 cue，不是通用组件的更新方法，也不重新下载字幕。没有活动 cue 时只清空视图；否则先发出 `subtitleBeforeUpdate`，按非空行生成 `.art-subtitle-line[data-group]`，再发出 `subtitleAfterUpdate`。渲染时以播放器配置决定转义；关闭 escape 时，cue 内容会作为可信 HTML 插入。监听器中的切换、重绘或销毁会阻止过期的外层渲染继续提交。
+
+`show`/`toggle()` 控制播放器的 `art-subtitle-show` 类并发出 `subtitle` 布尔事件，不暂停字幕下载或轨道。`style(object)` 和 `style(key, value)` 返回字幕容器节点。管理器的 `name` 为 `subtitle`；`destroyEvent` 是当前 cuechange 监听器的清理函数，不是销毁整个字幕管理器的方法。
+
+底层 `init(fullOption)` 不补齐配置，通常应使用 `switch`；`createTrack(kind, url)` 直接替换原生轨道，不下载转换、不合并选项，返回 undefined。新轨道以 hidden 模式工作，其 load 事件触发 `subtitleLoad`。替换会释放旧监听器；核心创建的 Blob URL 在被替换或播放器销毁时回收，调用者传入的 URL 仍由调用者管理。不要在 switch 刚返回时回收核心返回的 Blob URL。WebKit 原生全屏切换可能重建 track 并重新触发加载，不能把字幕加载视为只发生一次。
+
+根入口保留历史 style 的 void、switch 的 `Promise<string>` 和继承组件 update 声明。需要准确返回值与 `update()` 时使用 `artplayer/runtime`；其 `Subtitle` 是管理器类型，根入口 `Subtitle` 是配置类型。继承成员不表示字幕支持像 layers 一样添加自定义条目。
+
+```ts
+import Artplayer from 'artplayer/runtime';
+import type { SubtitleCue } from 'artplayer/runtime';
+
+const art = new Artplayer({ container: '.artplayer-app', url: '/assets/sample/video.mp4' });
+art.on('subtitleLoad', (cues: SubtitleCue[]) => console.info(cues.length));
+const node: HTMLDivElement = art.subtitle.style({ color: 'red' });
+const loading: Promise<string | null | undefined> = art.subtitle.switch('/assets/sample/subtitle.srt');
+void loading.catch(console.error);
+art.subtitle.update();
+void node;
+```
+
 - `url` 属性设置和返回当前字幕地址
 - `style` 方法设置当前字幕的样式
 - `switch` 方法设置当前字幕地址和选项

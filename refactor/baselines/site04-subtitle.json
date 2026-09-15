@@ -1,0 +1,955 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "doing",
+  "sourceBefore": "de45f5b978a69aaae3b466325ac4dce35bd0dee2",
+  "capturedAt": "2026-09-15T23:17:13.871Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "static": [
+      {
+        "language": "zh",
+        "name": "built-in",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+          "sha256": "7e3532221a87652457371babdcc816643984f4a7fd080a5aed07b1807cedb8e6"
+        },
+        "html": {
+          "path": "docs/document/advanced/built-in.html",
+          "sha256": "25794ecbe79571154672a3360d9dfb2c1fa48786b7537eb1cde78ebe3ea1ec41"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-subtitle/zh-built-in-0.mts",
+            "sha256": "e613264ed42611dcaf9d113b6657369fee86259fa4f93dd886e44d31daada1e0"
+          },
+          {
+            "path": "refactor/.cache/site04-subtitle/zh-built-in-1.mts",
+            "sha256": "e2813bfdb0e54859385e00b5b4cbe0a3f6670fdc2dee15c93d8993b64dfc78a6"
+          },
+          {
+            "path": "refactor/.cache/site04-subtitle/zh-built-in-2.mts",
+            "sha256": "8845a21ecf86b0b0b08a0b0de4d2488fbde834fe795eedb7cd125e66f6a46eae"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "advanced/built-in.md:12",
+            "sha256": "087735467fd821c2f6b73050a9bf932f1cefa183e017391ad6e963e9e988b8d6"
+          },
+          {
+            "id": "advanced/built-in.md:33",
+            "sha256": "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937"
+          },
+          {
+            "id": "advanced/built-in.md:95",
+            "sha256": "8dcf8fe91915f7bad2fb1f47e49294cc703cfbe80b21b7155e1d7ebacef017b2"
+          },
+          {
+            "id": "advanced/built-in.md:138",
+            "sha256": "aed4de9f5ce94737018c9e169d9319e44da9468bf244a25dd484b64b71d6a905"
+          },
+          {
+            "id": "advanced/built-in.md:161",
+            "sha256": "78a8622566fb190dad9687fcd3366aeca1ce2c440f98db1b8a63d936dd44601a"
+          },
+          {
+            "id": "advanced/built-in.md:181",
+            "sha256": "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4"
+          },
+          {
+            "id": "advanced/built-in.md:217",
+            "sha256": "9a1dabfbd2b43b4d7cc76c259c0e6da4fec0af51ffa87607ff2cf274e37ffebc"
+          },
+          {
+            "id": "advanced/built-in.md:292",
+            "sha256": "5622bd1dd05bd1b95b3dd4db0a0dd28387cba88bc1f6ad5da3a7451abdd9ec55"
+          },
+          {
+            "id": "advanced/built-in.md:325",
+            "sha256": "2429bccae4d847890c92fbad4ed2df3ffa6ba3172b7babe7e5081869542daece"
+          },
+          {
+            "id": "advanced/built-in.md:360",
+            "sha256": "97425833bd778311e3765b0f8c268cc15f38ab83e39727dbb35210060d332d17"
+          },
+          {
+            "id": "advanced/built-in.md:396",
+            "sha256": "3355c478c71f59548fd2be177f607fbcfb359b007067fcd9dc9524bb4cfc591f"
+          },
+          {
+            "id": "advanced/built-in.md:478",
+            "sha256": "c478d5976a42b468d48f6aa5594313b60d49a9daf007839c6ee2cd0881daeb63"
+          },
+          {
+            "id": "advanced/built-in.md:501",
+            "sha256": "2c8bd606ef43ceedd726f81b29260866558b12aedd7798e9955ba5c4ebb72b37"
+          },
+          {
+            "id": "advanced/built-in.md:525",
+            "sha256": "564713373d9c96b69e3c9f7ea82686ddb7b2ba8156ea6db8621c8e59d63c6ce6"
+          },
+          {
+            "id": "advanced/built-in.md:548",
+            "sha256": "48afe798b0202fd30467e8d148d082e7deb986db08da0c28ceffe1c440bd2d1c"
+          },
+          {
+            "id": "advanced/built-in.md:587",
+            "sha256": "c893a368edcb1a8320ff7ce682723294e900298f91022da0e49ee0ee9d41f449"
+          },
+          {
+            "id": "advanced/built-in.md:613",
+            "sha256": "b0e79e18d105f505cdc4a9cec236b96b39a916c4f2086e4c2e13b0d74e92c627"
+          },
+          {
+            "id": "advanced/built-in.md:644",
+            "sha256": "7ba346613aa1e0600f67a618b385c1b7b5bf06b136a67408c5d959490bf8f9dd"
+          }
+        ],
+        "localLinks": [
+          "/document/advanced/built-in.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/advanced/built-in.html#%E9%AB%98%E7%BA%A7%E5%B1%9E%E6%80%A7",
+          "/document/advanced/built-in.html#option",
+          "/document/advanced/built-in.html#template",
+          "/document/advanced/built-in.html#events",
+          "/document/advanced/built-in.html#storage",
+          "/document/advanced/built-in.html#icons",
+          "/document/advanced/built-in.html#i18n",
+          "/document/advanced/built-in.html#notice",
+          "/document/advanced/built-in.html#layers",
+          "/document/advanced/built-in.html#controls",
+          "/document/advanced/built-in.html#contextmenu",
+          "/document/advanced/built-in.html#subtitle",
+          "/document/advanced/built-in.html#subtitle-contract",
+          "/document/advanced/built-in.html#subtitle-runtime",
+          "/document/advanced/built-in.html#info",
+          "/document/advanced/built-in.html#loading",
+          "/document/advanced/built-in.html#hotkey",
+          "/document/advanced/built-in.html#mask",
+          "/document/advanced/built-in.html#setting",
+          "/document/advanced/built-in.html#plugins",
+          "/document/advanced/built-in.html#%E6%9C%8D%E5%8A%A1%E7%9A%84-typescript-%E8%A7%86%E5%9B%BE",
+          "/document/advanced/built-in.html#%E6%A8%A1%E6%9D%BF%E4%B8%8E%E5%9B%BE%E6%A0%87%E7%9A%84-typescript-%E8%A7%86%E5%9B%BE"
+        ]
+      },
+      {
+        "language": "en",
+        "name": "built-in",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+          "sha256": "3fc59e64a6cda6f1a176dddee92a24cfb0d0b56982bf535aa048e46a1bea774a"
+        },
+        "html": {
+          "path": "docs/document/en/advanced/built-in.html",
+          "sha256": "c0d0bc59222d022e99ee2ed5e9281fd8f2fd3b227a554669bbd45a169396ff0d"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-subtitle/en-built-in-0.mts",
+            "sha256": "e613264ed42611dcaf9d113b6657369fee86259fa4f93dd886e44d31daada1e0"
+          },
+          {
+            "path": "refactor/.cache/site04-subtitle/en-built-in-1.mts",
+            "sha256": "e2813bfdb0e54859385e00b5b4cbe0a3f6670fdc2dee15c93d8993b64dfc78a6"
+          },
+          {
+            "path": "refactor/.cache/site04-subtitle/en-built-in-2.mts",
+            "sha256": "8845a21ecf86b0b0b08a0b0de4d2488fbde834fe795eedb7cd125e66f6a46eae"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "en/advanced/built-in.md:12",
+            "sha256": "087735467fd821c2f6b73050a9bf932f1cefa183e017391ad6e963e9e988b8d6"
+          },
+          {
+            "id": "en/advanced/built-in.md:33",
+            "sha256": "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937"
+          },
+          {
+            "id": "en/advanced/built-in.md:95",
+            "sha256": "8dcf8fe91915f7bad2fb1f47e49294cc703cfbe80b21b7155e1d7ebacef017b2"
+          },
+          {
+            "id": "en/advanced/built-in.md:138",
+            "sha256": "aed4de9f5ce94737018c9e169d9319e44da9468bf244a25dd484b64b71d6a905"
+          },
+          {
+            "id": "en/advanced/built-in.md:161",
+            "sha256": "78a8622566fb190dad9687fcd3366aeca1ce2c440f98db1b8a63d936dd44601a"
+          },
+          {
+            "id": "en/advanced/built-in.md:181",
+            "sha256": "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4"
+          },
+          {
+            "id": "en/advanced/built-in.md:217",
+            "sha256": "9a1dabfbd2b43b4d7cc76c259c0e6da4fec0af51ffa87607ff2cf274e37ffebc"
+          },
+          {
+            "id": "en/advanced/built-in.md:292",
+            "sha256": "5622bd1dd05bd1b95b3dd4db0a0dd28387cba88bc1f6ad5da3a7451abdd9ec55"
+          },
+          {
+            "id": "en/advanced/built-in.md:325",
+            "sha256": "2429bccae4d847890c92fbad4ed2df3ffa6ba3172b7babe7e5081869542daece"
+          },
+          {
+            "id": "en/advanced/built-in.md:361",
+            "sha256": "97425833bd778311e3765b0f8c268cc15f38ab83e39727dbb35210060d332d17"
+          },
+          {
+            "id": "en/advanced/built-in.md:397",
+            "sha256": "3355c478c71f59548fd2be177f607fbcfb359b007067fcd9dc9524bb4cfc591f"
+          },
+          {
+            "id": "en/advanced/built-in.md:479",
+            "sha256": "c478d5976a42b468d48f6aa5594313b60d49a9daf007839c6ee2cd0881daeb63"
+          },
+          {
+            "id": "en/advanced/built-in.md:502",
+            "sha256": "2c8bd606ef43ceedd726f81b29260866558b12aedd7798e9955ba5c4ebb72b37"
+          },
+          {
+            "id": "en/advanced/built-in.md:526",
+            "sha256": "564713373d9c96b69e3c9f7ea82686ddb7b2ba8156ea6db8621c8e59d63c6ce6"
+          },
+          {
+            "id": "en/advanced/built-in.md:549",
+            "sha256": "48afe798b0202fd30467e8d148d082e7deb986db08da0c28ceffe1c440bd2d1c"
+          },
+          {
+            "id": "en/advanced/built-in.md:588",
+            "sha256": "c893a368edcb1a8320ff7ce682723294e900298f91022da0e49ee0ee9d41f449"
+          },
+          {
+            "id": "en/advanced/built-in.md:614",
+            "sha256": "b0e79e18d105f505cdc4a9cec236b96b39a916c4f2086e4c2e13b0d74e92c627"
+          },
+          {
+            "id": "en/advanced/built-in.md:645",
+            "sha256": "7ba346613aa1e0600f67a618b385c1b7b5bf06b136a67408c5d959490bf8f9dd"
+          }
+        ],
+        "localLinks": [
+          "/document/en/advanced/built-in.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/advanced/built-in.html#advanced-properties",
+          "/document/en/advanced/built-in.html#option",
+          "/document/en/advanced/built-in.html#template",
+          "/document/en/advanced/built-in.html#events",
+          "/document/en/advanced/built-in.html#storage",
+          "/document/en/advanced/built-in.html#icons",
+          "/document/en/advanced/built-in.html#i18n",
+          "/document/en/advanced/built-in.html#notice",
+          "/document/en/advanced/built-in.html#layers",
+          "/document/component/layers.html",
+          "/document/en/advanced/built-in.html#controls",
+          "/document/component/controls.html",
+          "/document/en/advanced/built-in.html#contextmenu",
+          "/document/component/contextmenu.html",
+          "/document/en/advanced/built-in.html#subtitle",
+          "/document/en/advanced/built-in.html#subtitle-contract",
+          "/document/en/advanced/built-in.html#subtitle-runtime",
+          "/document/en/advanced/built-in.html#info",
+          "/document/en/advanced/built-in.html#loading",
+          "/document/en/advanced/built-in.html#hotkey",
+          "/document/en/advanced/built-in.html#mask",
+          "/document/en/advanced/built-in.html#setting",
+          "/document/component/setting.html",
+          "/document/en/advanced/built-in.html#plugins",
+          "/document/en/advanced/built-in.html#typescript-service-views",
+          "/document/en/advanced/built-in.html#typescript-template-and-icon-views"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "zh",
+        "name": "built-in",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "087735467fd821c2f6b73050a9bf932f1cefa183e017391ad6e963e9e988b8d6",
+          "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937",
+          "8dcf8fe91915f7bad2fb1f47e49294cc703cfbe80b21b7155e1d7ebacef017b2",
+          "aed4de9f5ce94737018c9e169d9319e44da9468bf244a25dd484b64b71d6a905",
+          "78a8622566fb190dad9687fcd3366aeca1ce2c440f98db1b8a63d936dd44601a",
+          "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4",
+          "9a1dabfbd2b43b4d7cc76c259c0e6da4fec0af51ffa87607ff2cf274e37ffebc",
+          "5622bd1dd05bd1b95b3dd4db0a0dd28387cba88bc1f6ad5da3a7451abdd9ec55",
+          "2429bccae4d847890c92fbad4ed2df3ffa6ba3172b7babe7e5081869542daece",
+          "97425833bd778311e3765b0f8c268cc15f38ab83e39727dbb35210060d332d17",
+          "3355c478c71f59548fd2be177f607fbcfb359b007067fcd9dc9524bb4cfc591f",
+          "c478d5976a42b468d48f6aa5594313b60d49a9daf007839c6ee2cd0881daeb63",
+          "2c8bd606ef43ceedd726f81b29260866558b12aedd7798e9955ba5c4ebb72b37",
+          "564713373d9c96b69e3c9f7ea82686ddb7b2ba8156ea6db8621c8e59d63c6ce6",
+          "48afe798b0202fd30467e8d148d082e7deb986db08da0c28ceffe1c440bd2d1c",
+          "c893a368edcb1a8320ff7ce682723294e900298f91022da0e49ee0ee9d41f449",
+          "b0e79e18d105f505cdc4a9cec236b96b39a916c4f2086e4c2e13b0d74e92c627",
+          "7ba346613aa1e0600f67a618b385c1b7b5bf06b136a67408c5d959490bf8f9dd"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-subtitle/chromium-zh-built-in.png",
+          "sha256": "9fa2783136271bfe68c1307b5c616b21ef7c8ef23dd45832d88e42affbc7485a"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "en",
+        "name": "built-in",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "087735467fd821c2f6b73050a9bf932f1cefa183e017391ad6e963e9e988b8d6",
+          "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937",
+          "8dcf8fe91915f7bad2fb1f47e49294cc703cfbe80b21b7155e1d7ebacef017b2",
+          "aed4de9f5ce94737018c9e169d9319e44da9468bf244a25dd484b64b71d6a905",
+          "78a8622566fb190dad9687fcd3366aeca1ce2c440f98db1b8a63d936dd44601a",
+          "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4",
+          "9a1dabfbd2b43b4d7cc76c259c0e6da4fec0af51ffa87607ff2cf274e37ffebc",
+          "5622bd1dd05bd1b95b3dd4db0a0dd28387cba88bc1f6ad5da3a7451abdd9ec55",
+          "2429bccae4d847890c92fbad4ed2df3ffa6ba3172b7babe7e5081869542daece",
+          "97425833bd778311e3765b0f8c268cc15f38ab83e39727dbb35210060d332d17",
+          "3355c478c71f59548fd2be177f607fbcfb359b007067fcd9dc9524bb4cfc591f",
+          "c478d5976a42b468d48f6aa5594313b60d49a9daf007839c6ee2cd0881daeb63",
+          "2c8bd606ef43ceedd726f81b29260866558b12aedd7798e9955ba5c4ebb72b37",
+          "564713373d9c96b69e3c9f7ea82686ddb7b2ba8156ea6db8621c8e59d63c6ce6",
+          "48afe798b0202fd30467e8d148d082e7deb986db08da0c28ceffe1c440bd2d1c",
+          "c893a368edcb1a8320ff7ce682723294e900298f91022da0e49ee0ee9d41f449",
+          "b0e79e18d105f505cdc4a9cec236b96b39a916c4f2086e4c2e13b0d74e92c627",
+          "7ba346613aa1e0600f67a618b385c1b7b5bf06b136a67408c5d959490bf8f9dd"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-subtitle/chromium-en-built-in.png",
+          "sha256": "367366053e2bdb1964991ac1f26d61dbfe60ea3448e5c47b5ffbae45d5f7e4dd"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "zh",
+        "name": "built-in",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "087735467fd821c2f6b73050a9bf932f1cefa183e017391ad6e963e9e988b8d6",
+          "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937",
+          "8dcf8fe91915f7bad2fb1f47e49294cc703cfbe80b21b7155e1d7ebacef017b2",
+          "aed4de9f5ce94737018c9e169d9319e44da9468bf244a25dd484b64b71d6a905",
+          "78a8622566fb190dad9687fcd3366aeca1ce2c440f98db1b8a63d936dd44601a",
+          "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4",
+          "9a1dabfbd2b43b4d7cc76c259c0e6da4fec0af51ffa87607ff2cf274e37ffebc",
+          "5622bd1dd05bd1b95b3dd4db0a0dd28387cba88bc1f6ad5da3a7451abdd9ec55",
+          "2429bccae4d847890c92fbad4ed2df3ffa6ba3172b7babe7e5081869542daece",
+          "97425833bd778311e3765b0f8c268cc15f38ab83e39727dbb35210060d332d17",
+          "3355c478c71f59548fd2be177f607fbcfb359b007067fcd9dc9524bb4cfc591f",
+          "c478d5976a42b468d48f6aa5594313b60d49a9daf007839c6ee2cd0881daeb63",
+          "2c8bd606ef43ceedd726f81b29260866558b12aedd7798e9955ba5c4ebb72b37",
+          "564713373d9c96b69e3c9f7ea82686ddb7b2ba8156ea6db8621c8e59d63c6ce6",
+          "48afe798b0202fd30467e8d148d082e7deb986db08da0c28ceffe1c440bd2d1c",
+          "c893a368edcb1a8320ff7ce682723294e900298f91022da0e49ee0ee9d41f449",
+          "b0e79e18d105f505cdc4a9cec236b96b39a916c4f2086e4c2e13b0d74e92c627",
+          "7ba346613aa1e0600f67a618b385c1b7b5bf06b136a67408c5d959490bf8f9dd"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-subtitle/firefox-zh-built-in.png",
+          "sha256": "08d9818d9d473ad9f8e922dcb488304d35dd976a0d62ae11feba18695a22e853"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "en",
+        "name": "built-in",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "087735467fd821c2f6b73050a9bf932f1cefa183e017391ad6e963e9e988b8d6",
+          "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937",
+          "8dcf8fe91915f7bad2fb1f47e49294cc703cfbe80b21b7155e1d7ebacef017b2",
+          "aed4de9f5ce94737018c9e169d9319e44da9468bf244a25dd484b64b71d6a905",
+          "78a8622566fb190dad9687fcd3366aeca1ce2c440f98db1b8a63d936dd44601a",
+          "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4",
+          "9a1dabfbd2b43b4d7cc76c259c0e6da4fec0af51ffa87607ff2cf274e37ffebc",
+          "5622bd1dd05bd1b95b3dd4db0a0dd28387cba88bc1f6ad5da3a7451abdd9ec55",
+          "2429bccae4d847890c92fbad4ed2df3ffa6ba3172b7babe7e5081869542daece",
+          "97425833bd778311e3765b0f8c268cc15f38ab83e39727dbb35210060d332d17",
+          "3355c478c71f59548fd2be177f607fbcfb359b007067fcd9dc9524bb4cfc591f",
+          "c478d5976a42b468d48f6aa5594313b60d49a9daf007839c6ee2cd0881daeb63",
+          "2c8bd606ef43ceedd726f81b29260866558b12aedd7798e9955ba5c4ebb72b37",
+          "564713373d9c96b69e3c9f7ea82686ddb7b2ba8156ea6db8621c8e59d63c6ce6",
+          "48afe798b0202fd30467e8d148d082e7deb986db08da0c28ceffe1c440bd2d1c",
+          "c893a368edcb1a8320ff7ce682723294e900298f91022da0e49ee0ee9d41f449",
+          "b0e79e18d105f505cdc4a9cec236b96b39a916c4f2086e4c2e13b0d74e92c627",
+          "7ba346613aa1e0600f67a618b385c1b7b5bf06b136a67408c5d959490bf8f9dd"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-subtitle/firefox-en-built-in.png",
+          "sha256": "09aaa1c9005f7cd277720504a9ff2ab8ebfb60a6c25f93af6bbd5fe8a6421f87"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "zh",
+        "name": "built-in",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "087735467fd821c2f6b73050a9bf932f1cefa183e017391ad6e963e9e988b8d6",
+          "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937",
+          "8dcf8fe91915f7bad2fb1f47e49294cc703cfbe80b21b7155e1d7ebacef017b2",
+          "aed4de9f5ce94737018c9e169d9319e44da9468bf244a25dd484b64b71d6a905",
+          "78a8622566fb190dad9687fcd3366aeca1ce2c440f98db1b8a63d936dd44601a",
+          "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4",
+          "9a1dabfbd2b43b4d7cc76c259c0e6da4fec0af51ffa87607ff2cf274e37ffebc",
+          "5622bd1dd05bd1b95b3dd4db0a0dd28387cba88bc1f6ad5da3a7451abdd9ec55",
+          "2429bccae4d847890c92fbad4ed2df3ffa6ba3172b7babe7e5081869542daece",
+          "97425833bd778311e3765b0f8c268cc15f38ab83e39727dbb35210060d332d17",
+          "3355c478c71f59548fd2be177f607fbcfb359b007067fcd9dc9524bb4cfc591f",
+          "c478d5976a42b468d48f6aa5594313b60d49a9daf007839c6ee2cd0881daeb63",
+          "2c8bd606ef43ceedd726f81b29260866558b12aedd7798e9955ba5c4ebb72b37",
+          "564713373d9c96b69e3c9f7ea82686ddb7b2ba8156ea6db8621c8e59d63c6ce6",
+          "48afe798b0202fd30467e8d148d082e7deb986db08da0c28ceffe1c440bd2d1c",
+          "c893a368edcb1a8320ff7ce682723294e900298f91022da0e49ee0ee9d41f449",
+          "b0e79e18d105f505cdc4a9cec236b96b39a916c4f2086e4c2e13b0d74e92c627",
+          "7ba346613aa1e0600f67a618b385c1b7b5bf06b136a67408c5d959490bf8f9dd"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-subtitle/webkit-zh-built-in.png",
+          "sha256": "0e39c014df842039efa94a364c2037a86bdceb10d1279d38978c830aa679d7b8"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "en",
+        "name": "built-in",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "087735467fd821c2f6b73050a9bf932f1cefa183e017391ad6e963e9e988b8d6",
+          "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937",
+          "8dcf8fe91915f7bad2fb1f47e49294cc703cfbe80b21b7155e1d7ebacef017b2",
+          "aed4de9f5ce94737018c9e169d9319e44da9468bf244a25dd484b64b71d6a905",
+          "78a8622566fb190dad9687fcd3366aeca1ce2c440f98db1b8a63d936dd44601a",
+          "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4",
+          "9a1dabfbd2b43b4d7cc76c259c0e6da4fec0af51ffa87607ff2cf274e37ffebc",
+          "5622bd1dd05bd1b95b3dd4db0a0dd28387cba88bc1f6ad5da3a7451abdd9ec55",
+          "2429bccae4d847890c92fbad4ed2df3ffa6ba3172b7babe7e5081869542daece",
+          "97425833bd778311e3765b0f8c268cc15f38ab83e39727dbb35210060d332d17",
+          "3355c478c71f59548fd2be177f607fbcfb359b007067fcd9dc9524bb4cfc591f",
+          "c478d5976a42b468d48f6aa5594313b60d49a9daf007839c6ee2cd0881daeb63",
+          "2c8bd606ef43ceedd726f81b29260866558b12aedd7798e9955ba5c4ebb72b37",
+          "564713373d9c96b69e3c9f7ea82686ddb7b2ba8156ea6db8621c8e59d63c6ce6",
+          "48afe798b0202fd30467e8d148d082e7deb986db08da0c28ceffe1c440bd2d1c",
+          "c893a368edcb1a8320ff7ce682723294e900298f91022da0e49ee0ee9d41f449",
+          "b0e79e18d105f505cdc4a9cec236b96b39a916c4f2086e4c2e13b0d74e92c627",
+          "7ba346613aa1e0600f67a618b385c1b7b5bf06b136a67408c5d959490bf8f9dd"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-subtitle/webkit-en-built-in.png",
+          "sha256": "293b36489a25d198026e90e6058780ec12a08c1cd3c18763465e98391b62b06a"
+        }
+      }
+    ],
+    "dom": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "initial manager/track shape",
+          "style overloads return container",
+          "switch returns blob before caller waits for native load",
+          "SRT conversion and callback receiver",
+          "native load arguments and cue identity",
+          "switch does not change base settings or track label",
+          "style shallow options leave existing CSS",
+          "arrays are snapshots with shared cue identity",
+          "active cue and ordered render events",
+          "switch-only escape override does not affect rendering",
+          "base escape false enables trusted HTML",
+          "show toggle class and events",
+          "empty switch does not remove current track",
+          "next switch uses base rather than previous switch options",
+          "replacement clears old listeners and revokes owned URL",
+          "active fetch failure rejects and notices but retains track",
+          "failed attempt remains last option",
+          "superseded request settles undefined and aborts transport",
+          "late canceled response does not overwrite track",
+          "destroy settles pending request and aborts",
+          "destroy revokes active owned blob",
+          "player cleanup removes DOM and registry instance"
+        ]
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "initial manager/track shape",
+          "style overloads return container",
+          "switch returns blob before caller waits for native load",
+          "SRT conversion and callback receiver",
+          "native load arguments and cue identity",
+          "switch does not change base settings or track label",
+          "style shallow options leave existing CSS",
+          "arrays are snapshots with shared cue identity",
+          "active cue and ordered render events",
+          "switch-only escape override does not affect rendering",
+          "base escape false enables trusted HTML",
+          "show toggle class and events",
+          "empty switch does not remove current track",
+          "next switch uses base rather than previous switch options",
+          "replacement clears old listeners and revokes owned URL",
+          "active fetch failure rejects and notices but retains track",
+          "failed attempt remains last option",
+          "superseded request settles undefined and aborts transport",
+          "late canceled response does not overwrite track",
+          "destroy settles pending request and aborts",
+          "destroy revokes active owned blob",
+          "player cleanup removes DOM and registry instance"
+        ]
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "initial manager/track shape",
+          "style overloads return container",
+          "switch returns blob before caller waits for native load",
+          "SRT conversion and callback receiver",
+          "native load arguments and cue identity",
+          "switch does not change base settings or track label",
+          "style shallow options leave existing CSS",
+          "arrays are snapshots with shared cue identity",
+          "active cue and ordered render events",
+          "switch-only escape override does not affect rendering",
+          "base escape false enables trusted HTML",
+          "show toggle class and events",
+          "empty switch does not remove current track",
+          "next switch uses base rather than previous switch options",
+          "replacement clears old listeners and revokes owned URL",
+          "active fetch failure rejects and notices but retains track",
+          "failed attempt remains last option",
+          "superseded request settles undefined and aborts transport",
+          "late canceled response does not overwrite track",
+          "destroy settles pending request and aborts",
+          "destroy revokes active owned blob",
+          "player cleanup removes DOM and registry instance"
+        ]
+      }
+    ],
+    "complete": true,
+    "limitations": [
+      "Page navigation and DOM contracts only; no playback, codec, physical-device or release acceptance."
+    ],
+    "core": {
+      "artifact": {
+        "path": "packages/artplayer/dist/artplayer.js",
+        "sha256": "8a4caaa50a069875b3898a83765457b3c502700f4731d0c38988d6c463c3d20a"
+      },
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-qQwwPA/artplayer.tgz",
+        "version": "6.0.0",
+        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
+        "inputFingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "integrity": "sha512-+2+VWecKb9CbI3wTCs0sV7au8SNShyXahpwDAmGgZhDr22wbdv51QZnLnkPwgMgfNpVuTbsZ6A26Lpj3eY7NbQ=="
+      }
+    }
+  },
+  "semanticMapping": {
+    "addedRecords": 27,
+    "totalRecords": 358,
+    "remainingInventoryRecords": 605,
+    "unchanged": [
+      {
+        "group": "events",
+        "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+        "nonSubtitleSha256": "283df6319f48dc19c64fe9a3fe7d1f26e3a1c43d0ded760de0f63ad5bd49cc02"
+      },
+      {
+        "group": "events",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+        "nonSubtitleSha256": "c3d7299d857a3a758a1a1877b02ad1b3d42735eceaf516cdc0d0da7e2a65ef6c"
+      },
+      {
+        "group": "storage",
+        "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+        "nonSubtitleSha256": "283df6319f48dc19c64fe9a3fe7d1f26e3a1c43d0ded760de0f63ad5bd49cc02"
+      },
+      {
+        "group": "storage",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+        "nonSubtitleSha256": "c3d7299d857a3a758a1a1877b02ad1b3d42735eceaf516cdc0d0da7e2a65ef6c"
+      },
+      {
+        "group": "i18n",
+        "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+        "nonSubtitleSha256": "283df6319f48dc19c64fe9a3fe7d1f26e3a1c43d0ded760de0f63ad5bd49cc02"
+      },
+      {
+        "group": "i18n",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+        "nonSubtitleSha256": "c3d7299d857a3a758a1a1877b02ad1b3d42735eceaf516cdc0d0da7e2a65ef6c"
+      },
+      {
+        "group": "hotkey",
+        "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+        "nonSubtitleSha256": "283df6319f48dc19c64fe9a3fe7d1f26e3a1c43d0ded760de0f63ad5bd49cc02"
+      },
+      {
+        "group": "hotkey",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+        "nonSubtitleSha256": "c3d7299d857a3a758a1a1877b02ad1b3d42735eceaf516cdc0d0da7e2a65ef6c"
+      },
+      {
+        "group": "notice",
+        "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+        "nonSubtitleSha256": "283df6319f48dc19c64fe9a3fe7d1f26e3a1c43d0ded760de0f63ad5bd49cc02"
+      },
+      {
+        "group": "notice",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+        "nonSubtitleSha256": "c3d7299d857a3a758a1a1877b02ad1b3d42735eceaf516cdc0d0da7e2a65ef6c"
+      },
+      {
+        "group": "template",
+        "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+        "nonSubtitleSha256": "283df6319f48dc19c64fe9a3fe7d1f26e3a1c43d0ded760de0f63ad5bd49cc02"
+      },
+      {
+        "group": "template",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+        "nonSubtitleSha256": "c3d7299d857a3a758a1a1877b02ad1b3d42735eceaf516cdc0d0da7e2a65ef6c"
+      },
+      {
+        "group": "icons",
+        "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+        "nonSubtitleSha256": "283df6319f48dc19c64fe9a3fe7d1f26e3a1c43d0ded760de0f63ad5bd49cc02"
+      },
+      {
+        "group": "icons",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+        "nonSubtitleSha256": "c3d7299d857a3a758a1a1877b02ad1b3d42735eceaf516cdc0d0da7e2a65ef6c"
+      }
+    ]
+  },
+  "tests": {
+    "count": 34,
+    "pass": 34,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 1449.102,
+    "suites": [
+      "subtitle",
+      "site-loading",
+      "documentation-pipeline"
+    ]
+  },
+  "build": {
+    "vitepressSeconds": 9.85,
+    "yarnSeconds": 11.47,
+    "checked": [
+      "build:docs",
+      "build:llm",
+      "check:llm",
+      "site-inventory --write/--check",
+      "demos --check"
+    ]
+  },
+  "ledger": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-os1f7M/report.json",
+      "sha256": "4694dc14aab051e82a05010c069736e465ce43189015b7b672c99d0e0d7778b9"
+    },
+    "libraries": [
+      {
+        "name": "artplayer",
+        "fingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "fingerprint": "55236854b94ac7b0dd91b4107dcb60e97ac6f1a5e8b6b8a9dcb63bba66c6509a",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "fingerprint": "f88a6a2f1c5548389cae293614f648d72077ed03a7be6c81ad017a1155a839a3",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "fingerprint": "7fa3ca9577b53f3bb90e2c23fec9e6e70fbbb0c089ccae2923084b9059bcbdf9",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "fingerprint": "0c73b970872fe56df1c669e5badfa91f9cd7ec3c73070a9852cfea076cc8923f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "fingerprint": "9ced9b18e4b260ccbcf6ac016b32ec0852040cb5c0f57be72718a03d40d598bf",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "fingerprint": "f1dd73097e43df504f686f18a6ca30bcb1f57ab74d3cc62909db20505c994072",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "fingerprint": "d6d79d4b47afaefa66d32c5b1709f412ed9d32c636462723918c268a6601e631",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "fingerprint": "3d32a4c6d94d9eaa31cd982ec43ae2b710a4c923e5076f357ba4c902be48d729",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "fingerprint": "ceb17cbb235a42438c28df15ddf830d104a749b58515333c43da2b18534b166c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "fingerprint": "6716002b92bb12b54d17772d87a560bb9e863da35abfa37988907d54e02cdf74",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "fingerprint": "a3a56ecc218c8e180621d1bc00684950cca4ada8d483334b0cb91fd783c10831",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "fingerprint": "00a07f33277bae211a553e9fb2e924ade219513135bc54921886f4518dd27964",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "fingerprint": "cc9304759ff3cdd84767eee38fcbb9cf70e234f2449946536fd1da972cde679f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "fingerprint": "43825f602514c9e6a0bd8f0a270a54a03d1cb76f821b99d1e736d0150dafc190",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "fingerprint": "3503e145a591a406105eb953f9ac75c8373992c9f3f1f23b713de65c85a3bb3d",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "fingerprint": "b7932e08a086cfe16ed5e78872e274fb897931d0653dbf7ac61a19b404ddec85",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "fingerprint": "a0a8efb762e823fe4dd8c8de9601f74ac873ade8c6953a7e5305297608c71a12",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "fingerprint": "9fd7e62c56ae78866267cdd5650dc4e4af4aad76dd6ff8466b68908bc25d661c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "fingerprint": "00dc477ad56d12cfa6cd0d1e071e80f4120afed23f44af0393e23e5dac516a3b",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "fingerprint": "78bf5be3b2b5656a0b95ce2ce3cf1a635b6df609361a840b8298476f65af9d52",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      }
+    ],
+    "publicationAuthorized": false
+  },
+  "limitations": [
+    "Native track parsing and local seek/cue rendering checked; not full media playback acceptance or iOS/macOS fullscreen validation.",
+    "Two delayed fetches intentionally use a controlled wrapper to exercise cancellation even when transport ignores AbortSignal; other subtitle loads use routed HTTP responses and real Blob/native tracks."
+  ],
+  "visualInspection": "chromium-zh-built-in.png",
+  "attachments": [
+    {
+      "path": "refactor/.cache/site04-subtitle-validate.mjs",
+      "sha256": "8fe77b1b562f74d0ea1b548951631ae4c1818b592c4cc8724c6209b363b61bc2"
+    },
+    {
+      "path": "refactor/.cache/site04-subtitle-probe.js",
+      "sha256": "f07da099aa4ce45d6560f5e211f5d6c2d803effcfeb6ec10f642cb1ce6e75ece"
+    },
+    {
+      "path": "refactor/.cache/site04-subtitle/report.json",
+      "sha256": "dbaafecc3742a4a252489575c27121d718714e55374dd874847c4039e0e340f1"
+    },
+    {
+      "path": "refactor/.cache/site04-subtitle-build.log",
+      "sha256": "8bcf65221b4195bf81f99a274d412521a2e95ea5f8c919a6f4cbdd39e3658388"
+    },
+    {
+      "path": "refactor/.cache/site04-subtitle-llm.log",
+      "sha256": "362b5c76bfff0db1689626d5867480786aa855d15231b2da495362ae252718af"
+    },
+    {
+      "path": "refactor/.cache/site04-subtitle-tests.log",
+      "sha256": "124cdbb7c02d90ec888d0c4ba2b19625d863aa42e4a2affd56fb4faf490bdc90"
+    },
+    {
+      "path": "refactor/.cache/site04-subtitle-validate.log",
+      "sha256": "e07f7b177b499fa6d14cc152e8772b09013d23186ade29c5e2cc40e3544210a1"
+    },
+    {
+      "path": "refactor/.cache/site04-subtitle-ledger.log",
+      "sha256": "e248524ca797e8fe761b021f0f699a38d7383489fae4bafb959eab7e0e4da8ad"
+    }
+  ]
+}

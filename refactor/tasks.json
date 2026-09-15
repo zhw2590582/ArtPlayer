@@ -4583,7 +4583,9 @@
         "baselines/site04-setting.json",
         "changes/2026-09-16-SITE-04-setting.md",
         "baselines/site04-plugin-registry.json",
-        "changes/2026-09-16-SITE-04-plugin-registry.md"
+        "changes/2026-09-16-SITE-04-plugin-registry.md",
+        "baselines/site04-subtitle.json",
+        "changes/2026-09-16-SITE-04-subtitle.md"
       ]
     },
     {
