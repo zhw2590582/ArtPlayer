@@ -109,3 +109,10 @@ worker 切源/清理覆盖两个 SDK 与新旧核心/插件四组合；候选插
 随后直接1.5.17两次切组崩溃均在destroy之前；可选观察器向Node复制事件后，
 其中一次页面失联仍保留97条事件。此处有最后收到的音视频flush状态，尚无原生堆栈。
 详情及后续取证方向见[控制器检查点](changes/2026-09-15-PKG-HLS-SDK-01-controller-state.md)。
+
+## 可选 Windows 原生异常诊断
+
+PKG-HLS-SDK-01 已捕获直接 Hls 1.5.17 的 Firefox DOM Worker 原生异常，
+xul.dll+0x3bc4be0、C0000005 读取0x8；尚缺符号堆栈与根因，风险继续 open。
+范围隔离、工具版本、重跑命令、监控权限缺口与后续绿色对照的限制见
+[原生取证记录](changes/2026-09-15-PKG-HLS-SDK-01-native-exception.md)。

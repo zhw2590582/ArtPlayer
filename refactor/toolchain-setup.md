@@ -42,3 +42,11 @@ Monaco 浏览器资产匹配的精确 API 类型。只使用 type import，不�
 ENG-01 的 [npm 验证报告](baselines/toolchain-validation.json) 是切换前历史证据，不代表 Yarn 已验证。[Yarn 验证报告](baselines/yarn-validation.json) 记录最终干净冻结安装、20 项 Node 测试、21 库包 63 产物及文档站构建全部通过；63 产物 SHA-256 与 ENG-01 完全相同。保留的旧锁条目版本变化为零，9 个 workspace runtime 依赖解析与 npm 基线一致。搜索 peer 警告由 SITE-05 接续验证。
 
 构建通过不代表运行时、类型、真实浏览器或 npm 发布验收已完成。Chrome 不可用时按 release-reviews.md 使用内置浏览器并注明实际环境。
+
+## 可选原生浏览器诊断工具
+
+PKG-HLS-SDK-01 将官方 Microsoft ProcDump 12.01 解压到忽略的
+`refactor/.cache/toolchains/procdump`，运行时核对精确哈希和 Authenticode。
+用途仅为本次HLS测试的Firefox子进程异常取证，配合PowerShell 7.6.5；
+不进入npm依赖或CI默认安装，不更改Yarn/锁文件。来源、校验值、许可接受、
+权限限制和复现命令见[原生取证记录](changes/2026-09-15-PKG-HLS-SDK-01-native-exception.md)。

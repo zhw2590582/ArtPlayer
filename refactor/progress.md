@@ -1,5 +1,21 @@
 # 进度与证据
 
+## PKG-HLS-SDK-01 原生异常取证检查点
+
+直接 Hls 1.5.17/worker/HTTP 场景六次中两次在 destroy 前页面崩溃；
+ProcDump 捕获一次 C0000005，异常线程 DOM Worker，xul.dll+0x3bc4be0，
+读取地址0x8。两次页面崩溃分别保留96/95条宿主事件。仍缺符号堆栈/根因，
+不把该证据等同于另一项1.7.2停滞，也不据此改动播放器API/SDK配置。
+
+新增限定runner子进程的可选Windows监控与有边界检查的转储元数据读取。
+6项回归与lint通过；后续六次及最终两次播放通过，但有部分进程附加权限不足，
+整体诊断保持失败。所有监控已退出；转储只保留本机，未上传。详见
+[记录](changes/2026-09-15-PKG-HLS-SDK-01-native-exception.md)与[证据](baselines/hls-native-validation.json)。
+
+任务/风险仍未关闭；207 done、21 doing、43 todo，总271不变。
+没有生产源码、类型、锁文件、包版本或分发修改；下一步需要匹配构建的原生符号
+或有区分力的最小复现。没有推送、部署或发布。
+
 ## PKG-HLS-SDK-01 控制器与原生诊断检查点
 
 原Firefox1.7.2切组测试20次通过，不关闭历史停滞。新增可选controller-state，
