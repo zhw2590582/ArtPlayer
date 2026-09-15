@@ -8,10 +8,19 @@ export default function extract(job: ExtractionJob, config: ExtractionConfig) {
   const video = createVideo(job)
   if (!job.active())
     return
+  let metadataTimer: ReturnType<typeof setTimeout> | null = null
+  const clearMetadataTimer = () => {
+    const previous = metadataTimer
+    metadataTimer = null
+    if (previous !== null)
+      clearTimeout(previous)
+  }
+  job.own(clearMetadataTimer)
   video.onerror = job.guard(() => {
     throw video.error || new Error('Auto-thumbnail media failed to load')
   })
   video.onloadedmetadata = job.guard(() => {
+    clearMetadataTimer()
     video.onloadedmetadata = null
     const duration = video.duration
     const videoHeight = video.videoHeight
@@ -70,6 +79,15 @@ export default function extract(job: ExtractionJob, config: ExtractionConfig) {
     })
     seek()
   })
-  if (job.active())
-    video.src = config.url
+  if (!job.active())
+    return
+  metadataTimer = setTimeout(job.guard(() => {
+    if (metadataTimer !== null)
+      throw new Error('Auto-thumbnail metadata timed out')
+  }), 30000)
+  if (!job.active()) {
+    clearMetadataTimer()
+    return
+  }
+  video.src = config.url
 }

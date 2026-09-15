@@ -24,6 +24,13 @@ for video processing.
   handlers, and the frame/encode sequence. Each valid draw is encoded before the
   next seek. The final decoder is paused, cleared and reset; the final sheet URL
   remains owned by the session until another usable sheet replaces it or destroy.
+  Metadata loading has a separate 30-second deadline, started before assigning
+  the URL and canceled when metadata arrives or the job ends. A queued deadline
+  becomes inert after that phase; it cannot cancel frame reading or encoding.
+  A stalled load reports through the existing warning callback and disposes its
+  decoder without replacing the previous usable sheet. Timer-registration reentry
+  cannot restart loading after destruction. This does not time out registration,
+  change the public result, retry the URL, or impose a total extraction deadline.
   The private canvas is also job-owned: cancellation, failure and normal completion
   reset both dimensions to zero, even if an encoding callback still retains it.
   Width and height resets are independent cleanup actions, so one throwing setter
@@ -104,9 +111,10 @@ separate30-second encoding deadline starting just before toBlob. This is an
 intentional bound on formerly unbounded pending encoding; it does not shorten the
 frame wait or change the public frame-time formula. Very slow encodes can now
 warn and retain the last preview instead of retaining the decoder indefinitely.
-Initial metadata/network acquisition remains governed by media errors and session
-cancellation, not this encoding deadline. Neither timeout guarantees browser-level
-GPU/encoder reclamation or exact background-tab wall-clock scheduling.
+Initial metadata/network acquisition has its own 30-second deadline, as described
+above, and also ends on media errors or session cancellation. None of these
+deadlines guarantees browser-level GPU/encoder reclamation or exact background-tab
+wall-clock scheduling.
 
 The previous empty first encode is removed. Encoding is serial, duplicate native
 callbacks are consumed once, and source replacement/destruction invalidates old

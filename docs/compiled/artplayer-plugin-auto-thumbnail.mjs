@@ -317,10 +317,19 @@ function extract(job, config) {
   const video = createVideo(job);
   if (!job.active())
     return;
+  let metadataTimer = null;
+  const clearMetadataTimer = () => {
+    const previous = metadataTimer;
+    metadataTimer = null;
+    if (previous !== null)
+      clearTimeout(previous);
+  };
+  job.own(clearMetadataTimer);
   video.onerror = job.guard(() => {
     throw video.error || new Error("Auto-thumbnail media failed to load");
   });
   video.onloadedmetadata = job.guard(() => {
+    clearMetadataTimer();
     video.onloadedmetadata = null;
     const duration = video.duration;
     const videoHeight = video.videoHeight;
@@ -379,8 +388,17 @@ function extract(job, config) {
     });
     seek();
   });
-  if (job.active())
-    video.src = config.url;
+  if (!job.active())
+    return;
+  metadataTimer = setTimeout(job.guard(() => {
+    if (metadataTimer !== null)
+      throw new Error("Auto-thumbnail metadata timed out");
+  }), 3e4);
+  if (!job.active()) {
+    clearMetadataTimer();
+    return;
+  }
+  video.src = config.url;
 }
 function artplayerPluginAutoThumbnail(option) {
   return async (art) => {

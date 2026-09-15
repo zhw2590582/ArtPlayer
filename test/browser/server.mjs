@@ -181,6 +181,12 @@ const server = http.createServer((req, res) => {
       res.writeHead(503, { 'Content-Type': 'text/plain', 'Cache-Control': 'no-store' }).end('Intentional media failure')
       return
     }
+    if (url.pathname === '/test/pending-thumbnail-metadata.mp4') {
+      // Native media backends may bypass browser request interception. Keep this
+      // real HTTP response pending, with a server-side bound if a test fails.
+      res.setTimeout(10000, () => res.destroy())
+      return
+    }
     if (files.has(url.pathname)) {
       if (url.pathname === '/test/vast-skippable.xml' && ['http://imasdk.googleapis.com', 'https://imasdk.googleapis.com'].includes(req.headers.origin)) {
         res.setHeader('Access-Control-Allow-Origin', req.headers.origin)

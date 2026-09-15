@@ -1872,7 +1872,8 @@
       ],
       "dependsOn": [
         "PKG-AUTO-THUMB-04",
-        "CORE-22"
+        "CORE-22",
+        "PKG-AUTO-THUMB-12"
       ],
       "status": "todo",
       "risk": "H",
@@ -5675,6 +5676,27 @@
         "console-modernization.md",
         "changes/2026-09-15-SITE-CONSOLE-01-typescript.md",
         "baselines/site-console01-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-AUTO-THUMB-12",
+      "phase": "5 包迁移：artplayer-plugin-auto-thumbnail",
+      "title": "终止隐藏视频元数据永久等待并释放资源",
+      "scope": [
+        "artplayer-plugin-auto-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-AUTO-THUMB-02",
+        "CORE-09",
+        "CORE-19"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "元数据独立 30 秒期限、迟到回调失效、取消和错误清理、保留前一张可用预览；源码/重建产物及浏览器证据",
+      "acceptance": "旧红新绿、正常加载与阶段交接通过；实际挂起 HTTP 下销毁/切源/超时清理通过，不改变公开注册或帧时间公式，不关闭既有首帧风险",
+      "evidence": [
+        "changes/2026-09-15-PKG-AUTO-THUMB-12-metadata.md",
+        "baselines/auto-thumbnail-metadata-validation.json"
       ]
     }
   ]

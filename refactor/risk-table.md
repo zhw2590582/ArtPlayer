@@ -279,3 +279,4 @@
 | CONSOLE-SCROLL-01 | resolved / 已复现 | 控制台卸载后仍执行滚动回调 | SITE-CONSOLE-01, SITE-07 |
 | CONSOLE-OWNERSHIP-01 | resolved / 已复现 | 多个控制台的全局 hook 所有权冲突 | SITE-CONSOLE-01, SITE-07 |
 | CONSOLE-ERROR-01 | resolved / 已复现 | Firefox/WebKit 控制台丢失原生 Error 消息 | SITE-CONSOLE-01, SITE-07 |
+| AUTO-THUMB-METADATA-01 | resolved / 已复现 | Private metadata loading can retain its decoder indefinitely without metadata or media errors | PKG-AUTO-THUMB-12 |

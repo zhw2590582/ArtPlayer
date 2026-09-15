@@ -39,6 +39,12 @@ the runtime type for historical callers but remains ignored: the video aspect
 ratio determines sheet height. Numeric strings retain their old JavaScript
 coercion behavior but are not advertised as numeric TypeScript options.
 
+The private decoder stops if metadata does not arrive within 30 seconds. Frame
+readiness and each JPEG encoding operation also have their own 30-second limit.
+Failures use the existing console warning and retain the last usable thumbnail
+sheet; registration still resolves before processing. Restarting or destroying
+the player cancels the active wait and releases the private decoder.
+
 The runtime entry supports default ESM imports and CommonJS
 `import autoThumbnail = require('artplayer-plugin-auto-thumbnail/runtime')`.
 It exports the `Option`, `Result`, `Factory`, and `RuntimeFactory` types. `Factory`

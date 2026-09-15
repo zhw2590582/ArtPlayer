@@ -3,6 +3,73 @@ import { autoThumbnailCandidate } from '../helpers/auto-thumbnail.js'
 import { expect, test } from './fixtures.js'
 
 const implementation = await autoThumbnailCandidate()
+for (const scenario of ['timeout', 'destroy', 'restart']) {
+  test(`Auto-thumbnail candidate native pending metadata releases on ${scenario}`, async ({ page, request }, testInfo) => {
+    await page.goto('/test/player.html?core=published')
+    await page.setContent('<!doctype html><div></div>')
+    const caseId = `${testInfo.testId}-${testInfo.retry}`
+    await page.addScriptTag({ content: implementation.code })
+    await page.evaluate(async (caseId) => {
+      const schedule = window.setTimeout
+      const clear = window.clearTimeout
+      const warn = console.warn
+      const probe = window.metadataProbe = { timers: new Map(), warnings: [], updates: [], listeners: new Map() }
+      window.setTimeout = (callback, delay, ...args) => {
+        const id = schedule(callback, delay, ...args)
+        if (delay === 30000)
+          probe.timers.set(id, callback)
+        return id
+      }
+      window.clearTimeout = (id) => {
+        probe.timers.delete(id)
+        clear(id)
+      }
+      console.warn = (...args) => probe.warnings.push(args.map(String))
+      probe.restore = () => {
+        window.setTimeout = schedule
+        window.clearTimeout = clear
+        console.warn = warn
+      }
+      probe.art = {
+        option: { url: `/test/pending-thumbnail-metadata.mp4?case=${encodeURIComponent(caseId)}` },
+        on(name, callback) { probe.listeners.set(name, callback) },
+        off(name) { probe.listeners.delete(name) },
+        get thumbnails() { return probe.updates.at(-1) },
+        set thumbnails(value) { probe.updates.push(value) },
+      }
+      probe.result = await window.artplayerPluginAutoThumbnail({ width: 80, number: 1 })(probe.art)
+      probe.listeners.get('video:loadedmetadata')()
+      probe.video = document.querySelector('video')
+    }, caseId)
+    const requestLog = `/test/requests.json?case=${encodeURIComponent(caseId)}`
+    await expect.poll(async () => (await (await request.get(requestLog)).json()).length).toBeGreaterThan(0)
+    const mediaRequests = await (await request.get(requestLog)).json()
+    const evidence = await page.evaluate((scenario) => {
+      const probe = window.metadataProbe
+      const video = probe.video
+      const before = { connected: video.isConnected, readyState: video.readyState, source: video.getAttribute('src'), timers: probe.timers.size }
+      const deadline = [...probe.timers.values()][0]
+      if (scenario === 'timeout')
+        deadline?.()
+      else probe.listeners.get(scenario)()
+      const after = { connected: video.isConnected, readyState: video.readyState, source: video.getAttribute('src'), metadataHandler: video.onloadedmetadata, errorHandler: video.onerror, timers: probe.timers.size, canvases: document.querySelectorAll('canvas').length }
+      deadline?.()
+      probe.listeners.get('destroy')?.()
+      probe.restore()
+      return { before, after, result: probe.result, warnings: probe.warnings, updates: probe.updates.length }
+    }, scenario)
+    await testInfo.attach('auto-thumbnail-metadata-deadline', { contentType: 'application/json', body: JSON.stringify({ provenance: implementation.provenance, sha256: hash(implementation.code), scenario, mediaRequests, virtualDeadline: true, ...evidence }) })
+    expect(evidence.result).toEqual({ name: 'artplayerPluginAutoThumbnail' })
+    expect(evidence.before).toMatchObject({ connected: true, readyState: 0, timers: 1 })
+    expect(evidence.before.source).toContain('pending-thumbnail-metadata.mp4')
+    expect(evidence.after).toEqual({ connected: false, readyState: 0, source: null, metadataHandler: null, errorHandler: null, timers: 0, canvases: 0 })
+    expect(evidence.updates).toBe(0)
+    expect(evidence.warnings).toHaveLength(scenario === 'timeout' ? 1 : 0)
+    if (scenario === 'timeout')
+      expect(evidence.warnings[0].join(' ')).toContain('metadata timed out')
+  })
+}
+
 for (const variant of ['destroy', 'restart', 'complete', 'frame-destroy', 'frame-restart', 'alias-complete', 'encoding-timeout']) {
   const useDefault = variant === 'alias-complete'
   const scenario = useDefault ? 'complete' : variant

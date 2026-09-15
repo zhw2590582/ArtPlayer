@@ -1,5 +1,12 @@
 # 进度与证据
 
+## PKG-AUTO-THUMB-12 元数据加载超时与资源回收
+
+修复隐藏视频在未收到 metadata/error 时永久等待：独立 30 秒期限归 extraction/job 所有，成功/取消后旧期限失效，超时保留上一张可用图。旧 main 的 7 项回归全红；源码 189/189、main/legacy 各 82/82，重建后三引擎各 36/36。首版 WebKit 请求拦截等待失败已保留，最终用真实 HTTP 挂起端点及服务端到达证据验证。期限回调由测试显式触发，不声称等待了真实 30 秒。见[变更](changes/2026-09-15-PKG-AUTO-THUMB-12-metadata.md)与[证据](baselines/auto-thumbnail-metadata-validation.json)。
+
+本任务完成后 200/266；AUTO-THUMB-PIXEL-01、03/04/05 及设备/远端 CI/发布复盘仍未完成。SITE-07 的 Node 路径检查点已提交 d3aa4bbfe，后续来源审查仍开放。下一步继续关闭实际插件兼容/生命周期问题，不重复已定位的本机原生首帧对照。
+
+
 ## SITE-07 Monaco Node 路径来源与完整模块
 
 核实 Node v14.16.0 固定源码及 VS Code 移植。原 notice 已含完整相同条款，新增

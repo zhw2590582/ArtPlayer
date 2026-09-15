@@ -6552,6 +6552,25 @@
         "scripts/site-vendor/console/README.md"
       ],
       "resolutionRationale": "Candidate behavior failed on the original bundle (11 failed/1 passed); final browser/editor matrix 63 passed plus shared parser 3 passed across Chromium/Firefox/WebKit. Units, strict types and generation checks pass. Preserves React17, old component return, raw objects, exact CSS and 100 vendor module bodies. Physical BFCache and complete third-party provenance remain separate."
+    },
+    {
+      "id": "AUTO-THUMB-METADATA-01",
+      "title": "Private metadata loading can retain its decoder indefinitely without metadata or media errors",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-AUTO-THUMB-12"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-15-PKG-AUTO-THUMB-12-metadata.md",
+        "refactor/baselines/auto-thumbnail-metadata-validation.json"
+      ],
+      "compatibleResolution": "Bound only the private metadata phase, dispose through existing ownership, preserve usable previews and public registration timing.",
+      "closureCriteria": "Prechange failure and candidate unit/artifact/browser evidence cover stale deadlines, no metadata, cancellation, success and decoder cleanup.",
+      "resolutionEvidence": [
+        "refactor/baselines/auto-thumbnail-metadata-validation.json"
+      ],
+      "resolutionRationale": "Seven regressions fail on prechange main; source 189/189, main and legacy 82/82, native main and legacy 36/36 each. Final pending-response tests observe the HTTP server directly. Existing first-frame risk stays open."
     }
   ]
 }

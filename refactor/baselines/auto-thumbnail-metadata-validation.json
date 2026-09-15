@@ -1,0 +1,5665 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-AUTO-THUMB-12",
+  "recordedAt": "2026-09-15T04:30:49.805Z",
+  "baseCommit": "d3aa4bbfe4d9931249dce5e6a43afbe54b39800f",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "fingerprints": {
+    "package.json": "10d68b834c3fd60447ea418981b418e88be57edfceb73ab0f131fb6f484c3396",
+    "packages/artplayer-plugin-auto-thumbnail/src/extraction.ts": "61b54fb3322cd4eb374797558db57dc20df4b1bc5b5e49dfff5ddf81cabf285c",
+    "packages/artplayer-plugin-auto-thumbnail/README.md": "5317758381c6a4b737dd7b59d1065f48274ae0fd9bd62e88666fc3168abd2131",
+    "packages/artplayer-plugin-auto-thumbnail/ARCHITECTURE.md": "c5b766bdceed975145f9f5850cf1f30e772bd38c907d58807a4d6f32b4b5a919",
+    "test/auto-thumbnail-metadata.test.js": "107b84c999e794586fbc899c1a860dcee54ccdcda6b8ff96fc702f95657a1c6d",
+    "test/browser/auto-thumbnail-lifecycle.spec.js": "7011b1df14dc73456ffaec56f5775d5d6be0a5b5c5dd63f3156c98375151a8ab",
+    "test/browser/server.mjs": "d00afdce6917b7636a735a3f01518a803fc43a89378ab35872bda0d0f315362b"
+  },
+  "artifacts": [
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+      "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+      "docsCopy": "docs/compiled/artplayer-plugin-auto-thumbnail.js",
+      "previousSha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357"
+    },
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+      "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+      "docsCopy": "docs/compiled/artplayer-plugin-auto-thumbnail.legacy.js",
+      "previousSha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c"
+    },
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.mjs",
+      "sha256": "27c66d600e9b282063941de762906529e118bc47545d0fdd1b9c249ef9c648b9",
+      "docsCopy": "docs/compiled/artplayer-plugin-auto-thumbnail.mjs",
+      "previousSha256": "7c4ea237f03eaae0cbc06b27782ba03ee8e3639ec78f0de03c11841467f22a17"
+    }
+  ],
+  "logs": {
+    "old-main": {
+      "file": "refactor/.cache/auto-thumbnail-metadata-old-main.log",
+      "sha256": "17836588f859a80c664f080c6067d4aa9ea7dd5fc69790966462e29e6b874645"
+    },
+    "all-unit": {
+      "file": "refactor/.cache/auto-thumbnail-metadata-all-unit.log",
+      "sha256": "c290f8a2596a0c46e5e4d4fdcc68bba2ff5b9d25aedaf69f3cbe5abe97c90862"
+    },
+    "js-unit": {
+      "file": "refactor/.cache/auto-thumbnail-metadata-js-unit.log",
+      "sha256": "eed7f7c5e79d898fcb91dac61cabfb46778b6ccf78ec826750aeed95e02e0733"
+    },
+    "legacy.js-unit": {
+      "file": "refactor/.cache/auto-thumbnail-metadata-legacy.js-unit.log",
+      "sha256": "e23c6e9a3cec308fff1064764b9d31cc744aaa8cc1adcb5dc61f737feadc8731"
+    },
+    "build": {
+      "file": "refactor/.cache/auto-thumbnail-metadata-build.log",
+      "sha256": "e912e529c316bd37cd7c5552df7ea907dfcb8a4d780e5cd94687ab21ad4c55e8"
+    },
+    "toolchain": {
+      "file": "refactor/.cache/auto-thumbnail-metadata-toolchain.log",
+      "sha256": "46a0f2b5ccc6deb712d1d57bf61a72ba5fd1fae5c1bac0937ed5c32094949470"
+    }
+  },
+  "unit": {
+    "oldMain": {
+      "passed": 0,
+      "failed": 7,
+      "exitCode": 1
+    },
+    "source": {
+      "passed": 189,
+      "failed": 0,
+      "exitCode": 0
+    },
+    "main": {
+      "passed": 82,
+      "failed": 0,
+      "exitCode": 0
+    },
+    "legacy": {
+      "passed": 82,
+      "failed": 0,
+      "exitCode": 0
+    }
+  },
+  "checks": {
+    "packageTypes": 0,
+    "scopedLint": 0,
+    "strictToolchain": 0,
+    "packageBuild": 0
+  },
+  "browsers": {
+    "failedInterceptionHarness": {
+      "file": "refactor/.cache/auto-thumbnail-metadata-interception-browser/report.json",
+      "sha256": "497fdaad8d069f73775de6f80388945637fbd7e354d26aa78d9b76939a64a2c1",
+      "stats": {
+        "startTime": "2026-09-15T04:24:57.185Z",
+        "duration": 95976.31199999999,
+        "expected": 33,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "errors": [],
+      "tests": [
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on timeout",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "scenario": "timeout",
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [
+              [
+                "ArtPlayer auto-thumbnail failed:",
+                "Error: Auto-thumbnail metadata timed out"
+              ]
+            ],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on destroy",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "scenario": "destroy",
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on restart",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "scenario": "restart",
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native alias-complete owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native encoding-timeout owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on timeout",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "scenario": "timeout",
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [
+              [
+                "ArtPlayer auto-thumbnail failed:",
+                "Error: Auto-thumbnail metadata timed out"
+              ]
+            ],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on destroy",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "scenario": "destroy",
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on restart",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "scenario": "restart",
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native alias-complete owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native encoding-timeout owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on timeout",
+          "project": "webkit",
+          "status": "timedOut",
+          "retry": 0,
+          "errors": [
+            {
+              "message": "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m"
+            },
+            {
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\auto-thumbnail-lifecycle.spec.js",
+                "column": 26,
+                "line": 15
+              },
+              "message": "Error: page.waitForRequest: Test timeout of 20000ms exceeded.\n=========================== logs ===========================\nwaiting for request \"**/pending-thumbnail-metadata.mp4\"\n============================================================\n\n  13 |     })\n  14 |     await page.addScriptTag({ content: implementation.code })\n> 15 |     const request = page.waitForRequest('**/pending-thumbnail-metadata.mp4')\n     |                          ^\n  16 |     await page.evaluate(async () => {\n  17 |       const schedule = window.setTimeout\n  18 |       const clear = window.clearTimeout\n    at D:\\github\\ArtPlayer\\test\\browser\\auto-thumbnail-lifecycle.spec.js:15:26"
+            }
+          ],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on destroy",
+          "project": "webkit",
+          "status": "timedOut",
+          "retry": 0,
+          "errors": [
+            {
+              "message": "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m"
+            },
+            {
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\auto-thumbnail-lifecycle.spec.js",
+                "column": 26,
+                "line": 15
+              },
+              "message": "Error: page.waitForRequest: Test timeout of 20000ms exceeded.\n=========================== logs ===========================\nwaiting for request \"**/pending-thumbnail-metadata.mp4\"\n============================================================\n\n  13 |     })\n  14 |     await page.addScriptTag({ content: implementation.code })\n> 15 |     const request = page.waitForRequest('**/pending-thumbnail-metadata.mp4')\n     |                          ^\n  16 |     await page.evaluate(async () => {\n  17 |       const schedule = window.setTimeout\n  18 |       const clear = window.clearTimeout\n    at D:\\github\\ArtPlayer\\test\\browser\\auto-thumbnail-lifecycle.spec.js:15:26"
+            }
+          ],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on restart",
+          "project": "webkit",
+          "status": "timedOut",
+          "retry": 0,
+          "errors": [
+            {
+              "message": "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m"
+            },
+            {
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\auto-thumbnail-lifecycle.spec.js",
+                "column": 26,
+                "line": 15
+              },
+              "message": "Error: page.waitForRequest: Test timeout of 20000ms exceeded.\n=========================== logs ===========================\nwaiting for request \"**/pending-thumbnail-metadata.mp4\"\n============================================================\n\n  13 |     })\n  14 |     await page.addScriptTag({ content: implementation.code })\n> 15 |     const request = page.waitForRequest('**/pending-thumbnail-metadata.mp4')\n     |                          ^\n  16 |     await page.evaluate(async () => {\n  17 |       const schedule = window.setTimeout\n  18 |       const clear = window.clearTimeout\n    at D:\\github\\ArtPlayer\\test\\browser\\auto-thumbnail-lifecycle.spec.js:15:26"
+            }
+          ],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native alias-complete owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native encoding-timeout owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [],
+          "pixels": {
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                126,
+                0,
+                126,
+                255
+              ],
+              [
+                254,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                1,
+                252,
+                255
+              ],
+              [
+                255,
+                255,
+                1,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  127,
+                  0,
+                  126,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  254,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  255,
+                  2,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "pixels": {
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                15,
+                13,
+                138,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                14,
+                15,
+                141,
+                255
+              ],
+              [
+                213,
+                61,
+                47,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                244,
+                1,
+                0,
+                255
+              ],
+              [
+                5,
+                251,
+                2,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                255,
+                0,
+                253,
+                255
+              ],
+              [
+                2,
+                255,
+                253,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  253,
+                  52,
+                  0,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.583333,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.166667,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.791667,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.375,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [],
+          "pixels": {
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                136,
+                19,
+                126,
+                255
+              ],
+              [
+                254,
+                24,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                254,
+                241,
+                2,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  137,
+                  19,
+                  126,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  24,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  241,
+                  2,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [],
+          "pixels": {
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                5,
+                15,
+                250,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                247,
+                64,
+                0,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                255,
+                22,
+                9,
+                255
+              ],
+              [
+                0,
+                216,
+                3,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                255,
+                36,
+                254,
+                255
+              ],
+              [
+                1,
+                229,
+                254,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  69,
+                  1,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": [],
+          "pixels": {
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                238,
+                14,
+                14,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                15,
+                239,
+                255
+              ],
+              [
+                235,
+                236,
+                12,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "time": 1.6011924,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  238,
+                  14,
+                  14,
+                  255
+                ]
+              },
+              {
+                "time": 3.2030186,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  16,
+                  16,
+                  255
+                ]
+              },
+              {
+                "time": 4.8025276,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 6.4017353,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  235,
+                  236,
+                  12,
+                  255
+                ]
+              }
+            ],
+            "presented": [],
+            "supportsPresentation": false,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": [],
+          "pixels": {
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                217,
+                65,
+                51,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                238,
+                14,
+                15,
+                255
+              ],
+              [
+                14,
+                238,
+                14,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                238,
+                13,
+                237,
+                255
+              ],
+              [
+                14,
+                237,
+                237,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "time": 1.6017615,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 3.2016138,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 4.8009896,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 6.4024974,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  239,
+                  62,
+                  14,
+                  255
+                ]
+              }
+            ],
+            "presented": [],
+            "supportsPresentation": false,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        }
+      ]
+    },
+    "main": {
+      "file": "refactor/.cache/auto-thumbnail-metadata-main-browser/report.json",
+      "sha256": "d2827f4b098940e99c2ab03edfb89e2fac0a47668e73dd6ee209b93cf1d6dc59",
+      "stats": {
+        "startTime": "2026-09-15T04:27:46.556Z",
+        "duration": 34550.257000000005,
+        "expected": 36,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "tests": [
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on timeout",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-fd6199113f507b4a5687-0",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "scenario": "timeout",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-fd6199113f507b4a5687-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [
+              [
+                "ArtPlayer auto-thumbnail failed:",
+                "Error: Auto-thumbnail metadata timed out"
+              ]
+            ],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on destroy",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-db1643714b42d7109817-0",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "scenario": "destroy",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-db1643714b42d7109817-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on restart",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-fc9f1151d1a7f7955d37-0",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "scenario": "restart",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-fc9f1151d1a7f7955d37-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native alias-complete owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native encoding-timeout owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on timeout",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-dbb5fa535b67bd4f5ae4-0",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "scenario": "timeout",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-dbb5fa535b67bd4f5ae4-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [
+              [
+                "ArtPlayer auto-thumbnail failed:",
+                "Error: Auto-thumbnail metadata timed out"
+              ]
+            ],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on destroy",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-c064c2f74bff1d14fb6a-0",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "scenario": "destroy",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-c064c2f74bff1d14fb6a-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on restart",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-1118a10c61b3609f4370-0",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "scenario": "restart",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-1118a10c61b3609f4370-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native alias-complete owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native encoding-timeout owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on timeout",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": [],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "scenario": "timeout",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-43dc5b61f85ae7299365-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [
+              [
+                "ArtPlayer auto-thumbnail failed:",
+                "Error: Auto-thumbnail metadata timed out"
+              ]
+            ],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on destroy",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": [],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "scenario": "destroy",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-1c71b2365730194022fb-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on restart",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": [],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "scenario": "restart",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-a6308186be8e0eb6306a-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native alias-complete owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native encoding-timeout owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [],
+          "pixels": {
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                126,
+                0,
+                126,
+                255
+              ],
+              [
+                254,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                1,
+                252,
+                255
+              ],
+              [
+                255,
+                255,
+                1,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  127,
+                  0,
+                  126,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  254,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  255,
+                  2,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "pixels": {
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                15,
+                13,
+                138,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                14,
+                15,
+                141,
+                255
+              ],
+              [
+                213,
+                61,
+                47,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                244,
+                1,
+                0,
+                255
+              ],
+              [
+                5,
+                251,
+                2,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                255,
+                0,
+                253,
+                255
+              ],
+              [
+                2,
+                255,
+                253,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  253,
+                  52,
+                  0,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.583333,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.166667,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.791667,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.375,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [],
+          "pixels": {
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                136,
+                19,
+                126,
+                255
+              ],
+              [
+                254,
+                24,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                254,
+                241,
+                2,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  137,
+                  19,
+                  126,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  24,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  241,
+                  2,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [],
+          "pixels": {
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                5,
+                15,
+                250,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                247,
+                64,
+                0,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                255,
+                22,
+                9,
+                255
+              ],
+              [
+                0,
+                216,
+                3,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                255,
+                36,
+                254,
+                255
+              ],
+              [
+                1,
+                229,
+                254,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  69,
+                  1,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": [],
+          "pixels": {
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                238,
+                14,
+                14,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                15,
+                239,
+                255
+              ],
+              [
+                235,
+                236,
+                12,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "time": 1.6013046,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  238,
+                  14,
+                  14,
+                  255
+                ]
+              },
+              {
+                "time": 3.2018706,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  16,
+                  16,
+                  255
+                ]
+              },
+              {
+                "time": 4.8013337,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 6.4007299,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  235,
+                  236,
+                  12,
+                  255
+                ]
+              }
+            ],
+            "presented": [],
+            "supportsPresentation": false,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": [],
+          "pixels": {
+            "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+              "sha256": "615c7efd3c7177a5e451ef2fe148b8e8ec91562ef8cc4864b6135b3046105f46"
+            },
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                217,
+                65,
+                51,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                238,
+                14,
+                15,
+                255
+              ],
+              [
+                14,
+                238,
+                14,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                238,
+                13,
+                237,
+                255
+              ],
+              [
+                14,
+                237,
+                237,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0.0012229,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "time": 1.6017072,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 3.2019802,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 4.8009845,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 6.408194,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  239,
+                  62,
+                  14,
+                  255
+                ]
+              }
+            ],
+            "presented": [],
+            "supportsPresentation": false,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        }
+      ]
+    },
+    "legacy": {
+      "file": "refactor/.cache/browser/report.json",
+      "sha256": "29c2c8bca066bf7efca5c98e55ce8ffc382e8fa465b321b62808644ff759ec02",
+      "stats": {
+        "startTime": "2026-09-15T04:28:52.776Z",
+        "duration": 34832.753000000004,
+        "expected": 36,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "tests": [
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on timeout",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-fd6199113f507b4a5687-0",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+              "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219"
+            },
+            "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+            "scenario": "timeout",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-fd6199113f507b4a5687-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [
+              [
+                "ArtPlayer auto-thumbnail failed:",
+                "Error: Auto-thumbnail metadata timed out"
+              ]
+            ],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on destroy",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-db1643714b42d7109817-0",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+              "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219"
+            },
+            "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+            "scenario": "destroy",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-db1643714b42d7109817-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on restart",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-fc9f1151d1a7f7955d37-0",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+              "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219"
+            },
+            "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+            "scenario": "restart",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-fc9f1151d1a7f7955d37-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native alias-complete owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native encoding-timeout owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on timeout",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-dbb5fa535b67bd4f5ae4-0",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+              "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219"
+            },
+            "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+            "scenario": "timeout",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-dbb5fa535b67bd4f5ae4-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [
+              [
+                "ArtPlayer auto-thumbnail failed:",
+                "Error: Auto-thumbnail metadata timed out"
+              ]
+            ],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on destroy",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-c064c2f74bff1d14fb6a-0",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+              "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219"
+            },
+            "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+            "scenario": "destroy",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-c064c2f74bff1d14fb6a-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on restart",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-1118a10c61b3609f4370-0",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+              "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219"
+            },
+            "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+            "scenario": "restart",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-1118a10c61b3609f4370-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_ERROR_PARSED_DATA_CACHED"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native alias-complete owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native encoding-timeout owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on timeout",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": [],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+              "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219"
+            },
+            "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+            "scenario": "timeout",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-43dc5b61f85ae7299365-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [
+              [
+                "ArtPlayer auto-thumbnail failed:",
+                "Error: Auto-thumbnail metadata timed out"
+              ]
+            ],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on destroy",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": [],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+              "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219"
+            },
+            "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+            "scenario": "destroy",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-1c71b2365730194022fb-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native pending metadata releases on restart",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": [],
+          "deadline": {
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+              "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219"
+            },
+            "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+            "scenario": "restart",
+            "mediaRequests": [
+              {
+                "path": "/test/pending-thumbnail-metadata.mp4",
+                "range": "bytes=0-",
+                "method": "GET"
+              }
+            ],
+            "virtualDeadline": true,
+            "before": {
+              "connected": true,
+              "readyState": 0,
+              "source": "/test/pending-thumbnail-metadata.mp4?case=df35481b0fd839119f1d-a6308186be8e0eb6306a-0",
+              "timers": 1
+            },
+            "after": {
+              "connected": false,
+              "readyState": 0,
+              "source": null,
+              "metadataHandler": null,
+              "errorHandler": null,
+              "timers": 0,
+              "canvases": 0
+            },
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            },
+            "warnings": [],
+            "updates": 0
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native alias-complete owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate native encoding-timeout owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": []
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [],
+          "pixels": {
+            "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+              "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219"
+            },
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                126,
+                0,
+                126,
+                255
+              ],
+              [
+                254,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                1,
+                252,
+                255
+              ],
+              [
+                255,
+                255,
+                1,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  127,
+                  0,
+                  126,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  254,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  255,
+                  2,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "153.0.8010.12",
+          "pageErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "pixels": {
+            "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+              "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219"
+            },
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                15,
+                13,
+                138,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                14,
+                15,
+                141,
+                255
+              ],
+              [
+                213,
+                61,
+                47,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                244,
+                1,
+                0,
+                255
+              ],
+              [
+                5,
+                251,
+                2,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                255,
+                0,
+                253,
+                255
+              ],
+              [
+                2,
+                255,
+                253,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  253,
+                  52,
+                  0,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.583333,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.166667,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.791667,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.375,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [],
+          "pixels": {
+            "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+              "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219"
+            },
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                136,
+                19,
+                126,
+                255
+              ],
+              [
+                254,
+                24,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                254,
+                241,
+                2,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  137,
+                  19,
+                  126,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  24,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  241,
+                  2,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "155.0",
+          "pageErrors": [],
+          "failedRequests": [],
+          "pixels": {
+            "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+              "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219"
+            },
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                5,
+                15,
+                250,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                247,
+                64,
+                0,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                255,
+                22,
+                9,
+                255
+              ],
+              [
+                0,
+                216,
+                3,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                255,
+                36,
+                254,
+                255
+              ],
+              [
+                1,
+                229,
+                254,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  69,
+                  1,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": [],
+          "pixels": {
+            "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+              "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219"
+            },
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                238,
+                14,
+                14,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                15,
+                239,
+                255
+              ],
+              [
+                235,
+                236,
+                12,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "time": 1.6020004,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  238,
+                  14,
+                  14,
+                  255
+                ]
+              },
+              {
+                "time": 3.2010176,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  16,
+                  16,
+                  255
+                ]
+              },
+              {
+                "time": 4.8013539,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 6.4013167,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  235,
+                  236,
+                  12,
+                  255
+                ]
+              }
+            ],
+            "presented": [],
+            "supportsPresentation": false,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": "26.6",
+          "pageErrors": [],
+          "failedRequests": [],
+          "pixels": {
+            "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219",
+            "provenance": {
+              "kind": "explicit-artifact",
+              "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+              "sha256": "c7c893f0e9f21b0f539d19e3606f0326cace67314b35c80fd6e6d1f061494219"
+            },
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                217,
+                65,
+                51,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                238,
+                14,
+                15,
+                255
+              ],
+              [
+                14,
+                238,
+                14,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                238,
+                13,
+                237,
+                255
+              ],
+              [
+                14,
+                237,
+                237,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0.0011706,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "time": 1.6013216,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 3.2018444,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 4.8013614,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 6.4016004,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  239,
+                  62,
+                  14,
+                  255
+                ]
+              }
+            ],
+            "presented": [],
+            "supportsPresentation": false,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Metadata deadline delivery is controlled in tests; native media/HTTP and decoder teardown are real, not 30 seconds of wall time.",
+    "First WebKit harness failure was waiting for browser-visible requests; final test observes the real HTTP server instead.",
+    "Windows WebKit initial-frame pixel gap remains AUTO-THUMB-PIXEL-01; successful lifecycle checks do not close task03.",
+    "No remote CI, physical-device, installed-consumer or release completion claimed."
+  ]
+}
