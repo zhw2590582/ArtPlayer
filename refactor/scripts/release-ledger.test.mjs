@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict'
+import { Buffer } from 'node:buffer'
 import { execFileSync } from 'node:child_process'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 // eslint-disable-next-line test/no-import-node-test -- Release evidence must fail closed under stale or mis-scoped input.
 import test from 'node:test'
+import { gzipSync } from 'node:zlib'
 import { dependencyClosure, evaluatePackage, findingPackages, libraryGates, sharedTasks, siteGates, validateLedger } from './release-ledger-model.mjs'
 import { checkedCandidate, checkedReport, fingerprintInputs, fingerprintOf, localFile, root } from './release-ledger.mjs'
 import { hash } from './releases.mjs'
@@ -217,4 +219,50 @@ test('Release candidate checks actual tarball manifest and detects digest/versio
   row.name = 'example'
   save('candidate.tgz', 'tampered')
   assert.match(checkedCandidate(directory, row).errors[0], /Candidate integrity mismatch/)
+})
+
+function candidateArchive(entries) {
+  const blocks = []
+  for (const { name, type = '0', content = '', link = '' } of entries) {
+    const bytes = Buffer.from(content)
+    const header = Buffer.alloc(512)
+    header.write(name)
+    header.write('0000755\0', 100)
+    header.write('0000000\0', 108)
+    header.write('0000000\0', 116)
+    header.write(`${bytes.length.toString(8).padStart(11, '0')}\0`, 124)
+    header.write('00000000000\0', 136)
+    header.fill(32, 148, 156)
+    header.write(type, 156)
+    header.write(link, 157)
+    header.write('ustar\0', 257)
+    header.write('00', 263)
+    header.write(`${header.reduce((sum, byte) => sum + byte, 0).toString(8).padStart(6, '0')}\0 `, 148)
+    blocks.push(header, bytes, Buffer.alloc((512 - bytes.length % 512) % 512))
+  }
+  return gzipSync(Buffer.concat([...blocks, Buffer.alloc(1024)]))
+}
+
+test('Release candidate accepts Yarn directory entries without trailing slashes and rejects unsafe entry types', (t) => {
+  const { directory, save } = temp(t)
+  execFileSync('git', ['init', '-q', directory])
+  execFileSync('git', ['-c', 'user.name=Ledger test', '-c', 'user.email=ledger@example.invalid', 'commit', '--allow-empty', '-qm', 'fixture'], { cwd: directory })
+  const sourceCommit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: directory, encoding: 'utf8' }).trim()
+  const manifest = { name: 'example', version: '2.0.0' }
+  const entries = [{ name: 'package', type: '5' }, { name: 'package/dist', type: '5' }, { name: 'package/package.json', content: JSON.stringify(manifest) }, { name: 'package/dist/index.js', content: 'export default 1' }]
+  const row = { name: manifest.name, distribution: 'npm', candidate: { kind: 'npm-tarball', path: 'candidate.tgz', version: manifest.version, sourceCommit } }
+  const verify = (members) => {
+    const bytes = candidateArchive(members)
+    save('candidate.tgz', bytes)
+    row.candidate.integrity = `sha512-${hash(bytes, 'sha512', 'base64')}`
+    return checkedCandidate(directory, row).errors
+  }
+  assert.deepEqual(verify(entries), [])
+  assert.deepEqual(verify(entries.map(entry => entry.type === '5' ? { ...entry, name: `${entry.name}/` } : entry)), [])
+  for (const type of ['1', '2', '6'])
+    assert.match(verify([...entries, { name: 'package/dist/link.js', type, link: 'package/dist/index.js' }])[0], /links and special files/)
+  assert.match(verify([{ name: 'package', content: 'not a directory' }, ...entries.slice(1)])[0], /Invalid package root/)
+  assert.match(verify([...entries, entries[2]])[0], /Duplicate archive members/)
+  assert.match(verify([...entries, { name: 'outside.json', content: '{}' }])[0], /Invalid package root/)
+  assert.match(verify([...entries, { name: 'package/../outside.json', content: '{}' }])[0], /Unsafe package member/)
 })

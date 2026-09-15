@@ -28,6 +28,12 @@ reports are not evidence that an ArtPlayer package is ready to publish.
 
 ## Responsibilities
 
+- `../package-archive.mjs` checks actual tar entry types and paths for both
+  package installation checks and candidate registration. It accepts Yarn's
+  directory entries without a trailing slash while rejecting links, special
+  files, duplicate members and paths outside `package/`. The legacy
+  `package-check.mjs` export forwards to this helper for existing scripts.
+
 - `../prepare-release.mjs` is the Node entry and failure exit-code boundary.
 - `prepare.ts` parses the explicit package batch/tag, requires the canonical
   Node/Yarn, and checks clean Git state before both ledger reads. Ignored generated

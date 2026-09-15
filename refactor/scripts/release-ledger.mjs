@@ -5,9 +5,10 @@ import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { parseArgs } from 'node:util'
+import { packedFiles } from '../../scripts/package-archive.mjs'
 import { readImpactModel, repositoryPath } from './impact-model.mjs'
 import { dependencyClosure, evaluatePackage, findingPackages, validateLedger } from './release-ledger-model.mjs'
-import { archiveFiles, hash, readMember } from './releases.mjs'
+import { hash, readMember } from './releases.mjs'
 
 export const root = fileURLToPath(new URL('../../', import.meta.url))
 
@@ -74,7 +75,7 @@ export function checkedCandidate(directory, row) {
     }
     else {
       assert.equal(binding.kind, 'npm-tarball')
-      archiveFiles(artifact)
+      packedFiles(artifact)
       const manifest = JSON.parse(readMember(artifact, 'package/package.json'))
       assert.equal(manifest.name, row.name, 'Tarball package name mismatch')
       assert.equal(manifest.version, binding.version, 'Tarball version mismatch')

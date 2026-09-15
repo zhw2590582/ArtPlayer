@@ -5015,7 +5015,9 @@
       "acceptance": "隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容；在目标 major 版本确定后构建 pack，不在测试后改版本；逐包核验完整回退产物、实际候选版本/integrity、应用导入与冻结锁，重跑对应回退并保留报告；缺失历史分发不准入",
       "evidence": [
         "changes/2026-09-16-REL-02-types-inputs.md",
-        "baselines/major-installed-types-validation.json"
+        "baselines/major-installed-types-validation.json",
+        "changes/2026-09-16-REL-02-yarn-candidate-archives.md",
+        "baselines/major-candidate-archive-validation.json"
       ]
     },
     {

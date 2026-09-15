@@ -65,6 +65,10 @@ site-manifest文件包含package、version、outputRoot和files，每个file为p
 outputRoot必须在仓库内；目录完整文件集须等于files，新增、缺失、替换或符号链接输出
 均拒绝。清单SRI和每个实际部署文件字节分别验证；URL正确性仍必须有site-urls报告。
 
+候选tar成员检查与隔离安装共用scripts/package-archive.mjs，按实际条目类型识别
+目录，接受Yarn pack生成的无尾斜杠package和子目录；拒绝链接、特殊文件、重复
+成员和越界路径。冻结历史archive的原校验器仍用于历史内容核对，不用于新候选。
+
 `inputFingerprint`包含本包、其实际依赖闭包，以及共享构建/工具链/测试/CI输入。
 依赖来自impact-model的显式关系和源码/声明/manifest扫描；未解释动态导入按全部包
 保守处理。站点还包含docs及example。第三方清单、本校验器、兼容/环境/版本/复盘
