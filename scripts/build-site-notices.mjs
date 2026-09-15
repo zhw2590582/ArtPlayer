@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import process from 'node:process'
+import { verifyConsoleNoticeSources } from './site-vendor/console/notices.ts'
 import { writeOrCheckNotices } from './site-vendor/notices.ts'
 
 assert(process.argv.slice(2).every(arg => arg === '--check'), 'Use yarn build:site-notices [--check]')
@@ -70,5 +71,6 @@ assert.equal(consoleGroup?.notices.length, 47, 'Missing reviewed console notice'
 const vconsoleNotices = manifest.groups.find(group => group.name === 'vconsole')?.notices.map(notice => notice.target)
 for (const name of ['LICENSE', 'MIT-LICENSE', 'ATTRIBUTION.md'])
   assert(vconsoleNotices?.includes(`docs/licenses/vconsole/${name}`), `Missing vConsole notice: ${name}`)
+verifyConsoleNoticeSources(process.cwd(), manifest)
 const count = writeOrCheckNotices(process.cwd(), manifest, process.argv.includes('--check'))
 console.log(`Verified site notices: ${count} outputs; Monaco/vConsole/console inventories, embedded and other provenance gates remain open.`)

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "recordedAt": "2026-09-15T00:26:56.446Z",
+  "baseCommit": "4bef084328877d30a2abf6f71745831edb1e1c1e",
+  "node": "v24.21.0",
+  "fingerprints": {
+    "console": "a5f1388175fd885c03dd21b35fff97dca0b548745588dfca3172579a96537163",
+    "manifest": "f638ed7f3f6b13fcdaccf3c6e12642bea8e754455e1d8fee675d5d12ff19543d",
+    "runtimeDelta": "No byte changes",
+    "browserTest": "d94132e4d254e60281794849466ca09776315693034161ab685e6141852936a9"
+  },
+  "coverage": {
+    "components": 44,
+    "upstreamNotices": 46
+  },
+  "unit": {
+    "passed": 26,
+    "log": "refactor/.cache/console-notice-review-tests.log"
+  },
+  "reproduction": {
+    "result": {
+      "exactModules": 100,
+      "consoleFeed": 32,
+      "commonjs": 41,
+      "esm": 27,
+      "parcelPrelude": true,
+      "packageEdges": true,
+      "embeddedNotices": 2,
+      "embeddedMappedSources": 17,
+      "embeddedTransformedSources": 7,
+      "derivedGitSources": 7,
+      "replicatorFork": true,
+      "emotionStylisSource": true,
+      "stackOverflowRevision": 5,
+      "unresolved": 0,
+      "licenseClosure": false
+    },
+    "log": "refactor/.cache/console-notice-review-reproduce.log",
+    "unchangedNetworkSourceEvidence": "refactor/baselines/console-shallowequal-validation.json"
+  },
+  "browser": {
+    "report": "refactor/.cache/browser/report.json",
+    "sha256": "b69b84fa2fa88b8c8065e660bb698c5852eb10d264e2b294c3a95e221277060f",
+    "tests": [
+      {
+        "project": "chromium",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "notices": 65,
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ]
+      },
+      {
+        "project": "firefox",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "notices": 65,
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "notices": 65,
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      }
+    ]
+  },
+  "retainedCompatibility": "refactor/baselines/console-stackoverflow-validation.json",
+  "limits": [
+    "Original full lockfile and original online Closure service are not recovered.",
+    "Review is specific to the unchanged runtime and identified component sources, not global release clearance.",
+    "Local Windows browser verification does not replace device, external SDK or remote CI evidence."
+  ]
+}

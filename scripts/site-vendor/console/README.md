@@ -120,12 +120,12 @@ site builds continue using the frozen verified vendor boundary.
 
 The archived LICENSE is preserved verbatim with its Facebook attribution under
 `refactor/baselines/site-vendor/console-feed-3.2.2-LICENSE.txt`. Do not rewrite it
-or infer it covers every embedded/external component. Complete notices remain
-open, including the bundled replicator and remaining dependencies.
+or infer it covers every embedded/external component. Embedded and external
+components have their own source records and notices described below.
 The other 13 archives' LICENSE texts are also frozen under
 `refactor/baselines/site-vendor/console-commonjs/`, with exact bytes preserved by
-Git attributes. They are source evidence; complete site notice delivery still
-requires the remaining component review. The final ESM and Parcel texts live in
+Git attributes. They are source evidence tied to the generated notice inventory.
+The final ESM and Parcel texts live in
 `refactor/baselines/site-vendor/console-esm/`. React-inspector 5.1.1's ESM member
 is an exact match after historical conversion; its CJS member was a failed
 candidate. Styled-components 5.3.3 omits LICENSE in npm; the supplemental original
@@ -133,7 +133,7 @@ comes from fixed upstream commit 9b3457036cfedf1d5336f654f3171657630a9fd8.
 The fetch command verifies that immutable upstream text through GitHub's Contents
 API too (the raw URL had connection resets); both URLs and the blob ID are
 recorded, and decoded content must match the same hash. Offline mode checks
-the frozen bytes. Full embedded-component attribution remains open.
+the frozen bytes. The consolidated review is in `refactor/console-notice-review.md`.
 
 ## Public notice delivery and embedded sources
 
@@ -205,6 +205,16 @@ member. Callback/context support and other changes prevent an exact-source claim
 the public attribution explains that boundary and retains both authors' notices.
 
 There are now 47 console notice outputs for 44 components. This includes a
-CC BY-SA snippet; never describe the bundle as MIT-only. Final embedded-source
-and mixed-license distribution review remains open. Exact Parcel module
-reproduction alone is insufficient to close VENDOR-08.
+CC BY-SA snippet; never describe the bundle as MIT-only. The identified source
+and notice inventory is reviewed with the scope in `refactor/console-notice-review.md`.
+The original complete lockfile and online Closure service have not been recovered.
+The reproduction command's `licenseClosure: false` means that technical byte
+comparison alone makes no license-clearance claim; the documented review also
+considers component identity, embedded attribution and actual delivery.
+
+`notices.ts` binds the 44 delivered components to 46 upstream notice/source files
+from the independent provenance records. The 47th output is the local modification
+explanation for react-pure-render. Both normal notice commands verify this relation
+before writing: retaining all files while redirecting a BSD component to another
+component's MIT notice is rejected. Re-review changed source or integration boundaries,
+then revalidate the release candidate; this scope does not replace release reviews.

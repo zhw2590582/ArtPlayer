@@ -47,7 +47,7 @@ test('mobile vConsole shows logs and upstream site notice texts are served uncha
   expect(await index.text()).toContain('Included component: murmurhash-js (Gary Court)')
   expect(await index.text()).toContain('Included component: murmurhash2 (Austin Appleby)')
   expect(await index.text()).toContain('stackoverflow-custom-stringify answer 48254637 revision 5 (CC BY-SA 4.0)')
-  expect(await index.text()).toContain('Embedded attribution review is still incomplete')
+  expect(await index.text()).toContain('The identified embedded-source and attribution review is complete for this frozen vendor boundary.')
   await page.evaluate(() => {
     window.vConsole.destroy()
     window.art.destroy()

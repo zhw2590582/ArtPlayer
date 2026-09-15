@@ -1,5 +1,14 @@
 # 进度与证据
 
+## SITE-07 控制台来源审查收敛
+
+完成[汇总审查](console-notice-review.md)，VENDOR-08改为accepted-with-scope：
+当前100个保留模块及已识别内嵌来源、44组件/47份notice具备对应证据；保留原始
+完整锁和旧在线Closure服务未恢复的限制。新增组件/许可关联校验，防止文件
+俱全但BSD组件错误指向MIT许可。单元26/26、离线复现及三引擎交付3/3通过。
+见[变更](changes/2026-09-15-SITE-07-console-notice-review.md)。运行字节未变；
+SITE-07继续Monaco、字体及媒体，整体199/265，发布复盘门槛不变。
+
 ## SITE-07 shallowequal 原始署名
 
 已核对react-pure-render固定源码和Dan Abramov完整MIT许可，保留当前包作者署名，

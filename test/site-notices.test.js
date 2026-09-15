@@ -7,9 +7,25 @@ import path from 'node:path'
 import process from 'node:process'
 // eslint-disable-next-line test/no-import-node-test -- Verify real notice bytes and failure-before-write behavior.
 import test from 'node:test'
+import { verifyConsoleNoticeSources } from '../scripts/site-vendor/console/notices.ts'
 import { generateNotices, writeOrCheckNotices } from '../scripts/site-vendor/notices.ts'
 
 const hash = bytes => createHash('sha256').update(bytes).digest('hex')
+test('Console notices retain the verified owner and license association', () => {
+  const manifest = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))
+  assert.deepEqual(verifyConsoleNoticeSources(process.cwd(), manifest), { components: 44, upstreamNotices: 46 })
+  const group = manifest.groups.find(group => group.name === 'console')
+  const bsd = group.components.find(component => component.name === 'hoist-non-react-statics')
+  const react = group.components.find(component => component.name === 'react')
+  bsd.notices = [...react.notices]
+  // Every component/file remains present, but the BSD component falsely points to MIT.
+  assert.doesNotThrow(() => generateNotices(process.cwd(), manifest))
+  assert.throws(() => verifyConsoleNoticeSources(process.cwd(), manifest), /wrong notice: hoist-non-react-statics/)
+  bsd.notices = group.notices.filter(notice => notice.source.includes('hoist-non-react-statics')).map(notice => notice.target)
+  bsd.tarball = react.tarball
+  assert.throws(() => verifyConsoleNoticeSources(process.cwd(), manifest), /one component for verified/)
+})
+
 function fixture(t) {
   const root = fs.mkdtempSync(path.resolve('refactor/.cache/site-notices-test-'))
   t.after(() => {

@@ -1061,7 +1061,7 @@
         "SITE-01"
       ],
       "sourceStatus": "Frozen original 340306-byte Parcel bundle e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03 has 102 modules. SITE-CONSOLE-01 replaces only owned Focm/W5CS bodies and removes the missing map trailer. All 100 retained vendor bodies and Parcel loader exactly reproduce from 32 official runtime archives, Babel standalone 7.16.4, Terser 3.17.0 and Parcel 1.12.5 recipes; all package edges verified. This establishes exact source identities, not the original full lockfile or uniquely installed versions.",
-      "licenseStatus": "Generated console notices cover 44 components in 47 files, including react-pure-render origin attribution for shallowequal and Stack Overflow revision 5 under CC BY-SA 4.0. Source and author evidence is in refactor/baselines/console-derived-attribution.json and console-stackoverflow-provenance.json. Three-engine actual delivery is recorded in console-shallowequal-validation.json. Final embedded-source and mixed-license review remains open; never describe the entire bundle as MIT-only.",
+      "licenseStatus": "All currently identified component notices are preserved and delivered: 44 components, 47 files. Component associations are checked against fixed upstream provenance. VENDOR-08 accepted-with-scope; see refactor/console-notice-review.md for retained original-build limitations and CC BY-SA material boundaries. Never describe the entire bundle as MIT-only or treat this as publication clearance.",
       "upstreamSources": [
         "https://registry.npmjs.org/console-feed/-/console-feed-3.2.2.tgz",
         "https://registry.npmjs.org/terser/-/terser-3.17.0.tgz",
@@ -1100,7 +1100,7 @@
         "https://registry.npmjs.org/@babel/standalone/-/standalone-7.16.4.tgz",
         "https://raw.githubusercontent.com/styled-components/styled-components/9b3457036cfedf1d5336f654f3171657630a9fd8/LICENSE"
       ],
-      "upstreamReviewedAt": null,
+      "upstreamReviewedAt": "2026-09-15T00:26:56.484Z",
       "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "fingerprints": [
         {

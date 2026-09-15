@@ -4508,7 +4508,10 @@
         "baselines/console-stackoverflow-validation.json",
         "changes/2026-09-15-SITE-07-console-stackoverflow.md",
         "baselines/console-shallowequal-validation.json",
-        "changes/2026-09-15-SITE-07-console-shallowequal.md"
+        "changes/2026-09-15-SITE-07-console-shallowequal.md",
+        "console-notice-review.md",
+        "baselines/console-notice-review-validation.json",
+        "changes/2026-09-15-SITE-07-console-notice-review.md"
       ]
     },
     {

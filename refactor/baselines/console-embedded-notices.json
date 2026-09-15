@@ -25,7 +25,7 @@
     }
   ],
   "review": {
-    "status": "partial",
+    "status": "reviewed-with-scope",
     "confirmed": [
       "Chromium copyright and full BSD conditions in console-feed source",
       "Sultan Tarimo MIT header in styled-components embedded rule-sheet source",
@@ -36,8 +36,7 @@
       "customStringify exactly matches Stack Overflow revision 5 under CC BY-SA 4.0, with Alexander Mills and Rob W attribution, original snippet, full license and an emitted bundle comment.",
       "The shallowequal README source credit is verified; fixed react-pure-render source and Dan Abramov MIT license are retained, with explicit modified-source attribution."
     ],
-    "pending": [
-      "Final embedded-source and mixed-license distribution review"
-    ]
+    "pending": [],
+    "conclusion": "refactor/console-notice-review.md"
   }
 }

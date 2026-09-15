@@ -667,7 +667,7 @@
       "id": "VENDOR-08",
       "title": "console-bundle 来源、版本与许可闭环",
       "confirmation": "source-observed",
-      "status": "open",
+      "status": "accepted-with-scope",
       "owners": [
         "SITE-01",
         "SITE-07"
@@ -709,11 +709,21 @@
         "refactor/changes/2026-09-15-SITE-07-console-stackoverflow.md",
         "scripts/site-vendor/console/stackoverflow.ts",
         "refactor/baselines/console-shallowequal-validation.json",
-        "refactor/changes/2026-09-15-SITE-07-console-shallowequal.md"
+        "refactor/changes/2026-09-15-SITE-07-console-shallowequal.md",
+        "refactor/console-notice-review.md",
+        "refactor/baselines/console-notice-review-validation.json",
+        "refactor/changes/2026-09-15-SITE-07-console-notice-review.md",
+        "scripts/site-vendor/console/notices.ts"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
-      "workspaceState": "All 100 vendor modules and Parcel remain reproducible. Embedded author notices include fixed Stack Overflow revision 5 (CC BY-SA 4.0) and the react-pure-render origin credited by shallowequal. Both Dan Abramov and Alberto Leal MIT notices are retained, without claiming identical source or a unique installed upstream version. 47 console and 65 total site notices pass three-engine HTTP checks. Functional runtime unchanged. Final embedded-source and mixed-license review remains open."
+      "workspaceState": "Current identified console source and notice scope is reviewed; 47 console notices, 65 total site notices pass actual three-engine delivery. Component-to-upstream-license binding now rejects misassigned licenses. See console-notice-review.md for the source matrix, CC material handling and retained historical reconstruction limits. This does not close other site asset or release review gates.",
+      "resolutionEvidence": [
+        "refactor/console-notice-review.md",
+        "refactor/baselines/console-notice-review-validation.json",
+        "refactor/changes/2026-09-15-SITE-07-console-notice-review.md"
+      ],
+      "resolutionRationale": "All 100 retained modules and Parcel have exact reproducing sources, all identified embedded origins have original notices, and 44 components are bound to verified upstream materials before actual distribution. The unchanged runtime retains tested API behavior. Accept only the documented historical-reconstruction limits: the original full lockfile, uniquely installed versions and former online Closure service are not recovered. Component licenses remain separate, including CC BY-SA 4.0. Re-review changed code or integration boundaries and revalidate release candidates."
     },
     {
       "id": "SDK-01",

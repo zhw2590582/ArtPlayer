@@ -61,9 +61,10 @@ The desktop console's owned TS entry/view and lifecycle now build through
 Its other 100 Parcel modules remain frozen and now reproduce exactly from fixed
 archives, including the Parcel loader. Its package/loader licenses, two embedded
 headers, embedded dependency licenses and upstream author notices now ship as 47 files
-under `docs/licenses/console/`. Full embedded
-attribution remains open; the generated index explicitly preserves that boundary.
+under `docs/licenses/console/`. Each component is bound to its verified upstream
+notice by `console/notices.ts`. The consolidated review and historical reconstruction
+limits are recorded in `refactor/console-notice-review.md`.
 
-Follow-up: finish Monaco's broader bundled-component notice audit, the console
-embedded attribution/notices and remaining fonts/media. Do not upgrade these assets
+Follow-up: finish Monaco's broader bundled-component notice audit and remaining
+fonts/media. Do not upgrade these assets
 without verifying globals, AMD/worker paths, CSS, consoleLog and user interaction.
