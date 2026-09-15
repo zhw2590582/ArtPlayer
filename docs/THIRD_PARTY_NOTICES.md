@@ -73,6 +73,42 @@ Included component: typescript (Monaco worker) 4.4.4
 
 Source: https://registry.npmjs.org/typescript/-/typescript-4.4.4.tgz
 
+Included component: jsonc-parser 3.0.0
+
+Source: https://registry.npmjs.org/jsonc-parser/-/jsonc-parser-3.0.0.tgz
+
+Included component: vscode-css-languageservice 5.1.8
+
+Source: https://registry.npmjs.org/vscode-css-languageservice/-/vscode-css-languageservice-5.1.8.tgz
+
+Included component: vscode-html-languageservice 4.1.1
+
+Source: https://registry.npmjs.org/vscode-html-languageservice/-/vscode-html-languageservice-4.1.1.tgz
+
+Included component: vscode-json-languageservice 4.1.9
+
+Source: https://registry.npmjs.org/vscode-json-languageservice/-/vscode-json-languageservice-4.1.9.tgz
+
+Included component: vscode-languageserver-textdocument 1.0.2
+
+Source: https://registry.npmjs.org/vscode-languageserver-textdocument/-/vscode-languageserver-textdocument-1.0.2.tgz
+
+Included component: vscode-languageserver-types 3.16.0
+
+Source: https://registry.npmjs.org/vscode-languageserver-types/-/vscode-languageserver-types-3.16.0.tgz
+
+Included component: vscode-uri 3.0.2
+
+Source: https://registry.npmjs.org/vscode-uri/-/vscode-uri-3.0.2.tgz
+
+Included component: js-beautify (Monaco HTML embedded) embedded sources in vscode-html-languageservice 4.1.1
+
+Source: https://registry.npmjs.org/vscode-html-languageservice/-/vscode-html-languageservice-4.1.1.tgz
+
+Included component: glob-to-regexp (Monaco JSON fork) embedded source in vscode-json-languageservice 4.1.9
+
+Source: https://registry.npmjs.org/vscode-json-languageservice/-/vscode-json-languageservice-4.1.9.tgz
+
 - licenses/monaco-editor/LICENSE
 - licenses/monaco-editor/ThirdPartyNotices.txt
 - licenses/monaco-editor/codicons/LICENSE
@@ -83,6 +119,18 @@ Source: https://registry.npmjs.org/typescript/-/typescript-4.4.4.tgz
 - licenses/monaco-editor/typescript/CopyrightNotice.txt
 - licenses/monaco-editor/typescript/ThirdPartyNoticeText.txt
 - licenses/monaco-editor/typescript/ATTRIBUTION.md
+- licenses/monaco-editor/language-services/jsonc-parser/LICENSE.md
+- licenses/monaco-editor/language-services/vscode-css-languageservice/LICENSE.md
+- licenses/monaco-editor/language-services/vscode-html-languageservice/LICENSE.md
+- licenses/monaco-editor/language-services/vscode-html-languageservice/thirdpartynotices.txt
+- licenses/monaco-editor/language-services/vscode-json-languageservice/LICENSE.md
+- licenses/monaco-editor/language-services/vscode-languageserver-textdocument/License.txt
+- licenses/monaco-editor/language-services/vscode-languageserver-textdocument/thirdpartynotices.txt
+- licenses/monaco-editor/language-services/vscode-languageserver-types/License.txt
+- licenses/monaco-editor/language-services/vscode-uri/LICENSE.md
+- licenses/monaco-editor/language-services/beautify-css-NOTICE.txt
+- licenses/monaco-editor/language-services/beautify-html-NOTICE.txt
+- licenses/monaco-editor/language-services/ATTRIBUTION.md
 
 ## console legacy-vendor-with-TS-adapter
 

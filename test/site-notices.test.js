@@ -8,9 +8,38 @@ import process from 'node:process'
 // eslint-disable-next-line test/no-import-node-test -- Verify real notice bytes and failure-before-write behavior.
 import test from 'node:test'
 import { verifyConsoleNoticeSources } from '../scripts/site-vendor/console/notices.ts'
+import { verifyMonacoLanguageNoticeArchives, verifyMonacoLanguageNotices } from '../scripts/site-vendor/monaco/notices.ts'
 import { generateNotices, writeOrCheckNotices } from '../scripts/site-vendor/notices.ts'
 
 const hash = bytes => createHash('sha256').update(bytes).digest('hex')
+test('Monaco language notices bind full original terms to their actual worker sources', () => {
+  const original = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))
+  assert.equal(verifyMonacoLanguageNotices(process.cwd(), original), 12)
+  const manifest = structuredClone(original)
+  const group = manifest.groups.find(group => group.name === 'monaco-editor')
+  const json = group.components.find(item => item.name === 'vscode-json-languageservice')
+  const css = group.components.find(item => item.name === 'vscode-css-languageservice')
+  json.notices = [...css.notices]
+  // All files still exist: a count/hash-only generator accepts this wrong license.
+  assert.doesNotThrow(() => generateNotices(process.cwd(), manifest))
+  assert.throws(() => verifyMonacoLanguageNotices(process.cwd(), manifest), /Wrong Monaco language notice binding/)
+  json.notices = original.groups.find(group => group.name === 'monaco-editor').components.find(item => item.name === json.name).notices
+  json.assets = [...css.assets]
+  assert.throws(() => verifyMonacoLanguageNotices(process.cwd(), manifest), /Wrong Monaco language asset/)
+  assert.throws(() => verifyMonacoLanguageNoticeArchives(process.cwd(), { read: () => Buffer.from('unrelated archive notice') }), /differs from archive/)
+})
+
+test('Monaco language delivery cannot omit a third-party notice or embedded author header', () => {
+  const original = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))
+  const record = JSON.parse(fs.readFileSync('refactor/baselines/monaco-language-notices.json', 'utf8'))
+  for (const notice of record.notices) {
+    const manifest = structuredClone(original)
+    const group = manifest.groups.find(group => group.name === 'monaco-editor')
+    group.notices = group.notices.filter(item => item.target !== notice.target)
+    assert.throws(() => verifyMonacoLanguageNotices(process.cwd(), manifest), /Missing Monaco language notice/)
+  }
+})
+
 test('Console notices retain the verified owner and license association', () => {
   const manifest = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))
   assert.deepEqual(verifyConsoleNoticeSources(process.cwd(), manifest), { components: 44, upstreamNotices: 46 })

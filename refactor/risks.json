@@ -634,11 +634,15 @@
         "refactor/baselines/monaco-languages-validation.json",
         "refactor/changes/2026-09-15-SITE-07-monaco-languages.md",
         "scripts/site-vendor/monaco/languages.ts",
-        "scripts/site-vendor/monaco/reproduce-languages.ts"
+        "scripts/site-vendor/monaco/reproduce-languages.ts",
+        "refactor/baselines/monaco-language-notices.json",
+        "refactor/baselines/monaco-language-notices-validation.json",
+        "refactor/changes/2026-09-15-SITE-07-monaco-language-notices.md",
+        "scripts/site-vendor/monaco/notices.ts"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
-      "workspaceState": "Monaco 0.30.1 TypeScript worker identifies 4.4.4, unlike the original stale 2.7.2 notice. Fixed Git lock/recipes and four archives prove the 9698327-character adapted service segment and exact minified worker. Three original TypeScript notices plus a version/modification explanation are delivered. Unit 10/10 and three-engine editor/notice checks 6/6 pass. Other language services, shim, core embedded libraries and language definitions remain under review; VENDOR-06 is open. CSS/HTML/JSON complete workers now have exact source coverage for 119 module instances from 91 npm sources, 8 aliases, a shared Monaco-owned nls shim and three adapters; 11 archives/13 Git sources and all three minified outputs match. Four unit tests and three real-engine diagnostics/completion/formatting checks pass. Service notices, embedded attribution, mode bundles, core and basic languages remain open."
+      "workspaceState": "Monaco 0.30.1 TypeScript worker identifies 4.4.4, unlike the original stale 2.7.2 notice. Fixed Git lock/recipes and four archives prove the 9698327-character adapted service segment and exact minified worker. Three original TypeScript notices plus a version/modification explanation are delivered. Unit 10/10 and three-engine editor/notice checks 6/6 pass. Other language services, shim, core embedded libraries and language definitions remain under review; VENDOR-06 is open. CSS/HTML/JSON complete workers now have exact source coverage for 119 module instances from 91 npm sources, 8 aliases, a shared Monaco-owned nls shim and three adapters; 11 archives/13 Git sources and all three minified outputs match. Four unit tests and three real-engine diagnostics/completion/formatting checks pass. Service notices, embedded attribution, mode bundles, core and basic languages remain open. Seven language-service packages now deliver nine original notices, two complete formatter source headers and attribution. JSON glob BSD terms and the HTML formatter author-year difference are preserved. Component/source/notice bindings and all 81 site notice HTTP bytes/links pass; unit 14/14 and three-engine language/mobile suites 6/6. Broader Monaco origin review remains open."
     },
     {
       "id": "VENDOR-07",

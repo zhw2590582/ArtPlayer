@@ -1,5 +1,14 @@
 # 进度与证据
 
+## SITE-07 Monaco 语言服务许可交付
+
+七包九份原始许可、两个格式器源码署名和补充说明已加入站点；JSON glob 的 BSD
+条款、HTML 格式器年份差异完整保留。新增组件/来源/notice 绑定保护。单元 14/14、
+三引擎语言服务及移动实播/81 份 notice 交付 6/6，通过完整离线复现。见
+[记录](changes/2026-09-15-SITE-07-monaco-language-notices.md)。运行资产与锁未改，
+SITE-07/VENDOR-06 仍开放；继续 Monaco mode/core/语言定义与其他来源细节。
+整体 199/265，没有推送或发布。
+
 ## SITE-07 Monaco CSS/HTML/JSON worker
 
 完成三个 worker 的全部源码片段与压缩产物复现：11 归档、13 Git 来源、119 模块

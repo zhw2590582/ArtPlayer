@@ -80,9 +80,26 @@ disposes both workers and models. Monaco 0.30.1 has no public CSS/HTML/JSON work
 getter equivalent to `getTypeScriptWorker`. Tests exercise valid/invalid CSS and
 JSON, HTML tag completion, document symbols, and HTML/JSON formatting on three engines.
 
-This source checkpoint does not close embedded license review. Follow up with the
-seven packages' original licenses/third-party notices, including HTML beautifiers
-and data sources. Core embedded libraries, mode bundles and language definitions
-also remain under VENDOR-06. Revalidate editor-types and site-vendor tests when
-changing declarations or delivered notices. Whole-site, physical-device and remote
-release gates remain separate.
+## Language-service notices
+
+`monaco-language-notices.json` binds seven verified package versions to their nine
+complete original LICENSE/third-party notice files. Two exact source-comment slices
+preserve the HTML service's CSS/HTML beautifier MIT notices, 2007-2018 author years
+and formatter authors. The package's older 2007-2017 text remains verbatim. A local
+attribution explains this difference and the JSON service's original glob-to-regexp
+BSD conditions; neither component is relabeled as solely Microsoft's MIT code.
+The separate `beautify.js` source is Microsoft's no-op JS formatting adapter.
+
+`notices.ts` binds the nine component entries (seven packages plus two embedded
+origins) to their exact worker paths and delivered notices. The normal site build
+checks these associations before any output write. Full reproduction additionally
+matches all 12 notice inputs against their archived files or exact header byte
+ranges. Preserve raw bytes and the `-text` Git attributes for frozen/output notices.
+`site-vendor.spec.js` checks all 81 site notice files over HTTP plus the supplement's
+12 relative links, alongside mobile player playback and console cleanup.
+
+This does not close all Monaco embedded-source review. Core embedded libraries,
+mode bundles, language definitions and remaining upstream data/origin details stay
+under VENDOR-06. Revalidate editor-types and site-vendor tests when changing
+declarations or delivered notices. Whole-site, physical-device and remote release
+gates remain separate.

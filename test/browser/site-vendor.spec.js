@@ -21,13 +21,17 @@ test('mobile vConsole shows logs and upstream site notice texts are served uncha
       notices.push({ component: group.name, version: group.version, url: response.url(), sha256: notice.sha256 })
     }
   }
-  const attributionPath = '/licenses/console/react-pure-render/ATTRIBUTION.md'
-  const attribution = await request.get(attributionPath)
-  expect(attribution.status()).toBe(200)
-  const localLinks = [...(await attribution.text()).matchAll(/\]\((\.\.?\/[^)]+)\)/g)]
-  expect(localLinks).toHaveLength(2)
-  for (const [, target] of localLinks)
-    expect(notices.map(notice => notice.url)).toContain(new URL(target, attribution.url()).href)
+  for (const { path, count } of [
+    { path: '/licenses/console/react-pure-render/ATTRIBUTION.md', count: 2 },
+    { path: '/licenses/monaco-editor/language-services/ATTRIBUTION.md', count: 12 },
+  ]) {
+    const attribution = await request.get(path)
+    expect(attribution.status()).toBe(200)
+    const localLinks = [...(await attribution.text()).matchAll(/\]\((\.\.?\/[^)]+)\)/g)]
+    expect(localLinks).toHaveLength(count)
+    for (const [, target] of localLinks)
+      expect(notices.map(notice => notice.url)).toContain(new URL(target, attribution.url()).href)
+  }
   await testInfo.attach('verified-vendor-notices', { contentType: 'application/json', body: JSON.stringify(notices) })
   const provenance = JSON.parse(fs.readFileSync('refactor/baselines/site-codicons-provenance.json', 'utf8'))
   const font = await request.get(`/${provenance.fontPath.slice('docs/'.length)}`)
@@ -37,6 +41,10 @@ test('mobile vConsole shows logs and upstream site notice texts are served uncha
   expect(index.status()).toBe(200)
   expect(await index.text()).toContain('Included component: @vscode/codicons 0.0.26')
   expect(await index.text()).toContain('Included component: typescript (Monaco worker) 4.4.4')
+  expect(await index.text()).toContain('Included component: vscode-html-languageservice 4.1.1')
+  expect(await index.text()).toContain('Included component: vscode-json-languageservice 4.1.9')
+  expect(await index.text()).toContain('Included component: js-beautify (Monaco HTML embedded)')
+  expect(await index.text()).toContain('Included component: glob-to-regexp (Monaco JSON fork)')
   expect(await index.text()).toContain('Included component: console-feed 3.2.2')
   expect(await index.text()).toContain('Included component: react-pure-render (shallowequal origin) source commit 729cdbd')
   expect(await index.text()).toContain('Included component: chromium-string-utils')

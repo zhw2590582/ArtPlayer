@@ -33,3 +33,5 @@ refactor/baselines/site-vendor/console-stackoverflow/** -text whitespace=-traili
 refactor/baselines/site-vendor/monaco-typescript/** -text whitespace=-trailing-space,cr-at-eol
 docs/licenses/monaco-editor/typescript/** -text whitespace=-trailing-space,cr-at-eol
 refactor/baselines/site-vendor/monaco-languages/** -text whitespace=-trailing-space,cr-at-eol
+refactor/baselines/site-vendor/monaco-language-notices/** -text whitespace=-trailing-space,cr-at-eol
+docs/licenses/monaco-editor/language-services/** -text whitespace=-trailing-space,cr-at-eol

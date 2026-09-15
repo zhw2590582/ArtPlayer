@@ -1,5 +1,11 @@
 # 文档站、示例与生成链清单
 
+2026-09-15 Monaco 后续：CSS/HTML/JSON 完整 worker 已由固定源码和压缩配方复现，
+七个依赖的九份原始许可、两个格式器署名和补充说明已实际交付。全站 81 份
+notice 的 HTTP 字节、链接及三引擎功能检查通过，见
+[记录](changes/2026-09-15-SITE-07-monaco-language-notices.md)。Monaco core/mode/
+语言定义及其余来源细节仍开放，不能按本检查点认为整个站点已可发布。
+
 console.js 后续已冻结 102 个模块和实际 React/ReactDOM/Parcel/返回组件契约；
 三个浏览器复现卸载回调、多容器丢日志和 Error 消息丢失。源码尚未替换，依赖许可
 仍开放；下一实现任务为 SITE-CONSOLE-01，见[迁移边界](console-modernization.md)。

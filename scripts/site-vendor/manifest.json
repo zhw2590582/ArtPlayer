@@ -940,6 +940,66 @@
           "source": "refactor/baselines/site-vendor/monaco-typescript/ATTRIBUTION.txt",
           "target": "docs/licenses/monaco-editor/typescript/ATTRIBUTION.md",
           "sha256": "edb4b7526e86fadf7461ffda983f9f56a96472cf1ebf639947948e405ed95321"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-language-notices/jsonc-parser/LICENSE.md.txt",
+          "target": "docs/licenses/monaco-editor/language-services/jsonc-parser/LICENSE.md",
+          "sha256": "c3a24c02d678e5f0711623dcf3ab3f243b273c2633f638a1fa8e35fb7c7f8e4d"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-language-notices/vscode-css-languageservice/LICENSE.md.txt",
+          "target": "docs/licenses/monaco-editor/language-services/vscode-css-languageservice/LICENSE.md",
+          "sha256": "c3a24c02d678e5f0711623dcf3ab3f243b273c2633f638a1fa8e35fb7c7f8e4d"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-language-notices/vscode-html-languageservice/LICENSE.md.txt",
+          "target": "docs/licenses/monaco-editor/language-services/vscode-html-languageservice/LICENSE.md",
+          "sha256": "c3a24c02d678e5f0711623dcf3ab3f243b273c2633f638a1fa8e35fb7c7f8e4d"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-language-notices/vscode-html-languageservice/thirdpartynotices.txt.txt",
+          "target": "docs/licenses/monaco-editor/language-services/vscode-html-languageservice/thirdpartynotices.txt",
+          "sha256": "6fac688548f02e656a57234c7f0cb4a74bd8645b4ef2c7a33f5117861b9f3de0"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-language-notices/vscode-json-languageservice/LICENSE.md.txt",
+          "target": "docs/licenses/monaco-editor/language-services/vscode-json-languageservice/LICENSE.md",
+          "sha256": "4742836d395a83a45d2278d9b738824d68abb1a03b81d567210a6cbc3e686e12"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-language-notices/vscode-languageserver-textdocument/License.txt.txt",
+          "target": "docs/licenses/monaco-editor/language-services/vscode-languageserver-textdocument/License.txt",
+          "sha256": "ec9ee83580841e8eb687aca9867f221503809ba6426c7f876ede17d91b9fcfd0"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-language-notices/vscode-languageserver-textdocument/thirdpartynotices.txt.txt",
+          "target": "docs/licenses/monaco-editor/language-services/vscode-languageserver-textdocument/thirdpartynotices.txt",
+          "sha256": "a89123562fe364dc8e969e85614eb6c1f8452afe131d6e42bd1314bb2d092b04"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-language-notices/vscode-languageserver-types/License.txt.txt",
+          "target": "docs/licenses/monaco-editor/language-services/vscode-languageserver-types/License.txt",
+          "sha256": "ec9ee83580841e8eb687aca9867f221503809ba6426c7f876ede17d91b9fcfd0"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-language-notices/vscode-uri/LICENSE.md.txt",
+          "target": "docs/licenses/monaco-editor/language-services/vscode-uri/LICENSE.md",
+          "sha256": "c669138cb1eb01fbb745e8e460b291e4f2869c14a40061390b6095d845ed4c82"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-language-notices/beautify-css-NOTICE.txt",
+          "target": "docs/licenses/monaco-editor/language-services/beautify-css-NOTICE.txt",
+          "sha256": "ec728062ceae23091680dda36437fe1fa48975821e047adbb06a76805425e518"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-language-notices/beautify-html-NOTICE.txt",
+          "target": "docs/licenses/monaco-editor/language-services/beautify-html-NOTICE.txt",
+          "sha256": "25451d033cad3539a2cadfeda7fa5e29eb74e3413917cde63d8210a259fdc893"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-language-notices/ATTRIBUTION.txt",
+          "target": "docs/licenses/monaco-editor/language-services/ATTRIBUTION.md",
+          "sha256": "432cca135809edabcd9ccedd05576138b64b167445999005a6e1550132391d98"
         }
       ],
       "review": "The complete upstream Monaco LICENSE/ThirdPartyNotices are retained. The unmodified bundled Codicons font exactly matches @vscode/codicons 0.0.26; its historical README, CC BY 4.0 content license, MIT code license and added attribution are distributed below. Other site assets remain subject to their separate provenance reviews.",
@@ -970,6 +1030,125 @@
             "docs/licenses/monaco-editor/typescript/CopyrightNotice.txt",
             "docs/licenses/monaco-editor/typescript/ThirdPartyNoticeText.txt",
             "docs/licenses/monaco-editor/typescript/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "jsonc-parser",
+          "version": "3.0.0",
+          "tarball": "https://registry.npmjs.org/jsonc-parser/-/jsonc-parser-3.0.0.tgz",
+          "assets": [
+            "docs/assets/js/vs/language/json/jsonWorker.js"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/language-services/jsonc-parser/LICENSE.md",
+            "docs/licenses/monaco-editor/language-services/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "vscode-css-languageservice",
+          "version": "5.1.8",
+          "tarball": "https://registry.npmjs.org/vscode-css-languageservice/-/vscode-css-languageservice-5.1.8.tgz",
+          "assets": [
+            "docs/assets/js/vs/language/css/cssWorker.js"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/language-services/vscode-css-languageservice/LICENSE.md",
+            "docs/licenses/monaco-editor/language-services/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "vscode-html-languageservice",
+          "version": "4.1.1",
+          "tarball": "https://registry.npmjs.org/vscode-html-languageservice/-/vscode-html-languageservice-4.1.1.tgz",
+          "assets": [
+            "docs/assets/js/vs/language/html/htmlWorker.js"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/language-services/vscode-html-languageservice/LICENSE.md",
+            "docs/licenses/monaco-editor/language-services/vscode-html-languageservice/thirdpartynotices.txt",
+            "docs/licenses/monaco-editor/language-services/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "vscode-json-languageservice",
+          "version": "4.1.9",
+          "tarball": "https://registry.npmjs.org/vscode-json-languageservice/-/vscode-json-languageservice-4.1.9.tgz",
+          "assets": [
+            "docs/assets/js/vs/language/json/jsonWorker.js"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/language-services/vscode-json-languageservice/LICENSE.md",
+            "docs/licenses/monaco-editor/language-services/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "vscode-languageserver-textdocument",
+          "version": "1.0.2",
+          "tarball": "https://registry.npmjs.org/vscode-languageserver-textdocument/-/vscode-languageserver-textdocument-1.0.2.tgz",
+          "assets": [
+            "docs/assets/js/vs/language/css/cssWorker.js",
+            "docs/assets/js/vs/language/html/htmlWorker.js",
+            "docs/assets/js/vs/language/json/jsonWorker.js"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/language-services/vscode-languageserver-textdocument/License.txt",
+            "docs/licenses/monaco-editor/language-services/vscode-languageserver-textdocument/thirdpartynotices.txt",
+            "docs/licenses/monaco-editor/language-services/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "vscode-languageserver-types",
+          "version": "3.16.0",
+          "tarball": "https://registry.npmjs.org/vscode-languageserver-types/-/vscode-languageserver-types-3.16.0.tgz",
+          "assets": [
+            "docs/assets/js/vs/language/css/cssWorker.js",
+            "docs/assets/js/vs/language/html/htmlWorker.js",
+            "docs/assets/js/vs/language/json/jsonWorker.js"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/language-services/vscode-languageserver-types/License.txt",
+            "docs/licenses/monaco-editor/language-services/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "vscode-uri",
+          "version": "3.0.2",
+          "tarball": "https://registry.npmjs.org/vscode-uri/-/vscode-uri-3.0.2.tgz",
+          "assets": [
+            "docs/assets/js/vs/language/css/cssWorker.js",
+            "docs/assets/js/vs/language/html/htmlWorker.js",
+            "docs/assets/js/vs/language/json/jsonWorker.js"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/language-services/vscode-uri/LICENSE.md",
+            "docs/licenses/monaco-editor/language-services/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "js-beautify (Monaco HTML embedded)",
+          "version": "embedded sources in vscode-html-languageservice 4.1.1",
+          "tarball": "https://registry.npmjs.org/vscode-html-languageservice/-/vscode-html-languageservice-4.1.1.tgz",
+          "assets": [
+            "docs/assets/js/vs/language/html/htmlWorker.js"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/language-services/beautify-css-NOTICE.txt",
+            "docs/licenses/monaco-editor/language-services/beautify-html-NOTICE.txt",
+            "docs/licenses/monaco-editor/language-services/vscode-html-languageservice/LICENSE.md",
+            "docs/licenses/monaco-editor/language-services/vscode-html-languageservice/thirdpartynotices.txt",
+            "docs/licenses/monaco-editor/language-services/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "glob-to-regexp (Monaco JSON fork)",
+          "version": "embedded source in vscode-json-languageservice 4.1.9",
+          "tarball": "https://registry.npmjs.org/vscode-json-languageservice/-/vscode-json-languageservice-4.1.9.tgz",
+          "assets": [
+            "docs/assets/js/vs/language/json/jsonWorker.js"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/language-services/vscode-json-languageservice/LICENSE.md",
+            "docs/licenses/monaco-editor/language-services/ATTRIBUTION.md"
           ]
         }
       ]

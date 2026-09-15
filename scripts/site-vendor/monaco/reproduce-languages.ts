@@ -7,6 +7,7 @@ import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { ArchiveCache, hash } from './archives.ts'
 import { aliasModule, languageHeader, nameModule, verifyWorkerSources } from './languages.ts'
+import { verifyMonacoLanguageNoticeArchives } from './notices.ts'
 
 interface Provenance {
   archives: Archive[]
@@ -46,6 +47,7 @@ for (const member of record.modules) {
 }
 const cache = new ArchiveCache(root, path.join(root, 'refactor/.cache/monaco-review'))
 await cache.verify(record.archives, record.remotes, process.argv.includes('--fetch'))
+const notices = verifyMonacoLanguageNoticeArchives(root, cache)
 for (const name of ['typescript', 'terser', 'source-map']) {
   const archive = record.archives.find(item => item.name === name)
   assert(archive, 'Missing historical compiler dependency')
@@ -115,4 +117,4 @@ for (const worker of record.workers) {
   assert.equal(languageHeader(worker.language) + code, target.toString('utf8'), 'Minified language worker differs')
   results.push({ language: worker.language, modules: worker.ids.length, exactSources: true, exactWorker: true, sha256: hash(target) })
 }
-console.log(JSON.stringify({ archives: record.archives.length, gitSources: record.remotes.length, npmModules: modules.size, aliases: aliases.size, workers: results, licenseReviewComplete: false, otherMonacoComponentsReviewed: false }))
+console.log(JSON.stringify({ archives: record.archives.length, gitSources: record.remotes.length, npmModules: modules.size, aliases: aliases.size, workers: results, notices, licenseReviewComplete: false, otherMonacoComponentsReviewed: false }))

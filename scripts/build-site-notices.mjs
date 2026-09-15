@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import process from 'node:process'
 import { verifyConsoleNoticeSources } from './site-vendor/console/notices.ts'
+import { verifyMonacoLanguageNotices } from './site-vendor/monaco/notices.ts'
 import { writeOrCheckNotices } from './site-vendor/notices.ts'
 
 assert(process.argv.slice(2).every(arg => arg === '--check'), 'Use yarn build:site-notices [--check]')
@@ -14,11 +15,20 @@ assert.deepEqual(manifest.groups.filter(group => group.name !== 'console').flatM
   'copy-text-to-clipboard',
   'core-js',
   'css-loader',
+  'glob-to-regexp (Monaco JSON fork)',
+  'js-beautify (Monaco HTML embedded)',
+  'jsonc-parser',
   'mutation-observer',
   'regenerator-runtime',
   'style-loader',
   'svelte',
   'typescript (Monaco worker)',
+  'vscode-css-languageservice',
+  'vscode-html-languageservice',
+  'vscode-json-languageservice',
+  'vscode-languageserver-textdocument',
+  'vscode-languageserver-types',
+  'vscode-uri',
   'webpack',
 ], 'Do not silently drop verified bundled component attribution')
 const consoleGroup = manifest.groups.find(group => group.name === 'console')
@@ -75,5 +85,6 @@ assert.deepEqual(typeScriptNotices?.map(target => target.split('/').pop()).sort(
 for (const name of ['LICENSE', 'MIT-LICENSE', 'ATTRIBUTION.md'])
   assert(vconsoleNotices?.includes(`docs/licenses/vconsole/${name}`), `Missing vConsole notice: ${name}`)
 verifyConsoleNoticeSources(process.cwd(), manifest)
+verifyMonacoLanguageNotices(process.cwd(), manifest)
 const count = writeOrCheckNotices(process.cwd(), manifest, process.argv.includes('--check'))
 console.log(`Verified site notices: ${count} outputs; Monaco/vConsole/console inventories, embedded and other provenance gates remain open.`)
