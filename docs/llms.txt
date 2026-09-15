@@ -5277,6 +5277,221 @@ const installChapters = artplayerPluginChapter({ chapters });
 Desktop tests cover chapters with quality selection, thumbnails and fullscreen. They do not establish support on every mobile device. The current Windows WebKit quality-switch tests still encounter stalls while reading browser state, so this page does not promise timing reliability on every platform.
 
 
+===== packages/artplayer-vitepress/docs/en/plugin/chromecast.md =====
+
+# Chromecast
+
+[简体中文](../../plugin/chromecast.md)
+
+Add a right-side Cast control that selects a Cast session and loads media. Use a supported Chrome sender, HTTPS, a real receiver and receiver-accessible media. This page describes the unreleased branch. A local page, mocked SDK or successful session does not prove playback on a television.
+
+## Installation and example
+
+```sh
+yarn add artplayer artplayer-plugin-chromecast
+```
+
+```js
+import Artplayer from 'artplayer';
+import artplayerPluginChromecast from 'artplayer-plugin-chromecast';
+```
+
+For scripts, load ArtPlayer before `dist/artplayer-plugin-chromecast.js`; the global is `artplayerPluginChromecast`. This preserves the [original example](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast). Supply an absolute media URL reachable by your receiver; sender localhost, relative URLs and Blob URLs are not rewritten automatically.
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-chromecast/index.js">▶ Run Code</div>
+
+```js
+// npm i artplayer-plugin-chromecast
+// import artplayerPluginChromecast from 'artplayer-plugin-chromecast';
+
+const art = new Artplayer({
+  container: '.artplayer-app',
+  url: '/assets/sample/video.mp4',
+  fullscreen: true,
+  fullscreenWeb: true,
+  plugins: [
+    artplayerPluginChromecast({
+      // sdk: '', // The URL of the Cast SDK
+      // mimeType: '', // The MIME type of the media
+    }),
+  ],
+})
+```
+
+## Options and callbacks
+
+An options object is required; `{}` uses defaults. The icon is captured at registration; other options and callbacks are read from the original object at the relevant operation.
+
+| Field | Type | Behavior |
+| --- | --- | --- |
+| `url` | `string` | Nonempty override, otherwise current art.option.url |
+| `sdk` | `string` | Override the Cast SDK script URL |
+| `icon` | `string` | Trusted control HTML inside the retained art-icon/art-icon-cast wrapper |
+| `mimeType` | `string` | Nonempty override, otherwise inferred from the URL extension |
+| `onStateChange` | `(state) => void` | Normalized disconnected/connecting/connected/disconnecting state |
+| `onCastAvailable` | `(available: boolean) => void` | SDK availability event, not playback success |
+| `onCastStart` | `() => void` | Called after the current loadMedia completes |
+| `onError` | `(error: unknown) => void` | SDK, connection or loading failure; not necessarily an Error instance |
+
+Callback this is the original options object. The default SDK URL is `https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1`. Concurrent loads in the same module/window share the first pending URL; a later retry can read another URL.
+
+MIME inference strips query/hash and lowercases the extension. mp4/webm/ogg/ogv/mp3/wav/flv/mov/avi/wmv/mpd/m3u8 map respectively to video/mp4, video/webm, video/ogg, video/ogg, audio/mp3, audio/wav, video/x-flv, video/quicktime, video/x-msvideo, video/x-ms-wmv, application/dash+xml and application/x-mpegURL. Unknown extensions use application/octet-stream. This mapping is not receiver codec support; provide mimeType explicitly when needed.
+
+## Registration and session state
+
+Registration returns a Promise but adds the `chromecast` control immediately. SDK loading starts on first click, so registration is not SDK readiness. The loader has a 30-second readiness limit; script load alone is insufficient without the Framework. It configures the default media receiver and ORIGIN_SCOPED auto-join policy, with no custom receiver-application option.
+
+A click initializes the SDK and checks the current session. If absent, it requests a session, reads it again, then awaits loadMedia. Pending clicks for one controller share the operation. A successful session request without a current session is a connection error. The media URL is read when sending; later player source changes do not automatically cast again. Use the control to send the new media.
+
+The result is at `art.plugins.artplayerPluginChromecast`:
+
+| Member | Meaning |
+| --- | --- |
+| `name` | Always artplayerPluginChromecast |
+| `getCastState()` | Last raw SDK SessionState, initially null; not the normalized callback state |
+| `isCasting()` | Whether a session reference is retained, not proof of receiver playback |
+
+The icon uses white for disconnected, orange for transitional and red for connected states. Session termination, failure or replacement invalidates pending work; late results cannot start stale media or show obsolete notices. SDK failures display a stage-specific notice and call onError. User callback exceptions can still propagate.
+
+## Cleanup and shared sessions
+
+Player destruction releases this controller's loader subscription, SDK listeners and pending operation. It does not interrupt another player waiting for the SDK or end the page-shared receiver session. Successful scripts remain; failed or last-owner-cancelled pending scripts are removed. The core owns control DOM removal.
+
+There is no public start, stop, disconnect or destroy method, and no continuous synchronization of local pause, time or volume. Callbacks and icons describe observed controller state. Receiver playback, network reachability, source changes and disconnection require real hardware validation; local tests cannot substitute for it.
+
+## TypeScript
+
+Root and `/legacy` preserve npm1.1.0's required options and synchronous name-only declaration. For precise callbacks, Promise registration and state methods, use `/runtime`, with the same implementation:
+
+```ts
+import cast from 'artplayer-plugin-chromecast/runtime';
+import type { RuntimeOption, RuntimeResult } from 'artplayer-plugin-chromecast/runtime';
+
+const options: RuntimeOption = {
+  onStateChange(state) { console.log(state, this.url); },
+  onError(error) { console.error(error); },
+};
+const registerCast = cast(options);
+function readSession(plugin: RuntimeResult): boolean {
+  return plugin.isCasting(); // Session presence, not receiver playback.
+}
+```
+
+Root/runtime named types are Option, Chromecast, Result, Factory, ConnectionState, RuntimeOption, RuntimeResult and RuntimeFactory. Historical root NodeNext namespace behavior remains. Use runtime for accurate ESM default calls or older `import = require` syntax. JavaScript supports direct and `.default(...)` factory calls; type compatibility does not establish device capabilities.
+
+
+===== packages/artplayer-vitepress/docs/en/plugin/danmuku-mask.md =====
+
+# Danmuku Mask
+
+[简体中文](../../plugin/danmuku-mask.md)
+
+Generate a CSS mask from person segmentation so danmuku avoids people in the video. The plugin masks the core `.art-danmuku` layer without changing its queue, individual items or video pixels. This describes the unreleased branch; the online example and navigation checks are not model-quality acceptance.
+
+## Installation and example
+
+```sh
+yarn add artplayer artplayer-plugin-danmuku artplayer-plugin-danmuku-mask
+```
+
+```js
+import Artplayer from 'artplayer';
+import artplayerPluginDanmuku from 'artplayer-plugin-danmuku';
+import artplayerPluginDanmukuMask from 'artplayer-plugin-danmuku-mask';
+```
+
+For scripts, load the core and both plugin dist files. Their globals are `artplayerPluginDanmuku` and `artplayerPluginDanmukuMask`. The [original example](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask) registers them in that order and loads MediaPipe assets from the site's own directory:
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js&#10;./uncompiled/artplayer-plugin-danmuku-mask/index.js">▶ Run Code</div>
+
+```js
+// npm i artplayer-plugin-danmuku-mask
+// import artplayerPluginDanmukuMask from 'artplayer-plugin-danmuku-mask';
+
+// npm i @mediapipe/selfie_segmentation
+// 把 node_modules/@mediapipe/selfie_segmentation 目录复制到你的项目下
+
+const art = new Artplayer({
+  container: '.artplayer-app',
+  url: '/assets/sample/steve-jobs.mp4',
+  autoSize: true,
+  fullscreen: true,
+  fullscreenWeb: true,
+  autoOrientation: true,
+  plugins: [
+    artplayerPluginDanmuku({
+      danmuku: '/assets/sample/danmuku.xml',
+    }),
+    artplayerPluginDanmukuMask({
+      solutionPath: '/assets/@mediapipe/selfie_segmentation',
+    }),
+  ],
+})
+```
+
+Host matching MediaPipe assets under solutionPath. Copying a directory alone does not establish script, model, WASM, network-policy or browser support.
+
+## Options
+
+Options may be omitted; values are captured at registration:
+
+| Field | Type / default | Runtime use |
+| --- | --- | --- |
+| `solutionPath` | `string` | SDK asset root; default CDN URL is unversioned |
+| `modelSelection` | `number` / `1` | Historical forwarded field, not proof that the current model changes |
+| `smoothSegmentation` | `boolean` / `true` | Historical forwarded field; explicit false is retained |
+| `minDetectionConfidence` | `number` / `0.5` | Historical forwarded field |
+| `minTrackingConfidence` | `number` / `0.5` | Historical forwarded field |
+| `selfieMode` | `boolean` / `false` | Historical forwarded field |
+| `drawContour` | `boolean` / `false` | Passed to binary-mask conversion |
+| `foregroundThreshold` | `number` / `0.5` | Passed to foreground threshold conversion |
+| `opacity` | `number` / `1` | Passed to SDK drawMask, not directly applied as danmuku-layer opacity |
+| `maskBlurAmount` | `number` / `3` | Blur argument passed to SDK drawMask |
+
+The default solutionPath is the unversioned [MediaPipe asset root on jsDelivr](https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation).
+
+Except for smoothSegmentation's undefined check, defaults retain `value || default`. Zero modelSelection, opacity, threshold or blur uses its default rather than disabling the effect. Use stop to disable masking.
+
+The current selection is fixed to `runtime: 'mediapipe'` and `modelType: 'general'`. The installed adapter maps general to modelSelection 0 and ignores some extra forwarded fields. Their presence does not promise an inference change. TensorFlow first attempts webgl and tries cpu only on rejection; that does not establish MediaPipe's actual inference backend.
+
+## Start, stop and failures
+
+Registration synchronously returns `{ name: 'artplayerPluginDanmukuMask', start, stop }`, available at `art.plugins.artplayerPluginDanmukuMask`. The ready event starts it automatically; call start yourself if installed after ready.
+
+| Method | Behavior |
+| --- | --- |
+| `start()` | Returns `Promise<void>` after initialization/scheduling, not after a complete first mask |
+| `stop()` | Returns undefined synchronously; cancels scheduling and immediately sets layer maskImage to none |
+
+Repeated start does not overlap inference loops. Stop during initialization settles public start promptly while uncancellable SDK work remains observed. Late results cannot update the mask. A subsequent start waits for old work and disposal before creating another model.
+
+Model creation failure logs an error and can resolve start without a usable model; explicit start can retry. Backend or required DOM/Canvas initialization can still reject start. Automatic ready startup logs rejection. Inference/pixel errors log and continue scheduling while retaining the previous usable mask.
+
+Inference runs only while video is playing, not ended, and has valid dimensions. Binary-mask conversion, drawMask and Canvas pixel processing produce a PNG data URL assigned to the whole layer. No-person results retain the preceding mask. Accuracy, performance and cross-origin pixel access need actual media checks.
+
+## Lifecycle and types
+
+Player destruction stops work and removes ready/destroy subscriptions. The plugin owns its private canvas; after SDK work settles it resets dimensions and disposes the model. Stop is not a GPU-release completion Promise. Private SDK disposal completion still needs separate evidence. There is no public destroy, update or new event, and no takeover of application-wide TensorFlow lifetime.
+
+Root and `/legacy` retain optional options, synchronous registration, async start and sync stop. There is no `/runtime` subpath. Option/Result are private declaration types, extractable from the factory. This example is type-only extraction for NodeNext ESM; it does not call `.default` at runtime:
+
+```ts
+import type MaskModule from 'artplayer-plugin-danmuku-mask';
+
+type MaskFactory = typeof MaskModule.default;
+type MaskOptions = Parameters<MaskFactory>[0];
+type MaskResult = ReturnType<ReturnType<MaskFactory>>;
+
+const options: MaskOptions = { solutionPath: '/assets/@mediapipe/selfie_segmentation' };
+async function restartMask(mask: MaskResult): Promise<void> {
+  mask.stop();
+  await mask.start();
+}
+```
+
+The preserved NodeNext root declaration has namespace behavior; it does not give the current runtime factory a `.default` property. Current CommonJS calls the function directly, and ESM runtime uses its default export. Do not infer runtime aliases from the type namespace. Historical export forms, actual segmentation and device performance remain separate checks.
+
+
 ===== packages/artplayer-vitepress/docs/en/plugin/danmuku.md =====
 
 # Danmuku
@@ -6048,6 +6263,147 @@ Public `Option`, `Config`, `QualityLevel`, `AudioTrack` and `Result` types are e
 ## Validation scope
 
 The refactor tests Hls.js 1.5.17 and 1.7.2 with local media and real workers; these are tested points, not a newly declared supported range. Firefox grouped-stream crashes and a separate switching stall remain under investigation. Windows Playwright WebKit lacks the MSE path used in those tests; it does not establish Safari/iOS native-HLS acceptance. Verify your actual streams and target devices before adopting the unpublished refactor.
+
+
+===== packages/artplayer-vitepress/docs/en/plugin/jassub.md =====
+
+# ASS Subtitles with JASSUB
+
+[简体中文](../../plugin/jassub.md)
+
+Render ASS subtitles on Canvas using the JASSUB Worker and WASM. The plugin returns the actual JASSUB instance with its methods/events rather than converting ASS to plain VTT. This describes the unreleased branch; Worker, WASM, fonts and actual playback require deployment-specific validation.
+
+## Installation and example
+
+```sh
+yarn add artplayer artplayer-plugin-jassub
+```
+
+```js
+import Artplayer from 'artplayer';
+import artplayerPluginJassub from 'artplayer-plugin-jassub';
+```
+
+For scripts, load ArtPlayer before `dist/artplayer-plugin-jassub.js`; the global is `artplayerPluginJassub`. This preserves the [original example](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-jassub/index.js&example=jassub). Its Worker/WASM/font URLs are site assets, not paths automatically created in your application by installing the plugin.
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-jassub/index.js">▶ Run Code</div>
+
+```js
+// https://github.com/ThaUnknown/jassub
+// npm i artplayer-plugin-jassub
+// import artplayerPluginJassub from 'artplayer-plugin-jassub';
+
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/jassub/FGOBD.mp4',
+    autoSize: true,
+    fullscreen: true,
+    fullscreenWeb: true,
+    plugins: [
+        artplayerPluginJassub({
+            subUrl: '/assets/jassub/FGOBD.ass',
+            workerUrl: '/assets/jassub/jassub-worker.js',
+            wasmUrl: '/assets/jassub/jassub-worker.wasm',
+            modernWasmUrl: '/assets/jassub/jassub-worker-modern.wasm',
+            availableFonts: {
+                'liberation sans': '/assets/jassub/default.woff2'
+            },
+            fonts: [
+                '/assets/jassub/fonts/Averia Sans Libre Light.ttf',
+                '/assets/jassub/fonts/Averia Serif Simple Light.ttf',
+                '/assets/jassub/fonts/Gramond.ttf'
+            ],
+            timeOffset: -0.041
+        }),
+    ],
+});
+```
+
+Host matching Worker, WASM and fonts with correct paths, access policies and font usage rights. Missing fonts affect layout. Default relative URLs do not establish that files are deployed.
+
+## Resource and rendering options
+
+Runtime options are optional and default to art.video. They are read at registration; an explicit video overrides the host video. These are current local implementation defaults, including differences from old upstream comments.
+
+| Field | Actual default or meaning |
+| --- | --- |
+| `video` / `canvas` | Video defaults to art.video; caller canvas allows manual DOM handling; a usable rendering target is required |
+| `workerUrl` | `'jassub-worker.js'` |
+| `wasmUrl` | `'jassub-worker.wasm'` |
+| `legacyWasmUrl` | `'jassub-worker.wasm.js'` |
+| `modernWasmUrl` | Used when supplied and SIMD is detected; otherwise wasmUrl |
+| `subUrl` / `subContent` | Subtitle URL or ASS text sent to the Worker |
+| `fonts` | Empty array by default; entries can be URLs or Uint8Array |
+| `availableFonts` | Defaults to `{ 'liberation sans': './default.woff2' }`; font-name-to-URL/bytes map |
+| `fallbackFont` | `'liberation sans'` |
+| `useLocalFonts` | Enabled only when queryLocalFonts exists; current code defaults to true when available, with explicit false supported; permissions still apply |
+| `blendMode` | `'js'`, with `'wasm'` also accepted |
+| `asyncRender` | Defaults true, subject to createImageBitmap availability |
+| `offscreenRender` | Defaults true, requiring transferControlToOffscreen and no caller canvas |
+| `onDemandRender` | Defaults true, subject to requestVideoFrameCallback availability |
+| `targetFps` | Defaults 24; not a fixed update guarantee in on-demand mode |
+| `timeOffset` | Defaults 0 seconds |
+| `debug` | Defaults false |
+| `prescaleFactor` / `prescaleHeightLimit` / `maxRenderHeight` | Defaults 1 / 1080 / 0; rendering size controls, with no maximum imposed by a zero maxRenderHeight |
+| `dropAllAnimations` / `dropAllBlur` | Simplification options forwarded to the Worker; not set to true by the wrapper when omitted |
+| `libassMemoryLimit` / `libassGlyphLimit` | Defaults 0; libass cache limits in MiB, not a total browser-memory cap |
+
+Capabilities can change the chosen rendering path. Async/offscreen/backend options are not universal performance guarantees. Do not mix incompatible Worker and wrapper versions.
+
+## Instance and methods
+
+Registration synchronously returns `{ name: 'artplayerPluginJassub', instance }`, not a Worker-ready Promise. Access it at `art.plugins.artplayerPluginJassub.instance`. It is an EventTarget: query after ready, and observe its error event rather than assuming a same-named player event.
+
+| Method | Behavior and units |
+| --- | --- |
+| `resize(width?, height?, top?, left?, force?)` | Synchronous void; force is last, with omitted dimensions derived from video |
+| `setVideo(video)` | Rebind video, observation and the owned container position synchronously |
+| `setTrackByUrl(url)` / `setTrack(content)` / `freeTrack()` | Set subtitle URL/text or release the track |
+| `setIsPaused(boolean)` / `setRate(number)` | Manually update Worker playback state/rate |
+| `setCurrentTime(isPaused?, currentTime?, rate?)` | currentTime uses seconds |
+| `createEvent(event)` / `setEvent(event, index)` / `removeEvent(index)` | Mutate ASS events, accepting partial fields |
+| `getEvents(callback)` | Callback-based event query, not a Promise |
+| `createStyle(style)` / `setStyle(style, index)` / `removeStyle(index)` | Mutate styles, accepting partial fields |
+| `getStyles(callback)` | Callback-based style query, not a Promise |
+| `styleOverride(style)` / `disableStyleOverride()` | Enable/disable style override |
+| `setDefaultFont(font)` / `addFont(font)` | Set the default font or add a URL/byte font |
+| `runBenchmark()` | Request the Worker benchmark; not an end-to-end performance conclusion |
+| `sendMessage(target, data?, transferable?)` | Promise resolves after posting, or without posting after destroy; not a Worker acknowledgement |
+| `destroy()` | Synchronous, idempotent cleanup; no resource-reclamation Promise |
+
+Except sendMessage, ordinary control methods above return void; queries supply callback data. The historical destroy(error) overload returns an original Error, converts a nonempty string to Error, or retains an empty string. Normal cleanup uses no-argument destroy.
+
+AssEvent Start/Duration use milliseconds and Style is a numeric style index. Other fields are Name, MarginL/MarginR/MarginV, Effect, Text, ReadOrder and Layer. AssStyle includes Name/FontName/FontSize, PrimaryColour/SecondaryColour/OutlineColour/BackColour, Bold/Italic/Underline/StrikeOut, ScaleX/ScaleY/Spacing/Angle, BorderStyle/Outline/Shadow/Alignment, MarginL/MarginR/MarginV, Encoding, treat_fontname_as_pattern, Blur and Justify. Query results have no `_index`; the ASS text-format style name is not the runtime numeric Style.
+
+Successful queries call `(null, array)`; failures supply an Error or native Event without data. Destroy fails pending queries after releasing their listeners/timers. The protocol matches by response target, without a new request ID; do not assume simultaneous same-target queries have independently correlated responses.
+
+## Lifecycle and types
+
+The plugin-owned `.JASSUB` container uses z-index20 and is removed on destruction; caller canvas/video nodes remain. Player destruction calls the instance's current destroy method; direct destruction is also idempotent. setVideo/destroy invalidate old frame callbacks and clean Worker/observer ownership. Late bitmaps must not restart rendering. Actual offscreen stalls, browser differences and physical devices retain separate acceptance requirements.
+
+Root and `/legacy` retain historical JassubOption/JassubInstance: three required URLs, force-first resize, inaccurate Promise method returns and open extension indexes. Use `/runtime` for accurate types with the same implementation:
+
+```ts
+import type Artplayer from 'artplayer';
+import jassub from 'artplayer-plugin-jassub/runtime';
+
+function attachSubtitles(art: Artplayer) {
+  const { instance } = jassub({
+    workerUrl: '/assets/jassub/jassub-worker.js',
+    wasmUrl: '/assets/jassub/jassub-worker.wasm',
+    subUrl: '/subtitles.ass',
+  })(art);
+  instance.addEventListener('ready', () => {
+    instance.getEvents((error, events) => {
+      if (error) console.error(error);
+      else console.log(events);
+    });
+  });
+  return instance;
+}
+```
+
+Runtime exports FontSource, RuntimeOption, AssEvent, AssStyle, AssEventInput, AssStyleInput, WorkerRequestError, EventsCallback, StylesCallback, RuntimeEventMap, RuntimeInstance, RuntimeResult and RuntimeFactory. Precise instance fields include timeOffset, debug, the three sizing settings, optional busy and historical public `_canvas/_ctx`; `_ctx` may be false/null. There is no runtime factory `.default` self-alias. The old root's NodeNext namespace does not create one. Runtime supports an accurate ESM default and CommonJS `import = require`.
 
 
 ===== packages/artplayer-vitepress/docs/en/plugin/multiple-subtitles.md =====

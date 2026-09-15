@@ -71,6 +71,14 @@
       "sha256Lf": "b08eb8e82fb5afa73c54e3957dc764f20b3cb81ab7f6d46aa0c2dc8fc22f6239"
     },
     {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/chromecast.md",
+      "sha256Lf": "2776f10c24852aa4196973fc242dfb6b939847852d1c77f782a347d839d78f6c"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/danmuku-mask.md",
+      "sha256Lf": "fe79ede806db92af3c1a241061d22114d51d6118bccff0b059768c636fa7b03e"
+    },
+    {
       "file": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
       "sha256Lf": "a563349b064adac119dac943060ffc5bc82a8ccbd6e20d2d7b5a1e1cb4d66ba2"
     },
@@ -85,6 +93,10 @@
     {
       "file": "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
       "sha256Lf": "c0271b386e44fcc47c9aad017b3b02f75bb3baec830bca9634edcb2060cd91d3"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/jassub.md",
+      "sha256Lf": "4c0f8c3856c89b1802ed37b2a57a87ec099e591bef116c21768b65b0969ef18c"
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/plugin/multiple-subtitles.md",
@@ -319,5 +331,5 @@
       "sha256Lf": "967db6e5026a2fd3cc24d8a04e5c78859f543d0c0f6d4f9599c103e4e93c9b29"
     }
   ],
-  "outputSha256Lf": "c611edfd7cea17a8df6e0d87fed633ba697a8766bfc921e0435333da1ad41d4b"
+  "outputSha256Lf": "70d21278ba12ace4feaf3f61df79b9f08a9e77fe1ac017434698fe71d3085c31"
 }

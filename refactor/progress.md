@@ -1,5 +1,17 @@
 # 进度与证据
 
+## SITE-04 JASSUB/弹幕遮罩/Chromecast双语指南
+
+补齐六份页面、本地导航和原样示例，16个插件现均有独立双语指南。说明JASSUB实际
+方法/查询/资源、遮罩start与首帧/SDK配置边界、Cast会话与接收端播放区别。
+六份TS片段、37/38个页面链接、三浏览器18组最终导航及17项工具测试通过。
+截图发现遮罩表格过宽后调整列和CDN链接，保留初轮证据并重新验证最终页面宽度。
+当前58 Markdown/67 HTML，21库build仍有效。见
+[记录](changes/2026-09-16-SITE-04-jassub-mask-cast-guides.md)和
+[证据](baselines/site04-jassub-mask-cast-guides.json)。SITE-04保持doing，224/22/39
+不变；继续proxy/tool、已有指南和核心语义对应，不将导航计为SDK/媒体/设备通过，
+不启动用户保留的正式复盘。
+
 ## SITE-04 Ads/VAST双语指南
 
 补齐四份页面、本地导航和原样示例。Ads说明计时/媒体控制、skip与按钮限制、

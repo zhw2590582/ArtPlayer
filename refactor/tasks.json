@@ -4564,7 +4564,9 @@
         "changes/2026-09-16-SITE-04-auto-multi-guides.md",
         "baselines/site04-auto-multi-guides.json",
         "changes/2026-09-16-SITE-04-ads-vast-guides.md",
-        "baselines/site04-ads-vast-guides.json"
+        "baselines/site04-ads-vast-guides.json",
+        "changes/2026-09-16-SITE-04-jassub-mask-cast-guides.md",
+        "baselines/site04-jassub-mask-cast-guides.json"
       ]
     },
     {

@@ -1,0 +1,1040 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "doing",
+  "scope": "Six bilingual JASSUB, Danmuku Mask and Chromecast guides; no SDK, media or physical-device acceptance",
+  "sourceBefore": "558e946ae538b6e0aac9754aed875ba521d6ca9d",
+  "capturedAt": "2026-09-15T19:37:19.483Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "platform": "win32",
+    "static": [
+      {
+        "name": "jassub",
+        "language": "zh",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/plugin/jassub.md",
+          "sha256": "47a3aaef82192a2ff564a432dc7a9ce7f7893fa38febeb5b38290daff8bd45b9"
+        },
+        "html": {
+          "path": "docs/document/plugin/jassub.html",
+          "sha256": "fb4e80207a1a038b4bf35e05dd497e7f1b435e2f0ed3ee09fcebb2859fac896a"
+        },
+        "example": {
+          "path": "docs/assets/example/jassub.js",
+          "sha256": "4c93c554aa0a65ac19c1386bb0cfd9df6545f95b8a6f65541a0db8c072975f6d"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/jassub-zh.mts",
+          "sha256": "dea16fc47279a8459b56b98c5d26ec4205519d512769c8284143ba4f4a4dddaf"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/plugin/jassub.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/plugin/jassub.html#ass-%E5%AD%97%E5%B9%95-jassub",
+          "/document/en/plugin/jassub.html",
+          "/document/plugin/jassub.html#%E5%AE%89%E8%A3%85%E5%92%8C%E7%A4%BA%E4%BE%8B",
+          "/document/plugin/jassub.html#%E8%B5%84%E6%BA%90%E5%92%8C%E6%B8%B2%E6%9F%93%E9%80%89%E9%A1%B9",
+          "/document/plugin/jassub.html#%E5%AE%9E%E4%BE%8B%E5%92%8C%E6%96%B9%E6%B3%95",
+          "/document/plugin/jassub.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E7%B1%BB%E5%9E%8B"
+        ]
+      },
+      {
+        "name": "jassub",
+        "language": "en",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/plugin/jassub.md",
+          "sha256": "4c0f8c3856c89b1802ed37b2a57a87ec099e591bef116c21768b65b0969ef18c"
+        },
+        "html": {
+          "path": "docs/document/en/plugin/jassub.html",
+          "sha256": "fcb91b89d48af052f86917abff364f88c2f97f485bee2cfdbfb66f8efdef86bb"
+        },
+        "example": {
+          "path": "docs/assets/example/jassub.js",
+          "sha256": "4c93c554aa0a65ac19c1386bb0cfd9df6545f95b8a6f65541a0db8c072975f6d"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/jassub-en.mts",
+          "sha256": "dea16fc47279a8459b56b98c5d26ec4205519d512769c8284143ba4f4a4dddaf"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/en/plugin/jassub.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/plugin/jassub.html#ass-subtitles-with-jassub",
+          "/document/plugin/jassub.html",
+          "/document/en/plugin/jassub.html#installation-and-example",
+          "/document/en/plugin/jassub.html#resource-and-rendering-options",
+          "/document/en/plugin/jassub.html#instance-and-methods",
+          "/document/en/plugin/jassub.html#lifecycle-and-types"
+        ]
+      },
+      {
+        "name": "danmuku-mask",
+        "language": "zh",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/plugin/danmuku-mask.md",
+          "sha256": "6f93adeaf5f575f88ac3c18fa4f076e5bbfb9a83cab182d9667eea4d1400b232"
+        },
+        "html": {
+          "path": "docs/document/plugin/danmuku-mask.html",
+          "sha256": "c229623cc0c11acffddd042704e0b34ddf8c40478e7b5392b7e08aed7ee4a276"
+        },
+        "example": {
+          "path": "docs/assets/example/danmuku.mask.js",
+          "sha256": "c0fe4f2d4cd60738583c4bfeebc24bc3365d8ca382e6f4ff86e1056f5a2729a8"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/danmuku-mask-zh.mts",
+          "sha256": "5b6f643768701625780c08884b3120fe172e3e801d11bcf389448998e1e05302"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/plugin/danmuku-mask.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/plugin/danmuku-mask.html#%E5%BC%B9%E5%B9%95%E9%81%AE%E7%BD%A9",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/plugin/danmuku-mask.html#%E5%AE%89%E8%A3%85%E5%92%8C%E7%A4%BA%E4%BE%8B",
+          "/document/plugin/danmuku-mask.html#%E9%85%8D%E7%BD%AE",
+          "/document/plugin/danmuku-mask.html#start%E3%80%81stop-%E4%B8%8E%E5%A4%B1%E8%B4%A5",
+          "/document/plugin/danmuku-mask.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E7%B1%BB%E5%9E%8B"
+        ]
+      },
+      {
+        "name": "danmuku-mask",
+        "language": "en",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/plugin/danmuku-mask.md",
+          "sha256": "fe79ede806db92af3c1a241061d22114d51d6118bccff0b059768c636fa7b03e"
+        },
+        "html": {
+          "path": "docs/document/en/plugin/danmuku-mask.html",
+          "sha256": "a010c29eaa1347f3c49f5b248e2b115ee0c50f0d25b824a1dff5e44f649f41a2"
+        },
+        "example": {
+          "path": "docs/assets/example/danmuku.mask.js",
+          "sha256": "c0fe4f2d4cd60738583c4bfeebc24bc3365d8ca382e6f4ff86e1056f5a2729a8"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/danmuku-mask-en.mts",
+          "sha256": "5b6f643768701625780c08884b3120fe172e3e801d11bcf389448998e1e05302"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/en/plugin/danmuku-mask.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/plugin/danmuku-mask.html#danmuku-mask",
+          "/document/plugin/danmuku-mask.html",
+          "/document/en/plugin/danmuku-mask.html#installation-and-example",
+          "/document/en/plugin/danmuku-mask.html#options",
+          "/document/en/plugin/danmuku-mask.html#start-stop-and-failures",
+          "/document/en/plugin/danmuku-mask.html#lifecycle-and-types"
+        ]
+      },
+      {
+        "name": "chromecast",
+        "language": "zh",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/plugin/chromecast.md",
+          "sha256": "d62925f1c7d2fe6c76f30915d5ff3b3a3f7eafebbe24cab68478287dd93345f8"
+        },
+        "html": {
+          "path": "docs/document/plugin/chromecast.html",
+          "sha256": "4ed6f7449c80f11a41b00377b3ca2c948c5800f5cc8eb3fe46fc09889f3b6f74"
+        },
+        "example": {
+          "path": "docs/assets/example/chromecast.js",
+          "sha256": "edd4d232a667a3ca5bae247dca3c557431975b9ae38dc56cc590b57e327d048f"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/chromecast-zh.mts",
+          "sha256": "8ed596a510a4aea0eb3bedc33c76d2545d579b215184cf9b6d7a12864c50c336"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/plugin/chromecast.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/plugin/chromecast.html#chromecast",
+          "/document/en/plugin/chromecast.html",
+          "/document/plugin/chromecast.html#%E5%AE%89%E8%A3%85%E5%92%8C%E7%A4%BA%E4%BE%8B",
+          "/document/plugin/chromecast.html#%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9B%9E%E8%B0%83",
+          "/document/plugin/chromecast.html#%E6%B3%A8%E5%86%8C%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81",
+          "/document/plugin/chromecast.html#%E6%B8%85%E7%90%86%E5%92%8C%E5%85%B1%E4%BA%AB%E4%BC%9A%E8%AF%9D",
+          "/document/plugin/chromecast.html#typescript"
+        ]
+      },
+      {
+        "name": "chromecast",
+        "language": "en",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/plugin/chromecast.md",
+          "sha256": "2776f10c24852aa4196973fc242dfb6b939847852d1c77f782a347d839d78f6c"
+        },
+        "html": {
+          "path": "docs/document/en/plugin/chromecast.html",
+          "sha256": "099612d56f92a65a7395a87b674dc6aa46ea9c0ba8e861fe841ecbf419ec7098"
+        },
+        "example": {
+          "path": "docs/assets/example/chromecast.js",
+          "sha256": "edd4d232a667a3ca5bae247dca3c557431975b9ae38dc56cc590b57e327d048f"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/chromecast-en.mts",
+          "sha256": "8ed596a510a4aea0eb3bedc33c76d2545d579b215184cf9b6d7a12864c50c336"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/en/plugin/chromecast.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/plugin/chromecast.html#chromecast",
+          "/document/plugin/chromecast.html",
+          "/document/en/plugin/chromecast.html#installation-and-example",
+          "/document/en/plugin/chromecast.html#options-and-callbacks",
+          "/document/en/plugin/chromecast.html#registration-and-session-state",
+          "/document/en/plugin/chromecast.html#cleanup-and-shared-sessions",
+          "/document/en/plugin/chromecast.html#typescript"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "plugin/jassub.md",
+        "passed": true,
+        "errors": [],
+        "title": "ASS 字幕：JASSUB\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-jassub/index.js",
+          "codeSha256": "4c93c554aa0a65ac19c1386bb0cfd9df6545f95b8a6f65541a0db8c072975f6d"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/chromium-jassub-zh.png",
+          "sha256": "30a0a4036949fcd3cb2eca3f4d61a9678d33006678c5e749df77208f5105fdf9"
+        },
+        "translation": "/document/en/plugin/jassub.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "en/plugin/jassub.md",
+        "passed": true,
+        "errors": [],
+        "title": "ASS Subtitles with JASSUB\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-jassub/index.js",
+          "codeSha256": "4c93c554aa0a65ac19c1386bb0cfd9df6545f95b8a6f65541a0db8c072975f6d"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/chromium-jassub-en.png",
+          "sha256": "f312b16b70585fb6a8753d38ccada29c459749b4eb8b2b500773124e52579b86"
+        },
+        "translation": "/document/plugin/jassub.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "plugin/danmuku-mask.md",
+        "passed": true,
+        "errors": [],
+        "title": "弹幕遮罩\n​",
+        "optionsTable": {
+          "width": 688,
+          "contentWidth": 688
+        },
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-danmuku/index.js\n./uncompiled/artplayer-plugin-danmuku-mask/index.js",
+          "codeSha256": "9af098986165597dfd603a9437128b96a5765a72c791ea3b7eed382010d26982"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/chromium-danmuku-mask-zh.png",
+          "sha256": "a0b955205ff23ef62340cbcc6c89ec105cd2811c1fe280e158266c277ba429ec"
+        },
+        "translation": "/document/en/plugin/danmuku-mask.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "en/plugin/danmuku-mask.md",
+        "passed": true,
+        "errors": [],
+        "title": "Danmuku Mask\n​",
+        "optionsTable": {
+          "width": 688,
+          "contentWidth": 688
+        },
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-danmuku/index.js\n./uncompiled/artplayer-plugin-danmuku-mask/index.js",
+          "codeSha256": "9af098986165597dfd603a9437128b96a5765a72c791ea3b7eed382010d26982"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/chromium-danmuku-mask-en.png",
+          "sha256": "ed481a4739b0d4c949a25e54d6a38cb0fb8465aa4eb8ae1389cae69cc8dfafdc"
+        },
+        "translation": "/document/plugin/danmuku-mask.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "plugin/chromecast.md",
+        "passed": true,
+        "errors": [],
+        "title": "Chromecast\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-chromecast/index.js",
+          "codeSha256": "ee0ba2c9e10c89f3d1cf13d65aa16b6955e94892a82ca7e19024cae3eea8a4a4"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/chromium-chromecast-zh.png",
+          "sha256": "27daf19deb36884791333b3287569fde223a5dec9d68acc1e3e1581bf91b4dd1"
+        },
+        "translation": "/document/en/plugin/chromecast.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "en/plugin/chromecast.md",
+        "passed": true,
+        "errors": [],
+        "title": "Chromecast\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-chromecast/index.js",
+          "codeSha256": "ee0ba2c9e10c89f3d1cf13d65aa16b6955e94892a82ca7e19024cae3eea8a4a4"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/chromium-chromecast-en.png",
+          "sha256": "e85f2df293a4c113f329d1457d4e47287864210459b86dd78f987d8b1ff8e1e8"
+        },
+        "translation": "/document/plugin/chromecast.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "plugin/jassub.md",
+        "passed": true,
+        "errors": [],
+        "title": "ASS 字幕：JASSUB\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-jassub/index.js",
+          "codeSha256": "4c93c554aa0a65ac19c1386bb0cfd9df6545f95b8a6f65541a0db8c072975f6d"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/firefox-jassub-zh.png",
+          "sha256": "95c4857660d3a28f8dc663005ded81e467af3963979bc529b419d2f50aa6fdb4"
+        },
+        "translation": "/document/en/plugin/jassub.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "en/plugin/jassub.md",
+        "passed": true,
+        "errors": [],
+        "title": "ASS Subtitles with JASSUB\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-jassub/index.js",
+          "codeSha256": "4c93c554aa0a65ac19c1386bb0cfd9df6545f95b8a6f65541a0db8c072975f6d"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/firefox-jassub-en.png",
+          "sha256": "648c3f7422fd780a3c926881b85bec8664312dca38b4ef7f57c73a63b17680e8"
+        },
+        "translation": "/document/plugin/jassub.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "plugin/danmuku-mask.md",
+        "passed": true,
+        "errors": [],
+        "title": "弹幕遮罩\n​",
+        "optionsTable": {
+          "width": 688,
+          "contentWidth": 688
+        },
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-danmuku/index.js\n./uncompiled/artplayer-plugin-danmuku-mask/index.js",
+          "codeSha256": "9af098986165597dfd603a9437128b96a5765a72c791ea3b7eed382010d26982"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/firefox-danmuku-mask-zh.png",
+          "sha256": "ce8dda6f9149ff18e82380c9e45b05b23de95b6733d4f3915e8039209fe91690"
+        },
+        "translation": "/document/en/plugin/danmuku-mask.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "en/plugin/danmuku-mask.md",
+        "passed": true,
+        "errors": [],
+        "title": "Danmuku Mask\n​",
+        "optionsTable": {
+          "width": 688,
+          "contentWidth": 688
+        },
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-danmuku/index.js\n./uncompiled/artplayer-plugin-danmuku-mask/index.js",
+          "codeSha256": "9af098986165597dfd603a9437128b96a5765a72c791ea3b7eed382010d26982"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/firefox-danmuku-mask-en.png",
+          "sha256": "8f9ca16205c80af6a0c88f890337af7d3a2232badd75f0093e03a1f7d8b9e5f9"
+        },
+        "translation": "/document/plugin/danmuku-mask.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "plugin/chromecast.md",
+        "passed": true,
+        "errors": [],
+        "title": "Chromecast\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-chromecast/index.js",
+          "codeSha256": "ee0ba2c9e10c89f3d1cf13d65aa16b6955e94892a82ca7e19024cae3eea8a4a4"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/firefox-chromecast-zh.png",
+          "sha256": "a71b4a9340527a10b92a72e536a1a58ad9309146b4e081895fe5cc705b48ca2a"
+        },
+        "translation": "/document/en/plugin/chromecast.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "en/plugin/chromecast.md",
+        "passed": true,
+        "errors": [],
+        "title": "Chromecast\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-chromecast/index.js",
+          "codeSha256": "ee0ba2c9e10c89f3d1cf13d65aa16b6955e94892a82ca7e19024cae3eea8a4a4"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/firefox-chromecast-en.png",
+          "sha256": "56d92edc7d6ec4ba9d19ca826b6d2aba17da11b0fa88db7e0af000899cbf1a8a"
+        },
+        "translation": "/document/plugin/chromecast.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "plugin/jassub.md",
+        "passed": true,
+        "errors": [],
+        "title": "ASS 字幕：JASSUB ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-jassub/index.js",
+          "codeSha256": "4c93c554aa0a65ac19c1386bb0cfd9df6545f95b8a6f65541a0db8c072975f6d"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/webkit-jassub-zh.png",
+          "sha256": "4b07063ff7443f0f3f9186732182c2add08ce1af62fb1dfeb6de3527af5ebd02"
+        },
+        "translation": "/document/en/plugin/jassub.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "en/plugin/jassub.md",
+        "passed": true,
+        "errors": [],
+        "title": "ASS Subtitles with JASSUB ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-jassub/index.js",
+          "codeSha256": "4c93c554aa0a65ac19c1386bb0cfd9df6545f95b8a6f65541a0db8c072975f6d"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/webkit-jassub-en.png",
+          "sha256": "9118cd61ff50d795829a35d3075b99c353e7145de89b1fef6247a801a8ade0d8"
+        },
+        "translation": "/document/plugin/jassub.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "plugin/danmuku-mask.md",
+        "passed": true,
+        "errors": [],
+        "title": "弹幕遮罩 ​",
+        "optionsTable": {
+          "width": 688,
+          "contentWidth": 688
+        },
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-danmuku/index.js\n./uncompiled/artplayer-plugin-danmuku-mask/index.js",
+          "codeSha256": "9af098986165597dfd603a9437128b96a5765a72c791ea3b7eed382010d26982"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/webkit-danmuku-mask-zh.png",
+          "sha256": "eebe1c1b4d3cd718de0dc18146586f47c10cd9536faf0124e272ceeb4e486908"
+        },
+        "translation": "/document/en/plugin/danmuku-mask.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "en/plugin/danmuku-mask.md",
+        "passed": true,
+        "errors": [],
+        "title": "Danmuku Mask ​",
+        "optionsTable": {
+          "width": 688,
+          "contentWidth": 688
+        },
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-danmuku/index.js\n./uncompiled/artplayer-plugin-danmuku-mask/index.js",
+          "codeSha256": "9af098986165597dfd603a9437128b96a5765a72c791ea3b7eed382010d26982"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/webkit-danmuku-mask-en.png",
+          "sha256": "17a26a4062d4a6c13df3760736d404e9e6f598dbfac7c82f8e61a15e3dcb2b62"
+        },
+        "translation": "/document/plugin/danmuku-mask.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "plugin/chromecast.md",
+        "passed": true,
+        "errors": [],
+        "title": "Chromecast ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-chromecast/index.js",
+          "codeSha256": "ee0ba2c9e10c89f3d1cf13d65aa16b6955e94892a82ca7e19024cae3eea8a4a4"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/webkit-chromecast-zh.png",
+          "sha256": "5f7f6a9ec177fa7b15a7f190532b3f0445338cac3db97e14593a16e99ebfca45"
+        },
+        "translation": "/document/en/plugin/chromecast.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "en/plugin/chromecast.md",
+        "passed": true,
+        "errors": [],
+        "title": "Chromecast ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-chromecast/index.js",
+          "codeSha256": "ee0ba2c9e10c89f3d1cf13d65aa16b6955e94892a82ca7e19024cae3eea8a4a4"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-jassub-mask-cast-final/webkit-chromecast-en.png",
+          "sha256": "c3a5efd737cd802db702516df4ac134793fa6b12224f63a0e547a1b144f395d8"
+        },
+        "translation": "/document/plugin/chromecast.html"
+      }
+    ],
+    "controls": [],
+    "complete": true,
+    "limitations": [
+      "Guide rendering/navigation and original-code forwarding only; popup editor response is isolated, not media playback.",
+      "Does not complete SITE-04 core/member coverage, SITE-05, EX-03 or physical-device validation."
+    ]
+  },
+  "initialValidation": {
+    "report": {
+      "path": "refactor/.cache/site04-jassub-mask-cast/report.json",
+      "sha256": "ef66504916faf1c7f69888b29591b02e9b728094a1d49085fdb61414fe4e09d7"
+    },
+    "cases": 18,
+    "passed": 18,
+    "reasonForRevision": "The long Mask CDN URL forced option descriptions outside the initial table viewport. Move its link into prose and combine type/default columns, then check actual table width in the final browser run."
+  },
+  "tools": {
+    "tests": 17,
+    "pass": 17,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 1204.8237,
+    "checksPassed": [
+      "build:llm",
+      "build:docs",
+      "check:llm",
+      "config eslint",
+      "site-inventory --write/--check",
+      "demos --check"
+    ],
+    "buildSeconds": 8.46,
+    "yarnBuildSeconds": 10.12
+  },
+  "inventory": {
+    "markdown": 58,
+    "html": 67,
+    "examples": 30,
+    "declarationMembers": 963,
+    "assets": 204
+  },
+  "ledger": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-QSm1IM/report.json",
+      "sha256": "7a6c34f60fe2b2c8b7965d9e7376f14f2781f183dfdd540627a435dc5b186f17"
+    },
+    "libraries": [
+      {
+        "name": "artplayer",
+        "fingerprint": "896b9f1f57feb447e9baef3b02c2c04e51b79eadef858b01a921e2b2146ff75a",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "fingerprint": "a7c85c3cbd5893306c50af3e5ab2ae900838633184e2b5509a7790a346e63277",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "fingerprint": "58b3de027f6da9358927a032585af2db0b98ece514263062e61a26c0b0a60d69",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "fingerprint": "e99563e05cf2fa5cb687bee25bbec5f663dadb39cd7a780ae506121a069f3288",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "fingerprint": "68251599fb975857e5124b3a7804e2e7edbd9de6b3b22eef2882ae9cf38c3560",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "fingerprint": "fa1ac932fb279f6de85856d98d649ea6b12b39c221a8e54d63d5a46d28ed25eb",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "fingerprint": "4dcc9e5c4e127edbc17ab1e59e3fb973ac9733125cff744c3031b43b98476e02",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "fingerprint": "e16de620bd4770b4ab717291af29d5a2f450025ae8bdf22815f6efd51e40056e",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "fingerprint": "90d09ab98a1ca36575a5ed38332d518c03265bcd4ad95524170394b1e67209c0",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "fingerprint": "71b4367caed8ad8cbe4a171abb3bb4be3955c15dea4694255c1448c85d6dfb17",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "fingerprint": "3130f6e7c49373a87b094582bcc9affbdf799c562ec688137bb96f3d7ed42157",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "fingerprint": "3507d1d5e0de702173c25a2e5caddac6e245046d9cd1249728b76e6dea9b8b77",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "fingerprint": "3210ec59c5b8440d584d509e214f4021a0a5117639a1e883d617e95e2ac9a49b",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "fingerprint": "e0391ecf1e2c9da0a622bb933a857f718bb370ecfb63ecc4b5e3ef1261e84371",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "fingerprint": "d2b9e3f04560bcb5a5e6028166c7f92d23554290be6ae29fc632bf1eb82d1f87",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "fingerprint": "07e23e4b5ad201e2b33afd0f8b689161c6228d0c0e0621487e48b04457fef766",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "fingerprint": "4a7cbdb38d5d876a68bc74a3a785402a2989b3730638b0654c358275bcffc423",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "fingerprint": "3cad2e085d0cf960508f5ed75ed62731c245e741246659a0f882fd73f2ed5430",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "fingerprint": "adca4dc42d1a1bfe05ba81ebb397b607eb548ca6ec02856f1312dd41ea96a232",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "fingerprint": "a0808c48db68a5d433ebb983348cf28130552e5bea99c38a1335b90b4b302d3c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "fingerprint": "b6403202698ea9beccee34f764727442c31ad806cb5b5e3b4f6e944f760acdb8",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      }
+    ],
+    "publicationAuthorized": false
+  },
+  "visualInspections": [
+    "initial chromium-danmuku-mask-zh.png",
+    "final chromium-danmuku-mask-zh.png"
+  ],
+  "attachments": [
+    {
+      "path": "refactor/.cache/site04-jassub-mask-cast-validate.mjs",
+      "sha256": "69d30ecaf56b6d97215d225afd33f9f336ccac486ee944854891fe47fd156f11"
+    },
+    {
+      "path": "refactor/.cache/site04-jassub-mask-cast-layout.mjs",
+      "sha256": "2eb087a977a78858917a3b90f7e035d4182aad400194b128a95a2123ecfecc07"
+    },
+    {
+      "path": "refactor/.cache/site04-jassub-mask-cast-final-validate.mjs",
+      "sha256": "4b115f2f5128eddad6aaf7d8761596f65e4a34ed0f0dcd1afe58914eedfe2e74"
+    },
+    {
+      "path": "refactor/.cache/site04-jassub-mask-cast-final/report.json",
+      "sha256": "f7057e0e7c7889aa9a9a4399c0dee7d7b7b3c91c599b54a17ac847da1071b0ab"
+    },
+    {
+      "path": "refactor/.cache/site04-jassub-mask-cast-final-validate.log",
+      "sha256": "f94ea37d833fef8b09ee28f6a9819d7eada6c8adf295680f9bbfb9628e93e00b"
+    },
+    {
+      "path": "refactor/.cache/site04-jassub-mask-cast-tools.log",
+      "sha256": "eeb1948402debbfb04141ca553cf71d7a6ed00c56a9ecda142093e708d028f50"
+    },
+    {
+      "path": "refactor/.cache/site04-jassub-mask-cast-final-build.log",
+      "sha256": "a5cc3114210d0efda7d74b26b07bc04449f3d55ac13f347b096da0e1ea7e9e50"
+    },
+    {
+      "path": "refactor/.cache/site04-jassub-mask-cast-final-llm.log",
+      "sha256": "f5b46de593d011c435a9805606838753258de29779bcd7b6c517e2b95a65a6f7"
+    },
+    {
+      "path": "refactor/.cache/site04-jassub-mask-cast-ledger.log",
+      "sha256": "eab4f332b05ccf9880578b2173dcd491ef000cc5320760cb35570600af27315b"
+    }
+  ],
+  "whitespace": {
+    "fullExit": 2,
+    "findings": [
+      {
+        "file": "docs/document/en/plugin/chromecast.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/en/plugin/chromecast.html",
+        "line": 53
+      },
+      {
+        "file": "docs/document/en/plugin/danmuku-mask.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/en/plugin/danmuku-mask.html",
+        "line": 62
+      },
+      {
+        "file": "docs/document/en/plugin/jassub.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/en/plugin/jassub.html",
+        "line": 72
+      },
+      {
+        "file": "docs/document/plugin/chromecast.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/plugin/chromecast.html",
+        "line": 53
+      },
+      {
+        "file": "docs/document/plugin/danmuku-mask.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/plugin/danmuku-mask.html",
+        "line": 62
+      },
+      {
+        "file": "docs/document/plugin/jassub.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/plugin/jassub.html",
+        "line": 72
+      }
+    ],
+    "remainingExit": 0,
+    "note": "Only blank VitePress template lines; generated HTML preserved and full check not reported as passing."
+  }
+}

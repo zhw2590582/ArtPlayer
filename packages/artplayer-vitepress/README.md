@@ -23,6 +23,9 @@ not a VitePress page. Keep both URL surfaces compatible.
 | `docs/plugin/multiple-subtitles.md`, `docs/en/plugin/multiple-subtitles.md` | Track loading, selection, shared subtitle configuration and compatible type views | `/document/plugin/multiple-subtitles.html`, `/document/en/plugin/multiple-subtitles.html` |
 | `docs/plugin/ads.md`, `docs/en/plugin/ads.md` | Preroll options, countdown-only controls, events and approved type-inference migration | `/document/plugin/ads.html`, `/document/en/plugin/ads.html` |
 | `docs/plugin/vast.md`, `docs/en/plugin/vast.md` | Published/workspace initialization, request contexts, SDK ownership and accurate runtime types | `/document/plugin/vast.html`, `/document/en/plugin/vast.html` |
+| `docs/plugin/jassub.md`, `docs/en/plugin/jassub.md` | Worker resources, ASS queries, actual method signatures, ownership and compatible declarations | `/document/plugin/jassub.html`, `/document/en/plugin/jassub.html` |
+| `docs/plugin/danmuku-mask.md`, `docs/en/plugin/danmuku-mask.md` | Segmentation configuration, start/stop, mask ownership and preserved type shape | `/document/plugin/danmuku-mask.html`, `/document/en/plugin/danmuku-mask.html` |
+| `docs/plugin/chromecast.md`, `docs/en/plugin/chromecast.md` | SDK loading, callbacks, shared sessions, receiver limitations and runtime types | `/document/plugin/chromecast.html`, `/document/en/plugin/chromecast.html` |
 | `docs/.vitepress/config.js` | Navigation, base URL, output path, page head | Repository `docs/document/` |
 | `docs/vite.config.ts` | Search plugin configuration | VitePress/Vite integration; real search acceptance remains pending |
 | `docs/public/main.js` | Run Code links and first-visit language redirect | Copied into the built site |
@@ -36,10 +39,18 @@ and run `node refactor/scripts/demos.mjs --check`. Preserve the frozen BASE-04
 inventory. Also refresh and check the current site inventory; the two inventories
 serve different purposes. Neither path check replaces browser navigation tests.
 
-The generated site lives in `docs/document/`. The current inventory contains 52 Markdown pages: 26 Chinese
-and 26 English. Danmuku, HLS, DASH, Audio Track, VTT Thumbnail, Chapter, Ambilight, Document PiP, ASR, Auto Thumbnail, Multiple Subtitles, Ads and VAST have dedicated guides and navigation in both languages. Other plugins currently
-use their package README, architecture notes and linked editor examples;
+The generated site lives in `docs/document/`. The current inventory contains 58 Markdown pages: 29 Chinese
+and 29 English. All 16 plugins have dedicated guides and navigation in both languages.
+The two proxies and two tools still need dedicated bilingual guides. Core member
+mapping and the current cross-check of earlier guides remain in SITE-04;
 navigation links alone are not complete API documentation.
+
+JASSUB documents actual resize argument order, query callbacks and resource
+ownership separately from preserved historical declarations. Danmuku Mask keeps
+both plugin dependencies in its Run Code link and explains initialization versus
+first-mask completion. Chromecast distinguishes retained sessions from receiver
+playback, and player destruction from ending a shared Cast session. These guide
+checks do not validate actual ASS pixels, segmentation inference or Cast hardware.
 
 Ads and VAST keep their original demos and approved compatibility decisions.
 Ads play/pause affect its countdown, and its programmatic skip does not enforce

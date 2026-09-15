@@ -32,13 +32,21 @@ Ads 和 VAST 的本次核对：
 | Ads | [入口](../packages/artplayer-plugin-ads/src/index.ts)、options.ts、countdown.ts、view.ts、session.ts、根/runtime声明、README/ARCHITECTURE | [中文](../packages/artplayer-vitepress/docs/plugin/ads.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/ads.md)：七个配置及四项i18n、name/play/pause/skip、click/skip事件、十个公开类型 | video优先、可信HTML、浅合并、计时非视频时长、按钮限制不拦截直接skip、ready/首播/早调用/销毁、事件活配置、totalDuration推导修正和忽略source/type |
 | VAST | [入口](../packages/artplayer-plugin-vast/src/index.ts)、sdk.ts、session.ts、view.ts、根/runtime声明、README/ARCHITECTURE与两项已批准决策 | [中文](../packages/artplayer-vitepress/docs/plugin/vast.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/vast.md)：回调/第二参数、全部context字段、init/playUrl/playRes、name/destroy、runtime命名类型及工作区别名 | npm默认回调前创建/数据快照，显式workspace惰性/getter/请求抑制/事件；config可覆盖主字段；注册等待回调非广告完成；session可重建/core终止；旧根类型与准确runtime分离，外部IMA仍单独验收 |
 
+JASSUB、弹幕遮罩和 Chromecast 的本次核对：
+
+| 包 | 对照源码与声明 | 双语指南覆盖 | 保留边界 |
+| --- | --- | --- | --- |
+| JASSUB | [入口](../packages/artplayer-plugin-jassub/src/index.ts)、registration.ts、vendor实现、根/runtime声明、README/ARCHITECTURE | [中文](../packages/artplayer-vitepress/docs/plugin/jassub.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/jassub.md)：全部RuntimeOption；实例方法与字段；AssEvent/AssStyle；13个runtime命名类型 | 同步注册非Worker ready；实际resize参数/void返回与旧声明分开；query回调/target关联/毫秒单位；资源部署、caller节点归属、晚到位图与销毁；离屏停顿和字体/真机缺口保留 |
+| Danmuku Mask | [入口](../packages/artplayer-plugin-danmuku-mask/src/index.ts)、config.ts、controller.ts、output.ts、sdk.ts、根/legacy声明、README/ARCHITECTURE | [中文](../packages/artplayer-vitepress/docs/plugin/danmuku-mask.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/danmuku-mask.md)：十项配置、name/start/stop、NodeNext类型提取、双插件示例 | truthy默认值、固定MediaPipe/general与忽略字段、start不保证首mask、stop等待关系、无人物保留mask、model失败与其他拒绝区别；无runtime/新事件；SDK私有GPU完成未证明 |
+| Chromecast | [入口](../packages/artplayer-plugin-chromecast/src/index.ts)、controller.ts、media.ts、sdk.ts、根/runtime声明、README/ARCHITECTURE | [中文](../packages/artplayer-vitepress/docs/plugin/chromecast.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/chromecast.md)：四项设置/四回调、name/getCastState/isCasting、八个命名类型与旧根兼容 | options必填/活读取、首次点击加载、共享SDK/首URL、30秒ready期限、原始与标准状态、请求取消、绝对媒体URL/MIME、销毁不结束共享会话；有会话不等于接收端播放，真机仍独立验收 |
+
 ## 接续范围
 
 - 核心：依据 site-inventory.json 的 963 条成员逐项或按明确的共享声明分组核对；
   必须记录对应文档及语义结论，不能仅按同名标题匹配标为通过。
 - 已有 Danmuku、HLS、DASH、Audio、VTT 双语指南：继承各 SITE-* 任务的证据，但
   仍需在本轮全包核对中检查其当前声明、示例和能力边界。
-- 其余插件、两个 proxy、两个 tool：包内 README/ARCHITECTURE 不能替代缺失的
+- 16个插件现均有独立双语指南；两个 proxy、两个 tool：包内 README/ARCHITECTURE 不能替代缺失的
   双语使用说明。按实际能力分组补入口，不机械复制维护文档。
 - SITE-05 和 EX-03 负责后续完整页面与实际 demo 验收；静态内容核对不等待真机，
   也不能据此关闭真机、外部 SDK、发布或复盘门槛。
