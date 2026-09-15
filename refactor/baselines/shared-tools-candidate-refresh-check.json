@@ -1,0 +1,249 @@
+{
+  "task": "REL-02",
+  "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
+  "capturedAt": "2026-09-15T22:57:58.114Z",
+  "report": {
+    "path": "refactor/.cache/release-ledger-7sv85w/report.json",
+    "sha256": "3fe81ac0df70130cbbe5e4867fd7660dbdaa757b41b7368de36379dffc20f97e"
+  },
+  "preparation": {
+    "path": "refactor/baselines/shared-tools-candidate-refresh.json",
+    "sha256": "7df3f938a46586a251d7357dc69ab4e9010c0256dd19d09cbe247a9bdfcc82c1"
+  },
+  "libraries": [
+    {
+      "name": "artplayer",
+      "version": "6.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer.tgz",
+      "fingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 28
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "version": "3.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-ads.tgz",
+      "fingerprint": "55236854b94ac7b0dd91b4107dcb60e97ac6f1a5e8b6b8a9dcb63bba66c6509a",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 32
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-ambilight.tgz",
+      "fingerprint": "f88a6a2f1c5548389cae293614f648d72077ed03a7be6c81ad017a1155a839a3",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 31
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "version": "3.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-asr.tgz",
+      "fingerprint": "7fa3ca9577b53f3bb90e2c23fec9e6e70fbbb0c089ccae2923084b9059bcbdf9",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 32
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-audio-track.tgz",
+      "fingerprint": "0c73b970872fe56df1c669e5badfa91f9cd7ec3c73070a9852cfea076cc8923f",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 33
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-auto-thumbnail.tgz",
+      "fingerprint": "9ced9b18e4b260ccbcf6ac016b32ec0852040cb5c0f57be72718a03d40d598bf",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 37
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-chapter.tgz",
+      "fingerprint": "f1dd73097e43df504f686f18a6ca30bcb1f57ab74d3cc62909db20505c994072",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 31
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-chromecast.tgz",
+      "fingerprint": "d6d79d4b47afaefa66d32c5b1709f412ed9d32c636462723918c268a6601e631",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 31
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "6.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-danmuku.tgz",
+      "fingerprint": "3d32a4c6d94d9eaa31cd982ec43ae2b710a4c923e5076f357ba4c902be48d729",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 31
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-danmuku-mask.tgz",
+      "fingerprint": "ceb17cbb235a42438c28df15ddf830d104a749b58515333c43da2b18534b166c",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 40
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-dash-control.tgz",
+      "fingerprint": "6716002b92bb12b54d17772d87a560bb9e863da35abfa37988907d54e02cdf74",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 34
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-document-pip.tgz",
+      "fingerprint": "a3a56ecc218c8e180621d1bc00684950cca4ada8d483334b0cb91fd783c10831",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 34
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-hls-control.tgz",
+      "fingerprint": "00a07f33277bae211a553e9fb2e924ade219513135bc54921886f4518dd27964",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 35
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-jassub.tgz",
+      "fingerprint": "cc9304759ff3cdd84767eee38fcbb9cf70e234f2449946536fd1da972cde679f",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 38
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-multiple-subtitles.tgz",
+      "fingerprint": "43825f602514c9e6a0bd8f0a270a54a03d1cb76f821b99d1e736d0150dafc190",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 33
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-vast.tgz",
+      "fingerprint": "3503e145a591a406105eb953f9ac75c8373992c9f3f1f23b713de65c85a3bb3d",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 33
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-vtt-thumbnail.tgz",
+      "fingerprint": "b7932e08a086cfe16ed5e78872e274fb897931d0653dbf7ac61a19b404ddec85",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 34
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-proxy-canvas.tgz",
+      "fingerprint": "a0a8efb762e823fe4dd8c8de9601f74ac873ade8c6953a7e5305297608c71a12",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 30
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-proxy-mediabunny.tgz",
+      "fingerprint": "9fd7e62c56ae78866267cdd5650dc4e4af4aad76dd6ff8466b68908bc25d661c",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 41
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "version": "2.0.0",
+      "candidate": "refactor/.cache/packages/run-qQwwPA/artplayer-tool-iframe.tgz",
+      "fingerprint": "00dc477ad56d12cfa6cd0d1e071e80f4120afed23f44af0393e23e5dac516a3b",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 33
+    },
+    {
+      "name": "artplayer-tool-thumbnail",
+      "version": "5.0.0",
+      "candidate": "refactor/.cache/thumbnail-package-types-bGLHWV/candidate.tgz",
+      "fingerprint": "78bf5be3b2b5656a0b95ce2ce3cf1a635b6df609361a840b8298476f65af9d52",
+      "build": {
+        "status": "evidence-recorded"
+      },
+      "status": "blocked",
+      "blockers": 34
+    }
+  ],
+  "siteCandidate": null,
+  "publicationAuthorized": false,
+  "limitation": "Only build evidence refreshed. Identical shipped member bytes do not relabel older runtime/browser/SDK/device/rollback/review reports."
+}

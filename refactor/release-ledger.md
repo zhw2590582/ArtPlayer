@@ -45,6 +45,13 @@ integrity、输入指纹不一致的 rollback 报告仍被拒绝，远端恢复�
 
 ## 候选绑定
 
+2026-09-16：共享Markdown分段器及回归测试修改后，从96962a69a重新构建、打包和
+隔离安装21库。1918个输入保持一致，1041个快照输入匹配，299个归档成员与新构建、
+安装及上次候选一致。21库build指纹恢复有效，见
+[准备](baselines/shared-tools-candidate-refresh.json)和
+[登记检查](baselines/shared-tools-candidate-refresh-check.json)。原候选/build引用保留
+在准备记录中；相同包内容不自动重标旧浏览器、设备、SDK或回退报告。
+
 2026-09-16：Auto Thumbnail的随包维护说明修正后，已从实际提交重新构建、打包、
 冻结安装并单独替换其候选/build封套；旧证据保留不改写。见
 [更新记录](changes/2026-09-16-REL-02-auto-thumbnail-refresh.md)。其余20库候选不变，

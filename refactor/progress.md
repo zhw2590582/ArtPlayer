@@ -1,5 +1,15 @@
 # 进度与证据
 
+## REL-02 共享工具修复后的全库候选更新
+
+从96962a69a重新构建/打包21库，隔离安装及冻结锁检查通过；1918个唯一输入在构建
+前后保持一致，1041个快照输入匹配，299个包内成员与新构建/安装及旧候选均一致。
+核心/Chapter运行时与类型、Audio/HLS类型、Thumbnail七组候选类型及五组历史负例
+通过预期检查。见[记录](changes/2026-09-16-REL-02-shared-tools-refresh.md)、
+[准备](baselines/shared-tools-candidate-refresh.json)及[登记检查](baselines/shared-tools-candidate-refresh-check.json)。
+21库build重新有效，旧档案/浏览器报告保留；站点候选与其他发布门槛仍未完成。
+REL-02保持doing，224/22/39不变。继续核心文档与其他实施验收，不进入正式复盘。
+
 ## SITE-04 设置面板与翻译分段修复
 
 补齐双语设置面板指南，修正旧range字段阻止更新成switch的示例；79条新声明映射，
