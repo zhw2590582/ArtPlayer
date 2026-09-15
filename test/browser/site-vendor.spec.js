@@ -36,6 +36,7 @@ test('mobile vConsole shows logs and upstream site notice texts are served uncha
   const index = await request.get('/THIRD_PARTY_NOTICES.md')
   expect(index.status()).toBe(200)
   expect(await index.text()).toContain('Included component: @vscode/codicons 0.0.26')
+  expect(await index.text()).toContain('Included component: typescript (Monaco worker) 4.4.4')
   expect(await index.text()).toContain('Included component: console-feed 3.2.2')
   expect(await index.text()).toContain('Included component: react-pure-render (shallowequal origin) source commit 729cdbd')
   expect(await index.text()).toContain('Included component: chromium-string-utils')

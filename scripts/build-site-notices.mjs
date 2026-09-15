@@ -18,6 +18,7 @@ assert.deepEqual(manifest.groups.filter(group => group.name !== 'console').flatM
   'regenerator-runtime',
   'style-loader',
   'svelte',
+  'typescript (Monaco worker)',
   'webpack',
 ], 'Do not silently drop verified bundled component attribution')
 const consoleGroup = manifest.groups.find(group => group.name === 'console')
@@ -69,6 +70,8 @@ assert.deepEqual(consoleGroup?.components?.map(component => component.name).sort
 ], 'Do not silently drop verified console component attribution')
 assert.equal(consoleGroup?.notices.length, 47, 'Missing reviewed console notice')
 const vconsoleNotices = manifest.groups.find(group => group.name === 'vconsole')?.notices.map(notice => notice.target)
+const typeScriptNotices = manifest.groups.find(group => group.name === 'monaco-editor')?.components?.find(component => component.name === 'typescript (Monaco worker)')?.notices
+assert.deepEqual(typeScriptNotices?.map(target => target.split('/').pop()).sort(), ['ATTRIBUTION.md', 'CopyrightNotice.txt', 'LICENSE.txt', 'ThirdPartyNoticeText.txt'], 'Missing TypeScript component notice')
 for (const name of ['LICENSE', 'MIT-LICENSE', 'ATTRIBUTION.md'])
   assert(vconsoleNotices?.includes(`docs/licenses/vconsole/${name}`), `Missing vConsole notice: ${name}`)
 verifyConsoleNoticeSources(process.cwd(), manifest)

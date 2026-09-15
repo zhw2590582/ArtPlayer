@@ -69,12 +69,20 @@ Included component: @vscode/codicons 0.0.26
 
 Source: https://registry.npmjs.org/@vscode/codicons/-/codicons-0.0.26.tgz
 
+Included component: typescript (Monaco worker) 4.4.4
+
+Source: https://registry.npmjs.org/typescript/-/typescript-4.4.4.tgz
+
 - licenses/monaco-editor/LICENSE
 - licenses/monaco-editor/ThirdPartyNotices.txt
 - licenses/monaco-editor/codicons/LICENSE
 - licenses/monaco-editor/codicons/LICENSE-CODE
 - licenses/monaco-editor/codicons/README.md
 - licenses/monaco-editor/codicons/ATTRIBUTION.md
+- licenses/monaco-editor/typescript/LICENSE.txt
+- licenses/monaco-editor/typescript/CopyrightNotice.txt
+- licenses/monaco-editor/typescript/ThirdPartyNoticeText.txt
+- licenses/monaco-editor/typescript/ATTRIBUTION.md
 
 ## console legacy-vendor-with-TS-adapter
 

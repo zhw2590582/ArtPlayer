@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "commit": "5a7ba61be909ae9e4889768a3453ebb0dec392e2",
+  "archives": [
+    {
+      "name": "monaco-editor",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.30.1.tgz",
+      "integrity": "sha512-B/y4+b2O5G2gjuxIFtCE2EkM17R2NM7/3F8x0qcPsqy4V83bitJTIO4TIeZpYlzu/xy6INiY/+84BEm6+7Cmzg==",
+      "sha256": "d7872ab742036036eca48cd54e43d751bede56742f0689bcf4049bcf701468c7"
+    },
+    {
+      "name": "typescript",
+      "version": "4.4.4",
+      "tarball": "https://registry.npmjs.org/typescript/-/typescript-4.4.4.tgz",
+      "integrity": "sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==",
+      "sha256": "7524841bbf63777fef1fe6e1a826026b1dd4849f54f5affa481502faab2cdb16"
+    },
+    {
+      "name": "terser",
+      "version": "5.9.0",
+      "tarball": "https://registry.npmjs.org/terser/-/terser-5.9.0.tgz",
+      "integrity": "sha512-h5hxa23sCdpzcye/7b8YqbE5OwKca/ni0RQz1uRX3tGh8haaGHqcuSqbGRybuAKNdntZ0mDgFNXPJ48xQ2RXKQ==",
+      "sha256": "2ca0d9c4731b6ebd3b86ed1a7b735f685f98636ee5a067ae9e27e83246069619"
+    },
+    {
+      "name": "source-map",
+      "version": "0.7.3",
+      "tarball": "https://registry.npmjs.org/source-map/-/source-map-0.7.3.tgz",
+      "integrity": "sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==",
+      "sha256": "ad69b787ba774733c3e4f0eb20403df7b1fa466252d453533dbcc6a5ad15833e"
+    }
+  ],
+  "remotes": [
+    {
+      "source": "refactor/baselines/site-vendor/monaco-typescript/package-lock.json.txt",
+      "sha256": "84c66bfe8ae95b2226ca289279133999356e64137db7ba001817737fa1ac8cf8",
+      "gitBlobSha": "9f647e9fc82150a5d06a9c02dc781d2dbe902ed6",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/package-lock.json?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-typescript/importTypescript.js.txt",
+      "sha256": "6cdd4a73849bfb7ebf464c465b0b741f9f93f2c84f110dfd6efe6ca8c1a2f243",
+      "gitBlobSha": "ec2ecdbbebd4c1536bc1d0522ba08ebca83b407a",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-typescript/scripts/importTypescript.js?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-typescript/bundle.js.txt",
+      "sha256": "1f418cf3a1c27d9c466ce315ebb185451e47e70847e3fb53f383aae2bb5250d9",
+      "gitBlobSha": "2478682d11c9122debd33d6a7339183b16238799",
+      "apiUrl": "https://api.github.com/repos/microsoft/monaco-editor/contents/monaco-typescript/scripts/bundle.js?ref=5a7ba61be909ae9e4889768a3453ebb0dec392e2"
+    }
+  ],
+  "notices": [
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/LICENSE.txt",
+      "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47",
+      "source": "refactor/baselines/site-vendor/monaco-typescript/LICENSE.txt",
+      "target": "docs/licenses/monaco-editor/typescript/LICENSE.txt"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/CopyrightNotice.txt",
+      "sha256": "0d9e78b962c1f6215aa974365d263c50683b6855db45c6c0ed67ee1002974dc6",
+      "source": "refactor/baselines/site-vendor/monaco-typescript/CopyrightNotice.txt",
+      "target": "docs/licenses/monaco-editor/typescript/CopyrightNotice.txt"
+    },
+    {
+      "archive": "typescript-4.4.4",
+      "member": "package/ThirdPartyNoticeText.txt",
+      "sha256": "0a64d2681a1e3c7ccd1c2a146a68812d4a23e66ca7cc1dea0e30dbd81e80c369",
+      "source": "refactor/baselines/site-vendor/monaco-typescript/ThirdPartyNoticeText.txt",
+      "target": "docs/licenses/monaco-editor/typescript/ThirdPartyNoticeText.txt"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-typescript/ATTRIBUTION.txt",
+      "target": "docs/licenses/monaco-editor/typescript/ATTRIBUTION.md",
+      "sha256": "edb4b7526e86fadf7461ffda983f9f56a96472cf1ebf639947948e405ed95321",
+      "member": null
+    }
+  ],
+  "source": {
+    "archive": "typescript-4.4.4",
+    "member": "package/lib/typescriptServices.js",
+    "sha256": "1e02a7407cab6987cb40e3132983728b22fd17cb61a2df901ba3ca16b7347d7e"
+  },
+  "worker": {
+    "archive": "monaco-editor-0.30.1",
+    "member": "package/dev/vs/language/typescript/tsWorker.js",
+    "sha256": "22af34ae9b19d7e8f4f8204ba944f5ccd298bf130b28558f719a97c23a858a11"
+  },
+  "compiler": {
+    "archive": "terser-5.9.0",
+    "member": "package/dist/bundle.min.js",
+    "sha256": "b8b44743a529c5bd1cf8d6676f040c3c9bed29c7c114e5a26dde5e0fb2125838",
+    "version": "5.9.0",
+    "sourceMap": "0.7.3",
+    "options": {
+      "output": {
+        "comments": "some"
+      }
+    }
+  },
+  "target": {
+    "path": "docs/assets/js/vs/language/typescript/tsWorker.js",
+    "sha256": "95d7d318d3b6076692705bda50f69ccf2981aae6b06f240de5ac642f32970bf4"
+  },
+  "limits": [
+    "Only the TypeScript service segment is matched to the upstream compiler source. The full minified worker is reproduced from the fixed Monaco dev worker.",
+    "Other Monaco workers, core embedded dependencies and language definitions remain under review.",
+    "No historical npm install scripts or TypeScript service runtime are executed."
+  ]
+}

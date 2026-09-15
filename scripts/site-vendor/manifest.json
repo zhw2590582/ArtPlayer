@@ -920,6 +920,26 @@
           "source": "refactor/baselines/site-vendor/codicons-0.0.26/ATTRIBUTION.txt",
           "target": "docs/licenses/monaco-editor/codicons/ATTRIBUTION.md",
           "sha256": "ac4a57ce60aebaec1796b715d075273c4fd849853cd943fb92790c61ad038a5f"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-typescript/LICENSE.txt",
+          "target": "docs/licenses/monaco-editor/typescript/LICENSE.txt",
+          "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-typescript/CopyrightNotice.txt",
+          "target": "docs/licenses/monaco-editor/typescript/CopyrightNotice.txt",
+          "sha256": "0d9e78b962c1f6215aa974365d263c50683b6855db45c6c0ed67ee1002974dc6"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-typescript/ThirdPartyNoticeText.txt",
+          "target": "docs/licenses/monaco-editor/typescript/ThirdPartyNoticeText.txt",
+          "sha256": "0a64d2681a1e3c7ccd1c2a146a68812d4a23e66ca7cc1dea0e30dbd81e80c369"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-typescript/ATTRIBUTION.txt",
+          "target": "docs/licenses/monaco-editor/typescript/ATTRIBUTION.md",
+          "sha256": "edb4b7526e86fadf7461ffda983f9f56a96472cf1ebf639947948e405ed95321"
         }
       ],
       "review": "The complete upstream Monaco LICENSE/ThirdPartyNotices are retained. The unmodified bundled Codicons font exactly matches @vscode/codicons 0.0.26; its historical README, CC BY 4.0 content license, MIT code license and added attribution are distributed below. Other site assets remain subject to their separate provenance reviews.",
@@ -936,6 +956,20 @@
             "docs/licenses/monaco-editor/codicons/LICENSE-CODE",
             "docs/licenses/monaco-editor/codicons/README.md",
             "docs/licenses/monaco-editor/codicons/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "typescript (Monaco worker)",
+          "version": "4.4.4",
+          "tarball": "https://registry.npmjs.org/typescript/-/typescript-4.4.4.tgz",
+          "assets": [
+            "docs/assets/js/vs/language/typescript/tsWorker.js"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/typescript/LICENSE.txt",
+            "docs/licenses/monaco-editor/typescript/CopyrightNotice.txt",
+            "docs/licenses/monaco-editor/typescript/ThirdPartyNoticeText.txt",
+            "docs/licenses/monaco-editor/typescript/ATTRIBUTION.md"
           ]
         }
       ]

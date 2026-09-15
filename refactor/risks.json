@@ -624,11 +624,16 @@
         "scripts/site-vendor/manifest.json",
         "refactor/baselines/site-codicons-provenance.json",
         "refactor/baselines/site-codicons-validation.json",
-        "refactor/changes/2026-09-15-SITE-07-codicons.md"
+        "refactor/changes/2026-09-15-SITE-07-codicons.md",
+        "refactor/baselines/monaco-typescript-provenance.json",
+        "refactor/baselines/monaco-typescript-validation.json",
+        "refactor/changes/2026-09-15-SITE-07-monaco-typescript.md",
+        "scripts/site-vendor/monaco/typescript.ts",
+        "scripts/site-vendor/monaco/reproduce-typescript.ts"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
-      "workspaceState": "Monaco 0.30.1 inventory and original LICENSE/ThirdPartyNotices remain verified. Bundled codicon.ttf exactly matches official @vscode/codicons 0.0.26; historical CC BY 4.0 content license, MIT code license, README and added attribution now ship verbatim. Three-engine editor/mobile/native playback and HTTP notice/font checks pass 6/6. The Codicons gap is addressed; broader bundled-component notice completeness review remains open before closing VENDOR-06."
+      "workspaceState": "Monaco 0.30.1 TypeScript worker identifies 4.4.4, unlike the original stale 2.7.2 notice. Fixed Git lock/recipes and four archives prove the 9698327-character adapted service segment and exact minified worker. Three original TypeScript notices plus a version/modification explanation are delivered. Unit 10/10 and three-engine editor/notice checks 6/6 pass. Other language services, shim, core embedded libraries and language definitions remain under review; VENDOR-06 is open."
     },
     {
       "id": "VENDOR-07",

@@ -1,5 +1,14 @@
 # 进度与证据
 
+## SITE-07 Monaco TypeScript 4.4.4
+
+核对实际worker与固定提交锁，补充准确版本及三份原始许可/第三方说明，保留
+上游旧2.7.2标签并说明差异。服务源码经原适配后精确匹配，完整worker也通过
+固定minifier逐字节重现。单元10/10，三引擎编辑器/交付6/6通过；见
+[记录](changes/2026-09-15-SITE-07-monaco-typescript.md)。运行资产未改，69份notice
+实际交付。VENDOR-06/SITE-07仍开放，继续其他language services、核心和语言定义，
+整体199/265；没有推送、部署或发布。
+
 ## SITE-07 控制台来源审查收敛
 
 完成[汇总审查](console-notice-review.md)，VENDOR-08改为accepted-with-scope：

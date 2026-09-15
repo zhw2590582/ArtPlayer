@@ -144,3 +144,20 @@ test('Console notice CLI rejects omitted package or embedded attribution before 
     }
   }
 })
+
+test('Monaco TypeScript supplement requires all three upstream notices and its version explanation', (t) => {
+  const { root } = fixture(t)
+  const manifestPath = path.join(root, 'scripts/site-vendor/manifest.json')
+  fs.mkdirSync(path.dirname(manifestPath), { recursive: true })
+  const original = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))
+  for (const name of ['LICENSE.txt', 'CopyrightNotice.txt', 'ThirdPartyNoticeText.txt', 'ATTRIBUTION.md']) {
+    const manifest = structuredClone(original)
+    const component = manifest.groups.find(group => group.name === 'monaco-editor').components.find(component => component.name === 'typescript (Monaco worker)')
+    component.notices = component.notices.filter(target => !target.endsWith(`/${name}`))
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest))
+    const result = spawnSync(process.execPath, [path.resolve('scripts/build-site-notices.mjs')], { cwd: root, encoding: 'utf8' })
+    assert.equal(result.status, 1)
+    assert.match(result.stderr, /Missing TypeScript component notice/)
+    assert(!fs.existsSync(path.join(root, 'docs')))
+  }
+})

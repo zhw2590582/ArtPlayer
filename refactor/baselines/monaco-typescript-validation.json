@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "status": "checkpoint-incomplete",
+  "recordedAt": "2026-09-15T00:45:40.499Z",
+  "baseCommit": "fb1faffbe9a7a8acfd5aa8dcc19177daf5806406",
+  "node": "v24.21.0",
+  "fingerprints": {
+    "sourceRecord": "f10f3a2375750f3750eeb4416e0995f6b9353354360eabd1d7d234d38dee9d95",
+    "manifest": "339290aca7892db8630ee412ae67d6458ab34d742468e77d3cb01435d4d45604",
+    "worker": "95d7d318d3b6076692705bda50f69ccf2981aae6b06f240de5ac642f32970bf4",
+    "runtimeChanges": "No changes to any of the 99 Monaco asset records"
+  },
+  "unit": {
+    "passed": 10,
+    "log": "refactor/.cache/monaco-typescript-tests.log"
+  },
+  "reproduction": {
+    "result": {
+      "archives": 4,
+      "fixedGitSources": 3,
+      "typeScriptVersion": "4.4.4",
+      "sourceCharacters": 9698327,
+      "exactWorker": true,
+      "workerSha256": "95d7d318d3b6076692705bda50f69ccf2981aae6b06f240de5ac642f32970bf4",
+      "notices": 4,
+      "otherMonacoComponentsReviewed": false
+    },
+    "log": "refactor/.cache/monaco-typescript-fetch.log",
+    "offlineLog": "refactor/.cache/monaco-typescript-offline.log"
+  },
+  "browser": {
+    "report": "refactor/.cache/browser/report.json",
+    "sha256": "1374f9398d79ef18520d30c44d11bca257c194aaeaa65b22f8b8d066015b81a5",
+    "tests": [
+      {
+        "project": "chromium",
+        "title": "docs Monaco worker consumes generated core and published VAST types and runs a typed player example",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "notices": null,
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ]
+      },
+      {
+        "project": "firefox",
+        "title": "docs Monaco worker consumes generated core and published VAST types and runs a typed player example",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "notices": null,
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "docs Monaco worker consumes generated core and published VAST types and runs a typed player example",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "notices": null,
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "chromium",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "notices": 69,
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ]
+      },
+      {
+        "project": "firefox",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "notices": 69,
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "notices": 69,
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      }
+    ]
+  },
+  "followUp": {
+    "method": "TypeScript AST inspection of literal string define calls across current Monaco JS files; not an exhaustive scan of dynamically encoded modules",
+    "literalCalls": 328,
+    "externalPrefixes": [
+      "jsonc-parser",
+      "vscode-css-languageservice",
+      "vscode-html-languageservice",
+      "vscode-json-languageservice",
+      "vscode-languageserver-textdocument",
+      "vscode-languageserver-types",
+      "vscode-nls",
+      "vscode-uri"
+    ],
+    "caution": "vscode-nls may be an upstream-generated shim; installed lock version alone is not exact runtime provenance. Other worker/core/language source review remains open."
+  },
+  "limits": [
+    "Source proof covers the adapted TypeScript service and the full archived-dev-to-min worker transform, not a full rebuild of every Monaco component.",
+    "Raw upstream notices retain their original bytes and encoding.",
+    "Windows browser checks do not replace physical devices, external SDK tests or remote CI/release evidence."
+  ],
+  "checks": [
+    "Strict docs-tools TypeScript",
+    "Scoped source and test lint",
+    "Strict canonical toolchain",
+    "Read-only notice generation",
+    "Plan and risk checks"
+  ]
+}
