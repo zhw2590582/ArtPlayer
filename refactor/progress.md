@@ -1,5 +1,16 @@
 # 进度与证据
 
+## DOC-REVIEW-01 用户主导复盘启动
+
+用户明确要求实施完成后先不要复盘，由用户指导启动。已同步根AGENTS、
+release-reviews和ai-workflow：继续实施与必要测试，结束后交接并等待指示，
+不自动进入三轮复盘，也不提前开始首轮；原复盘及发布门槛保留。
+见[记录](changes/2026-09-15-DOC-REVIEW-01-user-guidance.md)。
+当前为218 done、21 doing、43 todo，共282；这项完成数仅代表执行规则文档。
+Firefox验收已提交9cfb6c8b9；当前没有浏览器测试进程运行，完整WebKit安装回归
+及其他实施任务仍待继续。减少重复运行和冗长输出，不推送或发布。
+
+
 ## CI-01 完整 Firefox 安装包回归
 
 固定b3344a7c6、Node24.21.0/Yarn1.22.22，复用5e0447fc5打包的run-cRduve；

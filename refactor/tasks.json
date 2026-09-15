@@ -5056,7 +5056,8 @@
         "MOD-02",
         "MOD-03",
         "CORE-25",
-        "ENG-13"
+        "ENG-13",
+        "DOC-REVIEW-01"
       ],
       "status": "todo",
       "risk": "H",
@@ -6076,6 +6077,26 @@
       "evidence": [
         "changes/2026-09-15-CI-JASSUB-SOURCE-01-native-inputs.md",
         "baselines/jassub-source-selection-validation.json"
+      ]
+    },
+    {
+      "id": "DOC-REVIEW-01",
+      "phase": "0 规划",
+      "title": "记录用户主导复盘阶段启动",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-08"
+      ],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "实施及必要测试完成后交接、等待用户指导复盘的持久执行规则",
+      "acceptance": "根指令与复盘/AI流程一致；三轮保持待办，原依赖与发布门槛不变，不自动提前复盘",
+      "evidence": [
+        "changes/2026-09-15-DOC-REVIEW-01-user-guidance.md",
+        "release-reviews.md",
+        "ai-workflow.md"
       ]
     }
   ]

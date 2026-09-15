@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 281 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 282 项，范围 22 个包及工作区/示例。
 
-状态：todo 43 / doing 21 / blocked 0 / done 217 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 43 / doing 21 / blocked 0 / done 218 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -54,6 +54,7 @@
 | DOC-11 | workspace<br>记录全部包各自升级一个大版本 | DOC-10 | 22 包目标版本清单、决策和发布/CI/复盘规则同步 | 版本表与 manifest 对照、计划检查通过并独立提交；不修改旧 API 兼容要求 | L | done |
 | DOC-12 | workspace<br>复审开发启动、验收覆盖及发布依赖 | DOC-11 | 语义依赖修正、版本实施任务、基线/分发分类及契约映射要求、校验器保护 | 原范围状态保持，计划检查和故障负例通过，独立提交 DOC-12 | M | done |
 | DOC-13 | workspace<br>记录并验证内置浏览器回退规则 | DOC-08 | 根指令、复盘和夹具文档中的浏览器回退及实际环境证据 | 内置浏览器打开真实页面，报告基础检查结果及未覆盖项；独立提交 | L | done |
+| DOC-REVIEW-01 | workspace<br>记录用户主导复盘阶段启动 | DOC-08 | 实施及必要测试完成后交接、等待用户指导复盘的持久执行规则 | 根指令与复盘/AI流程一致；三轮保持待办，原依赖与发布门槛不变，不自动提前复盘 | L | done |
 
 ## 1 基线
 
@@ -461,7 +462,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| REVIEW-01 | workspace<br>第一轮全项目架构与兼容性复盘 | REL-02, CORE-22, SITE-04, DOC-08, MOD-01, MOD-02, MOD-03, CORE-25, ENG-13 | 22 包结构、类型、旧 API/路径、测试盲区和维护文档的逐包报告 | 本轮阻断项由独立修复任务关闭并复测；环境缺口转交下一轮，不宣称已发布就绪 | H | todo |
+| REVIEW-01 | workspace<br>第一轮全项目架构与兼容性复盘 | REL-02, CORE-22, SITE-04, DOC-08, MOD-01, MOD-02, MOD-03, CORE-25, ENG-13, DOC-REVIEW-01 | 22 包结构、类型、旧 API/路径、测试盲区和维护文档的逐包报告 | 本轮阻断项由独立修复任务关闭并复测；环境缺口转交下一轮，不宣称已发布就绪 | H | todo |
 | REVIEW-02 | workspace<br>第二轮真实浏览器与生态集成复盘 | REVIEW-01, REL-03 | Chrome 交互、自动浏览器、新旧组合、真机/SDK/性能/资源的全范围报告 | 所需环境证据齐全，前轮修复再次核对；本轮阻断项关闭，无关 mock 不替代真实验收 | H | todo |
 | REVIEW-03 | workspace<br>第三轮 npm 候选内容与发布准备复盘 | REVIEW-02, REL-04, CI-04 | 实际候选 integrity、干净安装构建/消费者、入口/许可/版本/tag/回退及前轮证据汇总 | 最终候选完整检查通过，发布阻断项为零；准备可审阅的批次报告，不自动执行 publish；逐包核对 major 目标，不能用大版本豁免旧 API 兼容 | H | todo |
 
@@ -738,3 +739,4 @@
 - CI-TYPES-02: [记录](changes/2026-09-15-CI-TYPES-02-ecosystem.md) [记录](baselines/ecosystem-types-validation.json)
 - SITE-EDITOR-VAST-01: [记录](changes/2026-09-15-SITE-EDITOR-VAST-01-consumer.md) [记录](baselines/editor-vast-consumer-validation.json) [记录](baselines/ci-source-firefox-validation.json) [记录](vast-type-decision.md)
 - CI-JASSUB-SOURCE-01: [记录](changes/2026-09-15-CI-JASSUB-SOURCE-01-native-inputs.md) [记录](baselines/jassub-source-selection-validation.json)
+- DOC-REVIEW-01: [记录](changes/2026-09-15-DOC-REVIEW-01-user-guidance.md) [记录](release-reviews.md) [记录](ai-workflow.md)

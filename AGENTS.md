@@ -27,8 +27,10 @@ The user also authorizes installing needed dependencies and adding or improving 
 project scripts for the refactor without asking again for routine tooling choices.
 Record their purpose and versions, use the appropriate workspace/dependency category, update
 the lockfile when applicable, and verify compatibility and reproducible execution.
-After implementation, follow [refactor/release-reviews.md](refactor/release-reviews.md):
-complete the three review rounds and close blocking findings before candidate publication.
+After implementation and its necessary tests, hand off the results and wait for the
+user to guide and start the review phase. Do not automatically begin REVIEW-01/02/03,
+including an early first review. Follow [refactor/release-reviews.md](refactor/release-reviews.md):
+the three review rounds and closure of blocking findings remain required before candidate publication.
 Connected Chrome interaction checks complement committed automated browser tests; neither
 connection availability nor mocks replace actual playback or required device evidence.
 If Chrome is unavailable, use the Codex in-app browser for supported real-page tests.
