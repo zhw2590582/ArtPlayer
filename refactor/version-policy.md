@@ -4,7 +4,7 @@
 
 ## 目标清单
 
-以下来自源码提交 a9197f59 的 22 个 package.json，是本次规划快照，并非已核实的 npm 最新版本；package-inventory.json 历史基线保持不变。本任务不修改 manifest。
+以下来自源码提交 a9197f59 的 22 个 package.json，是本次规划快照，并非 npm 最新版本；package-inventory.json 历史基线保持不变。REL-01 已在 [分包版本方案](version-plan.md) 冻结目标、迁移/依赖方案和2026-09-16 registry观察；manifest 由 REL-09 更新。
 
 | 包 | 当前源码版本 | 重构正式目标 |
 | --- | --- | --- |
@@ -43,4 +43,4 @@
 6. 候选版本必须在最终构建/pack/验证前确定，CI-03 校验逐包版本、包内容和发布 tag；不能测试旧版本包后临发布再改版本。版本或依赖变化使相关候选证据失效，必须重跑验证。
 7. REVIEW-03 逐包核对目标、声明、入口、版本组合、旧调用及回退产物；release notes 说明本次工程重构采用新 major，但不能笼统声明所有旧 API 已兼容而缺少证据。
 
-本次决定替代 toolchain-release.md 和 github-ci-cd.md 原先“不自动提升全部 major”的规则。兼容契约与三轮复盘门槛不变；这是版本策略记录，尚未实施升级或发布。
+本次决定替代 toolchain-release.md 和 github-ci-cd.md 原先“不自动提升全部 major”的规则。兼容契约与三轮复盘门槛不变；REL-01已冻结方案，REL-09尚未实施升级，没有发布授权。实施完成后等待用户指导启动复盘。

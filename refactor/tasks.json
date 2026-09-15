@@ -4960,11 +4960,16 @@
         "PKG-MB-08",
         "PKG-FACTORY-01"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "每包版本/变更日志/依赖/类型差异方案和独立准入状态；按 version-policy.md 冻结各包下一 major（minor/patch 归零）并核实 registry 占用",
       "acceptance": "所有包有方案和剩余门槛，未决项明确阻止相应发布；本步骤不声称已经可发布；全部包有 major 目标，版本冲突明确处理，独立准备任务同步 manifest/锁/依赖/日志；按 BASE-05 区分 21 库与文档站分发，不机械把文档站当库上传 npm",
-      "evidence": []
+      "evidence": [
+        "version-plan.md",
+        "version-plan.json",
+        "baselines/version-registry-2026-09-16.json",
+        "changes/2026-09-16-REL-01-version-plan.md"
+      ]
     },
     {
       "id": "REL-09",

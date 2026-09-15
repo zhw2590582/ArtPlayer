@@ -37,6 +37,7 @@
 | [已实现的开发环境](toolchain-setup.md) | Node/Yarn 固定版本、锁文件、安装命令和实际验证范围 |
 | [Bun 隔离安装评估](bun-evaluation.md) | 固定版本对比、传递依赖/资源差异及继续使用 Yarn 的依据 |
 | [全包大版本策略](version-policy.md) | 每包分别升级一个 major 的目标清单、兼容要求和版本落地步骤 |
+| [分包版本与迁移方案](version-plan.md) | REL-01冻结的22包目标、registry观察、变更日志范围、依赖与示例计划 |
 | [已实现的 CI 入口](ci-setup.md) | Yarn 检查/构建、只读 lint、Pages 隔离及远端待验收状态 |
 | [GitHub CI/CD](github-ci-cd.md) | PR/兼容矩阵、构建报告、Pages、npm 发布及远端准入验证 |
 | [Pages部署与恢复](pages-deployment.md) | 独立暂存、旧URL/域名预检、只读远端快照与人工切换恢复顺序 |

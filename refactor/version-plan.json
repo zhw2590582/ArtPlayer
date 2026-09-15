@@ -1,0 +1,5212 @@
+{
+  "schemaVersion": 1,
+  "task": "REL-01",
+  "capturedAt": "2026-09-15T16:24:23.645Z",
+  "sourceCommit": "267b21226a11930b1dd89508f326956c1e106928",
+  "registrySnapshot": "refactor/baselines/version-registry-2026-09-16.json",
+  "policy": {
+    "basis": "refactor/version-policy.md",
+    "preparedVersion": "exact next-major stable target",
+    "prereleaseSuffix": null,
+    "localCandidate": "Unpublished target-version tarball, not an npm upload.",
+    "futureCandidateTag": "next",
+    "futureStableTag": "latest",
+    "publicationAuthorized": false,
+    "siteNpmPublication": false,
+    "versionReuse": "Never overwrite or republish any previously used package@version. Any post-publication content fix needs a new version and new evidence."
+  },
+  "sharedGates": [
+    "CI-01",
+    "CI-03",
+    "CI-04",
+    "REL-01",
+    "REL-09",
+    "REL-02",
+    "REL-03",
+    "REL-04",
+    "REVIEW-01",
+    "REVIEW-02",
+    "REVIEW-03"
+  ],
+  "packages": [
+    {
+      "name": "artplayer",
+      "sourceVersion": "5.4.1",
+      "targetVersion": "6.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer",
+        "observedAt": "2026-09-15T16:19:40.759Z",
+        "latest": "5.4.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/releases.json",
+        "selector": "releases.0",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer/CHANGELOG.md",
+        "heading": "6.0.0 (unreleased)",
+        "changes": [
+          "TypeScript subsystems and generated public declarations; preserve root APIs and offer precise /runtime types.",
+          "Lifecycle, source/event ownership, components, subtitles, playback/display and accessibility fixes; historical consumer matrix retained."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {
+          "dependencies": {
+            "option-validator": "^2.0.6"
+          }
+        },
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer.d.ts",
+        "runtimeSubpath": true,
+        "sources": "public/ generates types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer/README.md",
+        "packages/artplayer/ARCHITECTURE.md",
+        "packages/artplayer/types/README.md"
+      ],
+      "remainingPackageTasks": [],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "apple-safari-media",
+        "android-media",
+        "native-fullscreen-pip"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "5.4.1 must be prepared as 6.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "sourceVersion": "2.1.0",
+      "targetVersion": "3.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-ads",
+        "observedAt": "2026-09-15T16:19:40.741Z",
+        "latest": "1.0.6",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/ads-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-ads/CHANGELOG.md",
+        "heading": "3.0.0 (unreleased)",
+        "changes": [
+          "Typed ad lifecycle and cleanup with preserved published defaults.",
+          "Approved totalDuration type inference correction; migration explanation remains mandatory."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-plugin-ads.d.ts",
+        "runtimeSubpath": true,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-ads/README.md",
+        "packages/artplayer-plugin-ads/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-ADS-05",
+        "PKG-ADS-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "ad-skip-content-restore"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "2.1.0 must be prepared as 3.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-ADS-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-ADS-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ADS-DIST-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ADS-MEDIA-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "sourceVersion": "1.1.0",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-ambilight",
+        "observedAt": "2026-09-15T16:19:40.049Z",
+        "latest": "1.1.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/ambilight-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-ambilight/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed rendering and cleanup with legacy factory behavior.",
+          "Published root types retained; precise /runtime entry and older conflicting declaration migration."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-plugin-ambilight.d.ts",
+        "runtimeSubpath": true,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-ambilight/README.md",
+        "packages/artplayer-plugin-ambilight/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-AMBILIGHT-05",
+        "PKG-AMBILIGHT-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "canvas-cors-background"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.1.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-AMBILIGHT-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-AMBILIGHT-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AMBILIGHT-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "sourceVersion": "2.1.0",
+      "targetVersion": "3.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-asr",
+        "observedAt": "2026-09-15T16:19:40.611Z",
+        "latest": "2.1.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/asr-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-asr/CHANGELOG.md",
+        "heading": "3.0.0 (unreleased)",
+        "changes": [
+          "Typed recognition, media/audio ownership, fallback routing and explicit capture.",
+          "Preserve capability errors and cleanup; supported devices and WebAudio remain release gates."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-plugin-asr.d.ts",
+        "runtimeSubpath": true,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-asr/README.md",
+        "packages/artplayer-plugin-asr/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-ASR-05",
+        "PKG-ASR-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "audio-context-input-lifecycle"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "2.1.0 must be prepared as 3.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-ASR-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-ASR-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-11"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ASR-CORS-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "sourceVersion": "1.1.0",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-audio-track",
+        "observedAt": "2026-09-15T16:19:41.038Z",
+        "latest": "1.1.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/audio-track-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-audio-track/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed dual-media synchronization and owned track listeners.",
+          "Buffer starvation/recovery validation remains open; do not claim a fully green playback matrix."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "types/artplayer-plugin-audio-track.d.ts",
+        "runtimeSubpath": true,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-audio-track/README.md",
+        "packages/artplayer-plugin-audio-track/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-AUDIO-05",
+        "PKG-AUDIO-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "separate-audio-source-switch"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.1.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-AUDIO-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-AUDIO-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUDIO-SYNC-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUDIO-DEMO-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUDIO-BUFFER-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "sourceVersion": "1.1.0",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-auto-thumbnail",
+        "observedAt": "2026-09-15T16:19:41.044Z",
+        "latest": "1.1.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/auto-thumbnail-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-auto-thumbnail/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Separated metadata, frame capture, encoding and plugin cleanup in TypeScript.",
+          "Native frame readiness/pixel issues remain tracked; migration does not claim all browsers passed."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-plugin-auto-thumbnail.d.ts",
+        "runtimeSubpath": true,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-auto-thumbnail/README.md",
+        "packages/artplayer-plugin-auto-thumbnail/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-AUTO-THUMB-03",
+        "PKG-AUTO-THUMB-05",
+        "PKG-AUTO-THUMB-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "native-first-frame-jpeg"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.1.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-AUTO-THUMB-03"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-AUTO-THUMB-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-AUTO-THUMB-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUTO-THUMB-TYPE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUTO-THUMB-EXPORT-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUTO-THUMB-DIST-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUTO-THUMB-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUTO-THUMB-ENCODE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUTO-THUMB-PIXEL-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "sourceVersion": "1.1.0",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-chapter",
+        "observedAt": "2026-09-15T16:19:41.048Z",
+        "latest": "1.1.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/releases.json",
+        "selector": "releases.1",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-chapter/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed parsing, chapter UI and lifecycle integration.",
+          "Preserve chapter selection/events; remaining restart timing and distribution gates are explicit."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-plugin-chapter.d.ts",
+        "runtimeSubpath": false,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-chapter/README.md",
+        "packages/artplayer-plugin-chapter/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-CHAPTER-05",
+        "PKG-CHAPTER-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "touch-fullscreen-thumbnails"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.1.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-CHAPTER-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-CHAPTER-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "CHAPTER-TIMING-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "sourceVersion": "1.1.0",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-chromecast",
+        "observedAt": "2026-09-15T16:19:41.055Z",
+        "latest": "1.1.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/chromecast-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-chromecast/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed SDK initialization, session/receiver state and failure ownership.",
+          "Keep old public plugin surface; physical Cast/receiver verification is separate."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-plugin-chromecast.d.ts",
+        "runtimeSubpath": true,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-chromecast/README.md",
+        "packages/artplayer-plugin-chromecast/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-CAST-05",
+        "PKG-CAST-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "cast-receiver-session"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.1.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-CAST-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-CAST-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-06"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "sourceVersion": "5.3.0",
+      "targetVersion": "6.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-danmuku",
+        "observedAt": "2026-09-15T16:19:41.565Z",
+        "latest": "5.3.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/danmuku-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-danmuku/CHANGELOG.md",
+        "heading": "6.0.0 (unreleased)",
+        "changes": [
+          "Typed input, scheduling, Worker placement, renderer, UI and resource ownership.",
+          "Fix issue #958 heatmap density and CPU/async/first-frame scheduling loss; retain root published types with precise /runtime."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-plugin-danmuku.d.ts",
+        "runtimeSubpath": true,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-danmuku/README.md",
+        "packages/artplayer-plugin-danmuku/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-DANMUKU-08",
+        "PKG-DANMUKU-09"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "mask-fullscreen-pip"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "5.3.0 must be prepared as 6.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-DANMUKU-08"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-DANMUKU-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DANMUKU-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "sourceVersion": "1.1.0",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-danmuku-mask",
+        "observedAt": "2026-09-15T16:19:41.971Z",
+        "latest": "1.1.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/danmuku-mask-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-danmuku-mask/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed model/SDK lifecycle, rendering and cancellation.",
+          "Preserve model behavior; combined native load and final SDK/device resource evidence stay explicit."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {
+          "dependencies": {
+            "@mediapipe/selfie_segmentation": "^0.1.1675465747",
+            "@tensorflow-models/body-segmentation": "^1.0.2",
+            "@tensorflow/tfjs-backend-cpu": "^4.21.0",
+            "@tensorflow/tfjs-backend-webgl": "^4.21.0",
+            "@tensorflow/tfjs-converter": "^4.21.0",
+            "@tensorflow/tfjs-core": "^4.21.0"
+          }
+        },
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-plugin-danmuku-mask.d.ts",
+        "runtimeSubpath": false,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-danmuku-mask/README.md",
+        "packages/artplayer-plugin-danmuku-mask/ARCHITECTURE.md",
+        "packages/artplayer-plugin-danmuku-mask/types/README.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-MASK-05",
+        "PKG-MASK-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "real-model-gpu-cleanup"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.1.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-MASK-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-MASK-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-DANMUKU-08"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-DANMUKU-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-08"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MASK-LIFETIME-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MASK-MODEL-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MASK-BACKEND-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MASK-DOM-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MASK-NOTICE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DANMUKU-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MASK-SCHEDULING-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "sourceVersion": "1.1.0",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-dash-control",
+        "observedAt": "2026-09-15T16:19:41.354Z",
+        "latest": "1.1.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/dash-control-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-dash-control/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed SDK 4.x/5.x adapter, selector reconciliation and cleanup.",
+          "Preserve published options/events; distinguish bare-SDK failures from candidate behavior."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-plugin-dash-control.d.ts",
+        "runtimeSubpath": false,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-dash-control/README.md",
+        "packages/artplayer-plugin-dash-control/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-DASH-05",
+        "PKG-DASH-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "real-dash-sdk-tracks"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.1.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-DASH-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-DASH-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DASH-SDK-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DASH-DEMO-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DASH-SEEK-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "sourceVersion": "1.1.0",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-document-pip",
+        "observedAt": "2026-09-15T16:19:41.352Z",
+        "latest": "1.1.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/dpip-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-document-pip/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed document/window lifetime and content restoration.",
+          "Preserve existing API and DOM ownership; actual document-PiP/device gates remain."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-plugin-document-pip.d.ts",
+        "runtimeSubpath": false,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-document-pip/README.md",
+        "packages/artplayer-plugin-document-pip/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-DPIP-05",
+        "PKG-DPIP-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "document-pip-native-window"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.1.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-DPIP-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-DPIP-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DPIP-PACK-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DPIP-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DPIP-DOM-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DPIP-MEDIA-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "sourceVersion": "1.1.0",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-hls-control",
+        "observedAt": "2026-09-15T16:19:42.293Z",
+        "latest": "1.1.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/hls-control-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-hls-control/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed track/quality control and listener/selector lifecycle.",
+          "Preserve supported hls.js combinations and source-topology cleanup; native worker/device gaps remain."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-plugin-hls-control.d.ts",
+        "runtimeSubpath": false,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-hls-control/README.md",
+        "packages/artplayer-plugin-hls-control/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-HLS-SDK-01",
+        "PKG-HLS-05",
+        "PKG-HLS-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "native-hls-and-worker"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.1.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-HLS-SDK-01"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-HLS-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-HLS-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "HLS-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "HLS-CRASH-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "HLS-PLAYBACK-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "sourceVersion": "1.1.0",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-jassub",
+        "observedAt": "2026-09-15T16:19:42.245Z",
+        "latest": "1.1.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/jassub-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-jassub/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed renderer/Worker/font ownership and native drawing compatibility.",
+          "Preserve root entry and precise /runtime; hybrid late drawing issue remains an explicit blocker."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "types/artplayer-plugin-jassub.d.ts",
+        "runtimeSubpath": true,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-jassub/README.md",
+        "packages/artplayer-plugin-jassub/ARCHITECTURE.md",
+        "packages/artplayer-plugin-jassub/types/README.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-JASSUB-05",
+        "PKG-JASSUB-06",
+        "PKG-JASSUB-09"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "real-worker-wasm-hybrid"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.1.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-JASSUB-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-JASSUB-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-JASSUB-09"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "VENDOR-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "VENDOR-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-09"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "JASSUB-TYPE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "JASSUB-EXPORT-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "JASSUB-HYBRID-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "JASSUB-FIREFOX-OFFSCREEN-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "sourceVersion": "1.2.0",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-multiple-subtitles",
+        "observedAt": "2026-09-15T16:19:42.264Z",
+        "latest": "1.2.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/multiple-subtitles-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-multiple-subtitles/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed caption parsing, ASS conversion, merging and load cancellation.",
+          "Retain published root declaration; /runtime describes actual behavior and conflicting older extraction migration."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+        "runtimeSubpath": true,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-multiple-subtitles/README.md",
+        "packages/artplayer-plugin-multiple-subtitles/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-MULTI-SUB-05",
+        "PKG-MULTI-SUB-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "subtitle-offset-fullscreen"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.2.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-MULTI-SUB-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-MULTI-SUB-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-MERGE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-EXPORT-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "sourceVersion": "1.2.0",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-vast",
+        "observedAt": "2026-09-15T16:19:42.264Z",
+        "latest": "1.0.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/vast-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-vast/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed SDK/loading/disposal and published initialization timing by default.",
+          "Approved workspace-1.2 opt-in timing and /runtime type migration; SDK/network and device evidence remain separate."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {
+          "dependencies": {
+            "@alugha/ima": "2.1.0",
+            "@glomex/vast-ima-player": "^1.21.2"
+          }
+        },
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-plugin-vast.d.ts",
+        "runtimeSubpath": true,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-vast/README.md",
+        "packages/artplayer-plugin-vast/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-VAST-05",
+        "PKG-VAST-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "google-ima-ad-content-restore"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.2.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-VAST-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-VAST-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-07"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "VAST-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "VAST-DIST-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "sourceVersion": "1.1.0",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-plugin-vtt-thumbnail",
+        "observedAt": "2026-09-15T16:19:42.581Z",
+        "latest": "1.1.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/vtt-thumbnail-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-plugin-vtt-thumbnail/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed VTT parsing, sprite lifecycle and cleanup.",
+          "Preserve published root types and precise /runtime; document supported old-core combinations and name conflicts."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+        "runtimeSubpath": true,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-plugin-vtt-thumbnail/README.md",
+        "packages/artplayer-plugin-vtt-thumbnail/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-VTT-THUMB-05",
+        "PKG-VTT-THUMB-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "touch-fullscreen-chapter"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.1.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-VTT-THUMB-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-VTT-THUMB-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "VTT-THUMB-DIST-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "VTT-THUMB-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "VTT-THUMB-EXPORT-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "VTT-CORE-NAME-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "sourceVersion": "1.1.0",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-proxy-canvas",
+        "observedAt": "2026-09-15T16:19:42.579Z",
+        "latest": "1.1.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/canvas-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-proxy-canvas/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed canvas/media shim, source and native subtitle-track ownership.",
+          "Retain published root types with precise /runtime and documented older type conflicts."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-proxy-canvas.d.ts",
+        "runtimeSubpath": true,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-proxy-canvas/README.md",
+        "packages/artplayer-proxy-canvas/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-CANVAS-05",
+        "PKG-CANVAS-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "canvas-subtitle-document-pip"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.1.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-CANVAS-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-CANVAS-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "sourceVersion": "1.2.0",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-proxy-mediabunny",
+        "observedAt": "2026-09-15T16:19:42.812Z",
+        "latest": "1.2.0",
+        "nameState": "published",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/mb-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "changelog": {
+        "path": "packages/artplayer-proxy-mediabunny/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed engine/shim, input/HLS, audio/video pipelines and track controls.",
+          "Preserve media-like event ordering and published entries; native codec/long-duration/device evidence remains scoped."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {
+          "dependencies": {
+            "mediabunny": "^1.43.1"
+          }
+        },
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-proxy-mediabunny.d.ts",
+        "runtimeSubpath": false,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-proxy-mediabunny/README.md",
+        "packages/artplayer-proxy-mediabunny/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-MB-09",
+        "PKG-MB-10"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "webcodecs-hls-audio-video"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.2.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-HLS-SDK-01"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-HLS-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-HLS-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-MB-09"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-MB-10"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-10"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "HLS-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "HLS-CRASH-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "HLS-PLAYBACK-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MB-LICENSE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MB-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MB-CAP-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "sourceVersion": "1.1.0",
+      "targetVersion": "2.0.0",
+      "distribution": "renamed-npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-tool-iframe",
+        "observedAt": "2026-09-15T16:19:42.578Z",
+        "latest": null,
+        "nameState": "not-found",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/iframe-release.json",
+        "selector": "release",
+        "publishedName": "artplayer-plugin-iframe",
+        "rationale": "Frozen published predecessor and documented rename commit; candidate keeps current workspace name. Registry target availability still requires REL-01."
+      },
+      "changelog": {
+        "path": "packages/artplayer-tool-iframe/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed cross-frame protocol, navigation generations, origin checks and teardown.",
+          "Preserve the documented migration from artplayer-plugin-iframe; new-name rights and distribution rollback are not inferred from 404."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-tool-iframe.d.ts",
+        "runtimeSubpath": false,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-tool-iframe/README.md",
+        "packages/artplayer-tool-iframe/ARCHITECTURE.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-IFRAME-05",
+        "PKG-IFRAME-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "cross-origin-bfcache-device"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.1.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-IFRAME-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-IFRAME-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "IFRAME-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "IFRAME-TRUST-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "IFRAME-DIST-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-tool-thumbnail",
+      "sourceVersion": "4.4.0",
+      "targetVersion": "5.0.0",
+      "distribution": "recovered-npm",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-tool-thumbnail",
+        "observedAt": "2026-09-15T16:19:43.110Z",
+        "latest": null,
+        "nameState": "unpublished",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/thumbnail-release.json",
+        "selector": "recovered",
+        "rationale": "Recovered CDN/Git bytes only; original registry tarball and complete archive unavailable. Not an intact rollback artifact."
+      },
+      "changelog": {
+        "path": "packages/artplayer-tool-thumbnail/CHANGELOG.md",
+        "heading": "5.0.0 (unreleased)",
+        "changes": [
+          "Typed source/extraction/input/emitter ownership and actual constructor declarations.",
+          "Approved published-3.5 default with workspace-4.4 opt-in; preserve delay/height, event and input policies and historical creat* names."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {},
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": "./types/artplayer-tool-thumbnail.d.ts",
+        "runtimeSubpath": false,
+        "sources": "types/"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-tool-thumbnail/README.md",
+        "packages/artplayer-tool-thumbnail/ARCHITECTURE.md",
+        "packages/artplayer-tool-thumbnail/types/README.md"
+      ],
+      "remainingPackageTasks": [
+        "PKG-TOOL-THUMB-05",
+        "PKG-TOOL-THUMB-06"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "native-file-decode-encode"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "4.4.0 must be prepared as 5.0.0 before final candidate validation"
+          },
+          {
+            "kind": "distribution-history",
+            "detail": "Historical archive unavailable; recovered content is not a complete rollback tarball"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-TOOL-THUMB-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-TOOL-THUMB-06"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-DIST-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "THUMB-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "THUMB-MEDIA-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:runtime",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:types",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:combinations",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:browser",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    },
+    {
+      "name": "artplayer-vitepress",
+      "sourceVersion": "1.1.0",
+      "targetVersion": "2.0.0",
+      "distribution": "site",
+      "registry": {
+        "url": "https://registry.npmjs.org/artplayer-vitepress",
+        "observedAt": "2026-09-15T16:19:43.095Z",
+        "latest": null,
+        "nameState": "not-found",
+        "targetState": "not-observed",
+        "ownershipVerified": false
+      },
+      "frozenHistory": {
+        "file": "refactor/baselines/site-provenance.json",
+        "rationale": "Existing docs/site build and URL distribution. No npm publication is inferred."
+      },
+      "changelog": {
+        "path": "packages/artplayer-vitepress/CHANGELOG.md",
+        "heading": "2.0.0 (unreleased)",
+        "changes": [
+          "Typed site/editor/documentation/build modules and local library declaration generation.",
+          "Preserve URLs, examples and editor globals; font provenance, site verification and Pages gates remain. No new npm distribution."
+        ]
+      },
+      "dependencyPolicy": {
+        "action": "preserve existing runtime/dev/optional/peer declarations; do not introduce a new core-major peer restriction",
+        "sourceFields": {
+          "devDependencies": {
+            "flexsearch": "0.8.158",
+            "markdown-it": "14.1.0",
+            "vitepress": "1.6.3",
+            "vitepress-plugin-search": "1.0.4-alpha.22",
+            "vue": "3.5.13"
+          }
+        },
+        "internalWorkspaceDependencies": []
+      },
+      "declarationPolicy": {
+        "action": "preserve existing root and legacy declarations, approved type migrations and module resolution; retain accurate runtime subpath where already provided",
+        "root": null,
+        "runtimeSubpath": false,
+        "sources": "browser/ and build/ source types"
+      },
+      "maintenanceDocs": [
+        "packages/artplayer-vitepress/README.md"
+      ],
+      "remainingPackageTasks": [
+        "SITE-04",
+        "SITE-05",
+        "SITE-06",
+        "SITE-07"
+      ],
+      "remainingRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "mobile-editor-and-site"
+      ],
+      "readinessObservation": {
+        "status": "blocked",
+        "blockers": [
+          {
+            "kind": "version",
+            "detail": "1.1.0 must be prepared as 2.0.0 before final candidate validation"
+          },
+          {
+            "kind": "candidate",
+            "detail": "No candidate artifact is bound"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-01"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-03"
+          },
+          {
+            "kind": "task",
+            "detail": "CI-04"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-CHAPTER-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-CHAPTER-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-AMBILIGHT-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-AMBILIGHT-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-AUDIO-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-AUDIO-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-AUTO-THUMB-03"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-AUTO-THUMB-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-AUTO-THUMB-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-VTT-THUMB-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-VTT-THUMB-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-HLS-SDK-01"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-HLS-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-HLS-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-DASH-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-DASH-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-MULTI-SUB-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-MULTI-SUB-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-JASSUB-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-JASSUB-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-MASK-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-MASK-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-ASR-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-ASR-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-ADS-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-ADS-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-VAST-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-VAST-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-CAST-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-CAST-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-DPIP-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-DPIP-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-DANMUKU-08"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-DANMUKU-09"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-CANVAS-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-CANVAS-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-MB-09"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-MB-10"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-IFRAME-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-IFRAME-06"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-TOOL-THUMB-05"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-TOOL-THUMB-06"
+          },
+          {
+            "kind": "task",
+            "detail": "SITE-04"
+          },
+          {
+            "kind": "task",
+            "detail": "SITE-05"
+          },
+          {
+            "kind": "task",
+            "detail": "SITE-06"
+          },
+          {
+            "kind": "task",
+            "detail": "SITE-07"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-09"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REL-03"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-01"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-02"
+          },
+          {
+            "kind": "task",
+            "detail": "REVIEW-03"
+          },
+          {
+            "kind": "task",
+            "detail": "PKG-JASSUB-09"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ENG-PERF-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-DEMO-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-DIST-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SOURCE-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-SITE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-MEDIA-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "VENDOR-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "VENDOR-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "VENDOR-06"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-02"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-03"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-04"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-05"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-06"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-07"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-08"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-09"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-10"
+          },
+          {
+            "kind": "risk",
+            "detail": "SDK-11"
+          },
+          {
+            "kind": "risk",
+            "detail": "BASE-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "HLS-ENV-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "HLS-CRASH-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "HLS-PLAYBACK-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUDIO-SYNC-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUDIO-DEMO-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUDIO-BUFFER-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "CHAPTER-TIMING-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DASH-SDK-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DASH-DEMO-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DASH-SEEK-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ADS-DIST-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ADS-MEDIA-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "VAST-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "VAST-DIST-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AMBILIGHT-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DPIP-PACK-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DPIP-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DPIP-DOM-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DPIP-MEDIA-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MB-LICENSE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MB-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MB-CAP-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "IFRAME-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "IFRAME-TRUST-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "IFRAME-DIST-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "THUMB-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "THUMB-MEDIA-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUTO-THUMB-TYPE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUTO-THUMB-EXPORT-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUTO-THUMB-DIST-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUTO-THUMB-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUTO-THUMB-ENCODE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "AUTO-THUMB-PIXEL-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "VTT-THUMB-DIST-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "VTT-THUMB-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "VTT-THUMB-EXPORT-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-MERGE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-LIFE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-EXPORT-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "JASSUB-TYPE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "JASSUB-EXPORT-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "ASR-CORS-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MASK-LIFETIME-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MASK-MODEL-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MASK-BACKEND-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MASK-DOM-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MASK-NOTICE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "DANMUKU-SOURCE-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MASK-SCHEDULING-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "JASSUB-HYBRID-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "JASSUB-FIREFOX-OFFSCREEN-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "VTT-CORE-NAME-01"
+          },
+          {
+            "kind": "risk",
+            "detail": "MULTI-SUB-SWITCH-01"
+          },
+          {
+            "kind": "evidence:build",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:site-urls",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:site-assets",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:editor",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:devices",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:licenses",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:rollback",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:remote-ci",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-01",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-02",
+            "detail": "Missing candidate-bound evidence"
+          },
+          {
+            "kind": "evidence:review-03",
+            "detail": "Missing candidate-bound evidence"
+          }
+        ],
+        "publicationAuthorized": false,
+        "capturedAt": "2026-09-15T16:24:23.645Z"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "manifest": "example/react.js/package.json",
+      "private": true,
+      "versionChange": false,
+      "dependencies": {
+        "artplayer": {
+          "before": "^5.3.0-beta.4",
+          "planned": "file:../../packages/artplayer"
+        },
+        "artplayer-plugin-danmuku": {
+          "before": "^5.2.0",
+          "planned": "file:../../packages/artplayer-plugin-danmuku"
+        },
+        "artplayer-plugin-document-pip": {
+          "before": "^1.0.2",
+          "planned": "file:../../packages/artplayer-plugin-document-pip"
+        }
+      }
+    },
+    {
+      "manifest": "example/vue.js/package.json",
+      "private": true,
+      "versionChange": false,
+      "dependencies": {
+        "artplayer": {
+          "before": "^5.3.0-beta.4",
+          "planned": "file:../../packages/artplayer"
+        },
+        "artplayer-plugin-danmuku": {
+          "before": "^5.2.0",
+          "planned": "file:../../packages/artplayer-plugin-danmuku"
+        },
+        "artplayer-plugin-document-pip": {
+          "before": "^1.0.2",
+          "planned": "file:../../packages/artplayer-plugin-document-pip"
+        }
+      }
+    }
+  ],
+  "lockPolicy": "Yarn Classic 1.22.22; root yarn.lock only. Reinstall frozen after preparing metadata; do not create example lockfiles or change external dependency versions incidentally.",
+  "nextTask": "REL-09 implements metadata and changelogs. REL-02 rebuilds final target-version candidates and revalidates; old-version results are historical evidence only."
+}

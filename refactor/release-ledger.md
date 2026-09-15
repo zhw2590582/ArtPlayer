@@ -24,8 +24,9 @@ REL-08 建立台账及机械校验，不代表任何包已经可以发布。唯�
 
 ## 分发和版本边界
 
-每行明确记录独立下一major目标，初始依据是package-inventory.json。正式版本占用、
-预发布标识和变更日志仍由REL-01/09落实；本步不修改任何包版本。
+每行明确记录独立下一major目标，初始依据是package-inventory.json。REL-01已冻结
+[版本方案](version-plan.md)及registry快照：本地候选使用目标正式数字版本，
+实际上传仍需授权、最新占用和名称权限检查。REL-09落实manifest与变更日志。
 
 - 普通npm包使用各自冻结发布记录的name/version/integrity/SHA-256/URL作为历史依据。
   core和chapter引用releases.json各自成员；不把工作区版本当作npm版本。

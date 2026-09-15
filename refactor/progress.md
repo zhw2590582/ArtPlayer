@@ -1,5 +1,16 @@
 # 进度与证据
 
+## REL-01 全包版本方案冻结
+
+22包下一major、变更日志范围、依赖/类型规则、示例计划与剩余准入已写入
+[方案](version-plan.md)。真实registry查询22名及Iframe旧名，未观察到目标或
+更高major稳定版占用；404/撤包不作为名称权限证明。全部包发布准入仍blocked。
+5项registry规则测试、方案校验及lint通过，prepared检查正确拒绝尚未升级的
+manifest。见[记录](changes/2026-09-16-REL-01-version-plan.md)。
+本次没有修改版本号。REL-01 done；221 done、20 doing、42 todo，共283项。
+下一步REL-09落实22包版本、变更日志与本地示例消费，再重建候选。
+完成实施后等待用户指导复盘，不推送、不发布。
+
 ## PKG-DANMUKU-START-01 首帧漏显修复完成
 
 已解释原安装 WebKit 的首个 readys 在CPU间隔之后才运行的漏显：私有采样窗口
