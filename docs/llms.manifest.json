@@ -4,7 +4,7 @@
   "sources": [
     {
       "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
-      "sha256Lf": "5d56bce1f12b10363643edb8f655bbda1ed656b9646561c2e422ca9eb9a7b055"
+      "sha256Lf": "b3ae2863d389defd63ee4a7f02ca6508c08e6729b060e673030e3660e2811a34"
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
@@ -347,5 +347,5 @@
       "sha256Lf": "967db6e5026a2fd3cc24d8a04e5c78859f543d0c0f6d4f9599c103e4e93c9b29"
     }
   ],
-  "outputSha256Lf": "d61044c4c29aa6a07b8b259cccf05b414f36f2fab86d792536e3e45c4d7ff0f5"
+  "outputSha256Lf": "c4a7cb90327235a279ed8a77e09d1a98dc44f276607e73b775d7e46fc18a15d5"
 }

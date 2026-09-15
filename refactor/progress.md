@@ -1,5 +1,13 @@
 # 进度与证据
 
+## SITE-04 核心服务首批语义映射
+
+核对events/storage/i18n/hotkey/notice，补齐双语指南，并将快捷键示例的数字32修正
+为事件code字符串Space。81条声明记录已明确映射，882条仍待核对；两份严格TS、
+六组页面检查、三组真实键盘示例、51项测试及41个语言键查询验证通过。见
+[记录](changes/2026-09-16-SITE-04-core-services.md)及[核心映射](core-content-review.json)。
+运行时代码和候选字节未变，21库build仍有效；SITE-04保持doing，不进入正式复盘。
+
 ## REL-02 DASH维护说明修正后的候选刷新
 
 从b029062ac重新构建DASH2.0.0，五组隔离类型消费通过，每组拒绝八个非法用法；

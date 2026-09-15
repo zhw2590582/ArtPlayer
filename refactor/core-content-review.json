@@ -1,0 +1,806 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-04",
+  "inventory": {
+    "path": "refactor/baselines/site-inventory.json",
+    "sha256": "30c3e52e86b223ccb89184349a4931a49d4fbc716efc3689e4c3c81fb80d287d"
+  },
+  "reviewedAt": "2026-09-15T20:44:27.693Z",
+  "counts": {
+    "inventoryRecords": 963,
+    "reviewedRecords": 81,
+    "unreviewedRecords": 882
+  },
+  "note": "Explicit declaration-record semantic mapping, including overload/getter/setter rows and root/runtime aliases. Counts are not overall API or release completion. Recheck affected groups if their source/document hashes drift. Other declarations and inline members are not implicitly covered.",
+  "groups": [
+    {
+      "id": "events",
+      "status": "semantic-reviewed",
+      "conclusion": "DOM listener ownership, scalar/array disposers, native listener receivers/options, hover versus player events, cleanup collection, global rebind replacement and lifecycle closure.",
+      "records": [
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.proxy@121",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "proxy",
+          "line": 121
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.events@134",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "events",
+          "line": 134
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.events@80",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "events",
+          "line": 80
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.proxy@98",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "proxy",
+          "line": 98
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#EventRegistry.destroyEvents@12",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "EventRegistry",
+          "name": "destroyEvents",
+          "line": 12
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#EventRegistry.proxy@13",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "EventRegistry",
+          "name": "proxy",
+          "line": 13
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#EventRegistry.hover@18",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "EventRegistry",
+          "name": "hover",
+          "line": 18
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#EventRegistry.remove@19",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "EventRegistry",
+          "name": "remove",
+          "line": 19
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#EventRegistry.destroy@20",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "EventRegistry",
+          "name": "destroy",
+          "line": 20
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#EventRegistry.bindGlobalEvents@21",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "EventRegistry",
+          "name": "bindGlobalEvents",
+          "line": 21
+        }
+      ],
+      "sources": [
+        {
+          "path": "packages/artplayer/src/events/index.ts",
+          "sha256": "30d2286316dbd351e93f5a2234dcca84bf68ca28c05921169cca70c2e0b1ecf9"
+        },
+        {
+          "path": "packages/artplayer/src/events/listener-registry.ts",
+          "sha256": "fb062df5151c4e8e970de469f1c7d9af948f72214d32c293c81a5feeb8406124"
+        },
+        {
+          "path": "packages/artplayer/src/events/globalInit.ts",
+          "sha256": "6f6ea497a20a8fd0746b1f020caff76ad6817cd70a1a90fbaea12f992b6d03a7"
+        },
+        {
+          "path": "packages/artplayer/public/artplayer.ts",
+          "sha256": "26a42ac66811e70f68a8ebe62cbf304eb1993451b3e658961be98e7106162527"
+        },
+        {
+          "path": "packages/artplayer/public/runtime.ts",
+          "sha256": "ec4b1d56993eb482a77eb0f94b701047549d009e6ba6433f27e7d464fef30c2b"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/services.ts",
+          "sha256": "8e4648d8c61bff47343f9e1c2b995af69fc00947264b826109ceadcbaf553254"
+        }
+      ],
+      "docs": [
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+          "sha256": "078115d9703b987d6d556a73b23696ac5e3c6a8f2156d27bb21845820d1e9c16",
+          "anchor": "events"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+          "sha256": "8f7c31d21a50a56743ad38a7d9483bcc5e483faef8d05545f6237031b9188d1b",
+          "anchor": "events"
+        }
+      ],
+      "evidence": "baselines/site04-core-services.json"
+    },
+    {
+      "id": "storage",
+      "status": "semantic-reviewed",
+      "conclusion": "JSON envelope key versus item key; truthy-key lookup; current-key-only clear; per-instance fallback distinct from persistent data; synchronous void writes and no automatic merge/migration.",
+      "records": [
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.storage@145",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "storage",
+          "line": 145
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.storage@81",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "storage",
+          "line": 81
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#Storage.name@25",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "Storage",
+          "name": "name",
+          "line": 25
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#Storage.settings@26",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "Storage",
+          "name": "settings",
+          "line": 26
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#Storage.get@27",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "Storage",
+          "name": "get",
+          "line": 27
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#Storage.set@28",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "Storage",
+          "name": "set",
+          "line": 28
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#Storage.del@29",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "Storage",
+          "name": "del",
+          "line": 29
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#Storage.clear@30",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "Storage",
+          "name": "clear",
+          "line": 30
+        }
+      ],
+      "sources": [
+        {
+          "path": "packages/artplayer/src/storage.ts",
+          "sha256": "9c0a0f3d8ac18261db6e49b2ea14322d1d53bfec3531c7337b85005e708fef30"
+        },
+        {
+          "path": "packages/artplayer/public/artplayer.ts",
+          "sha256": "26a42ac66811e70f68a8ebe62cbf304eb1993451b3e658961be98e7106162527"
+        },
+        {
+          "path": "packages/artplayer/public/runtime.ts",
+          "sha256": "ec4b1d56993eb482a77eb0f94b701047549d009e6ba6433f27e7d464fef30c2b"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/services.ts",
+          "sha256": "8e4648d8c61bff47343f9e1c2b995af69fc00947264b826109ceadcbaf553254"
+        }
+      ],
+      "docs": [
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+          "sha256": "078115d9703b987d6d556a73b23696ac5e3c6a8f2156d27bb21845820d1e9c16",
+          "anchor": "storage"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+          "sha256": "8f7c31d21a50a56743ad38a7d9483bcc5e483faef8d05545f6237031b9188d1b",
+          "anchor": "storage"
+        }
+      ],
+      "evidence": "baselines/site04-core-services.json"
+    },
+    {
+      "id": "i18n",
+      "status": "semantic-reviewed",
+      "conclusion": "All41 I18nValue keys share own-key/nonempty lookup; default Chinese dictionary, lowercased language selection, dictionary casing, deep merge/init, fallback/custom keys and no automatic existing-UI redraw.",
+      "records": [
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.i18n@159",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "i18n",
+          "line": 159
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Context Menu@18",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Context Menu",
+          "line": 18
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Lock@19",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Lock",
+          "line": 19
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Video Info@20",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Video Info",
+          "line": 20
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Close@21",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Close",
+          "line": 21
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Video Load Failed@22",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Video Load Failed",
+          "line": 22
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Volume@23",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Volume",
+          "line": 23
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Progress@24",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Progress",
+          "line": 24
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Back@25",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Back",
+          "line": 25
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Settings@26",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Settings",
+          "line": 26
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Play@27",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Play",
+          "line": 27
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Pause@28",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Pause",
+          "line": 28
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Rate@29",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Rate",
+          "line": 29
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Mute@30",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Mute",
+          "line": 30
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Video Flip@31",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Video Flip",
+          "line": 31
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Horizontal@32",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Horizontal",
+          "line": 32
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Vertical@33",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Vertical",
+          "line": 33
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Reconnect@34",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Reconnect",
+          "line": 34
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Show Setting@35",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Show Setting",
+          "line": 35
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Hide Setting@36",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Hide Setting",
+          "line": 36
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Screenshot@37",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Screenshot",
+          "line": 37
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Play Speed@38",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Play Speed",
+          "line": 38
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Aspect Ratio@39",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Aspect Ratio",
+          "line": 39
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Default@40",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Default",
+          "line": 40
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Normal@41",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Normal",
+          "line": 41
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Open@42",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Open",
+          "line": 42
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Switch Video@43",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Switch Video",
+          "line": 43
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Switch Subtitle@44",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Switch Subtitle",
+          "line": 44
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Fullscreen@45",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Fullscreen",
+          "line": 45
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Exit Fullscreen@46",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Exit Fullscreen",
+          "line": 46
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Web Fullscreen@47",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Web Fullscreen",
+          "line": 47
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Exit Web Fullscreen@48",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Exit Web Fullscreen",
+          "line": 48
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Mini Player@49",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Mini Player",
+          "line": 49
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.PIP Mode@50",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "PIP Mode",
+          "line": 50
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Exit PIP Mode@51",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Exit PIP Mode",
+          "line": 51
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.PIP Not Supported@52",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "PIP Not Supported",
+          "line": 52
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Fullscreen Not Supported@53",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Fullscreen Not Supported",
+          "line": 53
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Subtitle Offset@54",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Subtitle Offset",
+          "line": 54
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Last Seen@55",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Last Seen",
+          "line": 55
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.Jump Play@56",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "Jump Play",
+          "line": 56
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.AirPlay@57",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "AirPlay",
+          "line": 57
+        },
+        {
+          "id": "packages/artplayer/public/i18n.ts#I18nValue.AirPlay Not Available@58",
+          "file": "packages/artplayer/public/i18n.ts",
+          "declaration": "I18nValue",
+          "name": "AirPlay Not Available",
+          "line": 58
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.i18n@83",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "i18n",
+          "line": 83
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#I18n.art@37",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "I18n",
+          "name": "art",
+          "line": 37
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#I18n.languages@38",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "I18n",
+          "name": "languages",
+          "line": 38
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#I18n.language@39",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "I18n",
+          "name": "language",
+          "line": 39
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#I18n.init@40",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "I18n",
+          "name": "init",
+          "line": 40
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#I18n.get@41",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "I18n",
+          "name": "get",
+          "line": 41
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#I18n.update@42",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "I18n",
+          "name": "update",
+          "line": 42
+        }
+      ],
+      "sources": [
+        {
+          "path": "packages/artplayer/src/i18n/index.ts",
+          "sha256": "09c6f5bce58e4118dde10e8b2a2d3808785b7fde913a54dd189e0b473e21266a"
+        },
+        {
+          "path": "packages/artplayer/src/i18n/zh-cn.ts",
+          "sha256": "51eb75562ae1ae4e248e1db85c90bcbc69b388a177ada6cbf8c3196a2c343ac6"
+        },
+        {
+          "path": "packages/artplayer/src/i18n/publish.ts",
+          "sha256": "5b216bbe313b3cda56a5da41fba4fb9d095eeec0dc903fcf284ddd8f94926e99"
+        },
+        {
+          "path": "packages/artplayer/src/utils/property.ts",
+          "sha256": "c737d4582a4382f4038d12dafdf8b43418e508c9b8b859b2f0cc17c20f370343"
+        },
+        {
+          "path": "packages/artplayer/public/artplayer.ts",
+          "sha256": "26a42ac66811e70f68a8ebe62cbf304eb1993451b3e658961be98e7106162527"
+        },
+        {
+          "path": "packages/artplayer/public/i18n.ts",
+          "sha256": "34b0c684668044f7600c80b9d3979f8fb730138007b7cb4e7034326b340156fb"
+        },
+        {
+          "path": "packages/artplayer/public/runtime.ts",
+          "sha256": "ec4b1d56993eb482a77eb0f94b701047549d009e6ba6433f27e7d464fef30c2b"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/services.ts",
+          "sha256": "8e4648d8c61bff47343f9e1c2b995af69fc00947264b826109ceadcbaf553254"
+        }
+      ],
+      "docs": [
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+          "sha256": "078115d9703b987d6d556a73b23696ac5e3c6a8f2156d27bb21845820d1e9c16",
+          "anchor": "i18n"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+          "sha256": "8f7c31d21a50a56743ad38a7d9483bcc5e483faef8d05545f6237031b9188d1b",
+          "anchor": "i18n"
+        }
+      ],
+      "evidence": "baselines/site04-core-services.json"
+    },
+    {
+      "id": "hotkey",
+      "status": "semantic-reviewed",
+      "conclusion": "KeyboardEvent.code keys; callback identity/receiver and manager return; native focus/editable/modifier rules; default versus custom keys; desktop init/mobile opt-in; removal and no duplicate initialization.",
+      "records": [
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.hotkey@192",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "hotkey",
+          "line": 192
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.hotkey@93",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "hotkey",
+          "line": 93
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#Hotkey.art@48",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "Hotkey",
+          "name": "art",
+          "line": 48
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#Hotkey.keys@49",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "Hotkey",
+          "name": "keys",
+          "line": 49
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#Hotkey.init@50",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "Hotkey",
+          "name": "init",
+          "line": 50
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#Hotkey.add@51",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "Hotkey",
+          "name": "add",
+          "line": 51
+        },
+        {
+          "id": "packages/artplayer/public/runtime/services.ts#Hotkey.remove@52",
+          "file": "packages/artplayer/public/runtime/services.ts",
+          "declaration": "Hotkey",
+          "name": "remove",
+          "line": 52
+        }
+      ],
+      "sources": [
+        {
+          "path": "packages/artplayer/src/hotkey.ts",
+          "sha256": "d8e477bf451143e566e1f743a5f253dcf00beb23544709794779f275e11498e8"
+        },
+        {
+          "path": "packages/artplayer/src/input/hotkey-defaults.ts",
+          "sha256": "c28e14821e5c7f7ac92a302e92439ab68fe77d5ef7d90a36b147b7c979ab96c6"
+        },
+        {
+          "path": "packages/artplayer/src/input/keyboard-focus.ts",
+          "sha256": "270c9dba40c0eb6d9fb36118b53e7f1d42a301ba4514917849523b6a05ed9e11"
+        },
+        {
+          "path": "packages/artplayer/public/artplayer.ts",
+          "sha256": "26a42ac66811e70f68a8ebe62cbf304eb1993451b3e658961be98e7106162527"
+        },
+        {
+          "path": "packages/artplayer/public/runtime.ts",
+          "sha256": "ec4b1d56993eb482a77eb0f94b701047549d009e6ba6433f27e7d464fef30c2b"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/services.ts",
+          "sha256": "8e4648d8c61bff47343f9e1c2b995af69fc00947264b826109ceadcbaf553254"
+        }
+      ],
+      "docs": [
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+          "sha256": "078115d9703b987d6d556a73b23696ac5e3c6a8f2156d27bb21845820d1e9c16",
+          "anchor": "hotkey"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+          "sha256": "8f7c31d21a50a56743ad38a7d9483bcc5e483faef8d05545f6237031b9188d1b",
+          "anchor": "hotkey"
+        }
+      ],
+      "evidence": "baselines/site04-core-services.json"
+    },
+    {
+      "id": "notice",
+      "status": "semantic-reviewed",
+      "conclusion": "Boolean getter versus historical root type; text/Error assignment, hidden-but-retained text/timer, per-display NOTICE_TIME, timer handle, timer-only destroy and closed player suppression.",
+      "records": [
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.notice@167",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "notice",
+          "line": 167
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Notice.art@45",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Notice",
+          "name": "art",
+          "line": 45
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.notice@84",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "notice",
+          "line": 84
+        },
+        {
+          "id": "packages/artplayer/public/runtime/subtitle.ts#Notice.timer@34",
+          "file": "packages/artplayer/public/runtime/subtitle.ts",
+          "declaration": "Notice",
+          "name": "timer",
+          "line": 34
+        },
+        {
+          "id": "packages/artplayer/public/runtime/subtitle.ts#Notice.show@35",
+          "file": "packages/artplayer/public/runtime/subtitle.ts",
+          "declaration": "Notice",
+          "name": "show",
+          "line": 35
+        },
+        {
+          "id": "packages/artplayer/public/runtime/subtitle.ts#Notice.show@36",
+          "file": "packages/artplayer/public/runtime/subtitle.ts",
+          "declaration": "Notice",
+          "name": "show",
+          "line": 36
+        },
+        {
+          "id": "packages/artplayer/public/runtime/subtitle.ts#Notice.destroy@37",
+          "file": "packages/artplayer/public/runtime/subtitle.ts",
+          "declaration": "Notice",
+          "name": "destroy",
+          "line": 37
+        }
+      ],
+      "sources": [
+        {
+          "path": "packages/artplayer/src/notice.ts",
+          "sha256": "4faa700323a8fdfd91a59491a5f57da2dee9bd1f2de0d900ed16e9809a208c94"
+        },
+        {
+          "path": "packages/artplayer/public/artplayer.ts",
+          "sha256": "26a42ac66811e70f68a8ebe62cbf304eb1993451b3e658961be98e7106162527"
+        },
+        {
+          "path": "packages/artplayer/public/runtime.ts",
+          "sha256": "ec4b1d56993eb482a77eb0f94b701047549d009e6ba6433f27e7d464fef30c2b"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/subtitle.ts",
+          "sha256": "13241c4f9a87517aa2cf7b3e0bb8cedaa12fa0b4d3f8934285797583b752557e"
+        }
+      ],
+      "docs": [
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+          "sha256": "078115d9703b987d6d556a73b23696ac5e3c6a8f2156d27bb21845820d1e9c16",
+          "anchor": "notice"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+          "sha256": "8f7c31d21a50a56743ad38a7d9483bcc5e483faef8d05545f6237031b9188d1b",
+          "anchor": "notice"
+        }
+      ],
+      "evidence": "baselines/site04-core-services.json"
+    }
+  ]
+}

@@ -70,6 +70,12 @@ JASSUB、弹幕遮罩和 Chromecast 的本次核对：
 
 ## 接续范围
 
+核心服务首批映射见 [core-content-review.json](core-content-review.json)：events10、
+storage8、i18n49、hotkey7、notice7，共81条明确声明记录，含根/runtime别名与getter/
+setter重复形状；不能当成81个独立功能。两份高级属性指南与实际源码、类型、
+51项测试和三浏览器快捷键示例核对完成，见[本批证据](baselines/site04-core-services.json)。
+清单中的其余882条仍待审查；本页未涉及的组件、模板等章节不因此自动算通过。
+
 - 核心：依据 site-inventory.json 的 963 条成员逐项或按明确的共享声明分组核对；
   必须记录对应文档及语义结论，不能仅按同名标题匹配标为通过。
 - Danmuku、HLS、DASH、Audio、VTT 的当前声明/源码语义已补核对；既有媒体报告

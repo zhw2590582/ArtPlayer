@@ -81,6 +81,12 @@ art.events.hover(container, (event) => {
 
 :::
 
+事件代理只管理通过它注册的 DOM 监听器，与 `art.on/off` 的播放器事件订阅不同。`art.proxy` 是同一套代理的快捷入口。`proxy(target, name, callback, options?)` 返回清理函数；name 为数组时返回对应清理函数数组。可直接调用清理函数，或传给 `art.events.remove(dispose)` 提前移除。options 沿用原生 capture/once/passive/signal 语义；普通回调的 this 是原生事件目标，不是播放器。
+
+`hover` 分别注册 mouseenter/mouseleave，返回 undefined；它不会产生一个新的播放器 hover 事件。`destroyEvents` 是内部清理函数集合，不要直接修改。`events.destroy()` 会清理当前集合（也包含核心自己的监听器），不等于销毁整个播放器；通常应调用 `art.destroy()`。已销毁播放器上的新代理不会注册监听器。
+
+`bindGlobalEvents({ window, document })` 用于跨文档移动后的全局事件重绑，成功后移除旧绑定，失败时保留原绑定。省略各字段会使用播放器节点所属文档/窗口；跨窗口时请成对提供它们。此方法不迁移 DOM，也不会重绑应用自己添加的监听器。
+
 ## `storage`
 
 管理播放器的本地存储
@@ -125,6 +131,10 @@ var art = new Artplayer({
 art.storage.name = 'your-storage-key';
 art.storage.set('test', { foo: 'bar' });
 ```
+
+`name` 是 localStorage 中存放整份 JSON 数据的键；`set/get/del` 的 key 是该 JSON 对象内的字段。`get()` 返回整份数据，`get(key)` 读取字段。为保持旧行为，空字符串 key（运行时的 0 也一样）会选择整份数据；请使用非空字符串键。set/del/clear 同步返回 undefined。
+
+`clear()` 只移除当前 name 对应的项，不会清空整个站点的 localStorage。修改 name 不会搬迁旧数据。同源实例使用相同 name 时共享持久数据；`settings` 是每个实例自己的异常回退对象，不是持久数据的实时镜像。读取或写入失败时对应操作会回退到它；恢复正常访问不会自动合并回退内容。存储采用 JSON，不能保证保留函数、循环对象等非 JSON 数据。
 
 ## `icons`
 
@@ -177,10 +187,57 @@ art.i18n.update({
 
 :::
 
+`languages` 保存按语言代码组织的字典，`language` 是当前字典，`art` 指回播放器。`update({ 'zh-cn': { Play: '播放' } })` 深合并字典后调用 `init()`，两者返回 undefined。init 根据 `art.option.lang.toLowerCase()` 选字典；字典的键本身不会转成小写。默认内置简体中文，其余未载入的语言退回原键文本。
+
+`get(key)` 返回当前字典中的非空值，否则返回 key；空字符串翻译也会回退。更新不会自动重绘已经创建的按钮、提示和菜单文字。切换 option.lang 后可调用 init 更新后续查询，但它不是整站界面语言切换 API。以下旧声明中的文本键共享上述查找语义；运行时也能查询应用自己的键：
+
+```text
+Context Menu
+Lock
+Video Info
+Close
+Video Load Failed
+Volume
+Progress
+Back
+Settings
+Play
+Pause
+Rate
+Mute
+Video Flip
+Horizontal
+Vertical
+Reconnect
+Show Setting
+Hide Setting
+Screenshot
+Play Speed
+Aspect Ratio
+Default
+Normal
+Open
+Switch Video
+Switch Subtitle
+Fullscreen
+Exit Fullscreen
+Web Fullscreen
+Exit Web Fullscreen
+Mini Player
+PIP Mode
+Exit PIP Mode
+PIP Not Supported
+Fullscreen Not Supported
+Subtitle Offset
+Last Seen
+Jump Play
+AirPlay
+AirPlay Not Available
+```
 
 ## `notice`
 
-管理播放器的提示语，只有一个 `show` 属性用于显示提示语
+管理播放器的提示语，通过 `show` 写入文本或读取显示状态
 
 <div className="run-code">▶ Run Code</div>
 
@@ -200,6 +257,10 @@ art.on('ready', () => {
 如果想马上隐藏 `notice` 的显示：`art.notice.show = '';`
 
 :::
+
+写入字符串或 Error 会显示纯文本并重新开始自动隐藏计时；Error 使用去掉两端空白的 message，普通字符串保留原文本。读取 `notice.show` 得到当前是否显示的布尔值，不是上次写入的文本。写入 false 或空字符串会立即隐藏，但不立即清空文本，也不取消原计时器。
+
+隐藏延时来自本次显示时的 `Artplayer.NOTICE_TIME`。`timer` 是计时器句柄，不是倒计时；`destroy()` 取消计时，不负责隐藏节点或销毁播放器。播放器销毁后不会继续显示新通知。根入口保留旧 getter 类型；需要准确布尔值类型时用 `artplayer/runtime`。
 
 ## `layers`
 
@@ -402,9 +463,9 @@ function hotkeyEvent(event) {
 }
 
 art.on('ready', () => {
-    art.hotkey.add(32, hotkeyEvent);
+    art.hotkey.add('Space', hotkeyEvent);
     setTimeout(() => {
-		art.hotkey.remove(32, hotkeyEvent);
+		art.hotkey.remove('Space', hotkeyEvent);
 	}, 5000);
 });
 ```
@@ -414,6 +475,12 @@ art.on('ready', () => {
 只在播放器获得焦点后（如点击了播放器后），这些快捷键才会生效
 
 :::
+
+使用 `KeyboardEvent.code` 字符串，例如 `'Space'`、`'KeyK'`、`'ArrowLeft'`，不要传数字 keyCode。add/remove 都返回 hotkey 管理对象；移除时需使用原回调。同一键可注册多个不同回调，相同回调不会重复加入，回调的 this 为播放器。添加自定义 Space 回调不会替换内置播放/暂停行为。
+
+`keys` 是按 code 保存的回调数组；`art` 指回播放器。桌面构造时自动执行 init，`hotkey: false` 只禁用内置快捷键，不禁用手动添加的回调。移动端默认不初始化键盘监听；已有 init 方法可显式开启，但这不代表已完成真机键盘验收。重复 init 不会累积同一组默认回调或文档订阅。
+
+输入框、文本域、选择框、可编辑区域、组合输入和带修饰键的事件会被排除；按钮/链接的原生激活键和已被播放器控件处理的按键也不会重复触发快捷键。命中回调时阻止原生默认行为，执行后发出 hotkey；随后仍会发出播放器 keydown。
 
 ## `mask`
 
@@ -501,4 +568,24 @@ function myPlugin(art) {
 art.on('ready', () => {
     art.plugins.add(myPlugin);
 });
+```
+
+## 服务的 TypeScript 视图
+
+当前重构分支的 `artplayer/runtime` 为同一运行时提供精确声明，包括布尔 notice.show、EventListener 对象和服务成员；该分支尚未发布。根入口和 legacy 保留旧声明形状。runtime 导出的 `EventRegistry`、`Storage`、`I18n<Host>`、`Hotkey<Host>`、`Notice` 描述服务，`Dictionary/Languages` 描述语言数据。
+
+```ts
+import Artplayer from 'artplayer/runtime';
+
+const art = new Artplayer({ container: '#player', url: '/video.mp4', hotkey: false });
+const dispose = art.events.proxy(document, 'click', { handleEvent(event) { console.log(event.type); } });
+art.events.remove(dispose);
+const onSpace = function (this: Artplayer, event: KeyboardEvent) { console.log(this.id, event.code); };
+art.hotkey.add('Space', onSpace);
+art.hotkey.remove('Space', onSpace);
+art.notice.show = 'Ready';
+const visible: boolean = art.notice.show;
+art.notice.show = false;
+art.i18n.update({ en: { Play: 'Start' } });
+console.log(visible, art.i18n.get('Play'));
 ```

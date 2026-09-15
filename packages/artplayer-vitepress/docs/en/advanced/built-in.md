@@ -81,6 +81,12 @@ If you need `DOM` events that should only exist during the player's lifecycle, i
 
 :::
 
+This registry manages DOM listeners registered through it, separately from player subscriptions using `art.on/off`. `art.proxy` is the same proxy shortcut. `proxy(target, name, callback, options?)` returns a disposer, or an array of disposers when name is an array. Call each disposer directly or pass it to `art.events.remove(dispose)` for early removal. Options retain native capture/once/passive/signal behavior; a normal listener's this is the native event target, not the player.
+
+`hover` registers mouseenter/mouseleave and returns undefined; it does not create a new player hover event. `destroyEvents` holds cleanup functions and should not be mutated directly. `events.destroy()` clears the current registry, including core listeners; it does not destroy the player. Normally use `art.destroy()`. New proxies on a destroyed player do not register listeners.
+
+`bindGlobalEvents({ window, document })` rebinds global listeners after a cross-document move. A successful replacement releases the old binding; a failed replacement preserves it. Omitted fields use the player node's document/window. Supply both when moving between windows. This method neither moves DOM nodes nor rebinds listeners your application installed itself.
+
 ## `storage`
 
 Manages the player's local storage.
@@ -125,6 +131,10 @@ var art = new Artplayer({
 art.storage.name = 'your-storage-key';
 art.storage.set('test', { foo: 'bar' });
 ```
+
+`name` is the localStorage key containing the entire JSON record; the key passed to set/get/del selects a field inside it. `get()` returns the full data and `get(key)` reads one field. Historical truthy-key selection means an empty string (and numeric zero at runtime) returns the full data; use nonempty string keys. set/del/clear synchronously return undefined.
+
+`clear()` removes only the current name entry, not all localStorage for the origin. Changing name does not migrate old data. Same-origin instances with the same name share persisted data. `settings` is a per-instance error fallback, not a live mirror of persistence. Failed reads or writes use the corresponding fallback operation; restored access does not merge fallback data automatically. Storage uses JSON and does not preserve functions, circular objects or all other non-JSON values.
 
 ## `icons`
 
@@ -177,9 +187,57 @@ Using `art.i18n.update` can only update the `i18n` after instantiation. If you w
 
 :::
 
+`languages` holds dictionaries by language code, `language` is the selected dictionary, and `art` references the player. `update({ 'zh-cn': { Play: '播放' } })` deep-merges dictionaries and calls `init()`; both return undefined. init selects `art.option.lang.toLowerCase()`, without lowercasing dictionary keys. Simplified Chinese is built in; an unloaded language falls back to the original key text.
+
+`get(key)` returns a nonempty translation or the key itself; an empty translation also falls back. Updating dictionaries does not redraw existing button, tooltip or menu text. After changing option.lang, init updates future lookups; it is not a complete interface-language switch API. These text keys from the historical declarations share the same lookup rules; runtime lookup also accepts application-defined keys:
+
+```text
+Context Menu
+Lock
+Video Info
+Close
+Video Load Failed
+Volume
+Progress
+Back
+Settings
+Play
+Pause
+Rate
+Mute
+Video Flip
+Horizontal
+Vertical
+Reconnect
+Show Setting
+Hide Setting
+Screenshot
+Play Speed
+Aspect Ratio
+Default
+Normal
+Open
+Switch Video
+Switch Subtitle
+Fullscreen
+Exit Fullscreen
+Web Fullscreen
+Exit Web Fullscreen
+Mini Player
+PIP Mode
+Exit PIP Mode
+PIP Not Supported
+Fullscreen Not Supported
+Subtitle Offset
+Last Seen
+Jump Play
+AirPlay
+AirPlay Not Available
+```
+
 ## `notice`
 
-Manages the player's notifications. It only has a `show` property for displaying notifications.
+Manages the player's notifications. Assign text through `show` or read its visibility state.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -199,6 +257,10 @@ art.on('ready', () => {
 If you want to hide the `notice` immediately: `art.notice.show = '';`
 
 :::
+
+Assigning a string or Error displays plain text and restarts the hide timer. Errors use their trimmed message; ordinary strings retain their original text. Reading `notice.show` returns a boolean visibility state, not the last assigned text. Assigning false or an empty string hides immediately, without immediately clearing the text or canceling the old timer.
+
+Each display reads its delay from `Artplayer.NOTICE_TIME`. `timer` is a timer handle, not a countdown. `destroy()` cancels the timer without hiding the node or destroying the player. New notices cannot appear after player destruction. The root entry retains the historical getter type; use `artplayer/runtime` for its accurate boolean type.
 
 ## `layers`
 
@@ -402,9 +464,9 @@ function hotkeyEvent(event) {
 }
 
 art.on('ready', () => {
-    art.hotkey.add(32, hotkeyEvent);
+    art.hotkey.add('Space', hotkeyEvent);
     setTimeout(() => {
-		art.hotkey.remove(32, hotkeyEvent);
+		art.hotkey.remove('Space', hotkeyEvent);
 	}, 5000);
 });
 ```
@@ -414,6 +476,12 @@ art.on('ready', () => {
 These hotkeys only take effect after the player gains focus (e.g., after clicking on the player)
 
 :::
+
+Use `KeyboardEvent.code` strings such as `'Space'`, `'KeyK'` and `'ArrowLeft'`, not numeric keyCode values. add/remove return the hotkey manager. Removal requires the original callback. Different callbacks may share a key; the same callback is not added twice. A callback's this is the player. Adding a custom Space callback does not replace built-in play/pause.
+
+`keys` stores callback arrays by code; `art` references the player. Desktop construction calls init automatically. `hotkey: false` disables built-in keys, but manually added callbacks still work. Mobile keyboard listening is opt-in through the existing init method; this is not physical-device acceptance. Repeated init does not duplicate the same default callbacks or document subscription.
+
+Inputs, textareas, selects, editable content, composition and modified key events are excluded. Native activation keys on buttons/links and keys already handled by player controls do not trigger duplicate shortcuts. Matching callbacks prevent the native default action and are followed by the hotkey event; the player keydown event follows as well.
 
 ## `mask`
 
@@ -501,4 +569,24 @@ function myPlugin(art) {
 art.on('ready', () => {
     art.plugins.add(myPlugin);
 });
+```
+
+## TypeScript service views
+
+The current, unpublished refactor's `artplayer/runtime` entry supplies accurate declarations for the same implementation, including boolean notice.show, EventListener objects and service members. Root and legacy entries preserve historical declaration shapes. Runtime exports `EventRegistry`, `Storage`, `I18n<Host>`, `Hotkey<Host>` and `Notice` describe services; `Dictionary/Languages` describe language data.
+
+```ts
+import Artplayer from 'artplayer/runtime';
+
+const art = new Artplayer({ container: '#player', url: '/video.mp4', hotkey: false });
+const dispose = art.events.proxy(document, 'click', { handleEvent(event) { console.log(event.type); } });
+art.events.remove(dispose);
+const onSpace = function (this: Artplayer, event: KeyboardEvent) { console.log(this.id, event.code); };
+art.hotkey.add('Space', onSpace);
+art.hotkey.remove('Space', onSpace);
+art.notice.show = 'Ready';
+const visible: boolean = art.notice.show;
+art.notice.show = false;
+art.i18n.update({ en: { Play: 'Start' } });
+console.log(visible, art.i18n.get('Play'));
 ```
