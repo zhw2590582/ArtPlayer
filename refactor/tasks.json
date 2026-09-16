@@ -3337,11 +3337,15 @@
         "PKG-CAST-04",
         "CORE-22"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "stub 测试之外记录实际 Cast 设备会话、源更新和断开",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-16-PKG-CAST-05-real-sdk.md",
+        "baselines/chromecast-real-sdk-validation.json",
+        "chromecast-validation.md"
+      ]
     },
     {
       "id": "PKG-CAST-06",

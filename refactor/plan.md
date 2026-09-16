@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 285 项，范围 22 个包及工作区/示例。
 
-状态：todo 37 / doing 23 / blocked 0 / done 225 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 36 / doing 24 / blocked 0 / done 225 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -322,7 +322,7 @@
 | PKG-CAST-02 | artplayer-plugin-chromecast<br>建立特有行为与错误测试 | PKG-CAST-01, ENG-03, ENG-05 | SDK 脚本加载失败/重入、无设备/拒绝、重复实例与销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-CAST-03 | artplayer-plugin-chromecast<br>整理内部职责与资源 | PKG-CAST-02, CORE-11, CORE-13 | SDK singleton/实例订阅/会话与控件职责分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-CAST-04 | artplayer-plugin-chromecast<br>迁移自有源码和公开类型 | PKG-CAST-03, ENG-04, ENG-06, CORE-07 | Cast 能力 adapter、全局对象和元数据类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-CAST-05 | artplayer-plugin-chromecast<br>验证新旧核心和组合 | PKG-CAST-04, CORE-22 | stub 测试之外记录实际 Cast 设备会话、源更新和断开 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-CAST-05 | artplayer-plugin-chromecast<br>验证新旧核心和组合 | PKG-CAST-04, CORE-22 | stub 测试之外记录实际 Cast 设备会话、源更新和断开 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
 | PKG-CAST-06 | artplayer-plugin-chromecast<br>验证分发并同步文档 | PKG-CAST-05, ENG-07 | chromecast.js、SDK URL/权限能力及待支持环境说明 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
 ## 5 包迁移：artplayer-plugin-document-pip
@@ -641,6 +641,7 @@
 - PKG-CAST-02: [记录](changes/2026-09-13-PKG-CAST-02-failures.md) [记录](baselines/chromecast-failures-validation.json)
 - PKG-CAST-03: [记录](changes/2026-09-13-PKG-CAST-03-runtime.md) [记录](baselines/chromecast-runtime-validation.json)
 - PKG-CAST-04: [记录](changes/2026-09-13-PKG-CAST-04-types.md) [记录](baselines/chromecast-types-validation.json)
+- PKG-CAST-05: [记录](changes/2026-09-16-PKG-CAST-05-real-sdk.md) [记录](baselines/chromecast-real-sdk-validation.json) [记录](chromecast-validation.md)
 - PKG-DPIP-01: [记录](changes/2026-09-12-PKG-DPIP-01-contract.md) [记录](baselines/dpip-release.json) [记录](baselines/dpip-contract.md) [记录](baselines/dpip-contract-validation.json) [记录](dpip-validation.md)
 - PKG-DPIP-02: [记录](changes/2026-09-12-PKG-DPIP-02-tests.md) [记录](baselines/dpip-behavior-validation.json) [记录](dpip-validation.md)
 - PKG-DPIP-03: [记录](changes/2026-09-12-PKG-DPIP-03-lifecycle.md) [记录](baselines/dpip-lifecycle-validation.json) [记录](dpip-validation.md)

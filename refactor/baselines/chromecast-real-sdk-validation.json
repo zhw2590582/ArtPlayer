@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-CAST-05",
+  "status": "real-sdk-observed-no-receiver",
+  "capturedAt": "2026-09-16T02:47:08.346Z",
+  "sourceCommit": "681eccfa76eb36da87bb85e32a5dbb93037d8c13",
+  "method": "Connected Chrome through CUA; actual UI clicks, DOM snapshots, Runtime read-only SDK state and Network response bodies. No mocked Cast API or receiver.",
+  "environment": {
+    "browser": "Google Chrome",
+    "version": "152.0.7977.84",
+    "os": "Windows",
+    "origin": "http://localhost:8082",
+    "secureContext": true,
+    "proxyObservation": "System network path in the existing Chrome profile; no network configuration changed."
+  },
+  "page": "http://localhost:8082/?libs=./compiled/artplayer-plugin-chromecast.js&example=chromecast",
+  "localArtifacts": [
+    {
+      "name": "artplayer",
+      "url": "http://localhost:8082/compiled/artplayer.js",
+      "sha256": "8a4caaa50a069875b3898a83765457b3c502700f4731d0c38988d6c463c3d20a",
+      "characters": 208943,
+      "file": "docs/compiled/artplayer.js",
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer.tgz",
+        "version": "6.0.0",
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "693ac1e1b107501f7202f19e8ab58ab15240e28f6ba6db0e0917eb2bebb447cd",
+        "integrity": "sha512-3HMgVqBMQzTDNJtey+EPO8UlU9+b22SbFgwCFmwXHg/1gAg7iMREaeGi0BtZrYzTAc9B7uZRtP75jBjlDa6OfA=="
+      },
+      "observation": "Actual Chrome Network.getResponseBody UTF-8 SHA256 matched current docs output and registered tarball member."
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "url": "http://localhost:8082/compiled/artplayer-plugin-chromecast.js",
+      "sha256": "af07fc1d768a90c444e9510bd60faf1878f63d30dec9ed6a8f91344afae6dc85",
+      "characters": 6096,
+      "file": "docs/compiled/artplayer-plugin-chromecast.js",
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-chromecast.tgz",
+        "version": "2.0.0",
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "e05496198b0cd7e99fd335de0125d36187c2ffa59d0699e46ef295d8d279ee37",
+        "integrity": "sha512-84Dm7cSe8tpz/L78W5CHMEODjOHy9sAMkO8yZrEsfKkHScZWD+q3XdhFPsKxPYpKlOYeNP+YQVwGYxSpmqb0gg=="
+      },
+      "observation": "Actual Chrome Network.getResponseBody UTF-8 SHA256 matched current docs output and registered tarball member."
+    }
+  ],
+  "remoteScripts": [
+    {
+      "url": "https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1",
+      "status": 200,
+      "sha256": "ee147e859ad0f09aa50367974e38ab53e7c7054c4a51d400a7f45b0eb251454f",
+      "characters": 4272
+    },
+    {
+      "url": "http://www.gstatic.com/eureka/clank/152/cast_sender.js",
+      "status": 200,
+      "sha256": "b99daad4bcc22cce872711e33cdc32636826346e715553645395f8a16ee79d55",
+      "characters": 47163
+    },
+    {
+      "url": "http://www.gstatic.com/cast/sdk/libs/sender/1.0/cast_framework.js",
+      "status": 200,
+      "sha256": "a2bdd8cb01353d4ed2a9ab4c7d7c263225f6908aa875614d015a2f39956d9d73",
+      "characters": 35946
+    }
+  ],
+  "observations": [
+    {
+      "phase": "workspace-demo",
+      "core": "5.4.1",
+      "scope": "Existing uncompiled workspace build, not frozen npm 5.4.0 or minimum-supported core proof",
+      "framework": true,
+      "castState": "NO_DEVICES_AVAILABLE",
+      "session": false,
+      "pluginState": null,
+      "isCasting": false,
+      "remoteStatuses": [
+        200,
+        200,
+        200
+      ]
+    },
+    {
+      "phase": "candidate-first-click",
+      "core": "6.0.0",
+      "framework": false,
+      "session": false,
+      "pluginState": null,
+      "isCasting": false,
+      "remoteStatuses": [
+        200,
+        200,
+        502
+      ],
+      "failedUrl": "http://www.gstatic.com/cast/sdk/libs/sender/1.0/cast_framework.js",
+      "bootstrapScriptsAfterFailure": 0,
+      "scope": "Observed remote framework HTTP 502 retained; no claim that candidate initialization succeeded on this attempt."
+    },
+    {
+      "phase": "candidate-retry-click",
+      "core": "6.0.0",
+      "framework": true,
+      "castState": "NO_DEVICES_AVAILABLE",
+      "session": false,
+      "pluginState": null,
+      "isCasting": false,
+      "frameworkHttpStatus": 200,
+      "bootstrapScripts": 1
+    },
+    {
+      "phase": "run-code-recreate",
+      "core": "6.0.0",
+      "instances": 1,
+      "castControls": 1,
+      "framework": false,
+      "session": false,
+      "bootstrapScripts": 0,
+      "scope": "Observed editor rerun state; not attributed solely to plugin destroy."
+    },
+    {
+      "phase": "recreated-player-click",
+      "core": "6.0.0",
+      "instances": 1,
+      "castControls": 1,
+      "framework": true,
+      "castState": "NO_DEVICES_AVAILABLE",
+      "session": false,
+      "pluginState": null,
+      "isCasting": false,
+      "bootstrapScripts": 1,
+      "remoteStatuses": [
+        200,
+        200,
+        200
+      ],
+      "scriptHashesMatchFirstSuccessfulLoad": true
+    }
+  ],
+  "cleanup": {
+    "restoredProdCheckbox": false,
+    "closedAgentTestTab": true
+  },
+  "limitations": [
+    "No Cast receiver was available. No session creation, receiver playback, media source update or disconnect was verified.",
+    "No claim of requestSession rejection/cancellation, timeout behavior or physical playback from NO_DEVICES_AVAILABLE alone.",
+    "Public callback support and older npm core combinations still rely on separately recorded controlled tests until a receiver is available.",
+    "The SDK bootstrap and framework URLs are mutable; response hashes describe this observation, not a pinned supported SDK version.",
+    "Localhost was a secure context; the SDK itself selected HTTP child script URLs. Production HTTPS behavior was not tested.",
+    "This manual observation does not replace committed deterministic browser tests, all-package release acceptance, or user-directed formal reviews."
+  ],
+  "publicationAuthorized": false,
+  "releaseInputCheck": {
+    "report": "refactor/.cache/release-ledger-KSwaI3/report.json",
+    "sha256": "7fca6b694b1263f03d2a97ae9b35a1bfd3221136549ce72fd37412c915f9b25d",
+    "validLibraryBuilds": 21,
+    "staleLibraryBuilds": 0,
+    "scope": "Documentation and observation only; no candidate build invalidated or browser acceptance rebound."
+  }
+}
