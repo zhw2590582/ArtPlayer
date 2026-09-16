@@ -1,0 +1,63 @@
+{
+  "capturedAt": "2026-09-16T04:19:58.827Z",
+  "status": "interrupted-at-user-request",
+  "completed": false,
+  "reason": "User requested ending autonomous refactor and handing off for extended self-testing; no imminent npm publication.",
+  "sessionId": 34354,
+  "exitCode": 1,
+  "sourceCommit": "78e3107b688c940ef44b773d72327fd89b62481c",
+  "originalProcessesAbsent": [
+    36836,
+    29524,
+    23276,
+    8156
+  ],
+  "port8084Listening": false,
+  "cleanupAssertionsProven": false,
+  "samples": [
+    {
+      "name": "mediabunny-MediaBunny-sust-71bde-layback-with-published-core-chromium",
+      "file": "refactor/.cache/soak/results/mediabunny-MediaBunny-sust-71bde-layback-with-published-core-chromium/progress.jsonl",
+      "sha256": "6d1275b3efc88f527b5a677397c6f9506ceaede72efa84db814cd2e1b0fbead7",
+      "samples": 695,
+      "lastUpdated": "2026-09-16T04:17:20.836Z",
+      "last": {
+        "kind": "sample",
+        "phase": "continuous-1x",
+        "wall": 3491745.399999976,
+        "time": 3492,
+        "rate": 1,
+        "active": 55,
+        "queued": 55,
+        "iterators": 2,
+        "draws": 83784,
+        "visibility": "visible",
+        "paused": false,
+        "error": null,
+        "maxAVError": 0.5489999999997508
+      }
+    },
+    {
+      "name": "mediabunny-MediaBunny-sust-828df-layback-with-candidate-core-chromium",
+      "file": "refactor/.cache/soak/results/mediabunny-MediaBunny-sust-828df-layback-with-candidate-core-chromium/progress.jsonl",
+      "sha256": "0c565c472fb418587b6fa7934501dac2ca7b669a16a8f04032b54dddbad4e78f",
+      "samples": 695,
+      "lastUpdated": "2026-09-16T04:17:20.370Z",
+      "last": {
+        "kind": "sample",
+        "phase": "continuous-1x",
+        "wall": 3491280,
+        "time": 3491.541333333333,
+        "rate": 1,
+        "active": 60,
+        "queued": 60,
+        "iterators": 2,
+        "draws": 83773,
+        "visibility": "visible",
+        "paused": false,
+        "error": null,
+        "maxAVError": 0.5699999999999363
+      }
+    }
+  ]
+}

@@ -6898,11 +6898,13 @@
       "evidence": [
         "refactor/baselines/mb-hour-av-breach.json",
         "refactor/changes/2026-09-16-PKG-MB-09-av-breach.md",
-        "test/soak/mediabunny.spec.js"
+        "test/soak/mediabunny.spec.js",
+        "refactor/baselines/self-test-handoff-stop.json",
+        "refactor/self-test-handoff.md"
       ],
-      "compatibleResolution": "Keep the running test and original 250ms gate. Distinguish delayed presentation, catch-up draws, sustained clock drift and host scheduling using bounded controls after preserving the terminal result; fix a reproduced project defect without changing the public dropLateFrames default.",
+      "compatibleResolution": "2026-09-16 user requested stopping autonomous work. Preserve the interrupted run and original 250ms gate; defer diagnosis. If resumed, distinguish delayed presentation, catch-up draws, sustained clock drift and host scheduling with bounded controls before changing code; retain the public dropLateFrames default.",
       "closureCriteria": "Retain the first failing samples and terminal report; establish cause with appropriate historical/native controls, fix any confirmed project regression, and complete unchanged duration/cleanup requirements with a justified clock/presentation interpretation. A later passing run alone does not close this risk.",
-      "workspaceState": "Running-at-capture, not a final report: around 1767 seconds both Chromium cases using the same candidate proxy reach approximately 549ms/570ms max delta; visibility, advancing media/draws, node bounds and lack of media errors remain intact. Core-specific, historical-proxy and OS-cause claims are unproven."
+      "workspaceState": "Running-at-capture, not a final report: around 1767 seconds both Chromium cases using the same candidate proxy reach approximately 549ms/570ms max delta; visibility, advancing media/draws, node bounds and lack of media errors remain intact. Core-specific, historical-proxy and OS-cause claims are unproven. Superseded running status: session34354 was interrupted at user request around3491 seconds of the first1x phase, exit1; original processes and8084 listener are absent. No completed four-case report or successful cleanup assertion is claimed. See self-test-handoff-stop.json."
     }
   ]
 }

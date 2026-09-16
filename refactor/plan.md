@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 286 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 287 项，范围 22 个包及工作区/示例。
 
-状态：todo 36 / doing 24 / blocked 0 / done 226 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 0 / doing 0 / blocked 0 / done 227 / deferred 60。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -55,6 +55,7 @@
 | DOC-12 | workspace<br>复审开发启动、验收覆盖及发布依赖 | DOC-11 | 语义依赖修正、版本实施任务、基线/分发分类及契约映射要求、校验器保护 | 原范围状态保持，计划检查和故障负例通过，独立提交 DOC-12 | M | done |
 | DOC-13 | workspace<br>记录并验证内置浏览器回退规则 | DOC-08 | 根指令、复盘和夹具文档中的浏览器回退及实际环境证据 | 内置浏览器打开真实页面，报告基础检查结果及未覆盖项；独立提交 | L | done |
 | DOC-REVIEW-01 | workspace<br>记录用户主导复盘阶段启动 | DOC-08 | 实施及必要测试完成后交接、等待用户指导复盘的持久执行规则 | 根指令与复盘/AI流程一致；三轮保持待办，原依赖与发布门槛不变，不自动提前复盘 | L | done |
+| DOC-HANDOFF-01 | workspace<br>停止自主推进并交接用户自测 | DOC-03 | 停止长测、保留问题和独立修复、登记延期范围及自测接续入口，汇总所有开放风险、已按范围接受的差异和延期任务 | 未完成项如实延期；运行进程停止；交接文档、计划与证据一致，不启动新修复或复盘 | L | done |
 
 ## 1 基线
 
@@ -94,10 +95,10 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| CI-01 | workspace<br>增强兼容矩阵、并发缓存与 CI 报告 | DOC-10, ENG-08, ENG-09, ENG-10 | OS/Node/TS/浏览器与影响范围矩阵、缓存、超时、汇总检查和 artifact 报告 | 固定安装、失败/取消不误报、核心影响全生态；检查只读，失败证据可追溯 | H | doing |
+| CI-01 | workspace<br>增强兼容矩阵、并发缓存与 CI 报告 | DOC-10, ENG-08, ENG-09, ENG-10 | OS/Node/TS/浏览器与影响范围矩阵、缓存、超时、汇总检查和 artifact 报告 | 固定安装、失败/取消不误报、核心影响全生态；检查只读，失败证据可追溯 | H | deferred |
 | CI-02 | workspace<br>分离并改进 GitHub Pages 部署 | DOC-10, ENG-02, SITE-03 | Pages artifact 部署配置、旧路径/域名核对、预检和迁移恢复指南 | 部署只取受信任已验证产物；本地实现可验收，远端 source/环境和实际部署状态单独登记 | H | done |
-| CI-03 | workspace<br>建立 npm 分包候选与发布工作流 | DOC-10, CI-01, REL-08, REL-04, CI-NPM-01, CI-NPM-02, CI-NPM-03 | 候选准备、精确 artifact 发布配置、OIDC 评估、版本/tag/registry 预检和部分失败恢复 | 不自动发布；明确逐包信任前置和 dry run 限制，不能重建未验证内容或重发冲突版本；按版本清单校验各包下一 major 和预发布/正式 tag，保留旧核心支持范围 | H | todo |
-| CI-04 | workspace<br>验收 GitHub 流水线与远端发布准入 | CI-01, CI-02, CI-03, SITE-06, CI-BROWSER-01, CI-TYPES-01, CI-TYPES-02, SITE-EDITOR-VAST-01, CI-JASSUB-SOURCE-01 | 静态/干净环境检查、真实 PR 正反例、候选 dry run、required checks/Pages/npm 必需配置状态及运维指南 | 必要 Actions 证据和远端配置核对齐全；缺失保持未完成，真实 publish/deploy 仍在授权发布步骤执行 | H | todo |
+| CI-03 | workspace<br>建立 npm 分包候选与发布工作流 | DOC-10, CI-01, REL-08, REL-04, CI-NPM-01, CI-NPM-02, CI-NPM-03 | 候选准备、精确 artifact 发布配置、OIDC 评估、版本/tag/registry 预检和部分失败恢复 | 不自动发布；明确逐包信任前置和 dry run 限制，不能重建未验证内容或重发冲突版本；按版本清单校验各包下一 major 和预发布/正式 tag，保留旧核心支持范围 | H | deferred |
+| CI-04 | workspace<br>验收 GitHub 流水线与远端发布准入 | CI-01, CI-02, CI-03, SITE-06, CI-BROWSER-01, CI-TYPES-01, CI-TYPES-02, SITE-EDITOR-VAST-01, CI-JASSUB-SOURCE-01 | 静态/干净环境检查、真实 PR 正反例、候选 dry run、required checks/Pages/npm 必需配置状态及运维指南 | 必要 Actions 证据和远端配置核对齐全；缺失保持未完成，真实 publish/deploy 仍在授权发布步骤执行 | H | deferred |
 | CI-BROWSER-01 | workspace<br>分离源码与已安装产物浏览器验证范围 | ENG-05, ENG-07 | 完整源码入口、明确已安装包子集、分开的报告目录与失败传播 | 混用输入旧红新绿；源码默认保留所有spec，已安装入口严格校验四包来源；两类报告都保留，源码失败不能误报全绿；不代表完整远端或全包验收 | M | done |
 | CI-NPM-01 | workspace<br>从已验收候选准备不可重建的npm交付包 | DOC-10, REL-08, REL-04 | 复用严格准入台账、复制精确tarball、绑定源码/工具链/证据/摘要的本地准备命令及反向测试；供CI-03后续受信任artifact工作流使用 | 缺候选或任一准入缺口即拒绝；不构建、不安装、不联网或发布；阻止路径越界、脏源码、复制期间漂移及半成品冒充完成，声明远端信任/OIDC/registry预检仍未实现 | H | done |
 | CI-TYPES-01 | workspace, artplayer-plugin-audio-track, artplayer-plugin-hls-control<br>接入 Audio/HLS 安装后严格类型消费者 | ENG-07, PKG-AUDIO-04, PKG-HLS-04 | 共享隔离编译器模块、真实 tarball 的五模式正反例和声明路径证据 | 旧/新编译器所有正例通过，每条无效调用实际报错；仓库外声明解析、缺声明/any/逃逸负例有效；保留独立运行时和浏览器验收 | M | done |
@@ -151,8 +152,8 @@
 | PKG-CHAPTER-02 | artplayer-plugin-chapter<br>建立特有行为与错误测试 | PKG-CHAPTER-01, ENG-03, ENG-05 | 区间重叠/空列表/边界 seek、hover 标题和 update 用例 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言；修正 BASE-TYPE-02 的可选参数声明并补正反例 | M | done |
 | PKG-CHAPTER-03 | artplayer-plugin-chapter<br>以 TypeScript 拆分内部职责与资源 | PKG-CHAPTER-02, ENG-07 | 以严格 TS 拆分区间计算、进度 DOM、事件生命周期与样式注入；公开声明消费在 04 闭环 | 不依赖新核心方法或大范围设置重构；旧 API/事件和资源通过，必要适配限包内 | M | done |
 | PKG-CHAPTER-04 | artplayer-plugin-chapter<br>迁移自有源码和公开类型 | PKG-CHAPTER-03, ENG-04, ENG-06 | 承接 03 的自有源码 TS 化，完善公开 Chapters/Option/Result 与 update 推导，关闭声明模块解析和旧消费差异 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容；处理 BASE-TYPE-01/03，保持运行时和新旧 TS 模块解析消费 | M | done |
-| PKG-CHAPTER-05 | artplayer-plugin-chapter<br>验证新旧核心和组合 | PKG-CHAPTER-04, CORE-22 | chapter + quality/thumbnail、移动和全屏进度场景 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | doing |
-| PKG-CHAPTER-06 | artplayer-plugin-chapter<br>验证分发并同步文档 | PKG-CHAPTER-05, ENG-07, PKG-CHAPTER-HOVER-01 | chapter.js 示例、产物和变更记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | todo |
+| PKG-CHAPTER-05 | artplayer-plugin-chapter<br>验证新旧核心和组合 | PKG-CHAPTER-04, CORE-22 | chapter + quality/thumbnail、移动和全屏进度场景 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | deferred |
+| PKG-CHAPTER-06 | artplayer-plugin-chapter<br>验证分发并同步文档 | PKG-CHAPTER-05, ENG-07, PKG-CHAPTER-HOVER-01 | chapter.js 示例、产物和变更记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | deferred |
 | PKG-CHAPTER-HOVER-01 | artplayer-plugin-chapter<br>定位并修复原生全屏章节悬停时序 | PKG-CHAPTER-04, CI-BROWSER-01 | 原生全屏动态几何与指针时序复现、针对根因的修复和真实浏览器回归 | 解释 Chromium 旧核心+新章节的 opacity 失败；保留标题、缩略图和全屏退出断言，不以重试或扩大等待掩盖；区分测试同步与生产缺陷 | M | done |
 
 ## 5 包迁移：artplayer-plugin-ambilight
@@ -164,8 +165,8 @@
 | PKG-AMBILIGHT-03 | artplayer-plugin-ambilight<br>整理内部职责与资源 | PKG-AMBILIGHT-02, CORE-03, CORE-12 | 取色计算与绘帧分离，统一 RAF 和 DOM 清理 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | M | done |
 | PKG-AMBILIGHT-04 | artplayer-plugin-ambilight<br>迁移自有源码和公开类型 | PKG-AMBILIGHT-03, ENG-04, ENG-06, CORE-07 | canvas 上下文、参数及 start/stop 的明确类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | M | done |
 | PKG-AMBILIGHT-PROXY-01 | artplayer-plugin-ambilight, artplayer-proxy-canvas<br>修复Canvas代理输出尺寸与取色区域 | PKG-AMBILIGHT-04, CORE-22 | 按Canvas实际输出buffer取色，原生video保留intrinsic尺寸，明确5.1.7没有proxy配置 | 旧错误复现、三引擎实际代理九色区域对照及原生视频回归通过；不把本子项当作最终代理/设备验收 | M | done |
-| PKG-AMBILIGHT-05 | artplayer-plugin-ambilight<br>验证新旧核心和组合 | PKG-AMBILIGHT-04, CORE-22, PKG-AMBILIGHT-PROXY-01, PKG-CANVAS-04, PKG-FACTORY-01 | 原生 video、canvas proxy 的能力边界及销毁无帧循环 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | doing |
-| PKG-AMBILIGHT-06 | artplayer-plugin-ambilight<br>验证分发并同步文档 | PKG-AMBILIGHT-05, ENG-07 | ambilight.js 示例及样式/分发验证 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | todo |
+| PKG-AMBILIGHT-05 | artplayer-plugin-ambilight<br>验证新旧核心和组合 | PKG-AMBILIGHT-04, CORE-22, PKG-AMBILIGHT-PROXY-01, PKG-CANVAS-04, PKG-FACTORY-01 | 原生 video、canvas proxy 的能力边界及销毁无帧循环 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | deferred |
+| PKG-AMBILIGHT-06 | artplayer-plugin-ambilight<br>验证分发并同步文档 | PKG-AMBILIGHT-05, ENG-07 | ambilight.js 示例及样式/分发验证 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | deferred |
 
 ## 5 包迁移：artplayer-plugin-audio-track
 
@@ -175,8 +176,8 @@
 | PKG-AUDIO-02 | artplayer-plugin-audio-track<br>建立特有行为与错误测试 | PKG-AUDIO-01, ENG-03, ENG-05 | 偏移、倍率、seek、waiting/playing、加载错误和 autoplay 拒绝 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-AUDIO-03 | artplayer-plugin-audio-track<br>整理内部职责与资源 | PKG-AUDIO-02, CORE-10 | 外部 audio 的同步策略、监听与源更新生命周期 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-AUDIO-04 | artplayer-plugin-audio-track<br>迁移自有源码和公开类型 | PKG-AUDIO-03, ENG-04, ENG-06, CORE-07 | Option/Result/audio、update 输入和事件类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-AUDIO-05 | artplayer-plugin-audio-track<br>验证新旧核心和组合 | PKG-AUDIO-04, CORE-22, CORE-24, PKG-AUDIO-BUFFER-01 | 主视频切源和缓冲恢复，多实例独立音频、旧核心 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
-| PKG-AUDIO-06 | artplayer-plugin-audio-track<br>验证分发并同步文档 | PKG-AUDIO-05, ENG-07 | audio.track.js 示例与运行返回值一致的声明 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-AUDIO-05 | artplayer-plugin-audio-track<br>验证新旧核心和组合 | PKG-AUDIO-04, CORE-22, CORE-24, PKG-AUDIO-BUFFER-01 | 主视频切源和缓冲恢复，多实例独立音频、旧核心 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | deferred |
+| PKG-AUDIO-06 | artplayer-plugin-audio-track<br>验证分发并同步文档 | PKG-AUDIO-05, ENG-07 | audio.track.js 示例与运行返回值一致的声明 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | deferred |
 | PKG-AUDIO-BUFFER-01 | artplayer-plugin-audio-track<br>修正断流测试的切源等待顺序 | PKG-AUDIO-04, CORE-22 | 网络扣留时独立观察切源Promise；完整元数据扣帧回归与阶段诊断 | 旧顺序复现死等，三浏览器新旧组合可放行并验证恢复；保留真实缓冲失败，不以本项关闭Audio-05或设备门槛 | M | done |
 
 ## 5 包迁移：artplayer-plugin-auto-thumbnail
@@ -185,10 +186,10 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | PKG-AUTO-THUMB-01 | artplayer-plugin-auto-thumbnail<br>核对包契约与历史用法 | BASE-05 | url/width/number/scale、异步工厂和渐进缩略图更新 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | done |
 | PKG-AUTO-THUMB-02 | artplayer-plugin-auto-thumbnail<br>建立特有行为与错误测试 | PKG-AUTO-THUMB-01, ENG-03, ENG-05 | 抽帧边界、短视频、失败、连续来源和销毁中的抽帧 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
-| PKG-AUTO-THUMB-03 | artplayer-plugin-auto-thumbnail<br>整理内部职责与资源 | PKG-AUTO-THUMB-02, CORE-09, CORE-19, PKG-AUTO-THUMB-07 | 隐藏 video、seek 队列、canvas 编码与 Blob URL 清理 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | doing |
+| PKG-AUTO-THUMB-03 | artplayer-plugin-auto-thumbnail<br>整理内部职责与资源 | PKG-AUTO-THUMB-02, CORE-09, CORE-19, PKG-AUTO-THUMB-07 | 隐藏 video、seek 队列、canvas 编码与 Blob URL 清理 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | deferred |
 | PKG-AUTO-THUMB-04 | artplayer-plugin-auto-thumbnail<br>迁移自有源码和公开类型 | PKG-AUTO-THUMB-02, CORE-09, CORE-19, PKG-AUTO-THUMB-07, PKG-AUTO-THUMB-12, ENG-04, ENG-06, CORE-07, PKG-AUTO-THUMB-08, PKG-AUTO-THUMB-09, PKG-AUTO-THUMB-10, PKG-AUTO-THUMB-11 | 抽帧结果和真实异步插件返回类型兼容 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-AUTO-THUMB-05 | artplayer-plugin-auto-thumbnail<br>验证新旧核心和组合 | PKG-AUTO-THUMB-04, CORE-22, PKG-AUTO-THUMB-12, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-13 | 旧核心/候选核心预览、多次加载无过期缩略图覆盖 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
-| PKG-AUTO-THUMB-06 | artplayer-plugin-auto-thumbnail<br>验证分发并同步文档 | PKG-AUTO-THUMB-05, ENG-07 | auto.thumbnail.js、三种产物和内存/URL 证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-AUTO-THUMB-05 | artplayer-plugin-auto-thumbnail<br>验证新旧核心和组合 | PKG-AUTO-THUMB-04, CORE-22, PKG-AUTO-THUMB-12, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-13 | 旧核心/候选核心预览、多次加载无过期缩略图覆盖 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | deferred |
+| PKG-AUTO-THUMB-06 | artplayer-plugin-auto-thumbnail<br>验证分发并同步文档 | PKG-AUTO-THUMB-05, ENG-07 | auto.thumbnail.js、三种产物和内存/URL 证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | deferred |
 | PKG-AUTO-THUMB-07 | artplayer-plugin-auto-thumbnail<br>终止抽帧时清空私有画布像素尺寸 | PKG-AUTO-THUMB-02, CORE-09, CORE-19 | 将私有 canvas 尺寸归入 job 清理；完成、取消、失败及分配重入均有回归，保留已编码 JPEG | 旧红新绿证明保留回调时画布归零，单项清理失败不阻断其他资源；原生取消和完成后 JPEG 仍可解码，原 API/时间公式/类型不变 | M | done |
 | PKG-AUTO-THUMB-08 | artplayer-plugin-auto-thumbnail<br>保留旧声明并提供准确异步类型入口 | PKG-AUTO-THUMB-02, ENG-04, ENG-06, CORE-07 | 保留实际 npm 1.1.0 根声明；新增同实现 /runtime 类型、编辑器声明及隔离安装消费者 | 原 Parameters/ReturnType/替代函数不变；准确 Promise 类型正反例、CJS/ESM 条件入口和声明解析通过；不把像素与设备缺口计为通过 | M | done |
 | PKG-AUTO-THUMB-09 | artplayer-plugin-auto-thumbnail<br>兼容旧 CommonJS default 与直接工厂调用 | PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-08 | 同一 callable 上的 default 自别名，保留最新根声明并补准确 runtime 别名类型；旧/新实际包入口证据 | 旧红新绿、直接/default/ESM/legacy/global 调用一致；旧根类型提取不变，公开准确类型与实际别名匹配；不关闭抽帧像素和设备缺口 | M | done |
@@ -205,8 +206,8 @@
 | PKG-VTT-THUMB-02 | artplayer-plugin-vtt-thumbnail<br>建立特有行为与错误测试 | PKG-VTT-THUMB-01, ENG-03, ENG-05 | VTT 解析、xywh、相对 URL、时间边界、请求失败和定位 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | M | done |
 | PKG-VTT-THUMB-03 | artplayer-plugin-vtt-thumbnail<br>整理内部职责与资源 | PKG-VTT-THUMB-02, CORE-09, CORE-19 | 纯解析/区间查找与 DOM、请求/定时器生命周期分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | M | done |
 | PKG-VTT-THUMB-04 | artplayer-plugin-vtt-thumbnail<br>迁移自有源码和公开类型 | PKG-VTT-THUMB-03, ENG-04, ENG-06, CORE-07 | cue/rect/result 和参数可选性保持兼容 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | M | done |
-| PKG-VTT-THUMB-05 | artplayer-plugin-vtt-thumbnail<br>验证新旧核心和组合 | PKG-VTT-THUMB-04, CORE-22 | 鼠标和移动进度、全屏、切源、chapter 组合 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | doing |
-| PKG-VTT-THUMB-06 | artplayer-plugin-vtt-thumbnail<br>验证分发并同步文档 | PKG-VTT-THUMB-05, ENG-07 | vtt.thumbnail.js、VTT/图片资源解析和产物验证 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | todo |
+| PKG-VTT-THUMB-05 | artplayer-plugin-vtt-thumbnail<br>验证新旧核心和组合 | PKG-VTT-THUMB-04, CORE-22 | 鼠标和移动进度、全屏、切源、chapter 组合 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | deferred |
+| PKG-VTT-THUMB-06 | artplayer-plugin-vtt-thumbnail<br>验证分发并同步文档 | PKG-VTT-THUMB-05, ENG-07 | vtt.thumbnail.js、VTT/图片资源解析和产物验证 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | deferred |
 
 ## 5 包迁移：artplayer-plugin-hls-control
 
@@ -216,9 +217,9 @@
 | PKG-HLS-02 | artplayer-plugin-hls-control<br>建立特有行为与错误测试 | PKG-HLS-01, ENG-03, ENG-05 | Auto/手动实际 level、音轨、去重/过滤和拓扑变化 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-HLS-03 | artplayer-plugin-hls-control<br>整理内部职责与资源 | PKG-HLS-02, CORE-11, CORE-14 | 映射计算与 selector 更新/删除、Hls 事件订阅分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-HLS-04 | artplayer-plugin-hls-control<br>迁移自有源码和公开类型 | PKG-HLS-03, ENG-04, ENG-06, CORE-07 | HLS 能力适配类型、回调上下文和旧 getName 参数 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-HLS-SDK-01 | artplayer-plugin-hls-control<br>验证真实 SDK worker 与分组轨道组合 | PKG-HLS-04, CORE-22 | 固定历史及当前 SDK 归档、真实 worker/多音轨组、外部选择与重绑定浏览器证据 | 受支持桌面 MSE 引擎与新旧核心通过；无 worker 回退伪通过，设备缺口仍由 PKG-HLS-05 保持未完成 | H | doing |
-| PKG-HLS-05 | artplayer-plugin-hls-control<br>验证新旧核心和组合 | PKG-HLS-04, CORE-22, PKG-HLS-SDK-01 | 本地多码率 HLS、换成无轨道来源、旧核心和最终核心 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
-| PKG-HLS-06 | artplayer-plugin-hls-control<br>验证分发并同步文档 | PKG-HLS-05, ENG-07, PKG-HLS-PACK-01 | hls.control.js、依赖范围与回退记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-HLS-SDK-01 | artplayer-plugin-hls-control<br>验证真实 SDK worker 与分组轨道组合 | PKG-HLS-04, CORE-22 | 固定历史及当前 SDK 归档、真实 worker/多音轨组、外部选择与重绑定浏览器证据 | 受支持桌面 MSE 引擎与新旧核心通过；无 worker 回退伪通过，设备缺口仍由 PKG-HLS-05 保持未完成 | H | deferred |
+| PKG-HLS-05 | artplayer-plugin-hls-control<br>验证新旧核心和组合 | PKG-HLS-04, CORE-22, PKG-HLS-SDK-01 | 本地多码率 HLS、换成无轨道来源、旧核心和最终核心 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | deferred |
+| PKG-HLS-06 | artplayer-plugin-hls-control<br>验证分发并同步文档 | PKG-HLS-05, ENG-07, PKG-HLS-PACK-01 | hls.control.js、依赖范围与回退记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | deferred |
 | PKG-HLS-PACK-01 | artplayer-plugin-hls-control<br>排除发布包内的实现 TypeScript 配置 | PKG-HLS-04, ENG-07 | 修正 npm 排除规则，真实打包核验公开入口与声明不变 | 旧归档复现 tsconfig 泄漏，新归档排除内部配置，全部历史 dist/types 保留且 JS/声明字节相同；正常 Yarn 打包与通用包校验通过 | M | done |
 
 ## 5 包迁移：artplayer-plugin-dash-control
@@ -231,8 +232,8 @@
 | PKG-DASH-04 | artplayer-plugin-dash-control<br>迁移自有源码和公开类型 | PKG-DASH-03, ENG-04, ENG-06, CORE-07 | dash.js adapter、selector 和回调类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
 | PKG-DASH-SEEK-01 | artplayer-plugin-dash-control<br>修复 SDK 4.5.2 暂停跳转后的缓冲指标停滞 | PKG-DASH-04 | 按版本和实测空缓冲限定的指标同步、生命周期守卫及真实 SDK 旧红新绿 | 新插件在新旧核心及 Chromium/Firefox 原位置回归通过；不修改 SDK 方法/配置、媒体时间或删除缓冲；旧 SDK 原生缺陷与旧插件限制独立记录，不宣称第三方本体已修复 | H | done |
 | PKG-DASH-MENU-01 | artplayer-plugin-dash-control<br>定位并修复 SDK 刷新期间设置选项不可见 | PKG-DASH-SEEK-01 | 真实 SDK 菜单点击失败根因、对应兼容修复及新旧核心回归 | 保留 legacy/旧核心/SDK5.2.1 的原失败；确定菜单在点击过程中不可见的原因；不靠 force 点击、扩大超时或重复运行覆盖问题；main/legacy 质量与音轨设置及 SDK 刷新组合通过 | H | done |
-| PKG-DASH-05 | artplayer-plugin-dash-control<br>验证新旧核心和组合 | PKG-DASH-04, CORE-22, PKG-DASH-SEEK-01, PKG-DASH-CLEANUP-01 | 固定 dash.js 4.5.2/5.2.1 与本地 DASH 实际清晰度/音轨、高亮、Auto 和换源组合 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
-| PKG-DASH-06 | artplayer-plugin-dash-control<br>验证分发并同步文档 | PKG-DASH-05, ENG-07, PKG-DASH-MENU-01 | dash.control.js、支持的 dash.js 版本与产物 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-DASH-05 | artplayer-plugin-dash-control<br>验证新旧核心和组合 | PKG-DASH-04, CORE-22, PKG-DASH-SEEK-01, PKG-DASH-CLEANUP-01 | 固定 dash.js 4.5.2/5.2.1 与本地 DASH 实际清晰度/音轨、高亮、Auto 和换源组合 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | deferred |
+| PKG-DASH-06 | artplayer-plugin-dash-control<br>验证分发并同步文档 | PKG-DASH-05, ENG-07, PKG-DASH-MENU-01 | dash.control.js、支持的 dash.js 版本与产物 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | deferred |
 | PKG-DASH-CLEANUP-01 | artplayer-plugin-dash-control<br>保留菜单和SDK清理的首个原始异常 | PKG-DASH-04 | 集中DASH清理调度与首错传播，保留重入保护；falsy异常、真实控件beforeUnmount、分发及文档验证 | 七种falsy值不被吞掉或后续错误覆盖；后续资源释放和生命周期回归通过，不更改公开API、SDK归属或异步刷新边界 | M | done |
 
 ## 5 包迁移：artplayer-plugin-multiple-subtitles
@@ -245,8 +246,8 @@
 | PKG-MULTI-SUB-04 | artplayer-plugin-multiple-subtitles<br>迁移自有源码和公开类型 | PKG-MULTI-SUB-03, ENG-04, ENG-06, CORE-07 | 准确 parser/cue/tree/result 类型与真实异步形状 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
 | PKG-MULTI-SUB-07 | artplayer-plugin-multiple-subtitles<br>修复字幕内嵌时间戳序列化 | PKG-MULTI-SUB-03 | 保留数字时间戳节点、修正无效 NaN 输出、明确旧/新字幕输出差异 | 旧九份实现可复现，候选有效内嵌时间戳及文字/CSS/原生字幕通过，公开工厂与选择接口不变 | H | done |
 | PKG-MULTI-SUB-08 | artplayer-plugin-multiple-subtitles<br>修复字幕实体解码与嵌套标签包装 | PKG-MULTI-SUB-04, PKG-MULTI-SUB-07 | 使用解析器既有实体表入口修复多余分号；保护字面文本并以兄弟节点包装标签，保留CSS钩子和时间戳 | 冻结旧实现复现、实体/双重编码/标签/选择重置回归、新旧核心真实字幕显示通过；vendor原文与来源校验不变，类型/分发兼容 | M | done |
-| PKG-MULTI-SUB-05 | artplayer-plugin-multiple-subtitles<br>验证新旧核心和组合 | PKG-MULTI-SUB-04, CORE-22, PKG-MULTI-SUB-07, PKG-MULTI-SUB-08 | 与核心字幕/偏移/全屏组合，旧名称调用不变 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
-| PKG-MULTI-SUB-06 | artplayer-plugin-multiple-subtitles<br>验证分发并同步文档 | PKG-MULTI-SUB-05, ENG-07, CORE-SUBTITLE-OFFSET-01, PKG-MULTI-SUB-09, PKG-MULTI-SUB-10, PKG-MULTI-SUB-11 | multiple.subtitles.js、parser 来源许可及打包边界 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-MULTI-SUB-05 | artplayer-plugin-multiple-subtitles<br>验证新旧核心和组合 | PKG-MULTI-SUB-04, CORE-22, PKG-MULTI-SUB-07, PKG-MULTI-SUB-08 | 与核心字幕/偏移/全屏组合，旧名称调用不变 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | deferred |
+| PKG-MULTI-SUB-06 | artplayer-plugin-multiple-subtitles<br>验证分发并同步文档 | PKG-MULTI-SUB-05, ENG-07, CORE-SUBTITLE-OFFSET-01, PKG-MULTI-SUB-09, PKG-MULTI-SUB-10, PKG-MULTI-SUB-11 | multiple.subtitles.js、parser 来源许可及打包边界 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | deferred |
 | PKG-MULTI-SUB-09 | artplayer-plugin-multiple-subtitles, artplayer<br>定位旧核心切源寻址与字幕显示边界 | PKG-MULTI-SUB-08, CORE-19 | 无插件及旧新插件对照、真实事件轨迹、原切源失败归因和组合测试顺序 | 保留旧核心立即寻址观察，候选首次寻址与正常字幕组合通过；不把原生时钟失败误归为字幕丢失 | M | done |
 | PKG-MULTI-SUB-10 | artplayer-plugin-multiple-subtitles<br>适配旧核心的多条活动字幕渲染 | PKG-MULTI-SUB-08, PKG-MULTI-SUB-09 | 独立旧宿主显示适配、原生异步字幕重叠回归和兼容边界说明 | 旧5.1.2/5.1.7复现先红后绿；保持原生cue对象/时间、旧事件标量和方法身份；多格式显示及清理通过，保留其他组合和设备缺口 | M | done |
 | PKG-MULTI-SUB-11 | artplayer-plugin-multiple-subtitles<br>处理旧发布核心 ASS 转换器丢失换行 | PKG-MULTI-SUB-10 | 冻结5.1.2发布/源码转换差异，兼容转换适配与真实ASS字幕回归 | 保持已有效转换行为，旧发布ASS缺陷有先红后绿与实际产物证据；不得将VTT替代夹具算作ASS通过 | M | done |
@@ -259,11 +260,11 @@
 | PKG-JASSUB-02 | artplayer-plugin-jassub<br>建立特有行为与错误测试 | PKG-JASSUB-01, ENG-03, ENG-05 | ASS 字体、时钟/seek/倍率/resize、加载失败和销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-JASSUB-03 | artplayer-plugin-jassub<br>整理内部职责与资源 | PKG-JASSUB-02, CORE-15, CORE-16 | 仅整理自有 adapter/销毁；保留第三方文件及来源 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-JASSUB-04 | artplayer-plugin-jassub<br>迁移自有源码和公开类型 | PKG-JASSUB-03, ENG-04, ENG-06, CORE-07 | JASSUB option/instance 的兼容类型包装，vendor JS 例外记录 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-JASSUB-05 | artplayer-plugin-jassub<br>验证新旧核心和组合 | PKG-JASSUB-04, CORE-22, PKG-JASSUB-07, PKG-JASSUB-08, PKG-JASSUB-09, PKG-JASSUB-10 | 真实 worker/WASM 字幕渲染与全屏、旧核心测试 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
-| PKG-JASSUB-06 | artplayer-plugin-jassub<br>验证分发并同步文档 | PKG-JASSUB-05, ENG-07, CI-JASSUB-SOURCE-01 | jassub.js、外部资源路径、许可和离线失败记录；接续 VENDOR-04/05 完整组件/字体通知、LGPL 源码分发核对及六份未明确字体的分发处置 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录；来源身份已由01冻结，完整通知和未明确字体的发布处理必须闭环，不能以来源相同替代许可结论 | H | todo |
+| PKG-JASSUB-05 | artplayer-plugin-jassub<br>验证新旧核心和组合 | PKG-JASSUB-04, CORE-22, PKG-JASSUB-07, PKG-JASSUB-08, PKG-JASSUB-09, PKG-JASSUB-10 | 真实 worker/WASM 字幕渲染与全屏、旧核心测试 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | deferred |
+| PKG-JASSUB-06 | artplayer-plugin-jassub<br>验证分发并同步文档 | PKG-JASSUB-05, ENG-07, CI-JASSUB-SOURCE-01 | jassub.js、外部资源路径、许可和离线失败记录；接续 VENDOR-04/05 完整组件/字体通知、LGPL 源码分发核对及六份未明确字体的分发处置 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录；来源身份已由01冻结，完整通知和未明确字体的发布处理必须闭环，不能以来源相同替代许可结论 | H | deferred |
 | PKG-JASSUB-07 | artplayer-plugin-jassub<br>修复 vendor 生命周期与字幕时钟 | PKG-JASSUB-03, PKG-JASSUB-02 | 独立记录 vendor 适配差异；幂等销毁、跨容器 setVideo、构造回滚、逐帧归属和倍率/能力边界；查询 timeout/Worker error 的缺失数据回调及每请求监听器/定时器清理（JASSUB-QUERY-01） | 保持公开真实 instance、同步方法与资源路径；保留原 vendor 来源指纹并记录每项实际补丁；候选修复正例和真实字幕/失败/时钟验证通过，未证实设备不得冒充通过 | H | done |
 | PKG-JASSUB-08 | artplayer-plugin-jassub<br>修复默认 offscreen 初始化消息顺序 | PKG-JASSUB-07 | 在释放排队绘制消息前转移初始画布；独立 vendor 补丁、默认模式原生回归和维护文档 | 保留默认能力选择、Worker/资源和公开同步 API；旧红新绿消息顺序测试及真实默认 offscreen 播放/seek/全屏通过，主线程绘制保持 | H | done |
-| PKG-JASSUB-09 | artplayer-plugin-jassub<br>修复 hybrid 迟到绘制与销毁后画布重建 | PKG-JASSUB-08 | 释放旧混合绘制 bitmap，不改变新模式的画布/时钟；销毁后切字幕不重新分配画布；来源补丁、原生排队消息及维护记录 | 旧红新绿验证旧帧不能重建画布/解除新绘制等待；正常 hybrid 绘制保持；真实 Worker/ImageBitmap 交错、主线程及默认模式回归通过，能力缺口明确 | H | doing |
+| PKG-JASSUB-09 | artplayer-plugin-jassub<br>修复 hybrid 迟到绘制与销毁后画布重建 | PKG-JASSUB-08 | 释放旧混合绘制 bitmap，不改变新模式的画布/时钟；销毁后切字幕不重新分配画布；来源补丁、原生排队消息及维护记录 | 旧红新绿验证旧帧不能重建画布/解除新绘制等待；正常 hybrid 绘制保持；真实 Worker/ImageBitmap 交错、主线程及默认模式回归通过，能力缺口明确 | H | deferred |
 | PKG-JASSUB-10 | artplayer-plugin-jassub<br>释放绘制异常后的整批 ImageBitmap | PKG-JASSUB-08 | 主线程异步绘制异常时释放整批位图；同步路径保持；原生异常/恢复测试和可逆vendor补丁记录 | 旧红新绿验证清屏、尺寸和首/后续绘制异常的释放及原异常传播；真实Worker位图和原生Canvas异常后恢复字幕；源码/main/legacy回归、类型、来源及构建通过 | M | done |
 
 ## 5 包迁移：artplayer-plugin-danmuku-mask
@@ -274,8 +275,8 @@
 | PKG-MASK-02 | artplayer-plugin-danmuku-mask<br>建立特有行为与错误测试 | PKG-MASK-01, ENG-03, ENG-05 | 加载期间停止/销毁、重复启动、推理失败、WebGL/CPU 边界 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-MASK-03 | artplayer-plugin-danmuku-mask<br>整理内部职责与资源 | PKG-MASK-02, CORE-18, PKG-DANMUKU-07 | 模型加载/推理/画布输出分离，阻止重叠推理与过期写入 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-MASK-04 | artplayer-plugin-danmuku-mask<br>迁移自有源码和公开类型 | PKG-MASK-03, ENG-04, ENG-06, CORE-07 | 模型 adapter、canvas 和选项的精确类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-MASK-05 | artplayer-plugin-danmuku-mask<br>验证新旧核心和组合 | PKG-MASK-04, CORE-22 | 真实模型和 danmuku/seek/全屏组合，GPU 资源释放 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
-| PKG-MASK-06 | artplayer-plugin-danmuku-mask<br>验证分发并同步文档 | PKG-MASK-05, ENG-07, PKG-DANMUKU-MASK-LOAD-01 | danmuku.mask.js、资源版本/许可、CPU fallback 和包体积证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-MASK-05 | artplayer-plugin-danmuku-mask<br>验证新旧核心和组合 | PKG-MASK-04, CORE-22 | 真实模型和 danmuku/seek/全屏组合，GPU 资源释放 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | deferred |
+| PKG-MASK-06 | artplayer-plugin-danmuku-mask<br>验证分发并同步文档 | PKG-MASK-05, ENG-07, PKG-DANMUKU-MASK-LOAD-01 | danmuku.mask.js、资源版本/许可、CPU fallback 和包体积证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | deferred |
 
 ## 5 包迁移：artplayer-plugin-asr
 
@@ -285,8 +286,8 @@
 | PKG-ASR-02 | artplayer-plugin-asr<br>建立特有行为与错误测试 | PKG-ASR-01, ENG-03, ENG-05 | PCM/WAV、chunk 时序、回调慢/拒绝、重复初始化与停止 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-ASR-03 | artplayer-plugin-asr<br>整理内部职责与资源 | PKG-ASR-02, CORE-10, CORE-18 | AudioContext/Worklet/Stream 生命周期和背压分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-ASR-04 | artplayer-plugin-asr<br>迁移自有源码和公开类型 | PKG-ASR-03, ENG-04, ENG-06, CORE-07 | 主线程/Worklet/音频 buffer 与异步回调类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-ASR-05 | artplayer-plugin-asr<br>验证新旧核心和组合 | PKG-ASR-04, CORE-22, PKG-ASR-07, PKG-ASR-08, PKG-ASR-09, PKG-ASR-10 | 真实 WebAudio 分块、播放暂停/切源/销毁，不引入网络 ASR | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
-| PKG-ASR-06 | artplayer-plugin-asr<br>验证分发并同步文档 | PKG-ASR-05, ENG-07 | asr.js、Worklet 资源、输出格式与声明证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-ASR-05 | artplayer-plugin-asr<br>验证新旧核心和组合 | PKG-ASR-04, CORE-22, PKG-ASR-07, PKG-ASR-08, PKG-ASR-09, PKG-ASR-10 | 真实 WebAudio 分块、播放暂停/切源/销毁，不引入网络 ASR | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | deferred |
+| PKG-ASR-06 | artplayer-plugin-asr<br>验证分发并同步文档 | PKG-ASR-05, ENG-07 | asr.js、Worklet 资源、输出格式与声明证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | deferred |
 | PKG-ASR-07 | artplayer-plugin-asr<br>修复原生播放音量二次衰减 | PKG-ASR-04 | 移除重复音量应用；保留新旧原生音频振幅对照及正式产物验收 | Chromium/Firefox 两核心和 source/main/legacy 输出音量线性、静音和 stop/restart 正确；旧版平方衰减单独保留；单元/类型/真实安装通过，不代替设备验收 | H | done |
 | PKG-ASR-08 | artplayer-plugin-asr<br>修复捕获回退重复播放与静音漏声 | PKG-ASR-07 | 捕获回退静音输出图、非零PCM与外部播放归属；真实红绿证据及产物验证 | 已进入回退后不产生额外输出、静音不漏声、外部播放图不被关闭、stop/restart/换源清理正确；明确Firefox受控拒绝不代表自然选择回退 | H | done |
 | PKG-ASR-09 | artplayer-plugin-asr<br>提供显式捕获归属并取消过期切源重启 | PKG-ASR-04, PKG-ASR-08 | 保留默认API的capture模式、精确runtime类型、可取消重启和原生外部归属/CORS证据 | 显式模式零直接绑定、不增加输出、拥有资源正确清理；Firefox不强制异常，CORS无绕过；旧工厂类型保持；延迟关闭期间pause/stop取消旧重启 | H | done |
@@ -300,8 +301,8 @@
 | PKG-ADS-02 | artplayer-plugin-ads<br>建立特有行为与错误测试 | PKG-ADS-01, ENG-03, ENG-05 | 固定 npm 1.0.6 与工作区契约；HTML/视频/图片 HTML、跳过阈值、计时链、工厂复用、多实例、过早/重复方法、播放拒绝与销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-ADS-03 | artplayer-plugin-ads<br>整理内部职责与资源 | PKG-ADS-02, CORE-10, CORE-13 | 配置/广告状态/计时/视图/主视频恢复分离，保留产品规则；资源与版本检查改用经验证的旧核心能力边界 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-ADS-04 | artplayer-plugin-ads<br>迁移自有源码和公开类型 | PKG-ADS-03, ENG-04, ENG-06, CORE-07 | 兼容真实 html/video/url/i18n、旧 export= 与工作区 source/type 类型接受面；时长 string/number 漂移与未实现别名单独处置 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-ADS-05 | artplayer-plugin-ads<br>验证新旧核心和组合 | PKG-ADS-04, CORE-22 | 本地广告 fixture、多实例、正常结束/跳过/销毁；核验历史关联核心 4.5.5、发布 5.4.1 与候选核心的实际归档/能力/媒体组合 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
-| PKG-ADS-06 | artplayer-plugin-ads<br>验证分发并同步文档 | PKG-ADS-05, ENG-07 | ads.js/README/声明一致；旧 require(pkg).default、原 dist 路径、当前 callable/ESM/legacy 的隔离 tarball 及浏览器验收 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-ADS-05 | artplayer-plugin-ads<br>验证新旧核心和组合 | PKG-ADS-04, CORE-22 | 本地广告 fixture、多实例、正常结束/跳过/销毁；核验历史关联核心 4.5.5、发布 5.4.1 与候选核心的实际归档/能力/媒体组合 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | deferred |
+| PKG-ADS-06 | artplayer-plugin-ads<br>验证分发并同步文档 | PKG-ADS-05, ENG-07 | ads.js/README/声明一致；旧 require(pkg).default、原 dist 路径、当前 callable/ESM/legacy 的隔离 tarball 及浏览器验收 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | deferred |
 
 ## 5 包迁移：artplayer-plugin-vast
 
@@ -311,8 +312,8 @@
 | PKG-VAST-02 | artplayer-plugin-vast<br>建立特有行为与错误测试 | PKG-VAST-01, ENG-03, ENG-05 | SDK 失败、重复初始化、广告事件、内容恢复和销毁竞态；发布 id/$container/eager 与工作区 lazy/config 覆盖、callback拒绝、加载中销毁、同毫秒多实例与晚到事件 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-VAST-03 | artplayer-plugin-vast<br>整理内部职责与资源 | PKG-VAST-02, CORE-10, CORE-13 | SDK loader、IMA adapter、广告状态和 DOM 清理分离；保持发布 callback 别名，明确初始化冲突；核心终止与显式 destroy 后重建区分 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-VAST-04 | artplayer-plugin-vast<br>迁移自有源码和公开类型 | PKG-VAST-03, ENG-04, ENG-06, CORE-07, PKG-VAST-07 | IMA/context/Promise 真实类型，外部 SDK 动态对象限定边界；修复 @alugha/ima 声明依赖链，保留 export= 和 require.default 消费；同步错误声明的兼容决策单列 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-VAST-05 | artplayer-plugin-vast<br>验证新旧核心和组合 | PKG-VAST-04, CORE-22 | 真实IMA广告播放、错误后主视频恢复、会话重建与销毁；核验npm5.1.7/npm5.4.0/候选5.4.1核心，VAST VPN外部脚本例外逐项记录，不将受控SDK当作实际IMA验收 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
-| PKG-VAST-06 | artplayer-plugin-vast<br>验证分发并同步文档 | PKG-VAST-05, ENG-07 | vast.js、SDK 资源、声明消费和独立版本记录；核验实际发布 namespace default、历史深路径、ESM和准确声明，版本按政策2.0.0由REL-09统一处理 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-VAST-05 | artplayer-plugin-vast<br>验证新旧核心和组合 | PKG-VAST-04, CORE-22 | 真实IMA广告播放、错误后主视频恢复、会话重建与销毁；核验npm5.1.7/npm5.4.0/候选5.4.1核心，VAST VPN外部脚本例外逐项记录，不将受控SDK当作实际IMA验收 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | deferred |
+| PKG-VAST-06 | artplayer-plugin-vast<br>验证分发并同步文档 | PKG-VAST-05, ENG-07 | vast.js、SDK 资源、声明消费和独立版本记录；核验实际发布 namespace default、历史深路径、ESM和准确声明，版本按政策2.0.0由REL-09统一处理 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | deferred |
 | PKG-VAST-07 | artplayer-plugin-vast<br>恢复旧发布VAST工厂default调用入口 | PKG-VAST-01, PKG-VAST-02 | 保留当前直接工厂并增加default自身别名，验证四类分发调用及异步注册，初始化决策独立保留 | 旧产物default用例失败，新源码/实际main/legacy/ESM通过；真实核心三浏览器控制SDK注册验证、模块文档/构建/测试入口同步；不冒充namespace反射、声明和IMA验收 | M | done |
 
 ## 5 包迁移：artplayer-plugin-chromecast
@@ -323,8 +324,8 @@
 | PKG-CAST-02 | artplayer-plugin-chromecast<br>建立特有行为与错误测试 | PKG-CAST-01, ENG-03, ENG-05 | SDK 脚本加载失败/重入、无设备/拒绝、重复实例与销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-CAST-03 | artplayer-plugin-chromecast<br>整理内部职责与资源 | PKG-CAST-02, CORE-11, CORE-13 | SDK singleton/实例订阅/会话与控件职责分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-CAST-04 | artplayer-plugin-chromecast<br>迁移自有源码和公开类型 | PKG-CAST-03, ENG-04, ENG-06, CORE-07 | Cast 能力 adapter、全局对象和元数据类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-CAST-05 | artplayer-plugin-chromecast<br>验证新旧核心和组合 | PKG-CAST-04, CORE-22 | stub 测试之外记录实际 Cast 设备会话、源更新和断开 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
-| PKG-CAST-06 | artplayer-plugin-chromecast<br>验证分发并同步文档 | PKG-CAST-05, ENG-07 | chromecast.js、SDK URL/权限能力及待支持环境说明 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-CAST-05 | artplayer-plugin-chromecast<br>验证新旧核心和组合 | PKG-CAST-04, CORE-22 | stub 测试之外记录实际 Cast 设备会话、源更新和断开 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | deferred |
+| PKG-CAST-06 | artplayer-plugin-chromecast<br>验证分发并同步文档 | PKG-CAST-05, ENG-07 | chromecast.js、SDK URL/权限能力及待支持环境说明 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | deferred |
 
 ## 5 包迁移：artplayer-plugin-document-pip
 
@@ -334,8 +335,8 @@
 | PKG-DPIP-02 | artplayer-plugin-document-pip<br>建立特有行为与错误测试 | PKG-DPIP-01, ENG-03, ENG-05 | 不支持/拒绝、重复打开、pagehide、核心销毁和视频 PiP fallback | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-DPIP-03 | artplayer-plugin-document-pip<br>整理内部职责与资源 | PKG-DPIP-02, CORE-16, CORE-17 | 窗口生命周期、DOM 迁移、样式与事件 document 重绑分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-DPIP-04 | artplayer-plugin-document-pip<br>迁移自有源码和公开类型 | PKG-DPIP-03, ENG-04, ENG-06, CORE-07 | Document PiP 可选能力和真实状态/返回类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-DPIP-05 | artplayer-plugin-document-pip<br>验证新旧核心和组合 | PKG-DPIP-04, CORE-22, PKG-CANVAS-04, PKG-MB-04 | 原生视频及两个 proxy、键盘/焦点/全屏与关闭还原 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
-| PKG-DPIP-06 | artplayer-plugin-document-pip<br>验证分发并同步文档 | PKG-DPIP-05, ENG-07 | document.pip.js、浏览器能力矩阵、旧接口与恢复证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-DPIP-05 | artplayer-plugin-document-pip<br>验证新旧核心和组合 | PKG-DPIP-04, CORE-22, PKG-CANVAS-04, PKG-MB-04 | 原生视频及两个 proxy、键盘/焦点/全屏与关闭还原 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | deferred |
+| PKG-DPIP-06 | artplayer-plugin-document-pip<br>验证分发并同步文档 | PKG-DPIP-05, ENG-07 | document.pip.js、浏览器能力矩阵、旧接口与恢复证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | deferred |
 
 ## 5 包迁移：artplayer-plugin-danmuku
 
@@ -348,8 +349,8 @@
 | PKG-DANMUKU-05 | artplayer-plugin-danmuku<br>整理 DOM 渲染、设置、热力图与 worker | PKG-DANMUKU-04, CORE-14, CORE-18 | renderer/setting/heatmap/worker 职责及资源归属 | mount/icons/设置和 worker 协议保持，销毁无后台工作 | H | done |
 | PKG-DANMUKU-06 | artplayer-plugin-danmuku<br>迁移 TS 与公开声明 | PKG-DANMUKU-05, ENG-04, ENG-06 | 自有模块、worker 消息、option/item/result 类型 | 旧参数、扩展字段和事件消费通过，vendored 边界清楚 | H | done |
 | PKG-DANMUKU-07 | artplayer-plugin-danmuku<br>弹幕能力稳定性验收 | PKG-DANMUKU-06, PKG-DANMUKU-10, PKG-DANMUKU-11, PKG-DANMUKU-12 | 负载/渲染/资源对比及 mask 可依赖的稳定边界 | 在试点核心中旧插件 API 与关键帧路径通过 | H | done |
-| PKG-DANMUKU-08 | artplayer-plugin-danmuku<br>完成新旧核心与组合验收 | PKG-DANMUKU-07, CORE-22, PKG-DANMUKU-START-01 | 最终核心/旧核心、mask/fullscreen/PiP 组合报告 | 性能无未解释退化，反复装卸无累计资源 | H | doing |
-| PKG-DANMUKU-09 | artplayer-plugin-danmuku<br>完成分发、示例与文档 | PKG-DANMUKU-08, ENG-07, PKG-DANMUKU-MASK-LOAD-01, PKG-DANMUKU-START-01 | danmuku.js、README、声明、worker 与产物 | tarball 和静态 icons 等旧调用通过，有独立回退版本 | H | todo |
+| PKG-DANMUKU-08 | artplayer-plugin-danmuku<br>完成新旧核心与组合验收 | PKG-DANMUKU-07, CORE-22, PKG-DANMUKU-START-01 | 最终核心/旧核心、mask/fullscreen/PiP 组合报告 | 性能无未解释退化，反复装卸无累计资源 | H | deferred |
+| PKG-DANMUKU-09 | artplayer-plugin-danmuku<br>完成分发、示例与文档 | PKG-DANMUKU-08, ENG-07, PKG-DANMUKU-MASK-LOAD-01, PKG-DANMUKU-START-01 | danmuku.js、README、声明、worker 与产物 | tarball 和静态 icons 等旧调用通过，有独立回退版本 | H | deferred |
 | PKG-DANMUKU-10 | artplayer-plugin-danmuku<br>修复 issue958 密集热力图过高与曲线裁平 | PKG-DANMUKU-05 | 自动密度缩放与曲线边界、历史自定义坐标兼容及真实浏览器红绿证据 | 16000条三种分布在两核心三引擎和source/main/legacy不遮挡；显式轴和自定义points保持旧解释，有单独commit | M | done |
 | PKG-DANMUKU-11 | artplayer-plugin-danmuku<br>修复 Worker 隐藏等待吞掉可见寿命 | PKG-DANMUKU-06 | 成功放置时的可见计时与延迟回复回归 | 真实 Worker 延迟下完整显示寿命；保留暂停/回收/取消和公开契约 | M | done |
 | PKG-DANMUKU-12 | artplayer-plugin-danmuku<br>保持异步放置期间的原生帧采样与寿命维护 | PKG-DANMUKU-11 | 每帧采样与串行dispatcher、代际buffer及回归 | 异步等待不丢已到时采样、不延迟既有寿命维护；保留顺序、取消与公开readys窗口 | H | done |
@@ -363,8 +364,8 @@
 | PKG-CANVAS-02 | artplayer-proxy-canvas<br>建立特有行为与错误测试 | PKG-CANVAS-01, ENG-03, ENG-05 | ready/loadeddata/canplay、play/seek、回调、resize 与销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-CANVAS-03 | artplayer-proxy-canvas<br>整理内部职责与资源 | PKG-CANVAS-02, CORE-06, CORE-11, CORE-16 | video adapter/原 canvas 方法/RAF 绘制/事件订阅分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-CANVAS-04 | artplayer-proxy-canvas<br>迁移自有源码和公开类型 | PKG-CANVAS-03, ENG-04, ENG-06, CORE-07 | canvas 与媒体能力的精确组合类型，保持 Result | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-CANVAS-05 | artplayer-proxy-canvas<br>验证新旧核心和组合 | PKG-CANVAS-04, CORE-22, PKG-DPIP-04, PKG-FACTORY-01, PKG-CANVAS-SUBTITLE-01 | 真实 video/canvas 绘制、字幕和 document PiP 恢复 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
-| PKG-CANVAS-06 | artplayer-proxy-canvas<br>验证分发并同步文档 | PKG-CANVAS-05, ENG-07 | canvas.js、三种产物、调用兼容与资源证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-CANVAS-05 | artplayer-proxy-canvas<br>验证新旧核心和组合 | PKG-CANVAS-04, CORE-22, PKG-DPIP-04, PKG-FACTORY-01, PKG-CANVAS-SUBTITLE-01 | 真实 video/canvas 绘制、字幕和 document PiP 恢复 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | deferred |
+| PKG-CANVAS-06 | artplayer-proxy-canvas<br>验证分发并同步文档 | PKG-CANVAS-05, ENG-07 | canvas.js、三种产物、调用兼容与资源证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | deferred |
 | PKG-CANVAS-SUBTITLE-01 | artplayer-proxy-canvas<br>修复 Canvas 代理原生字幕轨道挂载 | PKG-CANVAS-04 | 初始字幕能力、原生轨道挂载与资源生命周期适配及新旧核心回归 | 复现旧字幕 cues 为空；新旧核心加载、寻址、切换、销毁通过；普通 Canvas 节点行为和分发入口保持兼容 | M | done |
 
 ## 5 包迁移：artplayer-proxy-mediabunny
@@ -379,8 +380,8 @@
 | PKG-MB-06 | artplayer-proxy-mediabunny<br>整理音频解码、时钟与同步 | PKG-MB-04 | AudioEngine 时钟、缓冲和 AudioContext 归属 | AV sync、倍速、无音轨、静音/音量和暂停恢复通过 | H | done |
 | PKG-MB-07 | artplayer-proxy-mediabunny<br>整理 HLS 配对轨道与 selector | PKG-MB-05, PKG-MB-06, CORE-14 | m3u8 配对、质量/音频选择及拓扑清理 | 实际选择高亮、切到无轨道来源清理、无重复 readiness | H | done |
 | PKG-MB-08 | artplayer-proxy-mediabunny<br>完成 TS 与媒体能力声明 | PKG-MB-07, ENG-04, ENG-06 | 8 个自有 JS 模块迁移与 Result/shim 类型 | 解码器/Stream/DOM 类型清楚，旧 Option 和 art.mediabunny 使用保持 | H | done |
-| PKG-MB-09 | artplayer-proxy-mediabunny<br>完成新旧核心和真实媒体组合 | PKG-MB-08, CORE-22 | 跨浏览器能力、长播放、DPiP、HLS 音轨/质量报告 | 资源释放、事件顺序、AV sync 与支持范围满足基线 | H | doing |
-| PKG-MB-10 | artplayer-proxy-mediabunny<br>完成分发和文档 | PKG-MB-09, ENG-07 | mediabunny.js、README、依赖版本、三产物和许可; 拆分media声明后的独立编辑器生成/辅助文件过滤与语义检查（IFRAME-04全量生成时暴露） | tarball 可消费、无意外依赖升级、旧调用与回退可用 | H | todo |
+| PKG-MB-09 | artplayer-proxy-mediabunny<br>完成新旧核心和真实媒体组合 | PKG-MB-08, CORE-22 | 跨浏览器能力、长播放、DPiP、HLS 音轨/质量报告 | 资源释放、事件顺序、AV sync 与支持范围满足基线 | H | deferred |
+| PKG-MB-10 | artplayer-proxy-mediabunny<br>完成分发和文档 | PKG-MB-09, ENG-07 | mediabunny.js、README、依赖版本、三产物和许可; 拆分media声明后的独立编辑器生成/辅助文件过滤与语义检查（IFRAME-04全量生成时暴露） | tarball 可消费、无意外依赖升级、旧调用与回退可用 | H | deferred |
 
 ## 5 包迁移：artplayer-tool-iframe
 
@@ -390,8 +391,8 @@
 | PKG-IFRAME-02 | artplayer-tool-iframe<br>建立特有行为与错误测试 | PKG-IFRAME-01, ENG-03, ENG-05 | 跨窗口消息、ID 匹配、请求失败、重复 inject、销毁中请求 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-IFRAME-03 | artplayer-tool-iframe<br>整理内部职责与资源 | PKG-IFRAME-02, CORE-02, BASE-07 | 请求注册/响应匹配/监听清理分离；origin/source 安全边界独立决策 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-IFRAME-04 | artplayer-tool-iframe<br>迁移自有源码和公开类型 | PKG-IFRAME-03, ENG-04, ENG-06, CORE-07 | 消息联合类型、回调/Promise 推导、旧公开字段兼容；旧npm export=与实际namespace、额外helper协议分别核验 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-IFRAME-05 | artplayer-tool-iframe<br>验证新旧核心和组合 | PKG-IFRAME-04, CORE-22 | 真实同源/跨源 iframe、既有 commit 协议；安全变化有独立结论；新旧核心/demo、实际 BFCache/设备和外部中断导航验收，旧端无文档标记的限制明确 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
-| PKG-IFRAME-06 | artplayer-tool-iframe<br>验证分发并同步文档 | PKG-IFRAME-05, ENG-07 | iframe.js、示例集成和原 script/class 导出验证；旧包名/额外helper深入口与新工具名的迁移结论; 保留旧npm Function回调及namespace/helper与工具类的区别，核验实际编译后消费而非仅声明通过 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-IFRAME-05 | artplayer-tool-iframe<br>验证新旧核心和组合 | PKG-IFRAME-04, CORE-22 | 真实同源/跨源 iframe、既有 commit 协议；安全变化有独立结论；新旧核心/demo、实际 BFCache/设备和外部中断导航验收，旧端无文档标记的限制明确 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | deferred |
+| PKG-IFRAME-06 | artplayer-tool-iframe<br>验证分发并同步文档 | PKG-IFRAME-05, ENG-07 | iframe.js、示例集成和原 script/class 导出验证；旧包名/额外helper深入口与新工具名的迁移结论; 保留旧npm Function回调及namespace/helper与工具类的区别，核验实际编译后消费而非仅声明通过 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | deferred |
 
 ## 5 包迁移：artplayer-tool-thumbnail
 
@@ -401,8 +402,8 @@
 | PKG-TOOL-THUMB-02 | artplayer-tool-thumbnail<br>建立特有行为与错误测试 | PKG-TOOL-THUMB-01, ENG-03, ENG-05 | 文件输入/拖放、抽帧网格、begin/end、进度/失败/重复任务 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-TOOL-THUMB-03 | artplayer-tool-thumbnail<br>整理内部职责与资源 | PKG-TOOL-THUMB-02, CORE-01 | 输入、抽帧队列、网格导出、URL/监听清理分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-TOOL-THUMB-04 | artplayer-tool-thumbnail<br>迁移自有源码和公开类型 | PKG-TOOL-THUMB-03, ENG-04, ENG-06, CORE-07, PKG-TOOL-THUMB-07 | 补齐真实 API 声明，自有 emitter/utils TS 化 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容；为 BASE-DIST-01 提供兼容入口/声明及消费者验证 | H | done |
-| PKG-TOOL-THUMB-05 | artplayer-tool-thumbnail<br>验证新旧核心和组合 | PKG-TOOL-THUMB-04, CORE-22 | 工具独立浏览器使用，生成缩略图在核心中显示 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
-| PKG-TOOL-THUMB-06 | artplayer-tool-thumbnail<br>验证分发并同步文档 | PKG-TOOL-THUMB-05, ENG-07 | tool.thumbnail.js、历史 ESM 兼容文件、types 路径和 tarball | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-TOOL-THUMB-05 | artplayer-tool-thumbnail<br>验证新旧核心和组合 | PKG-TOOL-THUMB-04, CORE-22 | 工具独立浏览器使用，生成缩略图在核心中显示 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | deferred |
+| PKG-TOOL-THUMB-06 | artplayer-tool-thumbnail<br>验证分发并同步文档 | PKG-TOOL-THUMB-05, ENG-07 | tool.thumbnail.js、历史 ESM 兼容文件、types 路径和 tarball | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | deferred |
 | PKG-TOOL-THUMB-07 | artplayer-tool-thumbnail<br>恢复清理和销毁中的原始异常传播 | PKG-TOOL-THUMB-03 | 清理记录与异常值分离，保留首个 falsy 抛出值并继续释放资源；历史对照、真实DOM、分发验证及维护记录 | 恢复旧 destroy 监听器同步异常语义，0/false/undefined/NaN等不被吞掉或覆盖；后续清理、重复销毁与正常抽帧回归通过，默认兼容决策不受影响 | M | done |
 
 ## 6 文档与消费者
@@ -418,12 +419,12 @@
 | SITE-03 | artplayer-vitepress<br>整理 i18n/文档/LLM 生成流程 | SITE-02, SITE-LOAD-01, SITE-AI-DOCS-01, SITE-BUILD-01 | build-i18n/build-docs/build-llm/trans-docs 的任务边界和错误处理；桌面 common.js 自有 UI 的 TS 迁移与模块拆分 | 原命令兼容、生成可复现，翻译步骤不隐式运行远程服务；覆盖移动 loader 失败恢复 define、脚本依赖顺序、localhost/127.0.0.1 Run Code 目标和语言重定向；桌面剩余 UI 完成 TS 职责拆分并回归运行、导入与持久设置 | M | done |
 | SITE-DANMUKU-01 | artplayer-vitepress, artplayer-plugin-danmuku<br>核对弹幕双语指南并补齐英文入口 | SITE-03, PKG-DANMUKU-07 | 按实现修正中文调用说明，新增英文完整选项/API/热力图/类型指南和导航；同步生成站点与LLM资料，新增双语示例浏览器验收 | 旧中文URL和标题保留；实际方法返回、加载语义、回调与points边界准确；双语页面、Run Code及示例实测，完整插件组合和设备验收不冒充完成 | L | done |
 | SITE-04 | artplayer-vitepress<br>交叉核对逐包持续维护的文档 | CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08, SITE-DANMUKU-01, SITE-HLS-01, SITE-DASH-01, SITE-AUDIO-01, SITE-VTT-01, SITE-ROUTES-01, SITE-EDITOR-VAST-01 | 已随实现更新的中文/英文 API、包内实现地图、旧 JS 示例及已知能力限制的全包核对 | 未把缺环境的能力写成已验证，静态核对不等待设备任务；最终 demo 仍由 EX-03 验收；按 SITE-01 声明成员/候选标题清单逐项语义核对，补齐缺失的双语插件说明和 Danmuku 英文入口 | M | done |
-| SITE-05 | artplayer-vitepress<br>构建文档站和验证链接/示例 | SITE-04, EX-01, EX-02, SITE-VCONSOLE-01, SITE-CONSOLE-01 | VitePress 构建、链接与嵌入 demo 检查 | 文档构建、链接、嵌入路径与声明注入通过；真实完整 demo 保留 EX-03 独立门槛；核对 ENG-PM-01 登记的搜索 peer 范围和真实搜索行为 | M | doing |
-| SITE-06 | artplayer-vitepress<br>文档站交付验收 | SITE-05, SITE-07 | 维护指南和站点变更记录 | 未手改 generated 目录，旧 URL 可用、部署与检查分离 | M | todo |
-| SITE-07 | artplayer-vitepress, workspace<br>整理站点第三方资产与来源说明 | SITE-01 | Monaco/vConsole/console bundle/字体和样本的冻结来源、可复现构建或替代与站点 notices | 接续 SITE-01 的字节与换行差异证据；完整许可随实际分发，consoleLog/global/CSS/worker 与旧 URL 兼容；缺字体/媒体使用依据明确处置；资产变更后执行编辑器/移动/字幕/示例回归，不以来源指纹替代授权或运行证据 | H | doing |
+| SITE-05 | artplayer-vitepress<br>构建文档站和验证链接/示例 | SITE-04, EX-01, EX-02, SITE-VCONSOLE-01, SITE-CONSOLE-01 | VitePress 构建、链接与嵌入 demo 检查 | 文档构建、链接、嵌入路径与声明注入通过；真实完整 demo 保留 EX-03 独立门槛；核对 ENG-PM-01 登记的搜索 peer 范围和真实搜索行为 | M | deferred |
+| SITE-06 | artplayer-vitepress<br>文档站交付验收 | SITE-05, SITE-07 | 维护指南和站点变更记录 | 未手改 generated 目录，旧 URL 可用、部署与检查分离 | M | deferred |
+| SITE-07 | artplayer-vitepress, workspace<br>整理站点第三方资产与来源说明 | SITE-01 | Monaco/vConsole/console bundle/字体和样本的冻结来源、可复现构建或替代与站点 notices | 接续 SITE-01 的字节与换行差异证据；完整许可随实际分发，consoleLog/global/CSS/worker 与旧 URL 兼容；缺字体/媒体使用依据明确处置；资产变更后执行编辑器/移动/字幕/示例回归，不以来源指纹替代授权或运行证据 | H | deferred |
 | EX-01 | example/react.js, workspace<br>验证 React 消费者与 TS | CORE-22, ENG-07 | React 挂载/卸载/重挂载、引用和插件样例 | 真实 tarball + TS 消费通过，保留既有 React 集成 API | M | done |
 | EX-02 | example/vue.js, workspace<br>验证 Vue 消费者与更新卸载 | CORE-22, ENG-07 | Vue 实例/ref、参数更新、卸载及插件样例 | 旧 JS 组件用法无需修改，重复挂载不泄漏 | M | done |
-| EX-03 | workspace<br>验证全部原生 demo 与外部播放集成 | EX-01, EX-02, PKG-CHAPTER-06, PKG-AMBILIGHT-06, PKG-AUDIO-06, PKG-AUTO-THUMB-06, PKG-VTT-THUMB-06, PKG-HLS-06, PKG-DASH-06, PKG-MULTI-SUB-06, PKG-JASSUB-06, PKG-MASK-06, PKG-ASR-06, PKG-ADS-06, PKG-VAST-06, PKG-CAST-06, PKG-DPIP-06, PKG-DANMUKU-09, PKG-CANVAS-06, PKG-MB-10, PKG-IFRAME-06, PKG-TOOL-THUMB-06 | 8082 全 demo、HLS/DASH/FLV/MPEGTS/WebTorrent 集成记录 | 旧 URL/参数/脚本加载保持；网络/SDK 限制明确，不静默跳过；覆盖编辑器重复 Run 和 ESM/i18n/mobile/iframe，记录实际候选脚本及状态隔离证据；依据 BASE-04 路径台账逐项消除 not-run，处理 BASE-DEMO-01 | H | todo |
+| EX-03 | workspace<br>验证全部原生 demo 与外部播放集成 | EX-01, EX-02, PKG-CHAPTER-06, PKG-AMBILIGHT-06, PKG-AUDIO-06, PKG-AUTO-THUMB-06, PKG-VTT-THUMB-06, PKG-HLS-06, PKG-DASH-06, PKG-MULTI-SUB-06, PKG-JASSUB-06, PKG-MASK-06, PKG-ASR-06, PKG-ADS-06, PKG-VAST-06, PKG-CAST-06, PKG-DPIP-06, PKG-DANMUKU-09, PKG-CANVAS-06, PKG-MB-10, PKG-IFRAME-06, PKG-TOOL-THUMB-06 | 8082 全 demo、HLS/DASH/FLV/MPEGTS/WebTorrent 集成记录 | 旧 URL/参数/脚本加载保持；网络/SDK 限制明确，不静默跳过；覆盖编辑器重复 Run 和 ESM/i18n/mobile/iframe，记录实际候选脚本及状态隔离证据；依据 BASE-04 路径台账逐项消除 not-run，处理 BASE-DEMO-01 | H | deferred |
 | SITE-VCONSOLE-01 | artplayer-vitepress, workspace<br>修复 vConsole 日志帧与延迟面板销毁竞态 | SITE-01 | 冻结上游 bundle 的可复现 TS 生命周期补丁、旧红新绿回归、来源及生成检查；销毁后虚拟列表布局续段停止 | 最后日志插件移除后取消 RAF 并隔离旧队列；延迟面板不得写入已销毁或替换插件；三引擎移动页与 UMD 入口通过，维护声明与原有许可缺口分别记录；原生 ResizeObserver 布局与挂起 timer 旧红新绿 | M | done |
 | SITE-CONSOLE-01 | artplayer-vitepress, workspace<br>迁移控制台自有 TS 源码并修复日志生命周期 | SITE-03 | 从冻结 console.js 恢复自有入口/视图的 TS 模块、受控第三方边界与可验证构建；修复滚动回调、多容器 hook 所有权和原生 Error 消息丢失 | 保留 consoleLog 返回组件、React/ReactDOM/Parcel 全局及 DOM/CSS/日志对象语义；旧版复现与候选正确行为分开验证；多容器、卸载/重挂、外部 hook、错误/滚动及真实编辑器组合通过；架构与生成文档同批更新，不以冻结 vendor 代替 SITE-07 许可闭环 | H | done |
 | SITE-ROUTES-01 | artplayer-vitepress, workspace<br>将新增文档HTML纳入保留历史的路径覆盖台账 | BASE-04, SITE-03 | 不覆盖BASE-04的HTML增量台账、准确路由/责任校验及完整CI证据 | 复现完整ci:check的路径覆盖失败；新页面必须显式登记，拒绝漏项/重复/错误路由/越界/缺任务和提交，保留旧页面保护及浏览器验收边界 | M | done |
@@ -445,8 +446,8 @@
 | MOD-02 | workspace<br>整理剩余开发/构建脚本与插件模板 | ENG-06, SITE-03, MOD-PLUGIN-01 | dev/build/utils/create-plugin 的 TS 与可测 CLI，模板同时提供旧 API | 旧脚本入口保留、新插件类型/测试/示例齐全，Lerna 改动单独取证 | M | done |
 | MOD-DEV-01 | workspace<br>修复开发服务器失败状态并明确资源生命周期 | MOD-02 | 修复 Servor 占用端口却退出 0 的已复现问题；明确 HTTP/监听/热刷新连接与定时器的启动、失败和关闭责任 | 保持默认 8082、docs 页面、自动刷新和旧 dev 命令；端口冲突退出非零且不终止其他服务，连续启动/停止及编译错误恢复有实际验证；跨平台监听差异单独留证 | M | done |
 | MOD-03 | workspace<br>测量并优化核心热路径 | CORE-22, ENG-08 | DOM 读写、进度更新、持久化、初始化的测量与改进 | 相同设备媒体多次比较，契约不变，收益及无效尝试记录；复用 BASE-06 的原始样本与测量限制，至少三组同环境旧新配对，不以单次变快宣称收益 | M | done |
-| MOD-04 | workspace<br>测量并优化重型插件/proxy | PKG-DANMUKU-09, PKG-MASK-06, PKG-MB-10, ENG-08 | 帧/队列/推理/音画同步与资源长期运行比较 | 不改默认算法/阈值，性能改善有证据；无收益则保留旧实现 | M | todo |
-| MOD-05 | workspace<br>完成工具链与性能采用决策 | MOD-01, MOD-02, MOD-03, MOD-04, MOD-DEV-01 | 最终 runtime/packageManager/构建配置及性能台账 | 干净安装和全包检查通过；Bun 未采用有理由，不为状态强行切换 | M | todo |
+| MOD-04 | workspace<br>测量并优化重型插件/proxy | PKG-DANMUKU-09, PKG-MASK-06, PKG-MB-10, ENG-08 | 帧/队列/推理/音画同步与资源长期运行比较 | 不改默认算法/阈值，性能改善有证据；无收益则保留旧实现 | M | deferred |
+| MOD-05 | workspace<br>完成工具链与性能采用决策 | MOD-01, MOD-02, MOD-03, MOD-04, MOD-DEV-01 | 最终 runtime/packageManager/构建配置及性能台账 | 干净安装和全包检查通过；Bun 未采用有理由，不为状态强行切换 | M | deferred |
 
 ## 8 发布验收
 
@@ -455,20 +456,20 @@
 | REL-08 | workspace<br>提前建立逐包发布准入台账 | BASE-08, ENG-07 | 每批包/版本/源码/锁文件/工具/tarball integrity、必需测试/设备证据、限制和回退映射 | 受影响能力缺证据明确阻止对应批次；无关批次可独立准备，旧证据在候选内容变化后失效；站点采用真实构建/URL/资源验收，npm 分发依据历史核实，不从版本清单推断新增发布范围；关联 risks.json 和 third-party.json；受影响 bundle/worker/WASM/font/模型的来源与许可通知缺口必须有审查结论，未决项阻止对应批次 | H | done |
 | REL-01 | workspace<br>提前确定分包版本与差异方案 | REL-08, CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08, PKG-FACTORY-01 | 每包版本/变更日志/依赖/类型差异方案和独立准入状态；按 version-policy.md 冻结各包下一 major（minor/patch 归零）并核实 registry 占用 | 所有包有方案和剩余门槛，未决项明确阻止相应发布；本步骤不声称已经可发布；全部包有 major 目标，版本冲突明确处理，独立准备任务同步 manifest/锁/依赖/日志；按 BASE-05 区分 21 库与文档站分发，不机械把文档站当库上传 npm | H | done |
 | REL-09 | workspace<br>落实全包下一 major 版本及依赖元数据 | REL-01, DOC-11 | 22 包版本目标落实、适用锁文件/依赖范围/示例/变更日志同步，核实 registry 版本占用 | 版本与 policy 一致，旧核心支持保留；必要拆子任务各自提交，候选构建前完成，不执行 publish | H | done |
-| REL-02 | workspace<br>生成候选 tarball 并验证新旧组合 | REL-01, CORE-22, ENG-07, REL-09, REL-04 | 各候选本地 tarball/integrity 与新旧核心/插件消费者验证报告，外部门槛单独标注 | 隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容；在目标 major 版本确定后构建 pack，不在测试后改版本；逐包核验完整回退产物、实际候选版本/integrity、应用导入与冻结锁，重跑对应回退并保留报告；缺失历史分发不准入 | H | doing |
-| REL-03 | workspace<br>完成真机、外部 SDK 与压力验收 | REL-02, EX-03, SITE-06, MOD-05 | Safari/移动/PiP/Cast/IMA/模型/长播放完整报告 | 包集成与全项目真机/SDK/压力结论齐全才完成本汇总；独立批次先建立自己的完整门槛子任务 | H | todo |
+| REL-02 | workspace<br>生成候选 tarball 并验证新旧组合 | REL-01, CORE-22, ENG-07, REL-09, REL-04 | 各候选本地 tarball/integrity 与新旧核心/插件消费者验证报告，外部门槛单独标注 | 隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容；在目标 major 版本确定后构建 pack，不在测试后改版本；逐包核验完整回退产物、实际候选版本/integrity、应用导入与冻结锁，重跑对应回退并保留报告；缺失历史分发不准入 | H | deferred |
+| REL-03 | workspace<br>完成真机、外部 SDK 与压力验收 | REL-02, EX-03, SITE-06, MOD-05 | Safari/移动/PiP/Cast/IMA/模型/长播放完整报告 | 包集成与全项目真机/SDK/压力结论齐全才完成本汇总；独立批次先建立自己的完整门槛子任务 | H | deferred |
 | REL-04 | workspace<br>提前演练回退与主线修复同步 | REL-08, ENG-07 | 分包旧版本/tag/依赖回退方案与 master 差异 | 隔离包演练可回退，主线修复同步流程可执行；正式每批再核对其实际回退产物 | H | done |
-| REL-05 | workspace<br>经授权发布候选并收集反馈 | REL-03, REL-04, REVIEW-03 | 候选 tag、完整产物 integrity、反馈与复现记录 | 实际发布授权/操作/版本可追溯；本计划不自动执行发布 | H | todo |
-| REL-06 | workspace<br>经授权分批正式发布 | REL-05 | 正式分包版本/tag/站点文档及兼容公告 | 候选验收通过，安装/浏览器复核和回退入口就绪；候选反馈修复须独立建任务并复验三轮受影响结论，正式内容与最终验证产物一致 | H | todo |
-| REL-07 | workspace<br>关闭重构里程碑并维护后续队列 | REL-06, ENG-LINT-01, ENG-LINT-02 | 最终任务/设计/证据归档和维护指南 | 全范围任务有结论、无未解释兼容缺口；遗留项有明确后续责任 | L | todo |
+| REL-05 | workspace<br>经授权发布候选并收集反馈 | REL-03, REL-04, REVIEW-03 | 候选 tag、完整产物 integrity、反馈与复现记录 | 实际发布授权/操作/版本可追溯；本计划不自动执行发布 | H | deferred |
+| REL-06 | workspace<br>经授权分批正式发布 | REL-05 | 正式分包版本/tag/站点文档及兼容公告 | 候选验收通过，安装/浏览器复核和回退入口就绪；候选反馈修复须独立建任务并复验三轮受影响结论，正式内容与最终验证产物一致 | H | deferred |
+| REL-07 | workspace<br>关闭重构里程碑并维护后续队列 | REL-06, ENG-LINT-01, ENG-LINT-02 | 最终任务/设计/证据归档和维护指南 | 全范围任务有结论、无未解释兼容缺口；遗留项有明确后续责任 | L | deferred |
 
 ## 8.1 多轮复盘
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| REVIEW-01 | workspace<br>第一轮全项目架构与兼容性复盘 | REL-02, CORE-22, SITE-04, DOC-08, MOD-01, MOD-02, MOD-03, CORE-25, ENG-13, DOC-REVIEW-01 | 22 包结构、类型、旧 API/路径、测试盲区和维护文档的逐包报告 | 本轮阻断项由独立修复任务关闭并复测；环境缺口转交下一轮，不宣称已发布就绪 | H | todo |
-| REVIEW-02 | workspace<br>第二轮真实浏览器与生态集成复盘 | REVIEW-01, REL-03 | Chrome 交互、自动浏览器、新旧组合、真机/SDK/性能/资源的全范围报告 | 所需环境证据齐全，前轮修复再次核对；本轮阻断项关闭，无关 mock 不替代真实验收 | H | todo |
-| REVIEW-03 | workspace<br>第三轮 npm 候选内容与发布准备复盘 | REVIEW-02, REL-04, CI-04 | 实际候选 integrity、干净安装构建/消费者、入口/许可/版本/tag/回退及前轮证据汇总 | 最终候选完整检查通过，发布阻断项为零；准备可审阅的批次报告，不自动执行 publish；逐包核对 major 目标，不能用大版本豁免旧 API 兼容 | H | todo |
+| REVIEW-01 | workspace<br>第一轮全项目架构与兼容性复盘 | REL-02, CORE-22, SITE-04, DOC-08, MOD-01, MOD-02, MOD-03, CORE-25, ENG-13, DOC-REVIEW-01 | 22 包结构、类型、旧 API/路径、测试盲区和维护文档的逐包报告 | 本轮阻断项由独立修复任务关闭并复测；环境缺口转交下一轮，不宣称已发布就绪 | H | deferred |
+| REVIEW-02 | workspace<br>第二轮真实浏览器与生态集成复盘 | REVIEW-01, REL-03 | Chrome 交互、自动浏览器、新旧组合、真机/SDK/性能/资源的全范围报告 | 所需环境证据齐全，前轮修复再次核对；本轮阻断项关闭，无关 mock 不替代真实验收 | H | deferred |
+| REVIEW-03 | workspace<br>第三轮 npm 候选内容与发布准备复盘 | REVIEW-02, REL-04, CI-04 | 实际候选 integrity、干净安装构建/消费者、入口/许可/版本/tag/回退及前轮证据汇总 | 最终候选完整检查通过，发布阻断项为零；准备可审阅的批次报告，不自动执行 publish；逐包核对 major 目标，不能用大版本豁免旧 API 兼容 | H | deferred |
 
 ## 5 工厂类型兼容补审
 
@@ -542,8 +543,10 @@
 - ENG-09: [记录](changes/2026-09-12-ENG-09-integration.md) [记录](baselines/engineering-integration.json)
 - ENG-10: [记录](changes/2026-09-10-ENG-10-test-reliability.md) [记录](test-reliability.md)
 - ENG-11: [记录](build-analysis.md) [记录](baselines/bundle-attribution.json) [记录](changes/2026-09-11-ENG-11-build-analysis.md)
-- CI-01: [记录](ci-setup.md) [记录](changes/2026-09-13-CI-01-matrix-summary.md) [记录](baselines/ci-matrix-validation.json) [记录](changes/2026-09-13-CI-01-node-consumers.md) [记录](baselines/node-consumer-validation.json) [记录](changes/2026-09-14-CI-01-installed-full.md) [记录](baselines/ci-installed-full-validation.json) [记录](changes/2026-09-14-CI-01-source-chromium.md) [记录](baselines/ci-source-chromium-validation.json) [记录](changes/2026-09-15-CI-01-ads-installed.md) [记录](baselines/ci-ads-installed-validation.json) [记录](changes/2026-09-15-CI-01-subtitles-installed.md) [记录](baselines/ci-subtitles-installed-validation.json) [记录](changes/2026-09-15-CI-01-adaptive-installed.md) [记录](baselines/ci-adaptive-installed-validation.json) [记录](changes/2026-09-15-CI-01-asr-cast-installed.md) [记录](baselines/ci-asr-cast-installed-validation.json) [记录](changes/2026-09-15-CI-01-mediabunny-installed.md) [记录](baselines/ci-mediabunny-installed-validation.json) [记录](changes/2026-09-15-CI-01-jassub-installed.md) [记录](baselines/ci-jassub-installed-validation.json) [记录](changes/2026-09-15-CI-01-danmuku-installed.md) [记录](baselines/ci-danmuku-installed-validation.json) [记录](changes/2026-09-15-CI-01-browser-matrix.md) [记录](baselines/ci-browser-matrix-validation.json) [记录](changes/2026-09-15-CI-01-iframe-installed.md) [记录](baselines/ci-iframe-installed-validation.json) [记录](changes/2026-09-15-CI-01-vast-installed.md) [记录](baselines/ci-vast-installed-validation.json) [记录](changes/2026-09-15-CI-01-rendering-policy.md) [记录](baselines/ci-rendering-policy-validation.json) [记录](changes/2026-09-15-SITE-ROUTES-01-html-inventory.md) [记录](baselines/site-routes-validation.json) [记录](baselines/ci-source-firefox-validation.json) [记录](changes/2026-09-15-SITE-EDITOR-VAST-01-consumer.md) [记录](changes/2026-09-15-CI-01-source-webkit.md) [记录](baselines/ci-source-webkit-validation.json) [记录](changes/2026-09-15-CI-JASSUB-SOURCE-01-native-inputs.md) [记录](baselines/jassub-source-selection-validation.json) [记录](changes/2026-09-15-CI-01-installed-chromium.md) [记录](baselines/ci-installed-chromium-validation.json) [记录](changes/2026-09-15-CI-01-installed-firefox.md) [记录](baselines/ci-installed-firefox-validation.json) [记录](changes/2026-09-15-CI-01-installed-webkit.md) [记录](baselines/ci-installed-webkit-validation.json)
+- CI-01: [记录](ci-setup.md) [记录](changes/2026-09-13-CI-01-matrix-summary.md) [记录](baselines/ci-matrix-validation.json) [记录](changes/2026-09-13-CI-01-node-consumers.md) [记录](baselines/node-consumer-validation.json) [记录](changes/2026-09-14-CI-01-installed-full.md) [记录](baselines/ci-installed-full-validation.json) [记录](changes/2026-09-14-CI-01-source-chromium.md) [记录](baselines/ci-source-chromium-validation.json) [记录](changes/2026-09-15-CI-01-ads-installed.md) [记录](baselines/ci-ads-installed-validation.json) [记录](changes/2026-09-15-CI-01-subtitles-installed.md) [记录](baselines/ci-subtitles-installed-validation.json) [记录](changes/2026-09-15-CI-01-adaptive-installed.md) [记录](baselines/ci-adaptive-installed-validation.json) [记录](changes/2026-09-15-CI-01-asr-cast-installed.md) [记录](baselines/ci-asr-cast-installed-validation.json) [记录](changes/2026-09-15-CI-01-mediabunny-installed.md) [记录](baselines/ci-mediabunny-installed-validation.json) [记录](changes/2026-09-15-CI-01-jassub-installed.md) [记录](baselines/ci-jassub-installed-validation.json) [记录](changes/2026-09-15-CI-01-danmuku-installed.md) [记录](baselines/ci-danmuku-installed-validation.json) [记录](changes/2026-09-15-CI-01-browser-matrix.md) [记录](baselines/ci-browser-matrix-validation.json) [记录](changes/2026-09-15-CI-01-iframe-installed.md) [记录](baselines/ci-iframe-installed-validation.json) [记录](changes/2026-09-15-CI-01-vast-installed.md) [记录](baselines/ci-vast-installed-validation.json) [记录](changes/2026-09-15-CI-01-rendering-policy.md) [记录](baselines/ci-rendering-policy-validation.json) [记录](changes/2026-09-15-SITE-ROUTES-01-html-inventory.md) [记录](baselines/site-routes-validation.json) [记录](baselines/ci-source-firefox-validation.json) [记录](changes/2026-09-15-SITE-EDITOR-VAST-01-consumer.md) [记录](changes/2026-09-15-CI-01-source-webkit.md) [记录](baselines/ci-source-webkit-validation.json) [记录](changes/2026-09-15-CI-JASSUB-SOURCE-01-native-inputs.md) [记录](baselines/jassub-source-selection-validation.json) [记录](changes/2026-09-15-CI-01-installed-chromium.md) [记录](baselines/ci-installed-chromium-validation.json) [记录](changes/2026-09-15-CI-01-installed-firefox.md) [记录](baselines/ci-installed-firefox-validation.json) [记录](changes/2026-09-15-CI-01-installed-webkit.md) [记录](baselines/ci-installed-webkit-validation.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - CI-02: [记录](changes/2026-09-14-CI-02-pages-artifact.md) [记录](baselines/pages-artifact-validation.json) [记录](pages-deployment.md)
+- CI-03: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- CI-04: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PILOT-01: [记录](changes/2026-09-10-PILOT-01-chapter.md) [记录](baselines/pilot-validation.json)
 - CORE-01: [记录](changes/2026-09-10-CORE-01-typed-utils.md) [记录](baselines/core-utils-validation.json)
 - CORE-02: [记录](changes/2026-09-11-CORE-02-typed-emitter.md) [记录](baselines/emitter-validation.json)
@@ -573,81 +576,99 @@
 - PKG-CHAPTER-02: [记录](changes/2026-09-10-PKG-CHAPTER-02-tests.md) [记录](baselines/chapter-validation.json)
 - PKG-CHAPTER-03: [记录](changes/2026-09-10-PKG-CHAPTER-03-typescript-modules.md) [记录](baselines/chapter-migration-validation.json)
 - PKG-CHAPTER-04: [记录](changes/2026-09-10-PKG-CHAPTER-04-public-types.md) [记录](baselines/chapter-types-validation.json)
-- PKG-CHAPTER-05: [记录](changes/2026-09-12-PKG-CHAPTER-05-combinations.md) [记录](baselines/chapter-combinations-checkpoint.json) [记录](changes/2026-09-14-PKG-CHAPTER-05-timing.md) [记录](baselines/chapter-timing-observations.json) [记录](changes/2026-09-15-PKG-CHAPTER-05-native-timing.md) [记录](baselines/chapter-native-timing-validation.json) [记录](changes/2026-09-16-PKG-CHAPTER-05-major-timing.md) [记录](baselines/chapter-major-timing-validation.json)
+- PKG-CHAPTER-05: [记录](changes/2026-09-12-PKG-CHAPTER-05-combinations.md) [记录](baselines/chapter-combinations-checkpoint.json) [记录](changes/2026-09-14-PKG-CHAPTER-05-timing.md) [记录](baselines/chapter-timing-observations.json) [记录](changes/2026-09-15-PKG-CHAPTER-05-native-timing.md) [记录](baselines/chapter-native-timing-validation.json) [记录](changes/2026-09-16-PKG-CHAPTER-05-major-timing.md) [记录](baselines/chapter-major-timing-validation.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-CHAPTER-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-AMBILIGHT-01: [记录](changes/2026-09-12-PKG-AMBILIGHT-01-contract.md) [记录](baselines/ambilight-contract.md) [记录](baselines/ambilight-release.json) [记录](baselines/ambilight-contract-validation.json)
 - PKG-AMBILIGHT-02: [记录](changes/2026-09-12-PKG-AMBILIGHT-02-tests.md) [记录](baselines/ambilight-behavior-validation.json) [记录](ambilight-validation.md)
 - PKG-AMBILIGHT-03: [记录](changes/2026-09-12-PKG-AMBILIGHT-03-lifecycle.md) [记录](ambilight-validation.md) [记录](baselines/ambilight-lifecycle-validation.json)
 - PKG-AMBILIGHT-04: [记录](changes/2026-09-12-PKG-AMBILIGHT-04-types.md) [记录](ambilight-validation.md) [记录](baselines/ambilight-types-validation.json)
 - PKG-AMBILIGHT-PROXY-01: [记录](changes/2026-09-12-PKG-AMBILIGHT-PROXY-01-sampling.md) [记录](ambilight-validation.md) [记录](baselines/ambilight-proxy-validation.json)
-- PKG-AMBILIGHT-05: [记录](changes/2026-09-12-PKG-AMBILIGHT-PROXY-01-sampling.md) [记录](ambilight-validation.md) [记录](changes/2026-09-14-PKG-AMBILIGHT-05-installed-combination.md) [记录](baselines/ambilight-installed-validation.json)
+- PKG-AMBILIGHT-05: [记录](changes/2026-09-12-PKG-AMBILIGHT-PROXY-01-sampling.md) [记录](ambilight-validation.md) [记录](changes/2026-09-14-PKG-AMBILIGHT-05-installed-combination.md) [记录](baselines/ambilight-installed-validation.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-AMBILIGHT-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-AUDIO-01: [记录](changes/2026-09-12-PKG-AUDIO-01-contract.md) [记录](baselines/audio-track-contract.md) [记录](baselines/audio-track-release.json)
 - PKG-AUDIO-02: [记录](changes/2026-09-12-PKG-AUDIO-02-tests.md) [记录](audio-validation.md) [记录](baselines/audio-validation.json)
 - PKG-AUDIO-03: [记录](changes/2026-09-12-PKG-AUDIO-03-lifecycle.md) [记录](baselines/audio-lifecycle-validation.json)
 - PKG-AUDIO-04: [记录](changes/2026-09-12-PKG-AUDIO-04-types.md) [记录](baselines/audio-types-validation.json)
-- PKG-AUDIO-05: [记录](changes/2026-09-12-PKG-AUDIO-05-combinations.md) [记录](baselines/audio-combinations-first.json) [记录](baselines/audio-combinations-checkpoint.json) [记录](audio-validation.md) [记录](changes/2026-09-15-PKG-AUDIO-05-prefix.md) [记录](baselines/audio-prefix-validation.json)
+- PKG-AUDIO-05: [记录](changes/2026-09-12-PKG-AUDIO-05-combinations.md) [记录](baselines/audio-combinations-first.json) [记录](baselines/audio-combinations-checkpoint.json) [记录](audio-validation.md) [记录](changes/2026-09-15-PKG-AUDIO-05-prefix.md) [记录](baselines/audio-prefix-validation.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-AUDIO-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-AUTO-THUMB-01: [记录](baselines/auto-thumbnail-release.json) [记录](baselines/auto-thumbnail-contract.md) [记录](changes/2026-09-13-PKG-AUTO-THUMB-01-contract.md) [记录](baselines/auto-thumbnail-contract-validation.json)
 - PKG-AUTO-THUMB-02: [记录](baselines/auto-thumbnail-failures.md) [记录](baselines/auto-thumbnail-failures-validation.json) [记录](changes/2026-09-13-PKG-AUTO-THUMB-02-failures.md)
-- PKG-AUTO-THUMB-03: [记录](changes/2026-09-13-PKG-AUTO-THUMB-03-lifecycle-checkpoint.md) [记录](baselines/auto-thumbnail-lifecycle-checkpoint.json) [记录](changes/2026-09-13-PKG-AUTO-THUMB-03-hidden-renderer.md) [记录](baselines/auto-thumbnail-hidden-renderer.json) [记录](baselines/auto-thumbnail-timeline-media.json) [记录](changes/2026-09-13-PKG-AUTO-THUMB-03-frame-presentation.md) [记录](baselines/auto-thumbnail-frame-presentation.json) [记录](changes/2026-09-14-PKG-AUTO-THUMB-03-rendering-readiness.md) [记录](baselines/auto-thumbnail-rendering-readiness.json) [记录](changes/2026-09-14-PKG-AUTO-THUMB-03-first-seek.md) [记录](baselines/auto-thumbnail-first-seek.json) [记录](changes/2026-09-14-PKG-AUTO-THUMB-03-native-decoder.md) [记录](baselines/auto-thumbnail-native-decoder.json)
+- PKG-AUTO-THUMB-03: [记录](changes/2026-09-13-PKG-AUTO-THUMB-03-lifecycle-checkpoint.md) [记录](baselines/auto-thumbnail-lifecycle-checkpoint.json) [记录](changes/2026-09-13-PKG-AUTO-THUMB-03-hidden-renderer.md) [记录](baselines/auto-thumbnail-hidden-renderer.json) [记录](baselines/auto-thumbnail-timeline-media.json) [记录](changes/2026-09-13-PKG-AUTO-THUMB-03-frame-presentation.md) [记录](baselines/auto-thumbnail-frame-presentation.json) [记录](changes/2026-09-14-PKG-AUTO-THUMB-03-rendering-readiness.md) [记录](baselines/auto-thumbnail-rendering-readiness.json) [记录](changes/2026-09-14-PKG-AUTO-THUMB-03-first-seek.md) [记录](baselines/auto-thumbnail-first-seek.json) [记录](changes/2026-09-14-PKG-AUTO-THUMB-03-native-decoder.md) [记录](baselines/auto-thumbnail-native-decoder.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-AUTO-THUMB-04: [记录](changes/2026-09-15-PKG-AUTO-THUMB-04-migration.md) [记录](baselines/auto-thumbnail-migration-validation.json) [记录](changes/2026-09-13-PKG-AUTO-THUMB-03-internal-types.md) [记录](baselines/auto-thumbnail-metadata-validation.json)
+- PKG-AUTO-THUMB-05: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-AUTO-THUMB-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-VTT-THUMB-01: [记录](baselines/vtt-thumbnail-release.json) [记录](baselines/vtt-thumbnail-contract.md) [记录](changes/2026-09-13-PKG-VTT-THUMB-01-contract.md)
 - PKG-VTT-THUMB-02: [记录](baselines/vtt-thumbnail-failures.json) [记录](changes/2026-09-13-PKG-VTT-THUMB-02-failures.md)
 - PKG-VTT-THUMB-03: [记录](changes/2026-09-13-PKG-VTT-THUMB-03-resources.md) [记录](baselines/vtt-thumbnail-resources.json) [记录](changes/2026-09-13-PKG-VTT-THUMB-03-parser.md) [记录](baselines/vtt-thumbnail-parser.json)
 - PKG-VTT-THUMB-04: [记录](changes/2026-09-13-PKG-VTT-THUMB-04-runtime-types.md) [记录](baselines/vtt-thumbnail-runtime-types.json) [记录](changes/2026-09-13-PKG-VTT-THUMB-04-public-types.md) [记录](baselines/vtt-thumbnail-public-types.json) [记录](changes/2026-09-13-PKG-VTT-THUMB-04-module-forms.md) [记录](baselines/vtt-thumbnail-module-forms.json) [记录](type-compatibility-policy.md) [记录](baselines/vtt-thumbnail-approved-types.json) [记录](changes/2026-09-13-PKG-VTT-THUMB-04-approved-types.md)
-- PKG-VTT-THUMB-05: [记录](changes/2026-09-14-PKG-VTT-THUMB-05-combinations.md) [记录](baselines/vtt-thumbnail-combinations.json) [记录](baselines/vtt-thumbnail-core.json)
+- PKG-VTT-THUMB-05: [记录](changes/2026-09-14-PKG-VTT-THUMB-05-combinations.md) [记录](baselines/vtt-thumbnail-combinations.json) [记录](baselines/vtt-thumbnail-core.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-VTT-THUMB-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-HLS-01: [记录](baselines/hls-control-contract.md) [记录](baselines/hls-control-release.json) [记录](changes/2026-09-11-PKG-HLS-01-contract.md)
 - PKG-HLS-02: [记录](hls-validation.md) [记录](baselines/hls-sdk.json) [记录](baselines/hls-validation.json) [记录](changes/2026-09-11-PKG-HLS-02-tests.md)
 - PKG-HLS-03: [记录](changes/2026-09-12-PKG-HLS-03-modules.md) [记录](baselines/hls-modules-validation.json) [记录](hls-validation.md)
 - PKG-HLS-04: [记录](changes/2026-09-12-PKG-HLS-04-types.md) [记录](baselines/hls-types-validation.json) [记录](hls-validation.md)
-- PKG-HLS-SDK-01: [记录](changes/2026-09-12-PKG-HLS-SDK-01-integration.md) [记录](baselines/hls-sdk-validation.json) [记录](baselines/hls-sdk-diagnostics.json) [记录](changes/2026-09-14-PKG-HLS-SDK-01-http-teardown.md) [记录](baselines/hls-http-teardown-validation.json) [记录](changes/2026-09-15-PKG-HLS-SDK-01-switch-boundary.md) [记录](baselines/hls-switch-boundary-validation.json) [记录](changes/2026-09-15-PKG-HLS-SDK-01-sdk-sequence.md) [记录](baselines/hls-sdk-sequence-validation.json) [记录](changes/2026-09-15-PKG-HLS-SDK-01-controller-state.md) [记录](baselines/hls-controller-validation.json) [记录](changes/2026-09-15-PKG-HLS-SDK-01-native-exception.md) [记录](baselines/hls-native-validation.json)
+- PKG-HLS-SDK-01: [记录](changes/2026-09-12-PKG-HLS-SDK-01-integration.md) [记录](baselines/hls-sdk-validation.json) [记录](baselines/hls-sdk-diagnostics.json) [记录](changes/2026-09-14-PKG-HLS-SDK-01-http-teardown.md) [记录](baselines/hls-http-teardown-validation.json) [记录](changes/2026-09-15-PKG-HLS-SDK-01-switch-boundary.md) [记录](baselines/hls-switch-boundary-validation.json) [记录](changes/2026-09-15-PKG-HLS-SDK-01-sdk-sequence.md) [记录](baselines/hls-sdk-sequence-validation.json) [记录](changes/2026-09-15-PKG-HLS-SDK-01-controller-state.md) [记录](baselines/hls-controller-validation.json) [记录](changes/2026-09-15-PKG-HLS-SDK-01-native-exception.md) [记录](baselines/hls-native-validation.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-HLS-05: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-HLS-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-DASH-01: [记录](changes/2026-09-12-PKG-DASH-01-contract.md) [记录](baselines/dash-control-contract.md) [记录](baselines/dash-control-release.json)
 - PKG-DASH-02: [记录](changes/2026-09-12-PKG-DASH-02-tests.md) [记录](dash-validation.md) [记录](baselines/dash-validation.json)
 - PKG-DASH-03: [记录](changes/2026-09-12-PKG-DASH-03-runtime.md) [记录](baselines/dash-runtime.json) [记录](dash-validation.md)
 - PKG-DASH-04: [记录](changes/2026-09-12-PKG-DASH-04-types.md) [记录](baselines/dash-types-validation.json) [记录](dash-validation.md)
 - PKG-DASH-SEEK-01: [记录](changes/2026-09-14-PKG-DASH-SEEK-01-buffer-metrics.md) [记录](baselines/dash-seek-recovery-validation.json)
 - PKG-DASH-MENU-01: [记录](changes/2026-09-14-PKG-DASH-MENU-01-settings-navigation.md) [记录](baselines/dash-menu-validation.json) [记录](dash-validation.md)
-- PKG-DASH-05: [记录](changes/2026-09-12-PKG-DASH-05-sdk-checkpoint.md) [记录](baselines/dash-sdk.json) [记录](baselines/dash-sdk-checkpoint.json) [记录](dash-validation.md) [记录](changes/2026-09-12-PKG-DASH-05-sdk-types.md) [记录](baselines/dash-sdk-types-validation.json) [记录](changes/2026-09-12-PKG-DASH-05-sdk-events.md) [记录](baselines/dash-sdk-events-validation.json) [记录](changes/2026-09-12-PKG-DASH-05-seek-diagnosis.md) [记录](baselines/dash-seek-diagnosis.json)
+- PKG-DASH-05: [记录](changes/2026-09-12-PKG-DASH-05-sdk-checkpoint.md) [记录](baselines/dash-sdk.json) [记录](baselines/dash-sdk-checkpoint.json) [记录](dash-validation.md) [记录](changes/2026-09-12-PKG-DASH-05-sdk-types.md) [记录](baselines/dash-sdk-types-validation.json) [记录](changes/2026-09-12-PKG-DASH-05-sdk-events.md) [记录](baselines/dash-sdk-events-validation.json) [记录](changes/2026-09-12-PKG-DASH-05-seek-diagnosis.md) [记录](baselines/dash-seek-diagnosis.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-DASH-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-MULTI-SUB-01: [记录](baselines/multiple-subtitles-release.json) [记录](baselines/multiple-subtitles-contract.md) [记录](baselines/multiple-subtitles-contract-validation.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-01-contract.md)
 - PKG-MULTI-SUB-02: [记录](baselines/multiple-subtitles-failures.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-02-failures.md)
 - PKG-MULTI-SUB-03: [记录](baselines/multiple-subtitles-resources.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-03-resources.md)
 - PKG-MULTI-SUB-04: [记录](baselines/multiple-subtitles-runtime-types.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-04-runtime-types.md) [记录](baselines/multiple-subtitles-public-types.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-04-public-types.md) [记录](type-compatibility-policy.md) [记录](baselines/multiple-subtitles-approved-types.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-04-approved-types.md)
 - PKG-MULTI-SUB-07: [记录](baselines/multiple-subtitles-timestamps.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-07-timestamps.md)
 - PKG-MULTI-SUB-08: [记录](changes/2026-09-14-PKG-MULTI-SUB-08-entities.md) [记录](baselines/multiple-subtitles-entities-validation.json)
-- PKG-MULTI-SUB-05: [记录](changes/2026-09-14-PKG-MULTI-SUB-05-combinations.md) [记录](baselines/multiple-subtitles-combinations-validation.json) [记录](baselines/multiple-subtitles-cores.json) [记录](changes/2026-09-14-PKG-MULTI-SUB-05-seek-diagnostics.md) [记录](baselines/multiple-subtitles-seek-diagnostics.json)
+- PKG-MULTI-SUB-05: [记录](changes/2026-09-14-PKG-MULTI-SUB-05-combinations.md) [记录](baselines/multiple-subtitles-combinations-validation.json) [记录](baselines/multiple-subtitles-cores.json) [记录](changes/2026-09-14-PKG-MULTI-SUB-05-seek-diagnostics.md) [记录](baselines/multiple-subtitles-seek-diagnostics.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-MULTI-SUB-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-JASSUB-01: [记录](baselines/jassub-release.json) [记录](baselines/jassub-vendor.json) [记录](baselines/jassub-font-metadata.json) [记录](baselines/jassub-contract.md) [记录](baselines/jassub-contract-validation.json) [记录](changes/2026-09-13-PKG-JASSUB-01-baseline.md) [记录](baselines/jassub-provenance.json) [记录](baselines/jassub-provenance-validation.json) [记录](changes/2026-09-14-PKG-JASSUB-01-provenance.md)
 - PKG-JASSUB-02: [记录](changes/2026-09-14-PKG-JASSUB-02-failure-baseline.md) [记录](baselines/jassub-failures-validation.json)
 - PKG-JASSUB-03: [记录](changes/2026-09-14-PKG-JASSUB-03-registration.md) [记录](baselines/jassub-registration-validation.json)
 - PKG-JASSUB-04: [记录](changes/2026-09-14-PKG-JASSUB-04-types.md) [记录](baselines/jassub-types-validation.json)
+- PKG-JASSUB-05: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-JASSUB-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-JASSUB-07: [记录](changes/2026-09-14-PKG-JASSUB-07-vendor.md) [记录](baselines/jassub-vendor-validation.json) [记录](baselines/jassub-vendor-patch.json)
 - PKG-MASK-01: [记录](baselines/danmuku-mask-release.json) [记录](baselines/danmuku-mask-registry.json) [记录](baselines/danmuku-mask-contract.md) [记录](baselines/danmuku-mask-contract-validation.json) [记录](changes/2026-09-13-PKG-MASK-01-contract.md)
 - PKG-MASK-02: [记录](changes/2026-09-13-PKG-MASK-02-failures.md) [记录](baselines/danmuku-mask-failures-validation.json)
 - PKG-MASK-03: [记录](changes/2026-09-13-PKG-MASK-03-lifecycle.md) [记录](baselines/danmuku-mask-lifecycle-validation.json)
 - PKG-MASK-04: [记录](changes/2026-09-14-PKG-MASK-04-types.md) [记录](baselines/danmuku-mask-types-validation.json)
-- PKG-MASK-05: [记录](changes/2026-09-14-PKG-MASK-05-native-checkpoint.md) [记录](baselines/danmuku-mask-native-validation.json) [记录](baselines/danmuku-mask-historical-cores.json)
+- PKG-MASK-05: [记录](changes/2026-09-14-PKG-MASK-05-native-checkpoint.md) [记录](baselines/danmuku-mask-native-validation.json) [记录](baselines/danmuku-mask-historical-cores.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-MASK-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-ASR-01: [记录](changes/2026-09-13-PKG-ASR-01-contracts.md) [记录](baselines/asr-contract.md) [记录](baselines/asr-release.json)
 - PKG-ASR-02: [记录](changes/2026-09-13-PKG-ASR-02-audio-baseline.md) [记录](baselines/asr-audio-validation.json)
 - PKG-ASR-03: [记录](changes/2026-09-13-PKG-ASR-03-audio-ownership.md) [记录](baselines/asr-ownership-validation.json)
 - PKG-ASR-04: [记录](changes/2026-09-13-PKG-ASR-04-public-types.md) [记录](baselines/asr-types-validation.json) [记录](baselines/asr-type-diagnostics.json)
-- PKG-ASR-05: [记录](baselines/asr-volume-validation.json) [记录](baselines/asr-fallback-validation.json) [记录](baselines/asr-core.json) [记录](baselines/asr-local-core-validation.json) [记录](changes/2026-09-13-PKG-ASR-05-local-core-checkpoint.md) [记录](baselines/asr-combinations-validation.json) [记录](changes/2026-09-13-PKG-ASR-05-cors-combinations.md) [记录](baselines/asr-explicit-capture-validation.json) [记录](changes/2026-09-13-PKG-ASR-05-editor-generation.md) [记录](changes/2026-09-15-PKG-ASR-05-no-audio.md) [记录](baselines/asr-no-audio-validation.json) [记录](changes/2026-09-15-PKG-ASR-05-initial-error.md) [记录](baselines/asr-initial-error-validation.json)
+- PKG-ASR-05: [记录](baselines/asr-volume-validation.json) [记录](baselines/asr-fallback-validation.json) [记录](baselines/asr-core.json) [记录](baselines/asr-local-core-validation.json) [记录](changes/2026-09-13-PKG-ASR-05-local-core-checkpoint.md) [记录](baselines/asr-combinations-validation.json) [记录](changes/2026-09-13-PKG-ASR-05-cors-combinations.md) [记录](baselines/asr-explicit-capture-validation.json) [记录](changes/2026-09-13-PKG-ASR-05-editor-generation.md) [记录](changes/2026-09-15-PKG-ASR-05-no-audio.md) [记录](baselines/asr-no-audio-validation.json) [记录](changes/2026-09-15-PKG-ASR-05-initial-error.md) [记录](baselines/asr-initial-error-validation.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-ASR-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-ADS-01: [记录](baselines/ads-release.json) [记录](baselines/ads-contract.md) [记录](baselines/ads-contract-validation.json) [记录](changes/2026-09-12-PKG-ADS-01-contract.md) [记录](scripts/ads-contract.test.mjs)
 - PKG-ADS-02: [记录](changes/2026-09-12-PKG-ADS-02-tests.md) [记录](ads-validation.md) [记录](baselines/ads-validation.json)
 - PKG-ADS-03: [记录](changes/2026-09-12-PKG-ADS-03-lifecycle.md) [记录](ads-validation.md) [记录](baselines/ads-lifecycle-validation.json)
 - PKG-ADS-04: [记录](changes/2026-09-12-PKG-ADS-04-types.md) [记录](baselines/ads-types-validation.json)
-- PKG-ADS-05: [记录](changes/2026-09-12-PKG-ADS-05-browser.md) [记录](baselines/ads-ui-visibility-validation.json)
+- PKG-ADS-05: [记录](changes/2026-09-12-PKG-ADS-05-browser.md) [记录](baselines/ads-ui-visibility-validation.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-ADS-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-VAST-01: [记录](baselines/vast-contract.md) [记录](baselines/vast-release.json) [记录](changes/2026-09-12-PKG-VAST-01-contract.md) [记录](baselines/vast-contract-validation.json)
 - PKG-VAST-02: [记录](changes/2026-09-12-PKG-VAST-02-tests.md) [记录](baselines/vast-behavior-validation.json) [记录](baselines/vast-core.json) [记录](vast-validation.md)
 - PKG-VAST-03: [记录](changes/2026-09-12-PKG-VAST-03-lifecycle.md) [记录](baselines/vast-lifecycle-validation.json) [记录](vast-compatibility-decision.md) [记录](changes/2026-09-14-PKG-VAST-03-compatibility.md) [记录](baselines/vast-compatibility-validation.json)
 - PKG-VAST-04: [记录](changes/2026-09-14-PKG-VAST-04-types.md) [记录](baselines/vast-types-validation.json) [记录](vast-type-decision.md) [记录](vast-validation.md)
-- PKG-VAST-05: [记录](changes/2026-09-14-PKG-VAST-05-native-checkpoint.md) [记录](baselines/vast-native-validation.json) [记录](changes/2026-09-14-PKG-VAST-05-skip-checkpoint.md) [记录](baselines/vast-skip-validation.json) [记录](changes/2026-09-15-CI-01-vast-installed.md) [记录](baselines/ci-vast-installed-validation.json)
+- PKG-VAST-05: [记录](changes/2026-09-14-PKG-VAST-05-native-checkpoint.md) [记录](baselines/vast-native-validation.json) [记录](changes/2026-09-14-PKG-VAST-05-skip-checkpoint.md) [记录](baselines/vast-skip-validation.json) [记录](changes/2026-09-15-CI-01-vast-installed.md) [记录](baselines/ci-vast-installed-validation.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-VAST-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-CAST-01: [记录](baselines/chromecast-release.json) [记录](baselines/chromecast-contract.md) [记录](baselines/chromecast-contract-validation.json) [记录](changes/2026-09-13-PKG-CAST-01-contracts.md)
 - PKG-CAST-02: [记录](changes/2026-09-13-PKG-CAST-02-failures.md) [记录](baselines/chromecast-failures-validation.json)
 - PKG-CAST-03: [记录](changes/2026-09-13-PKG-CAST-03-runtime.md) [记录](baselines/chromecast-runtime-validation.json)
 - PKG-CAST-04: [记录](changes/2026-09-13-PKG-CAST-04-types.md) [记录](baselines/chromecast-types-validation.json)
-- PKG-CAST-05: [记录](changes/2026-09-16-PKG-CAST-05-real-sdk.md) [记录](baselines/chromecast-real-sdk-validation.json) [记录](chromecast-validation.md)
+- PKG-CAST-05: [记录](changes/2026-09-16-PKG-CAST-05-real-sdk.md) [记录](baselines/chromecast-real-sdk-validation.json) [记录](chromecast-validation.md) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-CAST-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-DPIP-01: [记录](changes/2026-09-12-PKG-DPIP-01-contract.md) [记录](baselines/dpip-release.json) [记录](baselines/dpip-contract.md) [记录](baselines/dpip-contract-validation.json) [记录](dpip-validation.md)
 - PKG-DPIP-02: [记录](changes/2026-09-12-PKG-DPIP-02-tests.md) [记录](baselines/dpip-behavior-validation.json) [记录](dpip-validation.md)
 - PKG-DPIP-03: [记录](changes/2026-09-12-PKG-DPIP-03-lifecycle.md) [记录](baselines/dpip-lifecycle-validation.json) [记录](dpip-validation.md)
 - PKG-DPIP-04: [记录](changes/2026-09-12-PKG-DPIP-04-types.md) [记录](baselines/dpip-types-validation.json) [记录](dpip-validation.md)
-- PKG-DPIP-05: [记录](changes/2026-09-12-PKG-DPIP-05-native-checkpoint.md) [记录](baselines/dpip-native-validation.json)
+- PKG-DPIP-05: [记录](changes/2026-09-12-PKG-DPIP-05-native-checkpoint.md) [记录](baselines/dpip-native-validation.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-DPIP-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-DANMUKU-01: [记录](baselines/danmuku-release.json) [记录](baselines/danmuku-contract.md) [记录](baselines/danmuku-contract-validation.json) [记录](changes/2026-09-13-PKG-DANMUKU-01-contracts.md)
 - PKG-DANMUKU-02: [记录](changes/2026-09-13-PKG-DANMUKU-02-controlled-failures.md) [记录](baselines/danmuku-failures-validation.json) [记录](changes/2026-09-13-PKG-DANMUKU-02-browser-baseline.md) [记录](baselines/danmuku-browser-validation.json)
 - PKG-DANMUKU-03: [记录](changes/2026-09-13-PKG-DANMUKU-03-input.md) [记录](baselines/danmuku-input-validation.json)
@@ -655,12 +676,14 @@
 - PKG-DANMUKU-05: [记录](changes/2026-09-13-PKG-DANMUKU-05-resources.md) [记录](baselines/danmuku-resources-validation.json)
 - PKG-DANMUKU-06: [记录](changes/2026-09-13-PKG-DANMUKU-06-types.md) [记录](baselines/danmuku-types-validation.json)
 - PKG-DANMUKU-07: [记录](changes/2026-09-13-PKG-DANMUKU-07-stability.md) [记录](baselines/danmuku-stability-validation.json) [记录](danmuku-stability.md)
-- PKG-DANMUKU-08: [记录](changes/2026-09-14-PKG-DANMUKU-08-native-combinations.md) [记录](baselines/danmuku-combination-checkpoint.json) [记录](changes/2026-09-14-PKG-DANMUKU-08-fullscreen-lifetimes.md) [记录](baselines/danmuku-fullscreen-validation.json) [记录](baselines/danmuku-old-core-load-validation.json) [记录](changes/2026-09-14-PKG-DANMUKU-08-combined-load.md) [记录](baselines/danmuku-combined-load-validation.json) [记录](changes/2026-09-15-CI-01-installed-webkit.md) [记录](baselines/ci-installed-webkit-validation.json) [记录](changes/2026-09-16-PKG-DANMUKU-START-01-first-sample.md) [记录](baselines/danmuku-start-validation.json)
+- PKG-DANMUKU-08: [记录](changes/2026-09-14-PKG-DANMUKU-08-native-combinations.md) [记录](baselines/danmuku-combination-checkpoint.json) [记录](changes/2026-09-14-PKG-DANMUKU-08-fullscreen-lifetimes.md) [记录](baselines/danmuku-fullscreen-validation.json) [记录](baselines/danmuku-old-core-load-validation.json) [记录](changes/2026-09-14-PKG-DANMUKU-08-combined-load.md) [记录](baselines/danmuku-combined-load-validation.json) [记录](changes/2026-09-15-CI-01-installed-webkit.md) [记录](baselines/ci-installed-webkit-validation.json) [记录](changes/2026-09-16-PKG-DANMUKU-START-01-first-sample.md) [记录](baselines/danmuku-start-validation.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-DANMUKU-09: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-CANVAS-01: [记录](changes/2026-09-12-PKG-CANVAS-01-contract.md) [记录](baselines/canvas-contract.md) [记录](baselines/canvas-release.json) [记录](canvas-validation.md) [记录](baselines/canvas-contract-validation.json)
 - PKG-CANVAS-02: [记录](changes/2026-09-12-PKG-CANVAS-02-tests.md) [记录](baselines/canvas-behavior-validation.json) [记录](canvas-validation.md)
 - PKG-CANVAS-03: [记录](changes/2026-09-12-PKG-CANVAS-03-lifecycle.md) [记录](baselines/canvas-lifecycle-validation.json) [记录](canvas-validation.md)
 - PKG-CANVAS-04: [记录](changes/2026-09-12-PKG-CANVAS-04-types.md) [记录](baselines/canvas-types-validation.json) [记录](canvas-validation.md)
-- PKG-CANVAS-05: [记录](changes/2026-09-14-PKG-CANVAS-05-native-pip.md) [记录](baselines/canvas-dpip-validation.json) [记录](baselines/canvas-subtitles-validation.json) [记录](baselines/ambilight-installed-validation.json)
+- PKG-CANVAS-05: [记录](changes/2026-09-14-PKG-CANVAS-05-native-pip.md) [记录](baselines/canvas-dpip-validation.json) [记录](baselines/canvas-subtitles-validation.json) [记录](baselines/ambilight-installed-validation.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-CANVAS-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-MB-01: [记录](baselines/mb-release.json) [记录](baselines/mb-surface.json) [记录](baselines/mb-contract.md) [记录](baselines/mb-contract-validation.json) [记录](mb-validation.md) [记录](changes/2026-09-12-PKG-MB-01-contract.md)
 - PKG-MB-02: [记录](changes/2026-09-12-PKG-MB-02-checkpoint.md) [记录](baselines/mb-media-checkpoint.json) [记录](mb-validation.md) [记录](changes/2026-09-12-PKG-MB-02-baseline.md) [记录](baselines/mb-behavior-validation.json)
 - PKG-MB-03: [记录](changes/2026-09-12-PKG-MB-03-input.md) [记录](baselines/mb-input-validation.json)
@@ -669,17 +692,20 @@
 - PKG-MB-06: [记录](baselines/mb-audio-source.json) [记录](changes/2026-09-12-PKG-MB-06-audio.md) [记录](baselines/mb-audio-validation.json)
 - PKG-MB-07: [记录](baselines/mb-hls-source.json) [记录](changes/2026-09-12-PKG-MB-07-hls.md) [记录](baselines/mb-hls-validation.json)
 - PKG-MB-08: [记录](baselines/mb-entry-source.json) [记录](changes/2026-09-12-PKG-MB-08-entry-checkpoint.md) [记录](baselines/mb-entry-checkpoint.json) [记录](baselines/mb-capability-source.json) [记录](changes/2026-09-12-PKG-MB-08-capability.md) [记录](baselines/mb-capability-validation.json)
-- PKG-MB-09: [记录](changes/2026-09-12-PKG-MB-09-native-pip-checkpoint.md) [记录](baselines/mb-native-pip-checkpoint.json) [记录](changes/2026-09-12-PKG-MB-09-sustained-playback-checkpoint.md) [记录](baselines/mb-sustained-validation.json) [记录](baselines/mb-sustained-media.json) [记录](changes/2026-09-16-PKG-MB-09-hour-soak.md) [记录](baselines/mb-hour-soak-start.json) [记录](changes/2026-09-16-PKG-MB-09-av-breach.md) [记录](baselines/mb-hour-av-breach.json)
+- PKG-MB-09: [记录](changes/2026-09-12-PKG-MB-09-native-pip-checkpoint.md) [记录](baselines/mb-native-pip-checkpoint.json) [记录](changes/2026-09-12-PKG-MB-09-sustained-playback-checkpoint.md) [记录](baselines/mb-sustained-validation.json) [记录](baselines/mb-sustained-media.json) [记录](changes/2026-09-16-PKG-MB-09-hour-soak.md) [记录](baselines/mb-hour-soak-start.json) [记录](changes/2026-09-16-PKG-MB-09-av-breach.md) [记录](baselines/mb-hour-av-breach.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-MB-10: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-IFRAME-01: [记录](changes/2026-09-12-PKG-IFRAME-01-contract.md) [记录](baselines/iframe-release.json) [记录](baselines/iframe-contract.md) [记录](baselines/iframe-contract-validation.json)
 - PKG-IFRAME-02: [记录](changes/2026-09-12-PKG-IFRAME-02-behavior.md) [记录](baselines/iframe-behavior-validation.json)
 - PKG-IFRAME-03: [记录](changes/2026-09-12-PKG-IFRAME-03-requests-checkpoint.md) [记录](baselines/iframe-requests-checkpoint.json) [记录](changes/2026-09-12-PKG-IFRAME-03-boundaries-checkpoint.md) [记录](baselines/iframe-boundaries-checkpoint.json) [记录](iframe-message-boundary.md) [记录](changes/2026-09-13-PKG-IFRAME-03-navigation.md) [记录](baselines/iframe-navigation-validation.json) [记录](iframe-document-protocol.md)
 - PKG-IFRAME-04: [记录](changes/2026-09-13-PKG-IFRAME-04-types.md) [记录](baselines/iframe-types-validation.json)
-- PKG-IFRAME-05: [记录](changes/2026-09-13-PKG-IFRAME-05-integration.md) [记录](baselines/iframe-integration-validation.json) [记录](changes/2026-09-13-PKG-IFRAME-05-history.md) [记录](baselines/iframe-history-validation.json) [记录](changes/2026-09-15-CI-01-iframe-installed.md) [记录](baselines/ci-iframe-installed-validation.json)
+- PKG-IFRAME-05: [记录](changes/2026-09-13-PKG-IFRAME-05-integration.md) [记录](baselines/iframe-integration-validation.json) [记录](changes/2026-09-13-PKG-IFRAME-05-history.md) [记录](baselines/iframe-history-validation.json) [记录](changes/2026-09-15-CI-01-iframe-installed.md) [记录](baselines/ci-iframe-installed-validation.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-IFRAME-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-TOOL-THUMB-01: [记录](baselines/thumbnail-release.json) [记录](baselines/thumbnail-contract.md) [记录](changes/2026-09-13-PKG-TOOL-THUMB-01-contract.md) [记录](baselines/thumbnail-contract-validation.json)
 - PKG-TOOL-THUMB-02: [记录](baselines/thumbnail-behavior-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-02-behavior.md)
 - PKG-TOOL-THUMB-03: [记录](changes/2026-09-13-PKG-TOOL-THUMB-03-input-checkpoint.md) [记录](baselines/thumbnail-input-checkpoint.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-03-lifecycle.md) [记录](baselines/thumbnail-lifecycle-validation.json)
 - PKG-TOOL-THUMB-04: [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-runtime-types.md) [记录](baselines/thumbnail-runtime-types-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-public-types.md) [记录](baselines/thumbnail-public-types-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-emitter.md) [记录](baselines/thumbnail-emitter-validation.json) [记录](thumbnail-compatibility-decision.md) [记录](changes/2026-09-15-PKG-TOOL-THUMB-04-policy-proposal.md) [记录](changes/2026-09-15-PKG-TOOL-THUMB-04-approved-policy.md) [记录](baselines/thumbnail-policy-validation.json)
-- PKG-TOOL-THUMB-05: [记录](changes/2026-09-16-PKG-TOOL-THUMB-05-core-combinations.md) [记录](baselines/thumbnail-core-validation.json) [记录](baselines/thumbnail-core.json)
+- PKG-TOOL-THUMB-05: [记录](changes/2026-09-16-PKG-TOOL-THUMB-05-core-combinations.md) [记录](baselines/thumbnail-core-validation.json) [记录](baselines/thumbnail-core.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- PKG-TOOL-THUMB-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - SITE-01: [记录](site-inventory.md) [记录](baselines/site-inventory.json) [记录](baselines/site-provenance.json) [记录](baselines/demo-additions.json) [记录](changes/2026-09-14-SITE-01-site-inventory.md) [记录](baselines/site-inventory-validation.json)
 - SITE-SMOKE-01: [记录](changes/2026-09-14-SITE-SMOKE-01-documentation-smoke.md) [记录](baselines/docs-smoke-validation.json) [记录](scripts/docs-smoke.test.mjs)
 - SITE-02: [记录](changes/2026-09-14-SITE-02-editor-declarations.md) [记录](baselines/editor-declarations-validation.json) [记录](changes/2026-09-14-SITE-SMOKE-01-documentation-smoke.md)
@@ -691,20 +717,31 @@
 - SITE-HLS-01: [记录](changes/2026-09-15-SITE-HLS-01-guides.md) [记录](baselines/hls-docs-validation.json)
 - SITE-DASH-01: [记录](changes/2026-09-15-SITE-DASH-01-guides.md) [记录](baselines/dash-docs-validation.json)
 - SITE-04: [记录](site-content-review.md) [记录](changes/2026-09-16-SITE-04-chapter-ambilight-guides.md) [记录](baselines/site04-chapter-ambilight-guides.json) [记录](changes/2026-09-16-SITE-04-dpip-asr-guides.md) [记录](baselines/site04-dpip-asr-guides.json) [记录](changes/2026-09-16-SITE-04-auto-multi-guides.md) [记录](baselines/site04-auto-multi-guides.json) [记录](changes/2026-09-16-SITE-04-ads-vast-guides.md) [记录](baselines/site04-ads-vast-guides.json) [记录](changes/2026-09-16-SITE-04-jassub-mask-cast-guides.md) [记录](baselines/site04-jassub-mask-cast-guides.json) [记录](changes/2026-09-16-SITE-04-tools-guides.md) [记录](baselines/site04-tools-guides.json) [记录](changes/2026-09-16-SITE-04-proxies-guides.md) [记录](baselines/site04-proxies-guides.json) [记录](changes/2026-09-16-SITE-04-existing-guides.md) [记录](baselines/site04-existing-guides.json) [记录](core-content-review.json) [记录](baselines/site04-core-services.json) [记录](changes/2026-09-16-SITE-04-core-services.md) [记录](baselines/site04-template-icons.json) [记录](changes/2026-09-16-SITE-04-template-icons.md) [记录](baselines/site04-components.json) [记录](changes/2026-09-16-SITE-04-components.md) [记录](baselines/site04-setting.json) [记录](changes/2026-09-16-SITE-04-setting.md) [记录](baselines/site04-plugin-registry.json) [记录](changes/2026-09-16-SITE-04-plugin-registry.md) [记录](baselines/site04-subtitle.json) [记录](changes/2026-09-16-SITE-04-subtitle.md) [记录](baselines/site04-utils.json) [记录](changes/2026-09-16-SITE-04-utils.md) [记录](baselines/site04-globals.json) [记录](changes/2026-09-16-SITE-04-globals.md) [记录](baselines/site04-events.json) [记录](changes/2026-09-16-SITE-04-events.md) [记录](baselines/site04-options.json) [记录](changes/2026-09-16-SITE-04-options.md) [记录](baselines/site04-css.json) [记录](changes/2026-09-16-SITE-04-css.md) [记录](baselines/site04-lifecycle.json) [记录](changes/2026-09-16-SITE-04-lifecycle.md) [记录](baselines/site04-playback.json) [记录](changes/2026-09-16-SITE-04-playback.md) [记录](baselines/site04-display.json) [记录](changes/2026-09-16-SITE-04-complete.md)
-- SITE-05: [记录](changes/2026-09-16-SITE-05-search.md) [记录](baselines/site05-search.json) [记录](changes/2026-09-16-SITE-05-links-editor.md) [记录](baselines/site05-links-editor.json)
-- SITE-07: [记录](site-inventory.md) [记录](baselines/site-provenance.json) [记录](changes/2026-09-14-SITE-07-vendor-notices.md) [记录](baselines/site-notices-checkpoint.json) [记录](baselines/site-codicons-provenance.json) [记录](baselines/site-codicons-validation.json) [记录](changes/2026-09-15-SITE-07-codicons.md) [记录](baselines/vconsole-notices-provenance.json) [记录](baselines/vconsole-notices-validation.json) [记录](changes/2026-09-15-SITE-07-vconsole-notices.md) [记录](console-modernization.md) [记录](baselines/site-console-inventory.json) [记录](baselines/site-console-validation.json) [记录](changes/2026-09-15-SITE-07-console-baseline.md) [记录](baselines/console-feed-provenance.json) [记录](changes/2026-09-15-SITE-07-console-feed-source.md) [记录](baselines/console-commonjs-provenance.json) [记录](changes/2026-09-15-SITE-07-console-commonjs.md) [记录](baselines/console-esm-provenance.json) [记录](changes/2026-09-15-SITE-07-console-esm.md) [记录](baselines/console-embedded-notices.json) [记录](baselines/console-notices-validation.json) [记录](changes/2026-09-15-SITE-07-console-notices.md) [记录](baselines/console-embedded-sources.json) [记录](baselines/console-embedded-validation.json) [记录](changes/2026-09-15-SITE-07-console-embedded-sources.md) [记录](baselines/console-derived-attribution.json) [记录](baselines/console-derived-validation.json) [记录](changes/2026-09-15-SITE-07-console-derived-attribution.md) [记录](baselines/console-stackoverflow-provenance.json) [记录](baselines/console-stackoverflow-validation.json) [记录](changes/2026-09-15-SITE-07-console-stackoverflow.md) [记录](baselines/console-shallowequal-validation.json) [记录](changes/2026-09-15-SITE-07-console-shallowequal.md) [记录](console-notice-review.md) [记录](baselines/console-notice-review-validation.json) [记录](changes/2026-09-15-SITE-07-console-notice-review.md) [记录](baselines/monaco-typescript-provenance.json) [记录](baselines/monaco-typescript-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-typescript.md) [记录](baselines/monaco-languages-provenance.json) [记录](baselines/monaco-languages-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-languages.md) [记录](baselines/monaco-language-notices.json) [记录](baselines/monaco-language-notices-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-language-notices.md) [记录](baselines/monaco-modes-provenance.json) [记录](baselines/monaco-modes-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-modes.md) [记录](baselines/monaco-basic-provenance.json) [记录](baselines/monaco-basic-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-basic.md) [记录](baselines/monaco-core-origins-provenance.json) [记录](baselines/monaco-core-origins-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-core-origins.md) [记录](baselines/monaco-core-build-provenance.json) [记录](baselines/monaco-core-build-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-core-build.md) [记录](baselines/monaco-contributions-provenance.json) [记录](baselines/monaco-contributions-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-contributions.md) [记录](baselines/monaco-css-build-provenance.json) [记录](baselines/monaco-css-build-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-css.md) [记录](baselines/monaco-node-path-provenance.json) [记录](baselines/monaco-node-path-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-node-path.md) [记录](changes/2026-09-15-SITE-07-monaco-dom.md) [记录](baselines/monaco-dom-origins-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-unicode.md) [记录](baselines/monaco-unicode-provenance.json) [记录](baselines/monaco-unicode-validation.json) [记录](changes/2026-09-15-SITE-07-font-notices.md) [记录](baselines/site-font-notices-provenance.json) [记录](baselines/site-font-notices-validation.json)
+- SITE-05: [记录](changes/2026-09-16-SITE-05-search.md) [记录](baselines/site05-search.json) [记录](changes/2026-09-16-SITE-05-links-editor.md) [记录](baselines/site05-links-editor.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- SITE-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- SITE-07: [记录](site-inventory.md) [记录](baselines/site-provenance.json) [记录](changes/2026-09-14-SITE-07-vendor-notices.md) [记录](baselines/site-notices-checkpoint.json) [记录](baselines/site-codicons-provenance.json) [记录](baselines/site-codicons-validation.json) [记录](changes/2026-09-15-SITE-07-codicons.md) [记录](baselines/vconsole-notices-provenance.json) [记录](baselines/vconsole-notices-validation.json) [记录](changes/2026-09-15-SITE-07-vconsole-notices.md) [记录](console-modernization.md) [记录](baselines/site-console-inventory.json) [记录](baselines/site-console-validation.json) [记录](changes/2026-09-15-SITE-07-console-baseline.md) [记录](baselines/console-feed-provenance.json) [记录](changes/2026-09-15-SITE-07-console-feed-source.md) [记录](baselines/console-commonjs-provenance.json) [记录](changes/2026-09-15-SITE-07-console-commonjs.md) [记录](baselines/console-esm-provenance.json) [记录](changes/2026-09-15-SITE-07-console-esm.md) [记录](baselines/console-embedded-notices.json) [记录](baselines/console-notices-validation.json) [记录](changes/2026-09-15-SITE-07-console-notices.md) [记录](baselines/console-embedded-sources.json) [记录](baselines/console-embedded-validation.json) [记录](changes/2026-09-15-SITE-07-console-embedded-sources.md) [记录](baselines/console-derived-attribution.json) [记录](baselines/console-derived-validation.json) [记录](changes/2026-09-15-SITE-07-console-derived-attribution.md) [记录](baselines/console-stackoverflow-provenance.json) [记录](baselines/console-stackoverflow-validation.json) [记录](changes/2026-09-15-SITE-07-console-stackoverflow.md) [记录](baselines/console-shallowequal-validation.json) [记录](changes/2026-09-15-SITE-07-console-shallowequal.md) [记录](console-notice-review.md) [记录](baselines/console-notice-review-validation.json) [记录](changes/2026-09-15-SITE-07-console-notice-review.md) [记录](baselines/monaco-typescript-provenance.json) [记录](baselines/monaco-typescript-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-typescript.md) [记录](baselines/monaco-languages-provenance.json) [记录](baselines/monaco-languages-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-languages.md) [记录](baselines/monaco-language-notices.json) [记录](baselines/monaco-language-notices-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-language-notices.md) [记录](baselines/monaco-modes-provenance.json) [记录](baselines/monaco-modes-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-modes.md) [记录](baselines/monaco-basic-provenance.json) [记录](baselines/monaco-basic-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-basic.md) [记录](baselines/monaco-core-origins-provenance.json) [记录](baselines/monaco-core-origins-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-core-origins.md) [记录](baselines/monaco-core-build-provenance.json) [记录](baselines/monaco-core-build-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-core-build.md) [记录](baselines/monaco-contributions-provenance.json) [记录](baselines/monaco-contributions-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-contributions.md) [记录](baselines/monaco-css-build-provenance.json) [记录](baselines/monaco-css-build-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-css.md) [记录](baselines/monaco-node-path-provenance.json) [记录](baselines/monaco-node-path-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-node-path.md) [记录](changes/2026-09-15-SITE-07-monaco-dom.md) [记录](baselines/monaco-dom-origins-validation.json) [记录](changes/2026-09-15-SITE-07-monaco-unicode.md) [记录](baselines/monaco-unicode-provenance.json) [记录](baselines/monaco-unicode-validation.json) [记录](changes/2026-09-15-SITE-07-font-notices.md) [记录](baselines/site-font-notices-provenance.json) [记录](baselines/site-font-notices-validation.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - EX-01: [记录](changes/2026-09-14-EX-01-react-consumer.md) [记录](baselines/react-consumer-validation.json) [记录](scripts/react-consumer.mjs)
 - EX-02: [记录](changes/2026-09-14-EX-02-vue-consumer.md) [记录](baselines/vue-consumer-validation.json) [记录](scripts/vue-consumer.mjs)
+- EX-03: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - MOD-01: [记录](changes/2026-09-15-MOD-01-bun-evaluation.md) [记录](baselines/bun-install-validation.json) [记录](bun-evaluation.md)
 - MOD-PLUGIN-01: [记录](changes/2026-09-14-MOD-PLUGIN-01-scaffold.md) [记录](baselines/scaffold-validation.json)
 - MOD-02: [记录](changes/2026-09-14-MOD-02-library-tooling.md) [记录](baselines/library-tooling-validation.json)
 - MOD-DEV-01: [记录](changes/2026-09-14-MOD-DEV-01-dev-server.md) [记录](baselines/dev-server-validation.json)
 - MOD-03: [记录](changes/2026-09-14-MOD-03-slider-updates.md) [记录](baselines/slider-updates-validation.json) [记录](changes/2026-09-14-MOD-03-performance-acceptance.md) [记录](baselines/core-performance-validation.json)
+- MOD-04: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- MOD-05: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - REL-08: [记录](changes/2026-09-14-REL-08-release-ledger.md) [记录](baselines/release-ledger-validation.json) [记录](release-ledger.md) [记录](release-ledger.json)
 - REL-01: [记录](version-plan.md) [记录](version-plan.json) [记录](baselines/version-registry-2026-09-16.json) [记录](changes/2026-09-16-REL-01-version-plan.md)
 - REL-09: [记录](changes/2026-09-16-REL-09-major-versions.md) [记录](baselines/major-version-preparation.json) [记录](baselines/version-registry-prepared-2026-09-16.json) [记录](version-plan.md)
-- REL-02: [记录](changes/2026-09-16-REL-02-types-inputs.md) [记录](baselines/major-installed-types-validation.json) [记录](changes/2026-09-16-REL-02-yarn-candidate-archives.md) [记录](baselines/major-candidate-archive-validation.json) [记录](changes/2026-09-16-REL-02-candidate-registration.md) [记录](baselines/major-candidate-preparation.json) [记录](changes/2026-09-16-REL-02-auto-thumbnail-refresh.md) [记录](baselines/auto-thumbnail-candidate-refresh.json) [记录](baselines/auto-thumbnail-candidate-refresh-check.json) [记录](changes/2026-09-16-REL-02-thumbnail-refresh.md) [记录](baselines/thumbnail-candidate-refresh.json) [记录](baselines/thumbnail-candidate-refresh-check.json) [记录](changes/2026-09-16-REL-02-dash-refresh.md) [记录](baselines/dash-candidate-refresh.json) [记录](baselines/dash-candidate-refresh-check.json) [记录](changes/2026-09-16-REL-02-shared-tools-refresh.md) [记录](baselines/shared-tools-candidate-refresh.json) [记录](baselines/shared-tools-candidate-refresh-check.json) [记录](changes/2026-09-16-REL-02-site-inputs-refresh.md) [记录](baselines/site-inputs-candidate-refresh.json) [记录](baselines/site-inputs-candidate-refresh-check.json)
+- REL-02: [记录](changes/2026-09-16-REL-02-types-inputs.md) [记录](baselines/major-installed-types-validation.json) [记录](changes/2026-09-16-REL-02-yarn-candidate-archives.md) [记录](baselines/major-candidate-archive-validation.json) [记录](changes/2026-09-16-REL-02-candidate-registration.md) [记录](baselines/major-candidate-preparation.json) [记录](changes/2026-09-16-REL-02-auto-thumbnail-refresh.md) [记录](baselines/auto-thumbnail-candidate-refresh.json) [记录](baselines/auto-thumbnail-candidate-refresh-check.json) [记录](changes/2026-09-16-REL-02-thumbnail-refresh.md) [记录](baselines/thumbnail-candidate-refresh.json) [记录](baselines/thumbnail-candidate-refresh-check.json) [记录](changes/2026-09-16-REL-02-dash-refresh.md) [记录](baselines/dash-candidate-refresh.json) [记录](baselines/dash-candidate-refresh-check.json) [记录](changes/2026-09-16-REL-02-shared-tools-refresh.md) [记录](baselines/shared-tools-candidate-refresh.json) [记录](baselines/shared-tools-candidate-refresh-check.json) [记录](changes/2026-09-16-REL-02-site-inputs-refresh.md) [记录](baselines/site-inputs-candidate-refresh.json) [记录](baselines/site-inputs-candidate-refresh-check.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- REL-03: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - REL-04: [记录](changes/2026-09-15-REL-04-consumer-checkpoint.md) [记录](rollback-rehearsal.md) [记录](baselines/rollback-consumer-validation.json) [记录](changes/2026-09-15-REL-04-workflows-checkpoint.md) [记录](rollback-inventory.md) [记录](baselines/rollback-workflows-validation.json) [记录](changes/2026-09-15-REL-04-pages-recovery.md) [记录](baselines/pages-recovery-validation.json) [记录](changes/2026-09-15-REL-04-acceptance.md) [记录](baselines/rollback-acceptance-validation.json)
+- REVIEW-01: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- REVIEW-02: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- REVIEW-03: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- REL-05: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- REL-06: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
+- REL-07: [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md) [记录](type-compatibility-policy.md) [记录](baselines/factory-compatibility-validation.json) [记录](changes/2026-09-13-PKG-FACTORY-01-compatible-types.md)
 - CORE-25: [记录](changes/2026-09-13-CORE-25-defaults-ssr.md) [记录](baselines/defaults-ssr-validation.json)
 - ENG-12: [记录](changes/2026-09-13-ENG-12-library-public.md) [记录](baselines/library-public-validation.json)
@@ -716,7 +753,7 @@
 - PKG-DANMUKU-11: [记录](changes/2026-09-13-PKG-DANMUKU-11-visible-lifetime.md) [记录](baselines/danmuku-lifetime-validation.json)
 - PKG-DANMUKU-12: [记录](changes/2026-09-13-PKG-DANMUKU-12-frame-sampling.md) [记录](baselines/danmuku-frame-sampling-validation.json)
 - PKG-JASSUB-08: [记录](changes/2026-09-14-PKG-JASSUB-08-offscreen.md) [记录](baselines/jassub-offscreen-validation.json) [记录](baselines/jassub-offscreen-patch.json)
-- PKG-JASSUB-09: [记录](changes/2026-09-14-PKG-JASSUB-09-hybrid.md) [记录](baselines/jassub-hybrid-validation.json) [记录](baselines/jassub-hybrid-patch.json) [记录](changes/2026-09-14-PKG-JASSUB-09-firefox-diagnostics.md) [记录](changes/2026-09-14-PKG-JASSUB-09-display.md) [记录](baselines/jassub-display-validation.json) [记录](changes/2026-09-15-PKG-JASSUB-09-native-call.md) [记录](baselines/jassub-native-call-validation.json)
+- PKG-JASSUB-09: [记录](changes/2026-09-14-PKG-JASSUB-09-hybrid.md) [记录](baselines/jassub-hybrid-validation.json) [记录](baselines/jassub-hybrid-patch.json) [记录](changes/2026-09-14-PKG-JASSUB-09-firefox-diagnostics.md) [记录](changes/2026-09-14-PKG-JASSUB-09-display.md) [记录](baselines/jassub-display-validation.json) [记录](changes/2026-09-15-PKG-JASSUB-09-native-call.md) [记录](baselines/jassub-native-call-validation.json) [记录](self-test-handoff.md) 2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。
 - PKG-AUTO-THUMB-07: [记录](changes/2026-09-14-PKG-AUTO-THUMB-07-canvas.md) [记录](baselines/auto-thumbnail-canvas-validation.json)
 - PKG-AUTO-THUMB-08: [记录](changes/2026-09-14-PKG-AUTO-THUMB-08-types.md) [记录](baselines/auto-thumbnail-types-validation.json)
 - PKG-AUTO-THUMB-09: [记录](changes/2026-09-14-PKG-AUTO-THUMB-09-alias.md) [记录](baselines/auto-thumbnail-alias-validation.json)
@@ -755,3 +792,4 @@
 - CI-NPM-02: [记录](changes/2026-09-16-CI-NPM-02-verify-bundle.md) [记录](baselines/npm-bundle-verification.json)
 - CI-NPM-03: [记录](changes/2026-09-16-CI-NPM-03-registry.md) [记录](baselines/npm-registry-validation.json)
 - PKG-AUDIO-BUFFER-01: [记录](changes/2026-09-16-PKG-AUDIO-BUFFER-01-order.md) [记录](baselines/audio-buffer-order-validation.json)
+- DOC-HANDOFF-01: [记录](self-test-handoff.md) [记录](baselines/self-test-handoff-stop.json) [记录](remaining-issues.md)

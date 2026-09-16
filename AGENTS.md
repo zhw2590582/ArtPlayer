@@ -2,6 +2,12 @@
 
 ## Compatibility Refactor
 
+2026-09-16 user scope update: stop autonomous refactor implementation and hand off for
+the user's extended self-testing. Read [refactor/self-test-handoff.md](refactor/self-test-handoff.md)
+first. Remaining tasks are deferred, not passed; do not resume long tests, new fixes,
+full matrices, release preparation, or formal reviews without a new user instruction.
+Existing compatibility requirements and future publication gates remain in force.
+
 The compatibility modernization plan is maintained in [refactor/README.md](refactor/README.md).
 For refactor work, read its compatibility contract, task plan, and progress log before editing.
 Use `refactor/tasks.json` as the task status source and regenerate the readable plan with

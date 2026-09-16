@@ -750,7 +750,7 @@
         "ENG-09",
         "ENG-10"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "OS/Node/TS/浏览器与影响范围矩阵、缓存、超时、汇总检查和 artifact 报告",
       "acceptance": "固定安装、失败/取消不误报、核心影响全生态；检查只读，失败证据可追溯",
@@ -799,8 +799,11 @@
         "changes/2026-09-15-CI-01-installed-firefox.md",
         "baselines/ci-installed-firefox-validation.json",
         "changes/2026-09-15-CI-01-installed-webkit.md",
-        "baselines/ci-installed-webkit-validation.json"
-      ]
+        "baselines/ci-installed-webkit-validation.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "CI-02",
@@ -840,11 +843,15 @@
         "CI-NPM-02",
         "CI-NPM-03"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "候选准备、精确 artifact 发布配置、OIDC 评估、版本/tag/registry 预检和部分失败恢复",
       "acceptance": "不自动发布；明确逐包信任前置和 dry run 限制，不能重建未验证内容或重发冲突版本；按版本清单校验各包下一 major 和预发布/正式 tag，保留旧核心支持范围",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "CI-04",
@@ -864,11 +871,15 @@
         "SITE-EDITOR-VAST-01",
         "CI-JASSUB-SOURCE-01"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "静态/干净环境检查、真实 PR 正反例、候选 dry run、required checks/Pages/npm 必需配置状态及运维指南",
       "acceptance": "必要 Actions 证据和远端配置核对齐全；缺失保持未完成，真实 publish/deploy 仍在授权发布步骤执行",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "scope": [
@@ -1481,7 +1492,7 @@
         "PKG-CHAPTER-04",
         "CORE-22"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "M",
       "deliverable": "chapter + quality/thumbnail、移动和全屏进度场景",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
@@ -1493,8 +1504,11 @@
         "changes/2026-09-15-PKG-CHAPTER-05-native-timing.md",
         "baselines/chapter-native-timing-validation.json",
         "changes/2026-09-16-PKG-CHAPTER-05-major-timing.md",
-        "baselines/chapter-major-timing-validation.json"
-      ]
+        "baselines/chapter-major-timing-validation.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-CHAPTER-06",
@@ -1508,11 +1522,15 @@
         "ENG-07",
         "PKG-CHAPTER-HOVER-01"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "M",
       "deliverable": "chapter.js 示例、产物和变更记录",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-AMBILIGHT-01",
@@ -1638,7 +1656,7 @@
         "PKG-CANVAS-04",
         "PKG-FACTORY-01"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "M",
       "deliverable": "原生 video、canvas proxy 的能力边界及销毁无帧循环",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
@@ -1646,8 +1664,11 @@
         "changes/2026-09-12-PKG-AMBILIGHT-PROXY-01-sampling.md",
         "ambilight-validation.md",
         "changes/2026-09-14-PKG-AMBILIGHT-05-installed-combination.md",
-        "baselines/ambilight-installed-validation.json"
-      ]
+        "baselines/ambilight-installed-validation.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-AMBILIGHT-06",
@@ -1660,11 +1681,15 @@
         "PKG-AMBILIGHT-05",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "M",
       "deliverable": "ambilight.js 示例及样式/分发验证",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-AUDIO-01",
@@ -1763,7 +1788,7 @@
         "CORE-24",
         "PKG-AUDIO-BUFFER-01"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "主视频切源和缓冲恢复，多实例独立音频、旧核心",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
@@ -1773,8 +1798,11 @@
         "baselines/audio-combinations-checkpoint.json",
         "audio-validation.md",
         "changes/2026-09-15-PKG-AUDIO-05-prefix.md",
-        "baselines/audio-prefix-validation.json"
-      ]
+        "baselines/audio-prefix-validation.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-AUDIO-06",
@@ -1787,11 +1815,15 @@
         "PKG-AUDIO-05",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "audio.track.js 示例与运行返回值一致的声明",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-AUTO-THUMB-01",
@@ -1849,7 +1881,7 @@
         "CORE-19",
         "PKG-AUTO-THUMB-07"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "隐藏 video、seek 队列、canvas 编码与 Blob URL 清理",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
@@ -1866,8 +1898,11 @@
         "changes/2026-09-14-PKG-AUTO-THUMB-03-first-seek.md",
         "baselines/auto-thumbnail-first-seek.json",
         "changes/2026-09-14-PKG-AUTO-THUMB-03-native-decoder.md",
-        "baselines/auto-thumbnail-native-decoder.json"
-      ]
+        "baselines/auto-thumbnail-native-decoder.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-AUTO-THUMB-04",
@@ -1915,11 +1950,15 @@
         "PKG-AUTO-THUMB-03",
         "PKG-AUTO-THUMB-13"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "旧核心/候选核心预览、多次加载无过期缩略图覆盖",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-AUTO-THUMB-06",
@@ -1932,11 +1971,15 @@
         "PKG-AUTO-THUMB-05",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "auto.thumbnail.js、三种产物和内存/URL 证据",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-VTT-THUMB-01",
@@ -2042,15 +2085,18 @@
         "PKG-VTT-THUMB-04",
         "CORE-22"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "M",
       "deliverable": "鼠标和移动进度、全屏、切源、chapter 组合",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": [
         "changes/2026-09-14-PKG-VTT-THUMB-05-combinations.md",
         "baselines/vtt-thumbnail-combinations.json",
-        "baselines/vtt-thumbnail-core.json"
-      ]
+        "baselines/vtt-thumbnail-core.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-VTT-THUMB-06",
@@ -2063,11 +2109,15 @@
         "PKG-VTT-THUMB-05",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "M",
       "deliverable": "vtt.thumbnail.js、VTT/图片资源解析和产物验证",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-HLS-01",
@@ -2168,7 +2218,7 @@
         "PKG-HLS-04",
         "CORE-22"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "固定历史及当前 SDK 归档、真实 worker/多音轨组、外部选择与重绑定浏览器证据",
       "acceptance": "受支持桌面 MSE 引擎与新旧核心通过；无 worker 回退伪通过，设备缺口仍由 PKG-HLS-05 保持未完成",
@@ -2185,8 +2235,11 @@
         "changes/2026-09-15-PKG-HLS-SDK-01-controller-state.md",
         "baselines/hls-controller-validation.json",
         "changes/2026-09-15-PKG-HLS-SDK-01-native-exception.md",
-        "baselines/hls-native-validation.json"
-      ]
+        "baselines/hls-native-validation.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-HLS-05",
@@ -2200,11 +2253,15 @@
         "CORE-22",
         "PKG-HLS-SDK-01"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "本地多码率 HLS、换成无轨道来源、旧核心和最终核心",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-HLS-06",
@@ -2218,11 +2275,15 @@
         "ENG-07",
         "PKG-HLS-PACK-01"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "hls.control.js、依赖范围与回退记录",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-DASH-01",
@@ -2363,7 +2424,7 @@
         "PKG-DASH-SEEK-01",
         "PKG-DASH-CLEANUP-01"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "固定 dash.js 4.5.2/5.2.1 与本地 DASH 实际清晰度/音轨、高亮、Auto 和换源组合",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
@@ -2377,8 +2438,11 @@
         "changes/2026-09-12-PKG-DASH-05-sdk-events.md",
         "baselines/dash-sdk-events-validation.json",
         "changes/2026-09-12-PKG-DASH-05-seek-diagnosis.md",
-        "baselines/dash-seek-diagnosis.json"
-      ]
+        "baselines/dash-seek-diagnosis.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-DASH-06",
@@ -2392,11 +2456,15 @@
         "ENG-07",
         "PKG-DASH-MENU-01"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "dash.control.js、支持的 dash.js 版本与产物",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-MULTI-SUB-01",
@@ -2539,7 +2607,7 @@
         "PKG-MULTI-SUB-07",
         "PKG-MULTI-SUB-08"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "与核心字幕/偏移/全屏组合，旧名称调用不变",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
@@ -2548,8 +2616,11 @@
         "baselines/multiple-subtitles-combinations-validation.json",
         "baselines/multiple-subtitles-cores.json",
         "changes/2026-09-14-PKG-MULTI-SUB-05-seek-diagnostics.md",
-        "baselines/multiple-subtitles-seek-diagnostics.json"
-      ]
+        "baselines/multiple-subtitles-seek-diagnostics.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-MULTI-SUB-06",
@@ -2566,11 +2637,15 @@
         "PKG-MULTI-SUB-10",
         "PKG-MULTI-SUB-11"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "multiple.subtitles.js、parser 来源许可及打包边界",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-JASSUB-01",
@@ -2677,11 +2752,15 @@
         "PKG-JASSUB-09",
         "PKG-JASSUB-10"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "真实 worker/WASM 字幕渲染与全屏、旧核心测试",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-JASSUB-06",
@@ -2695,11 +2774,15 @@
         "ENG-07",
         "CI-JASSUB-SOURCE-01"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "jassub.js、外部资源路径、许可和离线失败记录；接续 VENDOR-04/05 完整组件/字体通知、LGPL 源码分发核对及六份未明确字体的分发处置",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录；来源身份已由01冻结，完整通知和未明确字体的发布处理必须闭环，不能以来源相同替代许可结论",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-JASSUB-07",
@@ -2819,15 +2902,18 @@
         "PKG-MASK-04",
         "CORE-22"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "真实模型和 danmuku/seek/全屏组合，GPU 资源释放",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": [
         "changes/2026-09-14-PKG-MASK-05-native-checkpoint.md",
         "baselines/danmuku-mask-native-validation.json",
-        "baselines/danmuku-mask-historical-cores.json"
-      ]
+        "baselines/danmuku-mask-historical-cores.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-MASK-06",
@@ -2841,11 +2927,15 @@
         "ENG-07",
         "PKG-DANMUKU-MASK-LOAD-01"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "danmuku.mask.js、资源版本/许可、CPU fallback 和包体积证据",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-ASR-01",
@@ -2947,7 +3037,7 @@
         "PKG-ASR-09",
         "PKG-ASR-10"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "真实 WebAudio 分块、播放暂停/切源/销毁，不引入网络 ASR",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
@@ -2964,8 +3054,11 @@
         "changes/2026-09-15-PKG-ASR-05-no-audio.md",
         "baselines/asr-no-audio-validation.json",
         "changes/2026-09-15-PKG-ASR-05-initial-error.md",
-        "baselines/asr-initial-error-validation.json"
-      ]
+        "baselines/asr-initial-error-validation.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-ASR-06",
@@ -2978,11 +3071,15 @@
         "PKG-ASR-05",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "asr.js、Worklet 资源、输出格式与声明证据",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-ADS-01",
@@ -3083,14 +3180,17 @@
         "PKG-ADS-04",
         "CORE-22"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "本地广告 fixture、多实例、正常结束/跳过/销毁；核验历史关联核心 4.5.5、发布 5.4.1 与候选核心的实际归档/能力/媒体组合",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": [
         "changes/2026-09-12-PKG-ADS-05-browser.md",
-        "baselines/ads-ui-visibility-validation.json"
-      ]
+        "baselines/ads-ui-visibility-validation.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-ADS-06",
@@ -3103,11 +3203,15 @@
         "PKG-ADS-05",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "ads.js/README/声明一致；旧 require(pkg).default、原 dist 路径、当前 callable/ESM/legacy 的隔离 tarball 及浏览器验收",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-VAST-01",
@@ -3213,7 +3317,7 @@
         "PKG-VAST-04",
         "CORE-22"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "真实IMA广告播放、错误后主视频恢复、会话重建与销毁；核验npm5.1.7/npm5.4.0/候选5.4.1核心，VAST VPN外部脚本例外逐项记录，不将受控SDK当作实际IMA验收",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
@@ -3223,8 +3327,11 @@
         "changes/2026-09-14-PKG-VAST-05-skip-checkpoint.md",
         "baselines/vast-skip-validation.json",
         "changes/2026-09-15-CI-01-vast-installed.md",
-        "baselines/ci-vast-installed-validation.json"
-      ]
+        "baselines/ci-vast-installed-validation.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-VAST-06",
@@ -3237,11 +3344,15 @@
         "PKG-VAST-05",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "vast.js、SDK 资源、声明消费和独立版本记录；核验实际发布 namespace default、历史深路径、ESM和准确声明，版本按政策2.0.0由REL-09统一处理",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-CAST-01",
@@ -3339,15 +3450,18 @@
         "PKG-CAST-04",
         "CORE-22"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "stub 测试之外记录实际 Cast 设备会话、源更新和断开",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": [
         "changes/2026-09-16-PKG-CAST-05-real-sdk.md",
         "baselines/chromecast-real-sdk-validation.json",
-        "chromecast-validation.md"
-      ]
+        "chromecast-validation.md",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-CAST-06",
@@ -3360,11 +3474,15 @@
         "PKG-CAST-05",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "chromecast.js、SDK URL/权限能力及待支持环境说明",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-DPIP-01",
@@ -3468,14 +3586,17 @@
         "PKG-CANVAS-04",
         "PKG-MB-04"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "原生视频及两个 proxy、键盘/焦点/全屏与关闭还原",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": [
         "changes/2026-09-12-PKG-DPIP-05-native-checkpoint.md",
-        "baselines/dpip-native-validation.json"
-      ]
+        "baselines/dpip-native-validation.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-DPIP-06",
@@ -3488,11 +3609,15 @@
         "PKG-DPIP-05",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "document.pip.js、浏览器能力矩阵、旧接口与恢复证据",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-DANMUKU-01",
@@ -3655,7 +3780,7 @@
         "CORE-22",
         "PKG-DANMUKU-START-01"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "最终核心/旧核心、mask/fullscreen/PiP 组合报告",
       "acceptance": "性能无未解释退化，反复装卸无累计资源",
@@ -3670,8 +3795,11 @@
         "changes/2026-09-15-CI-01-installed-webkit.md",
         "baselines/ci-installed-webkit-validation.json",
         "changes/2026-09-16-PKG-DANMUKU-START-01-first-sample.md",
-        "baselines/danmuku-start-validation.json"
-      ]
+        "baselines/danmuku-start-validation.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-DANMUKU-09",
@@ -3686,11 +3814,15 @@
         "PKG-DANMUKU-MASK-LOAD-01",
         "PKG-DANMUKU-START-01"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "danmuku.js、README、声明、worker 与产物",
       "acceptance": "tarball 和静态 icons 等旧调用通过，有独立回退版本",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-CANVAS-01",
@@ -3796,7 +3928,7 @@
         "PKG-FACTORY-01",
         "PKG-CANVAS-SUBTITLE-01"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "真实 video/canvas 绘制、字幕和 document PiP 恢复",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
@@ -3804,8 +3936,11 @@
         "changes/2026-09-14-PKG-CANVAS-05-native-pip.md",
         "baselines/canvas-dpip-validation.json",
         "baselines/canvas-subtitles-validation.json",
-        "baselines/ambilight-installed-validation.json"
-      ]
+        "baselines/ambilight-installed-validation.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-CANVAS-06",
@@ -3818,11 +3953,15 @@
         "PKG-CANVAS-05",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "canvas.js、三种产物、调用兼容与资源证据",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-MB-01",
@@ -4013,7 +4152,7 @@
         "PKG-MB-08",
         "CORE-22"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "跨浏览器能力、长播放、DPiP、HLS 音轨/质量报告",
       "acceptance": "资源释放、事件顺序、AV sync 与支持范围满足基线",
@@ -4026,8 +4165,11 @@
         "changes/2026-09-16-PKG-MB-09-hour-soak.md",
         "baselines/mb-hour-soak-start.json",
         "changes/2026-09-16-PKG-MB-09-av-breach.md",
-        "baselines/mb-hour-av-breach.json"
-      ]
+        "baselines/mb-hour-av-breach.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-MB-10",
@@ -4040,11 +4182,15 @@
         "PKG-MB-09",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "mediabunny.js、README、依赖版本、三产物和许可; 拆分media声明后的独立编辑器生成/辅助文件过滤与语义检查（IFRAME-04全量生成时暴露）",
       "acceptance": "tarball 可消费、无意外依赖升级、旧调用与回退可用",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-IFRAME-01",
@@ -4148,7 +4294,7 @@
         "PKG-IFRAME-04",
         "CORE-22"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "真实同源/跨源 iframe、既有 commit 协议；安全变化有独立结论；新旧核心/demo、实际 BFCache/设备和外部中断导航验收，旧端无文档标记的限制明确",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
@@ -4158,8 +4304,11 @@
         "changes/2026-09-13-PKG-IFRAME-05-history.md",
         "baselines/iframe-history-validation.json",
         "changes/2026-09-15-CI-01-iframe-installed.md",
-        "baselines/ci-iframe-installed-validation.json"
-      ]
+        "baselines/ci-iframe-installed-validation.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-IFRAME-06",
@@ -4172,11 +4321,15 @@
         "PKG-IFRAME-05",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "iframe.js、示例集成和原 script/class 导出验证；旧包名/额外helper深入口与新工具名的迁移结论; 保留旧npm Function回调及namespace/helper与工具类的区别，核验实际编译后消费而非仅声明通过",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-TOOL-THUMB-01",
@@ -4284,15 +4437,18 @@
         "PKG-TOOL-THUMB-04",
         "CORE-22"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "工具独立浏览器使用，生成缩略图在核心中显示",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": [
         "changes/2026-09-16-PKG-TOOL-THUMB-05-core-combinations.md",
         "baselines/thumbnail-core-validation.json",
-        "baselines/thumbnail-core.json"
-      ]
+        "baselines/thumbnail-core.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-TOOL-THUMB-06",
@@ -4305,11 +4461,15 @@
         "PKG-TOOL-THUMB-05",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "tool.thumbnail.js、历史 ESM 兼容文件、types 路径和 tarball",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "SITE-01",
@@ -4632,7 +4792,7 @@
         "SITE-VCONSOLE-01",
         "SITE-CONSOLE-01"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "M",
       "deliverable": "VitePress 构建、链接与嵌入 demo 检查",
       "acceptance": "文档构建、链接、嵌入路径与声明注入通过；真实完整 demo 保留 EX-03 独立门槛；核对 ENG-PM-01 登记的搜索 peer 范围和真实搜索行为",
@@ -4640,8 +4800,11 @@
         "changes/2026-09-16-SITE-05-search.md",
         "baselines/site05-search.json",
         "changes/2026-09-16-SITE-05-links-editor.md",
-        "baselines/site05-links-editor.json"
-      ]
+        "baselines/site05-links-editor.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "SITE-06",
@@ -4654,11 +4817,15 @@
         "SITE-05",
         "SITE-07"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "M",
       "deliverable": "维护指南和站点变更记录",
       "acceptance": "未手改 generated 目录，旧 URL 可用、部署与检查分离",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "SITE-07",
@@ -4671,7 +4838,7 @@
       "dependsOn": [
         "SITE-01"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "Monaco/vConsole/console bundle/字体和样本的冻结来源、可复现构建或替代与站点 notices",
       "acceptance": "接续 SITE-01 的字节与换行差异证据；完整许可随实际分发，consoleLog/global/CSS/worker 与旧 URL 兼容；缺字体/媒体使用依据明确处置；资产变更后执行编辑器/移动/字幕/示例回归，不以来源指纹替代授权或运行证据",
@@ -4750,8 +4917,11 @@
         "baselines/monaco-unicode-validation.json",
         "changes/2026-09-15-SITE-07-font-notices.md",
         "baselines/site-font-notices-provenance.json",
-        "baselines/site-font-notices-validation.json"
-      ]
+        "baselines/site-font-notices-validation.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "EX-01",
@@ -4828,11 +4998,15 @@
         "PKG-IFRAME-06",
         "PKG-TOOL-THUMB-06"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "8082 全 demo、HLS/DASH/FLV/MPEGTS/WebTorrent 集成记录",
       "acceptance": "旧 URL/参数/脚本加载保持；网络/SDK 限制明确，不静默跳过；覆盖编辑器重复 Run 和 ESM/i18n/mobile/iframe，记录实际候选脚本及状态隔离证据；依据 BASE-04 路径台账逐项消除 not-run，处理 BASE-DEMO-01",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "MOD-01",
@@ -4949,11 +5123,15 @@
         "PKG-MB-10",
         "ENG-08"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "M",
       "deliverable": "帧/队列/推理/音画同步与资源长期运行比较",
       "acceptance": "不改默认算法/阈值，性能改善有证据；无收益则保留旧实现",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "MOD-05",
@@ -4969,11 +5147,15 @@
         "MOD-04",
         "MOD-DEV-01"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "M",
       "deliverable": "最终 runtime/packageManager/构建配置及性能台账",
       "acceptance": "干净安装和全包检查通过；Bun 未采用有理由，不为状态强行切换",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "scope": [
@@ -5077,7 +5259,7 @@
         "REL-09",
         "REL-04"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "各候选本地 tarball/integrity 与新旧核心/插件消费者验证报告，外部门槛单独标注",
       "acceptance": "隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容；在目标 major 版本确定后构建 pack，不在测试后改版本；逐包核验完整回退产物、实际候选版本/integrity、应用导入与冻结锁，重跑对应回退并保留报告；缺失历史分发不准入",
@@ -5102,8 +5284,11 @@
         "baselines/shared-tools-candidate-refresh-check.json",
         "changes/2026-09-16-REL-02-site-inputs-refresh.md",
         "baselines/site-inputs-candidate-refresh.json",
-        "baselines/site-inputs-candidate-refresh-check.json"
-      ]
+        "baselines/site-inputs-candidate-refresh-check.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "REL-03",
@@ -5118,11 +5303,15 @@
         "SITE-06",
         "MOD-05"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "Safari/移动/PiP/Cast/IMA/模型/长播放完整报告",
       "acceptance": "包集成与全项目真机/SDK/压力结论齐全才完成本汇总；独立批次先建立自己的完整门槛子任务",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "REL-04",
@@ -5171,11 +5360,15 @@
         "ENG-13",
         "DOC-REVIEW-01"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "22 包结构、类型、旧 API/路径、测试盲区和维护文档的逐包报告",
       "acceptance": "本轮阻断项由独立修复任务关闭并复测；环境缺口转交下一轮，不宣称已发布就绪",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "REVIEW-02",
@@ -5188,11 +5381,15 @@
         "REVIEW-01",
         "REL-03"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "Chrome 交互、自动浏览器、新旧组合、真机/SDK/性能/资源的全范围报告",
       "acceptance": "所需环境证据齐全，前轮修复再次核对；本轮阻断项关闭，无关 mock 不替代真实验收",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "REVIEW-03",
@@ -5206,11 +5403,15 @@
         "REL-04",
         "CI-04"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "实际候选 integrity、干净安装构建/消费者、入口/许可/版本/tag/回退及前轮证据汇总",
       "acceptance": "最终候选完整检查通过，发布阻断项为零；准备可审阅的批次报告，不自动执行 publish；逐包核对 major 目标，不能用大版本豁免旧 API 兼容",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "REL-05",
@@ -5224,11 +5425,15 @@
         "REL-04",
         "REVIEW-03"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "候选 tag、完整产物 integrity、反馈与复现记录",
       "acceptance": "实际发布授权/操作/版本可追溯；本计划不自动执行发布",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "REL-06",
@@ -5240,11 +5445,15 @@
       "dependsOn": [
         "REL-05"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "正式分包版本/tag/站点文档及兼容公告",
       "acceptance": "候选验收通过，安装/浏览器复核和回退入口就绪；候选反馈修复须独立建任务并复验三轮受影响结论，正式内容与最终验证产物一致",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "REL-07",
@@ -5258,11 +5467,15 @@
         "ENG-LINT-01",
         "ENG-LINT-02"
       ],
-      "status": "todo",
+      "status": "deferred",
       "risk": "L",
       "deliverable": "最终任务/设计/证据归档和维护指南",
       "acceptance": "全范围任务有结论、无未解释兼容缺口；遗留项有明确后续责任",
-      "evidence": []
+      "evidence": [
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "todo",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-FACTORY-01",
@@ -5496,7 +5709,7 @@
       "dependsOn": [
         "PKG-JASSUB-08"
       ],
-      "status": "doing",
+      "status": "deferred",
       "risk": "H",
       "deliverable": "释放旧混合绘制 bitmap，不改变新模式的画布/时钟；销毁后切字幕不重新分配画布；来源补丁、原生排队消息及维护记录",
       "acceptance": "旧红新绿验证旧帧不能重建画布/解除新绘制等待；正常 hybrid 绘制保持；真实 Worker/ImageBitmap 交错、主线程及默认模式回归通过，能力缺口明确",
@@ -5508,8 +5721,11 @@
         "changes/2026-09-14-PKG-JASSUB-09-display.md",
         "baselines/jassub-display-validation.json",
         "changes/2026-09-15-PKG-JASSUB-09-native-call.md",
-        "baselines/jassub-native-call-validation.json"
-      ]
+        "baselines/jassub-native-call-validation.json",
+        "self-test-handoff.md"
+      ],
+      "statusBeforeDeferral": "doing",
+      "reason": "2026-09-16 用户要求停止本轮自主重构，交付长期自测；原验收未完成，恢复需用户另行指示。详见 self-test-handoff.md。"
     },
     {
       "id": "PKG-AUTO-THUMB-07",
@@ -6289,6 +6505,26 @@
       "evidence": [
         "changes/2026-09-16-PKG-AUDIO-BUFFER-01-order.md",
         "baselines/audio-buffer-order-validation.json"
+      ]
+    },
+    {
+      "id": "DOC-HANDOFF-01",
+      "phase": "0 规划",
+      "title": "停止自主推进并交接用户自测",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-03"
+      ],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "停止长测、保留问题和独立修复、登记延期范围及自测接续入口，汇总所有开放风险、已按范围接受的差异和延期任务",
+      "acceptance": "未完成项如实延期；运行进程停止；交接文档、计划与证据一致，不启动新修复或复盘",
+      "evidence": [
+        "self-test-handoff.md",
+        "baselines/self-test-handoff-stop.json",
+        "remaining-issues.md"
       ]
     }
   ]
