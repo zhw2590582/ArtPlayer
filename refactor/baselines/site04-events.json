@@ -1,0 +1,1271 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "doing",
+  "sourceBefore": "0a060e6088ded006235cfdbf5064b8ff014d842a",
+  "capturedAt": "2026-09-15T23:59:04.814Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "static": [
+      {
+        "language": "zh",
+        "name": "event",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/advanced/event.md",
+          "sha256": "2d8a33a17191e3ec14da8e62442700ad4af5b8d101acba483763811143e64bcd"
+        },
+        "html": {
+          "path": "docs/document/advanced/event.html",
+          "sha256": "f6e91d0ef8b69537c4fd173034cbb8fd40644954b8a966da00555ed20272da79"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-events/zh-event-0.mts",
+            "sha256": "8f75d35fccf7c69d611364a62a814d7b9ac9f777192defb25ea17eaff2256437"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "advanced/event.md:10",
+            "sha256": "148552605c6968c8a4ce98fc6487615200d71ab68e1fec31fcab0b0b4d4b4861"
+          },
+          {
+            "id": "advanced/event.md:25",
+            "sha256": "e894978aa0193b7706d6a2dc8ed021a8c0074f4617906dfcbddf505b086e5faa"
+          },
+          {
+            "id": "advanced/event.md:40",
+            "sha256": "79a45ca120ad719fffa789ad2a0fd6cdda416f6bee0acf60b2dfaa291bff1388"
+          },
+          {
+            "id": "advanced/event.md:53",
+            "sha256": "11c08a997203cc2ce326b6246fb58d1290deae4769fe1827f9e0609a412cea95"
+          },
+          {
+            "id": "advanced/event.md:177",
+            "sha256": "e9024ba74ee5548256f983e4f75074ccc149717c2bcfa9f7d195f928f748cc44"
+          },
+          {
+            "id": "advanced/event.md:194",
+            "sha256": "d453fb78806de6f1cfcf431f467106fc8ade5b62b988afd78a7577c5e039528c"
+          },
+          {
+            "id": "advanced/event.md:215",
+            "sha256": "bc37513ce747de557fe9af4931d2aeecbe9b4035ba76cc0aa1f2747a39de4d6f"
+          },
+          {
+            "id": "advanced/event.md:232",
+            "sha256": "7045145f7ed403e84c8335aef596ac0ab8a2f20d0cf8a846dc218d4e58c1be91"
+          },
+          {
+            "id": "advanced/event.md:249",
+            "sha256": "67b58661c87ff991bdf72aeac310a30d8065bfc2acbb61c5992f9dad9e5c9ef0"
+          },
+          {
+            "id": "advanced/event.md:266",
+            "sha256": "510f2c1e9d5791ffa63bea2dc8ed0f33ea671bd13f8be8be51b1722d2c56d8f3"
+          },
+          {
+            "id": "advanced/event.md:287",
+            "sha256": "8278359c125eb701d3616c50f4765dbbc0a484e007a49a8f05afeb41ee99b6b8"
+          },
+          {
+            "id": "advanced/event.md:304",
+            "sha256": "ed79708ce27a6ae9b7c0c8eea78e2bb726476ba16cc2a7032918ebad229150ca"
+          },
+          {
+            "id": "advanced/event.md:321",
+            "sha256": "e1ca98295eb7c1567b294f164a153c8cf72d8e539eaba33d70489ff8bebe9473"
+          },
+          {
+            "id": "advanced/event.md:338",
+            "sha256": "ea7299fe0f4f2cc0ae80ae3f69061dfc3d8683d26865faa58f83e5d07a707f0a"
+          },
+          {
+            "id": "advanced/event.md:355",
+            "sha256": "cc0c0ef4da34534e6a173a5ee99ed9759ab88d141e95ed5f215238130e0cf41b"
+          },
+          {
+            "id": "advanced/event.md:372",
+            "sha256": "508bf1aa147ba9b3ee10b307387984aae05a89a15ad5cb4d7444f1c4888b7979"
+          },
+          {
+            "id": "advanced/event.md:389",
+            "sha256": "633c268d3182d8ba8510178b2449ba8cbe57058c70e4e2e6c972b434e7b1fabd"
+          },
+          {
+            "id": "advanced/event.md:406",
+            "sha256": "ad794a14f0bf0e7e377b5d558b0afd5c24e3d5002b62753ec2af20846cb00dc3"
+          },
+          {
+            "id": "advanced/event.md:423",
+            "sha256": "686773479d69113663e1dd478b2b5f384eb106902798db3374ec23bad3fb1519"
+          },
+          {
+            "id": "advanced/event.md:440",
+            "sha256": "ed759064414addcd01bf4b08918e12b89dc8b9aa861692e0d9f8c511fe62bfd9"
+          },
+          {
+            "id": "advanced/event.md:458",
+            "sha256": "6fb508ea8382837d1e7630c012f666054c3a95bb5bd73de9d1e3090f446311cc"
+          },
+          {
+            "id": "advanced/event.md:477",
+            "sha256": "1d8f737781b464f2b56a163f7aa267242a01cd85cd0319baccf9b6a0497251c4"
+          },
+          {
+            "id": "advanced/event.md:498",
+            "sha256": "cbba6bdc09e6e9a436c9cbebbc4e14a888c73d231bf42047e956f692be4f69ff"
+          },
+          {
+            "id": "advanced/event.md:516",
+            "sha256": "9385d4e7ddc394d4457623591e85cff794ec7e399e9a20f848b23a0bb7c922de"
+          },
+          {
+            "id": "advanced/event.md:535",
+            "sha256": "885f7b2b89787a4fa0f6c764490915812774dc65239178ab711f8edefbbdafaf"
+          },
+          {
+            "id": "advanced/event.md:553",
+            "sha256": "42463ea4a6e741b112d8c8bf27ef291e05ac8055bad52693cdddb6c27396077a"
+          },
+          {
+            "id": "advanced/event.md:574",
+            "sha256": "053b68a7876ad2fbadbdf33ddfc2d7ffbc07d4cd8fcd6aaab26c321a2aad0e8e"
+          },
+          {
+            "id": "advanced/event.md:592",
+            "sha256": "d06cd93cc6643cd982045f3858c4f61c4e63b4a90da13061b9bf4c93ee6b1071"
+          },
+          {
+            "id": "advanced/event.md:613",
+            "sha256": "fe95da0456898b32a39405b403fde18d80d2b3614e0657944c6cfeb8637cd63f"
+          },
+          {
+            "id": "advanced/event.md:631",
+            "sha256": "7dad7fe5df17bb84bfc253fc827002b53712d4861155d0eca69782fab303d161"
+          },
+          {
+            "id": "advanced/event.md:649",
+            "sha256": "aa9c620ddecb97bca6753156910a2f977c141486400c2b2eb02bf126b51e151b"
+          },
+          {
+            "id": "advanced/event.md:666",
+            "sha256": "5186004281b2381af3e4586a2b3fdfc4930f4d7a2b255888ec85b202d54697c0"
+          },
+          {
+            "id": "advanced/event.md:688",
+            "sha256": "a3df03d5f9b3cfec670b41ecb0fae97817eabdeab2521b7de4dbcc2388aca793"
+          },
+          {
+            "id": "advanced/event.md:708",
+            "sha256": "acab15fe53ca27a05ec157aeb34fc10c5c3490462537ffa679d391d6bd24181a"
+          },
+          {
+            "id": "advanced/event.md:728",
+            "sha256": "9d63de94cb7dde7ab4c97230166954a533ec8e3537a130e22c0faea451d7c97d"
+          },
+          {
+            "id": "advanced/event.md:748",
+            "sha256": "cde7fffc6e36ffdd00cbfcf5b14077752b7863e1edc7ffbaacf6e3ea1a0d33bc"
+          },
+          {
+            "id": "advanced/event.md:765",
+            "sha256": "cc19c4fa9c9098eeb6524c17d8580d28312e895788f0379662a03e820cf5c2fd"
+          },
+          {
+            "id": "advanced/event.md:782",
+            "sha256": "299b648096c3ad515f890451b9be7d5cf761006031f02f54d2871d0a0ffc2beb"
+          },
+          {
+            "id": "advanced/event.md:799",
+            "sha256": "d3c42e6c38708bff35fdc2225701446c8dc6fd1931509f437c27dda8d9f64d82"
+          },
+          {
+            "id": "advanced/event.md:816",
+            "sha256": "1c2d642fa4bf1fb3350a099f6c10702f353448551229a145fb87d8e714fc9094"
+          },
+          {
+            "id": "advanced/event.md:833",
+            "sha256": "554d7b62f36d8ac737d2a197e5f217b23122aa034b858f310c18d0cde53c155f"
+          },
+          {
+            "id": "advanced/event.md:850",
+            "sha256": "6b3aaffdae10764396f2392b81635880e537c2044f2d0f5300513723914510bf"
+          },
+          {
+            "id": "advanced/event.md:867",
+            "sha256": "59fd1f7011dcea1e79f21db6c6219300f4cde4d43b7f1bed81cd9e3a922a5bb3"
+          },
+          {
+            "id": "advanced/event.md:885",
+            "sha256": "70e57d3f4cbd6cb030c7ac2e83e28b3e922bb2fb8c64d4fa45e8b208dc9d0d83"
+          },
+          {
+            "id": "advanced/event.md:902",
+            "sha256": "88fb1b1aa1ee710c96773151a8c0f1c298a8fe22a314318eae7b158ee2b2c3cf"
+          }
+        ],
+        "localLinks": [
+          "/document/advanced/event.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/advanced/event.html#%E5%AE%9E%E4%BE%8B%E4%BA%8B%E4%BB%B6",
+          "/document/advanced/event.html#emitter-contract",
+          "/document/advanced/event.html#native-event-contract",
+          "/document/advanced/event.html#custom-event-contract",
+          "/document/advanced/event.html#%E5%AA%92%E4%BD%93%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F",
+          "/document/advanced/event.html#%E7%95%8C%E9%9D%A2%E4%B8%8E%E8%BE%93%E5%85%A5",
+          "/document/advanced/event.html#%E5%B0%BA%E5%AF%B8%E3%80%81%E6%98%BE%E7%A4%BA%E4%B8%8E%E5%AD%97%E5%B9%95",
+          "/document/advanced/event.html#event-types",
+          "/document/advanced/event.html#ready",
+          "/document/advanced/event.html#restart",
+          "/document/advanced/event.html#pause",
+          "/document/advanced/event.html#play",
+          "/document/advanced/event.html#hotkey",
+          "/document/advanced/event.html#destroy",
+          "/document/advanced/event.html#focus",
+          "/document/advanced/event.html#blur",
+          "/document/advanced/event.html#dblclick",
+          "/document/advanced/event.html#click",
+          "/document/advanced/event.html#error",
+          "/document/advanced/event.html#hover",
+          "/document/advanced/event.html#mousemove",
+          "/document/advanced/event.html#resize",
+          "/document/advanced/event.html#view",
+          "/document/advanced/event.html#lock",
+          "/document/advanced/event.html#aspectratio",
+          "/document/advanced/event.html#autoheight",
+          "/document/advanced/event.html#autosize",
+          "/document/advanced/event.html#flip",
+          "/document/advanced/event.html#fullscreen",
+          "/document/advanced/event.html#fullscreenerror",
+          "/document/advanced/event.html#fullscreenweb",
+          "/document/advanced/event.html#mini",
+          "/document/advanced/event.html#pip",
+          "/document/advanced/event.html#screenshot",
+          "/document/advanced/event.html#seek",
+          "/document/advanced/event.html#subtitleoffset",
+          "/document/advanced/event.html#subtitlebeforeupdate",
+          "/document/advanced/event.html#subtitleafterupdate",
+          "/document/advanced/event.html#subtitleload",
+          "/document/advanced/event.html#info",
+          "/document/advanced/event.html#layer",
+          "/document/advanced/event.html#loading",
+          "/document/advanced/event.html#mask",
+          "/document/advanced/event.html#subtitle",
+          "/document/advanced/event.html#contextmenu",
+          "/document/advanced/event.html#control",
+          "/document/advanced/event.html#setting",
+          "/document/advanced/event.html#muted",
+          "/document/advanced/event.html#keydown",
+          "/document/advanced/event.html#video-canplay",
+          "/document/advanced/event.html#video-canplaythrough",
+          "/document/advanced/event.html#video-complete",
+          "/document/advanced/event.html#video-durationchange",
+          "/document/advanced/event.html#video-emptied",
+          "/document/advanced/event.html#video-ended",
+          "/document/advanced/event.html#video-error",
+          "/document/advanced/event.html#video-loadeddata",
+          "/document/advanced/event.html#video-loadedmetadata",
+          "/document/advanced/event.html#video-pause",
+          "/document/advanced/event.html#video-play",
+          "/document/advanced/event.html#video-playing",
+          "/document/advanced/event.html#video-progress",
+          "/document/advanced/event.html#video-ratechange",
+          "/document/advanced/event.html#video-seeked",
+          "/document/advanced/event.html#video-seeking",
+          "/document/advanced/event.html#video-stalled",
+          "/document/advanced/event.html#video-suspend",
+          "/document/advanced/event.html#video-timeupdate",
+          "/document/advanced/event.html#video-volumechange",
+          "/document/advanced/event.html#video-waiting"
+        ]
+      },
+      {
+        "language": "en",
+        "name": "event",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/event.md",
+          "sha256": "84bc4214a4f680a78fa91bf8a28e2587bbdc102767b71c4f4669c1dca346e7f4"
+        },
+        "html": {
+          "path": "docs/document/en/advanced/event.html",
+          "sha256": "0f90da507fa452ed08fde960a783b356bc6fc7a10c15ff6d796ccb1d2120fbe8"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-events/en-event-0.mts",
+            "sha256": "8f75d35fccf7c69d611364a62a814d7b9ac9f777192defb25ea17eaff2256437"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "en/advanced/event.md:10",
+            "sha256": "148552605c6968c8a4ce98fc6487615200d71ab68e1fec31fcab0b0b4d4b4861"
+          },
+          {
+            "id": "en/advanced/event.md:25",
+            "sha256": "e894978aa0193b7706d6a2dc8ed021a8c0074f4617906dfcbddf505b086e5faa"
+          },
+          {
+            "id": "en/advanced/event.md:40",
+            "sha256": "79a45ca120ad719fffa789ad2a0fd6cdda416f6bee0acf60b2dfaa291bff1388"
+          },
+          {
+            "id": "en/advanced/event.md:53",
+            "sha256": "11c08a997203cc2ce326b6246fb58d1290deae4769fe1827f9e0609a412cea95"
+          },
+          {
+            "id": "en/advanced/event.md:177",
+            "sha256": "e9024ba74ee5548256f983e4f75074ccc149717c2bcfa9f7d195f928f748cc44"
+          },
+          {
+            "id": "en/advanced/event.md:194",
+            "sha256": "d453fb78806de6f1cfcf431f467106fc8ade5b62b988afd78a7577c5e039528c"
+          },
+          {
+            "id": "en/advanced/event.md:215",
+            "sha256": "bc37513ce747de557fe9af4931d2aeecbe9b4035ba76cc0aa1f2747a39de4d6f"
+          },
+          {
+            "id": "en/advanced/event.md:232",
+            "sha256": "7045145f7ed403e84c8335aef596ac0ab8a2f20d0cf8a846dc218d4e58c1be91"
+          },
+          {
+            "id": "en/advanced/event.md:249",
+            "sha256": "67b58661c87ff991bdf72aeac310a30d8065bfc2acbb61c5992f9dad9e5c9ef0"
+          },
+          {
+            "id": "en/advanced/event.md:266",
+            "sha256": "510f2c1e9d5791ffa63bea2dc8ed0f33ea671bd13f8be8be51b1722d2c56d8f3"
+          },
+          {
+            "id": "en/advanced/event.md:287",
+            "sha256": "8278359c125eb701d3616c50f4765dbbc0a484e007a49a8f05afeb41ee99b6b8"
+          },
+          {
+            "id": "en/advanced/event.md:304",
+            "sha256": "ed79708ce27a6ae9b7c0c8eea78e2bb726476ba16cc2a7032918ebad229150ca"
+          },
+          {
+            "id": "en/advanced/event.md:321",
+            "sha256": "e1ca98295eb7c1567b294f164a153c8cf72d8e539eaba33d70489ff8bebe9473"
+          },
+          {
+            "id": "en/advanced/event.md:338",
+            "sha256": "ea7299fe0f4f2cc0ae80ae3f69061dfc3d8683d26865faa58f83e5d07a707f0a"
+          },
+          {
+            "id": "en/advanced/event.md:355",
+            "sha256": "cc0c0ef4da34534e6a173a5ee99ed9759ab88d141e95ed5f215238130e0cf41b"
+          },
+          {
+            "id": "en/advanced/event.md:373",
+            "sha256": "508bf1aa147ba9b3ee10b307387984aae05a89a15ad5cb4d7444f1c4888b7979"
+          },
+          {
+            "id": "en/advanced/event.md:390",
+            "sha256": "633c268d3182d8ba8510178b2449ba8cbe57058c70e4e2e6c972b434e7b1fabd"
+          },
+          {
+            "id": "en/advanced/event.md:407",
+            "sha256": "ad794a14f0bf0e7e377b5d558b0afd5c24e3d5002b62753ec2af20846cb00dc3"
+          },
+          {
+            "id": "en/advanced/event.md:424",
+            "sha256": "686773479d69113663e1dd478b2b5f384eb106902798db3374ec23bad3fb1519"
+          },
+          {
+            "id": "en/advanced/event.md:441",
+            "sha256": "ed759064414addcd01bf4b08918e12b89dc8b9aa861692e0d9f8c511fe62bfd9"
+          },
+          {
+            "id": "en/advanced/event.md:459",
+            "sha256": "6fb508ea8382837d1e7630c012f666054c3a95bb5bd73de9d1e3090f446311cc"
+          },
+          {
+            "id": "en/advanced/event.md:478",
+            "sha256": "1d8f737781b464f2b56a163f7aa267242a01cd85cd0319baccf9b6a0497251c4"
+          },
+          {
+            "id": "en/advanced/event.md:499",
+            "sha256": "cbba6bdc09e6e9a436c9cbebbc4e14a888c73d231bf42047e956f692be4f69ff"
+          },
+          {
+            "id": "en/advanced/event.md:517",
+            "sha256": "9385d4e7ddc394d4457623591e85cff794ec7e399e9a20f848b23a0bb7c922de"
+          },
+          {
+            "id": "en/advanced/event.md:536",
+            "sha256": "885f7b2b89787a4fa0f6c764490915812774dc65239178ab711f8edefbbdafaf"
+          },
+          {
+            "id": "en/advanced/event.md:554",
+            "sha256": "42463ea4a6e741b112d8c8bf27ef291e05ac8055bad52693cdddb6c27396077a"
+          },
+          {
+            "id": "en/advanced/event.md:575",
+            "sha256": "053b68a7876ad2fbadbdf33ddfc2d7ffbc07d4cd8fcd6aaab26c321a2aad0e8e"
+          },
+          {
+            "id": "en/advanced/event.md:593",
+            "sha256": "d06cd93cc6643cd982045f3858c4f61c4e63b4a90da13061b9bf4c93ee6b1071"
+          },
+          {
+            "id": "en/advanced/event.md:614",
+            "sha256": "fe95da0456898b32a39405b403fde18d80d2b3614e0657944c6cfeb8637cd63f"
+          },
+          {
+            "id": "en/advanced/event.md:633",
+            "sha256": "7dad7fe5df17bb84bfc253fc827002b53712d4861155d0eca69782fab303d161"
+          },
+          {
+            "id": "en/advanced/event.md:651",
+            "sha256": "aa9c620ddecb97bca6753156910a2f977c141486400c2b2eb02bf126b51e151b"
+          },
+          {
+            "id": "en/advanced/event.md:668",
+            "sha256": "5186004281b2381af3e4586a2b3fdfc4930f4d7a2b255888ec85b202d54697c0"
+          },
+          {
+            "id": "en/advanced/event.md:690",
+            "sha256": "a3df03d5f9b3cfec670b41ecb0fae97817eabdeab2521b7de4dbcc2388aca793"
+          },
+          {
+            "id": "en/advanced/event.md:710",
+            "sha256": "acab15fe53ca27a05ec157aeb34fc10c5c3490462537ffa679d391d6bd24181a"
+          },
+          {
+            "id": "en/advanced/event.md:730",
+            "sha256": "9d63de94cb7dde7ab4c97230166954a533ec8e3537a130e22c0faea451d7c97d"
+          },
+          {
+            "id": "en/advanced/event.md:750",
+            "sha256": "cde7fffc6e36ffdd00cbfcf5b14077752b7863e1edc7ffbaacf6e3ea1a0d33bc"
+          },
+          {
+            "id": "en/advanced/event.md:767",
+            "sha256": "cc19c4fa9c9098eeb6524c17d8580d28312e895788f0379662a03e820cf5c2fd"
+          },
+          {
+            "id": "en/advanced/event.md:784",
+            "sha256": "299b648096c3ad515f890451b9be7d5cf761006031f02f54d2871d0a0ffc2beb"
+          },
+          {
+            "id": "en/advanced/event.md:801",
+            "sha256": "d3c42e6c38708bff35fdc2225701446c8dc6fd1931509f437c27dda8d9f64d82"
+          },
+          {
+            "id": "en/advanced/event.md:818",
+            "sha256": "1c2d642fa4bf1fb3350a099f6c10702f353448551229a145fb87d8e714fc9094"
+          },
+          {
+            "id": "en/advanced/event.md:835",
+            "sha256": "554d7b62f36d8ac737d2a197e5f217b23122aa034b858f310c18d0cde53c155f"
+          },
+          {
+            "id": "en/advanced/event.md:852",
+            "sha256": "6b3aaffdae10764396f2392b81635880e537c2044f2d0f5300513723914510bf"
+          },
+          {
+            "id": "en/advanced/event.md:869",
+            "sha256": "59fd1f7011dcea1e79f21db6c6219300f4cde4d43b7f1bed81cd9e3a922a5bb3"
+          },
+          {
+            "id": "en/advanced/event.md:888",
+            "sha256": "70e57d3f4cbd6cb030c7ac2e83e28b3e922bb2fb8c64d4fa45e8b208dc9d0d83"
+          },
+          {
+            "id": "en/advanced/event.md:905",
+            "sha256": "88fb1b1aa1ee710c96773151a8c0f1c298a8fe22a314318eae7b158ee2b2c3cf"
+          }
+        ],
+        "localLinks": [
+          "/document/en/advanced/event.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/advanced/event.html#instance-events",
+          "/document/en/advanced/event.html#emitter-contract",
+          "/document/en/advanced/event.html#native-event-contract",
+          "/document/en/advanced/event.html#custom-event-contract",
+          "/document/en/advanced/event.html#media-and-lifecycle",
+          "/document/en/advanced/event.html#ui-and-input",
+          "/document/en/advanced/event.html#size-display-and-subtitles",
+          "/document/en/advanced/event.html#event-types",
+          "/document/en/advanced/event.html#ready",
+          "/document/en/advanced/event.html#restart",
+          "/document/en/advanced/event.html#pause",
+          "/document/en/advanced/event.html#play",
+          "/document/en/advanced/event.html#hotkey",
+          "/document/en/advanced/event.html#destroy",
+          "/document/en/advanced/event.html#focus",
+          "/document/en/advanced/event.html#blur",
+          "/document/en/advanced/event.html#dblclick",
+          "/document/en/advanced/event.html#click",
+          "/document/en/advanced/event.html#error",
+          "/document/en/advanced/event.html#hover",
+          "/document/en/advanced/event.html#mousemove",
+          "/document/en/advanced/event.html#resize",
+          "/document/en/advanced/event.html#view",
+          "/document/en/advanced/event.html#lock",
+          "/document/en/advanced/event.html#aspectratio",
+          "/document/en/advanced/event.html#autoheight",
+          "/document/en/advanced/event.html#autosize",
+          "/document/en/advanced/event.html#flip",
+          "/document/en/advanced/event.html#fullscreen",
+          "/document/en/advanced/event.html#fullscreenerror",
+          "/document/en/advanced/event.html#fullscreenweb",
+          "/document/en/advanced/event.html#mini",
+          "/document/en/advanced/event.html#pip",
+          "/document/en/advanced/event.html#screenshot",
+          "/document/en/advanced/event.html#seek",
+          "/document/en/advanced/event.html#subtitleoffset",
+          "/document/en/advanced/event.html#subtitlebeforeupdate",
+          "/document/en/advanced/event.html#subtitleafterupdate",
+          "/document/en/advanced/event.html#subtitleload",
+          "/document/en/advanced/event.html#info",
+          "/document/en/advanced/event.html#layer",
+          "/document/en/advanced/event.html#loading",
+          "/document/en/advanced/event.html#mask",
+          "/document/en/advanced/event.html#subtitle",
+          "/document/en/advanced/event.html#contextmenu",
+          "/document/en/advanced/event.html#control",
+          "/document/en/advanced/event.html#setting",
+          "/document/en/advanced/event.html#muted",
+          "/document/en/advanced/event.html#keydown",
+          "/document/en/advanced/event.html#video-canplay",
+          "/document/en/advanced/event.html#video-canplaythrough",
+          "/document/en/advanced/event.html#video-complete",
+          "/document/en/advanced/event.html#video-durationchange",
+          "/document/en/advanced/event.html#video-emptied",
+          "/document/en/advanced/event.html#video-ended",
+          "/document/en/advanced/event.html#video-error",
+          "/document/en/advanced/event.html#video-loadeddata",
+          "/document/en/advanced/event.html#video-loadedmetadata",
+          "/document/en/advanced/event.html#video-pause",
+          "/document/en/advanced/event.html#video-play",
+          "/document/en/advanced/event.html#video-playing",
+          "/document/en/advanced/event.html#video-progress",
+          "/document/en/advanced/event.html#video-ratechange",
+          "/document/en/advanced/event.html#video-seeked",
+          "/document/en/advanced/event.html#video-seeking",
+          "/document/en/advanced/event.html#video-stalled",
+          "/document/en/advanced/event.html#video-suspend",
+          "/document/en/advanced/event.html#video-timeupdate",
+          "/document/en/advanced/event.html#video-volumechange",
+          "/document/en/advanced/event.html#video-waiting"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "zh",
+        "name": "event",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "148552605c6968c8a4ce98fc6487615200d71ab68e1fec31fcab0b0b4d4b4861",
+          "e894978aa0193b7706d6a2dc8ed021a8c0074f4617906dfcbddf505b086e5faa",
+          "79a45ca120ad719fffa789ad2a0fd6cdda416f6bee0acf60b2dfaa291bff1388",
+          "11c08a997203cc2ce326b6246fb58d1290deae4769fe1827f9e0609a412cea95"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-events/chromium-zh-event.png",
+          "sha256": "60f8a7203b0aa715078f076fb3e5404760e2e1a2bec437a4846072cda0e37019"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "en",
+        "name": "event",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "148552605c6968c8a4ce98fc6487615200d71ab68e1fec31fcab0b0b4d4b4861",
+          "e894978aa0193b7706d6a2dc8ed021a8c0074f4617906dfcbddf505b086e5faa",
+          "79a45ca120ad719fffa789ad2a0fd6cdda416f6bee0acf60b2dfaa291bff1388",
+          "11c08a997203cc2ce326b6246fb58d1290deae4769fe1827f9e0609a412cea95"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-events/chromium-en-event.png",
+          "sha256": "a753915ec92df3c4c31d28b6ac781fc7e875cedac1f31265e0b440b4f3a44ac6"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "zh",
+        "name": "event",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "148552605c6968c8a4ce98fc6487615200d71ab68e1fec31fcab0b0b4d4b4861",
+          "e894978aa0193b7706d6a2dc8ed021a8c0074f4617906dfcbddf505b086e5faa",
+          "79a45ca120ad719fffa789ad2a0fd6cdda416f6bee0acf60b2dfaa291bff1388",
+          "11c08a997203cc2ce326b6246fb58d1290deae4769fe1827f9e0609a412cea95"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-events/firefox-zh-event.png",
+          "sha256": "ca68492788347f2c2d042619ba1e307f558a389ef1537a3f6a00c307fcd80c38"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "en",
+        "name": "event",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "148552605c6968c8a4ce98fc6487615200d71ab68e1fec31fcab0b0b4d4b4861",
+          "e894978aa0193b7706d6a2dc8ed021a8c0074f4617906dfcbddf505b086e5faa",
+          "79a45ca120ad719fffa789ad2a0fd6cdda416f6bee0acf60b2dfaa291bff1388",
+          "11c08a997203cc2ce326b6246fb58d1290deae4769fe1827f9e0609a412cea95"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-events/firefox-en-event.png",
+          "sha256": "17121a8ffc2c935262cbd60ea825b09eb843e060f2917293a1c2b31926964487"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "zh",
+        "name": "event",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "148552605c6968c8a4ce98fc6487615200d71ab68e1fec31fcab0b0b4d4b4861",
+          "e894978aa0193b7706d6a2dc8ed021a8c0074f4617906dfcbddf505b086e5faa",
+          "79a45ca120ad719fffa789ad2a0fd6cdda416f6bee0acf60b2dfaa291bff1388",
+          "11c08a997203cc2ce326b6246fb58d1290deae4769fe1827f9e0609a412cea95"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-events/webkit-zh-event.png",
+          "sha256": "baca379d89e8b2d2f7b794a7dc141fa59ab9923fabcfbf2c60121fb83697ff9c"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "en",
+        "name": "event",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "148552605c6968c8a4ce98fc6487615200d71ab68e1fec31fcab0b0b4d4b4861",
+          "e894978aa0193b7706d6a2dc8ed021a8c0074f4617906dfcbddf505b086e5faa",
+          "79a45ca120ad719fffa789ad2a0fd6cdda416f6bee0acf60b2dfaa291bff1388",
+          "11c08a997203cc2ce326b6246fb58d1290deae4769fe1827f9e0609a412cea95"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-events/webkit-en-event.png",
+          "sha256": "7dd4a3d70b8193d6d6600baf89e28b72379316ad4041f5e36dc8dc70d38a57cd"
+        }
+      }
+    ],
+    "dom": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "independent emitter starts with no registry",
+          "emit and off are chainable and create registry",
+          "on and once are chainable",
+          "context payload identity and once cleanup",
+          "off removes matching callback in all contexts",
+          "dispatch uses starting snapshot",
+          "nested snapshots consume once only once",
+          "throw stops current dispatch and consumes once",
+          "later dispatch runs remaining listener",
+          "duplicate registrations run twice",
+          "off removes all duplicates",
+          "off accepts original once callback",
+          "symbol numeric and prototype channel names",
+          "async listener result not awaited",
+          "async callback settles independently",
+          "ready state set before callback and custom precedes later raw listener",
+          "historical names not default forwarded",
+          "native forwarding retains Event object",
+          "direct media play only emits native channel",
+          "art pause synchronously emits method event",
+          "already paused method still emits",
+          "art play emits after successful media call",
+          "seek event preserves requested string and assigned number",
+          "show emits identical assignments",
+          "focus carries original contextmenu event",
+          "blur carries original outside click",
+          "hover boolean and raw event pair",
+          "shortcut callback then hotkey then keydown",
+          "destroy event after state registry and DOM cleanup",
+          "destroy does not erase user event bus"
+        ]
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "independent emitter starts with no registry",
+          "emit and off are chainable and create registry",
+          "on and once are chainable",
+          "context payload identity and once cleanup",
+          "off removes matching callback in all contexts",
+          "dispatch uses starting snapshot",
+          "nested snapshots consume once only once",
+          "throw stops current dispatch and consumes once",
+          "later dispatch runs remaining listener",
+          "duplicate registrations run twice",
+          "off removes all duplicates",
+          "off accepts original once callback",
+          "symbol numeric and prototype channel names",
+          "async listener result not awaited",
+          "async callback settles independently",
+          "ready state set before callback and custom precedes later raw listener",
+          "historical names not default forwarded",
+          "native forwarding retains Event object",
+          "direct media play only emits native channel",
+          "art pause synchronously emits method event",
+          "already paused method still emits",
+          "art play emits after successful media call",
+          "seek event preserves requested string and assigned number",
+          "show emits identical assignments",
+          "focus carries original contextmenu event",
+          "blur carries original outside click",
+          "hover boolean and raw event pair",
+          "shortcut callback then hotkey then keydown",
+          "destroy event after state registry and DOM cleanup",
+          "destroy does not erase user event bus"
+        ]
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "independent emitter starts with no registry",
+          "emit and off are chainable and create registry",
+          "on and once are chainable",
+          "context payload identity and once cleanup",
+          "off removes matching callback in all contexts",
+          "dispatch uses starting snapshot",
+          "nested snapshots consume once only once",
+          "throw stops current dispatch and consumes once",
+          "later dispatch runs remaining listener",
+          "duplicate registrations run twice",
+          "off removes all duplicates",
+          "off accepts original once callback",
+          "symbol numeric and prototype channel names",
+          "async listener result not awaited",
+          "async callback settles independently",
+          "ready state set before callback and custom precedes later raw listener",
+          "historical names not default forwarded",
+          "native forwarding retains Event object",
+          "direct media play only emits native channel",
+          "art pause synchronously emits method event",
+          "already paused method still emits",
+          "art play emits after successful media call",
+          "seek event preserves requested string and assigned number",
+          "show emits identical assignments",
+          "focus carries original contextmenu event",
+          "blur carries original outside click",
+          "hover boolean and raw event pair",
+          "shortcut callback then hotkey then keydown",
+          "destroy event after state registry and DOM cleanup",
+          "destroy does not erase user event bus"
+        ]
+      }
+    ],
+    "complete": true,
+    "limitations": [
+      "Page navigation and DOM contracts only; no playback, codec, physical-device or release acceptance."
+    ],
+    "core": {
+      "artifact": {
+        "path": "packages/artplayer/dist/artplayer.js",
+        "sha256": "8a4caaa50a069875b3898a83765457b3c502700f4731d0c38988d6c463c3d20a"
+      },
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-qQwwPA/artplayer.tgz",
+        "version": "6.0.0",
+        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
+        "inputFingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "integrity": "sha512-+2+VWecKb9CbI3wTCs0sV7au8SNShyXahpwDAmGgZhDr22wbdv51QZnLnkPwgMgfNpVuTbsZ6A26Lpj3eY7NbQ=="
+      }
+    }
+  },
+  "semanticMapping": {
+    "addedRecords": 120,
+    "totalRecords": 627,
+    "remainingInventoryRecords": 336,
+    "previousSourceAndGuideHashesUnchanged": true
+  },
+  "tests": {
+    "count": 131,
+    "pass": 131,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 1522.8842,
+    "suites": [
+      "public-behavior",
+      "playback",
+      "media-events",
+      "global-events",
+      "pointer-events",
+      "hotkey",
+      "instance-lifecycle",
+      "source",
+      "site-loading",
+      "documentation-pipeline"
+    ]
+  },
+  "build": {
+    "vitepressSeconds": 9.4,
+    "yarnSeconds": 11.03,
+    "checked": [
+      "build:docs",
+      "build:llm",
+      "check:llm",
+      "site-inventory --write/--check",
+      "demos --check"
+    ]
+  },
+  "serverDiagnosis": {
+    "oldPort": 8082,
+    "validationPort": 8083,
+    "existingServerChanged": false,
+    "sourceChanged": false,
+    "cause": "Existing dev process started September 13 served no Content-Length/Accept-Ranges and ignored Range. Raw Chromium video, without Artplayer, reported seekable [0,0] and clamped requested 1 to 0. Current startDevServer on isolated 8083 returns 206/16 bytes and seekable [0,90.046009]; unchanged strict player probe then passes all three engines.",
+    "http": [
+      {
+        "port": 8082,
+        "headStatus": 200,
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Date": [
+            "Tue, 15 Sep 2026 23:57:09 GMT"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Keep-Alive": [
+            "timeout=5"
+          ],
+          "Content-Type": [
+            "video/mp4"
+          ]
+        },
+        "rangeStatus": 200,
+        "rangeContentRange": null,
+        "rangeBytes": 5818706
+      },
+      {
+        "port": 8083,
+        "headStatus": 200,
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Cache-Control": [
+            "no-store"
+          ],
+          "Accept-Ranges": [
+            "bytes"
+          ],
+          "Vary": [
+            "Accept-Encoding"
+          ],
+          "Date": [
+            "Tue, 15 Sep 2026 23:57:09 GMT"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Keep-Alive": [
+            "timeout=5"
+          ],
+          "Content-Type": [
+            "video/mp4"
+          ],
+          "Last-Modified": [
+            "Sat, 11 Oct 2025 09:23:15 GMT"
+          ],
+          "Content-Length": [
+            "5818706"
+          ]
+        },
+        "rangeStatus": 206,
+        "rangeContentRange": [
+          "bytes 0-15/5818706"
+        ],
+        "rangeBytes": 16
+      }
+    ],
+    "oldNative": {
+      "before": {
+        "currentTime": 0.002114,
+        "duration": 90.046009,
+        "readyState": 4,
+        "seekable": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "immediate": {
+        "currentTime": 0,
+        "seeking": true
+      },
+      "after": 0.00019
+    },
+    "currentNative": {
+      "before": {
+        "currentTime": 0.003637,
+        "duration": 90.046009,
+        "readyState": 4,
+        "seekable": [
+          [
+            0,
+            90.046009
+          ]
+        ]
+      },
+      "immediate": {
+        "currentTime": 1,
+        "seeking": true
+      },
+      "after": 1.000223
+    }
+  },
+  "ledger": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-zt2nBv/report.json",
+      "sha256": "d1ff25aaf0ff830cbf91314435e3925dbd3b87657574b675991d35201e639454"
+    },
+    "libraries": [
+      {
+        "name": "artplayer",
+        "fingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "fingerprint": "55236854b94ac7b0dd91b4107dcb60e97ac6f1a5e8b6b8a9dcb63bba66c6509a",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "fingerprint": "f88a6a2f1c5548389cae293614f648d72077ed03a7be6c81ad017a1155a839a3",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "fingerprint": "7fa3ca9577b53f3bb90e2c23fec9e6e70fbbb0c089ccae2923084b9059bcbdf9",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "fingerprint": "0c73b970872fe56df1c669e5badfa91f9cd7ec3c73070a9852cfea076cc8923f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "fingerprint": "9ced9b18e4b260ccbcf6ac016b32ec0852040cb5c0f57be72718a03d40d598bf",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "fingerprint": "f1dd73097e43df504f686f18a6ca30bcb1f57ab74d3cc62909db20505c994072",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "fingerprint": "d6d79d4b47afaefa66d32c5b1709f412ed9d32c636462723918c268a6601e631",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "fingerprint": "3d32a4c6d94d9eaa31cd982ec43ae2b710a4c923e5076f357ba4c902be48d729",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "fingerprint": "ceb17cbb235a42438c28df15ddf830d104a749b58515333c43da2b18534b166c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "fingerprint": "6716002b92bb12b54d17772d87a560bb9e863da35abfa37988907d54e02cdf74",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "fingerprint": "a3a56ecc218c8e180621d1bc00684950cca4ada8d483334b0cb91fd783c10831",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "fingerprint": "00a07f33277bae211a553e9fb2e924ade219513135bc54921886f4518dd27964",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "fingerprint": "cc9304759ff3cdd84767eee38fcbb9cf70e234f2449946536fd1da972cde679f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "fingerprint": "43825f602514c9e6a0bd8f0a270a54a03d1cb76f821b99d1e736d0150dafc190",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "fingerprint": "3503e145a591a406105eb953f9ac75c8373992c9f3f1f23b713de65c85a3bb3d",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "fingerprint": "b7932e08a086cfe16ed5e78872e274fb897931d0653dbf7ac61a19b404ddec85",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "fingerprint": "a0a8efb762e823fe4dd8c8de9601f74ac873ade8c6953a7e5305297608c71a12",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "fingerprint": "9fd7e62c56ae78866267cdd5650dc4e4af4aad76dd6ff8466b68908bc25d661c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "fingerprint": "00dc477ad56d12cfa6cd0d1e071e80f4120afed23f44af0393e23e5dac516a3b",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "fingerprint": "78bf5be3b2b5656a0b95ce2ce3cf1a635b6df609361a840b8298476f65af9d52",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      }
+    ],
+    "publicationAuthorized": false
+  },
+  "limitations": [
+    "All 90 existing snippets remain byte-identical and parse; only first four per guide forwarded (24 across engines), not all demos executed.",
+    "Native local-MP4 playback/seek checks verify event payloads only; no codec, long playback, physical Safari/iOS/Android, Cast, SDK or release acceptance.",
+    "Pointer and keyboard assertions use dispatched DOM events; not physical input validation.",
+    "Initial stale-server failure retained; no implementation fix or baseline overwrite claimed."
+  ],
+  "visualInspection": "chromium-zh-event.png",
+  "attachments": [
+    {
+      "path": "refactor/.cache/site04-events-validate.mjs",
+      "sha256": "f28d8aca6febd584cfafb3555f8bea6d911961f973f1883cd8bc90e4397893ca"
+    },
+    {
+      "path": "refactor/.cache/site04-events-probe.js",
+      "sha256": "6a343d558c9a60b6ee53dc7b3b2d84a4347865fc4f4f97887cccc13fa30dc4db"
+    },
+    {
+      "path": "refactor/.cache/site04-events/report.json",
+      "sha256": "3e31f2c13fb7878f62b827b4daeb978e84cb1dca510efbb9a074f7aa9e9d1037"
+    },
+    {
+      "path": "refactor/.cache/site04-events/failed-initial-report.json",
+      "sha256": "d0c5581fe9f24ca101e48f1acf097fd1232a8a072d9625d48644418e232dac94"
+    },
+    {
+      "path": "refactor/.cache/site04-events-build.log",
+      "sha256": "27a212cfede82d17a59afe4a4ce98700d82942a9ba26f05408985f2d49150bb9"
+    },
+    {
+      "path": "refactor/.cache/site04-events-llm.log",
+      "sha256": "85c41119a5008356b1168732c210b975d5c5b3454d4b8bdbf31da38630068092"
+    },
+    {
+      "path": "refactor/.cache/site04-events-tests.log",
+      "sha256": "2a346867bcfabf6355d76a3b36d2f7ae147f208c193bca19f0fc7a6392a64a93"
+    },
+    {
+      "path": "refactor/.cache/site04-events-validate.log",
+      "sha256": "772bbf2054c549536f13f30763ba584f4133906a176c898263aed0fe3bc3c075"
+    },
+    {
+      "path": "refactor/.cache/site04-events-validate-final.log",
+      "sha256": "b66b98923cf3fd66a6f6e48dfd4bbda80afa5144d55628589588a6a2544f7ef6"
+    },
+    {
+      "path": "refactor/.cache/site04-events-ledger.log",
+      "sha256": "4dc96cd6acdf3082622139469d0a3f95e30d0c7b9ad712e431d7f300f67d468a"
+    },
+    {
+      "path": "refactor/.cache/site04-events-server.mjs",
+      "sha256": "f878ce962172e7c339136d47e00356c5df3a65af96a62f0ecdcf7481f2a6d6f7"
+    },
+    {
+      "path": "refactor/.cache/site04-events-server-proof.json",
+      "sha256": "011aa0cda5eb0323ec6c62f070aa7611fcf62125e5d786805da4acee505b1dbc"
+    },
+    {
+      "path": "refactor/.cache/site04-events-native-seek-diagnostic.mjs",
+      "sha256": "ac05b6d5455e843876a7a0e28275f44f1be0c39f19342c02097c2cad6b1b2236"
+    },
+    {
+      "path": "refactor/.cache/site04-events-native-seek-diagnostic.log",
+      "sha256": "749f20dbd98c525dfb837c96c9fb8a4a057a0fdbd23eed6d008e86b659955ea8"
+    },
+    {
+      "path": "refactor/.cache/site04-events-native-seek-ready.log",
+      "sha256": "3dea03cdacd49e233a6941061febc6c0738542c9c267775f4e5033f87a2ba3bf"
+    },
+    {
+      "path": "refactor/.cache/site04-events-native-seek-current.mjs",
+      "sha256": "bd2c3e37d9c6e10f0f6021d1055b42b1c1799b86631751dadb69eb03a5d8677a"
+    },
+    {
+      "path": "refactor/.cache/site04-events-native-seek-current.log",
+      "sha256": "9d1803b4c1c159aceb19ddb44aaae5dc03b5d762df2d506ba0e1e0adc137e24d"
+    }
+  ]
+}

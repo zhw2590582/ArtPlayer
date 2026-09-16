@@ -3,13 +3,13 @@
   "task": "SITE-04",
   "inventory": {
     "path": "refactor/baselines/site-inventory.json",
-    "sha256": "99cacdc8f51451c2dd55fa9bd867b2b62114f6d8b32590ec9ac087c3c5001a05"
+    "sha256": "06bd32ec7b555ff4585ffa587094b9eba8488b30da34f712c906036e89e524ca"
   },
-  "reviewedAt": "2026-09-15T23:37:15.006Z",
+  "reviewedAt": "2026-09-15T23:59:04.813Z",
   "counts": {
     "inventoryRecords": 963,
-    "reviewedRecords": 507,
-    "unreviewedRecords": 456
+    "reviewedRecords": 627,
+    "unreviewedRecords": 336
   },
   "note": "Explicit declaration-record semantic mapping, including overload/getter/setter rows and root/runtime aliases. Counts are not overall API or release completion. Recheck affected groups if their source/document hashes drift. Other declarations and inline members are not implicitly covered.",
   "groups": [
@@ -4771,6 +4771,1082 @@
         }
       ],
       "evidence": "baselines/site04-globals.json"
+    },
+    {
+      "id": "emitter-events",
+      "status": "semantic-reviewed",
+      "conclusion": "Synchronous emitter dispatch, context, snapshot, duplicate/once/off/reentrant/error semantics; lazy visible registry and retained user subscriptions. Default native/document/window forwarding inventories versus historical-only names. Custom lifecycle/media/UI/display/subtitle payloads and timing, root compatibility overloads versus accurate runtime tuples. Native local-media checks do not close device, codec or SDK gates.",
+      "records": [
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.Emitter@47",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "Emitter",
+          "line": 47
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.on@104",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "on",
+          "line": 104
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.on@105",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "on",
+          "line": 105
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.on@106",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "on",
+          "line": 106
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.once@108",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "once",
+          "line": 108
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.once@109",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "once",
+          "line": 109
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.once@110",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "once",
+          "line": 110
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.emit@112",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "emit",
+          "line": 112
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.emit@113",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "emit",
+          "line": 113
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.emit@114",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "emit",
+          "line": 114
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.off@116",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "off",
+          "line": 116
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.off@117",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "off",
+          "line": 117
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.off@118",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "off",
+          "line": 118
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.e@124",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "e",
+          "line": 124
+        },
+        {
+          "id": "packages/artplayer/public/emitter.ts#Emitter.e@3",
+          "file": "packages/artplayer/public/emitter.ts",
+          "declaration": "Emitter",
+          "name": "e",
+          "line": 3
+        },
+        {
+          "id": "packages/artplayer/public/emitter.ts#Emitter.on@4",
+          "file": "packages/artplayer/public/emitter.ts",
+          "declaration": "Emitter",
+          "name": "on",
+          "line": 4
+        },
+        {
+          "id": "packages/artplayer/public/emitter.ts#Emitter.once@5",
+          "file": "packages/artplayer/public/emitter.ts",
+          "declaration": "Emitter",
+          "name": "once",
+          "line": 5
+        },
+        {
+          "id": "packages/artplayer/public/emitter.ts#Emitter.emit@6",
+          "file": "packages/artplayer/public/emitter.ts",
+          "declaration": "Emitter",
+          "name": "emit",
+          "line": 6
+        },
+        {
+          "id": "packages/artplayer/public/emitter.ts#Emitter.off@7",
+          "file": "packages/artplayer/public/emitter.ts",
+          "declaration": "Emitter",
+          "name": "off",
+          "line": 7
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#SubtitleUpdateEvents.subtitleBeforeUpdate@8",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "SubtitleUpdateEvents",
+          "name": "subtitleBeforeUpdate",
+          "line": 8
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#SubtitleUpdateEvents.subtitleAfterUpdate@9",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "SubtitleUpdateEvents",
+          "name": "subtitleAfterUpdate",
+          "line": 9
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.document:click@13",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "document:click",
+          "line": 13
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.document:mouseup@14",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "document:mouseup",
+          "line": 14
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.document:keydown@15",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "document:keydown",
+          "line": 15
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.document:touchend@16",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "document:touchend",
+          "line": 16
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.document:touchcancel@17",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "document:touchcancel",
+          "line": 17
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.document:touchmove@18",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "document:touchmove",
+          "line": 18
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.document:mousemove@19",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "document:mousemove",
+          "line": 19
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.document:pointerup@20",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "document:pointerup",
+          "line": 20
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.document:contextmenu@21",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "document:contextmenu",
+          "line": 21
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.document:pointermove@22",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "document:pointermove",
+          "line": 22
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.document:visibilitychange@23",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "document:visibilitychange",
+          "line": 23
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.document:webkitfullscreenchange@24",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "document:webkitfullscreenchange",
+          "line": 24
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.window:resize@26",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "window:resize",
+          "line": 26
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.window:scroll@27",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "window:scroll",
+          "line": 27
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.window:orientationchange@28",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "window:orientationchange",
+          "line": 28
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:abort@30",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:abort",
+          "line": 30
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:canplay@31",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:canplay",
+          "line": 31
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:canplaythrough@32",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:canplaythrough",
+          "line": 32
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:complete@33",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:complete",
+          "line": 33
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:durationchange@34",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:durationchange",
+          "line": 34
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:emptied@35",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:emptied",
+          "line": 35
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:encrypted@36",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:encrypted",
+          "line": 36
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:ended@37",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:ended",
+          "line": 37
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:error@38",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:error",
+          "line": 38
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:loadeddata@39",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:loadeddata",
+          "line": 39
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:loadedmetadata@40",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:loadedmetadata",
+          "line": 40
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:loadstart@41",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:loadstart",
+          "line": 41
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:pause@42",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:pause",
+          "line": 42
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:play@43",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:play",
+          "line": 43
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:playing@44",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:playing",
+          "line": 44
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:progress@45",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:progress",
+          "line": 45
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:ratechange@46",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:ratechange",
+          "line": 46
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:seeked@47",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:seeked",
+          "line": 47
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:seeking@48",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:seeking",
+          "line": 48
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:stalled@49",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:stalled",
+          "line": 49
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:suspend@50",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:suspend",
+          "line": 50
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:timeupdate@51",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:timeupdate",
+          "line": 51
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:volumechange@52",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:volumechange",
+          "line": 52
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.video:waiting@53",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "video:waiting",
+          "line": 53
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.info@55",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "info",
+          "line": 55
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.layer@56",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "layer",
+          "line": 56
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.loading@57",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "loading",
+          "line": 57
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.mask@58",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "mask",
+          "line": 58
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.subtitle@59",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "subtitle",
+          "line": 59
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.contextmenu@60",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "contextmenu",
+          "line": 60
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.control@61",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "control",
+          "line": 61
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.setting@62",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "setting",
+          "line": 62
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.hotkey@63",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "hotkey",
+          "line": 63
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.destroy@65",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "destroy",
+          "line": 65
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.subtitleOffset@67",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "subtitleOffset",
+          "line": 67
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.subtitleBeforeUpdate@69",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "subtitleBeforeUpdate",
+          "line": 69
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.subtitleAfterUpdate@71",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "subtitleAfterUpdate",
+          "line": 71
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.subtitleLoad@72",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "subtitleLoad",
+          "line": 72
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.focus@74",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "focus",
+          "line": 74
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.blur@75",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "blur",
+          "line": 75
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.dblclick@76",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "dblclick",
+          "line": 76
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.click@77",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "click",
+          "line": 77
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.hover@78",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "hover",
+          "line": 78
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.mousemove@79",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "mousemove",
+          "line": 79
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.resize@81",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "resize",
+          "line": 81
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.view@82",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "view",
+          "line": 82
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.lock@83",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "lock",
+          "line": 83
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.aspectRatio@84",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "aspectRatio",
+          "line": 84
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.autoHeight@85",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "autoHeight",
+          "line": 85
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.autoSize@86",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "autoSize",
+          "line": 86
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.ready@87",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "ready",
+          "line": 87
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.airplay@88",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "airplay",
+          "line": 88
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.raf@89",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "raf",
+          "line": 89
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.error@91",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "error",
+          "line": 91
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.flip@92",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "flip",
+          "line": 92
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.fullscreen@93",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "fullscreen",
+          "line": 93
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.fullscreenError@94",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "fullscreenError",
+          "line": 94
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.fullscreenWeb@95",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "fullscreenWeb",
+          "line": 95
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.mini@96",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "mini",
+          "line": 96
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.pause@97",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "pause",
+          "line": 97
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.pip@98",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "pip",
+          "line": 98
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.play@99",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "play",
+          "line": 99
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.screenshot@100",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "screenshot",
+          "line": 100
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.seek@101",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "seek",
+          "line": 101
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.restart@102",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "restart",
+          "line": 102
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.muted@103",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "muted",
+          "line": 103
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.setBar@104",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "setBar",
+          "line": 104
+        },
+        {
+          "id": "packages/artplayer/public/events.ts#Events.keydown@105",
+          "file": "packages/artplayer/public/events.ts",
+          "declaration": "Events",
+          "name": "keydown",
+          "line": 105
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#ArtplayerConstructor.Emitter@115",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "ArtplayerConstructor",
+          "name": "Emitter",
+          "line": 115
+        },
+        {
+          "id": "packages/artplayer/public/runtime/events.ts#BuiltinEvents.document:keydown@8",
+          "file": "packages/artplayer/public/runtime/events.ts",
+          "declaration": "BuiltinEvents",
+          "name": "document:keydown",
+          "line": 8
+        },
+        {
+          "id": "packages/artplayer/public/runtime/events.ts#BuiltinEvents.document:mousemove@9",
+          "file": "packages/artplayer/public/runtime/events.ts",
+          "declaration": "BuiltinEvents",
+          "name": "document:mousemove",
+          "line": 9
+        },
+        {
+          "id": "packages/artplayer/public/runtime/events.ts#BuiltinEvents.document:mouseup@10",
+          "file": "packages/artplayer/public/runtime/events.ts",
+          "declaration": "BuiltinEvents",
+          "name": "document:mouseup",
+          "line": 10
+        },
+        {
+          "id": "packages/artplayer/public/runtime/events.ts#BuiltinEvents.mousemove@11",
+          "file": "packages/artplayer/public/runtime/events.ts",
+          "declaration": "BuiltinEvents",
+          "name": "mousemove",
+          "line": 11
+        },
+        {
+          "id": "packages/artplayer/public/runtime/events.ts#BuiltinEvents.click@12",
+          "file": "packages/artplayer/public/runtime/events.ts",
+          "declaration": "BuiltinEvents",
+          "name": "click",
+          "line": 12
+        },
+        {
+          "id": "packages/artplayer/public/runtime/events.ts#BuiltinEvents.blur@13",
+          "file": "packages/artplayer/public/runtime/events.ts",
+          "declaration": "BuiltinEvents",
+          "name": "blur",
+          "line": 13
+        },
+        {
+          "id": "packages/artplayer/public/runtime/events.ts#BuiltinEvents.error@14",
+          "file": "packages/artplayer/public/runtime/events.ts",
+          "declaration": "BuiltinEvents",
+          "name": "error",
+          "line": 14
+        },
+        {
+          "id": "packages/artplayer/public/runtime/events.ts#BuiltinEvents.fullscreenError@15",
+          "file": "packages/artplayer/public/runtime/events.ts",
+          "declaration": "BuiltinEvents",
+          "name": "fullscreenError",
+          "line": 15
+        },
+        {
+          "id": "packages/artplayer/public/runtime/events.ts#BuiltinEvents.aspectRatio@16",
+          "file": "packages/artplayer/public/runtime/events.ts",
+          "declaration": "BuiltinEvents",
+          "name": "aspectRatio",
+          "line": 16
+        },
+        {
+          "id": "packages/artplayer/public/runtime/events.ts#BuiltinEvents.flip@17",
+          "file": "packages/artplayer/public/runtime/events.ts",
+          "declaration": "BuiltinEvents",
+          "name": "flip",
+          "line": 17
+        },
+        {
+          "id": "packages/artplayer/public/runtime/events.ts#BuiltinEvents.seek@18",
+          "file": "packages/artplayer/public/runtime/events.ts",
+          "declaration": "BuiltinEvents",
+          "name": "seek",
+          "line": 18
+        },
+        {
+          "id": "packages/artplayer/public/runtime/events.ts#BuiltinEvents.setBar@19",
+          "file": "packages/artplayer/public/runtime/events.ts",
+          "declaration": "BuiltinEvents",
+          "name": "setBar",
+          "line": 19
+        },
+        {
+          "id": "packages/artplayer/public/runtime/events.ts#BuiltinEvents.subtitleBeforeUpdate@20",
+          "file": "packages/artplayer/public/runtime/events.ts",
+          "declaration": "BuiltinEvents",
+          "name": "subtitleBeforeUpdate",
+          "line": 20
+        },
+        {
+          "id": "packages/artplayer/public/runtime/events.ts#BuiltinEvents.subtitleAfterUpdate@21",
+          "file": "packages/artplayer/public/runtime/events.ts",
+          "declaration": "BuiltinEvents",
+          "name": "subtitleAfterUpdate",
+          "line": 21
+        },
+        {
+          "id": "packages/artplayer/public/runtime/events.ts#BuiltinEvents.subtitleLoad@22",
+          "file": "packages/artplayer/public/runtime/events.ts",
+          "declaration": "BuiltinEvents",
+          "name": "subtitleLoad",
+          "line": 22
+        }
+      ],
+      "sources": [
+        {
+          "path": "packages/artplayer/src/utils/emitter.ts",
+          "sha256": "26a93d3ff35b53e71a5f3bb22c252a854559d8151ede50a66a28d9eefae6c008"
+        },
+        {
+          "path": "packages/artplayer/src/utils/component.ts",
+          "sha256": "c3fa96467e8b315d974a42a19591aa4a4a7514853db796135b2acbcdcb160ea3"
+        },
+        {
+          "path": "packages/artplayer/src/events/globalInit.ts",
+          "sha256": "6f6ea497a20a8fd0746b1f020caff76ad6817cd70a1a90fbaea12f992b6d03a7"
+        },
+        {
+          "path": "packages/artplayer/src/input/pointer-focus.ts",
+          "sha256": "802087098c786135eefa6727f13177ffe4a98e2abf48fad0e356b91e26960077"
+        },
+        {
+          "path": "packages/artplayer/src/events/clickInit.ts",
+          "sha256": "bd1ba29fe0af4332ceb19297797c4c942a3a74bfd901998d6b93293f1b309300"
+        },
+        {
+          "path": "packages/artplayer/src/events/hoverInit.ts",
+          "sha256": "d1250e0dd35a8ba8067275986acbe6320c22adf1a977ec1009c0c012ed1563fe"
+        },
+        {
+          "path": "packages/artplayer/src/events/moveInit.ts",
+          "sha256": "da97591723f8b94a34702559b7ee67a35f172aa696d37dfbecd472581ad3de35"
+        },
+        {
+          "path": "packages/artplayer/src/events/updateInit.ts",
+          "sha256": "6f174db14d20319f03a76e6ea267a3d71973faac44a92483badfa4420791817a"
+        },
+        {
+          "path": "packages/artplayer/src/events/viewInit.ts",
+          "sha256": "d77b83eab802ff0046a4966e28b810a25592bcada49f526adae37556c1e4c3e9"
+        },
+        {
+          "path": "packages/artplayer/src/events/resizeInit.ts",
+          "sha256": "719e27d11d2f93fcbe8368393c9190e251fc86dd0c3c2919f60e9b3b1edd0192"
+        },
+        {
+          "path": "packages/artplayer/src/hotkey.ts",
+          "sha256": "d8e477bf451143e566e1f743a5f253dcf00beb23544709794779f275e11498e8"
+        },
+        {
+          "path": "packages/artplayer/src/config/index.ts",
+          "sha256": "a56b4d3d6942cfa3e2b47f909fc5ad87e6e3202fd61b29c7afd7649049e31d05"
+        },
+        {
+          "path": "packages/artplayer/src/media/events/readiness.ts",
+          "sha256": "3ba74f26dd9ff0729967097c2cb6f329a9cea57745bfe8173f9173e0d134476a"
+        },
+        {
+          "path": "packages/artplayer/src/media/events/playback.ts",
+          "sha256": "2c68e4f6274a0dc65e56d42c928e500fc1d63bf3e03bbdd8a83c3f3ed7ae8ee4"
+        },
+        {
+          "path": "packages/artplayer/src/media/events/forward.ts",
+          "sha256": "6b1b7e80036bfb523b51843dc6ec6d83c2b949cefb9cef085b2d679a444e46d8"
+        },
+        {
+          "path": "packages/artplayer/src/media/events/reconnect.ts",
+          "sha256": "876027b5116d0d3628755705682b30630f4b713199ed8015541932d81d2944be"
+        },
+        {
+          "path": "packages/artplayer/src/player/playMix.ts",
+          "sha256": "2d46a3f84da0b1dd18139b76e5e2e163f1d9d9c8f54e67807eeec672acd49917"
+        },
+        {
+          "path": "packages/artplayer/src/player/pauseMix.ts",
+          "sha256": "f4fa2b1f05b84ebd27bec9cff5a151addf096dd9b32a38122fb2f1829def0043"
+        },
+        {
+          "path": "packages/artplayer/src/player/urlMix.ts",
+          "sha256": "726a42899261879e03c8b1d4f716458bf3e6e614cecc3bb8d7a581afc2b7866d"
+        },
+        {
+          "path": "packages/artplayer/src/player/seekMix.ts",
+          "sha256": "e6e1bf00e8441f1ce58d2a67a66f7e5e98c86d78620ff10a5e6268d54f13fadb"
+        },
+        {
+          "path": "packages/artplayer/src/player/currentTimeMix.ts",
+          "sha256": "cc374abeb85b203b9f31c566a6b9e53a4a1723d609fccc7b0c9c210993b79e75"
+        },
+        {
+          "path": "packages/artplayer/src/player/volumeMix.ts",
+          "sha256": "d830bb27b984e0ab2f687943fb49abcbd0331d71fe96049fd81edbddaa64f07f"
+        },
+        {
+          "path": "packages/artplayer/src/player/screenshotMix.ts",
+          "sha256": "1754bbce09f713204c120cd4657b52c06eb09eb1fe3244f84474e5967cd68e50"
+        },
+        {
+          "path": "packages/artplayer/src/player/airplayMix.ts",
+          "sha256": "bfa30e1dcd7cbaef97e977344e8a35524fad6bd23089cd8e45945e3b32b4bf04"
+        },
+        {
+          "path": "packages/artplayer/src/player/aspectRatioMix.ts",
+          "sha256": "9e5e7365d469aeaef65a6010cb92734702191f9086b2f21d98c9f0ad7f356898"
+        },
+        {
+          "path": "packages/artplayer/src/player/flipMix.ts",
+          "sha256": "a1519c83f8c9437a9b7e99a59e38a3d931032c579f4085226fc0955c7c9eab67"
+        },
+        {
+          "path": "packages/artplayer/src/player/autoHeightMix.ts",
+          "sha256": "5848e34cd826f5d4cc81d076c83fb3bcea0aed1228cd93a1edb6b8ca402ad175"
+        },
+        {
+          "path": "packages/artplayer/src/player/autoSizeMix.ts",
+          "sha256": "6373a8ea7fff4cd875d17c5d3df6dc37764055ab77850a6c6348526969071cbb"
+        },
+        {
+          "path": "packages/artplayer/src/player/subtitleOffsetMix.ts",
+          "sha256": "cf9834711842c8a31c3143ab3028f0cf9ba541fafe6f0a3076067daa9d4c750a"
+        },
+        {
+          "path": "packages/artplayer/src/display/native-fullscreen.ts",
+          "sha256": "323401f2b3ea5186da981a1215b1b9e7dcf4ef4261a8e885fe8ff0c090de6a7a"
+        },
+        {
+          "path": "packages/artplayer/src/display/video-fullscreen.ts",
+          "sha256": "b425bf0df462524b5d3accc9e3df383c6635676c152bf4bef09c477a90662728"
+        },
+        {
+          "path": "packages/artplayer/src/display/web-fullscreen.ts",
+          "sha256": "13f901d20a31a7b8e4ebfbcceac5d3e0737df6335b71f0dfed638785bc413a5a"
+        },
+        {
+          "path": "packages/artplayer/src/display/native-pip.ts",
+          "sha256": "647879ae027cc0ebe684daa31d75511dd882e123e4ca8da2942e659bae3719f2"
+        },
+        {
+          "path": "packages/artplayer/src/display/webkit-pip.ts",
+          "sha256": "3617927b4bb8fa46f651d0e584141f804ae438e2b4531cc2e9cf9f7eeb027550"
+        },
+        {
+          "path": "packages/artplayer/src/display/mini.ts",
+          "sha256": "a6fed598428bbf8d52931f21bb68b7560a3643d2576f7e7bfbae98b2f7cdd1e5"
+        },
+        {
+          "path": "packages/artplayer/src/plugins/lock.ts",
+          "sha256": "8f5fe4469787b7b2a0a302d0fbd925f8eb6d1b261cae6e17367e4d97666a096c"
+        },
+        {
+          "path": "packages/artplayer/src/subtitle/render.ts",
+          "sha256": "96493fc35680af635a8db225a8bf002208df79ed48b1d4ee6cc73587543add5c"
+        },
+        {
+          "path": "packages/artplayer/src/subtitle/track.ts",
+          "sha256": "707f4c43af4ebf4b87521f6f577168460e739274d0cec28b9efe5704d2540d18"
+        },
+        {
+          "path": "packages/artplayer/src/subtitle/timing.ts",
+          "sha256": "f2c1dbb63697a51c200371127da4fb8ea6e90a5b4de888bb1c2d7eae4007a5f8"
+        },
+        {
+          "path": "packages/artplayer/src/source/listen.ts",
+          "sha256": "c0596b98258c1544c8e4b762509646428450e56588da36908cb8583b8b716c37"
+        },
+        {
+          "path": "packages/artplayer/src/lifecycle/instance.ts",
+          "sha256": "3168f7db4271bae7a242e80798546b755ac15443e15dd9ebb7675f5a259299d8"
+        },
+        {
+          "path": "packages/artplayer/public/artplayer.ts",
+          "sha256": "26a42ac66811e70f68a8ebe62cbf304eb1993451b3e658961be98e7106162527"
+        },
+        {
+          "path": "packages/artplayer/public/emitter.ts",
+          "sha256": "9c62551cdcc6dd3966bed8a7a85dd477435db977c91a294d2ac8f162f9592537"
+        },
+        {
+          "path": "packages/artplayer/public/events.ts",
+          "sha256": "af191f862af4ec8933b09113b8c074603ae254a8b70460d0f3006646cd74ae42"
+        },
+        {
+          "path": "packages/artplayer/public/runtime.ts",
+          "sha256": "ec4b1d56993eb482a77eb0f94b701047549d009e6ba6433f27e7d464fef30c2b"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/events.ts",
+          "sha256": "52848f57d35eb1037cf74c8877521edf99a015bcd77f30ef6bbcba1807a99bfe"
+        }
+      ],
+      "docs": [
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/event.md",
+          "sha256": "2d8a33a17191e3ec14da8e62442700ad4af5b8d101acba483763811143e64bcd",
+          "anchor": "emitter-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/event.md",
+          "sha256": "2d8a33a17191e3ec14da8e62442700ad4af5b8d101acba483763811143e64bcd",
+          "anchor": "native-event-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/event.md",
+          "sha256": "2d8a33a17191e3ec14da8e62442700ad4af5b8d101acba483763811143e64bcd",
+          "anchor": "custom-event-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/event.md",
+          "sha256": "2d8a33a17191e3ec14da8e62442700ad4af5b8d101acba483763811143e64bcd",
+          "anchor": "event-types"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/event.md",
+          "sha256": "84bc4214a4f680a78fa91bf8a28e2587bbdc102767b71c4f4669c1dca346e7f4",
+          "anchor": "emitter-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/event.md",
+          "sha256": "84bc4214a4f680a78fa91bf8a28e2587bbdc102767b71c4f4669c1dca346e7f4",
+          "anchor": "native-event-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/event.md",
+          "sha256": "84bc4214a4f680a78fa91bf8a28e2587bbdc102767b71c4f4669c1dca346e7f4",
+          "anchor": "custom-event-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/event.md",
+          "sha256": "84bc4214a4f680a78fa91bf8a28e2587bbdc102767b71c4f4669c1dca346e7f4",
+          "anchor": "event-types"
+        }
+      ],
+      "evidence": "baselines/site04-events.json"
     }
   ]
 }

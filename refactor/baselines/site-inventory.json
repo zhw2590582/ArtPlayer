@@ -199,7 +199,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-      "sha256Lf": "a5b2bf5bba605914efaa76e7a21b16b52575e92e8fe1ec682f46ea0e4faf7a55",
+      "sha256Lf": "b5b955ad71e912f7846b250529076a4ceb9ef843d17f0d6b40c433363cb9fbb8",
       "language": "zh",
       "route": "/document/advanced/event.html",
       "headings": [
@@ -208,252 +208,280 @@
           "line": 1
         },
         {
-          "text": "`ready`",
+          "text": "订阅与同步派发 {#emitter-contract}",
           "line": 72
         },
         {
+          "text": "原生事件转发 {#native-event-contract}",
+          "line": 84
+        },
+        {
+          "text": "自定义事件参数与阶段 {#custom-event-contract}",
+          "line": 101
+        },
+        {
+          "text": "媒体与生命周期",
+          "line": 105
+        },
+        {
+          "text": "界面与输入",
+          "line": 121
+        },
+        {
+          "text": "尺寸、显示与字幕",
+          "line": 137
+        },
+        {
+          "text": "TypeScript事件视图 {#event-types}",
+          "line": 149
+        },
+        {
+          "text": "`ready`",
+          "line": 170
+        },
+        {
           "text": "`restart`",
-          "line": 89
+          "line": 187
         },
         {
           "text": "`pause`",
-          "line": 110
+          "line": 208
         },
         {
           "text": "`play`",
-          "line": 127
+          "line": 225
         },
         {
           "text": "`hotkey`",
-          "line": 144
+          "line": 242
         },
         {
           "text": "`destroy`",
-          "line": 161
+          "line": 259
         },
         {
           "text": "`focus`",
-          "line": 182
+          "line": 280
         },
         {
           "text": "`blur`",
-          "line": 199
+          "line": 297
         },
         {
           "text": "`dblclick`",
-          "line": 216
+          "line": 314
         },
         {
           "text": "`click`",
-          "line": 233
+          "line": 331
         },
         {
           "text": "`error`",
-          "line": 250
+          "line": 348
         },
         {
           "text": "`hover`",
-          "line": 267
+          "line": 365
         },
         {
           "text": "`mousemove`",
-          "line": 284
+          "line": 382
         },
         {
           "text": "`resize`",
-          "line": 301
+          "line": 399
         },
         {
           "text": "`view`",
-          "line": 318
+          "line": 416
         },
         {
           "text": "`lock`",
-          "line": 335
+          "line": 433
         },
         {
           "text": "`aspectRatio`",
-          "line": 353
+          "line": 451
         },
         {
           "text": "`autoHeight`",
-          "line": 372
+          "line": 470
         },
         {
           "text": "`autoSize`",
-          "line": 393
+          "line": 491
         },
         {
           "text": "`flip`",
-          "line": 411
+          "line": 509
         },
         {
           "text": "`fullscreen`",
-          "line": 430
+          "line": 528
         },
         {
           "text": "`fullscreenError`",
-          "line": 448
+          "line": 546
         },
         {
           "text": "`fullscreenWeb`",
-          "line": 469
+          "line": 567
         },
         {
           "text": "`mini`",
-          "line": 487
+          "line": 585
         },
         {
           "text": "`pip`",
-          "line": 508
+          "line": 606
         },
         {
           "text": "`screenshot`",
-          "line": 526
+          "line": 624
         },
         {
           "text": "`seek`",
-          "line": 544
+          "line": 642
         },
         {
           "text": "`subtitleOffset`",
-          "line": 561
+          "line": 659
         },
         {
           "text": "`subtitleBeforeUpdate`",
-          "line": 583
+          "line": 681
         },
         {
           "text": "`subtitleAfterUpdate`",
-          "line": 603
+          "line": 701
         },
         {
           "text": "`subtitleLoad`",
-          "line": 623
+          "line": 721
         },
         {
           "text": "`info`",
-          "line": 643
+          "line": 741
         },
         {
           "text": "`layer`",
-          "line": 660
+          "line": 758
         },
         {
           "text": "`loading`",
-          "line": 677
+          "line": 775
         },
         {
           "text": "`mask`",
-          "line": 694
+          "line": 792
         },
         {
           "text": "`subtitle`",
-          "line": 711
+          "line": 809
         },
         {
           "text": "`contextmenu`",
-          "line": 728
-        },
-        {
-          "text": "`control`",
-          "line": 745
-        },
-        {
-          "text": "`setting`",
-          "line": 762
-        },
-        {
-          "text": "`muted`",
-          "line": 780
-        },
-        {
-          "text": "`keydown`",
-          "line": 797
-        },
-        {
-          "text": "`video:canplay`",
-          "line": 814
-        },
-        {
-          "text": "`video:canplaythrough`",
-          "line": 818
-        },
-        {
-          "text": "`video:complete`",
-          "line": 822
-        },
-        {
-          "text": "`video:durationchange`",
           "line": 826
         },
         {
-          "text": "`video:emptied`",
-          "line": 830
+          "text": "`control`",
+          "line": 843
         },
         {
-          "text": "`video:ended`",
-          "line": 834
+          "text": "`setting`",
+          "line": 860
         },
         {
-          "text": "`video:error`",
-          "line": 838
-        },
-        {
-          "text": "`video:loadeddata`",
-          "line": 842
-        },
-        {
-          "text": "`video:loadedmetadata`",
-          "line": 846
-        },
-        {
-          "text": "`video:pause`",
-          "line": 850
-        },
-        {
-          "text": "`video:play`",
-          "line": 854
-        },
-        {
-          "text": "`video:playing`",
-          "line": 858
-        },
-        {
-          "text": "`video:progress`",
-          "line": 862
-        },
-        {
-          "text": "`video:ratechange`",
-          "line": 866
-        },
-        {
-          "text": "`video:seeked`",
-          "line": 870
-        },
-        {
-          "text": "`video:seeking`",
-          "line": 874
-        },
-        {
-          "text": "`video:stalled`",
+          "text": "`muted`",
           "line": 878
         },
         {
+          "text": "`keydown`",
+          "line": 895
+        },
+        {
+          "text": "`video:canplay`",
+          "line": 912
+        },
+        {
+          "text": "`video:canplaythrough`",
+          "line": 916
+        },
+        {
+          "text": "`video:complete`",
+          "line": 920
+        },
+        {
+          "text": "`video:durationchange`",
+          "line": 924
+        },
+        {
+          "text": "`video:emptied`",
+          "line": 928
+        },
+        {
+          "text": "`video:ended`",
+          "line": 932
+        },
+        {
+          "text": "`video:error`",
+          "line": 936
+        },
+        {
+          "text": "`video:loadeddata`",
+          "line": 940
+        },
+        {
+          "text": "`video:loadedmetadata`",
+          "line": 944
+        },
+        {
+          "text": "`video:pause`",
+          "line": 948
+        },
+        {
+          "text": "`video:play`",
+          "line": 952
+        },
+        {
+          "text": "`video:playing`",
+          "line": 956
+        },
+        {
+          "text": "`video:progress`",
+          "line": 960
+        },
+        {
+          "text": "`video:ratechange`",
+          "line": 964
+        },
+        {
+          "text": "`video:seeked`",
+          "line": 968
+        },
+        {
+          "text": "`video:seeking`",
+          "line": 972
+        },
+        {
+          "text": "`video:stalled`",
+          "line": 976
+        },
+        {
           "text": "`video:suspend`",
-          "line": 882
+          "line": 980
         },
         {
           "text": "`video:timeupdate`",
-          "line": 886
+          "line": 984
         },
         {
           "text": "`video:volumechange`",
-          "line": 890
+          "line": 988
         },
         {
           "text": "`video:waiting`",
-          "line": 894
+          "line": 992
         }
       ],
       "runCodeMarkers": 45,
@@ -1237,7 +1265,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-      "sha256Lf": "e11360c89bc91ed4f68ce9a40d335c1726ef006a23950d5d9ce4475789aecb7e",
+      "sha256Lf": "d6eeba01c64cfdc29f59c76befb6ce1f3ee7d1cb850b72d586a322c5d53d6246",
       "language": "en",
       "route": "/document/en/advanced/event.html",
       "headings": [
@@ -1246,252 +1274,280 @@
           "line": 1
         },
         {
-          "text": "`ready`",
+          "text": "Subscription and synchronous dispatch {#emitter-contract}",
           "line": 72
         },
         {
+          "text": "Native forwarding {#native-event-contract}",
+          "line": 84
+        },
+        {
+          "text": "Custom payloads and timing {#custom-event-contract}",
+          "line": 101
+        },
+        {
+          "text": "Media and lifecycle",
+          "line": 105
+        },
+        {
+          "text": "UI and input",
+          "line": 121
+        },
+        {
+          "text": "Size, display, and subtitles",
+          "line": 137
+        },
+        {
+          "text": "TypeScript event views {#event-types}",
+          "line": 149
+        },
+        {
+          "text": "`ready`",
+          "line": 170
+        },
+        {
           "text": "`restart`",
-          "line": 89
+          "line": 187
         },
         {
           "text": "`pause`",
-          "line": 110
+          "line": 208
         },
         {
           "text": "`play`",
-          "line": 127
+          "line": 225
         },
         {
           "text": "`hotkey`",
-          "line": 144
+          "line": 242
         },
         {
           "text": "`destroy`",
-          "line": 161
+          "line": 259
         },
         {
           "text": "`focus`",
-          "line": 182
+          "line": 280
         },
         {
           "text": "`blur`",
-          "line": 199
+          "line": 297
         },
         {
           "text": "`dblclick`",
-          "line": 216
+          "line": 314
         },
         {
           "text": "`click`",
-          "line": 233
+          "line": 331
         },
         {
           "text": "`error`",
-          "line": 250
+          "line": 348
         },
         {
           "text": "`hover`",
-          "line": 268
+          "line": 366
         },
         {
           "text": "`mousemove`",
-          "line": 285
+          "line": 383
         },
         {
           "text": "`resize`",
-          "line": 302
+          "line": 400
         },
         {
           "text": "`view`",
-          "line": 319
+          "line": 417
         },
         {
           "text": "`lock`",
-          "line": 336
+          "line": 434
         },
         {
           "text": "`aspectRatio`",
-          "line": 354
+          "line": 452
         },
         {
           "text": "`autoHeight`",
-          "line": 373
+          "line": 471
         },
         {
           "text": "`autoSize`",
-          "line": 394
+          "line": 492
         },
         {
           "text": "`flip`",
-          "line": 412
+          "line": 510
         },
         {
           "text": "`fullscreen`",
-          "line": 431
+          "line": 529
         },
         {
           "text": "`fullscreenError`",
-          "line": 449
+          "line": 547
         },
         {
           "text": "`fullscreenWeb`",
-          "line": 470
+          "line": 568
         },
         {
           "text": "`mini`",
-          "line": 488
+          "line": 586
         },
         {
           "text": "`pip`",
-          "line": 509
+          "line": 607
         },
         {
           "text": "`screenshot`",
-          "line": 528
+          "line": 626
         },
         {
           "text": "`seek`",
-          "line": 546
+          "line": 644
         },
         {
           "text": "`subtitleOffset`",
-          "line": 563
+          "line": 661
         },
         {
           "text": "`subtitleBeforeUpdate`",
-          "line": 585
+          "line": 683
         },
         {
           "text": "`subtitleAfterUpdate`",
-          "line": 605
+          "line": 703
         },
         {
           "text": "`subtitleLoad`",
-          "line": 625
+          "line": 723
         },
         {
           "text": "`info`",
-          "line": 645
+          "line": 743
         },
         {
           "text": "`layer`",
-          "line": 662
+          "line": 760
         },
         {
           "text": "`loading`",
-          "line": 679
+          "line": 777
         },
         {
           "text": "`mask`",
-          "line": 696
+          "line": 794
         },
         {
           "text": "`subtitle`",
-          "line": 713
+          "line": 811
         },
         {
           "text": "`contextmenu`",
-          "line": 730
+          "line": 828
         },
         {
           "text": "`control`",
-          "line": 747
-        },
-        {
-          "text": "`setting`",
-          "line": 764
-        },
-        {
-          "text": "`muted`",
-          "line": 783
-        },
-        {
-          "text": "`keydown`",
-          "line": 800
-        },
-        {
-          "text": "`video:canplay`",
-          "line": 817
-        },
-        {
-          "text": "`video:canplaythrough`",
-          "line": 821
-        },
-        {
-          "text": "`video:complete`",
-          "line": 825
-        },
-        {
-          "text": "`video:durationchange`",
-          "line": 829
-        },
-        {
-          "text": "`video:emptied`",
-          "line": 833
-        },
-        {
-          "text": "`video:ended`",
-          "line": 837
-        },
-        {
-          "text": "`video:error`",
-          "line": 841
-        },
-        {
-          "text": "`video:loadeddata`",
           "line": 845
         },
         {
-          "text": "`video:loadedmetadata`",
-          "line": 849
+          "text": "`setting`",
+          "line": 862
         },
         {
-          "text": "`video:pause`",
-          "line": 853
-        },
-        {
-          "text": "`video:play`",
-          "line": 857
-        },
-        {
-          "text": "`video:playing`",
-          "line": 861
-        },
-        {
-          "text": "`video:progress`",
-          "line": 865
-        },
-        {
-          "text": "`video:ratechange`",
-          "line": 869
-        },
-        {
-          "text": "`video:seeked`",
-          "line": 873
-        },
-        {
-          "text": "`video:seeking`",
-          "line": 877
-        },
-        {
-          "text": "`video:stalled`",
+          "text": "`muted`",
           "line": 881
         },
         {
+          "text": "`keydown`",
+          "line": 898
+        },
+        {
+          "text": "`video:canplay`",
+          "line": 915
+        },
+        {
+          "text": "`video:canplaythrough`",
+          "line": 919
+        },
+        {
+          "text": "`video:complete`",
+          "line": 923
+        },
+        {
+          "text": "`video:durationchange`",
+          "line": 927
+        },
+        {
+          "text": "`video:emptied`",
+          "line": 931
+        },
+        {
+          "text": "`video:ended`",
+          "line": 935
+        },
+        {
+          "text": "`video:error`",
+          "line": 939
+        },
+        {
+          "text": "`video:loadeddata`",
+          "line": 943
+        },
+        {
+          "text": "`video:loadedmetadata`",
+          "line": 947
+        },
+        {
+          "text": "`video:pause`",
+          "line": 951
+        },
+        {
+          "text": "`video:play`",
+          "line": 955
+        },
+        {
+          "text": "`video:playing`",
+          "line": 959
+        },
+        {
+          "text": "`video:progress`",
+          "line": 963
+        },
+        {
+          "text": "`video:ratechange`",
+          "line": 967
+        },
+        {
+          "text": "`video:seeked`",
+          "line": 971
+        },
+        {
+          "text": "`video:seeking`",
+          "line": 975
+        },
+        {
+          "text": "`video:stalled`",
+          "line": 979
+        },
+        {
           "text": "`video:suspend`",
-          "line": 885
+          "line": 983
         },
         {
           "text": "`video:timeupdate`",
-          "line": 889
+          "line": 987
         },
         {
           "text": "`video:volumechange`",
-          "line": 893
+          "line": 991
         },
         {
           "text": "`video:waiting`",
-          "line": 897
+          "line": 995
         }
       ],
       "runCodeMarkers": 45,
@@ -5429,7 +5485,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 161
+          "line": 259
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -5437,7 +5493,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 161
+          "line": 259
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -5663,7 +5719,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 728
+          "line": 826
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -5671,7 +5727,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 730
+          "line": 828
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -5696,7 +5752,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 711
+          "line": 809
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -5704,7 +5760,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 713
+          "line": 811
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -5729,7 +5785,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 643
+          "line": 741
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -5737,7 +5793,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 645
+          "line": 743
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -5754,7 +5810,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 677
+          "line": 775
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -5762,7 +5818,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 679
+          "line": 777
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -5779,7 +5835,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 144
+          "line": 242
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -5787,7 +5843,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 144
+          "line": 242
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -5812,7 +5868,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 694
+          "line": 792
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -5820,7 +5876,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 696
+          "line": 794
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -5837,7 +5893,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 762
+          "line": 860
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -5845,7 +5901,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 764
+          "line": 862
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -6089,11 +6145,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 233
+          "line": 331
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 233
+          "line": 331
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6614,11 +6670,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 583
+          "line": 681
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 585
+          "line": 683
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6631,11 +6687,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 603
+          "line": 701
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 605
+          "line": 703
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6776,11 +6832,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 814
+          "line": 912
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 817
+          "line": 915
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6793,11 +6849,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 818
+          "line": 916
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 821
+          "line": 919
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6810,11 +6866,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 822
+          "line": 920
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 825
+          "line": 923
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6827,11 +6883,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 826
+          "line": 924
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 829
+          "line": 927
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6844,11 +6900,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 830
+          "line": 928
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 833
+          "line": 931
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6869,11 +6925,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 834
+          "line": 932
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 837
+          "line": 935
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6886,11 +6942,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 838
+          "line": 936
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 841
+          "line": 939
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6903,11 +6959,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 842
+          "line": 940
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 845
+          "line": 943
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6920,11 +6976,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 846
+          "line": 944
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 849
+          "line": 947
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6945,11 +7001,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 850
+          "line": 948
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 853
+          "line": 951
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6962,11 +7018,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 854
+          "line": 952
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 857
+          "line": 955
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6979,11 +7035,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 858
+          "line": 956
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 861
+          "line": 959
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -6996,11 +7052,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 862
+          "line": 960
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 865
+          "line": 963
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7013,11 +7069,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 866
+          "line": 964
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 869
+          "line": 967
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7030,11 +7086,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 870
+          "line": 968
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 873
+          "line": 971
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7047,11 +7103,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 874
+          "line": 972
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 877
+          "line": 975
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7064,11 +7120,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 878
+          "line": 976
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 881
+          "line": 979
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7081,11 +7137,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 882
+          "line": 980
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 885
+          "line": 983
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7098,11 +7154,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 886
+          "line": 984
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 889
+          "line": 987
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7115,11 +7171,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 890
+          "line": 988
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 893
+          "line": 991
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7132,11 +7188,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 894
+          "line": 992
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 897
+          "line": 995
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7153,7 +7209,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 643
+          "line": 741
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -7161,7 +7217,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 645
+          "line": 743
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7174,11 +7230,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 660
+          "line": 758
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 662
+          "line": 760
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7195,7 +7251,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 677
+          "line": 775
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -7203,7 +7259,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 679
+          "line": 777
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7220,7 +7276,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 694
+          "line": 792
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -7228,7 +7284,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 696
+          "line": 794
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7245,7 +7301,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 711
+          "line": 809
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -7253,7 +7309,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 713
+          "line": 811
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -7278,7 +7334,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 728
+          "line": 826
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -7286,7 +7342,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 730
+          "line": 828
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -7307,11 +7363,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 745
+          "line": 843
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 747
+          "line": 845
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/component/controls.md",
@@ -7332,7 +7388,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 762
+          "line": 860
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -7340,7 +7396,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 764
+          "line": 862
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -7365,7 +7421,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 144
+          "line": 242
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -7373,7 +7429,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 144
+          "line": 242
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -7394,7 +7450,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 161
+          "line": 259
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -7402,7 +7458,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 161
+          "line": 259
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -7419,7 +7475,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 561
+          "line": 659
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -7427,7 +7483,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 563
+          "line": 661
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -7452,11 +7508,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 583
+          "line": 681
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 585
+          "line": 683
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7469,11 +7525,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 603
+          "line": 701
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 605
+          "line": 703
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7486,11 +7542,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 623
+          "line": 721
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 625
+          "line": 723
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7503,11 +7559,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 182
+          "line": 280
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 182
+          "line": 280
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7520,11 +7576,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 199
+          "line": 297
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 199
+          "line": 297
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7537,11 +7593,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 216
+          "line": 314
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 216
+          "line": 314
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7554,11 +7610,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 233
+          "line": 331
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 233
+          "line": 331
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7571,11 +7627,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 267
+          "line": 365
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 268
+          "line": 366
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7588,11 +7644,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 284
+          "line": 382
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 285
+          "line": 383
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7605,11 +7661,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 301
+          "line": 399
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 302
+          "line": 400
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7622,11 +7678,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 318
+          "line": 416
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 319
+          "line": 417
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7639,11 +7695,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 335
+          "line": 433
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 336
+          "line": 434
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -7664,7 +7720,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 353
+          "line": 451
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -7672,7 +7728,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 354
+          "line": 452
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -7697,7 +7753,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 372
+          "line": 470
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -7705,7 +7761,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 373
+          "line": 471
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -7722,7 +7778,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 393
+          "line": 491
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -7730,7 +7786,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 394
+          "line": 492
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -7755,11 +7811,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 72
+          "line": 170
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 72
+          "line": 170
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7805,11 +7861,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 250
+          "line": 348
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 250
+          "line": 348
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7822,7 +7878,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 411
+          "line": 509
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -7830,7 +7886,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 412
+          "line": 510
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -7855,7 +7911,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 430
+          "line": 528
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -7863,7 +7919,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 431
+          "line": 529
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -7888,11 +7944,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 448
+          "line": 546
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 449
+          "line": 547
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7905,7 +7961,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 469
+          "line": 567
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -7913,7 +7969,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 470
+          "line": 568
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -7938,7 +7994,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 487
+          "line": 585
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -7946,7 +8002,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 488
+          "line": 586
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -7963,7 +8019,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 110
+          "line": 208
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -7971,7 +8027,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 110
+          "line": 208
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -7988,7 +8044,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 508
+          "line": 606
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -7996,7 +8052,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 509
+          "line": 607
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -8021,7 +8077,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 127
+          "line": 225
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -8029,7 +8085,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 127
+          "line": 225
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -8046,7 +8102,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 526
+          "line": 624
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -8054,7 +8110,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 528
+          "line": 626
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -8079,7 +8135,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 544
+          "line": 642
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -8087,7 +8143,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 546
+          "line": 644
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -8104,11 +8160,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 89
+          "line": 187
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 89
+          "line": 187
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -8121,7 +8177,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 780
+          "line": 878
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -8129,7 +8185,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 783
+          "line": 881
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -8162,11 +8218,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 797
+          "line": 895
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 800
+          "line": 898
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -8525,7 +8581,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 677
+          "line": 775
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -8533,7 +8589,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 679
+          "line": 777
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -8575,7 +8631,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 127
+          "line": 225
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -8583,7 +8639,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 127
+          "line": 225
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -8600,7 +8656,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 110
+          "line": 208
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -8608,7 +8664,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 110
+          "line": 208
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -8666,7 +8722,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 526
+          "line": 624
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -8674,7 +8730,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 528
+          "line": 626
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -8703,7 +8759,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 762
+          "line": 860
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -8711,7 +8767,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 764
+          "line": 862
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -8732,7 +8788,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 508
+          "line": 606
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -8740,7 +8796,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 509
+          "line": 607
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -8806,7 +8862,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 353
+          "line": 451
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -8814,7 +8870,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 354
+          "line": 452
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -8860,11 +8916,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 335
+          "line": 433
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 336
+          "line": 434
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -8885,7 +8941,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 411
+          "line": 509
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -8893,7 +8949,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 412
+          "line": 510
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -8974,11 +9030,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 250
+          "line": 348
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 250
+          "line": 348
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -9186,7 +9242,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 728
+          "line": 826
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -9194,7 +9250,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 730
+          "line": 828
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9408,7 +9464,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 780
+          "line": 878
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -9416,7 +9472,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 783
+          "line": 881
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -9458,7 +9514,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 393
+          "line": 491
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -9466,7 +9522,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 394
+          "line": 492
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -9525,7 +9581,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 411
+          "line": 509
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -9533,7 +9589,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 412
+          "line": 510
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -9583,7 +9639,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 353
+          "line": 451
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -9591,7 +9647,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 354
+          "line": 452
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -9616,7 +9672,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 526
+          "line": 624
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -9624,7 +9680,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 528
+          "line": 626
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -9653,7 +9709,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 762
+          "line": 860
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -9661,7 +9717,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 764
+          "line": 862
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9686,7 +9742,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 144
+          "line": 242
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -9694,7 +9750,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 144
+          "line": 242
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9715,7 +9771,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 508
+          "line": 606
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -9723,7 +9779,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 509
+          "line": 607
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -9782,7 +9838,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 430
+          "line": 528
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -9790,7 +9846,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 431
+          "line": 529
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -9815,7 +9871,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 469
+          "line": 567
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -9823,7 +9879,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 470
+          "line": 568
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -9848,7 +9904,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 561
+          "line": 659
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -9856,7 +9912,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 563
+          "line": 661
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -9932,11 +9988,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 335
+          "line": 433
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 336
+          "line": 434
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10137,7 +10193,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 728
+          "line": 826
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -10145,7 +10201,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 730
+          "line": 828
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10279,7 +10335,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 711
+          "line": 809
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -10287,7 +10343,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 713
+          "line": 811
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10417,7 +10473,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 127
+          "line": 225
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -10425,7 +10481,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 127
+          "line": 225
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -10442,7 +10498,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 110
+          "line": 208
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -10450,7 +10506,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 110
+          "line": 208
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -10484,7 +10540,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 353
+          "line": 451
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -10492,7 +10548,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 354
+          "line": 452
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -10517,7 +10573,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 353
+          "line": 451
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -10525,7 +10581,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 354
+          "line": 452
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -10793,7 +10849,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 411
+          "line": 509
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -10801,7 +10857,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 412
+          "line": 510
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -10826,7 +10882,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 411
+          "line": 509
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -10834,7 +10890,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 412
+          "line": 510
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -10859,7 +10915,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 430
+          "line": 528
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -10867,7 +10923,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 431
+          "line": 529
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -10892,7 +10948,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 430
+          "line": 528
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -10900,7 +10956,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 431
+          "line": 529
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -10925,7 +10981,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 469
+          "line": 567
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -10933,7 +10989,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 470
+          "line": 568
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -10958,7 +11014,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 469
+          "line": 567
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -10966,7 +11022,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 470
+          "line": 568
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -11025,7 +11081,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 487
+          "line": 585
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -11033,7 +11089,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 488
+          "line": 586
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -11050,7 +11106,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 487
+          "line": 585
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -11058,7 +11114,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 488
+          "line": 586
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -11075,7 +11131,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 508
+          "line": 606
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -11083,7 +11139,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 509
+          "line": 607
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -11108,7 +11164,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 508
+          "line": 606
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -11116,7 +11172,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 509
+          "line": 607
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -11344,7 +11400,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 544
+          "line": 642
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -11352,7 +11408,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 546
+          "line": 644
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -11369,7 +11425,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 544
+          "line": 642
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -11377,7 +11433,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 546
+          "line": 644
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -11562,7 +11618,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 780
+          "line": 878
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -11570,7 +11626,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 783
+          "line": 881
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -11595,7 +11651,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 780
+          "line": 878
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -11603,7 +11659,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 783
+          "line": 881
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -11678,7 +11734,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 561
+          "line": 659
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -11686,7 +11742,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 563
+          "line": 661
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -11711,7 +11767,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 561
+          "line": 659
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -11719,7 +11775,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 563
+          "line": 661
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -11878,7 +11934,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 110
+          "line": 208
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -11886,7 +11942,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 110
+          "line": 208
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -11903,7 +11959,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 127
+          "line": 225
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -11911,7 +11967,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 127
+          "line": 225
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -12055,7 +12111,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 526
+          "line": 624
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -12063,7 +12119,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 528
+          "line": 626
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -12113,7 +12169,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 393
+          "line": 491
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -12121,7 +12177,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 394
+          "line": 492
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -12146,7 +12202,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 372
+          "line": 470
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -12154,7 +12210,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 373
+          "line": 471
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -12379,7 +12435,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 728
+          "line": 826
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -12387,7 +12443,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 730
+          "line": 828
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -12770,7 +12826,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 728
+          "line": 826
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -12778,7 +12834,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 730
+          "line": 828
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -12803,7 +12859,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 711
+          "line": 809
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -12811,7 +12867,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 713
+          "line": 811
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -12836,7 +12892,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 643
+          "line": 741
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -12844,7 +12900,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 645
+          "line": 743
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12861,7 +12917,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 677
+          "line": 775
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -12869,7 +12925,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 679
+          "line": 777
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12886,7 +12942,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 144
+          "line": 242
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -12894,7 +12950,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 144
+          "line": 242
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -12919,7 +12975,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 694
+          "line": 792
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -12927,7 +12983,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 696
+          "line": 794
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12944,7 +13000,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 762
+          "line": 860
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -12952,7 +13008,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 764
+          "line": 862
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -13098,7 +13154,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 161
+          "line": 259
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -13106,7 +13162,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 161
+          "line": 259
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -13468,11 +13524,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 233
+          "line": 331
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 233
+          "line": 331
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13723,7 +13779,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 762
+          "line": 860
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -13731,7 +13787,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 764
+          "line": 862
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -13855,11 +13911,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 284
+          "line": 382
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 285
+          "line": 383
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13872,11 +13928,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 233
+          "line": 331
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 233
+          "line": 331
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13889,11 +13945,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 199
+          "line": 297
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 199
+          "line": 297
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13906,11 +13962,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 250
+          "line": 348
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 250
+          "line": 348
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13923,11 +13979,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 448
+          "line": 546
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 449
+          "line": 547
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13940,7 +13996,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 353
+          "line": 451
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -13948,7 +14004,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 354
+          "line": 452
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -13973,7 +14029,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 411
+          "line": 509
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -13981,7 +14037,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 412
+          "line": 510
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -14006,7 +14062,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 544
+          "line": 642
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -14014,7 +14070,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 546
+          "line": 644
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -14039,11 +14095,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 583
+          "line": 681
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 585
+          "line": 683
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14056,11 +14112,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 603
+          "line": 701
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 605
+          "line": 703
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14073,11 +14129,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 623
+          "line": 721
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 625
+          "line": 723
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14090,7 +14146,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 127
+          "line": 225
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -14098,7 +14154,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 127
+          "line": 225
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -14115,7 +14171,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 110
+          "line": 208
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -14123,7 +14179,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 110
+          "line": 208
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -14148,11 +14204,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 250
+          "line": 348
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 250
+          "line": 348
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14382,7 +14438,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 728
+          "line": 826
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -14390,7 +14446,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 730
+          "line": 828
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -14532,7 +14588,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 711
+          "line": 809
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -14540,7 +14596,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 713
+          "line": 811
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -14687,7 +14743,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 544
+          "line": 642
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -14695,7 +14751,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 546
+          "line": 644
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -14712,7 +14768,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 544
+          "line": 642
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -14720,7 +14776,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 546
+          "line": 644
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -14997,7 +15053,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 508
+          "line": 606
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -15005,7 +15061,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 509
+          "line": 607
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -15030,7 +15086,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 508
+          "line": 606
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -15038,7 +15094,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 509
+          "line": 607
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -15063,7 +15119,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 430
+          "line": 528
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -15071,7 +15127,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 431
+          "line": 529
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -15096,7 +15152,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 469
+          "line": 567
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -15104,7 +15160,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 470
+          "line": 568
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -15129,7 +15185,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 487
+          "line": 585
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -15137,7 +15193,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 488
+          "line": 586
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -15179,7 +15235,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 780
+          "line": 878
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -15187,7 +15243,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 783
+          "line": 881
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -15237,7 +15293,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 353
+          "line": 451
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -15245,7 +15301,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 354
+          "line": 452
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -15270,7 +15326,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 411
+          "line": 509
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -15278,7 +15334,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 412
+          "line": 510
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -15378,7 +15434,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 561
+          "line": 659
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -15386,7 +15442,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 563
+          "line": 661
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -15657,7 +15713,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 127
+          "line": 225
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -15665,7 +15721,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 127
+          "line": 225
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -15682,7 +15738,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 110
+          "line": 208
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -15690,7 +15746,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 110
+          "line": 208
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -15758,7 +15814,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 393
+          "line": 491
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -15766,7 +15822,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 394
+          "line": 492
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -15791,7 +15847,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 372
+          "line": 470
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -15799,7 +15855,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 373
+          "line": 471
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -15875,7 +15931,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 526
+          "line": 624
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -15883,7 +15939,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 528
+          "line": 626
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -16098,11 +16154,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 267
+          "line": 365
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 268
+          "line": 366
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -16123,7 +16179,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 161
+          "line": 259
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -16131,7 +16187,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 161
+          "line": 259
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -16719,11 +16775,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 301
+          "line": 399
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 302
+          "line": 400
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -17034,7 +17090,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 161
+          "line": 259
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -17042,7 +17098,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 161
+          "line": 259
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -17292,7 +17348,7 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/event.md",
-          "line": 161
+          "line": 259
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
@@ -17300,7 +17356,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
-          "line": 161
+          "line": 259
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
@@ -19628,10 +19684,10 @@
     {
       "source": "docs/document/404.html",
       "route": "/document/404.html",
-      "sha256Lf": "ef480ed59bbe1bea5f8d680767c8879e231e8b8da558a1d7d5dbf8234ed91571",
+      "sha256Lf": "497835691e131f9b65fe358bcdc2ef888c3328b8291992ab7181bb4ec5c483e0",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19641,10 +19697,10 @@
     {
       "source": "docs/document/advanced/built-in.html",
       "route": "/document/advanced/built-in.html",
-      "sha256Lf": "f6cfba6c91583d4c26394e256aa4413ff7603959ffa5ee27d577f7e6dbb13006",
+      "sha256Lf": "4c9ad53e3e144d6781cacb632c13ffa3533fa59e664b9f509e402c9b4ce25e65",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19654,10 +19710,10 @@
     {
       "source": "docs/document/advanced/class.html",
       "route": "/document/advanced/class.html",
-      "sha256Lf": "ba933562b3f68fe51d5e7d1d784a91ccde5c2a50a2d85567421ec150fda0d204",
+      "sha256Lf": "cdb563b7ee5a82b52ecb109c259f23b7e59c2fa1f55af299fb0f826a8b5f14eb",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19667,10 +19723,10 @@
     {
       "source": "docs/document/advanced/event.html",
       "route": "/document/advanced/event.html",
-      "sha256Lf": "44bffc7916fcffadf7dd17a5ebb2d5b9e99eb42beca05edf2818560134f8d529",
+      "sha256Lf": "f6e91d0ef8b69537c4fd173034cbb8fd40644954b8a966da00555ed20272da79",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19680,10 +19736,10 @@
     {
       "source": "docs/document/advanced/global.html",
       "route": "/document/advanced/global.html",
-      "sha256Lf": "3c30b646bfaec74bd703fa9467fd1fef86fb6ae251a06f98edb7221859676584",
+      "sha256Lf": "b94bc9431519f8d603c056c5837daf0322058d981c1258af7f8465e7c9a56f8b",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19693,10 +19749,10 @@
     {
       "source": "docs/document/advanced/plugin.html",
       "route": "/document/advanced/plugin.html",
-      "sha256Lf": "6cff6dee81b286123a17822cba9a77bcdbc39d4dd9294025bc4c4abbe3d314ba",
+      "sha256Lf": "3ce054d9efe5678e4afab97db5dc6b2534823377982b863e64a4572faeb65d93",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19706,10 +19762,10 @@
     {
       "source": "docs/document/advanced/property.html",
       "route": "/document/advanced/property.html",
-      "sha256Lf": "bd350da4cc8cbe833e42e55519c1844ff54bd6569403e80a8a69961b14fea85a",
+      "sha256Lf": "49c64630cdbf95c438f7f83ff9c70f585ba1632d30ef6a4dd37307884916a20c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19719,10 +19775,10 @@
     {
       "source": "docs/document/component/contextmenu.html",
       "route": "/document/component/contextmenu.html",
-      "sha256Lf": "34ce883236eaaf1f683c4aa831d5c0e3063838b19c08a2fd7447e06ce2dfa2ea",
+      "sha256Lf": "d84f1cb7ea25608843e7f1f44d8db153e161ac1330c1ccc29acff2371c72e85c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19732,10 +19788,10 @@
     {
       "source": "docs/document/component/controls.html",
       "route": "/document/component/controls.html",
-      "sha256Lf": "52ef554f46018b063e5ee1cabdca2bf79e7577760a221d19a9874019e15a587f",
+      "sha256Lf": "8182bc64f2900d7060db71746ec75a13e5eb67f5336a14cc76c167ad145a2921",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19745,10 +19801,10 @@
     {
       "source": "docs/document/component/layers.html",
       "route": "/document/component/layers.html",
-      "sha256Lf": "1362a35b4ec3cd7b5edce398ecc068b04bac59085d4231b1fe78089cee2f8618",
+      "sha256Lf": "0ff02b5d229c79d565d956712c2f4aa634236b7add49557dcf662c6213badcaf",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19758,10 +19814,10 @@
     {
       "source": "docs/document/component/setting.html",
       "route": "/document/component/setting.html",
-      "sha256Lf": "b25ab1c63efd57f21befc6d99fb260d9ed3962c362483edfd232fac86a6022c8",
+      "sha256Lf": "5db2a06573f3b2a6e02030d03d61704d717436d1e5396df49321410f5a8bdba8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19771,10 +19827,10 @@
     {
       "source": "docs/document/en/advanced/built-in.html",
       "route": "/document/en/advanced/built-in.html",
-      "sha256Lf": "a7954f35beca880a2ff44d2251701efb16199f82f2ee6f9a1ff8d4bc81e4be43",
+      "sha256Lf": "00bef05430c05edde96830b65d31bd70c1fb18efe941ba4d3ada60f0a639456f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19784,10 +19840,10 @@
     {
       "source": "docs/document/en/advanced/class.html",
       "route": "/document/en/advanced/class.html",
-      "sha256Lf": "ce81e271689ccaa1eec8a637263c8e9f47260fb3b6d51397261c4c4ac5b77538",
+      "sha256Lf": "d83694b714137726b2931405c0017b4bf49fba9507e1cfe2754f4affc7afe078",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19797,10 +19853,10 @@
     {
       "source": "docs/document/en/advanced/event.html",
       "route": "/document/en/advanced/event.html",
-      "sha256Lf": "27ff38c0eb0d9310d1011dc4f9c2cb1fc3aa25a65f3894cc5210f9bfc47ce282",
+      "sha256Lf": "0f90da507fa452ed08fde960a783b356bc6fc7a10c15ff6d796ccb1d2120fbe8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19810,10 +19866,10 @@
     {
       "source": "docs/document/en/advanced/global.html",
       "route": "/document/en/advanced/global.html",
-      "sha256Lf": "f2e0c07ed7133f8de420af1e1498cdfdd8646f4a5088a60d67be9e4b3beab306",
+      "sha256Lf": "9bb42e823ea9e3e28e1c2ccb4c558b3afb36175d90be470ba42a80f6a57254f2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19823,10 +19879,10 @@
     {
       "source": "docs/document/en/advanced/plugin.html",
       "route": "/document/en/advanced/plugin.html",
-      "sha256Lf": "79d49b1f5ea77dfb41078405199374fbc0f6c69ffc649b305ebdd93880fafe41",
+      "sha256Lf": "f72e5e3158db381283d53685487217e8d5b45f760925e36d6588866c52c91760",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19836,10 +19892,10 @@
     {
       "source": "docs/document/en/advanced/property.html",
       "route": "/document/en/advanced/property.html",
-      "sha256Lf": "65b35459faeaa34011e2a180313ed93f96551f98cb47bc341ebfac617b099c73",
+      "sha256Lf": "d12ac8cd159c61d8cac689dbc69ebe01882e18ef96ab833fa5f3f8ae48d9c369",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19849,10 +19905,10 @@
     {
       "source": "docs/document/en/component/contextmenu.html",
       "route": "/document/en/component/contextmenu.html",
-      "sha256Lf": "2e0995090e839df75475d40f5e4857a25f29832150c8d4d06f95ac75393b8db3",
+      "sha256Lf": "c06fdd1b3ba4168570b397943a25d4dc600cb7c278682975051fff4ec44f9170",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19862,10 +19918,10 @@
     {
       "source": "docs/document/en/component/controls.html",
       "route": "/document/en/component/controls.html",
-      "sha256Lf": "0da9c006746cdecbfc6448374dca763a5e32417c1c1a83392b45727e697a7b7f",
+      "sha256Lf": "d5a6a045659c7a56d5e766b4058e8f62bb2fab9be0f6c8ba716b53570fc4e895",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19875,10 +19931,10 @@
     {
       "source": "docs/document/en/component/layers.html",
       "route": "/document/en/component/layers.html",
-      "sha256Lf": "ad6d5a1ec00e95dfd62c901c2b913c5da64ac5e18076b6692cff2277b567a422",
+      "sha256Lf": "4c2bd96294aada7c029c7395026e125c6055f547154d841c329b2509a4d6316c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19888,10 +19944,10 @@
     {
       "source": "docs/document/en/component/setting.html",
       "route": "/document/en/component/setting.html",
-      "sha256Lf": "1740d0f206d9e5f833c891e3b74504ff9e38597b09c29c92016ceaefdc5b912e",
+      "sha256Lf": "978cd4fd4ec1efd1b9cf5cc4e0f597b5e7206988b6ffa4fab81a109d5c2f82a6",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19901,10 +19957,10 @@
     {
       "source": "docs/document/en/index.html",
       "route": "/document/en/",
-      "sha256Lf": "41bcaec99b4a9f27150d7ebb60331b2eaf78bb9a4cf84b23ab2b30647fc3f57a",
+      "sha256Lf": "7fc4d25bc2f8baf75e3355f23e7dc543572353dbbbac5bb841f724819c7ffffe",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19914,10 +19970,10 @@
     {
       "source": "docs/document/en/plugin/ads.html",
       "route": "/document/en/plugin/ads.html",
-      "sha256Lf": "c80d2f420883beb741268592c6ec770fa088232060be7a07b659ef15bafa9495",
+      "sha256Lf": "a88ef9c8c45f04165f6779a5f703e6de03b6eb65c4a3104f7592ad311b76c584",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19927,10 +19983,10 @@
     {
       "source": "docs/document/en/plugin/ambilight.html",
       "route": "/document/en/plugin/ambilight.html",
-      "sha256Lf": "cac7fb018b6e2d331c7f19c1444b1a8006039ac3dfb0c591d5655063b625bac5",
+      "sha256Lf": "a05005f4f2f31d878308b0ae7bc2ee6ba75d6d7acf2a498ed80082efeaa792e7",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19940,10 +19996,10 @@
     {
       "source": "docs/document/en/plugin/asr.html",
       "route": "/document/en/plugin/asr.html",
-      "sha256Lf": "3a26a155c339f5a9836829b8fc823ae3bfe6746fb0994488286c83e3d9b81948",
+      "sha256Lf": "babb4857731699cca33ef4e8baec9b418153a266c4062d0d3a0c8c0f37b43ea8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19953,10 +20009,10 @@
     {
       "source": "docs/document/en/plugin/audio-track.html",
       "route": "/document/en/plugin/audio-track.html",
-      "sha256Lf": "dc66b1ce7e8d22f0ea7f15c2592a6768a515f60bcaa2dc82456cbb3bf5178d2a",
+      "sha256Lf": "e203b5b8498410562760c22b3006d2978e6450c278e1e1338e32cadf14c84cc8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19966,10 +20022,10 @@
     {
       "source": "docs/document/en/plugin/auto-thumbnail.html",
       "route": "/document/en/plugin/auto-thumbnail.html",
-      "sha256Lf": "9a4e6d9ebdb5ac6954b19f0ac46433f1d427c44154a8dfdc21d28ade51fe0744",
+      "sha256Lf": "658fdef9c008d7960b9fcd928e6e14ee5cbc76bcd2f261aad8ebdb56833f9557",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19979,10 +20035,10 @@
     {
       "source": "docs/document/en/plugin/chapter.html",
       "route": "/document/en/plugin/chapter.html",
-      "sha256Lf": "2de2d2070eea976d0bcbe1ef943e41b1c7c8dfb7ea824084f8a746fb91af127a",
+      "sha256Lf": "8cc3151abc3cd33020957506b0346c4abe72f19f72fd79294f1b9a6285a2a1ea",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19992,10 +20048,10 @@
     {
       "source": "docs/document/en/plugin/chromecast.html",
       "route": "/document/en/plugin/chromecast.html",
-      "sha256Lf": "bc4503b19db24345c561f896ca8b2a4087eea0ae989bb037acd9f1f960c47214",
+      "sha256Lf": "670eba184add3f29f691cdf85436575f2d46420fddcadef5e8ed3a2873ee2b17",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20005,10 +20061,10 @@
     {
       "source": "docs/document/en/plugin/danmuku-mask.html",
       "route": "/document/en/plugin/danmuku-mask.html",
-      "sha256Lf": "e591132eed5c312c95c50fdc59ae50f56ffc25887fb096e3d5042c484bbb6a85",
+      "sha256Lf": "45474ac892f69ec8835daf64b361d0223fbcd46febea9adf311407d3ee9d9c3c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20018,10 +20074,10 @@
     {
       "source": "docs/document/en/plugin/danmuku.html",
       "route": "/document/en/plugin/danmuku.html",
-      "sha256Lf": "909873a6b0fd9775021ef1dc0e2946df0b28c4da5858206189c7010ba4b1c381",
+      "sha256Lf": "cb27a17f147886a7d6647c066ed676fa80ee7d7fff383bff89997e2beb377320",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20031,10 +20087,10 @@
     {
       "source": "docs/document/en/plugin/dash-control.html",
       "route": "/document/en/plugin/dash-control.html",
-      "sha256Lf": "fb1044b26b7f571d7187c685044e1107dbd6daea29d292e9524ccad7bfbbc6a0",
+      "sha256Lf": "cafde739ba8ff273f652aa2ec7f6b5c0e82fa392ee62e68058d9ad4af666950e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20044,10 +20100,10 @@
     {
       "source": "docs/document/en/plugin/document-pip.html",
       "route": "/document/en/plugin/document-pip.html",
-      "sha256Lf": "7700e4079bc64e0cb841bd18fa633162548d5ee41bee7828f277ab3fb7d117c4",
+      "sha256Lf": "619a68246408a14711af5b7b48f1446a42d41d45111900ea4ad04296776de778",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20057,10 +20113,10 @@
     {
       "source": "docs/document/en/plugin/hls-control.html",
       "route": "/document/en/plugin/hls-control.html",
-      "sha256Lf": "6b50046b317b08e94883dddd72152d59afc13b77ce9c658d8fb2e9aee44d1526",
+      "sha256Lf": "528edc63fd20cc6c3df8d04898a084b40381262f5592cfac3db126272587073a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20070,10 +20126,10 @@
     {
       "source": "docs/document/en/plugin/jassub.html",
       "route": "/document/en/plugin/jassub.html",
-      "sha256Lf": "82305468e15e75e4be4e7bc3b9f8ee59395bc675ecb5cd60251f4f01d4db9f64",
+      "sha256Lf": "71a95d720c5ac30e2c15c0a21de0867aa30d9dc233f198028ee5ae84dff5775b",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20083,10 +20139,10 @@
     {
       "source": "docs/document/en/plugin/multiple-subtitles.html",
       "route": "/document/en/plugin/multiple-subtitles.html",
-      "sha256Lf": "0d4e1db4a353890815b6c499ef5fec7fbde96848161aab739babde84801423ab",
+      "sha256Lf": "8b50ddb45a29e3882f719cd546e4ed7b571ad05c57f596d1892adfca9c9a62c1",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20096,10 +20152,10 @@
     {
       "source": "docs/document/en/plugin/vast.html",
       "route": "/document/en/plugin/vast.html",
-      "sha256Lf": "cef636754db83c76fe0b57e8a5428e2a9f166500e0fc66ba5060d9787669f203",
+      "sha256Lf": "80489a5e4b784358f35ae1fe63e22c790ed5cebfa5b631e8a9709a15e22821c5",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20109,10 +20165,10 @@
     {
       "source": "docs/document/en/plugin/vtt-thumbnail.html",
       "route": "/document/en/plugin/vtt-thumbnail.html",
-      "sha256Lf": "c2bf79ab0f6ce171bb27d96db5fb89a163f943b278f968e9fa5c33758f0e5c8a",
+      "sha256Lf": "de5f16853197b8b5ceee59a26b890f11e13a0af35dc0e4523c9c820abc0df50e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20122,10 +20178,10 @@
     {
       "source": "docs/document/en/proxy/canvas.html",
       "route": "/document/en/proxy/canvas.html",
-      "sha256Lf": "4004774240a10d0b5647cc92c663175473f979f2df92b74a74095f3c322cf000",
+      "sha256Lf": "3054c23560e7a940421794fc32b6a2ae774e1d1ae0eb50063a1f021a10efd34c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20135,10 +20191,10 @@
     {
       "source": "docs/document/en/proxy/mediabunny.html",
       "route": "/document/en/proxy/mediabunny.html",
-      "sha256Lf": "554e5432a56ae092c431b7618faf1646b5d68f2169d63bb5e8aaf0abf3b06fe8",
+      "sha256Lf": "d4adf93cbb988204baab92525fd8bcb609f01d517c9b1216cc4e6766790ae1d4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20148,10 +20204,10 @@
     {
       "source": "docs/document/en/start/i18n.html",
       "route": "/document/en/start/i18n.html",
-      "sha256Lf": "fcb8a0b5207580ea0131654c5c5e2459b0b49ee680e3929fda9785e58b57110c",
+      "sha256Lf": "c10078d33cae15315ef1a38028c8ad5c08d2d052106c4fa2b075b7b302ae380e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20161,10 +20217,10 @@
     {
       "source": "docs/document/en/start/option.html",
       "route": "/document/en/start/option.html",
-      "sha256Lf": "259e84a4a9379ac0500986de40888c438d2dcba19487d22adce87484797e0a1a",
+      "sha256Lf": "fcce3395f425f590767098ae2b1e2162bcb40d541256dabc5b25b25720cc035f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20174,10 +20230,10 @@
     {
       "source": "docs/document/en/tool/iframe.html",
       "route": "/document/en/tool/iframe.html",
-      "sha256Lf": "b08fc8110628d20694099ef3eafa3edb02b850c182afb22c0c42f062c5ca7377",
+      "sha256Lf": "1ae878c19b5848ffad8841896620070acd243d651ec15896a3deccbf06075674",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20187,10 +20243,10 @@
     {
       "source": "docs/document/en/tool/thumbnail.html",
       "route": "/document/en/tool/thumbnail.html",
-      "sha256Lf": "d0bd20d2ed5872710f3e01b333db79deb5f030d107fb6b116c172c926c1f672a",
+      "sha256Lf": "630f3c23e02261c8242e0ad05a3df66b3d6df3fde2a3c16ab2eddaded5247530",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20200,10 +20256,10 @@
     {
       "source": "docs/document/index.html",
       "route": "/document/",
-      "sha256Lf": "e20723c85c04c8c460411f7ca4fac78a7bc4c1087bd3b408e139c4498de69a3e",
+      "sha256Lf": "f9bfee2b321abe90b94badc7eb93647eadb49836adee44b64897e21628ecd300",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20213,10 +20269,10 @@
     {
       "source": "docs/document/plugin/ads.html",
       "route": "/document/plugin/ads.html",
-      "sha256Lf": "005e69f97a0dbe2139420b5d1908c7bdbc337452666526d7074a6ecae555d6d1",
+      "sha256Lf": "4f241d7d71dc184bd189f0daaa974892ba2e32f7e4aecfd61d64ac2eebed65fd",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20226,10 +20282,10 @@
     {
       "source": "docs/document/plugin/ambilight.html",
       "route": "/document/plugin/ambilight.html",
-      "sha256Lf": "504c721bb39aeb7d21e594ac33562f5a2ba8d833287e522b8019412c5f8f634f",
+      "sha256Lf": "d6e9981bc84f729c9f02e9eb59a50bd15b264e7cf4eea67da612b618332a3e4f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20239,10 +20295,10 @@
     {
       "source": "docs/document/plugin/asr.html",
       "route": "/document/plugin/asr.html",
-      "sha256Lf": "ce200b32276496d7425012c685f93476aa231014ff8d522134aacaa53198134d",
+      "sha256Lf": "6c3749c1964939e6ed7fe01eaffaaadf39ab4952fd0829541b4c3d1f85bd9664",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20252,10 +20308,10 @@
     {
       "source": "docs/document/plugin/audio-track.html",
       "route": "/document/plugin/audio-track.html",
-      "sha256Lf": "6451e6a811665217bbc05fcb2bb05f0da0b5287a1fd07363a008fae5c27000c8",
+      "sha256Lf": "72c8ab0d71d30a15d96c988a327e874f5f6eb88e19648ed4b87bb3cc8184ae46",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20265,10 +20321,10 @@
     {
       "source": "docs/document/plugin/auto-thumbnail.html",
       "route": "/document/plugin/auto-thumbnail.html",
-      "sha256Lf": "5635bda03d48de8d790121f699c8161759c6cbfafd54581c40b094869f795986",
+      "sha256Lf": "d06a2f557e697e2d26a7fd7f2cbeeada17d35a37a96fa72f776b26885af6a638",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20278,10 +20334,10 @@
     {
       "source": "docs/document/plugin/chapter.html",
       "route": "/document/plugin/chapter.html",
-      "sha256Lf": "8b451c037e20b1cf6cf45843fd194ece01c221676cd23f2f09c0433ba5b1a5e3",
+      "sha256Lf": "ece76b5cb6035ede8e76f87d275c85e764e4f30fa9a922f07756ba7ffda78e53",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20291,10 +20347,10 @@
     {
       "source": "docs/document/plugin/chromecast.html",
       "route": "/document/plugin/chromecast.html",
-      "sha256Lf": "0d1ee5e838cfd251eb0c931d61884bb20625e58ce4703a29e029dcc48a829935",
+      "sha256Lf": "4eb25e9358d3caeffb2558480f20bf3b36bcb5f8cb7bdd0dab7cda512e9a8bf0",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20304,10 +20360,10 @@
     {
       "source": "docs/document/plugin/danmuku-mask.html",
       "route": "/document/plugin/danmuku-mask.html",
-      "sha256Lf": "5f9469e082a7fbaab240e56d08acf455be71db3778391a1da8016f792d1a5b54",
+      "sha256Lf": "31f5adde804046cbbd3e6b09def1f2b597a9d597eaab5a8457e144e1b3b11fd4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20317,10 +20373,10 @@
     {
       "source": "docs/document/plugin/danmuku.html",
       "route": "/document/plugin/danmuku.html",
-      "sha256Lf": "d460c189160737e8f7461a60aa607212e18866e94b1ced1870146ec6e393c0b8",
+      "sha256Lf": "2683266d728583c9f76149fbb8ceff7b987b223bb816318effb1c5ee65fb391e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20330,10 +20386,10 @@
     {
       "source": "docs/document/plugin/dash-control.html",
       "route": "/document/plugin/dash-control.html",
-      "sha256Lf": "7330f13ad2f0ef4eddd1133aef2801de8ad632df107bcf441868785fcbea42c4",
+      "sha256Lf": "6b9af16e5a57c39e6ea9d2cd8d0a165fbab1d275400aaf54341c04acf3308738",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20343,10 +20399,10 @@
     {
       "source": "docs/document/plugin/document-pip.html",
       "route": "/document/plugin/document-pip.html",
-      "sha256Lf": "76940cff03ad76ed0928cfebede59d40ef8935c5a442798af013c4f1e986945e",
+      "sha256Lf": "695387357dd4dbe969b6a9ea2aa0c276a560a9e046aea43ba1c9a60f6111bdd8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20356,10 +20412,10 @@
     {
       "source": "docs/document/plugin/hls-control.html",
       "route": "/document/plugin/hls-control.html",
-      "sha256Lf": "a194775427b239c06360e365d5557d5cbb4001c5eefa013c41bd618f8972dc9a",
+      "sha256Lf": "8d8e20c98974bad9329350c7da3a1d28c3eb20f76e4570f0c1cdd9a27e47a9c7",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20369,10 +20425,10 @@
     {
       "source": "docs/document/plugin/jassub.html",
       "route": "/document/plugin/jassub.html",
-      "sha256Lf": "510a9c731f17ba5e0dce821a9f0e75efcb5fd8c176588920f548bee008b9979c",
+      "sha256Lf": "a9b2a49b5cca42b5ebad8d9cb0fe39fdfb9045f1c9fd0f390c80ea50248b282f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20382,10 +20438,10 @@
     {
       "source": "docs/document/plugin/multiple-subtitles.html",
       "route": "/document/plugin/multiple-subtitles.html",
-      "sha256Lf": "16028491c483befeb697903ff2312075e322053c6826e80b16adddb6b629624c",
+      "sha256Lf": "e0e26fd6be7b68049971abe1946b4dfd3a12cab2f47a935584a8af4cade22b00",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20395,10 +20451,10 @@
     {
       "source": "docs/document/plugin/vast.html",
       "route": "/document/plugin/vast.html",
-      "sha256Lf": "e6dfc4bde300e7a7346dea6aed51c28f7a15bb2dd6c92b7ca1c1cd9dba56911e",
+      "sha256Lf": "bee1fbf1c6446032eeacca95ca67864c84f02e8a56cf4efb463dd4a01fc3ebe2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20408,10 +20464,10 @@
     {
       "source": "docs/document/plugin/vtt-thumbnail.html",
       "route": "/document/plugin/vtt-thumbnail.html",
-      "sha256Lf": "c75ad7017bcd687b644e8ddfe5a3b154384f1a9e96ec868aab7a6488b1972ca6",
+      "sha256Lf": "e7aa5642a1f138556f187193e8c7e3ea82b676b34af12b666821c7c593038e29",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20421,10 +20477,10 @@
     {
       "source": "docs/document/proxy/canvas.html",
       "route": "/document/proxy/canvas.html",
-      "sha256Lf": "75a00bd6a56d7a35ded81e18415d14a421bdab740be5ec4d5c2d70376bf878d2",
+      "sha256Lf": "4452906046a4007ee69040297b2575fc6f0643bc705ac51691759aba76d46dd0",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20434,10 +20490,10 @@
     {
       "source": "docs/document/proxy/mediabunny.html",
       "route": "/document/proxy/mediabunny.html",
-      "sha256Lf": "f60a294bbc5174e66ee87e2280114d98330f9f08cfeb5e1a14d20b12fd2fcf63",
+      "sha256Lf": "dc83c756ab836abe67ed7aed84a26991570fa84bdaed33a5a0c844706ba8aa83",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20447,10 +20503,10 @@
     {
       "source": "docs/document/start/i18n.html",
       "route": "/document/start/i18n.html",
-      "sha256Lf": "1ac3f17a5a2457ccc6d4ab7b1ad6b45d1dfa3d18338f55350635a7f4a765a3f4",
+      "sha256Lf": "d667c1c7769d571d5828011f035c0f9d8cb999c39469be75cb947067207d2d84",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20460,10 +20516,10 @@
     {
       "source": "docs/document/start/option.html",
       "route": "/document/start/option.html",
-      "sha256Lf": "a2fcf7d3f5b2cbf4de91681a4fdd6d5dd28c523fd59dd1f6d172e0d3d33928b9",
+      "sha256Lf": "0708909c0bded90e8ea606b82cfab4c5dc95820ce6198f6d9df7ec4cbfb55027",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20473,10 +20529,10 @@
     {
       "source": "docs/document/tool/iframe.html",
       "route": "/document/tool/iframe.html",
-      "sha256Lf": "4cccb60f77ce823ed8a11c222ad27823827c9bce572f11691e8664d47681ebc2",
+      "sha256Lf": "8624ddb69e6bb16c7b54f13c272fe6308e90a5862002ce61cdc1ccbf22e5af11",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20486,10 +20542,10 @@
     {
       "source": "docs/document/tool/thumbnail.html",
       "route": "/document/tool/thumbnail.html",
-      "sha256Lf": "49eb9530026b7586c399fa6e0cc5224484a534e96e8563c660046388f6c54192",
+      "sha256Lf": "e3c5642f95ef6773134a584401298c8b0d9db7d0f74bc5b2518fc299b563e7bd",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CEYmLzTJ.js",
+        "/document/assets/app.i7OqoAoJ.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
