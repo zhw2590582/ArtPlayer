@@ -21293,6 +21293,10 @@
       "sha256Lf": "394b8f19d795980f49cf1557b79b4708f3419689d0fa53be348b83b655d9a984"
     },
     {
+      "file": "scripts/site-build/links.ts",
+      "sha256Lf": "004eac68a543ef3f936b3e32bda2d7226b319e82df2ce9180b0c00eb69c576bf"
+    },
+    {
       "file": "packages/artplayer-vitepress/build/markdown.ts",
       "sha256Lf": "6d639e25bab97c973940661e2aac6f1034ab53ab1c016310a571ab52392819da"
     },
@@ -21356,7 +21360,7 @@
     "build:i18n": "node ./scripts/build-i18n.js",
     "build:test": "node ./scripts/build-test.js",
     "build:all": "yarn ci:build && yarn lint",
-    "ci:build": "yarn build:types && yarn build all && yarn build:i18n && yarn build:ts && yarn build:llm && yarn build:vconsole && yarn build:console && yarn build:site-notices && yarn build:test && yarn build:docs && yarn test:imports",
+    "ci:build": "yarn build:types && yarn build all && yarn build:i18n && yarn build:ts && yarn build:llm && yarn build:vconsole && yarn build:console && yarn build:site-notices && yarn build:test && yarn build:docs && yarn check:site-links && yarn test:imports",
     "build:types": "node scripts/build-types.mjs --write"
   },
   "siteManifest": {

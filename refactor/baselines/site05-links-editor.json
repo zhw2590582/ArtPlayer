@@ -1,0 +1,1778 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-05",
+  "status": "local-checks-passed-remote-edit-links-pending",
+  "baseCommit": "6b580d166747d2a1d460666d4259238beb851f4c",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "inputs": [
+    {
+      "file": "package.json",
+      "sha256": "400b3e7b2f3ce328369633f4537117075c86b7ac02ea42bda1daa928e07b74f1"
+    },
+    {
+      "file": "yarn.lock",
+      "sha256": "af8533e43d58ecc22dc2fa602faa56c40cceb6e986fb850a98c8ab4deb08a217"
+    },
+    {
+      "file": "scripts/check-site-links.mjs",
+      "sha256": "58e9194faf317dea59c895d6a37d8b791b03cb6f70c305632ff9f5c5359311bf"
+    },
+    {
+      "file": "scripts/site-build/links.ts",
+      "sha256": "004eac68a543ef3f936b3e32bda2d7226b319e82df2ce9180b0c00eb69c576bf"
+    },
+    {
+      "file": "scripts/tsconfig.docs.json",
+      "sha256": "a4a35841f7e79f305fdc9ebed65c16a6a0f4d56797243768be39616601ea9f02"
+    },
+    {
+      "file": "test/site-links.test.js",
+      "sha256": "265aac7be28fbfe0853376983b412234abf90710b943479b64c65ae1afb40d5f"
+    }
+  ],
+  "links": {
+    "pages": 67,
+    "localReferences": 5766,
+    "searchEntries": 942,
+    "searchModule": {
+      "path": "document/assets/chunks/virtual_search-data.DK5dZ1YJ.js",
+      "sha256": "d4a65a7f90c87416479edddbb2f4089af1ce88c98ab80257e4fd312d7617e0ba"
+    },
+    "externalUrls": [
+      "https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation",
+      "https://developers.google.com/web/updates/2017/09/autoplay-policy-changes",
+      "https://github.com/browserslist/browserslist#full-list",
+      "https://github.com/zhw2590582/ArtPlayer",
+      "https://github.com/zhw2590582/ArtPlayer#donations",
+      "https://github.com/zhw2590582/ArtPlayer/blob/master/CHANGELOG.md",
+      "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/cssVar.d.ts",
+      "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/events.d.ts",
+      "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/i18n.d.ts",
+      "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/icons.d.ts",
+      "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/template.d.ts",
+      "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/utils.d.ts",
+      "https://github.com/zhw2590582/ArtPlayer/blob/master/scripts/build.js#L29",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/example",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/advanced/built-in.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/advanced/class.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/advanced/event.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/advanced/global.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/advanced/plugin.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/advanced/property.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/component/contextmenu.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/component/controls.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/component/layers.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/component/setting.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/advanced/class.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/advanced/event.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/advanced/global.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/advanced/plugin.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/advanced/property.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/component/contextmenu.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/component/controls.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/component/layers.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/component/setting.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/index.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/ads.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/ambilight.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/asr.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/audio-track.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/auto-thumbnail.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/chapter.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/chromecast.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/danmuku-mask.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/document-pip.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/jassub.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/multiple-subtitles.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/vast.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/proxy/canvas.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/proxy/mediabunny.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/start/i18n.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/start/option.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/tool/iframe.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/tool/thumbnail.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/index.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/ads.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/ambilight.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/asr.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/audio-track.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/auto-thumbnail.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/chapter.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/chromecast.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/danmuku-mask.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/danmuku.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/dash-control.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/document-pip.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/hls-control.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/jassub.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/multiple-subtitles.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/vast.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/vtt-thumbnail.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/proxy/canvas.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/proxy/mediabunny.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/start/i18n.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/start/option.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/tool/iframe.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/tool/thumbnail.md",
+      "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer/types",
+      "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+    ],
+    "pageIssues": 0,
+    "searchIssues": 0,
+    "issues": []
+  },
+  "browser": {
+    "command": "yarn test:browser:source site-editor.spec.js site-loading.spec.js editor-declarations.spec.js editor-types.spec.js document-search.spec.js document-site.spec.js --workers=1",
+    "stats": {
+      "startTime": "2026-09-16T01:44:10.265Z",
+      "duration": 127013.172,
+      "expected": 72,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "Monaco compiles Ads namespaces and executes callable and historical default factories",
+        "file": "ads-editor-types.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "Monaco compiles Ads namespaces and executes callable and historical default factories",
+        "file": "ads-editor-types.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "Monaco compiles Ads namespaces and executes callable and historical default factories",
+        "file": "ads-editor-types.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "Monaco preserves legacy audio inference and runs the precise typed factory",
+        "file": "audio-editor-types.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "Monaco preserves legacy audio inference and runs the precise typed factory",
+        "file": "audio-editor-types.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "Monaco preserves legacy audio inference and runs the precise typed factory",
+        "file": "audio-editor-types.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "Monaco consumes DASH global types and executes the emitted plugin factory",
+        "file": "dash-editor-types.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "Monaco consumes DASH global types and executes the emitted plugin factory",
+        "file": "dash-editor-types.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "Monaco consumes DASH global types and executes the emitted plugin factory",
+        "file": "dash-editor-types.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "documentation search supports mouse and keyboard without reloading (zh)",
+        "file": "document-search.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "documentation search supports mouse and keyboard without reloading (en)",
+        "file": "document-search.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "documentation search supports mouse and keyboard without reloading (zh)",
+        "file": "document-search.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "documentation search supports mouse and keyboard without reloading (en)",
+        "file": "document-search.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "documentation search supports mouse and keyboard without reloading (zh)",
+        "file": "document-search.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "documentation search supports mouse and keyboard without reloading (en)",
+        "file": "document-search.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+        "file": "document-site.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+        "file": "document-site.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+        "file": "document-site.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+        "file": "document-site.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+        "file": "document-site.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+        "file": "document-site.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "Monaco checks all editor declarations together and runs the Chapter consumer",
+        "file": "editor-declarations.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "Monaco checks all editor declarations together and runs the Chapter consumer",
+        "file": "editor-declarations.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "Monaco checks all editor declarations together and runs the Chapter consumer",
+        "file": "editor-declarations.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "docs Monaco worker consumes generated core and published VAST types and runs a typed player example",
+        "file": "editor-types.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "docs Monaco worker consumes generated core and published VAST types and runs a typed player example",
+        "file": "editor-types.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "docs Monaco worker consumes generated core and published VAST types and runs a typed player example",
+        "file": "editor-types.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "Monaco consumes HLS global types and executes the emitted plugin factory",
+        "file": "hls-editor-types.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "Monaco consumes HLS global types and executes the emitted plugin factory",
+        "file": "hls-editor-types.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "Monaco consumes HLS global types and executes the emitted plugin factory",
+        "file": "hls-editor-types.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "desktop TypeScript mode emits and runs typed code, Ctrl-S reruns and invalid syntax keeps the current player",
+        "file": "site-editor.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "desktop file imports retain order, support CSS and remain usable after Run",
+        "file": "site-editor.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "denied browser storage falls back to a working editor and reports unsaved preferences",
+        "file": "site-editor.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "stored production and visibility settings reload with their existing keys",
+        "file": "site-editor.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "Monaco language AMD modules finish before example dependencies can suspend define",
+        "file": "site-editor.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "failed declaration loading disposes partial models and prevents premature Run",
+        "file": "site-editor.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "desktop TypeScript mode emits and runs typed code, Ctrl-S reruns and invalid syntax keeps the current player",
+        "file": "site-editor.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "desktop file imports retain order, support CSS and remain usable after Run",
+        "file": "site-editor.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "denied browser storage falls back to a working editor and reports unsaved preferences",
+        "file": "site-editor.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "stored production and visibility settings reload with their existing keys",
+        "file": "site-editor.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "Monaco language AMD modules finish before example dependencies can suspend define",
+        "file": "site-editor.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "failed declaration loading disposes partial models and prevents premature Run",
+        "file": "site-editor.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "desktop TypeScript mode emits and runs typed code, Ctrl-S reruns and invalid syntax keeps the current player",
+        "file": "site-editor.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "desktop file imports retain order, support CSS and remain usable after Run",
+        "file": "site-editor.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "denied browser storage falls back to a working editor and reports unsaved preferences",
+        "file": "site-editor.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "stored production and visibility settings reload with their existing keys",
+        "file": "site-editor.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "Monaco language AMD modules finish before example dependencies can suspend define",
+        "file": "site-editor.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "failed declaration loading disposes partial models and prevents premature Run",
+        "file": "site-editor.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "mobile page runs dependencies in order and plays the selected code with no AMD property leak",
+        "file": "site-loading.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "real script failure is retryable and cancellation restores the original AMD function",
+        "file": "site-loading.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "desktop editor preserves example priority and reuses loaded dependencies when Run is clicked",
+        "file": "site-loading.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "Run Code handles nested clicks, encodes dependencies and stays local on 127.0.0.1",
+        "file": "site-loading.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "first-language redirect preserves the translated deep link and later explicit Chinese selection",
+        "file": "site-loading.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "a late initial example response cannot overwrite a newer editor Run",
+        "file": "site-loading.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "denied storage keeps the requested documentation page without a redirect loop",
+        "file": "site-loading.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "mobile page runs dependencies in order and plays the selected code with no AMD property leak",
+        "file": "site-loading.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "real script failure is retryable and cancellation restores the original AMD function",
+        "file": "site-loading.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "desktop editor preserves example priority and reuses loaded dependencies when Run is clicked",
+        "file": "site-loading.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "Run Code handles nested clicks, encodes dependencies and stays local on 127.0.0.1",
+        "file": "site-loading.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "first-language redirect preserves the translated deep link and later explicit Chinese selection",
+        "file": "site-loading.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "a late initial example response cannot overwrite a newer editor Run",
+        "file": "site-loading.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "denied storage keeps the requested documentation page without a redirect loop",
+        "file": "site-loading.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "mobile page runs dependencies in order and plays the selected code with no AMD property leak",
+        "file": "site-loading.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "real script failure is retryable and cancellation restores the original AMD function",
+        "file": "site-loading.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "desktop editor preserves example priority and reuses loaded dependencies when Run is clicked",
+        "file": "site-loading.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "Run Code handles nested clicks, encodes dependencies and stays local on 127.0.0.1",
+        "file": "site-loading.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "first-language redirect preserves the translated deep link and later explicit Chinese selection",
+        "file": "site-loading.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "a late initial example response cannot overwrite a newer editor Run",
+        "file": "site-loading.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "denied storage keeps the requested documentation page without a redirect loop",
+        "file": "site-loading.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "Monaco consumes Thumbnail global declarations and runs the actual typed constructor and cleanup",
+        "file": "thumbnail-editor-types.spec.js",
+        "project": "chromium",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "Monaco consumes Thumbnail global declarations and runs the actual typed constructor and cleanup",
+        "file": "thumbnail-editor-types.spec.js",
+        "project": "firefox",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "Monaco consumes Thumbnail global declarations and runs the actual typed constructor and cleanup",
+        "file": "thumbnail-editor-types.spec.js",
+        "project": "webkit",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      }
+    ],
+    "report": "refactor/.cache/site05-editor-final-browser/report.json",
+    "sha256": "4791c019e464d3015bcd36fd754a4573ff015d905e1cabf71fec8a3350b2fb7f",
+    "scope": "source built documentation and editor; external HTTPS isolated by relevant fixtures; not full package SDK or physical-device acceptance"
+  },
+  "unit": {
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0,
+    "durationMs": 1334.8651
+  },
+  "ciTests": {
+    "passed": 80,
+    "failed": 0,
+    "skipped": 0,
+    "durationMs": 5761.8837
+  },
+  "checks": [
+    "frozen install with unchanged lock",
+    "strict toolchain: 41 tools / 1473 selectors",
+    "typecheck:docs-tools",
+    "read-only modified-file ESLint",
+    "check:editor-types: 24 outputs, current and compatibility compilers",
+    "check:site-assets: 5 assets / 66 routes",
+    "check:ci",
+    "site-inventory --check"
+  ],
+  "external": {
+    "direct": {
+      "checked": 81,
+      "ok": 2,
+      "transportFailures": 79,
+      "report": "refactor/.cache/site05-external-links.json"
+    },
+    "throughSystemProxy": {
+      "date": "2026-09-16T01:49:55.076Z",
+      "method": "HEAD",
+      "proxy": "system proxy endpoint",
+      "attemptsPerUrl": 1,
+      "results": [
+        {
+          "url": "https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation",
+          "status": 200,
+          "finalUrl": "https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation",
+          "durationSeconds": 0.297152
+        },
+        {
+          "url": "https://developers.google.com/web/updates/2017/09/autoplay-policy-changes",
+          "status": 200,
+          "finalUrl": "https://developer.chrome.com/blog/autoplay/",
+          "durationSeconds": 2.270095
+        },
+        {
+          "url": "https://github.com/browserslist/browserslist",
+          "status": 200,
+          "finalUrl": "https://github.com/browserslist/browserslist",
+          "durationSeconds": 0.85515
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer",
+          "durationSeconds": 0.98102
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/blob/master/CHANGELOG.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/CHANGELOG.md",
+          "durationSeconds": 0.858585
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/cssVar.d.ts",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/cssVar.d.ts",
+          "durationSeconds": 0.872066
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/events.d.ts",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/events.d.ts",
+          "durationSeconds": 0.806153
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/i18n.d.ts",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/i18n.d.ts",
+          "durationSeconds": 0.864404
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/icons.d.ts",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/icons.d.ts",
+          "durationSeconds": 0.835476
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/template.d.ts",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/template.d.ts",
+          "durationSeconds": 0.777945
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/utils.d.ts",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/utils.d.ts",
+          "durationSeconds": 0.846138
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/blob/master/scripts/build.js",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/scripts/build.js",
+          "durationSeconds": 0.810154
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/example",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/example",
+          "durationSeconds": 0.667672
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/advanced/built-in.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/advanced/built-in.md",
+          "durationSeconds": 1.237864
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/advanced/class.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/advanced/class.md",
+          "durationSeconds": 1.343097
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/advanced/event.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/advanced/event.md",
+          "durationSeconds": 1.163772
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/advanced/global.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/advanced/global.md",
+          "durationSeconds": 1.244429
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/advanced/plugin.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/advanced/plugin.md",
+          "durationSeconds": 1.063278
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/advanced/property.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/advanced/property.md",
+          "durationSeconds": 1.152961
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/component/contextmenu.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/component/contextmenu.md",
+          "durationSeconds": 1.186861
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/component/controls.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/component/controls.md",
+          "durationSeconds": 1.094521
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/component/layers.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/component/layers.md",
+          "durationSeconds": 1.032512
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/component/setting.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/component/setting.md",
+          "durationSeconds": 1.122282
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+          "durationSeconds": 1.203078
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/advanced/class.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/en/advanced/class.md",
+          "durationSeconds": 1.019787
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/advanced/event.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/en/advanced/event.md",
+          "durationSeconds": 1.176227
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/advanced/global.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/en/advanced/global.md",
+          "durationSeconds": 1.274226
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/advanced/plugin.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/en/advanced/plugin.md",
+          "durationSeconds": 1.301747
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "durationSeconds": 1.257999
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/component/contextmenu.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/en/component/contextmenu.md",
+          "durationSeconds": 1.040966
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/component/controls.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/en/component/controls.md",
+          "durationSeconds": 1.203154
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/component/layers.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/en/component/layers.md",
+          "durationSeconds": 1.221799
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/component/setting.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/en/component/setting.md",
+          "durationSeconds": 1.120565
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/index.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/en/index.md",
+          "durationSeconds": 1.18777
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/ads.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/ads.md",
+          "durationSeconds": 0.854762
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/ambilight.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/ambilight.md",
+          "durationSeconds": 0.633012
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/asr.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/asr.md",
+          "durationSeconds": 0.674269
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/audio-track.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/audio-track.md",
+          "durationSeconds": 0.636651
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/auto-thumbnail.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/auto-thumbnail.md",
+          "durationSeconds": 0.593755
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/chapter.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/chapter.md",
+          "durationSeconds": 0.597185
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/chromecast.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/chromecast.md",
+          "durationSeconds": 0.636504
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/danmuku-mask.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/danmuku-mask.md",
+          "durationSeconds": 0.776302
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+          "durationSeconds": 0.572908
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
+          "durationSeconds": 0.61135
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/document-pip.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/document-pip.md",
+          "durationSeconds": 0.591979
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
+          "durationSeconds": 0.744267
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/jassub.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/jassub.md",
+          "durationSeconds": 0.627222
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/multiple-subtitles.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/multiple-subtitles.md",
+          "durationSeconds": 0.636187
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/vast.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/vast.md",
+          "durationSeconds": 0.623025
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md",
+          "durationSeconds": 0.594952
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/proxy/canvas.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/proxy/canvas.md",
+          "durationSeconds": 0.672692
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/proxy/mediabunny.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/proxy/mediabunny.md",
+          "durationSeconds": 0.577246
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/start/i18n.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/en/start/i18n.md",
+          "durationSeconds": 1.127119
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/start/option.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/en/start/option.md",
+          "durationSeconds": 1.194185
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/tool/iframe.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/tool/iframe.md",
+          "durationSeconds": 0.703616
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/tool/thumbnail.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/tool/thumbnail.md",
+          "durationSeconds": 0.572344
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/index.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/index.md",
+          "durationSeconds": 1.217795
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/ads.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/ads.md",
+          "durationSeconds": 1.076511
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/ambilight.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/ambilight.md",
+          "durationSeconds": 0.579204
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/asr.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/asr.md",
+          "durationSeconds": 0.705892
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/audio-track.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/audio-track.md",
+          "durationSeconds": 0.61268
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/auto-thumbnail.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/auto-thumbnail.md",
+          "durationSeconds": 0.595393
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/chapter.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/chapter.md",
+          "durationSeconds": 0.701298
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/chromecast.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/chromecast.md",
+          "durationSeconds": 0.642198
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/danmuku-mask.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/danmuku-mask.md",
+          "durationSeconds": 0.598281
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/danmuku.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/plugin/danmuku.md",
+          "durationSeconds": 1.170842
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/dash-control.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/dash-control.md",
+          "durationSeconds": 0.699381
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/document-pip.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/document-pip.md",
+          "durationSeconds": 0.666397
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/hls-control.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/hls-control.md",
+          "durationSeconds": 0.638141
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/jassub.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/jassub.md",
+          "durationSeconds": 0.659567
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/multiple-subtitles.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/multiple-subtitles.md",
+          "durationSeconds": 0.615269
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/vast.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/vast.md",
+          "durationSeconds": 0.60703
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/vtt-thumbnail.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/vtt-thumbnail.md",
+          "durationSeconds": 0.646007
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/proxy/canvas.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/proxy/canvas.md",
+          "durationSeconds": 0.597424
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/proxy/mediabunny.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/proxy/mediabunny.md",
+          "durationSeconds": 0.63033
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/start/i18n.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/start/i18n.md",
+          "durationSeconds": 1.203561
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/start/option.md",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer-vitepress/docs/start/option.md",
+          "durationSeconds": 1.322352
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/tool/iframe.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/tool/iframe.md",
+          "durationSeconds": 0.601983
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/tool/thumbnail.md",
+          "status": 404,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/tool/thumbnail.md",
+          "durationSeconds": 0.589342
+        },
+        {
+          "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer/types",
+          "status": 200,
+          "finalUrl": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer/types",
+          "durationSeconds": 0.773787
+        },
+        {
+          "url": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662",
+          "status": 200,
+          "finalUrl": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662",
+          "durationSeconds": 0.285044
+        }
+      ]
+    },
+    "pendingRemoteSources": [
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/ads.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/ads.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/ambilight.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/ambilight.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/asr.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/asr.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/audio-track.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/audio-track.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/auto-thumbnail.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/auto-thumbnail.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/chapter.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/chapter.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/chromecast.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/chromecast.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/danmuku-mask.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/danmuku-mask.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/document-pip.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/document-pip.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/jassub.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/jassub.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/multiple-subtitles.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/multiple-subtitles.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/vast.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/vast.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md",
+        "file": "packages/artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/proxy/canvas.md",
+        "file": "packages/artplayer-vitepress/docs/en/proxy/canvas.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/proxy/mediabunny.md",
+        "file": "packages/artplayer-vitepress/docs/en/proxy/mediabunny.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/tool/iframe.md",
+        "file": "packages/artplayer-vitepress/docs/en/tool/iframe.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/en/tool/thumbnail.md",
+        "file": "packages/artplayer-vitepress/docs/en/tool/thumbnail.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/ads.md",
+        "file": "packages/artplayer-vitepress/docs/plugin/ads.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/ambilight.md",
+        "file": "packages/artplayer-vitepress/docs/plugin/ambilight.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/asr.md",
+        "file": "packages/artplayer-vitepress/docs/plugin/asr.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/audio-track.md",
+        "file": "packages/artplayer-vitepress/docs/plugin/audio-track.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/auto-thumbnail.md",
+        "file": "packages/artplayer-vitepress/docs/plugin/auto-thumbnail.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/chapter.md",
+        "file": "packages/artplayer-vitepress/docs/plugin/chapter.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/chromecast.md",
+        "file": "packages/artplayer-vitepress/docs/plugin/chromecast.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/danmuku-mask.md",
+        "file": "packages/artplayer-vitepress/docs/plugin/danmuku-mask.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/dash-control.md",
+        "file": "packages/artplayer-vitepress/docs/plugin/dash-control.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/document-pip.md",
+        "file": "packages/artplayer-vitepress/docs/plugin/document-pip.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/hls-control.md",
+        "file": "packages/artplayer-vitepress/docs/plugin/hls-control.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/jassub.md",
+        "file": "packages/artplayer-vitepress/docs/plugin/jassub.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/multiple-subtitles.md",
+        "file": "packages/artplayer-vitepress/docs/plugin/multiple-subtitles.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/vast.md",
+        "file": "packages/artplayer-vitepress/docs/plugin/vast.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/plugin/vtt-thumbnail.md",
+        "file": "packages/artplayer-vitepress/docs/plugin/vtt-thumbnail.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/proxy/canvas.md",
+        "file": "packages/artplayer-vitepress/docs/proxy/canvas.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/proxy/mediabunny.md",
+        "file": "packages/artplayer-vitepress/docs/proxy/mediabunny.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/tool/iframe.md",
+        "file": "packages/artplayer-vitepress/docs/tool/iframe.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      },
+      {
+        "url": "https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/tool/thumbnail.md",
+        "file": "packages/artplayer-vitepress/docs/tool/thumbnail.md",
+        "existsLocally": true,
+        "existedAtRefactorBaseline": false
+      }
+    ],
+    "limitation": "HEAD status and redirect only; external fragments and SDK behavior unverified"
+  },
+  "remaining": [
+    "39 new guide source paths unavailable on remote master; recheck after authorized integration",
+    "SITE-06/SITE-07 final delivery and asset provenance",
+    "EX-03 full demos and real external integrations",
+    "REL-02 shared candidate fingerprint refresh"
+  ],
+  "publicationAuthorized": false
+}

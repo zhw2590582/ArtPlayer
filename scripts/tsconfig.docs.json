@@ -29,6 +29,7 @@
     "build-site-notices.mjs",
     "build-i18n.js",
     "build-docs.js",
+    "check-site-links.mjs",
     "../packages/artplayer-vitepress/build/**/*.ts",
     "build-vconsole.mjs",
     "browser-validation/**/*.ts",

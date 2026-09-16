@@ -75,8 +75,12 @@ Use `yarn test:site-build` for the pinned-component compilation and drift guard,
 before `yarn test:browser:source document-search.spec.js document-site.spec.js`.
 Browser checks cover both language URLs, pointer navigation, keyboard selection,
 Escape, focus, no results, and retained document identity (no form reload).
-They isolate external scripts and do not validate AdSense, physical devices,
-all search-index anchors or the complete online editor; those remain SITE-05 work.
+They isolate external scripts and do not validate AdSense or physical devices.
+`yarn check:site-links` separately checks every built page's local href/src and
+every shipped search-index target/anchor. The site-editor, site-loading and
+editor declaration suites exercise the actual Monaco UI and worker. Remote
+GitHub edit links for new guides require those source paths to reach `master`;
+an unpublished local guide is not proof that its external edit link is available.
 
 Tools have their own navigation group. Iframe explains the required child inject
 step and serialized commit body, without treating the protocol as a sandbox or

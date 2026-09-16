@@ -4624,7 +4624,9 @@
       "acceptance": "文档构建、链接、嵌入路径与声明注入通过；真实完整 demo 保留 EX-03 独立门槛；核对 ENG-PM-01 登记的搜索 peer 范围和真实搜索行为",
       "evidence": [
         "changes/2026-09-16-SITE-05-search.md",
-        "baselines/site05-search.json"
+        "baselines/site05-search.json",
+        "changes/2026-09-16-SITE-05-links-editor.md",
+        "baselines/site05-links-editor.json"
       ]
     },
     {

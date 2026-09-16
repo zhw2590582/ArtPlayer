@@ -6,7 +6,7 @@
 
 1. 切换到 .node-version 指定的 Node，安装 Yarn 1.22.22；例如 `npm install --global yarn@1.22.22`，然后确认 `node --version` 和 `yarn --version`。npm 仅可用于安装 Yarn 工具及消费者兼容检查，不用于维护本仓库依赖锁。
 2. 干净 checkout 执行 `yarn install --frozen-lockfile --non-interactive`，禁止 CI 自动更新锁或忽略安装脚本/engines。参见 [Yarn Classic install](https://classic.yarnpkg.com/en/docs/cli/install/)。
-3. 执行 `yarn check:toolchain --strict`，核对实际 Node/Yarn、20 个固定开发工具和 22 个 workspace 的声明及传递依赖锁条目。普通检查允许满足最低工具要求的 Node，同时打印标准版本。
+3. 执行 `yarn check:toolchain --strict`，核对实际 Node/Yarn、根固定开发工具和 22 个 workspace 的声明及传递依赖锁条目。工具数量以本次输出为准；普通检查允许满足最低工具要求的 Node，同时打印标准版本。
 4. 执行 `yarn test:playback`、`yarn test:dash-control`、`yarn build all` 和 `yarn workspace artplayer-vitepress build`。ENG-02 已拆分只读 lint 与 lint:fix；PR/主线入口和独立 Pages 流程见 ci-setup.md。
 
 私有根包最低 Node 为 ^20.19.0 || >=22.12.0，与原本使用的 Vite 7 一致。标准工具链验证
@@ -19,6 +19,11 @@ CORE-25 默认选项缺陷已修复并通过相同三 Node 与严格打包检查
 ## 锁文件和依赖维护
 
 - 根构建工具固定精确版本并放在 devDependencies；发布包的 dependencies/peer 范围保持原样。
+- SITE-05 将已有传递依赖 `htmlparser2@10.1.0` 显式声明为根 devDependency，供
+  `yarn check:site-links` 解析生成 HTML 使用；不进入播放器包。原版本和完整性不变，
+  根 yarn.lock 只合并新增的精确选择器。链接检查不执行 HTML 的脚本，不请求外部 URL。
+  文档站 FlexSearch peer 已对齐 0.7.43，见[搜索验证](changes/2026-09-16-SITE-05-search.md)。
+  Yarn workspace add 后须再从根目录安装并核对 resolutions，防止工作区子命令遗漏根覆盖。
 - PKG-JASSUB-09 新增根 devDependency `pngjs@7.0.0`，在 Node 中解码 Playwright 截图，
   用实际合成画面与转移画布 readback 对照；不进入发布包。仅新增其精确 Yarn 锁条目，
   并验证固定 Node/Yarn 的 frozen 安装及严格工具链检查。上游 API 见
@@ -39,7 +44,7 @@ Monaco 浏览器资产匹配的精确 API 类型。只使用 type import，不�
 或加入播放器产物；root yarn.lock 仅增加该版本的一个条目。新增
 `yarn test:site-editor` 验证编辑器状态/读取失败；浏览器检查仍使用原 assets/js/vs。
 
-ENG-01 的 [npm 验证报告](baselines/toolchain-validation.json) 是切换前历史证据，不代表 Yarn 已验证。[Yarn 验证报告](baselines/yarn-validation.json) 记录最终干净冻结安装、20 项 Node 测试、21 库包 63 产物及文档站构建全部通过；63 产物 SHA-256 与 ENG-01 完全相同。保留的旧锁条目版本变化为零，9 个 workspace runtime 依赖解析与 npm 基线一致。搜索 peer 警告由 SITE-05 接续验证。
+ENG-01 的 [npm 验证报告](baselines/toolchain-validation.json) 是切换前历史证据，不代表 Yarn 已验证。[Yarn 验证报告](baselines/yarn-validation.json) 记录最终干净冻结安装、20 项 Node 测试、21 库包 63 产物及文档站构建全部通过；63 产物 SHA-256 与 ENG-01 完全相同。保留的旧锁条目版本变化为零，9 个 workspace runtime 依赖解析与 npm 基线一致。搜索 peer 后续已由 SITE-05 对齐版本并完成三引擎交互验证；未启用的托管提供方警告保留说明。
 
 构建通过不代表运行时、类型、真实浏览器或 npm 发布验收已完成。Chrome 不可用时按 release-reviews.md 使用内置浏览器并注明实际环境。
 

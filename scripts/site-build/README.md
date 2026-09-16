@@ -88,4 +88,23 @@ native radio selection and visible code blocks after clicking the built code-gro
 labels. SITE-03 still
 owns desktop editor UI migration, SITE-04 semantic/bilingual documentation and
 SITE-05 full site/search/link acceptance. No npm/Pages publication or remote CI
-run follows from a successful local build. No dependencies were added.
+run follows from a successful local build.
+
+## Generated documentation links
+
+`yarn check:site-links` reads every generated HTML page under `docs/document/`
+and the actual built `virtual_search-data.*.js` module. `links.ts` uses the pinned
+root development dependency `htmlparser2@10.1.0` to collect href/src references,
+IDs and legacy named anchors without executing page scripts. It resolves local
+files, directory indexes, encoded fragments and references back to the site root.
+Script contents and inert template contents are not treated as rendered links.
+An HTML base element requires explicit checker support rather than silently
+using the wrong base. Missing/ambiguous/malformed search data and missing HTML
+output fail the command. A missing target or anchor also exits nonzero.
+
+The checker runs in `ci:check` against committed output and after the documentation
+build in `ci:build`. Its JSON lists external URLs without requesting them. External
+availability, CSS/JavaScript-discovered URLs, interactive Run Code forwarding,
+playback and online editor behavior need separate checks. `test/site-links.test.js`
+exercises valid HTML/entities, missing assets and anchors, invalid URLs and broken
+search modules; it is included in `test:site-build` and `test:node`.

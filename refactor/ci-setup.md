@@ -1,5 +1,9 @@
 # PR 检查和 Pages 操作说明
 
+SITE-05 增加 `yarn check:site-links`：`ci:check` 校验已提交文档，`ci:build` 在重建
+文档后检查生成 HTML 的 href/src、本地文件/锚点及实际搜索索引。任一缺失使入口失败。
+外部 URL 只列入报告，在线编辑器和真实播放由浏览器矩阵另验；本地配置不代表远端运行。
+
 同一20包安装映射的Windows WebKit26.6完整运行现已结束：bb2c12df3执行77文件/845项，
 694通过、13失败、138能力跳过、0重试，1214.860秒。失败包括8项Audio、1项Chapter、
 1项候选弹幕CPU间隔漏发和3项旧JASSUB；候选JASSUB三核心通过。见
