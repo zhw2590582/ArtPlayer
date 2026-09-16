@@ -2,6 +2,59 @@
 
 这里的 `实例属性` 是指挂载在 `实例` 的 `一级属性`，比较常用
 
+## 实例身份与生命周期 {#instance-lifecycle}
+
+Artplayer.instances 返回成功构造且仍在登记中的实例共享数组。构造器只在同步初始化结束后加入实例，因此构造插件执行时还不能在其中找到自己。它不是副本，也不代表所有实例已 ready。读取或复制即可，不应手动修改：登记、容器重复检查和互斥播放都依赖该数组；销毁只移除当前实例。
+
+art.constructor 指向同一个 Artplayer 构造器，其 prototype 是实例原型。Artplayer.version 是包版本字符串，不是能力检测。历史根声明仍包含 Artplayer.env 和 Artplayer.build，但冻结的 npm 5.4.0 及当前 6.0.0 运行时都没有提供它们，读取返回 undefined；runtime 类型省略了它们。构建过程替换 NODE_ENV 不会创建这些公开字段。
+
+art.id 是同一份已加载构造器内递增的数字，在配置校验前分配，失败构造可能留下间隔；分别加载的 bundle 有各自计数和实例表。它与播放记忆键 option.id 无关，不应用作跨页面持久唯一标识。
+
+### 状态字段与内部服务 {#instance-state}
+
+下列六个字段初始为 false，是普通可写字段，不是操作命令或能力保证。直接赋值不会执行对应功能或资源清理。
+
+| 字段 | 核心含义 |
+| --- | --- |
+| isReady | 首次 canplay 后在 ready 事件前设为 true；reset、切源和正常销毁不把它重置为 false，因此不能证明当前 URL 已就绪 |
+| isDestroy | 核心清理及实例移除后、destroy 事件前设为 true；内部关闭保护更早生效，清理执行中仍可能为 false |
+| isFocus | 根据播放器 focusin/focusout 和文档内外 click/contextmenu 更新，不等同于 document.activeElement |
+| isInput | 在上述路径记录目标是否为 INPUT，不代表所有可编辑目标；键盘过滤另行检查可编辑内容 |
+| isLock | 移动端锁定辅助功能与 CSS 状态一起更新；直接赋值不会创建锁定 UI 或派发 lock |
+| isRotate | 记录网页自动旋转的 CSS 变换；原生屏幕方向锁定不会让它成为通用设备方向标志 |
+
+可选的 flv/m3u8/hls/ts/mpd/torrent 是外部适配器的集成位置，核心不初始化这些 SDK，也不会自动调用任意对象的 destroy 方法。按适配器的资源归属规则注册清理；runtime 将这些值描述为 unknown，需要使用者检查后再使用。
+
+art.player 是安装实例属性描述符的对象，没有公开操作方法；播放 API 位于 art 本身。info/loading/mask 是已有组件服务，提供 show 和 toggle()。show setter 修改 CSS 状态并同步派发同名事件，重复相同赋值也会派发；它不是 Promise，不负责拉取媒体或决定缓冲状态，后续原生媒体回调可能再次改变其显示状态。
+
+info 在桌面初始化，即使隐藏也按 INFO_LOOP_TIME 轮询 data-video 字段，数字显示两位小数并写入 textContent；runtime 的 init() 会重新建立归属的轮询/监听作用域，而不是额外叠加独立循环。loading 挂载配置的加载图标。mask 挂载状态/错误图标，状态按钮点击时请求 play，销毁时切换终止呈现；用户 destroy 监听器抛错不会跳过它的最终清理。这些服务不是 layers/controls 那样的自定义条目容器。
+
+plugins.add 仍按插件指南的规则工作：同步结果立即注册，同 realm Promise 返回最终解析为管理器的 Promise，不会统一改造成异步 API。runtime 的 Plugins.add 类型接受准确和旧版工厂，不包装实际函数。插件返回对象即使有 destroy 方法，也不会仅因此被自动释放。
+
+### Reset、销毁与失败 {#instance-cleanup}
+
+reset() 只依次调用 video.removeAttribute('src') 和 video.load()，返回 undefined，保留 UI、实例登记、option.url、就绪标志和用户订阅；不撤销调用方 URL、不销毁 SDK，也不重建插件，原生媒体事件仍可能随后到达。需要协调切源时使用切源 API；reset 不是完整播放器重启或异步取消完成凭证。
+
+destroy(removeHtml = true) 同步开始清理。REMOVE_SRC_WHEN_DESTROY 开启且媒体节点可用时先调用 reset，再释放归属作用域、处理模板、移除实例、设置 isDestroy、派发 destroy，并完成余下资源清理。返回不代表已经发出的浏览器异步请求全部完成。reset/destroy 都使用方法的 this，作为回调传递时应绑定实例。
+
+true 会清空容器，但不删除调用方容器节点，也不恢复挂载前内容；false 保留生成 DOM 并添加 art-destroy，同时仍停止核心资源。重复/重入 destroy 不再执行，因此 destroy(false) 后再调用 destroy(true) 不会补删保留的 DOM。容器释放后可以创建新实例，不能把旧实例当作已复活，也不能假设销毁后的所有属性访问都统一无操作。
+
+清理遇到异常仍继续，最后抛出第一个捕获值并记录额外异常；同步构造失败则恢复捕获的 DOM/属性并重新抛出原初始化错误。destroy 不清空所有用户事件订阅：保留实例也会保留这些回调，需自行移除。调用方创建的计时器、原生监听器和 SDK 资源需要自己的清理，核心管理器和作用域只释放登记给它们的资源。
+
+```ts
+import Artplayer from 'artplayer/runtime';
+
+const art = new Artplayer({ container: '#player' });
+const instances: Artplayer[] = [...Artplayer.instances];
+const identifier: number = art.id;
+art.info.show = true;
+art.loading.toggle();
+const dispose = art.destroy.bind(art);
+const retained: void = dispose(false);
+void [instances, identifier, retained];
+```
+
+
 ## `play`
 
 -   Type: `Function`
@@ -961,6 +1014,39 @@ var art = new Artplayer({
 
 console.info(art.video);
 ```
+
+### 原生与代理媒体能力 {#media-capabilities}
+
+art.video 返回当前模板媒体节点，与 art.template.$video 相同，可能是经过适配的 canvas，而非 HTMLVideoElement。根入口保留历史 video 类型；runtime 导出 MediaSurface，即 NativeMedia | CanvasMedia。CanvasMedia 描述真正的 canvas 加上适配器提供的媒体状态、源地址、尺寸、缓冲区间、音量/倍速、load 和播放方法。普通 canvas 不满足此契约，类型本身也不会安装适配器。
+
+PlaybackMethods 允许适配器自己的 play/pause 返回类型。直接调用 art.video.play/pause 操作媒体节点，得到原生或适配器返回值；Artplayer 方法还会处理通知、自定义事件、操作归属和互斥。MediaState 描述 currentTime/duration/paused/ended/readyState 以及可选布尔 playing；没有该提示时，核心按时间大于零、未暂停/结束和 readyState 大于二推导 playing。这些状态不能证明画面帧实际正在呈现。
+
+| 可选能力 | 含义与检查 |
+| --- | --- |
+| textTracks、error | 类轨道列表/原生或适配器错误值，代理可能不提供；error 为 unknown，不保证是 Error 实例 |
+| requestVideoFrameCallback、cancelVideoFrameCallback | 可选帧回调方法，需要分别检测并保留媒体 this；类型不承诺计时器回退 |
+| requestPictureInPicture | 可选原生画中画请求，返回 Promise；存在该方法不代表没有用户激活、策略或媒体要求 |
+| webkitEnterFullscreen、webkitExitFullscreen、webkitSupportsFullscreen | WebKit 媒体全屏方法及能力标志，使用前检测 |
+| webkitSupportsPresentationMode、webkitSetPresentationMode、webkitPresentationMode | WebKit 呈现模式的能力、请求与观测状态；方法可用不保证请求成功 |
+| webkitDisplayingFullscreen | 可选的媒体全屏观测状态，不是请求方法 |
+| webkitShowPlaybackTargetPicker | 可选 AirPlay 选择器；核心还检查可用性事件，调用不代表已连接接收设备 |
+
+直接使用可选原生方法时保留媒体 this 并处理 Promise 失败；常规播放器集成优先使用公开显示模式 API。能力检测或 Windows WebKit 运行不能替代真实 Safari/iOS/AirPlay 验收。下面的类型样例保持可选性，不发出显示模式请求：
+
+```ts
+import Artplayer from 'artplayer/runtime';
+import type { MediaSurface, NativeMedia, CanvasMedia } from 'artplayer/runtime';
+
+const art = new Artplayer({ container: '#player' });
+const media: MediaSurface = art.video;
+const error: unknown = media.error;
+const tracks: ArrayLike<TextTrack> | undefined = media.textTracks;
+const supportsFrames = typeof media.requestVideoFrameCallback === 'function'
+    && typeof media.cancelVideoFrameCallback === 'function';
+const surface: NativeMedia | CanvasMedia = media;
+void [error, tracks, supportsFrames, surface];
+```
+
 
 ## `cssVar`
 

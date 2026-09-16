@@ -2,6 +2,59 @@
 
 Here, `Instance Properties` refer to the `first-level properties` mounted on the `instance`, which are commonly used.
 
+## Instance identity and lifecycle {#instance-lifecycle}
+
+Artplayer.instances returns the shared array of successfully constructed, still-registered instances. The constructor adds an instance only after synchronous initialization finishes; a constructor plugin does not yet find its own instance there. It is not a copy or a list of ready players. Read or copy it rather than editing it: registration, duplicate-container checks and mutex playback use this array. Destruction removes only that instance.
+
+art.constructor is the same Artplayer constructor and its prototype is the instance prototype. Artplayer.version is the package version string, not a capability test. The historical root declarations still name Artplayer.env and Artplayer.build, but neither is supplied by the frozen npm 5.4.0 runtime or the current 6.0.0 runtime; their reads return undefined. The runtime declaration view omits them. The build process's NODE_ENV replacement does not create these public properties.
+
+art.id is an incrementing numeric identifier within one loaded constructor, allocated before option validation. Failed construction can leave gaps; independent bundle copies have independent counters/registries. It is unrelated to option.id, which is a playback-memory key. Do not use it as a globally unique persistent identifier.
+
+### State fields and owned services {#instance-state}
+
+These six fields start as false and are ordinary writable fields, not commands or capability promises. Assigning them does not run the corresponding feature or perform cleanup.
+
+| Field | Core meaning |
+| --- | --- |
+| isReady | Set before the first ready event after canplay. Not reset to false by reset, source changes or normal destruction, so it does not prove the current URL is ready |
+| isDestroy | Set after core teardown and instance removal, before the destroy event. Internal closing guards start earlier; it can still be false while cleanup is executing |
+| isFocus | Updated by player focusin/focusout and inside/outside document click/contextmenu paths. Not a direct alias of document.activeElement |
+| isInput | Tracks INPUT targets in those paths, not every editable target. Keyboard filtering separately checks editable content |
+| isLock | Updated by the mobile lock helper alongside its CSS state. Assigning this field alone does not create the lock UI or emit lock |
+| isRotate | Tracks the CSS rotation used by web auto-orientation. Native screen-orientation locking does not make this a general device-orientation flag |
+
+Optional flv/m3u8/hls/ts/mpd/torrent fields are integration slots for caller-installed adapters. The core does not initialize those SDKs or automatically call arbitrary objects' destroy methods. Follow each adapter's ownership contract and register its cleanup. runtime describes unknown integration values so that consumers check them before use.
+
+art.player is the descriptor installer object, with no public operational methods; playback APIs are installed on art itself. info/loading/mask are existing component services with show and toggle(). Their show setters update CSS state and synchronously emit their named event, including identical assignments. They are not promises and do not fetch media or control buffering. Native media handlers may subsequently change their visibility.
+
+The info service initializes on desktop, polls data-video fields at INFO_LOOP_TIME even while hidden, formats numbers to two decimals, and updates textContent. Its runtime init() restarts the owned polling/listener scope rather than creating an independent extra loop. Loading mounts the configured loading icon. Mask mounts state/error icons, requests play on state-button click, and switches to its terminal error presentation on destruction; a thrown user destroy listener does not skip its final cleanup. These services are not custom-entry containers like layers or controls.
+
+plugins.add remains the registry method documented in the plugin guide: a synchronous result is immediately installed, a same-realm Promise returns a Promise of the registry, and neither shape is converted into a universal async API. The runtime Plugins.add type accepts accurate and legacy factories without wrapping the actual function. Plugin result objects are not automatically disposed merely because they contain a destroy method.
+
+### Reset, destruction, and failure {#instance-cleanup}
+
+reset() only calls video.removeAttribute('src') followed by video.load(). It returns undefined, keeps the UI, registration, option.url, readiness flag and user subscriptions, and does not revoke caller URLs, destroy SDKs or rebuild plugins. Native media events may still follow. Use the source-switch APIs for coordinated source changes; reset is not a full player restart or an asynchronous cancellation receipt.
+
+destroy(removeHtml = true) synchronously starts teardown. When REMOVE_SRC_WHEN_DESTROY is enabled and a media node is available it first calls reset, then releases owned scopes, handles the template, removes the instance, marks isDestroy, emits destroy, and finalizes remaining resources. Browser promises already in flight are not synchronously made complete by its return. Both reset and destroy use the method receiver; keep them bound to the instance when passing them elsewhere.
+
+With true, destruction empties the container; it does not remove the caller's container node or restore its pre-mount content. With false, it keeps the generated DOM and marks the player art-destroy while still stopping core resources. A repeated/reentrant destroy is a no-op, so destroy(false) followed by destroy(true) does not later remove the retained DOM. Reusing the released container requires a new player. The old instance must not be treated as revived, and later property access is not uniformly guaranteed to be a no-op.
+
+Cleanup continues after a failure, then throws the first caught value and logs additional failures. A failing synchronous constructor instead restores its captured DOM/attributes and rethrows the original initialization error. User event registrations are not all erased by destroy: retaining an instance also retains those callbacks until removed. Caller-created timers, native listeners and external SDK resources need their own cleanup; the core-owned listener manager and scopes only release resources registered with them.
+
+```ts
+import Artplayer from 'artplayer/runtime';
+
+const art = new Artplayer({ container: '#player' });
+const instances: Artplayer[] = [...Artplayer.instances];
+const identifier: number = art.id;
+art.info.show = true;
+art.loading.toggle();
+const dispose = art.destroy.bind(art);
+const retained: void = dispose(false);
+void [instances, identifier, retained];
+```
+
+
 ## `play`
 
 -   Type: `Function`
@@ -962,6 +1015,39 @@ var art = new Artplayer({
 
 console.info(art.video);
 ```
+
+### Native and proxy media capabilities {#media-capabilities}
+
+art.video is the current template media node, identical to art.template.$video; it may be an adapted canvas rather than an HTMLVideoElement. The root entry retains its historical video type. runtime exports MediaSurface as NativeMedia | CanvasMedia: CanvasMedia describes an actual canvas plus media state, source, dimensions, buffered ranges, volume/rate, load and playback methods supplied by an adapter. A bare canvas does not satisfy that contract, and the type does not install an adapter.
+
+PlaybackMethods allows an adapter's own play/pause return types. Calling art.video.play/pause acts directly on that surface, with its native or adapter result; the Artplayer method facade separately applies notices, custom events, operation ownership and mutex behavior. MediaState describes currentTime/duration/paused/ended/readyState and an optional boolean playing hint; when that hint is absent, the core derives playing from time greater than zero, not paused/ended, and readyState greater than two. These state fields do not prove decoded frames are being presented.
+
+| Optional capability | Meaning and check |
+| --- | --- |
+| textTracks, error | Track-list-like data / native or adapter error value. Proxies may omit either; error is unknown, not guaranteed to be an Error instance |
+| requestVideoFrameCallback, cancelVideoFrameCallback | Optional paired frame-callback methods. Detect each function and preserve the media receiver; no timer fallback is promised by these types |
+| requestPictureInPicture | Optional native PiP request returning a Promise; availability does not remove user-activation, policy or media requirements |
+| webkitEnterFullscreen, webkitExitFullscreen, webkitSupportsFullscreen | WebKit media-fullscreen methods and capability flag; detect before use |
+| webkitSupportsPresentationMode, webkitSetPresentationMode, webkitPresentationMode | WebKit presentation-mode capability, request and observed mode; a supported method does not guarantee the requested mode succeeds |
+| webkitDisplayingFullscreen | Optional observed media-fullscreen state, not a request |
+| webkitShowPlaybackTargetPicker | Optional AirPlay picker. The core additionally checks availability events; calling it is not proof of a receiver connection |
+
+Keep optional native calls bound to the media object, handle Promise failures, and use the public display APIs for normal player integration. Capability detection or Windows WebKit execution is not physical Safari/iOS/AirPlay acceptance. The following type-only consumer keeps access optional without issuing a display request:
+
+```ts
+import Artplayer from 'artplayer/runtime';
+import type { MediaSurface, NativeMedia, CanvasMedia } from 'artplayer/runtime';
+
+const art = new Artplayer({ container: '#player' });
+const media: MediaSurface = art.video;
+const error: unknown = media.error;
+const tracks: ArrayLike<TextTrack> | undefined = media.textTracks;
+const supportsFrames = typeof media.requestVideoFrameCallback === 'function'
+    && typeof media.cancelVideoFrameCallback === 'function';
+const surface: NativeMedia | CanvasMedia = media;
+void [error, tracks, supportsFrames, surface];
+```
+
 
 ## `cssVar`
 

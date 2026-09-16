@@ -31,7 +31,7 @@ console.info(Artplayer.version);
 
 ## `env`
 
-Returns the environment variables of the player.
+Retained in historical root declarations, but absent at runtime in both the frozen npm 5.4.0 baseline and the current 6.0.0 build. Reading it returns undefined; it is not a reliable environment check.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -41,7 +41,7 @@ console.info(Artplayer.env);
 
 ## `build`
 
-Returns the build timestamp of the player.
+Retained in historical root declarations, but neither the frozen npm 5.4.0 baseline nor the current 6.0.0 runtime provides a build timestamp here. Reading it returns undefined; use your own release metadata when needed.
 
 <div className="run-code">▶ Run Code</div>
 

@@ -31,7 +31,7 @@ console.info(Artplayer.version);
 
 ## `env`
 
-返回播放器的环境变量
+历史根声明保留此字段，但冻结的 npm 5.4.0 与当前 6.0.0 运行时均未提供，读取返回 undefined，不能用来可靠判断运行环境。
 
 <div className="run-code">▶ Run Code</div>
 
@@ -41,7 +41,7 @@ console.info(Artplayer.env);
 
 ## `build`
 
-返回播放器的打包时间
+历史根声明保留此字段，但冻结的 npm 5.4.0 与当前 6.0.0 运行时均未在此提供打包时间，读取返回 undefined；需要时应使用自己的发布元信息。
 
 <div className="run-code">▶ Run Code</div>
 
