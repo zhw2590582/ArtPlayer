@@ -4274,11 +4274,15 @@
         "PKG-TOOL-THUMB-04",
         "CORE-22"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "工具独立浏览器使用，生成缩略图在核心中显示",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-16-PKG-TOOL-THUMB-05-core-combinations.md",
+        "baselines/thumbnail-core-validation.json",
+        "baselines/thumbnail-core.json"
+      ]
     },
     {
       "id": "PKG-TOOL-THUMB-06",

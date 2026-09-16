@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "task": "BASE-07",
   "sourceCommit": "e01f39ff",
-  "updatedAt": "2026-09-15T17:18:32.442Z",
+  "updatedAt": "2026-09-16T02:27:53.896Z",
   "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
   "items": [
     {
@@ -4182,8 +4182,13 @@
         "refactor/baselines/thumbnail-input-checkpoint.json",
         "refactor/changes/2026-09-13-PKG-TOOL-THUMB-03-lifecycle.md",
         "test/thumbnail-lifecycle.test.js",
-        "refactor/baselines/thumbnail-lifecycle-validation.json"
-      ]
+        "refactor/baselines/thumbnail-lifecycle-validation.json",
+        "refactor/changes/2026-09-16-PKG-TOOL-THUMB-05-core-combinations.md",
+        "refactor/baselines/thumbnail-core-validation.json",
+        "refactor/baselines/thumbnail-core.json",
+        "test/browser/thumbnail-core.spec.js"
+      ],
+      "workspaceState": "04 strict types and approved default/workspace policy are complete. 05 source and installed tool main pass actual Chromium/Firefox extraction, two generated sheets, preview pixels and exact URL ownership against core 3.5.31/5.4.0/candidate. Windows WebKit native Blob error 4 and physical Safari/device evidence remain open."
     },
     {
       "id": "THUMB-PROVENANCE-01",
@@ -4225,7 +4230,11 @@
         "refactor/baselines/thumbnail-behavior-validation.json",
         "refactor/changes/2026-09-13-PKG-TOOL-THUMB-02-behavior.md",
         "test/thumbnail.test.js",
-        "test/browser/thumbnail-tool.spec.js"
+        "test/browser/thumbnail-tool.spec.js",
+        "refactor/changes/2026-09-16-PKG-TOOL-THUMB-05-core-combinations.md",
+        "refactor/baselines/thumbnail-core-validation.json",
+        "refactor/baselines/thumbnail-core.json",
+        "test/browser/thumbnail-core.spec.js"
       ],
       "compatibleResolution": "Preserve independent HTTP/Blob capability controls; obtain actual supported WebKit/Safari file extraction evidence before release acceptance. Do not count the 12 unavailable controls as successful thumbnail generation or silently replace local files with HTTP media.",
       "closureCriteria": "Actual generated PNG/extraction and lifecycle proof in supported Safari/WebKit environments, or explicit supported-environment decision with migration documentation; Windows limitation stays identifiable."

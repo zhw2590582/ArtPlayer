@@ -535,6 +535,18 @@ The first immediate-pixel WebKit failure remains in the refactor evidence.
 This is native desktop media playback, not physical audibility or full devices.
 `document-site.spec.js` also checks generated guide links and Run Code parameters.
 
+## Standalone thumbnail sheets
+
+The standalone tool's `thumbnail-core.spec.js` generates actual PNG sheets from
+a selected local MP4 and displays them in core 3.5.31, 5.4.0 and the candidate.
+It checks two generations, real hover, unobscured screenshot pixels and exact
+Blob URL ownership. Historical grid defects are asserted separately from the
+correct candidate layout. Tool main can be selected with
+`ARTPLAYER_THUMBNAIL_ARTIFACT`. Windows WebKit's HTTP-success/Blob-error-4 branch
+is explicitly a capability control, not successful extraction. Full evidence:
+`refactor/baselines/thumbnail-core-validation.json`; run
+`yarn test:browser:source thumbnail-core.spec.js --workers=1`.
+
 ## Auto-thumbnail delayed registration
 
 Auto-thumbnail's `auto-thumbnail-registration.spec.js` separately checks direct

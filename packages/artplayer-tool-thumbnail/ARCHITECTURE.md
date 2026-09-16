@@ -134,6 +134,27 @@ The [public type guide](types/README.md)
 documents declaration ownership, module entries, events and installed consumers.
 See [task plan](../../refactor/plan.md) and [risk ledger](../../refactor/risks.json).
 
+## Generated sheets consumed by ArtPlayer
+
+The tool owns both `videoUrl` and `thumbnailUrl`. Destroy the player borrowing
+those URLs before generating a replacement sheet or destroying the tool. Pass
+the same `number`, `column`, `width` and `height` to the player's thumbnails
+option; the PNG includes a 30px attribution footer, so do not infer cell height
+from the full image height. The integration suite uses `scale: 1`.
+
+Run `yarn test:browser:source thumbnail-core.spec.js --workers=1` for native file
+extraction, two generated sheets, real mouse hover, screenshot pixels and URL
+ownership against associated core 3.5.31, published 5.4.0 and the candidate core.
+`ARTPLAYER_THUMBNAIL_ARTIFACT` selects the installed tool main. Historical cores'
+first-cell/row-boundary defects have explicit expectations; the candidate must
+use the correct cell. The old tool uses its original 300ms delay, while the
+candidate still exercises 20ms. Recovered 3.5.31 at 20ms produced black cells in
+Firefox because it draws after a timer without awaiting seek completion.
+
+Windows WebKit Blob controls do not validate extraction. See the
+[combination checkpoint](../../refactor/changes/2026-09-16-PKG-TOOL-THUMB-05-core-combinations.md)
+for exact passing scopes and remaining Safari/device/archive evidence.
+
 ## Type and provenance boundaries
 
 All nine executable source modules and the shared type module are checked with

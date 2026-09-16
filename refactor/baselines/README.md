@@ -35,6 +35,12 @@ BASE-01 于 2026-09-10 固定核心与 chapter 的 npm 发布内容，数据在 
 
 ## 公共 API 报告
 
+Thumbnail 工具的关联历史核心 3.5.31 已单独恢复完整 npm 归档，见
+[144 个文件与来源](thumbnail-core.json) 和
+[三代核心组合结果](thumbnail-core-validation.json)。运行
+`node --test refactor/scripts/thumbnail-core.test.mjs` 校验归档和历史关联。
+工具本身的旧 3.5.31 完整归档仍未恢复；不能将核心归档当成工具分发证据。
+
 Audio Track 的后续包基线由 PKG-AUDIO-01 独立冻结，见
 [契约和重跑](audio-track-contract.md) 及 [1.1.0 归档来源](audio-track-release.json)。
 它不改写本目录初始 BASE 快照，媒体/类型/设备通过范围由后续任务提供。
