@@ -4591,7 +4591,9 @@
         "baselines/site04-globals.json",
         "changes/2026-09-16-SITE-04-globals.md",
         "baselines/site04-events.json",
-        "changes/2026-09-16-SITE-04-events.md"
+        "changes/2026-09-16-SITE-04-events.md",
+        "baselines/site04-options.json",
+        "changes/2026-09-16-SITE-04-options.md"
       ]
     },
     {

@@ -1,0 +1,1188 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "doing",
+  "sourceBefore": "8d2ec199d7873491c88da155dbbb4e86c151bbe1",
+  "capturedAt": "2026-09-16T00:12:40.060Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "static": [
+      {
+        "language": "zh",
+        "name": "option",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/start/option.md",
+          "sha256": "88e44983009b354091f89113369298f6e6854f690797e4db3d5a7477ef3aecab"
+        },
+        "html": {
+          "path": "docs/document/start/option.html",
+          "sha256": "c17f231b45e9c7834b85b4402ea12127a3f3ba51afbcd8a3c883c73ff9bd9544"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-options/zh-option-0.mts",
+            "sha256": "ec1a6fc78a1f3ecb65ad84ca9743b845a02567f8f0abedbc5b9b9cff973cdcb7"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "start/option.md:99",
+            "sha256": "70e86f081fdbbc9909524d6ae42af9f1be35878631e8a0e24543c6184e4ebb58"
+          },
+          {
+            "id": "start/option.md:139",
+            "sha256": "18a33f800d39f7e817e01b1451159a766d8c6d0bfe6fcad5f207f568302fd47f"
+          },
+          {
+            "id": "start/option.md:150",
+            "sha256": "9336fd5bddbb38fc65e121fa76e75430f34248923db534fbb6a8f80ce487648e"
+          },
+          {
+            "id": "start/option.md:178",
+            "sha256": "3cf66a0c9c155e277de196a22863ac9aa0f5d709b5c331a26836c40509666fdb"
+          },
+          {
+            "id": "start/option.md:195",
+            "sha256": "e8cd923aecb5d62c6a71a105430c3e4299681fdce63ec12c3ae1fb40bfebd90a"
+          },
+          {
+            "id": "start/option.md:237",
+            "sha256": "b186e9e60f375a08fece8809918d40688efa018a0ae4789bd6add9cb19b4ed47"
+          },
+          {
+            "id": "start/option.md:254",
+            "sha256": "16defcbedb9e10721718395404c5b5eefc828bedef7c7f16053905af5b1c5c91"
+          },
+          {
+            "id": "start/option.md:271",
+            "sha256": "1a4d8cc2000339ab5e78486ae2bf17fbb1f2ebb440fc52c104e00a88bf88eae0"
+          },
+          {
+            "id": "start/option.md:294",
+            "sha256": "05f67d49e7afcc689a7745b75469e264b6a2c6b6bea31ca807492e98fd49504b"
+          },
+          {
+            "id": "start/option.md:311",
+            "sha256": "c2527f76fcab814388ce2c06ebd847a01a9cc2392f6a8cee615be8337179c6d0"
+          },
+          {
+            "id": "start/option.md:328",
+            "sha256": "9608b3d6ba8cf349453082f62ce33653ab1a7817ba4920e59599ea7b2b46f351"
+          },
+          {
+            "id": "start/option.md:352",
+            "sha256": "429b995bfc912fa515094575a71d1b8dfa9a71aabb47c9184e8eb574d48d1765"
+          },
+          {
+            "id": "start/option.md:369",
+            "sha256": "e4dcaf34de59fd2509fb673bea81bd9034a235119ea421066694851434890c76"
+          },
+          {
+            "id": "start/option.md:386",
+            "sha256": "e4143ddc284427f15f24f566d5aae872bd81c4247f766e8a6506152710ea973e"
+          },
+          {
+            "id": "start/option.md:403",
+            "sha256": "cb15d38041ea51dbc50df3ca5ef7a37746cad53bfd82ecd43a89859b09eaa957"
+          },
+          {
+            "id": "start/option.md:421",
+            "sha256": "047eeccecc0d984349b062902b57e328f73eac2d1c1bf22517700df7610d3fb3"
+          },
+          {
+            "id": "start/option.md:439",
+            "sha256": "453592a3e3a9f2500a665cfa07f9a37c4546f2bf5559909d39341c2a595ad39b"
+          },
+          {
+            "id": "start/option.md:457",
+            "sha256": "d1068d03550464048ec11b4ed81d0da90ab3acfc0b22a9f35fc79328059c2d0a"
+          },
+          {
+            "id": "start/option.md:480",
+            "sha256": "9a7f72bd3c9653b3f59fe6fa2c97e683a477e6060f99131191d70be786cea924"
+          },
+          {
+            "id": "start/option.md:497",
+            "sha256": "68dc005f0e97fe79d2e5e6b1ee161db7f9b1c5e5bb01e25a603b11c45df02ae6"
+          },
+          {
+            "id": "start/option.md:528",
+            "sha256": "eeb27aea2f1590c02256c9490c512bcb578e1ae9f59537cefd0666b1559e7d3b"
+          },
+          {
+            "id": "start/option.md:545",
+            "sha256": "e8cf2a38b1db516f5cc266334f530f2afa4df6787b528e5026780d8feda6110f"
+          },
+          {
+            "id": "start/option.md:562",
+            "sha256": "0606b67af2369188e58ccc1c8e6536ec0496894acc1be244c9dde9d62aca9913"
+          },
+          {
+            "id": "start/option.md:579",
+            "sha256": "e6f8331c8d7a9a4937588fd888bb95c31739813b68f7e0ead49eb25f3f82300c"
+          },
+          {
+            "id": "start/option.md:596",
+            "sha256": "5d4f69000490d6a775587d4abc1b0c7f8c1ecd505de7f4b94d930cdfd58f33f6"
+          },
+          {
+            "id": "start/option.md:613",
+            "sha256": "4f9ac7e45241fe79f1cf0fa267cf1e88af955d7ce551df5d3bdf1d56068d6e57"
+          },
+          {
+            "id": "start/option.md:634",
+            "sha256": "ae7f525677538b1ff92328fd73181a2e24d4741a5a5b3c81aaa0cae49555ee5d"
+          },
+          {
+            "id": "start/option.md:653",
+            "sha256": "6e826e6dbf0496dcbe968439e49c8e8e8904f455722a3a0025cda8081d0eb8cd"
+          },
+          {
+            "id": "start/option.md:673",
+            "sha256": "ce639b857c26457b52ff94e72b65f6acbc91642a08ab6130d674228b34950db8"
+          },
+          {
+            "id": "start/option.md:690",
+            "sha256": "a27a6b052a971937e57a15ed1ff9d0142bc6cb61a018723e4c3a78a3ae1a9c2f"
+          },
+          {
+            "id": "start/option.md:732",
+            "sha256": "c67163aa8fd8ce137ae1cd9f0ca993536ea157dd82d7ce8c66fb36e722fc0627"
+          },
+          {
+            "id": "start/option.md:785",
+            "sha256": "19a569917fbfaffec3eaa2cc64e8238af4985bf6be7619e54a83346a83b68456"
+          },
+          {
+            "id": "start/option.md:816",
+            "sha256": "b58c7385cbcf71cafd17d947e81b13cf20f266805848a3f91c5beff778b387ad"
+          },
+          {
+            "id": "start/option.md:857",
+            "sha256": "6886fde39818688419e3c9e5e9a268451fe517f3984542b2e2994af4f35e6cc0"
+          },
+          {
+            "id": "start/option.md:889",
+            "sha256": "d654ddad617f20ad2b78170ccfed9037e48d872514e24c336ed4b8b86874550f"
+          },
+          {
+            "id": "start/option.md:927",
+            "sha256": "4df30a40c4124f1585168ff5f1f070a5e1895e28c2413cb4a0047264410236c8"
+          },
+          {
+            "id": "start/option.md:964",
+            "sha256": "d8b9bf4e881763d335b4960437e317abf75d271c0c4ba68d1cb6cc80e238b3b0"
+          },
+          {
+            "id": "start/option.md:1001",
+            "sha256": "d97029ff9e0590468bb0eaea9f55b76faa23822c6cb157789218081c8c7bb83d"
+          },
+          {
+            "id": "start/option.md:1027",
+            "sha256": "8a57d3ef82e5541fb31d148638d6d23b686a88a675a1110d9e73106e45410372"
+          },
+          {
+            "id": "start/option.md:1047",
+            "sha256": "1119bc5fe8e085e5d00589f0ba5230c636743611bbb96dacd4d0506acdc1d31f"
+          },
+          {
+            "id": "start/option.md:1073",
+            "sha256": "bb6f3413c4d455be834513454432e67c45f9b3c0b6a4365c3dedc8fe4f2939a3"
+          },
+          {
+            "id": "start/option.md:1104",
+            "sha256": "409dcc606f78ec60b5ef50ebc54ca5155582d3378ee506ac2c1eef4e5033ebbf"
+          },
+          {
+            "id": "start/option.md:1125",
+            "sha256": "840304fc20ed43b9a01184e9ad72a25f401bb40f1fbb9bcc13051d45b4762931"
+          },
+          {
+            "id": "start/option.md:1150",
+            "sha256": "abc9f1d96b735e8c0a30cbcf6b1fe12bde04ecce5b9067b8bc6db0c6b5df5eb1"
+          },
+          {
+            "id": "start/option.md:1167",
+            "sha256": "2f0809ad7146accdf4709766aba2f78d5ca1f6470b298268a4ce3fcc1b1eac88"
+          },
+          {
+            "id": "start/option.md:1197",
+            "sha256": "c13f6cf1556e5e5d410455fce894c2fd7460f7be6397d1fb33f0fd94fa6a8a00"
+          },
+          {
+            "id": "start/option.md:1214",
+            "sha256": "bb81a0bb1f0a5e72ec33e00b21784e316a3cad735b0eb305fc6e2e34535abb2e"
+          },
+          {
+            "id": "start/option.md:1231",
+            "sha256": "1bc69c1e424cf7b2c1864e479ec484399060cecfd22dc7b8854ad4d3f32f20a2"
+          },
+          {
+            "id": "start/option.md:1248",
+            "sha256": "18321729358365cd3bb4a82f38d7aae0a0f864fce6fe9c83793bd0d2e6ebdfb9"
+          },
+          {
+            "id": "start/option.md:1274",
+            "sha256": "6266399bccbe775fa920fecb9f8f61349c9e48c5116dabfa5367a262f934009a"
+          },
+          {
+            "id": "start/option.md:1291",
+            "sha256": "9fd490a7e523b01d5a5bb3b5abfd4dddbb65a7d27787db4800cd4def18f069dd"
+          },
+          {
+            "id": "start/option.md:1308",
+            "sha256": "e6ab7ec979db1b4d7eb7e2216663a6256bde43ef6d6dd9258cc51a8294de7fdf"
+          },
+          {
+            "id": "start/option.md:1333",
+            "sha256": "0d306f56b11b8c7542ee384ff19c648e09ba45cf81c17a4d576bff934744c111"
+          }
+        ],
+        "localLinks": [
+          "/document/start/option.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/start/option.html#%E5%9F%BA%E7%A1%80%E9%80%89%E9%A1%B9",
+          "/document/start/option.html#construction-contract",
+          "/document/start/option.html#option-merge",
+          "/document/start/option.html#option-precedence",
+          "/document/start/option.html#option-capabilities",
+          "/document/start/option.html#option-nested",
+          "/document/start/option.html#option-types",
+          "/document/start/option.html#container",
+          "/document/start/option.html#url",
+          "/document/start/option.html#id",
+          "/document/start/option.html#onready",
+          "/document/start/option.html#poster",
+          "/document/start/option.html#theme",
+          "/document/start/option.html#volume",
+          "/document/start/option.html#islive",
+          "/document/start/option.html#muted",
+          "/document/start/option.html#autoplay",
+          "/document/start/option.html#autosize",
+          "/document/start/option.html#automini",
+          "/document/start/option.html#loop",
+          "/document/start/option.html#flip",
+          "/document/start/option.html#playbackrate",
+          "/document/start/option.html#aspectratio",
+          "/document/start/option.html#screenshot",
+          "/document/start/option.html#setting",
+          "/document/start/option.html#hotkey",
+          "/document/start/option.html#pip",
+          "/document/start/option.html#mutex",
+          "/document/start/option.html#backdrop",
+          "/document/start/option.html#fullscreen",
+          "/document/start/option.html#fullscreenweb",
+          "/document/start/option.html#subtitleoffset",
+          "/document/start/option.html#miniprogressbar",
+          "/document/start/option.html#usessr",
+          "/document/start/option.html#playsinline",
+          "/document/start/option.html#layers",
+          "/document/start/option.html#settings",
+          "/document/start/option.html#contextmenu",
+          "/document/start/option.html#controls",
+          "/document/start/option.html#quality",
+          "/document/start/option.html#highlight",
+          "/document/start/option.html#plugins",
+          "/document/start/option.html#thumbnails",
+          "/document/start/option.html#subtitle",
+          "/document/start/option.html#morevideoattr",
+          "/document/start/option.html#icons",
+          "/document/start/option.html#type",
+          "/document/start/option.html#customtype",
+          "/document/start/option.html#lang",
+          "/document/start/option.html#i18n",
+          "/document/start/option.html#lock",
+          "/document/start/option.html#gesture",
+          "/document/start/option.html#fastforward",
+          "/document/start/option.html#autoplayback",
+          "/document/start/option.html#autoorientation",
+          "/document/start/option.html#airplay",
+          "/document/start/option.html#cssvar",
+          "/document/start/option.html#proxy"
+        ]
+      },
+      {
+        "language": "en",
+        "name": "option",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/start/option.md",
+          "sha256": "a21f6b7977e418b9be91dacf2c57c017ca4e5855496aab4874d6d258a22aff9f"
+        },
+        "html": {
+          "path": "docs/document/en/start/option.html",
+          "sha256": "637eb116d8a640f32df33b6b7ec13e26506690081d8d4eca3ce5d83ec1ed47fa"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-options/en-option-0.mts",
+            "sha256": "ec1a6fc78a1f3ecb65ad84ca9743b845a02567f8f0abedbc5b9b9cff973cdcb7"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "en/start/option.md:99",
+            "sha256": "64f8e8ab7e97f24abe4311668ae9643e631913a2e753f5995856e54279b56fef"
+          },
+          {
+            "id": "en/start/option.md:139",
+            "sha256": "18a33f800d39f7e817e01b1451159a766d8c6d0bfe6fcad5f207f568302fd47f"
+          },
+          {
+            "id": "en/start/option.md:150",
+            "sha256": "9336fd5bddbb38fc65e121fa76e75430f34248923db534fbb6a8f80ce487648e"
+          },
+          {
+            "id": "en/start/option.md:177",
+            "sha256": "3cf66a0c9c155e277de196a22863ac9aa0f5d709b5c331a26836c40509666fdb"
+          },
+          {
+            "id": "en/start/option.md:194",
+            "sha256": "e8cd923aecb5d62c6a71a105430c3e4299681fdce63ec12c3ae1fb40bfebd90a"
+          },
+          {
+            "id": "en/start/option.md:236",
+            "sha256": "b186e9e60f375a08fece8809918d40688efa018a0ae4789bd6add9cb19b4ed47"
+          },
+          {
+            "id": "en/start/option.md:253",
+            "sha256": "16defcbedb9e10721718395404c5b5eefc828bedef7c7f16053905af5b1c5c91"
+          },
+          {
+            "id": "en/start/option.md:270",
+            "sha256": "1a4d8cc2000339ab5e78486ae2bf17fbb1f2ebb440fc52c104e00a88bf88eae0"
+          },
+          {
+            "id": "en/start/option.md:293",
+            "sha256": "05f67d49e7afcc689a7745b75469e264b6a2c6b6bea31ca807492e98fd49504b"
+          },
+          {
+            "id": "en/start/option.md:310",
+            "sha256": "c2527f76fcab814388ce2c06ebd847a01a9cc2392f6a8cee615be8337179c6d0"
+          },
+          {
+            "id": "en/start/option.md:327",
+            "sha256": "9608b3d6ba8cf349453082f62ce33653ab1a7817ba4920e59599ea7b2b46f351"
+          },
+          {
+            "id": "en/start/option.md:351",
+            "sha256": "429b995bfc912fa515094575a71d1b8dfa9a71aabb47c9184e8eb574d48d1765"
+          },
+          {
+            "id": "en/start/option.md:369",
+            "sha256": "e4dcaf34de59fd2509fb673bea81bd9034a235119ea421066694851434890c76"
+          },
+          {
+            "id": "en/start/option.md:386",
+            "sha256": "e4143ddc284427f15f24f566d5aae872bd81c4247f766e8a6506152710ea973e"
+          },
+          {
+            "id": "en/start/option.md:403",
+            "sha256": "cb15d38041ea51dbc50df3ca5ef7a37746cad53bfd82ecd43a89859b09eaa957"
+          },
+          {
+            "id": "en/start/option.md:421",
+            "sha256": "047eeccecc0d984349b062902b57e328f73eac2d1c1bf22517700df7610d3fb3"
+          },
+          {
+            "id": "en/start/option.md:439",
+            "sha256": "453592a3e3a9f2500a665cfa07f9a37c4546f2bf5559909d39341c2a595ad39b"
+          },
+          {
+            "id": "en/start/option.md:457",
+            "sha256": "d1068d03550464048ec11b4ed81d0da90ab3acfc0b22a9f35fc79328059c2d0a"
+          },
+          {
+            "id": "en/start/option.md:480",
+            "sha256": "9a7f72bd3c9653b3f59fe6fa2c97e683a477e6060f99131191d70be786cea924"
+          },
+          {
+            "id": "en/start/option.md:497",
+            "sha256": "68dc005f0e97fe79d2e5e6b1ee161db7f9b1c5e5bb01e25a603b11c45df02ae6"
+          },
+          {
+            "id": "en/start/option.md:528",
+            "sha256": "eeb27aea2f1590c02256c9490c512bcb578e1ae9f59537cefd0666b1559e7d3b"
+          },
+          {
+            "id": "en/start/option.md:545",
+            "sha256": "e8cf2a38b1db516f5cc266334f530f2afa4df6787b528e5026780d8feda6110f"
+          },
+          {
+            "id": "en/start/option.md:562",
+            "sha256": "3d7368fa047938f80f8c2fcc2e30882c29b6023c93bca16e1d15b1956884e113"
+          },
+          {
+            "id": "en/start/option.md:579",
+            "sha256": "e6f8331c8d7a9a4937588fd888bb95c31739813b68f7e0ead49eb25f3f82300c"
+          },
+          {
+            "id": "en/start/option.md:596",
+            "sha256": "5d4f69000490d6a775587d4abc1b0c7f8c1ecd505de7f4b94d930cdfd58f33f6"
+          },
+          {
+            "id": "en/start/option.md:613",
+            "sha256": "4f9ac7e45241fe79f1cf0fa267cf1e88af955d7ce551df5d3bdf1d56068d6e57"
+          },
+          {
+            "id": "en/start/option.md:635",
+            "sha256": "ae7f525677538b1ff92328fd73181a2e24d4741a5a5b3c81aaa0cae49555ee5d"
+          },
+          {
+            "id": "en/start/option.md:654",
+            "sha256": "6e826e6dbf0496dcbe968439e49c8e8e8904f455722a3a0025cda8081d0eb8cd"
+          },
+          {
+            "id": "en/start/option.md:674",
+            "sha256": "ce639b857c26457b52ff94e72b65f6acbc91642a08ab6130d674228b34950db8"
+          },
+          {
+            "id": "en/start/option.md:691",
+            "sha256": "a27a6b052a971937e57a15ed1ff9d0142bc6cb61a018723e4c3a78a3ae1a9c2f"
+          },
+          {
+            "id": "en/start/option.md:733",
+            "sha256": "c67163aa8fd8ce137ae1cd9f0ca993536ea157dd82d7ce8c66fb36e722fc0627"
+          },
+          {
+            "id": "en/start/option.md:786",
+            "sha256": "19a569917fbfaffec3eaa2cc64e8238af4985bf6be7619e54a83346a83b68456"
+          },
+          {
+            "id": "en/start/option.md:817",
+            "sha256": "b58c7385cbcf71cafd17d947e81b13cf20f266805848a3f91c5beff778b387ad"
+          },
+          {
+            "id": "en/start/option.md:859",
+            "sha256": "6886fde39818688419e3c9e5e9a268451fe517f3984542b2e2994af4f35e6cc0"
+          },
+          {
+            "id": "en/start/option.md:891",
+            "sha256": "d654ddad617f20ad2b78170ccfed9037e48d872514e24c336ed4b8b86874550f"
+          },
+          {
+            "id": "en/start/option.md:929",
+            "sha256": "4df30a40c4124f1585168ff5f1f070a5e1895e28c2413cb4a0047264410236c8"
+          },
+          {
+            "id": "en/start/option.md:966",
+            "sha256": "d8b9bf4e881763d335b4960437e317abf75d271c0c4ba68d1cb6cc80e238b3b0"
+          },
+          {
+            "id": "en/start/option.md:1003",
+            "sha256": "d97029ff9e0590468bb0eaea9f55b76faa23822c6cb157789218081c8c7bb83d"
+          },
+          {
+            "id": "en/start/option.md:1029",
+            "sha256": "8a57d3ef82e5541fb31d148638d6d23b686a88a675a1110d9e73106e45410372"
+          },
+          {
+            "id": "en/start/option.md:1050",
+            "sha256": "1119bc5fe8e085e5d00589f0ba5230c636743611bbb96dacd4d0506acdc1d31f"
+          },
+          {
+            "id": "en/start/option.md:1076",
+            "sha256": "bb6f3413c4d455be834513454432e67c45f9b3c0b6a4365c3dedc8fe4f2939a3"
+          },
+          {
+            "id": "en/start/option.md:1107",
+            "sha256": "409dcc606f78ec60b5ef50ebc54ca5155582d3378ee506ac2c1eef4e5033ebbf"
+          },
+          {
+            "id": "en/start/option.md:1128",
+            "sha256": "840304fc20ed43b9a01184e9ad72a25f401bb40f1fbb9bcc13051d45b4762931"
+          },
+          {
+            "id": "en/start/option.md:1153",
+            "sha256": "abc9f1d96b735e8c0a30cbcf6b1fe12bde04ecce5b9067b8bc6db0c6b5df5eb1"
+          },
+          {
+            "id": "en/start/option.md:1170",
+            "sha256": "2f0809ad7146accdf4709766aba2f78d5ca1f6470b298268a4ce3fcc1b1eac88"
+          },
+          {
+            "id": "en/start/option.md:1200",
+            "sha256": "c13f6cf1556e5e5d410455fce894c2fd7460f7be6397d1fb33f0fd94fa6a8a00"
+          },
+          {
+            "id": "en/start/option.md:1217",
+            "sha256": "bb81a0bb1f0a5e72ec33e00b21784e316a3cad735b0eb305fc6e2e34535abb2e"
+          },
+          {
+            "id": "en/start/option.md:1234",
+            "sha256": "1bc69c1e424cf7b2c1864e479ec484399060cecfd22dc7b8854ad4d3f32f20a2"
+          },
+          {
+            "id": "en/start/option.md:1251",
+            "sha256": "18321729358365cd3bb4a82f38d7aae0a0f864fce6fe9c83793bd0d2e6ebdfb9"
+          },
+          {
+            "id": "en/start/option.md:1277",
+            "sha256": "6266399bccbe775fa920fecb9f8f61349c9e48c5116dabfa5367a262f934009a"
+          },
+          {
+            "id": "en/start/option.md:1294",
+            "sha256": "9fd490a7e523b01d5a5bb3b5abfd4dddbb65a7d27787db4800cd4def18f069dd"
+          },
+          {
+            "id": "en/start/option.md:1311",
+            "sha256": "e6ab7ec979db1b4d7eb7e2216663a6256bde43ef6d6dd9258cc51a8294de7fdf"
+          },
+          {
+            "id": "en/start/option.md:1336",
+            "sha256": "0d306f56b11b8c7542ee384ff19c648e09ba45cf81c17a4d576bff934744c111"
+          }
+        ],
+        "localLinks": [
+          "/document/en/start/option.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/start/option.html#basic-options",
+          "/document/en/start/option.html#construction-contract",
+          "/document/en/start/option.html#option-merge",
+          "/document/en/start/option.html#option-precedence",
+          "/document/en/start/option.html#option-capabilities",
+          "/document/en/start/option.html#option-nested",
+          "/document/en/start/option.html#option-types",
+          "/document/en/start/option.html#container",
+          "/document/en/start/option.html#url",
+          "/document/en/start/option.html#id",
+          "/document/en/start/option.html#onready",
+          "/document/en/start/option.html#poster",
+          "/document/en/start/option.html#theme",
+          "/document/en/start/option.html#volume",
+          "/document/en/start/option.html#islive",
+          "/document/en/start/option.html#muted",
+          "/document/en/start/option.html#autoplay",
+          "/document/en/start/option.html#autosize",
+          "/document/en/start/option.html#automini",
+          "/document/en/start/option.html#loop",
+          "/document/en/start/option.html#flip",
+          "/document/en/start/option.html#playbackrate",
+          "/document/en/start/option.html#aspectratio",
+          "/document/en/start/option.html#screenshot",
+          "/document/en/start/option.html#setting",
+          "/document/en/start/option.html#hotkey",
+          "/document/en/start/option.html#pip",
+          "/document/en/start/option.html#mutex",
+          "/document/en/start/option.html#backdrop",
+          "/document/en/start/option.html#fullscreen",
+          "/document/en/start/option.html#fullscreenweb",
+          "/document/en/start/option.html#subtitleoffset",
+          "/document/en/start/option.html#miniprogressbar",
+          "/document/en/start/option.html#usessr",
+          "/document/en/start/option.html#playsinline",
+          "/document/en/start/option.html#layers",
+          "/document/component/layers.html",
+          "/document/en/start/option.html#settings",
+          "/document/component/setting.html",
+          "/document/en/start/option.html#contextmenu",
+          "/document/component/contextmenu.html",
+          "/document/en/start/option.html#controls",
+          "/document/component/controls.html",
+          "/document/en/start/option.html#quality",
+          "/document/en/start/option.html#highlight",
+          "/document/en/start/option.html#plugins",
+          "/document/en/start/option.html#thumbnails",
+          "/document/en/start/option.html#subtitle",
+          "/document/en/start/option.html#morevideoattr",
+          "/document/en/start/option.html#icons",
+          "/document/en/start/option.html#type",
+          "/document/en/start/option.html#customtype",
+          "/document/en/start/option.html#lang",
+          "/document/start/i18n.html",
+          "/document/en/start/option.html#i18n",
+          "/document/en/start/option.html#lock",
+          "/document/en/start/option.html#gesture",
+          "/document/en/start/option.html#fastforward",
+          "/document/en/start/option.html#autoplayback",
+          "/document/en/start/option.html#autoorientation",
+          "/document/en/start/option.html#airplay",
+          "/document/en/start/option.html#cssvar",
+          "/document/en/start/option.html#proxy"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "zh",
+        "name": "option",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "70e86f081fdbbc9909524d6ae42af9f1be35878631e8a0e24543c6184e4ebb58",
+          "18a33f800d39f7e817e01b1451159a766d8c6d0bfe6fcad5f207f568302fd47f",
+          "9336fd5bddbb38fc65e121fa76e75430f34248923db534fbb6a8f80ce487648e",
+          "3cf66a0c9c155e277de196a22863ac9aa0f5d709b5c331a26836c40509666fdb"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-options/chromium-zh-option.png",
+          "sha256": "d6ee09a54d3f222cb682cf3522d8ddfee05179f275233143ed323adf881610a9"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "en",
+        "name": "option",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "64f8e8ab7e97f24abe4311668ae9643e631913a2e753f5995856e54279b56fef",
+          "18a33f800d39f7e817e01b1451159a766d8c6d0bfe6fcad5f207f568302fd47f",
+          "9336fd5bddbb38fc65e121fa76e75430f34248923db534fbb6a8f80ce487648e",
+          "3cf66a0c9c155e277de196a22863ac9aa0f5d709b5c331a26836c40509666fdb"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-options/chromium-en-option.png",
+          "sha256": "c5ad432b382f3aece22e7c8f404623c01e5c86b51faf0b6f61da103b51a2759e"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "zh",
+        "name": "option",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "70e86f081fdbbc9909524d6ae42af9f1be35878631e8a0e24543c6184e4ebb58",
+          "18a33f800d39f7e817e01b1451159a766d8c6d0bfe6fcad5f207f568302fd47f",
+          "9336fd5bddbb38fc65e121fa76e75430f34248923db534fbb6a8f80ce487648e",
+          "3cf66a0c9c155e277de196a22863ac9aa0f5d709b5c331a26836c40509666fdb"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-options/firefox-zh-option.png",
+          "sha256": "2fc759b1c4afdd43d8a549de875ce4fa89458500c425fba4be9721102e1b4774"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "en",
+        "name": "option",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "64f8e8ab7e97f24abe4311668ae9643e631913a2e753f5995856e54279b56fef",
+          "18a33f800d39f7e817e01b1451159a766d8c6d0bfe6fcad5f207f568302fd47f",
+          "9336fd5bddbb38fc65e121fa76e75430f34248923db534fbb6a8f80ce487648e",
+          "3cf66a0c9c155e277de196a22863ac9aa0f5d709b5c331a26836c40509666fdb"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-options/firefox-en-option.png",
+          "sha256": "f081440aea8713ef6879678d0abb0635db40f0c83ebe019ac88cc8bd3f2d8515"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "zh",
+        "name": "option",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "70e86f081fdbbc9909524d6ae42af9f1be35878631e8a0e24543c6184e4ebb58",
+          "18a33f800d39f7e817e01b1451159a766d8c6d0bfe6fcad5f207f568302fd47f",
+          "9336fd5bddbb38fc65e121fa76e75430f34248923db534fbb6a8f80ce487648e",
+          "3cf66a0c9c155e277de196a22863ac9aa0f5d709b5c331a26836c40509666fdb"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-options/webkit-zh-option.png",
+          "sha256": "6a3172227181e25096217b7c27cf9b37242c8dc418771984acd1f3eeca50d51d"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "en",
+        "name": "option",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "64f8e8ab7e97f24abe4311668ae9643e631913a2e753f5995856e54279b56fef",
+          "18a33f800d39f7e817e01b1451159a766d8c6d0bfe6fcad5f207f568302fd47f",
+          "9336fd5bddbb38fc65e121fa76e75430f34248923db534fbb6a8f80ce487648e",
+          "3cf66a0c9c155e277de196a22863ac9aa0f5d709b5c331a26836c40509666fdb"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-options/webkit-en-option.png",
+          "sha256": "d8fd7f0f147e9ee0c43c18ab3b8e22cbc5c77bfc44b068a022de337b62a36928"
+        }
+      }
+    ],
+    "dom": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "fresh defaults and nested ownership",
+          "default getter mutation is not global configuration",
+          "language and Safari preload defaults",
+          "nested defaults are populated",
+          "schema shared and classifier same callable",
+          "validator keeps input identity and unvalidated extensions",
+          "validator diagnostic path and no default merging",
+          "missing container rejects despite default selector",
+          "validation precedes mounting and proxy",
+          "explicit undefined overrides a required default",
+          "container must be a DIV at runtime",
+          "partial nested input keeps defaults",
+          "array items and extension identity survive",
+          "input nested object remains independent",
+          "same active container cannot mount twice",
+          "proxy runs before public template assignment",
+          "constructor plugin precedes registry assignment",
+          "proxy class and container identity",
+          "invalid proxy result throws and rolls back DOM",
+          "synchronous plugin failure preserves error and DOM",
+          "SSR reuses preinserted media node",
+          "zero option skips initial volume write",
+          "media properties are applied before truthy core values",
+          "false options do not undo extra media properties",
+          "theme wins initial cssVar conflict",
+          "stored numeric volume overrides input",
+          "explicit post-construction setter can silence",
+          "live mode omits normal progress and time controls",
+          "quality default creates label without loading its URL",
+          "constructor rejects Element quality label despite legacy type",
+          "custom type waits beyond construction",
+          "customType and ready callback receivers and readiness",
+          "option id does not replace numeric instance id",
+          "constructor returns same prototype across instances"
+        ]
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "fresh defaults and nested ownership",
+          "default getter mutation is not global configuration",
+          "language and Safari preload defaults",
+          "nested defaults are populated",
+          "schema shared and classifier same callable",
+          "validator keeps input identity and unvalidated extensions",
+          "validator diagnostic path and no default merging",
+          "missing container rejects despite default selector",
+          "validation precedes mounting and proxy",
+          "explicit undefined overrides a required default",
+          "container must be a DIV at runtime",
+          "partial nested input keeps defaults",
+          "array items and extension identity survive",
+          "input nested object remains independent",
+          "same active container cannot mount twice",
+          "proxy runs before public template assignment",
+          "constructor plugin precedes registry assignment",
+          "proxy class and container identity",
+          "invalid proxy result throws and rolls back DOM",
+          "synchronous plugin failure preserves error and DOM",
+          "SSR reuses preinserted media node",
+          "zero option skips initial volume write",
+          "media properties are applied before truthy core values",
+          "false options do not undo extra media properties",
+          "theme wins initial cssVar conflict",
+          "stored numeric volume overrides input",
+          "explicit post-construction setter can silence",
+          "live mode omits normal progress and time controls",
+          "quality default creates label without loading its URL",
+          "constructor rejects Element quality label despite legacy type",
+          "custom type waits beyond construction",
+          "customType and ready callback receivers and readiness",
+          "option id does not replace numeric instance id",
+          "constructor returns same prototype across instances"
+        ]
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "fresh defaults and nested ownership",
+          "default getter mutation is not global configuration",
+          "language and Safari preload defaults",
+          "nested defaults are populated",
+          "schema shared and classifier same callable",
+          "validator keeps input identity and unvalidated extensions",
+          "validator diagnostic path and no default merging",
+          "missing container rejects despite default selector",
+          "validation precedes mounting and proxy",
+          "explicit undefined overrides a required default",
+          "container must be a DIV at runtime",
+          "partial nested input keeps defaults",
+          "array items and extension identity survive",
+          "input nested object remains independent",
+          "same active container cannot mount twice",
+          "proxy runs before public template assignment",
+          "constructor plugin precedes registry assignment",
+          "proxy class and container identity",
+          "invalid proxy result throws and rolls back DOM",
+          "synchronous plugin failure preserves error and DOM",
+          "SSR reuses preinserted media node",
+          "zero option skips initial volume write",
+          "media properties are applied before truthy core values",
+          "false options do not undo extra media properties",
+          "theme wins initial cssVar conflict",
+          "stored numeric volume overrides input",
+          "explicit post-construction setter can silence",
+          "live mode omits normal progress and time controls",
+          "quality default creates label without loading its URL",
+          "constructor rejects Element quality label despite legacy type",
+          "custom type waits beyond construction",
+          "customType and ready callback receivers and readiness",
+          "option id does not replace numeric instance id",
+          "constructor returns same prototype across instances"
+        ]
+      }
+    ],
+    "complete": true,
+    "limitations": [
+      "Page navigation and DOM contracts only; no playback, codec, physical-device or release acceptance."
+    ],
+    "core": {
+      "artifact": {
+        "path": "packages/artplayer/dist/artplayer.js",
+        "sha256": "8a4caaa50a069875b3898a83765457b3c502700f4731d0c38988d6c463c3d20a"
+      },
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-qQwwPA/artplayer.tgz",
+        "version": "6.0.0",
+        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
+        "inputFingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "integrity": "sha512-+2+VWecKb9CbI3wTCs0sV7au8SNShyXahpwDAmGgZhDr22wbdv51QZnLnkPwgMgfNpVuTbsZ6A26Lpj3eY7NbQ=="
+      }
+    }
+  },
+  "semanticMapping": {
+    "addedRecords": 93,
+    "totalRecords": 720,
+    "remainingInventoryRecords": 243,
+    "previousSourceAndGuideHashesUnchanged": true
+  },
+  "tests": {
+    "count": 135,
+    "pass": 135,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 2647.1053,
+    "suites": [
+      "options",
+      "entry",
+      "instance-lifecycle",
+      "template-resources",
+      "source",
+      "storage",
+      "thumbnails",
+      "media-events",
+      "playback",
+      "plugins",
+      "site-loading",
+      "documentation-pipeline"
+    ]
+  },
+  "build": {
+    "vitepressSeconds": 12.77,
+    "yarnSeconds": 15.46,
+    "checked": [
+      "build:docs",
+      "build:llm",
+      "check:llm",
+      "site-inventory --write/--check",
+      "demos --check"
+    ]
+  },
+  "ledger": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-VfrnJM/report.json",
+      "sha256": "bf3c78d1891352b9da2fc9fbc1a6d68fbc1347025d8e5a432091a43d5deaac4f"
+    },
+    "libraries": [
+      {
+        "name": "artplayer",
+        "fingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "fingerprint": "55236854b94ac7b0dd91b4107dcb60e97ac6f1a5e8b6b8a9dcb63bba66c6509a",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "fingerprint": "f88a6a2f1c5548389cae293614f648d72077ed03a7be6c81ad017a1155a839a3",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "fingerprint": "7fa3ca9577b53f3bb90e2c23fec9e6e70fbbb0c089ccae2923084b9059bcbdf9",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "fingerprint": "0c73b970872fe56df1c669e5badfa91f9cd7ec3c73070a9852cfea076cc8923f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "fingerprint": "9ced9b18e4b260ccbcf6ac016b32ec0852040cb5c0f57be72718a03d40d598bf",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "fingerprint": "f1dd73097e43df504f686f18a6ca30bcb1f57ab74d3cc62909db20505c994072",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "fingerprint": "d6d79d4b47afaefa66d32c5b1709f412ed9d32c636462723918c268a6601e631",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "fingerprint": "3d32a4c6d94d9eaa31cd982ec43ae2b710a4c923e5076f357ba4c902be48d729",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "fingerprint": "ceb17cbb235a42438c28df15ddf830d104a749b58515333c43da2b18534b166c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "fingerprint": "6716002b92bb12b54d17772d87a560bb9e863da35abfa37988907d54e02cdf74",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "fingerprint": "a3a56ecc218c8e180621d1bc00684950cca4ada8d483334b0cb91fd783c10831",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "fingerprint": "00a07f33277bae211a553e9fb2e924ade219513135bc54921886f4518dd27964",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "fingerprint": "cc9304759ff3cdd84767eee38fcbb9cf70e234f2449946536fd1da972cde679f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "fingerprint": "43825f602514c9e6a0bd8f0a270a54a03d1cb76f821b99d1e736d0150dafc190",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "fingerprint": "3503e145a591a406105eb953f9ac75c8373992c9f3f1f23b713de65c85a3bb3d",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "fingerprint": "b7932e08a086cfe16ed5e78872e274fb897931d0653dbf7ac61a19b404ddec85",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "fingerprint": "a0a8efb762e823fe4dd8c8de9601f74ac873ade8c6953a7e5305297608c71a12",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "fingerprint": "9fd7e62c56ae78866267cdd5650dc4e4af4aad76dd6ff8466b68908bc25d661c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "fingerprint": "00dc477ad56d12cfa6cd0d1e071e80f4120afed23f44af0393e23e5dac516a3b",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "fingerprint": "78bf5be3b2b5656a0b95ce2ce3cf1a635b6df609361a840b8298476f65af9d52",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      }
+    ],
+    "publicationAuthorized": false
+  },
+  "limitations": [
+    "All 106 original snippets remain unchanged and parse; only first four per guide forwarded (24 across engines), not all examples executed.",
+    "Browser probes exercise constructor/default/ownership/precedence/failure behavior and native local-MP4 readiness, not a full media or physical-device matrix.",
+    "Desktop Playwright engines do not verify mobile gestures, AirPlay, native fullscreen, Cast or SDK behavior.",
+    "option-validator 2.0.6 was inspected from the existing frozen installation; no dependency changed."
+  ],
+  "visualInspection": "chromium-zh-option.png",
+  "attachments": [
+    {
+      "path": "refactor/.cache/site04-options-validate.mjs",
+      "sha256": "489fda0817a9a3de3d8378537da9586f03481fb78723015144b8eda08b802088"
+    },
+    {
+      "path": "refactor/.cache/site04-options-probe.js",
+      "sha256": "42007ad9933cf075c5aba24759b8878fa7b3620d86ed874206a892c3125064fa"
+    },
+    {
+      "path": "refactor/.cache/site04-options/report.json",
+      "sha256": "aa54eb51ea31777a07410e2d48e0b670ec91393bc94c5ff950ca0acb0c0804ba"
+    },
+    {
+      "path": "refactor/.cache/site04-options-build.log",
+      "sha256": "41dbb71bfdeaa3787214537f81e7e1b0868f042b6e595d82c0ebff124d4b7ce0"
+    },
+    {
+      "path": "refactor/.cache/site04-options-llm.log",
+      "sha256": "338f756c9f0a32e0ec42478b2d887f2f2542ba9ff993789ea1ff4a090f6d0602"
+    },
+    {
+      "path": "refactor/.cache/site04-options-tests.log",
+      "sha256": "4e869c21387bf65ec81fed2dfc5eab4b43d35b4fb34d3c1ec1085457f08aaa08"
+    },
+    {
+      "path": "refactor/.cache/site04-options-validate.log",
+      "sha256": "77c5775a7d34ac93a32db1330978cebd77e27e4be601490f7d1d70759237ea43"
+    },
+    {
+      "path": "refactor/.cache/site04-options-ledger.log",
+      "sha256": "83c982cb41f72ccb59e4b5678a5d032e682550c0c23df970e98ac41f7bea31af"
+    },
+    {
+      "path": "refactor/.cache/site04-options-server.mjs",
+      "sha256": "f878ce962172e7c339136d47e00356c5df3a65af96a62f0ecdcf7481f2a6d6f7"
+    }
+  ]
+}

@@ -1,5 +1,91 @@
 # 基础选项
 
+## 构造与配置归属 {#construction-contract}
+
+`new Artplayer(option, readyCallback?)` 同步构造实例，需要浏览器和 DIV 容器，可以传节点或 CSS 选择器。默认值里虽然有 '#artplayer'，构造输入仍必须提供 container：校验前会用输入值覆盖该默认值。同一容器同时只能归属一个活跃实例。未开启 useSSR 时会替换容器内容；开启后须提前放入版本匹配的 Artplayer.html，它不会启用服务端构造，也不会修补缺失的模板。
+
+每次构造读取一份新的 Artplayer.option，合并输入、校验后再创建子系统。配置校验失败发生在挂载 DOM 和调用 proxy 之前。初始化失败会释放已归属的资源并恢复捕获的容器内容；构造器成功返回不代表媒体、字幕、异步插件或外部 SDK 已就绪。
+
+第二参数才是 ready 回调，不是名为 onReady 的配置项。普通函数的 this 和第一个参数都是播放器实例。该回调在构造插件之后注册，由首次成功处理的 canplay 触发，不等待插件 Promise。允许空 URL，之后再赋值。数字 art.id 与 option.id 不同，后者是可选的播放记忆键。
+
+### 合并与校验 {#option-merge}
+
+- 每次读取 Artplayer.option 都得到独立的嵌套默认配置，修改返回对象不会设置全局默认值。lang 读取当前 navigator.language 并转为小写；moreVideoAttr.preload 使用模块加载时的 Safari 判断。非浏览器读取时 lang 可能为 undefined，但构造仍要求浏览器。
+- 合并创建新的顶层对象，两边都存在的对象递归合并；数组沿用 concat/spread 规则，因此数组本身是新的，普通对象成员仍保留身份。函数和 Element 保留引用，这不是完整深拷贝。组件之后可能给共享的条目对象添加元信息。
+- 自有可枚举的扩展字段保留，不受 schema 校验。继承字段通常不参与，container 则会再次从输入显式读取，因此 getter 可能执行多次。显式 undefined 可以覆盖必填默认值并导致校验失败，不能当作省略字段。
+- Artplayer.scheme 是共享且可修改的校验规则。Artplayer.validator(value, scheme) 校验传入值，成功返回原对象，遇到第一个非法已知字段即抛错；不合并默认值，也不挂载播放器。Artplayer.kindOf 是校验器的类型分类函数，不是媒体能力检测。runtime 类型还提供校验器用于错误路径的可选第三参数。
+- art.option 是合并后的实际对象，不是响应式配置入口。一些回调之后仍会读取它，另一些值只在初始化时捕获或创建 UI。播放行为使用对应 setter，UI 使用组件管理器；给配置字段赋新值不会自动重建全部功能。
+
+### 初始媒体值与优先级 {#option-precedence}
+
+moreVideoAttr 通过 art.attr 写入媒体的**属性**，不是调用 setAttribute。值为 undefined 时沿用 attr 的读取分支，不执行写入。之后核心应用真值 muted、volume、poster、autoplay、playsInline 和 theme，再写 CSS 变量及 URL。不能依靠 moreVideoAttr 的字段顺序覆盖后续步骤。
+
+历史音量初始化只写入真值 option.volume 并钳制到 [0,1]，因此 volume:0 会跳过这一步；随后读取的数字 storage 音量还会覆盖配置值。要求初始静音时使用 muted:true，需要覆盖记忆音量时在构造后设置 art.volume。autoplay/muted/playsInline 的 false 不会撤销 moreVideoAttr 已写入的属性。自动播放及行内播放仍受浏览器策略限制。
+
+非空 theme 会先把 '--art-theme' 写入合并后的 cssVar，再应用样式，因此优先于冲突的初始 cssVar 值。poster 使用播放器的背景层。loop 由 ended 回调执行 seek=0 和 play，区别于通过 moreVideoAttr 设置原生 video.loop。
+
+### UI、平台与内容配置 {#option-capabilities}
+
+| 配置 | 实际作用范围 |
+| --- | --- |
+| isLive | 选择直播 UI，省略普通进度/时间控件和部分点播辅助功能；不会检测协议或安装解码器 |
+| flip、playbackRate、aspectRatio | 启用桌面右键菜单及开启 setting 后的设置选项，不是初始翻转、倍速或比例值 |
+| setting、settings | 启用设置 UI 并提供条目；关闭面板时管理器仍存在 |
+| screenshot、pip、fullscreen、fullscreenWeb、airplay | 请求相应控件；截图按钮只在桌面添加，AirPlay 还检查原生可用性 API。开关不授予权限，也不保证浏览器支持 |
+| hotkey | 启用桌面内置快捷键；false 不移除公开管理器，也不禁止手动注册快捷键 |
+| gesture | 在移动端点播模式启用视频区域滑动；进度区域单独绑定，false 不会取消该绑定 |
+| lock、fastForward、autoOrientation | 安装移动端辅助功能，fastForward 还要求点播模式。之后改变开关不会安装缺失插件 |
+| miniProgressBar、autoPlayback | 安装点播辅助功能；播放记忆使用 id 或当前 URL，需要存储，并不代表自动播放权限 |
+| autoMini、autoSize | 响应视口事件/普通状态的 resize 路径，不保证初次可见性检测，也不是持续 ResizeObserver |
+| mutex | art.play 成功后暂停其他已登记实例；直接调用原生 video.play 不经过这一方法步骤 |
+| backdrop、playsInline | 添加初始背景 CSS 类/写入行内播放属性，实际样式和媒体行为由浏览器决定 |
+| layers、controls、contextmenu | 初始组件条目，需提供 html，controls 还需要 position。构造时的右键菜单仅在桌面初始化；回调和清理见组件指南 |
+| quality | 构造校验要求字符串 html 和 URL。default 决定标签/选中项，不替换 option.url，也不自动加载该地址。初始选择器延后安装，之后选择条目调用 switchQuality |
+| highlight | metadata 就绪时渲染 time/text 标记，定位时间钳制到 duration，文字按文本保存，不是章节播放接口 |
+| lang、i18n、icons | 初始语言、词典和图标覆盖，回退规则、节点归属及后续更新见对应管理器指南 |
+
+### 嵌套默认值与媒体适配 {#option-nested}
+
+thumbnails 实际默认值为 `{ url: '', number: 60, column: 10, width: 0, height: 0, scale: 1 }`，描述雪碧图，不是视频地址或缩略图生成器。提供的宽高乘以 scale；否则宽度取图片宽度/column，高度按视频比例计算。格子从零开始按行排列，进度交互时才加载。后续 art.thumbnails 赋值直接替换对象，不再执行构造时的默认值合并，需提供所需几何参数；setter 忽略空 URL 和直播模式赋值。
+
+subtitle 实际默认值包括空 url/type/name、空 style、escape:true、encoding:'utf-8' 和原样返回文本的 onVttLoad。部分构造配置与默认值合并；转换、track 就绪、每次调用的覆盖及 Blob URL 归属见字幕管理器指南，构造返回不代表字幕加载完成。
+
+type 是显式 customType 查找键，未提供时用 getExt 从 URL 推导。核心不规范化显式 type，也不按扩展名安装 SDK。匹配的回调在归属的初始化延迟之后收到 (video, url, art)，this===art；其 Promise 失败会被处理，但不定义媒体就绪。适配器负责设置媒体能力、原生事件和资源清理。没有匹配回调时直接设置 video.src。类型里的可选 art.hls/art.flv 字段不会创建这些库。
+
+proxy 在模板挂载期间更早执行，此时 art.template、video/query/proxy getter 和多数管理器尚不可用。必须返回真正的 HTMLVideoElement 或 HTMLCanvasElement；旧类型虽允许 undefined，运行时仍拒绝它和普通对象。返回节点替换模板 video，className 被设置为 art-video。canvas 的媒体属性、方法和事件需由适配器提供，不会自动获得播放能力。
+
+### 构造器 TypeScript 视图 {#option-types}
+
+根入口 Option 保留历史 URL 必填及读取类型；OptionInput 允许省略 URL 和数字组件 HTML。runtime 提供合并后的配置类型和准确回调视图：ProxyHost 刻意限制可用字段，组件回调里的后续管理器可能尚未赋值，PluginHost 也不假设构造自己的过程中 art.plugins 已存在。这些类型描述同一个构造器，不是不同实现。历史宽松类型不绕过运行时校验，例如构造配置 quality 的 html 仍要求字符串。
+
+```ts
+import LegacyArtplayer from 'artplayer';
+import type { OptionInput as LegacyInput } from 'artplayer';
+import Artplayer from 'artplayer/runtime';
+import type { OptionInput, ProxyHost } from 'artplayer/runtime';
+
+const input: LegacyInput = { container: '#legacy', controls: [{ name: 'count', html: 42, position: 'left' }] };
+new LegacyArtplayer(input);
+const options: OptionInput = {
+    container: '#player',
+    proxy: function (art: ProxyHost) {
+        const same: boolean = this === art;
+        void same;
+        return document.createElement('video');
+    },
+    plugins: [function (art) {
+        const pending = art.plugins;
+        void pending;
+        return { name: 'example' };
+    }],
+};
+new Artplayer(options, function (art) {
+    const same: boolean = this === art;
+    void same;
+});
+```
+
+
 ## `container`
 
 -   Type: `String, Element`
@@ -859,7 +945,7 @@ var art = new Artplayer({
 ## `thumbnails`
 
 -   Type: `Object`
--   Default: `{}`
+-   Default: `{ url: '', number: 60, column: 10, width: 0, height: 0, scale: 1 }`
 
 在进度条上设置 `预览图`
 
@@ -895,7 +981,7 @@ var art = new Artplayer({
 ## `subtitle`
 
 -   Type: `Object`
--   Default: `{}`
+-   Default: `{ url: '', type: '', name: '', style: {}, escape: true, encoding: 'utf-8', onVttLoad: vtt => vtt }`
 
 设置视频的字幕，支持字幕格式：`vtt`, `srt`, `ass`
 

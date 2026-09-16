@@ -3,13 +3,13 @@
   "task": "SITE-04",
   "inventory": {
     "path": "refactor/baselines/site-inventory.json",
-    "sha256": "06bd32ec7b555ff4585ffa587094b9eba8488b30da34f712c906036e89e524ca"
+    "sha256": "9a444c8db60f47c9d12ac6d183d3aff88e1f088072927ce967cca77a8356b24e"
   },
-  "reviewedAt": "2026-09-15T23:59:04.813Z",
+  "reviewedAt": "2026-09-16T00:12:40.060Z",
   "counts": {
     "inventoryRecords": 963,
-    "reviewedRecords": 627,
-    "unreviewedRecords": 336
+    "reviewedRecords": 720,
+    "unreviewedRecords": 243
   },
   "note": "Explicit declaration-record semantic mapping, including overload/getter/setter rows and root/runtime aliases. Counts are not overall API or release completion. Recheck affected groups if their source/document hashes drift. Other declarations and inline members are not implicitly covered.",
   "groups": [
@@ -5847,6 +5847,905 @@
         }
       ],
       "evidence": "baselines/site04-events.json"
+    },
+    {
+      "id": "construction-options",
+      "status": "semantic-reviewed",
+      "conclusion": "Constructor input and resolved root/runtime option views, staged callback receivers, fresh nested defaults, merge/reference/extension behavior, shared schema and validator return/errors. Initial media/CSS/storage precedence, non-reactive configuration, platform/UI feature gates, quality selection versus URL, thumbnails geometry/defaults, subtitle defaults, customType/proxy ownership and readiness. Historical zero-volume, undefined-proxy and quality-label type/runtime discrepancies explicitly retained/documented. Existing detailed component/subtitle/plugin guides remain authoritative for their managers.",
+      "records": [
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.constructor@37",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "constructor",
+          "line": 37
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.constructor@38",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "constructor",
+          "line": 38
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.scheme@46",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "scheme",
+          "line": 46
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.validator@48",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "validator",
+          "line": 48
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.kindOf@49",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "kindOf",
+          "line": 49
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.option@51",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "option",
+          "line": 51
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.option@89",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "option",
+          "line": 89
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Thumbnails.url@24",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Thumbnails",
+          "name": "url",
+          "line": 24
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Thumbnails.number@29",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Thumbnails",
+          "name": "number",
+          "line": 29
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Thumbnails.column@34",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Thumbnails",
+          "name": "column",
+          "line": 34
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Thumbnails.width@39",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Thumbnails",
+          "name": "width",
+          "line": 39
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Thumbnails.height@44",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Thumbnails",
+          "name": "height",
+          "line": 44
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Thumbnails.scale@49",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Thumbnails",
+          "name": "scale",
+          "line": 49
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#OptionInput.url@54",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "OptionInput",
+          "name": "url",
+          "line": 54
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#OptionInput.controls@55",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "OptionInput",
+          "name": "controls",
+          "line": 55
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#OptionInput.layers@56",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "OptionInput",
+          "name": "layers",
+          "line": 56
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#OptionInput.contextmenu@57",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "OptionInput",
+          "name": "contextmenu",
+          "line": 57
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.id@64",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "id",
+          "line": 64
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.container@69",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "container",
+          "line": 69
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.url@74",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "url",
+          "line": 74
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.poster@79",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "poster",
+          "line": 79
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.type@84",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "type",
+          "line": 84
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.theme@89",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "theme",
+          "line": 89
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.lang@94",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "lang",
+          "line": 94
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.volume@99",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "volume",
+          "line": 99
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.isLive@104",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "isLive",
+          "line": 104
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.muted@109",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "muted",
+          "line": 109
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.autoplay@114",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "autoplay",
+          "line": 114
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.autoSize@119",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "autoSize",
+          "line": 119
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.autoMini@124",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "autoMini",
+          "line": 124
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.loop@129",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "loop",
+          "line": 129
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.flip@134",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "flip",
+          "line": 134
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.playbackRate@139",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "playbackRate",
+          "line": 139
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.aspectRatio@144",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "aspectRatio",
+          "line": 144
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.screenshot@149",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "screenshot",
+          "line": 149
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.setting@154",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "setting",
+          "line": 154
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.hotkey@159",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "hotkey",
+          "line": 159
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.pip@164",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "pip",
+          "line": 164
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.mutex@169",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "mutex",
+          "line": 169
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.backdrop@174",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "backdrop",
+          "line": 174
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.fullscreen@179",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "fullscreen",
+          "line": 179
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.fullscreenWeb@184",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "fullscreenWeb",
+          "line": 184
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.subtitleOffset@189",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "subtitleOffset",
+          "line": 189
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.miniProgressBar@194",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "miniProgressBar",
+          "line": 194
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.useSSR@199",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "useSSR",
+          "line": 199
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.playsInline@204",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "playsInline",
+          "line": 204
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.lock@209",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "lock",
+          "line": 209
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.gesture@214",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "gesture",
+          "line": 214
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.fastForward@219",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "fastForward",
+          "line": 219
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.autoPlayback@224",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "autoPlayback",
+          "line": 224
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.autoOrientation@229",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "autoOrientation",
+          "line": 229
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.airplay@234",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "airplay",
+          "line": 234
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.proxy@239",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "proxy",
+          "line": 239
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.plugins@244",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "plugins",
+          "line": 244
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.layers@249",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "layers",
+          "line": 249
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.contextmenu@254",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "contextmenu",
+          "line": 254
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.controls@259",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "controls",
+          "line": 259
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.settings@264",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "settings",
+          "line": 264
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.quality@269",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "quality",
+          "line": 269
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.highlight@274",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "highlight",
+          "line": 274
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.thumbnails@289",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "thumbnails",
+          "line": 289
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.subtitle@294",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "subtitle",
+          "line": 294
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.moreVideoAttr@299",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "moreVideoAttr",
+          "line": 299
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.i18n@308",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "i18n",
+          "line": 308
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.icons@313",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "icons",
+          "line": 313
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.cssVar@320",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "cssVar",
+          "line": 320
+        },
+        {
+          "id": "packages/artplayer/public/option.ts#Option.customType@325",
+          "file": "packages/artplayer/public/option.ts",
+          "declaration": "Option",
+          "name": "customType",
+          "line": 325
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#OptionInput.plugins@33",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "OptionInput",
+          "name": "plugins",
+          "line": 33
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#OptionInput.proxy@34",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "OptionInput",
+          "name": "proxy",
+          "line": 34
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#OptionInput.customType@35",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "OptionInput",
+          "name": "customType",
+          "line": 35
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#OptionInput.layers@36",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "OptionInput",
+          "name": "layers",
+          "line": 36
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#OptionInput.controls@37",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "OptionInput",
+          "name": "controls",
+          "line": 37
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#OptionInput.contextmenu@38",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "OptionInput",
+          "name": "contextmenu",
+          "line": 38
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.option@66",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "option",
+          "line": 66
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#ArtplayerConstructor.constructor@107",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "ArtplayerConstructor",
+          "name": "constructor",
+          "line": 107
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#ArtplayerConstructor.constructor@108",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "ArtplayerConstructor",
+          "name": "constructor",
+          "line": 108
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#ArtplayerConstructor.scheme@114",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "ArtplayerConstructor",
+          "name": "scheme",
+          "line": 114
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#ArtplayerConstructor.validator@116",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "ArtplayerConstructor",
+          "name": "validator",
+          "line": 116
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#ArtplayerConstructor.kindOf@117",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "ArtplayerConstructor",
+          "name": "kindOf",
+          "line": 117
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#ArtplayerConstructor.option@119",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "ArtplayerConstructor",
+          "name": "option",
+          "line": 119
+        },
+        {
+          "id": "packages/artplayer/public/runtime/option.ts#OptionInput.container@11",
+          "file": "packages/artplayer/public/runtime/option.ts",
+          "declaration": "OptionInput",
+          "name": "container",
+          "line": 11
+        },
+        {
+          "id": "packages/artplayer/public/runtime/option.ts#OptionInput.proxy@12",
+          "file": "packages/artplayer/public/runtime/option.ts",
+          "declaration": "OptionInput",
+          "name": "proxy",
+          "line": 12
+        },
+        {
+          "id": "packages/artplayer/public/runtime/option.ts#OptionInput.plugins@13",
+          "file": "packages/artplayer/public/runtime/option.ts",
+          "declaration": "OptionInput",
+          "name": "plugins",
+          "line": 13
+        },
+        {
+          "id": "packages/artplayer/public/runtime/option.ts#OptionInput.layers@14",
+          "file": "packages/artplayer/public/runtime/option.ts",
+          "declaration": "OptionInput",
+          "name": "layers",
+          "line": 14
+        },
+        {
+          "id": "packages/artplayer/public/runtime/option.ts#OptionInput.controls@15",
+          "file": "packages/artplayer/public/runtime/option.ts",
+          "declaration": "OptionInput",
+          "name": "controls",
+          "line": 15
+        },
+        {
+          "id": "packages/artplayer/public/runtime/option.ts#OptionInput.contextmenu@16",
+          "file": "packages/artplayer/public/runtime/option.ts",
+          "declaration": "OptionInput",
+          "name": "contextmenu",
+          "line": 16
+        },
+        {
+          "id": "packages/artplayer/public/runtime/option.ts#OptionInput.settings@17",
+          "file": "packages/artplayer/public/runtime/option.ts",
+          "declaration": "OptionInput",
+          "name": "settings",
+          "line": 17
+        },
+        {
+          "id": "packages/artplayer/public/runtime/option.ts#OptionInput.customType@18",
+          "file": "packages/artplayer/public/runtime/option.ts",
+          "declaration": "OptionInput",
+          "name": "customType",
+          "line": 18
+        },
+        {
+          "id": "packages/artplayer/public/runtime/option.ts#OptionInput.i18n@19",
+          "file": "packages/artplayer/public/runtime/option.ts",
+          "declaration": "OptionInput",
+          "name": "i18n",
+          "line": 19
+        },
+        {
+          "id": "packages/artplayer/public/runtime/option.ts#OptionInput.icons@20",
+          "file": "packages/artplayer/public/runtime/option.ts",
+          "declaration": "OptionInput",
+          "name": "icons",
+          "line": 20
+        },
+        {
+          "id": "packages/artplayer/public/runtime/option.ts#Option.proxy@25",
+          "file": "packages/artplayer/public/runtime/option.ts",
+          "declaration": "Option",
+          "name": "proxy",
+          "line": 25
+        },
+        {
+          "id": "packages/artplayer/public/runtime/option.ts#Option.subtitle@26",
+          "file": "packages/artplayer/public/runtime/option.ts",
+          "declaration": "Option",
+          "name": "subtitle",
+          "line": 26
+        },
+        {
+          "id": "packages/artplayer/public/runtime/option.ts#Option.thumbnails@27",
+          "file": "packages/artplayer/public/runtime/option.ts",
+          "declaration": "Option",
+          "name": "thumbnails",
+          "line": 27
+        }
+      ],
+      "sources": [
+        {
+          "path": "packages/artplayer/src/index.ts",
+          "sha256": "20cfe3738b3ce7e11b69721a5f0bdad9db77807417d8e421397a40dfade4c047"
+        },
+        {
+          "path": "packages/artplayer/src/option/defaults.ts",
+          "sha256": "0bfdc329c48716ac5987c8979fee7e116f6894a70fefc908c99876dfbb4d9dc0"
+        },
+        {
+          "path": "packages/artplayer/src/option/resolve.ts",
+          "sha256": "27bb1b81a9288062969abb561cec9c88c4b9acb715023e4f22f299f3d5f4bf65"
+        },
+        {
+          "path": "packages/artplayer/src/option/runtime.ts",
+          "sha256": "4caa060f67c6a57db4a7cc93598e8768794f727b303a5cfa4aeb2ebc247e52d9"
+        },
+        {
+          "path": "packages/artplayer/src/option/types.ts",
+          "sha256": "224e32ce13cfc9d41ad9f2f3427f97d10bcaaec7e88e30503d618a3d06ae381e"
+        },
+        {
+          "path": "packages/artplayer/src/scheme/index.ts",
+          "sha256": "dc4a3b5e08478cf72b46b0b59c023359ad5f79b891ea8a6a119ce24a5251821a"
+        },
+        {
+          "path": "packages/artplayer/src/utils/property.ts",
+          "sha256": "c737d4582a4382f4038d12dafdf8b43418e508c9b8b859b2f0cc17c20f370343"
+        },
+        {
+          "path": "packages/artplayer/src/utils/compatibility.ts",
+          "sha256": "1fd2a5b17ee3245712eda961d3c0a15caf3c428010112e48231890176ce1e5e2"
+        },
+        {
+          "path": "packages/artplayer/src/template.ts",
+          "sha256": "0ea9155b9292d4c528a464d3c97996ee5a1c9c4aabc2959a744989085db2251b"
+        },
+        {
+          "path": "packages/artplayer/src/template/nodes.ts",
+          "sha256": "1572746a636647e4d313cc8752d3a110ff81fddb390ad7b0feb6a0db0d42b9d4"
+        },
+        {
+          "path": "packages/artplayer/src/template/html.ts",
+          "sha256": "351c472bfd01fa5ba1a4e347ed31bd5faaf823d9b4c5cab1ce8c651e3b175021"
+        },
+        {
+          "path": "packages/artplayer/src/lifecycle/instance.ts",
+          "sha256": "3168f7db4271bae7a242e80798546b755ac15443e15dd9ebb7675f5a259299d8"
+        },
+        {
+          "path": "packages/artplayer/src/lifecycle/template-rollback.ts",
+          "sha256": "7a83da6739bcec1587b02f8157934988910d7f9103fe489a0d6f4f65290c3d77"
+        },
+        {
+          "path": "packages/artplayer/src/player/index.ts",
+          "sha256": "359943c88dc99863e510fc0d51f8e8ee2397217e68045f755d4e9538579bdaec"
+        },
+        {
+          "path": "packages/artplayer/src/player/optionInit.ts",
+          "sha256": "7c1c47679ee6201d0e0d203fc7b449a09309e7b24a0a1099ad259a70fc1b1a35"
+        },
+        {
+          "path": "packages/artplayer/src/player/attrMix.ts",
+          "sha256": "d82150611a69423ed46bf673f44c3e0f61e80425026effd486a6951b6c0dd90c"
+        },
+        {
+          "path": "packages/artplayer/src/player/volumeMix.ts",
+          "sha256": "d830bb27b984e0ab2f687943fb49abcbd0331d71fe96049fd81edbddaa64f07f"
+        },
+        {
+          "path": "packages/artplayer/src/player/cssVarMix.ts",
+          "sha256": "0d023f28b7a8b4c1a5e2c4dd5672ef4294c86bce0013babd9d52efa32a443b2a"
+        },
+        {
+          "path": "packages/artplayer/src/player/urlMix.ts",
+          "sha256": "726a42899261879e03c8b1d4f716458bf3e6e614cecc3bb8d7a581afc2b7866d"
+        },
+        {
+          "path": "packages/artplayer/src/player/qualityMix.ts",
+          "sha256": "980ff584c8a5793f5ec9f049f144df31d184d7c9acef49fbe9d504b7657a96bb"
+        },
+        {
+          "path": "packages/artplayer/src/player/thumbnailsMix.ts",
+          "sha256": "6c097d7d00779a6d0d3d65cf9ffd126624a48c9bdb98396c84c39f4de4bdf712"
+        },
+        {
+          "path": "packages/artplayer/src/player/playMix.ts",
+          "sha256": "2d46a3f84da0b1dd18139b76e5e2e163f1d9d9c8f54e67807eeec672acd49917"
+        },
+        {
+          "path": "packages/artplayer/src/thumbnails/layout.ts",
+          "sha256": "6630439242a880f53fcb374b7b15c7f486405aab8a0fad651b137f02971eeb59"
+        },
+        {
+          "path": "packages/artplayer/src/control/builtins.ts",
+          "sha256": "2a0e12a9741713c92938e1d2009149bbbde498284aa85c63f270d02b27dc22b1"
+        },
+        {
+          "path": "packages/artplayer/src/control/progress/view.ts",
+          "sha256": "60ee16d5170be81b8132bb56dd0bc0eaf23e50f5c268d0697c9187b38a14aba9"
+        },
+        {
+          "path": "packages/artplayer/src/setting/index.ts",
+          "sha256": "f6319af15ebe3600a466123dd9d343b86a8d6ed201693ac7ac86dc1d674d477f"
+        },
+        {
+          "path": "packages/artplayer/src/contextmenu/index.ts",
+          "sha256": "7532165d162fa463f1fe3c538d6bda0f579b5907b05137382efeb0018719b011"
+        },
+        {
+          "path": "packages/artplayer/src/plugins/index.ts",
+          "sha256": "4c97f354769bbcb338263f321876a90745a87a9af2d267e216bd3d9d007f268a"
+        },
+        {
+          "path": "packages/artplayer/src/plugins/builtins.ts",
+          "sha256": "4631c9775732982dfdc87e16b1bd6b41a350be36fb27e0a9132c11a85b0c016d"
+        },
+        {
+          "path": "packages/artplayer/src/plugins/auto-playback/records.ts",
+          "sha256": "133a4ba2fd2d3df724d96eb203d05cffb0b82ecb8de72403974f7979bd37ce01"
+        },
+        {
+          "path": "packages/artplayer/src/events/resizeInit.ts",
+          "sha256": "719e27d11d2f93fcbe8368393c9190e251fc86dd0c3c2919f60e9b3b1edd0192"
+        },
+        {
+          "path": "packages/artplayer/src/events/viewInit.ts",
+          "sha256": "d77b83eab802ff0046a4966e28b810a25592bcada49f526adae37556c1e4c3e9"
+        },
+        {
+          "path": "packages/artplayer/src/events/gestureInit.ts",
+          "sha256": "9e9d1ac0da7f87e89dd0d86fa2820b980e9cb810782d6ab30017de8686fc910b"
+        },
+        {
+          "path": "packages/artplayer/src/hotkey.ts",
+          "sha256": "d8e477bf451143e566e1f743a5f253dcf00beb23544709794779f275e11498e8"
+        },
+        {
+          "path": "packages/artplayer/src/media/events/playback.ts",
+          "sha256": "2c68e4f6274a0dc65e56d42c928e500fc1d63bf3e03bbdd8a83c3f3ed7ae8ee4"
+        },
+        {
+          "path": "packages/artplayer/src/media/events/readiness.ts",
+          "sha256": "3ba74f26dd9ff0729967097c2cb6f329a9cea57745bfe8173f9173e0d134476a"
+        },
+        {
+          "path": "packages/artplayer/src/storage.ts",
+          "sha256": "9c0a0f3d8ac18261db6e49b2ea14322d1d53bfec3531c7337b85005e708fef30"
+        },
+        {
+          "path": "packages/artplayer/public/artplayer.ts",
+          "sha256": "26a42ac66811e70f68a8ebe62cbf304eb1993451b3e658961be98e7106162527"
+        },
+        {
+          "path": "packages/artplayer/public/option.ts",
+          "sha256": "850e5264219b8b438c80694402225b690b131786677a5da0d22739ec2352d263"
+        },
+        {
+          "path": "packages/artplayer/public/runtime.ts",
+          "sha256": "ec4b1d56993eb482a77eb0f94b701047549d009e6ba6433f27e7d464fef30c2b"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/option.ts",
+          "sha256": "bb672e49ffe74a6fc78543217f6de80d7d738890146df0857c709d4dc283e4ce"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/construction.ts",
+          "sha256": "24cc5cda1f614314db382271a9b0d5583b781894cfdf6c548700b1b5270467ee"
+        },
+        {
+          "path": "node_modules/option-validator/package.json",
+          "sha256": "fad30dba9b36a06de9e625b6c994a6d3c19c6222b500eefa0a01e71ef4cb5fa8"
+        },
+        {
+          "path": "node_modules/option-validator/index.js",
+          "sha256": "f942c593c6f2fa0aabdc417661ea55d21cbf506dba3c255193838eac9ab51aa5"
+        }
+      ],
+      "docs": [
+        {
+          "path": "packages/artplayer-vitepress/docs/start/option.md",
+          "sha256": "88e44983009b354091f89113369298f6e6854f690797e4db3d5a7477ef3aecab",
+          "anchor": "construction-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/start/option.md",
+          "sha256": "88e44983009b354091f89113369298f6e6854f690797e4db3d5a7477ef3aecab",
+          "anchor": "option-merge"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/start/option.md",
+          "sha256": "88e44983009b354091f89113369298f6e6854f690797e4db3d5a7477ef3aecab",
+          "anchor": "option-precedence"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/start/option.md",
+          "sha256": "88e44983009b354091f89113369298f6e6854f690797e4db3d5a7477ef3aecab",
+          "anchor": "option-capabilities"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/start/option.md",
+          "sha256": "88e44983009b354091f89113369298f6e6854f690797e4db3d5a7477ef3aecab",
+          "anchor": "option-nested"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/start/option.md",
+          "sha256": "88e44983009b354091f89113369298f6e6854f690797e4db3d5a7477ef3aecab",
+          "anchor": "option-types"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/start/option.md",
+          "sha256": "a21f6b7977e418b9be91dacf2c57c017ca4e5855496aab4874d6d258a22aff9f",
+          "anchor": "construction-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/start/option.md",
+          "sha256": "a21f6b7977e418b9be91dacf2c57c017ca4e5855496aab4874d6d258a22aff9f",
+          "anchor": "option-merge"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/start/option.md",
+          "sha256": "a21f6b7977e418b9be91dacf2c57c017ca4e5855496aab4874d6d258a22aff9f",
+          "anchor": "option-precedence"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/start/option.md",
+          "sha256": "a21f6b7977e418b9be91dacf2c57c017ca4e5855496aab4874d6d258a22aff9f",
+          "anchor": "option-capabilities"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/start/option.md",
+          "sha256": "a21f6b7977e418b9be91dacf2c57c017ca4e5855496aab4874d6d258a22aff9f",
+          "anchor": "option-nested"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/start/option.md",
+          "sha256": "a21f6b7977e418b9be91dacf2c57c017ca4e5855496aab4874d6d258a22aff9f",
+          "anchor": "option-types"
+        }
+      ],
+      "evidence": "baselines/site04-options.json"
     }
   ]
 }
