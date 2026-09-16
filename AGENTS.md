@@ -150,17 +150,25 @@ For proxy/plugin work, prefer validating on the local demo page rather than reas
 
 ### Ecosystem packages
 
-Most ecosystem packages follow this pattern:
+Migrated ecosystem packages follow this pattern:
 
 ```text
 packages/<package>/
-  src/index.js
+  src/index.ts
+  src/*.ts         # internal modules; see the package maintenance map
   src/*.less        # optional
-  types/*.d.ts      # optional but preferred for public APIs
+  types/*.d.ts      # public compatibility declarations
+  ARCHITECTURE.md   # maintenance map, or a maintenance section in README.md
   README.md
   package.json
   dist/*
 ```
+
+Read the package maintenance map before changing module ownership. Some packages
+also expose accurate types through `/runtime`, with `.d.mts`/`.d.cts` declarations.
+Do not replace historical root declarations with internal implementation types;
+follow [the approved type policy](refactor/type-compatibility-policy.md) and each
+package's recorded compatibility decisions. Check package.json for exact exports.
 
 ### Demo and docs assets
 
@@ -281,7 +289,8 @@ Keep examples realistic and runnable. Prefer local demo URLs or stable public sa
 
 ## Code Quality Expectations
 
-- Follow existing plain JavaScript style in the repo.
+- Follow the existing TypeScript style for migrated production modules and the
+  existing JavaScript style for tests, launchers and documented legacy exceptions.
 - Use ASCII unless a file already requires otherwise.
 - Match the minimal-comment style of neighboring files.
 - Avoid unnecessary abstraction; this codebase generally prefers direct implementation.
@@ -314,19 +323,27 @@ This package now depends on modern `mediabunny` and supports HLS through `mediab
 
 Files to understand first:
 
-- `packages/artplayer-proxy-mediabunny/src/index.js`
-- `packages/artplayer-proxy-mediabunny/src/VideoShim.js`
-- `packages/artplayer-proxy-mediabunny/src/MediaBunnyEngine.js`
-- `packages/artplayer-proxy-mediabunny/src/input.js`
-- `packages/artplayer-proxy-mediabunny/src/m3u8.js`
+- `packages/artplayer-proxy-mediabunny/ARCHITECTURE.md`
+- `packages/artplayer-proxy-mediabunny/src/index.ts`
+- `packages/artplayer-proxy-mediabunny/src/VideoShim.ts`
+- `packages/artplayer-proxy-mediabunny/src/MediaBunnyEngine.ts`
+- `packages/artplayer-proxy-mediabunny/src/input.ts`
+- `packages/artplayer-proxy-mediabunny/src/m3u8.ts`
 
 Key expectations:
 
-- HLS source detection should happen in `input.js`
+- HLS source detection should happen in `input.ts`
 - track selection should use actual pairable audio/video relationships
 - selector UI should mirror the behavior of `artplayer-plugin-hls-control`
 - selector cleanup is required when a later source no longer supports the same controls
 - avoid duplicate readiness events during load and track switches
+
+For sustained playback, use `yarn test:mediabunny-soak` with explicit artifacts and
+media; see [the long-test procedure](refactor/changes/2026-09-16-PKG-MB-09-hour-soak.md).
+It shares port 8084 with ordinary browser tests. Do not start another browser
+server or change the measured source, artifacts or media during a live run.
+Use its live process handle and per-case progress samples to check progress;
+an old report or a start snapshot does not prove current execution or completion.
 
 ## When Unsure
 

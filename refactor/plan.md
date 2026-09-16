@@ -507,7 +507,7 @@
 
 - DOC-01: [记录](progress.md)
 - DOC-02: [记录](progress.md)
-- DOC-03: [记录](progress.md)
+- DOC-03: [记录](progress.md) [记录](changes/2026-09-16-DOC-03-ai-entrypoints.md)
 - DOC-04: [记录](progress.md)
 - DOC-05: [记录](changes/2026-09-10-DOC-05-task-commits.md)
 - DOC-06: [记录](changes/2026-09-10-DOC-06-dependencies-and-scripts.md)

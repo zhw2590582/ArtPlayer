@@ -54,7 +54,8 @@
       "deliverable": "refactor 文档集与任务数据",
       "acceptance": "每包有独立步骤、依赖、交付物和验收条件",
       "evidence": [
-        "progress.md"
+        "progress.md",
+        "changes/2026-09-16-DOC-03-ai-entrypoints.md"
       ]
     },
     {
