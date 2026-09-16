@@ -31,7 +31,7 @@ not a VitePress page. Keep both URL surfaces compatible.
 | `docs/proxy/canvas.md`, `docs/en/proxy/canvas.md` | Backing video, draw callbacks/events, Canvas priority, subtitles and compatible types | `/document/proxy/canvas.html`, `/document/en/proxy/canvas.html` |
 | `docs/proxy/mediabunny.md`, `docs/en/proxy/mediabunny.md` | Input, HLS pairing, synthetic media state, lifecycle and explicit type views | `/document/proxy/mediabunny.html`, `/document/en/proxy/mediabunny.html` |
 | `docs/.vitepress/config.js` | Navigation, base URL, output path, page head | Repository `docs/document/` |
-| `docs/vite.config.ts` | Search plugin configuration | VitePress/Vite integration; real search acceptance remains pending |
+| `docs/vite.config.ts`, `build/search.ts` | Search configuration and pinned upstream interaction adapter | Preserves the search template, CSS hooks, index and result URLs |
 | `docs/public/main.js` | Run Code links and first-visit language redirect | Copied into the built site |
 | `docs/public/style.css` | Documentation presentation | Copied into the built site |
 
@@ -45,9 +45,38 @@ serve different purposes. Neither path check replaces browser navigation tests.
 
 The generated site lives in `docs/document/`. The current inventory contains 66 Markdown pages: 33 Chinese
 and 33 English. All 16 plugins, both tools and both proxies have dedicated guides and navigation in both languages.
-Core member
-mapping and the current cross-check of earlier guides remain in SITE-04;
-navigation links alone are not complete API documentation.
+SITE-04 completed the 963 core declaration mappings and cross-checked all 40
+ecosystem guides. Full site execution and delivery remain in SITE-05/SITE-06;
+navigation links alone do not establish player or plugin playback compatibility.
+
+### Local documentation search
+
+`vitepress-plugin-search` 1.0.4-alpha.22 supplies the shared Chinese/English
+index and existing search UI. Its FlexSearch peer is pinned to 0.7.43 in this
+workspace, within the declared `^0.7.31` range. The plugin also embeds its own
+index implementation, so changing this peer alone does not fix UI behavior.
+Its existing token matching is retained; Chinese substring segmentation is not
+promised. The Algolia/search-insights peer warnings originate from VitePress's
+unused hosted-search dependencies; this site does not configure that provider.
+
+`build/search.ts` runs before Vue compilation. It checks the exact installed
+component hash, normalizes CRLF for patch matching, and requires each replacement
+to match once. It prevents Enter from submitting the HTML form, navigates the
+selected result through the router, handles empty results and composition,
+resets selection when queries change, and makes Escape close the modal and
+restore button focus. Focus waits for Vue's DOM update rather than a timer.
+The component owns its shortcut listener and removes it on unmount; a late index
+import cannot attach it after unmount. Upstream HTML/CSS and third-party attribution
+stay intact. Do not modify `node_modules` or simply update the hash on an upgrade:
+review these interactions and the new upstream component first.
+
+Use `yarn test:site-build` for the pinned-component compilation and drift guard,
+`yarn typecheck:docs-tools` for the adapter, and rebuild with `yarn build:docs`
+before `yarn test:browser:source document-search.spec.js document-site.spec.js`.
+Browser checks cover both language URLs, pointer navigation, keyboard selection,
+Escape, focus, no results, and retained document identity (no form reload).
+They isolate external scripts and do not validate AdSense, physical devices,
+all search-index anchors or the complete online editor; those remain SITE-05 work.
 
 Tools have their own navigation group. Iframe explains the required child inject
 step and serialized commit body, without treating the protocol as a sandbox or

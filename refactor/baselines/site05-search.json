@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-05",
+  "status": "checkpoint-not-complete",
+  "baseCommit": "61fe8deb5923de72740bce00e0734dcc93a05cb2",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "peer": {
+    "version": "0.7.43",
+    "range": "^0.7.31"
+  },
+  "inputs": [
+    {
+      "file": "packages/artplayer-vitepress/build/search.ts",
+      "sha256": "8817ec57edb08c0d7ad867e5b8886e51a3f9dd97e0b52056c17db9b92ea64d01"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/vite.config.ts",
+      "sha256": "98a3d464871b5eae52d919e4b895c59ad1595cc4b846a38924c01eb2d3495d3b"
+    },
+    {
+      "file": "packages/artplayer-vitepress/package.json",
+      "sha256": "4d62561b27c9ae5b7cb09c20acdc182fe4b0ed4a711dfbd65bdf78c6813f8ade"
+    },
+    {
+      "file": "yarn.lock",
+      "sha256": "69c3e83f6e7d249914b5bdb0d176dd14ff31d6aa2cfe9d6a4a97216c201300c1"
+    },
+    {
+      "file": "test/browser/document-search.spec.js",
+      "sha256": "3104f2bc5c1cb6044eb55386abda77765dd4f56a82de2fdf8349bfcd87cd1a36"
+    },
+    {
+      "file": "test/site-markdown.test.js",
+      "sha256": "002dccb6f7878937bb9f0cabe86c42d12348f41274658ce436492a0a765af35a"
+    }
+  ],
+  "upstream": {
+    "file": "node_modules/vitepress-plugin-search/dist/Search.vue",
+    "sha256": "c53a0d2a5b5380123f775b0852b5805a4b0a3d97248d5c296972de30c35f6f9c"
+  },
+  "browser": {
+    "command": "yarn test:browser:source document-search.spec.js document-site.spec.js --workers=1",
+    "stats": {
+      "startTime": "2026-09-16T01:32:28.534Z",
+      "duration": 52270.393,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "documentation search supports mouse and keyboard without reloading (zh)",
+        "project": "chromium",
+        "runs": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "documentation search supports mouse and keyboard without reloading (en)",
+        "project": "chromium",
+        "runs": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "documentation search supports mouse and keyboard without reloading (zh)",
+        "project": "firefox",
+        "runs": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "documentation search supports mouse and keyboard without reloading (en)",
+        "project": "firefox",
+        "runs": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "documentation search supports mouse and keyboard without reloading (zh)",
+        "project": "webkit",
+        "runs": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "documentation search supports mouse and keyboard without reloading (en)",
+        "project": "webkit",
+        "runs": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+        "project": "chromium",
+        "runs": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+        "project": "chromium",
+        "runs": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "153.0.8010.12"
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+        "project": "firefox",
+        "runs": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+        "project": "firefox",
+        "runs": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "155.0"
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads zh deep pages and opens Run Code with encoded source",
+        "project": "webkit",
+        "runs": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      },
+      {
+        "title": "built documentation loads en deep pages and opens Run Code with encoded source",
+        "project": "webkit",
+        "runs": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "browser": "26.6"
+          }
+        ]
+      }
+    ],
+    "report": "refactor/.cache/site05-search-final-browser/report.json",
+    "reportSha256": "cb7e3e286c07a539f1c3767a3c829f31cb5b8087908e1ebd0567d00185347bb8",
+    "automaticRetries": 0,
+    "scope": "built documentation; external HTTPS isolated; no media or physical-device acceptance"
+  },
+  "previousFailures": [
+    {
+      "report": "refactor/.cache/site05-search-before-browser/report.json",
+      "cause": "upstream Enter form submission reloads the document"
+    },
+    {
+      "report": "refactor/.cache/site05-search-partial-browser/report.json",
+      "cause": "partial implementation did not match upstream CRLF Escape block"
+    },
+    {
+      "report": "refactor/.cache/site05-search-focus-browser/report.json",
+      "cause": "focus callback queued before Vue visibility update"
+    }
+  ],
+  "unit": {
+    "command": "yarn test:site-build",
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0,
+    "durationMs": 1343.1779
+  },
+  "build": {
+    "command": "yarn build:docs",
+    "vitepressSeconds": 10.34,
+    "yarnSeconds": 12.03
+  },
+  "checks": [
+    "frozen root Yarn install; lock unchanged",
+    "check:toolchain --strict",
+    "typecheck:docs-tools",
+    "targeted readonly ESLint",
+    "site-inventory --check",
+    "demos --check",
+    "risk-register --check"
+  ],
+  "remaining": [
+    "all document links and search index anchors",
+    "online editor and declaration injection matrix",
+    "SITE-07 provenance retained at SITE-06",
+    "REL-02 candidate refresh after shared input changes"
+  ],
+  "publicationAuthorized": false
+}
