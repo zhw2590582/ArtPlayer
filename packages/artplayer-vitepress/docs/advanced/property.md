@@ -125,6 +125,70 @@ void [nativeCommands, togglePlayback, changeSource, progress, unreadable];
 ```
 
 
+## 显示、尺寸与图像契约 {#display-contract}
+
+### 显示模式与浏览器能力 {#display-modes}
+
+state 按 mini、pip、fullscreen、fullscreenWeb 的顺序返回第一个真值模式，否则为 standard。写入只关闭名称不同的活动模式，**不会开启指定模式**；进入迷你播放器请写 mini = true。standard 或未知名称会请求关闭全部活动模式，浏览器退出可能异步完成。它不是事务式切换，也不保证赋值后立即达到目标状态。
+
+fullscreen 在首次 video:loadedmetadata 时才根据当时能力安装描述符，之前可能是 undefined；优先使用文档原生全屏，其次尝试 WebKit 视频全屏，否则读 false 并显示不支持提示。根声明保留 boolean，runtime 标为可选。原生请求需要符合浏览器的用户激活和权限策略，布尔赋值表达式不是可 await 的请求结果。原生事件确认状态后才派发 fullscreen；原生路径随后更新互斥状态、CSS与resize。错误可能显示通知并产生 fullscreenError；不要用属性存在或桌面WebKit测试推断手机支持。
+
+fullscreenWeb 是页面内CSS模式，读取 art-fullscreen-web 类。开启时保存播放器节点原位置和行内样式，根据 FULLSCREEN_WEB_IN_BODY 决定是否搬到所属文档body，再调整尺寸和类；退出恢复首次保存的位置与样式。因此模式期间对同一行内样式的临时修改可能在退出时被恢复覆盖。同步派发 fullscreenWeb 后再派发 resize，重复赋值也可能派发；销毁负责归还节点与清理，不是原生浏览器全屏。
+
+mini 是可拖动的页面浮层，不是操作系统PiP。核心把同一个媒体节点搬入浮层，退出恢复原父节点和相邻位置；重复进入复用浮层。位置使用storage的left/top并限制在视口内。隐藏取消拖动，销毁只移除核心创建的浮层，调用方提供的节点仍由调用方拥有。mini事件表示浮层状态，不证明媒体已经播放。
+
+pip 优先选择标准原生PiP，读取时若本实例拥有PiP则返回媒体元素，否则为null；WebKit presentation模式读取boolean，不支持时为false。根类型保留boolean，runtime为Element/null/boolean。设置仍为boolean且不返回可观察Promise：保留用户点击调用栈，处理通知与pip事件，不要把赋值结果当作窗口。销毁/取消只退出自身拥有或迟到的请求，不退出别的播放器窗口。这个接口是视频PiP；整页窗口请看Document PiP插件。同步原生异常仍可抛出，异步拒绝由核心记录到通知。
+
+airplay() 根据WebKit可用性事件和选择器方法请求目标选择器，正常返回undefined，调用后派发airplay不代表已连接接收设备；不可用时只提示。调用应在合适的用户操作中进行，方法异常仍可传播。Safari/iOS、接收设备、iframe权限、代理媒体支持都必须独立验证。
+
+### 尺寸、比例与封面 {#display-sizing}
+
+rect 每次读取播放器节点的getBoundingClientRect；bottom/top/left/right/width/height来自这个视口坐标矩形。x/y是left/top加页面滚动偏移，属于页面坐标，不是rect.x/rect.y的简单别名。结果不是视频解码分辨率，也不是固定快照；多个属性分别读取可能跨越布局变化。
+
+autoSize() 用有效视频宽高在调用方容器内等比容纳播放器，修改播放器百分比宽高，派发autoSize({width, height})；autoHeight() 保持容器clientWidth，按视频比例写容器像素高度并派发autoHeight(height)。二者返回undefined且可抽取调用。未得到有限正尺寸或容器隐藏时不写入、不派发无效尺寸；显示或元数据就绪后可重新调用。它们不是安装一个持续自动观察器的命令。
+
+aspectRatio 用比例文本计算媒体节点的宽高和margin，并保存data-aspect-ratio；default或假值会清除这三项行内布局和dataset。合法比例按当前播放器尺寸计算，畸形/非正比例不写无效几何，但仍保留输入dataset、提示和事件，所以getter不是有效性证明。flip使用data-flip；normal或假值清除，horizontal/vertical由内置CSS处理。其他字符串仍可保留并派发，不代表存在对应变换；设置比例/翻转不改变源视频像素。两者都是先提示后同步派发同名事件，重复值也可能派发。
+
+poster 读写封面层的行内background-image，不是video.poster，也不会加载新媒体或自动重新显示封面。读取依赖浏览器序列化的双引号URL，解析失败返回空字符串；不会读取外部样式表中的背景值。
+
+### 截图结果与资源归属 {#capture-contract}
+
+getDataURL() 和 getBlobUrl() 在调用时同步把媒体当前帧绘入内部canvas，再返回Promise：前者解析为PNG data URL，后者异步编码后创建Blob URL。尺寸来自媒体videoWidth/videoHeight，截图是媒体帧，不包含播放器控件、CSS翻转/比例效果或DOM字幕。没有可解码画面、canvas不可用或跨域媒体污染canvas时可能失败；播放成功不等于允许读取像素，核心不会绕过CORS。
+
+getBlobUrl返回的URL由调用方在不再使用时URL.revokeObjectURL，销毁播放器不会代为撤销，也不使已开始的编码结果无效。getDataURL无需撤销。编码失败会拒绝Promise；仍有效的实例/源会显示错误提示。不要在没有有效尺寸时把空图结果视为成功截图。
+
+screenshot(name?) 等待getDataURL，再下载并派发screenshot(dataURL)，最终返回同一字符串。文件名为传入名称或artplayer_加格式化时间，**总会再追加.png**；传入chosen.png会得到chosen.png.png。下载是否落盘仍取决于浏览器。等待期间切源或销毁会抑制过期下载和事件，但Promise仍可返回已经捕获的帧。三个方法可抽取调用；应处理Promise拒绝。
+
+### 雪碧图预览与字幕偏移 {#preview-offset-contract}
+
+thumbnails getter返回实际option.thumbnails对象。setter仅在实例未关闭、url为真值且非直播时替换整个对象并重置图片加载；不是与旧配置合并，空url不能当作清除命令。控件存在且发生hover，或移动端带事件的played更新时才加载/呈现。替换配置、控件或销毁会释放内部缩放Blob URL，并阻止过期结果写入；失败记录警告，后续hover可以重试。
+
+number是总格数、column是列数，使用从0开始的行列。单格宽度优先width乘scale，否则由已加载图片宽度除column；高度优先height乘scale，否则按视频比例计算。提供有效的正数网格和可用视频尺寸。进度严格在两端之间才更新预览，左右定位受进度条宽度约束。scale涉及canvas缩放，跨域图片能显示不保证能缩放；配置对象不产生图片，生成雪碧图使用相应工具或插件。
+
+subtitleOffset 只有存在track及cue时才写入。存储的偏移限制为[-10, 10]，每次相对保留的原始cue时间重新计算，cue边界再限制到[0, duration]，不是累加偏移；暂停时也刷新字幕。提示和subtitleOffset事件携带原始输入值，getter返回实际限制后的偏移。切换track后的行为以新track为准；没有cue时不会预存一个未来偏移。reset的独立声明仍对应前文[生命周期](#instance-cleanup)，不能把它视为恢复这些显示设置的命令。
+
+```ts
+import Artplayer from 'artplayer/runtime';
+
+const art = new Artplayer({ container: '#player' });
+const fullscreen: boolean | undefined = art.fullscreen;
+const pip: Element | null | boolean = art.pip;
+const viewportRect: DOMRect = art.rect;
+const pagePosition = { x: art.x, y: art.y };
+function showMini(): void { art.mini = true; }
+function closeModes(): void { art.state = 'standard'; }
+async function inspectFrame(): Promise<number> {
+    const url = await art.getBlobUrl();
+    try {
+        return (await (await fetch(url)).blob()).size;
+    } finally {
+        URL.revokeObjectURL(url);
+    }
+}
+void [fullscreen, pip, viewportRect, pagePosition, showMini, closeModes, inspectFrame];
+```
+
+
 ## `play`
 
 -   Type: `Function`
@@ -712,7 +776,9 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     console.info(art.state); // 默认 standard
-    art.state = 'mini';
+    art.mini = true;
+    console.info(art.state); // mini
+    art.state = 'standard';
 });
 ```
 

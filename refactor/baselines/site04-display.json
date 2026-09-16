@@ -1,0 +1,2749 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "done",
+  "sourceBefore": "54e5cbf49caf7bf1a500d003d89822ca7fbbc4f5",
+  "capturedAt": "2026-09-16T01:10:02.995Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "static": [
+      {
+        "language": "zh",
+        "name": "property",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+          "sha256": "b071db7d96e5a46d310b362371cecb9f70164b9e0aa40f19ad5d594f7dcd69f4"
+        },
+        "html": {
+          "path": "docs/document/advanced/property.html",
+          "sha256": "2b976052d327c9271b80642804c6346bf59110f60ec1bf8ef933736d1e802310"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-display/zh-property-0.mts",
+            "sha256": "712c8b701a127cebb0732b10800acce3328c043c7bdf4972dca28d44d52a902b"
+          },
+          {
+            "path": "refactor/.cache/site04-display/zh-property-1.mts",
+            "sha256": "622d79a44d82ee51d9118e9cb395256a0b4a682e76c52c808d38ea8dff3f544e"
+          },
+          {
+            "path": "refactor/.cache/site04-display/zh-property-2.mts",
+            "sha256": "d877fc575efb7476e3e768530c555c0f693d0fd7c72c4c61fcd48ca8acec58b3"
+          },
+          {
+            "path": "refactor/.cache/site04-display/zh-property-3.mts",
+            "sha256": "8b2b575718d0685e4b0ff3fdaf6d36901a17946d4c8b5686ec9b73cfbd3bfba7"
+          },
+          {
+            "path": "refactor/.cache/site04-display/zh-property-4.mts",
+            "sha256": "b1ebc352de566ade8c86051cdf61ff4aa8aec836bf4f650f94c1f42a6a0eb079"
+          }
+        ],
+        "changedSnippets": [
+          {
+            "id": "advanced/property.md:772",
+            "oldSha256": "bde03335b221e6cbf53bdf827b1271cfb27b429418724187b2447853db30e9f7",
+            "sha256": "03f2a8c4119d6df2e853df7da14e50eccee8c7bc1546d2eab09af2f0f0c2acb8"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "advanced/property.md:201",
+            "sha256": "3cabe61431f355e4586233ea74fee21d731f7d4a971c400918a3f0b488e2c4ff"
+          },
+          {
+            "id": "advanced/property.md:221",
+            "sha256": "70a8c691c60351316a3f513143cfead37d939ee0c484690ea4391077a2c8743a"
+          },
+          {
+            "id": "advanced/property.md:245",
+            "sha256": "c3f3c00df8c7f5b58907b857a8d011f8750b4696ae43c7ff56982d64e0df8092"
+          },
+          {
+            "id": "advanced/property.md:270",
+            "sha256": "4387bb6edc35ce5f1f1a0d23bef3360501b85cb1c788a687d70fba58c542c558"
+          },
+          {
+            "id": "advanced/property.md:291",
+            "sha256": "9f90410a980c753e91b8b96c18474f89725046f7314ef2e40e6b20137606d15c"
+          },
+          {
+            "id": "advanced/property.md:312",
+            "sha256": "b59bed172f2e7cbeb3cca9a91962a673435c05435d6fb46e286802d5bdbb716b"
+          },
+          {
+            "id": "advanced/property.md:332",
+            "sha256": "0262ac7cab0b29f6291a0e4d25748126cc5c804736b5c5c56dd8921a92bf57a1"
+          },
+          {
+            "id": "advanced/property.md:352",
+            "sha256": "f08b81f8657b6319f4fdca09bb4013ed65b320b7fd6922e2fced903cb429dcf2"
+          },
+          {
+            "id": "advanced/property.md:376",
+            "sha256": "cd33637bc031f7337c104fea1b122b5e07bced68103efa0f0a1d049622031a3b"
+          },
+          {
+            "id": "advanced/property.md:398",
+            "sha256": "f478310b4a2186229b1592d6c1454bdedf40a837900a7a17e615c3a80cae6634"
+          },
+          {
+            "id": "advanced/property.md:418",
+            "sha256": "95a5bab0c95a3e6af3beaafd354d5ad8582e3c2cc2499cde4520776ce3e19eaa"
+          },
+          {
+            "id": "advanced/property.md:441",
+            "sha256": "87fc8c2bbc61c4b1ba6c5158dbe8dd23db8054d8f5a561af7f4888f643c9b7c2"
+          },
+          {
+            "id": "advanced/property.md:470",
+            "sha256": "bab7649d940c8b0dfea0be40c54be2985344672301f8337565a402b8a227422f"
+          },
+          {
+            "id": "advanced/property.md:493",
+            "sha256": "5667932068586cec17e5dc327233300b771b609501e3032e3bce1a57e1f98387"
+          },
+          {
+            "id": "advanced/property.md:515",
+            "sha256": "25793429ff3f206fd755f453b104f5584a7be7a3c837eae19ce7a3d6a9402be5"
+          },
+          {
+            "id": "advanced/property.md:536",
+            "sha256": "aa0e384baec035be0983ae24e0d46d7d1855ecfcd6df3fe0517ac2773be3b175"
+          },
+          {
+            "id": "advanced/property.md:561",
+            "sha256": "21bcfd32284f83b2666e6f1800ee9a5bd4882cc86ae53e61784d96da62edfa3c"
+          },
+          {
+            "id": "advanced/property.md:580",
+            "sha256": "9fee33590d1f16ca35860d44569130c1ef1f8fb16b6d2a237156bc780b35845a"
+          },
+          {
+            "id": "advanced/property.md:600",
+            "sha256": "31f1d341bcf7558cd3fed8d9c7885d9baa9bfe447d8598593f07553ff9757000"
+          },
+          {
+            "id": "advanced/property.md:621",
+            "sha256": "b0deffd95e61be6f3bad2a7804c555d7c99a0924e1acfb636aeb36a38725558a"
+          },
+          {
+            "id": "advanced/property.md:652",
+            "sha256": "abbb497430d6655dda16940e79e7d443db4cc2ab1c83ffe19d19dd13ed246261"
+          },
+          {
+            "id": "advanced/property.md:677",
+            "sha256": "ae7f551a33957fa38ec9c2716ed6f50d8710d90ec90a2a9b7b75120dfb3824a6"
+          },
+          {
+            "id": "advanced/property.md:708",
+            "sha256": "34cf6c5eca225e8e0000dddcf617764705d013b2d2776b3b2becba0a0b9dd59b"
+          },
+          {
+            "id": "advanced/property.md:731",
+            "sha256": "dfe94368bceb32fb3e505e0ab1cc79ad7e2a049a9d9abb5153e07ff7b48cb33b"
+          },
+          {
+            "id": "advanced/property.md:751",
+            "sha256": "4553ef81f777cc2039746903872c0af42e995f2bad32c142642c0241c8472c61"
+          },
+          {
+            "id": "advanced/property.md:772",
+            "sha256": "03f2a8c4119d6df2e853df7da14e50eccee8c7bc1546d2eab09af2f0f0c2acb8"
+          },
+          {
+            "id": "advanced/property.md:794",
+            "sha256": "89c7317aae3a7e512ff59cb3c09ec8fe4ad7511a8d9578e831be478cada01ef3"
+          },
+          {
+            "id": "advanced/property.md:813",
+            "sha256": "097fd3bec57f94ed2981ad42d03a8b5684a3988cf5d421f21579cdd4e9949f9b"
+          },
+          {
+            "id": "advanced/property.md:841",
+            "sha256": "08d554917e8a8e01a2cd1fd1de9ac2ba31ef096a4d127b4b6dbfe6fe887178d1"
+          },
+          {
+            "id": "advanced/property.md:861",
+            "sha256": "61369be2387dd04cdbaac10125ffa78c1d4f0d2e44af5919210a7aa4f71fe846"
+          },
+          {
+            "id": "advanced/property.md:883",
+            "sha256": "aa17d4b76b245662060491e5111cdf1a8fda9507a37a2a438c1a8dcdec3ecb4d"
+          },
+          {
+            "id": "advanced/property.md:905",
+            "sha256": "2204ab589ef4a8dd1051f1cf45d792f11f27808dc700c70a7217c97c42de1e34"
+          },
+          {
+            "id": "advanced/property.md:926",
+            "sha256": "33faf743b2342146d2cb3e2123b210c953d0214496a20eec81eb0aba8cbdd563"
+          },
+          {
+            "id": "advanced/property.md:956",
+            "sha256": "c6c4d8e19ca90bc1eac07a712f34170326952ad5362b0a5d08fe0efe9da8ad1f"
+          },
+          {
+            "id": "advanced/property.md:978",
+            "sha256": "c1fdc14f65e682f52ae6e15cb6669f3740881faa4a0b59a502aeed1c3dbfd7a5"
+          },
+          {
+            "id": "advanced/property.md:1000",
+            "sha256": "db3e0182d4345db218a6f108ddcb503c67c9bbbde0ab4a6e8a03b2684ce26b9b"
+          },
+          {
+            "id": "advanced/property.md:1021",
+            "sha256": "6a015838368689c8acfff86891c14c5a85bf66f6a687bb7129bd8df095f4ba6e"
+          },
+          {
+            "id": "advanced/property.md:1045",
+            "sha256": "953763d9e84fff724bf84fb2d6114381fd4ad2c9aa8a77bfd33e1ef86b3d13c4"
+          },
+          {
+            "id": "advanced/property.md:1064",
+            "sha256": "e9bdbb3515801506d7ea7653ff2219ffeaf2e8d9868ae23344a0137f6852455b"
+          },
+          {
+            "id": "advanced/property.md:1083",
+            "sha256": "32d3569ae3ff5471f6cc93e4abba9c4ad96486197cc285a9c47b7bb8701c813a"
+          },
+          {
+            "id": "advanced/property.md:1102",
+            "sha256": "bd49f48474c50b608624abd9167fe9f9d7f60c273b997a47828dd901a3445e99"
+          },
+          {
+            "id": "advanced/property.md:1129",
+            "sha256": "a68e1ed899c756ce64bb6432a1b52a7ba192d6669fa899a7f7d24c1407190592"
+          },
+          {
+            "id": "advanced/property.md:1146",
+            "sha256": "da4dde2ee26d5a97655c572a889c11d937e3cd747ae79a2f4aeb3e3d0c84c67f"
+          },
+          {
+            "id": "advanced/property.md:1196",
+            "sha256": "ee9a841efe8763bc601a8b0ab710961f76709c60541c34171f4f4b8b6e0a2953"
+          },
+          {
+            "id": "advanced/property.md:1300",
+            "sha256": "c078cb17235bd6309b69f157683d4cf6b1565b00dab397c1c4f4cafc53e61868"
+          },
+          {
+            "id": "advanced/property.md:1343",
+            "sha256": "490713b798e44c6ffc32e3bec40746b9267da62929be79ceff8ce256046b2c47"
+          },
+          {
+            "id": "advanced/property.md:1367",
+            "sha256": "9096ab3bba28746c56a44ca491a31957fd18d52649afb122970ed43774a1e689"
+          }
+        ],
+        "localLinks": [
+          "/document/advanced/property.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/advanced/property.html#%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7",
+          "/document/advanced/property.html#instance-lifecycle",
+          "/document/advanced/property.html#instance-state",
+          "/document/advanced/property.html#instance-cleanup",
+          "/document/advanced/property.html#playback-contract",
+          "/document/advanced/property.html#playback-results",
+          "/document/advanced/property.html#playback-values",
+          "/document/advanced/property.html#source-transitions",
+          "/document/advanced/property.html#quality-contract",
+          "/document/advanced/property.html#display-contract",
+          "/document/advanced/property.html#display-modes",
+          "/document/advanced/property.html#display-sizing",
+          "/document/advanced/property.html#capture-contract",
+          "/document/advanced/property.html#preview-offset-contract",
+          "/document/advanced/property.html#play",
+          "/document/advanced/property.html#pause",
+          "/document/advanced/property.html#toggle",
+          "/document/advanced/property.html#destroy",
+          "/document/advanced/property.html#reset",
+          "/document/advanced/property.html#seek",
+          "/document/advanced/property.html#forward",
+          "/document/advanced/property.html#backward",
+          "/document/advanced/property.html#volume",
+          "/document/advanced/property.html#url",
+          "/document/advanced/property.html#switch",
+          "/document/advanced/property.html#switchurl",
+          "/document/advanced/property.html#switchquality",
+          "/document/advanced/property.html#muted",
+          "/document/advanced/property.html#currenttime",
+          "/document/advanced/property.html#duration",
+          "/document/advanced/property.html#screenshot",
+          "/document/advanced/property.html#getdataurl",
+          "/document/advanced/property.html#getbloburl",
+          "/document/advanced/property.html#fullscreen",
+          "/document/advanced/property.html#fullscreenweb",
+          "/document/advanced/property.html#pip",
+          "/document/advanced/property.html#poster",
+          "/document/advanced/property.html#mini",
+          "/document/advanced/property.html#playing",
+          "/document/advanced/property.html#state",
+          "/document/advanced/property.html#autosize",
+          "/document/advanced/property.html#rect",
+          "/document/advanced/property.html#bottom-top-left-right-x-y-width-height",
+          "/document/advanced/property.html#flip",
+          "/document/advanced/property.html#playbackrate",
+          "/document/advanced/property.html#aspectratio",
+          "/document/advanced/property.html#autoheight",
+          "/document/advanced/property.html#attr",
+          "/document/advanced/property.html#type",
+          "/document/advanced/property.html#theme",
+          "/document/advanced/property.html#airplay",
+          "/document/advanced/property.html#loaded",
+          "/document/advanced/property.html#loadedtime",
+          "/document/advanced/property.html#played",
+          "/document/advanced/property.html#proxy",
+          "/document/advanced/property.html#query",
+          "/document/advanced/property.html#video",
+          "/document/advanced/property.html#media-capabilities",
+          "/document/advanced/property.html#cssvar",
+          "/document/advanced/property.html#css-variable-contract",
+          "/document/advanced/property.html#css-variable-defaults",
+          "/document/advanced/property.html#css-variable-modes",
+          "/document/advanced/property.html#quality",
+          "/document/advanced/property.html#thumbnails",
+          "/document/advanced/property.html#subtitleoffset"
+        ]
+      },
+      {
+        "language": "en",
+        "name": "property",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "sha256": "362511a1a0d6f010bc3dcd5bbe63b3a8d9a90ed9d39a2b0e439be5e760225934"
+        },
+        "html": {
+          "path": "docs/document/en/advanced/property.html",
+          "sha256": "790499d6e457f3751b2a649ca1afa5b15aab32f0b152340bf9d060fc6eea4611"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-display/en-property-0.mts",
+            "sha256": "712c8b701a127cebb0732b10800acce3328c043c7bdf4972dca28d44d52a902b"
+          },
+          {
+            "path": "refactor/.cache/site04-display/en-property-1.mts",
+            "sha256": "622d79a44d82ee51d9118e9cb395256a0b4a682e76c52c808d38ea8dff3f544e"
+          },
+          {
+            "path": "refactor/.cache/site04-display/en-property-2.mts",
+            "sha256": "d877fc575efb7476e3e768530c555c0f693d0fd7c72c4c61fcd48ca8acec58b3"
+          },
+          {
+            "path": "refactor/.cache/site04-display/en-property-3.mts",
+            "sha256": "8b2b575718d0685e4b0ff3fdaf6d36901a17946d4c8b5686ec9b73cfbd3bfba7"
+          },
+          {
+            "path": "refactor/.cache/site04-display/en-property-4.mts",
+            "sha256": "b1ebc352de566ade8c86051cdf61ff4aa8aec836bf4f650f94c1f42a6a0eb079"
+          }
+        ],
+        "changedSnippets": [
+          {
+            "id": "en/advanced/property.md:773",
+            "oldSha256": "4fd9295f6d5406ea993a81098ce0310ecdb2fc10218f08a08c5a30df6f9f4897",
+            "sha256": "f8bb6c33a72890bf163c3e8c3a3c5e32b1030763acb5d47553945d70fe586d16"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "en/advanced/property.md:201",
+            "sha256": "3cabe61431f355e4586233ea74fee21d731f7d4a971c400918a3f0b488e2c4ff"
+          },
+          {
+            "id": "en/advanced/property.md:221",
+            "sha256": "70a8c691c60351316a3f513143cfead37d939ee0c484690ea4391077a2c8743a"
+          },
+          {
+            "id": "en/advanced/property.md:245",
+            "sha256": "c3f3c00df8c7f5b58907b857a8d011f8750b4696ae43c7ff56982d64e0df8092"
+          },
+          {
+            "id": "en/advanced/property.md:270",
+            "sha256": "4387bb6edc35ce5f1f1a0d23bef3360501b85cb1c788a687d70fba58c542c558"
+          },
+          {
+            "id": "en/advanced/property.md:291",
+            "sha256": "4632f6c855acb2635a2a8ab7b3730e84bafd57bd298a9afc3f0cad79eecd639b"
+          },
+          {
+            "id": "en/advanced/property.md:312",
+            "sha256": "b59bed172f2e7cbeb3cca9a91962a673435c05435d6fb46e286802d5bdbb716b"
+          },
+          {
+            "id": "en/advanced/property.md:332",
+            "sha256": "0262ac7cab0b29f6291a0e4d25748126cc5c804736b5c5c56dd8921a92bf57a1"
+          },
+          {
+            "id": "en/advanced/property.md:352",
+            "sha256": "f08b81f8657b6319f4fdca09bb4013ed65b320b7fd6922e2fced903cb429dcf2"
+          },
+          {
+            "id": "en/advanced/property.md:376",
+            "sha256": "cd33637bc031f7337c104fea1b122b5e07bced68103efa0f0a1d049622031a3b"
+          },
+          {
+            "id": "en/advanced/property.md:398",
+            "sha256": "f478310b4a2186229b1592d6c1454bdedf40a837900a7a17e615c3a80cae6634"
+          },
+          {
+            "id": "en/advanced/property.md:418",
+            "sha256": "95a5bab0c95a3e6af3beaafd354d5ad8582e3c2cc2499cde4520776ce3e19eaa"
+          },
+          {
+            "id": "en/advanced/property.md:441",
+            "sha256": "87fc8c2bbc61c4b1ba6c5158dbe8dd23db8054d8f5a561af7f4888f643c9b7c2"
+          },
+          {
+            "id": "en/advanced/property.md:471",
+            "sha256": "bab7649d940c8b0dfea0be40c54be2985344672301f8337565a402b8a227422f"
+          },
+          {
+            "id": "en/advanced/property.md:494",
+            "sha256": "5667932068586cec17e5dc327233300b771b609501e3032e3bce1a57e1f98387"
+          },
+          {
+            "id": "en/advanced/property.md:516",
+            "sha256": "25793429ff3f206fd755f453b104f5584a7be7a3c837eae19ce7a3d6a9402be5"
+          },
+          {
+            "id": "en/advanced/property.md:537",
+            "sha256": "aa0e384baec035be0983ae24e0d46d7d1855ecfcd6df3fe0517ac2773be3b175"
+          },
+          {
+            "id": "en/advanced/property.md:562",
+            "sha256": "21bcfd32284f83b2666e6f1800ee9a5bd4882cc86ae53e61784d96da62edfa3c"
+          },
+          {
+            "id": "en/advanced/property.md:581",
+            "sha256": "9fee33590d1f16ca35860d44569130c1ef1f8fb16b6d2a237156bc780b35845a"
+          },
+          {
+            "id": "en/advanced/property.md:601",
+            "sha256": "31f1d341bcf7558cd3fed8d9c7885d9baa9bfe447d8598593f07553ff9757000"
+          },
+          {
+            "id": "en/advanced/property.md:622",
+            "sha256": "b0deffd95e61be6f3bad2a7804c555d7c99a0924e1acfb636aeb36a38725558a"
+          },
+          {
+            "id": "en/advanced/property.md:653",
+            "sha256": "abbb497430d6655dda16940e79e7d443db4cc2ab1c83ffe19d19dd13ed246261"
+          },
+          {
+            "id": "en/advanced/property.md:678",
+            "sha256": "ae7f551a33957fa38ec9c2716ed6f50d8710d90ec90a2a9b7b75120dfb3824a6"
+          },
+          {
+            "id": "en/advanced/property.md:709",
+            "sha256": "34cf6c5eca225e8e0000dddcf617764705d013b2d2776b3b2becba0a0b9dd59b"
+          },
+          {
+            "id": "en/advanced/property.md:732",
+            "sha256": "dfe94368bceb32fb3e505e0ab1cc79ad7e2a049a9d9abb5153e07ff7b48cb33b"
+          },
+          {
+            "id": "en/advanced/property.md:752",
+            "sha256": "4553ef81f777cc2039746903872c0af42e995f2bad32c142642c0241c8472c61"
+          },
+          {
+            "id": "en/advanced/property.md:773",
+            "sha256": "f8bb6c33a72890bf163c3e8c3a3c5e32b1030763acb5d47553945d70fe586d16"
+          },
+          {
+            "id": "en/advanced/property.md:795",
+            "sha256": "89c7317aae3a7e512ff59cb3c09ec8fe4ad7511a8d9578e831be478cada01ef3"
+          },
+          {
+            "id": "en/advanced/property.md:814",
+            "sha256": "097fd3bec57f94ed2981ad42d03a8b5684a3988cf5d421f21579cdd4e9949f9b"
+          },
+          {
+            "id": "en/advanced/property.md:842",
+            "sha256": "08d554917e8a8e01a2cd1fd1de9ac2ba31ef096a4d127b4b6dbfe6fe887178d1"
+          },
+          {
+            "id": "en/advanced/property.md:862",
+            "sha256": "61369be2387dd04cdbaac10125ffa78c1d4f0d2e44af5919210a7aa4f71fe846"
+          },
+          {
+            "id": "en/advanced/property.md:884",
+            "sha256": "aa17d4b76b245662060491e5111cdf1a8fda9507a37a2a438c1a8dcdec3ecb4d"
+          },
+          {
+            "id": "en/advanced/property.md:906",
+            "sha256": "2204ab589ef4a8dd1051f1cf45d792f11f27808dc700c70a7217c97c42de1e34"
+          },
+          {
+            "id": "en/advanced/property.md:927",
+            "sha256": "33faf743b2342146d2cb3e2123b210c953d0214496a20eec81eb0aba8cbdd563"
+          },
+          {
+            "id": "en/advanced/property.md:957",
+            "sha256": "c6c4d8e19ca90bc1eac07a712f34170326952ad5362b0a5d08fe0efe9da8ad1f"
+          },
+          {
+            "id": "en/advanced/property.md:979",
+            "sha256": "c1fdc14f65e682f52ae6e15cb6669f3740881faa4a0b59a502aeed1c3dbfd7a5"
+          },
+          {
+            "id": "en/advanced/property.md:1001",
+            "sha256": "db3e0182d4345db218a6f108ddcb503c67c9bbbde0ab4a6e8a03b2684ce26b9b"
+          },
+          {
+            "id": "en/advanced/property.md:1022",
+            "sha256": "6a015838368689c8acfff86891c14c5a85bf66f6a687bb7129bd8df095f4ba6e"
+          },
+          {
+            "id": "en/advanced/property.md:1046",
+            "sha256": "953763d9e84fff724bf84fb2d6114381fd4ad2c9aa8a77bfd33e1ef86b3d13c4"
+          },
+          {
+            "id": "en/advanced/property.md:1065",
+            "sha256": "e9bdbb3515801506d7ea7653ff2219ffeaf2e8d9868ae23344a0137f6852455b"
+          },
+          {
+            "id": "en/advanced/property.md:1084",
+            "sha256": "32d3569ae3ff5471f6cc93e4abba9c4ad96486197cc285a9c47b7bb8701c813a"
+          },
+          {
+            "id": "en/advanced/property.md:1103",
+            "sha256": "bd49f48474c50b608624abd9167fe9f9d7f60c273b997a47828dd901a3445e99"
+          },
+          {
+            "id": "en/advanced/property.md:1130",
+            "sha256": "a68e1ed899c756ce64bb6432a1b52a7ba192d6669fa899a7f7d24c1407190592"
+          },
+          {
+            "id": "en/advanced/property.md:1147",
+            "sha256": "da4dde2ee26d5a97655c572a889c11d937e3cd747ae79a2f4aeb3e3d0c84c67f"
+          },
+          {
+            "id": "en/advanced/property.md:1197",
+            "sha256": "ee9a841efe8763bc601a8b0ab710961f76709c60541c34171f4f4b8b6e0a2953"
+          },
+          {
+            "id": "en/advanced/property.md:1301",
+            "sha256": "c078cb17235bd6309b69f157683d4cf6b1565b00dab397c1c4f4cafc53e61868"
+          },
+          {
+            "id": "en/advanced/property.md:1345",
+            "sha256": "490713b798e44c6ffc32e3bec40746b9267da62929be79ceff8ce256046b2c47"
+          },
+          {
+            "id": "en/advanced/property.md:1369",
+            "sha256": "9096ab3bba28746c56a44ca491a31957fd18d52649afb122970ed43774a1e689"
+          }
+        ],
+        "localLinks": [
+          "/document/en/advanced/property.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/advanced/property.html#instance-properties",
+          "/document/en/advanced/property.html#instance-lifecycle",
+          "/document/en/advanced/property.html#instance-state",
+          "/document/en/advanced/property.html#instance-cleanup",
+          "/document/en/advanced/property.html#playback-contract",
+          "/document/en/advanced/property.html#playback-results",
+          "/document/en/advanced/property.html#playback-values",
+          "/document/en/advanced/property.html#source-transitions",
+          "/document/en/advanced/property.html#quality-contract",
+          "/document/en/advanced/property.html#display-contract",
+          "/document/en/advanced/property.html#display-modes",
+          "/document/en/advanced/property.html#display-sizing",
+          "/document/en/advanced/property.html#capture-contract",
+          "/document/en/advanced/property.html#preview-offset-contract",
+          "/document/en/advanced/property.html#play",
+          "/document/en/advanced/property.html#pause",
+          "/document/en/advanced/property.html#toggle",
+          "/document/en/advanced/property.html#destroy",
+          "/document/en/advanced/property.html#reset",
+          "/document/en/advanced/property.html#seek",
+          "/document/en/advanced/property.html#forward",
+          "/document/en/advanced/property.html#backward",
+          "/document/en/advanced/property.html#volume",
+          "/document/en/advanced/property.html#url",
+          "/document/en/advanced/property.html#switch",
+          "/document/en/advanced/property.html#switchurl",
+          "/document/en/advanced/property.html#switchquality",
+          "/document/en/advanced/property.html#muted",
+          "/document/en/advanced/property.html#currenttime",
+          "/document/en/advanced/property.html#duration",
+          "/document/en/advanced/property.html#screenshot",
+          "/document/en/advanced/property.html#getdataurl",
+          "/document/en/advanced/property.html#getbloburl",
+          "/document/en/advanced/property.html#fullscreen",
+          "/document/en/advanced/property.html#fullscreenweb",
+          "/document/en/advanced/property.html#pip",
+          "/document/en/advanced/property.html#poster",
+          "/document/en/advanced/property.html#mini",
+          "/document/en/advanced/property.html#playing",
+          "/document/en/advanced/property.html#state",
+          "/document/en/advanced/property.html#autosize",
+          "/document/en/advanced/property.html#rect",
+          "/document/en/advanced/property.html#bottom-top-left-right-x-y-width-height",
+          "/document/en/advanced/property.html#flip",
+          "/document/en/advanced/property.html#playbackrate",
+          "/document/en/advanced/property.html#aspectratio",
+          "/document/en/advanced/property.html#autoheight",
+          "/document/en/advanced/property.html#attr",
+          "/document/en/advanced/property.html#type",
+          "/document/en/advanced/property.html#theme",
+          "/document/en/advanced/property.html#airplay",
+          "/document/en/advanced/property.html#loaded",
+          "/document/en/advanced/property.html#loadedtime",
+          "/document/en/advanced/property.html#played",
+          "/document/en/advanced/property.html#proxy",
+          "/document/en/advanced/property.html#query",
+          "/document/en/advanced/property.html#video",
+          "/document/en/advanced/property.html#media-capabilities",
+          "/document/en/advanced/property.html#cssvar",
+          "/document/en/advanced/property.html#css-variable-contract",
+          "/document/en/advanced/property.html#css-variable-defaults",
+          "/document/en/advanced/property.html#css-variable-modes",
+          "/document/en/advanced/property.html#quality",
+          "/document/en/advanced/property.html#thumbnails",
+          "/document/en/advanced/property.html#subtitleoffset"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "zh",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "21bcfd32284f83b2666e6f1800ee9a5bd4882cc86ae53e61784d96da62edfa3c",
+          "31f1d341bcf7558cd3fed8d9c7885d9baa9bfe447d8598593f07553ff9757000",
+          "03f2a8c4119d6df2e853df7da14e50eccee8c7bc1546d2eab09af2f0f0c2acb8",
+          "89c7317aae3a7e512ff59cb3c09ec8fe4ad7511a8d9578e831be478cada01ef3",
+          "490713b798e44c6ffc32e3bec40746b9267da62929be79ceff8ce256046b2c47",
+          "9096ab3bba28746c56a44ca491a31957fd18d52649afb122970ed43774a1e689"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-display/chromium-zh-property.png",
+          "sha256": "b1c9086a7a7d1c8b41b0d158fd65ea2e60be14aca3710d236d74729a952bc40a"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "en",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "21bcfd32284f83b2666e6f1800ee9a5bd4882cc86ae53e61784d96da62edfa3c",
+          "31f1d341bcf7558cd3fed8d9c7885d9baa9bfe447d8598593f07553ff9757000",
+          "f8bb6c33a72890bf163c3e8c3a3c5e32b1030763acb5d47553945d70fe586d16",
+          "89c7317aae3a7e512ff59cb3c09ec8fe4ad7511a8d9578e831be478cada01ef3",
+          "490713b798e44c6ffc32e3bec40746b9267da62929be79ceff8ce256046b2c47",
+          "9096ab3bba28746c56a44ca491a31957fd18d52649afb122970ed43774a1e689"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-display/chromium-en-property.png",
+          "sha256": "c7c094bec5715036cc79f257af81b671245fe80a7d4de152c41dcffc89b325b8"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "zh",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "21bcfd32284f83b2666e6f1800ee9a5bd4882cc86ae53e61784d96da62edfa3c",
+          "31f1d341bcf7558cd3fed8d9c7885d9baa9bfe447d8598593f07553ff9757000",
+          "03f2a8c4119d6df2e853df7da14e50eccee8c7bc1546d2eab09af2f0f0c2acb8",
+          "89c7317aae3a7e512ff59cb3c09ec8fe4ad7511a8d9578e831be478cada01ef3",
+          "490713b798e44c6ffc32e3bec40746b9267da62929be79ceff8ce256046b2c47",
+          "9096ab3bba28746c56a44ca491a31957fd18d52649afb122970ed43774a1e689"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-display/firefox-zh-property.png",
+          "sha256": "60f032f2fadbf4e4da814e92040d84a99b6bbb87a0c315f275163a73eab552c7"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "en",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "21bcfd32284f83b2666e6f1800ee9a5bd4882cc86ae53e61784d96da62edfa3c",
+          "31f1d341bcf7558cd3fed8d9c7885d9baa9bfe447d8598593f07553ff9757000",
+          "f8bb6c33a72890bf163c3e8c3a3c5e32b1030763acb5d47553945d70fe586d16",
+          "89c7317aae3a7e512ff59cb3c09ec8fe4ad7511a8d9578e831be478cada01ef3",
+          "490713b798e44c6ffc32e3bec40746b9267da62929be79ceff8ce256046b2c47",
+          "9096ab3bba28746c56a44ca491a31957fd18d52649afb122970ed43774a1e689"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-display/firefox-en-property.png",
+          "sha256": "440017efa9e05ba07182bdbe631f1fe8a0b69a4334b05200c6d422c6e00ac277"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "zh",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "21bcfd32284f83b2666e6f1800ee9a5bd4882cc86ae53e61784d96da62edfa3c",
+          "31f1d341bcf7558cd3fed8d9c7885d9baa9bfe447d8598593f07553ff9757000",
+          "03f2a8c4119d6df2e853df7da14e50eccee8c7bc1546d2eab09af2f0f0c2acb8",
+          "89c7317aae3a7e512ff59cb3c09ec8fe4ad7511a8d9578e831be478cada01ef3",
+          "490713b798e44c6ffc32e3bec40746b9267da62929be79ceff8ce256046b2c47",
+          "9096ab3bba28746c56a44ca491a31957fd18d52649afb122970ed43774a1e689"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-display/webkit-zh-property.png",
+          "sha256": "baba357af170137bb80df74543bded7a1ac117d52764768d30cf8291d488dc56"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "en",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "21bcfd32284f83b2666e6f1800ee9a5bd4882cc86ae53e61784d96da62edfa3c",
+          "31f1d341bcf7558cd3fed8d9c7885d9baa9bfe447d8598593f07553ff9757000",
+          "f8bb6c33a72890bf163c3e8c3a3c5e32b1030763acb5d47553945d70fe586d16",
+          "89c7317aae3a7e512ff59cb3c09ec8fe4ad7511a8d9578e831be478cada01ef3",
+          "490713b798e44c6ffc32e3bec40746b9267da62929be79ceff8ce256046b2c47",
+          "9096ab3bba28746c56a44ca491a31957fd18d52649afb122970ed43774a1e689"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-display/webkit-en-property.png",
+          "sha256": "7f178f4fa34a5d575c4db41eed46afdaa3755fb5247158310d21040095f0090e"
+        }
+      }
+    ],
+    "dom": [],
+    "complete": true,
+    "limitations": [
+      "Page rendering and Run Code forwarding only. Native media checks are recorded separately using the existing source browser suite; no physical-device or release acceptance."
+    ],
+    "core": {
+      "artifact": {
+        "path": "packages/artplayer/dist/artplayer.js",
+        "sha256": "8a4caaa50a069875b3898a83765457b3c502700f4731d0c38988d6c463c3d20a"
+      },
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-qQwwPA/artplayer.tgz",
+        "version": "6.0.0",
+        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
+        "inputFingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "integrity": "sha512-+2+VWecKb9CbI3wTCs0sV7au8SNShyXahpwDAmGgZhDr22wbdv51QZnLnkPwgMgfNpVuTbsZ6A26Lpj3eY7NbQ=="
+      }
+    }
+  },
+  "semanticMapping": {
+    "addedRecords": 63,
+    "totalRecords": 963,
+    "remainingInventoryRecords": 0,
+    "unchanged": [
+      {
+        "group": "css-variables-theme",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "a449c901a5c14bc541460cba29261fdf9a128e05480598413e0a6990ca90e16e",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "css-variables-theme",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "a449c901a5c14bc541460cba29261fdf9a128e05480598413e0a6990ca90e16e",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "css-variables-theme",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "a449c901a5c14bc541460cba29261fdf9a128e05480598413e0a6990ca90e16e",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "css-variables-theme",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "9e300b785c7b3f02346a1e7fff281ed6737e1d9abfe7cffe4985f74daca45cd4",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "css-variables-theme",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "9e300b785c7b3f02346a1e7fff281ed6737e1d9abfe7cffe4985f74daca45cd4",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "css-variables-theme",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "9e300b785c7b3f02346a1e7fff281ed6737e1d9abfe7cffe4985f74daca45cd4",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "a449c901a5c14bc541460cba29261fdf9a128e05480598413e0a6990ca90e16e",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "a449c901a5c14bc541460cba29261fdf9a128e05480598413e0a6990ca90e16e",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "a449c901a5c14bc541460cba29261fdf9a128e05480598413e0a6990ca90e16e",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "a449c901a5c14bc541460cba29261fdf9a128e05480598413e0a6990ca90e16e",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "9e300b785c7b3f02346a1e7fff281ed6737e1d9abfe7cffe4985f74daca45cd4",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "9e300b785c7b3f02346a1e7fff281ed6737e1d9abfe7cffe4985f74daca45cd4",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "9e300b785c7b3f02346a1e7fff281ed6737e1d9abfe7cffe4985f74daca45cd4",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "9e300b785c7b3f02346a1e7fff281ed6737e1d9abfe7cffe4985f74daca45cd4",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "playback-source-quality",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "a449c901a5c14bc541460cba29261fdf9a128e05480598413e0a6990ca90e16e",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "playback-source-quality",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "a449c901a5c14bc541460cba29261fdf9a128e05480598413e0a6990ca90e16e",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "playback-source-quality",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "a449c901a5c14bc541460cba29261fdf9a128e05480598413e0a6990ca90e16e",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "playback-source-quality",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "a449c901a5c14bc541460cba29261fdf9a128e05480598413e0a6990ca90e16e",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "playback-source-quality",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "a449c901a5c14bc541460cba29261fdf9a128e05480598413e0a6990ca90e16e",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "playback-source-quality",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "9e300b785c7b3f02346a1e7fff281ed6737e1d9abfe7cffe4985f74daca45cd4",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "playback-source-quality",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "9e300b785c7b3f02346a1e7fff281ed6737e1d9abfe7cffe4985f74daca45cd4",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "playback-source-quality",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "9e300b785c7b3f02346a1e7fff281ed6737e1d9abfe7cffe4985f74daca45cd4",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "playback-source-quality",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "9e300b785c7b3f02346a1e7fff281ed6737e1d9abfe7cffe4985f74daca45cd4",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      },
+      {
+        "group": "playback-source-quality",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "9e300b785c7b3f02346a1e7fff281ed6737e1d9abfe7cffe4985f74daca45cd4",
+        "changedSections": [
+          "display-contract",
+          "state example"
+        ]
+      }
+    ]
+  },
+  "tests": {
+    "count": 122,
+    "pass": 122,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 1584.4914,
+    "files": [
+      {
+        "path": "test/display-native.test.js",
+        "sha256": "416738577500ac34e832fb43c9b17b84c4b39ffbd8f2c745fb9e48a7b2525ed6"
+      },
+      {
+        "path": "test/display-video-fullscreen.test.js",
+        "sha256": "2310d4434e37af92083ac4bba1cf8668f5d440cad2ad2fb1a51168771b4b6d60"
+      },
+      {
+        "path": "test/display-pip.test.js",
+        "sha256": "aba0510a9afd53b689c266a849449d8256d94a5fe9f823832f88b8798c75db5f"
+      },
+      {
+        "path": "test/display-mini.test.js",
+        "sha256": "7e3d1a88dc0145c49b68c91d75a6f2444dc224fc73ba6921712bc1647d2582c1"
+      },
+      {
+        "path": "test/display-sizing.test.js",
+        "sha256": "e6ce3dcfa1d96f9200cf9ab6c08f001e032f6d973d2b47c6792e5c18ed64f7fc"
+      },
+      {
+        "path": "test/display-orientation.test.js",
+        "sha256": "d9d789962f92aac1cd38af782bd24adffd17d3650ea2a431967af891d5249254"
+      },
+      {
+        "path": "test/screenshot.test.js",
+        "sha256": "740e879c9159c75e62240d37e3a327facb228f54b0b531e9da375c1f184abb24"
+      },
+      {
+        "path": "test/thumbnails.test.js",
+        "sha256": "367882200a3898cce718379f95bb80706d9d5ee06e8d8e3624acada118ccc41c"
+      },
+      {
+        "path": "test/subtitle.test.js",
+        "sha256": "c996b0b4b9f812d04bfe6d255c339682bb28b2999ab850ff3f65bcc4e15c2154"
+      },
+      {
+        "path": "test/documentation-pipeline.test.js",
+        "sha256": "9ca4e50b34d381339783b4f02de8a48224f3ec4e045073bacd12aa28b8d0f7b7"
+      },
+      {
+        "path": "test/site-loading.test.js",
+        "sha256": "cd0e513fcc5a6c69458ee6dd4ac12a270a2d28c15e13c46c0bab1ef1299b8667"
+      }
+    ]
+  },
+  "nativeBrowser": {
+    "scope": "source",
+    "invocation": {
+      "scope": "source",
+      "args": [
+        "test",
+        "--config=playwright.source.config.js",
+        "display-web.spec.js",
+        "display-mini.spec.js",
+        "display-sizing.spec.js",
+        "screenshot.spec.js",
+        "thumbnails.spec.js",
+        "display-native.spec.js",
+        "display-pip.spec.js",
+        "--grep",
+        "sizing preserves valid|aspect ratio and flip preserve|hidden containers|unresolved media dimensions|mini retains first-entry|mini switches to body|web fullscreen restores initial style|body fullscreen restores original parent|captures decoded PNG|screenshot preserves download|actual cross-origin video rejects|thumbnail cells follow|native fullscreen belongs|destroyed players stop|actual native PiP",
+        "--workers=1"
+      ],
+      "node": "24.21.0",
+      "artifactMap": null,
+      "inputs": []
+    },
+    "stats": {
+      "startTime": "2026-09-16T01:04:41.484Z",
+      "duration": 78282.856,
+      "expected": 93,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "published: mini retains first-entry and reuse DOM order and display",
+        "file": "display-mini.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          263
+        ]
+      },
+      {
+        "title": "candidate: mini retains first-entry and reuse DOM order and display",
+        "file": "display-mini.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          191
+        ]
+      },
+      {
+        "title": "candidate: mini switches to body web fullscreen and restores the original video placement",
+        "file": "display-mini.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          179
+        ]
+      },
+      {
+        "title": "published: mini retains first-entry and reuse DOM order and display",
+        "file": "display-mini.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          1300
+        ]
+      },
+      {
+        "title": "candidate: mini retains first-entry and reuse DOM order and display",
+        "file": "display-mini.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          577
+        ]
+      },
+      {
+        "title": "candidate: mini switches to body web fullscreen and restores the original video placement",
+        "file": "display-mini.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          498
+        ]
+      },
+      {
+        "title": "published: mini retains first-entry and reuse DOM order and display",
+        "file": "display-mini.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1108
+        ]
+      },
+      {
+        "title": "candidate: mini retains first-entry and reuse DOM order and display",
+        "file": "display-mini.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1081
+        ]
+      },
+      {
+        "title": "candidate: mini switches to body web fullscreen and restores the original video placement",
+        "file": "display-mini.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1070
+        ]
+      },
+      {
+        "title": "published: native fullscreen belongs to its player and other players cannot exit it",
+        "file": "display-native.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          393
+        ]
+      },
+      {
+        "title": "published: destroyed players stop receiving later native fullscreen events",
+        "file": "display-native.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          392
+        ]
+      },
+      {
+        "title": "candidate: native fullscreen belongs to its player and other players cannot exit it",
+        "file": "display-native.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          420
+        ]
+      },
+      {
+        "title": "candidate: destroyed players stop receiving later native fullscreen events",
+        "file": "display-native.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          455
+        ]
+      },
+      {
+        "title": "published: native fullscreen belongs to its player and other players cannot exit it",
+        "file": "display-native.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          525
+        ]
+      },
+      {
+        "title": "published: destroyed players stop receiving later native fullscreen events",
+        "file": "display-native.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          598
+        ]
+      },
+      {
+        "title": "candidate: native fullscreen belongs to its player and other players cannot exit it",
+        "file": "display-native.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          627
+        ]
+      },
+      {
+        "title": "candidate: destroyed players stop receiving later native fullscreen events",
+        "file": "display-native.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          700
+        ]
+      },
+      {
+        "title": "published: native fullscreen belongs to its player and other players cannot exit it",
+        "file": "display-native.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1572
+        ]
+      },
+      {
+        "title": "published: destroyed players stop receiving later native fullscreen events",
+        "file": "display-native.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1627
+        ]
+      },
+      {
+        "title": "candidate: native fullscreen belongs to its player and other players cannot exit it",
+        "file": "display-native.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1677
+        ]
+      },
+      {
+        "title": "candidate: destroyed players stop receiving later native fullscreen events",
+        "file": "display-native.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1540
+        ]
+      },
+      {
+        "title": "candidate: actual native PiP gesture and playback or explicit unsupported capability",
+        "file": "display-pip.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          760
+        ]
+      },
+      {
+        "title": "candidate: actual native PiP gesture and playback or explicit unsupported capability",
+        "file": "display-pip.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          1159
+        ]
+      },
+      {
+        "title": "candidate: actual native PiP gesture and playback or explicit unsupported capability",
+        "file": "display-pip.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1083
+        ]
+      },
+      {
+        "title": "candidate: hidden containers defer sizing and recover after becoming visible",
+        "file": "display-sizing.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          183
+        ]
+      },
+      {
+        "title": "published: sizing preserves valid geometry, return values and emitted measurements",
+        "file": "display-sizing.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          172
+        ]
+      },
+      {
+        "title": "published: aspect ratio and flip preserve dataset, notices and event order",
+        "file": "display-sizing.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          158
+        ]
+      },
+      {
+        "title": "published: unresolved media dimensions do not partially change layout or emit NaN height",
+        "file": "display-sizing.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          168
+        ]
+      },
+      {
+        "title": "candidate: sizing preserves valid geometry, return values and emitted measurements",
+        "file": "display-sizing.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          193
+        ]
+      },
+      {
+        "title": "candidate: aspect ratio and flip preserve dataset, notices and event order",
+        "file": "display-sizing.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          191
+        ]
+      },
+      {
+        "title": "candidate: unresolved media dimensions do not partially change layout or emit NaN height",
+        "file": "display-sizing.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          179
+        ]
+      },
+      {
+        "title": "candidate: hidden containers defer sizing and recover after becoming visible",
+        "file": "display-sizing.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          477
+        ]
+      },
+      {
+        "title": "published: sizing preserves valid geometry, return values and emitted measurements",
+        "file": "display-sizing.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          1118
+        ]
+      },
+      {
+        "title": "published: aspect ratio and flip preserve dataset, notices and event order",
+        "file": "display-sizing.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          398
+        ]
+      },
+      {
+        "title": "published: unresolved media dimensions do not partially change layout or emit NaN height",
+        "file": "display-sizing.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          351
+        ]
+      },
+      {
+        "title": "candidate: sizing preserves valid geometry, return values and emitted measurements",
+        "file": "display-sizing.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          367
+        ]
+      },
+      {
+        "title": "candidate: aspect ratio and flip preserve dataset, notices and event order",
+        "file": "display-sizing.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          456
+        ]
+      },
+      {
+        "title": "candidate: unresolved media dimensions do not partially change layout or emit NaN height",
+        "file": "display-sizing.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          373
+        ]
+      },
+      {
+        "title": "candidate: hidden containers defer sizing and recover after becoming visible",
+        "file": "display-sizing.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1048
+        ]
+      },
+      {
+        "title": "published: sizing preserves valid geometry, return values and emitted measurements",
+        "file": "display-sizing.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1041
+        ]
+      },
+      {
+        "title": "published: aspect ratio and flip preserve dataset, notices and event order",
+        "file": "display-sizing.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1039
+        ]
+      },
+      {
+        "title": "published: unresolved media dimensions do not partially change layout or emit NaN height",
+        "file": "display-sizing.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1087
+        ]
+      },
+      {
+        "title": "candidate: sizing preserves valid geometry, return values and emitted measurements",
+        "file": "display-sizing.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1048
+        ]
+      },
+      {
+        "title": "candidate: aspect ratio and flip preserve dataset, notices and event order",
+        "file": "display-sizing.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1052
+        ]
+      },
+      {
+        "title": "candidate: unresolved media dimensions do not partially change layout or emit NaN height",
+        "file": "display-sizing.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          885
+        ]
+      },
+      {
+        "title": "published: web fullscreen restores initial style after repeated entry (empty)",
+        "file": "display-web.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          153
+        ]
+      },
+      {
+        "title": "published: web fullscreen restores initial style after repeated entry (width: 70%; height: 80%; color: red;)",
+        "file": "display-web.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          169
+        ]
+      },
+      {
+        "title": "published: body fullscreen restores original parent and sibling when flag changes=false",
+        "file": "display-web.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          177
+        ]
+      },
+      {
+        "title": "published: body fullscreen restores original parent and sibling when flag changes=true",
+        "file": "display-web.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          153
+        ]
+      },
+      {
+        "title": "candidate: web fullscreen restores initial style after repeated entry (empty)",
+        "file": "display-web.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          192
+        ]
+      },
+      {
+        "title": "candidate: web fullscreen restores initial style after repeated entry (width: 70%; height: 80%; color: red;)",
+        "file": "display-web.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          178
+        ]
+      },
+      {
+        "title": "candidate: body fullscreen restores original parent and sibling when flag changes=false",
+        "file": "display-web.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          166
+        ]
+      },
+      {
+        "title": "candidate: body fullscreen restores original parent and sibling when flag changes=true",
+        "file": "display-web.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          183
+        ]
+      },
+      {
+        "title": "published: web fullscreen restores initial style after repeated entry (empty)",
+        "file": "display-web.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          462
+        ]
+      },
+      {
+        "title": "published: web fullscreen restores initial style after repeated entry (width: 70%; height: 80%; color: red;)",
+        "file": "display-web.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          438
+        ]
+      },
+      {
+        "title": "published: body fullscreen restores original parent and sibling when flag changes=false",
+        "file": "display-web.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          483
+        ]
+      },
+      {
+        "title": "published: body fullscreen restores original parent and sibling when flag changes=true",
+        "file": "display-web.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          380
+        ]
+      },
+      {
+        "title": "candidate: web fullscreen restores initial style after repeated entry (empty)",
+        "file": "display-web.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          1027
+        ]
+      },
+      {
+        "title": "candidate: web fullscreen restores initial style after repeated entry (width: 70%; height: 80%; color: red;)",
+        "file": "display-web.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          376
+        ]
+      },
+      {
+        "title": "candidate: body fullscreen restores original parent and sibling when flag changes=false",
+        "file": "display-web.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          339
+        ]
+      },
+      {
+        "title": "candidate: body fullscreen restores original parent and sibling when flag changes=true",
+        "file": "display-web.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          469
+        ]
+      },
+      {
+        "title": "published: web fullscreen restores initial style after repeated entry (empty)",
+        "file": "display-web.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1006
+        ]
+      },
+      {
+        "title": "published: web fullscreen restores initial style after repeated entry (width: 70%; height: 80%; color: red;)",
+        "file": "display-web.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1037
+        ]
+      },
+      {
+        "title": "published: body fullscreen restores original parent and sibling when flag changes=false",
+        "file": "display-web.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          900
+        ]
+      },
+      {
+        "title": "published: body fullscreen restores original parent and sibling when flag changes=true",
+        "file": "display-web.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1022
+        ]
+      },
+      {
+        "title": "candidate: web fullscreen restores initial style after repeated entry (empty)",
+        "file": "display-web.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1057
+        ]
+      },
+      {
+        "title": "candidate: web fullscreen restores initial style after repeated entry (width: 70%; height: 80%; color: red;)",
+        "file": "display-web.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1051
+        ]
+      },
+      {
+        "title": "candidate: body fullscreen restores original parent and sibling when flag changes=false",
+        "file": "display-web.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1070
+        ]
+      },
+      {
+        "title": "candidate: body fullscreen restores original parent and sibling when flag changes=true",
+        "file": "display-web.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1075
+        ]
+      },
+      {
+        "title": "published: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "file": "screenshot.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          331
+        ]
+      },
+      {
+        "title": "published: screenshot preserves download filename, event data and Promise result",
+        "file": "screenshot.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          791
+        ]
+      },
+      {
+        "title": "published: actual cross-origin video rejects capture with SecurityError and notice",
+        "file": "screenshot.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          289
+        ]
+      },
+      {
+        "title": "candidate: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "file": "screenshot.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          319
+        ]
+      },
+      {
+        "title": "candidate: screenshot preserves download filename, event data and Promise result",
+        "file": "screenshot.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          519
+        ]
+      },
+      {
+        "title": "candidate: actual cross-origin video rejects capture with SecurityError and notice",
+        "file": "screenshot.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          373
+        ]
+      },
+      {
+        "title": "published: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "file": "screenshot.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          506
+        ]
+      },
+      {
+        "title": "published: screenshot preserves download filename, event data and Promise result",
+        "file": "screenshot.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          779
+        ]
+      },
+      {
+        "title": "published: actual cross-origin video rejects capture with SecurityError and notice",
+        "file": "screenshot.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          848
+        ]
+      },
+      {
+        "title": "candidate: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "file": "screenshot.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          931
+        ]
+      },
+      {
+        "title": "candidate: screenshot preserves download filename, event data and Promise result",
+        "file": "screenshot.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          653
+        ]
+      },
+      {
+        "title": "candidate: actual cross-origin video rejects capture with SecurityError and notice",
+        "file": "screenshot.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          880
+        ]
+      },
+      {
+        "title": "published: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "file": "screenshot.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1308
+        ]
+      },
+      {
+        "title": "published: screenshot preserves download filename, event data and Promise result",
+        "file": "screenshot.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1328
+        ]
+      },
+      {
+        "title": "published: actual cross-origin video rejects capture with SecurityError and notice",
+        "file": "screenshot.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          4227
+        ]
+      },
+      {
+        "title": "candidate: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "file": "screenshot.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1391
+        ]
+      },
+      {
+        "title": "candidate: screenshot preserves download filename, event data and Promise result",
+        "file": "screenshot.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1290
+        ]
+      },
+      {
+        "title": "candidate: actual cross-origin video rejects capture with SecurityError and notice",
+        "file": "screenshot.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          3816
+        ]
+      },
+      {
+        "title": "published: thumbnail cells follow the generated grid at row boundaries and on returning to the first cell",
+        "file": "thumbnails.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          301
+        ]
+      },
+      {
+        "title": "candidate: thumbnail cells follow the generated grid at row boundaries and on returning to the first cell",
+        "file": "thumbnails.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          308
+        ]
+      },
+      {
+        "title": "published: thumbnail cells follow the generated grid at row boundaries and on returning to the first cell",
+        "file": "thumbnails.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          1325
+        ]
+      },
+      {
+        "title": "candidate: thumbnail cells follow the generated grid at row boundaries and on returning to the first cell",
+        "file": "thumbnails.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          600
+        ]
+      },
+      {
+        "title": "published: thumbnail cells follow the generated grid at row boundaries and on returning to the first cell",
+        "file": "thumbnails.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1570
+        ]
+      },
+      {
+        "title": "candidate: thumbnail cells follow the generated grid at row boundaries and on returning to the first cell",
+        "file": "thumbnails.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1643
+        ]
+      }
+    ],
+    "pip": [
+      {
+        "engine": "chromium",
+        "observations": [
+          {
+            "name": "native-pip-capability",
+            "value": {
+              "enabled": true,
+              "request": true,
+              "exit": true
+            }
+          },
+          {
+            "name": "native-pip-playback",
+            "value": {
+              "window": {
+                "width": 320,
+                "height": 180
+              },
+              "currentTime": 0.05885,
+              "events": [
+                "video:loadedmetadata",
+                "ready",
+                "video:playing"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "engine": "firefox",
+        "observations": [
+          {
+            "name": "native-pip-capability",
+            "value": {
+              "enabled": true,
+              "request": true,
+              "exit": true
+            }
+          },
+          {
+            "name": "native-pip-playback",
+            "value": {
+              "window": {
+                "width": 320,
+                "height": 180
+              },
+              "currentTime": 0.169294,
+              "events": [
+                "video:loadedmetadata",
+                "ready",
+                "video:playing"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "engine": "webkit",
+        "observations": [
+          {
+            "name": "native-pip-capability",
+            "value": {
+              "enabled": false,
+              "request": false,
+              "exit": false
+            }
+          }
+        ]
+      }
+    ],
+    "files": [
+      {
+        "path": "test/browser/display-web.spec.js",
+        "sha256": "f5c2c2d7dcd737788ce63257eadbf0b02819e0f99cfa73bae30d58d284b6164c"
+      },
+      {
+        "path": "test/browser/display-mini.spec.js",
+        "sha256": "eecb351ef6c1b4d5a96c682e9d9b4507260473b10159bad0b918af277c2c58f3"
+      },
+      {
+        "path": "test/browser/display-sizing.spec.js",
+        "sha256": "04912463007d1fa53a5d5048a88e7fcb9c0238a4e20e215e11a3dfe381ad74da"
+      },
+      {
+        "path": "test/browser/screenshot.spec.js",
+        "sha256": "a2b49fbd8616533fc351892c1f6687d588d2bc9350fda4be5475decb97d77a0e"
+      },
+      {
+        "path": "test/browser/thumbnails.spec.js",
+        "sha256": "bc00e6fe6eb6987bd36193f26c69e2377249b53f41dfc1474dd44d6e833a2c09"
+      },
+      {
+        "path": "test/browser/display-native.spec.js",
+        "sha256": "557f0613a23c8da819d55a62acd5ae47340f16cfb4f91bb9778f7984b8887e49"
+      },
+      {
+        "path": "test/browser/display-pip.spec.js",
+        "sha256": "562f25b2e27c4644981d5e95f54bdc1a887ec051a10fe5e91ccad3ae22c8238d"
+      }
+    ],
+    "limit": "Published baseline versus source-built candidate, not new installed-tarball acceptance. Geometry cases override media dimensions; capture cases decode native frames and test CORS. Chromium/Firefox native PiP playback observed; WebKit reports unsupported standard PiP, not PiP success or Safari acceptance."
+  },
+  "build": {
+    "vitepressSeconds": 10.79,
+    "yarnSeconds": 12.51,
+    "checked": [
+      "build:docs",
+      "build:llm",
+      "check:llm",
+      "site-inventory --write/--check",
+      "demos --check"
+    ]
+  },
+  "ledger": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-OkrstK/report.json",
+      "sha256": "3fb50be19f3bfbef2517054658c8328998e4cd5cbeb30630a63372243a880a99"
+    },
+    "libraries": [
+      {
+        "name": "artplayer",
+        "fingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "fingerprint": "55236854b94ac7b0dd91b4107dcb60e97ac6f1a5e8b6b8a9dcb63bba66c6509a",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "fingerprint": "f88a6a2f1c5548389cae293614f648d72077ed03a7be6c81ad017a1155a839a3",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "fingerprint": "7fa3ca9577b53f3bb90e2c23fec9e6e70fbbb0c089ccae2923084b9059bcbdf9",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "fingerprint": "0c73b970872fe56df1c669e5badfa91f9cd7ec3c73070a9852cfea076cc8923f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "fingerprint": "9ced9b18e4b260ccbcf6ac016b32ec0852040cb5c0f57be72718a03d40d598bf",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "fingerprint": "f1dd73097e43df504f686f18a6ca30bcb1f57ab74d3cc62909db20505c994072",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "fingerprint": "d6d79d4b47afaefa66d32c5b1709f412ed9d32c636462723918c268a6601e631",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "fingerprint": "3d32a4c6d94d9eaa31cd982ec43ae2b710a4c923e5076f357ba4c902be48d729",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "fingerprint": "ceb17cbb235a42438c28df15ddf830d104a749b58515333c43da2b18534b166c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "fingerprint": "6716002b92bb12b54d17772d87a560bb9e863da35abfa37988907d54e02cdf74",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "fingerprint": "a3a56ecc218c8e180621d1bc00684950cca4ada8d483334b0cb91fd783c10831",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "fingerprint": "00a07f33277bae211a553e9fb2e924ade219513135bc54921886f4518dd27964",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "fingerprint": "cc9304759ff3cdd84767eee38fcbb9cf70e234f2449946536fd1da972cde679f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "fingerprint": "43825f602514c9e6a0bd8f0a270a54a03d1cb76f821b99d1e736d0150dafc190",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "fingerprint": "3503e145a591a406105eb953f9ac75c8373992c9f3f1f23b713de65c85a3bb3d",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "fingerprint": "b7932e08a086cfe16ed5e78872e274fb897931d0653dbf7ac61a19b404ddec85",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "fingerprint": "a0a8efb762e823fe4dd8c8de9601f74ac873ade8c6953a7e5305297608c71a12",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "fingerprint": "9fd7e62c56ae78866267cdd5650dc4e4af4aad76dd6ff8466b68908bc25d661c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "fingerprint": "00dc477ad56d12cfa6cd0d1e071e80f4120afed23f44af0393e23e5dac516a3b",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "fingerprint": "78bf5be3b2b5656a0b95ce2ce3cf1a635b6df609361a840b8298476f65af9d52",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      }
+    ],
+    "publicationAuthorized": false
+  },
+  "closure": {
+    "core": {
+      "declarations": 963,
+      "uniqueMapped": 963,
+      "sourceAndGuideHashesVerified": true,
+      "allMappedAnchorsPresent": true
+    },
+    "ecosystem": {
+      "guides": [
+        {
+          "package": "artplayer-plugin-chapter",
+          "path": "packages/artplayer-vitepress/docs/plugin/chapter.md",
+          "sha256": "6401e3ef3ad79b62718db93062d013f9e0b1ba149ef9c70730898054edee2bab",
+          "semanticEvidence": "refactor/baselines/site04-chapter-ambilight-guides.json",
+          "reviewCommit": "31388126103a14834dc37051a5b3c6daaf9afb05"
+        },
+        {
+          "package": "artplayer-plugin-chapter",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/chapter.md",
+          "sha256": "b08eb8e82fb5afa73c54e3957dc764f20b3cb81ab7f6d46aa0c2dc8fc22f6239",
+          "semanticEvidence": "refactor/baselines/site04-chapter-ambilight-guides.json",
+          "reviewCommit": "31388126103a14834dc37051a5b3c6daaf9afb05"
+        },
+        {
+          "package": "artplayer-plugin-ambilight",
+          "path": "packages/artplayer-vitepress/docs/plugin/ambilight.md",
+          "sha256": "3ed8105311f1da0aeae9c95936f56e0a55f4885c6cb04268e86162d4823935c6",
+          "semanticEvidence": "refactor/baselines/site04-chapter-ambilight-guides.json",
+          "reviewCommit": "31388126103a14834dc37051a5b3c6daaf9afb05"
+        },
+        {
+          "package": "artplayer-plugin-ambilight",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/ambilight.md",
+          "sha256": "d3362744c24d26e8d9c045cb73e54984cc47c9173b4612421b431bcfbde1b65c",
+          "semanticEvidence": "refactor/baselines/site04-chapter-ambilight-guides.json",
+          "reviewCommit": "31388126103a14834dc37051a5b3c6daaf9afb05"
+        },
+        {
+          "package": "artplayer-plugin-document-pip",
+          "path": "packages/artplayer-vitepress/docs/plugin/document-pip.md",
+          "sha256": "5ea4f5838b84ae80291670126c12e415334a897d451000116084d4bceb8e1e7a",
+          "semanticEvidence": "refactor/baselines/site04-dpip-asr-guides.json",
+          "reviewCommit": "94adb77fd677f34c171ed1812cbda9512dc5e168"
+        },
+        {
+          "package": "artplayer-plugin-document-pip",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/document-pip.md",
+          "sha256": "143c9a582207c121247c4f56b9e9f1bc5a9c254c4b41f11932558be03554f808",
+          "semanticEvidence": "refactor/baselines/site04-dpip-asr-guides.json",
+          "reviewCommit": "94adb77fd677f34c171ed1812cbda9512dc5e168"
+        },
+        {
+          "package": "artplayer-plugin-asr",
+          "path": "packages/artplayer-vitepress/docs/plugin/asr.md",
+          "sha256": "3af3617ac271457bbe14af49c295537f15bff2fe84ab9af8febc95e8039a2999",
+          "semanticEvidence": "refactor/baselines/site04-dpip-asr-guides.json",
+          "reviewCommit": "94adb77fd677f34c171ed1812cbda9512dc5e168"
+        },
+        {
+          "package": "artplayer-plugin-asr",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/asr.md",
+          "sha256": "d214f61365f3e78542edd8709f5fab322661793df84c849f1cd084ece6d0b21c",
+          "semanticEvidence": "refactor/baselines/site04-dpip-asr-guides.json",
+          "reviewCommit": "94adb77fd677f34c171ed1812cbda9512dc5e168"
+        },
+        {
+          "package": "artplayer-plugin-auto-thumbnail",
+          "path": "packages/artplayer-vitepress/docs/plugin/auto-thumbnail.md",
+          "sha256": "35d626d2e1cdca80544e0d27af5dcebec8f8d6bf754a4174eb727f62783b56e0",
+          "semanticEvidence": "refactor/baselines/site04-auto-multi-guides.json",
+          "reviewCommit": "3317230f2ece7df65e75e02f093da4b72d5f77d3"
+        },
+        {
+          "package": "artplayer-plugin-auto-thumbnail",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/auto-thumbnail.md",
+          "sha256": "33a05dfeb3d1d3ce3dcd6924be6818ae410a158218b03a7077628e78ef523fa2",
+          "semanticEvidence": "refactor/baselines/site04-auto-multi-guides.json",
+          "reviewCommit": "3317230f2ece7df65e75e02f093da4b72d5f77d3"
+        },
+        {
+          "package": "artplayer-plugin-multiple-subtitles",
+          "path": "packages/artplayer-vitepress/docs/plugin/multiple-subtitles.md",
+          "sha256": "3b8f659f4337e00bd4a859886af393210e733e7138016df4cb6e98f8506fe517",
+          "semanticEvidence": "refactor/baselines/site04-auto-multi-guides.json",
+          "reviewCommit": "3317230f2ece7df65e75e02f093da4b72d5f77d3"
+        },
+        {
+          "package": "artplayer-plugin-multiple-subtitles",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/multiple-subtitles.md",
+          "sha256": "a37bd14edcfcaa69a5cb3b09a7eb1e404961a22f5c2db3b2567bb83b6d11d4e6",
+          "semanticEvidence": "refactor/baselines/site04-auto-multi-guides.json",
+          "reviewCommit": "3317230f2ece7df65e75e02f093da4b72d5f77d3"
+        },
+        {
+          "package": "artplayer-plugin-ads",
+          "path": "packages/artplayer-vitepress/docs/plugin/ads.md",
+          "sha256": "63faf6ef731a1b8c8d948fffe3770ff233c55a52442f60a280d7c14335f5781d",
+          "semanticEvidence": "refactor/baselines/site04-ads-vast-guides.json",
+          "reviewCommit": "558e946ae538b6e0aac9754aed875ba521d6ca9d"
+        },
+        {
+          "package": "artplayer-plugin-ads",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/ads.md",
+          "sha256": "d85cddf9838354f6aa66292da3523152992c67a95f0a99321873200a7a04fff9",
+          "semanticEvidence": "refactor/baselines/site04-ads-vast-guides.json",
+          "reviewCommit": "558e946ae538b6e0aac9754aed875ba521d6ca9d"
+        },
+        {
+          "package": "artplayer-plugin-vast",
+          "path": "packages/artplayer-vitepress/docs/plugin/vast.md",
+          "sha256": "288cf08318a9cb4ea09e22b66689e5e7fd63dbf613d9779002caed2b2b46a561",
+          "semanticEvidence": "refactor/baselines/site04-ads-vast-guides.json",
+          "reviewCommit": "558e946ae538b6e0aac9754aed875ba521d6ca9d"
+        },
+        {
+          "package": "artplayer-plugin-vast",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/vast.md",
+          "sha256": "ac320256a8d59b60d81d81ab0bfbe72215ed5c18097c43cd793b386049190d9a",
+          "semanticEvidence": "refactor/baselines/site04-ads-vast-guides.json",
+          "reviewCommit": "558e946ae538b6e0aac9754aed875ba521d6ca9d"
+        },
+        {
+          "package": "artplayer-plugin-jassub",
+          "path": "packages/artplayer-vitepress/docs/plugin/jassub.md",
+          "sha256": "47a3aaef82192a2ff564a432dc7a9ce7f7893fa38febeb5b38290daff8bd45b9",
+          "semanticEvidence": "refactor/baselines/site04-jassub-mask-cast-guides.json",
+          "reviewCommit": "3aad294aa5eee5276afbd8b80330efb45a68d677"
+        },
+        {
+          "package": "artplayer-plugin-jassub",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/jassub.md",
+          "sha256": "4c0f8c3856c89b1802ed37b2a57a87ec099e591bef116c21768b65b0969ef18c",
+          "semanticEvidence": "refactor/baselines/site04-jassub-mask-cast-guides.json",
+          "reviewCommit": "3aad294aa5eee5276afbd8b80330efb45a68d677"
+        },
+        {
+          "package": "artplayer-plugin-danmuku-mask",
+          "path": "packages/artplayer-vitepress/docs/plugin/danmuku-mask.md",
+          "sha256": "6f93adeaf5f575f88ac3c18fa4f076e5bbfb9a83cab182d9667eea4d1400b232",
+          "semanticEvidence": "refactor/baselines/site04-jassub-mask-cast-guides.json",
+          "reviewCommit": "3aad294aa5eee5276afbd8b80330efb45a68d677"
+        },
+        {
+          "package": "artplayer-plugin-danmuku-mask",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/danmuku-mask.md",
+          "sha256": "fe79ede806db92af3c1a241061d22114d51d6118bccff0b059768c636fa7b03e",
+          "semanticEvidence": "refactor/baselines/site04-jassub-mask-cast-guides.json",
+          "reviewCommit": "3aad294aa5eee5276afbd8b80330efb45a68d677"
+        },
+        {
+          "package": "artplayer-plugin-chromecast",
+          "path": "packages/artplayer-vitepress/docs/plugin/chromecast.md",
+          "sha256": "d62925f1c7d2fe6c76f30915d5ff3b3a3f7eafebbe24cab68478287dd93345f8",
+          "semanticEvidence": "refactor/baselines/site04-jassub-mask-cast-guides.json",
+          "reviewCommit": "3aad294aa5eee5276afbd8b80330efb45a68d677"
+        },
+        {
+          "package": "artplayer-plugin-chromecast",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/chromecast.md",
+          "sha256": "2776f10c24852aa4196973fc242dfb6b939847852d1c77f782a347d839d78f6c",
+          "semanticEvidence": "refactor/baselines/site04-jassub-mask-cast-guides.json",
+          "reviewCommit": "3aad294aa5eee5276afbd8b80330efb45a68d677"
+        },
+        {
+          "package": "artplayer-tool-iframe",
+          "path": "packages/artplayer-vitepress/docs/tool/iframe.md",
+          "sha256": "7012ae1ba5b2da32a235aaa75cbb8c228290234ba95c34f55bf8b52455939fc5",
+          "semanticEvidence": "refactor/baselines/site04-tools-guides.json",
+          "reviewCommit": "484a8c903c98b1ef7bcb8b345002d920132cb4d8"
+        },
+        {
+          "package": "artplayer-tool-iframe",
+          "path": "packages/artplayer-vitepress/docs/en/tool/iframe.md",
+          "sha256": "99cf8218094d869355db986c7812861ad9d9f98d8af4c31a520c323fc7f4df57",
+          "semanticEvidence": "refactor/baselines/site04-tools-guides.json",
+          "reviewCommit": "484a8c903c98b1ef7bcb8b345002d920132cb4d8"
+        },
+        {
+          "package": "artplayer-tool-thumbnail",
+          "path": "packages/artplayer-vitepress/docs/tool/thumbnail.md",
+          "sha256": "bda8789f49f4f0ad2da72c7e211ad5194c5b715a3d7006856ad8cda1b6b215f0",
+          "semanticEvidence": "refactor/baselines/site04-tools-guides.json",
+          "reviewCommit": "484a8c903c98b1ef7bcb8b345002d920132cb4d8"
+        },
+        {
+          "package": "artplayer-tool-thumbnail",
+          "path": "packages/artplayer-vitepress/docs/en/tool/thumbnail.md",
+          "sha256": "71b121db9f8d525463d4472c2ba6866ea0fbf88e02fe17f9b2fbf87011b44ced",
+          "semanticEvidence": "refactor/baselines/site04-tools-guides.json",
+          "reviewCommit": "484a8c903c98b1ef7bcb8b345002d920132cb4d8"
+        },
+        {
+          "package": "artplayer-proxy-canvas",
+          "path": "packages/artplayer-vitepress/docs/proxy/canvas.md",
+          "sha256": "56f03babf6dcaa307e685755d9520aff8a15b12c39559b17ef6ff5b89d603bf8",
+          "semanticEvidence": "refactor/baselines/site04-proxies-guides.json",
+          "reviewCommit": "4db9789014e304d67b18b0e5a5cc312d12af28df"
+        },
+        {
+          "package": "artplayer-proxy-canvas",
+          "path": "packages/artplayer-vitepress/docs/en/proxy/canvas.md",
+          "sha256": "89a35c2f61b39cc2cfe4f14d24b23be36c73a1ec4a116bbba6075b3ede6e5bdc",
+          "semanticEvidence": "refactor/baselines/site04-proxies-guides.json",
+          "reviewCommit": "4db9789014e304d67b18b0e5a5cc312d12af28df"
+        },
+        {
+          "package": "artplayer-proxy-mediabunny",
+          "path": "packages/artplayer-vitepress/docs/proxy/mediabunny.md",
+          "sha256": "9a3786f09e1f7fde6554d48facec0e67f8b7b08dd4c5a4f10f036459288f6473",
+          "semanticEvidence": "refactor/baselines/site04-proxies-guides.json",
+          "reviewCommit": "4db9789014e304d67b18b0e5a5cc312d12af28df"
+        },
+        {
+          "package": "artplayer-proxy-mediabunny",
+          "path": "packages/artplayer-vitepress/docs/en/proxy/mediabunny.md",
+          "sha256": "f1fa76ef2554969f4e3365676cee1e10eec3bb417d75786a3699653a8dbd976b",
+          "semanticEvidence": "refactor/baselines/site04-proxies-guides.json",
+          "reviewCommit": "4db9789014e304d67b18b0e5a5cc312d12af28df"
+        },
+        {
+          "package": "artplayer-plugin-danmuku",
+          "path": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
+          "sha256": "c030799732122c0e21ef46c26c92e34ddcbfa90bd609eb07254dd5090fc5302f",
+          "semanticEvidence": "refactor/baselines/site04-existing-guides.json",
+          "reviewCommit": "b029062acef15293b759b8bcc786d37f47fdbfdb"
+        },
+        {
+          "package": "artplayer-plugin-danmuku",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
+          "sha256": "ddd9972d86649b7785070adc80af2dc4ce5fd2c760839b2e4ac6dc60bcd4ccb0",
+          "semanticEvidence": "refactor/baselines/site04-existing-guides.json",
+          "reviewCommit": "b029062acef15293b759b8bcc786d37f47fdbfdb"
+        },
+        {
+          "package": "artplayer-plugin-hls-control",
+          "path": "packages/artplayer-vitepress/docs/plugin/hls-control.md",
+          "sha256": "e6cd0502a6f74cafbcb11066d29c2f861df4775dbd9e81be2108286f0d02c7c7",
+          "semanticEvidence": "refactor/baselines/site04-existing-guides.json",
+          "reviewCommit": "b029062acef15293b759b8bcc786d37f47fdbfdb"
+        },
+        {
+          "package": "artplayer-plugin-hls-control",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
+          "sha256": "2b3e6ea43f5a319c968275dbf3479314e8c51da0fc5205cb5315682368fd09d7",
+          "semanticEvidence": "refactor/baselines/site04-existing-guides.json",
+          "reviewCommit": "b029062acef15293b759b8bcc786d37f47fdbfdb"
+        },
+        {
+          "package": "artplayer-plugin-dash-control",
+          "path": "packages/artplayer-vitepress/docs/plugin/dash-control.md",
+          "sha256": "708dc007b424ccd3a72ade613d89c78aadad4869b358f64c3496562691c47629",
+          "semanticEvidence": "refactor/baselines/site04-existing-guides.json",
+          "reviewCommit": "b029062acef15293b759b8bcc786d37f47fdbfdb"
+        },
+        {
+          "package": "artplayer-plugin-dash-control",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
+          "sha256": "99b81ae9bcaa685349dd29000c7383fd4c7648fdfc9e692d6f528681c0600502",
+          "semanticEvidence": "refactor/baselines/site04-existing-guides.json",
+          "reviewCommit": "b029062acef15293b759b8bcc786d37f47fdbfdb"
+        },
+        {
+          "package": "artplayer-plugin-audio-track",
+          "path": "packages/artplayer-vitepress/docs/plugin/audio-track.md",
+          "sha256": "8ecb19cf98ba0e8ec44e0f63d5feb66584892bd99864496df3619855cc4333d9",
+          "semanticEvidence": "refactor/baselines/site04-existing-guides.json",
+          "reviewCommit": "b029062acef15293b759b8bcc786d37f47fdbfdb"
+        },
+        {
+          "package": "artplayer-plugin-audio-track",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/audio-track.md",
+          "sha256": "18261b1051ace8d399844e3e6c887a36d224cde76b305f4a54c98e0bdb472c3c",
+          "semanticEvidence": "refactor/baselines/site04-existing-guides.json",
+          "reviewCommit": "b029062acef15293b759b8bcc786d37f47fdbfdb"
+        },
+        {
+          "package": "artplayer-plugin-vtt-thumbnail",
+          "path": "packages/artplayer-vitepress/docs/plugin/vtt-thumbnail.md",
+          "sha256": "1245a11bce5eca1ac47d28bdca67ecb9a9febaf49548a025f68e764f9bef558a",
+          "semanticEvidence": "refactor/baselines/site04-existing-guides.json",
+          "reviewCommit": "b029062acef15293b759b8bcc786d37f47fdbfdb"
+        },
+        {
+          "package": "artplayer-plugin-vtt-thumbnail",
+          "path": "packages/artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md",
+          "sha256": "555caaf6f4f70a04858a2bbb893d55fe51be313d088c290ef5872255323c6116",
+          "semanticEvidence": "refactor/baselines/site04-existing-guides.json",
+          "reviewCommit": "b029062acef15293b759b8bcc786d37f47fdbfdb"
+        }
+      ],
+      "packages": [
+        "artplayer-plugin-chapter",
+        "artplayer-plugin-ambilight",
+        "artplayer-plugin-document-pip",
+        "artplayer-plugin-asr",
+        "artplayer-plugin-auto-thumbnail",
+        "artplayer-plugin-multiple-subtitles",
+        "artplayer-plugin-ads",
+        "artplayer-plugin-vast",
+        "artplayer-plugin-jassub",
+        "artplayer-plugin-danmuku-mask",
+        "artplayer-plugin-chromecast",
+        "artplayer-tool-iframe",
+        "artplayer-tool-thumbnail",
+        "artplayer-proxy-canvas",
+        "artplayer-proxy-mediabunny",
+        "artplayer-plugin-danmuku",
+        "artplayer-plugin-hls-control",
+        "artplayer-plugin-dash-control",
+        "artplayer-plugin-audio-track",
+        "artplayer-plugin-vtt-thumbnail"
+      ],
+      "errors": []
+    },
+    "dependencies": [
+      {
+        "id": "CORE-21",
+        "status": "done"
+      },
+      {
+        "id": "SITE-03",
+        "status": "done"
+      },
+      {
+        "id": "PKG-CHAPTER-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-AMBILIGHT-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-AUDIO-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-AUTO-THUMB-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-VTT-THUMB-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-HLS-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-DASH-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-MULTI-SUB-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-JASSUB-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-MASK-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-ASR-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-ADS-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-VAST-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-CAST-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-DPIP-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-CANVAS-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-IFRAME-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-TOOL-THUMB-04",
+        "status": "done"
+      },
+      {
+        "id": "PKG-DANMUKU-06",
+        "status": "done"
+      },
+      {
+        "id": "PKG-MB-08",
+        "status": "done"
+      },
+      {
+        "id": "SITE-DANMUKU-01",
+        "status": "done"
+      },
+      {
+        "id": "SITE-HLS-01",
+        "status": "done"
+      },
+      {
+        "id": "SITE-DASH-01",
+        "status": "done"
+      },
+      {
+        "id": "SITE-AUDIO-01",
+        "status": "done"
+      },
+      {
+        "id": "SITE-VTT-01",
+        "status": "done"
+      },
+      {
+        "id": "SITE-ROUTES-01",
+        "status": "done"
+      },
+      {
+        "id": "SITE-EDITOR-VAST-01",
+        "status": "done"
+      }
+    ],
+    "acceptance": "SITE-04 content/semantic verification only. SITE-05/EX-03 full page/demo acceptance, devices, package release gates and user-directed REVIEW rounds remain open."
+  },
+  "limitations": [
+    "94 Run Code snippets parse; 92 remain unchanged and only two state examples are corrected. 36 forwards are not full demo execution.",
+    "Source browser scope includes controlled geometry and explicit unsupported capability; no physical device, AirPlay receiver, adaptive SDK, long-session or release acceptance."
+  ],
+  "visualInspection": "chromium-zh-property.png",
+  "attachments": [
+    {
+      "path": "refactor/.cache/site04-display-validate.mjs",
+      "sha256": "a229f6c0f53aee4c2ee816aebc5848f56ca965ab32e55bb8b90e105a30ccaeaa"
+    },
+    {
+      "path": "refactor/.cache/site04-display/report.json",
+      "sha256": "8a9a784ceca57c4424d0e55f244e3e8cba42b6d521592ca73e0574d021bcdaf7"
+    },
+    {
+      "path": "refactor/.cache/site04-display-build.log",
+      "sha256": "a635ca7442b7def833b25df3ce5fe00844b462b09f8604beff0d318ab25ebfe1"
+    },
+    {
+      "path": "refactor/.cache/site04-display-llm.log",
+      "sha256": "25c91e9fd589b8851a6d353774dbf656da870dd12747aeb7b5f0b2687aaaa3fb"
+    },
+    {
+      "path": "refactor/.cache/site04-display-tests.log",
+      "sha256": "7e3bbef5cf64ab21d6b8977b11a2f5aaf75acea4925b8c676648384246c243fc"
+    },
+    {
+      "path": "refactor/.cache/site04-display-validate.log",
+      "sha256": "f99551c13373a1032e12c5bd8faa12174fe0bf65073d0d57fc206ed7c6c510b7"
+    },
+    {
+      "path": "refactor/.cache/site04-display-media.log",
+      "sha256": "d2e5ef41c0f69aa525cc62ff54d1d929a7d71064fcc0e12d6aee76af80ef0469"
+    },
+    {
+      "path": "refactor/.cache/site04-display-media-report.json",
+      "sha256": "b58fefdcce5cae669c2bb836fdf93b4f37d200a1efd38aa5684434cc16b8cbea"
+    },
+    {
+      "path": "refactor/.cache/site04-display-media-invocation.json",
+      "sha256": "ad7a1d32f496f382c74e3f53beb16c373025cf0f96b930c5f621e390496d758e"
+    },
+    {
+      "path": "refactor/.cache/site04-display-media-result.json",
+      "sha256": "b69942e33d8138b8313b77f8676c47da9118bbe1c116abcb3226a7335c861e52"
+    },
+    {
+      "path": "refactor/.cache/site04-display-ledger.log",
+      "sha256": "4ca43845de4c924fad6603592395a2efb126b5c210f64b1f6dc57179d495ec08"
+    },
+    {
+      "path": "refactor/.cache/site04-ecosystem-closure.mjs",
+      "sha256": "cf78fc7cef66e7a36369bc5019b60f3c55ed384d1d9a4862e4129afebc3f0f75"
+    },
+    {
+      "path": "refactor/.cache/site04-ecosystem-closure.json",
+      "sha256": "a079d17955a47ca23d33ad9dd4c83d2d296668da2e1af8956af09a040ac7ea99"
+    }
+  ]
+}

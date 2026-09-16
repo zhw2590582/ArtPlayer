@@ -2877,6 +2877,70 @@ void [nativeCommands, togglePlayback, changeSource, progress, unreadable];
 ```
 
 
+## Display, sizing and image contracts {#display-contract}
+
+### Display modes and browser capabilities {#display-modes}
+
+state returns the first truthy mode in mini, pip, fullscreen, fullscreenWeb order, or standard. Assignment closes active modes with a different name; **it does not enable the named mode**. Enter mini with mini = true. standard or an unknown name requests all active modes to close, and native exit may complete asynchronously. This is not an atomic mode transition or a guarantee of immediate completion.
+
+fullscreen is installed on the first video:loadedmetadata event using capabilities available then; it may be undefined beforehand. It prefers document fullscreen, then WebKit video fullscreen, otherwise reads false and shows an unsupported notice. Root types retain boolean; runtime marks it optional. Native requests remain subject to user activation and permissions, and a boolean assignment expression is not an awaitable request result. Native state events drive fullscreen emission; the document path then updates exclusive state, CSS and resize. Errors may show a notice and produce fullscreenError. Property presence or desktop WebKit execution does not prove mobile support.
+
+fullscreenWeb is a CSS page mode, read from the art-fullscreen-web class. Entry saves the player node's placement and inline style, optionally moves it to its owner document's body according to FULLSCREEN_WEB_IN_BODY, then changes dimensions and class. Exit restores the original snapshot, so temporary inline style changes made during the mode can be overwritten on exit. It synchronously emits fullscreenWeb then resize; repeated assignments can emit again. Destruction restores ownership and cleans up. This is not native browser fullscreen.
+
+mini is a draggable page overlay, not operating-system PiP. The core moves the same media node into it and restores its original parent and sibling position on exit; subsequent entries reuse the overlay. Position uses storage left/top and is constrained to the viewport. Hiding cancels dragging; destruction removes only core-created overlays, while caller-provided nodes remain caller-owned. mini events describe overlay state, not successful playback.
+
+pip prefers standard native PiP and reads as the media element when owned by this instance, otherwise null. WebKit presentation mode reads as a boolean; unsupported implementations read false. Root types retain boolean; runtime exposes Element/null/boolean. Assignment still takes a boolean and provides no observable Promise: preserve the user-click call stack and observe notices/pip events instead of treating assignment as a returned window. Cancellation/destruction exits only owned or late requests, not another player's window. This is video PiP; use the Document PiP plugin for a document window. Synchronous native errors may throw; asynchronous rejection is shown through the notice.
+
+airplay() checks WebKit availability events and the picker method to request a target picker. It normally returns undefined; the subsequent airplay event does not prove a receiver connection. Unavailability only shows a notice. Call from appropriate user interaction and allow for method exceptions. Safari/iOS, receiver devices, iframe permissions and proxy support require separate verification.
+
+### Geometry, aspect ratio and poster {#display-sizing}
+
+rect reads the player node's getBoundingClientRect each time; bottom/top/left/right/width/height use this viewport rectangle. x/y add page scroll offsets to left/top, giving page coordinates rather than simple aliases of rect.x/rect.y. These are not decoded media dimensions or a fixed snapshot; separate reads may span layout changes.
+
+autoSize() contains the player within its caller container using valid video dimensions, writes player percentage width/height and emits autoSize({width, height}). autoHeight() keeps container clientWidth, writes a proportional pixel height on the container and emits autoHeight(height). Both return undefined and support extracted calls. Missing finite positive dimensions or hidden containers produce no invalid sizing writes/events; call again when visible or ready. These methods do not install a persistent automatic observer.
+
+aspectRatio computes media width, height and margin from a ratio string and stores data-aspect-ratio. default or falsy input clears those three inline properties and the dataset. Valid ratios use current player dimensions; malformed/nonpositive ratios avoid invalid geometry but still retain the input dataset, notice and event, so the getter is not validation. flip uses data-flip; normal or falsy input clears it, and built-in CSS handles horizontal/vertical. Other strings can be retained and emitted without having a corresponding transform. Neither property changes source pixels. Both show the notice before synchronously emitting their named event, including repeated values.
+
+poster reads/writes the poster layer's inline background-image, not video.poster. It neither loads a new media source nor automatically shows the poster again. Reading depends on the browser's quoted URL serialization and returns an empty string if parsing fails; it does not read backgrounds supplied by external stylesheets.
+
+### Capture results and ownership {#capture-contract}
+
+getDataURL() and getBlobUrl() synchronously draw the current media frame into an internal canvas at call time, then return Promises. The first resolves to a PNG data URL; the second encodes asynchronously and creates a Blob URL. Dimensions come from media videoWidth/videoHeight. Capture contains the media frame, not player controls, CSS flip/aspect effects or DOM subtitles. Missing decoded frames, unavailable canvas or cross-origin media tainting can fail; successful playback does not imply readable pixels, and the core does not bypass CORS.
+
+The getBlobUrl caller must use URL.revokeObjectURL when finished. Destroying the player does not revoke that URL or invalidate an encoding result already in progress. Data URLs need no revocation. Encoding failures reject, and a still-current instance/source shows an error notice. Do not treat an empty image from unavailable dimensions as a successful capture.
+
+screenshot(name?) waits for getDataURL, requests a download, emits screenshot(dataURL) and returns the same string. The filename uses the supplied name or artplayer_ plus formatted time, and **always appends .png**: chosen.png becomes chosen.png.png. Actual download storage remains browser-controlled. Source replacement or destruction during the wait suppresses obsolete download/event effects, but the Promise can still return the captured frame. All three methods support extracted calls; handle rejection.
+
+### Sprite previews and subtitle offset {#preview-offset-contract}
+
+The thumbnails getter returns the actual option.thumbnails object. Its setter replaces the whole object and resets image loading only while the instance is open, url is truthy and the player is not live. It does not merge settings; an empty URL is not a clearing command. Loading/rendering starts only with an existing control and hover, or an event-bearing played update on mobile. Replacing configuration/control or destroying releases internal scaled Blob URLs and prevents stale writes. Failures log warnings and a later hover can retry.
+
+number is the total cell count and column is the column count, with zero-based rows/cells. Cell width prefers width times scale, otherwise loaded image width divided by column; height prefers height times scale, otherwise uses the video ratio. Provide a valid positive grid and usable video dimensions. Preview updates require progress strictly between the endpoints; placement is constrained by progress-bar width. scale uses canvas resampling, so a cross-origin image being displayable does not prove it can be scaled. Configuration does not generate a sprite; use the relevant tool or plugin.
+
+subtitleOffset writes only when a track and cues exist. Stored offset is clamped to [-10, 10]; each write recalculates from retained original cue times, then clamps cue boundaries to [0, duration], rather than accumulating offsets. Paused subtitles also refresh. The notice and subtitleOffset event carry the original input; the getter returns the stored clamped offset. A new track supplies its own state, and missing cues do not store an offset for future loading. The remaining reset declaration refers to the earlier [lifecycle contract](#instance-cleanup), not restoration of these display settings.
+
+```ts
+import Artplayer from 'artplayer/runtime';
+
+const art = new Artplayer({ container: '#player' });
+const fullscreen: boolean | undefined = art.fullscreen;
+const pip: Element | null | boolean = art.pip;
+const viewportRect: DOMRect = art.rect;
+const pagePosition = { x: art.x, y: art.y };
+function showMini(): void { art.mini = true; }
+function closeModes(): void { art.state = 'standard'; }
+async function inspectFrame(): Promise<number> {
+    const url = await art.getBlobUrl();
+    try {
+        return (await (await fetch(url)).blob()).size;
+    } finally {
+        URL.revokeObjectURL(url);
+    }
+}
+void [fullscreen, pip, viewportRect, pagePosition, showMini, closeModes, inspectFrame];
+```
+
+
 ## `play`
 
 -   Type: `Function`
@@ -3465,7 +3529,9 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     console.info(art.state); // Default is 'standard'
-    art.state = 'mini';
+    art.mini = true;
+    console.info(art.state); // mini
+    art.state = 'standard';
 });
 ```
 
