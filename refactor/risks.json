@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "task": "BASE-07",
   "sourceCommit": "e01f39ff",
-  "updatedAt": "2026-09-16T02:27:53.896Z",
+  "updatedAt": "2026-09-16T03:53:29.998Z",
   "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
   "items": [
     {
@@ -6886,6 +6886,23 @@
         "refactor/baselines/danmuku-start-validation.json"
       ],
       "resolutionRationale": "The first sampling anchor was created only inside RAF. Reproduced in controlled first-frame and time-zero tests plus real Chromium/WebKit start-listener CPU stalls. Private playback-start anchoring preserves public queries and invalidation. Final source/installed three-engine timing, both installed runtime formats, scheduler regression and actual model load pass."
+    },
+    {
+      "id": "MB-SYNC-01",
+      "title": "Installed MediaBunny hour soak exceeds the original frame/audio-clock tolerance in both Chromium core combinations",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-MB-09"
+      ],
+      "evidence": [
+        "refactor/baselines/mb-hour-av-breach.json",
+        "refactor/changes/2026-09-16-PKG-MB-09-av-breach.md",
+        "test/soak/mediabunny.spec.js"
+      ],
+      "compatibleResolution": "Keep the running test and original 250ms gate. Distinguish delayed presentation, catch-up draws, sustained clock drift and host scheduling using bounded controls after preserving the terminal result; fix a reproduced project defect without changing the public dropLateFrames default.",
+      "closureCriteria": "Retain the first failing samples and terminal report; establish cause with appropriate historical/native controls, fix any confirmed project regression, and complete unchanged duration/cleanup requirements with a justified clock/presentation interpretation. A later passing run alone does not close this risk.",
+      "workspaceState": "Running-at-capture, not a final report: around 1767 seconds both Chromium cases using the same candidate proxy reach approximately 549ms/570ms max delta; visibility, advancing media/draws, node bounds and lack of media errors remain intact. Core-specific, historical-proxy and OS-cause claims are unproven."
     }
   ]
 }

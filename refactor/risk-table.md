@@ -291,3 +291,4 @@
 | SITE-EDITOR-VAST-01 | resolved / 已复现 | Monaco browser consumer still assumes the workspace VAST namespace after the approved npm-root restoration | SITE-EDITOR-VAST-01 |
 | CI-JASSUB-SOURCE-01 | resolved / 已复现 | Default native JASSUB source runs select only the published plugin and omit the current source | CI-JASSUB-SOURCE-01 |
 | DANMUKU-INSTALLED-GAP-01 | resolved / 已复现 | Windows WebKit installed Danmuku candidate misses two rows after a native main-thread gap | PKG-DANMUKU-08, PKG-DANMUKU-START-01 |
+| MB-SYNC-01 | open / 已复现 | Installed MediaBunny hour soak exceeds the original frame/audio-clock tolerance in both Chromium core combinations | PKG-MB-09 |

@@ -4024,7 +4024,9 @@
         "baselines/mb-sustained-validation.json",
         "baselines/mb-sustained-media.json",
         "changes/2026-09-16-PKG-MB-09-hour-soak.md",
-        "baselines/mb-hour-soak-start.json"
+        "baselines/mb-hour-soak-start.json",
+        "changes/2026-09-16-PKG-MB-09-av-breach.md",
+        "baselines/mb-hour-av-breach.json"
       ]
     },
     {
