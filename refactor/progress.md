@@ -1,5 +1,15 @@
 # 进度与证据
 
+## CI-NPM-03 只读 registry 与部分发布恢复判断
+
+新增 `yarn release:registry`，在真实候选验证前后夹住只读 registry 查询，区分缺失、
+同摘要已就位、tag-only 和冲突；始终不授权或执行发布。发布工具47/47、严格类型、
+全仓/测试lint和工具链通过，真实GET核对5.4.0冻结摘要与6.0.0缺失状态。
+[实现与限制](changes/2026-09-16-CI-NPM-03-registry.md)、
+[证据](baselines/npm-registry-validation.json)。CI-03保留原门槛并新增此依赖。
+共享脚本变动使旧候选输入指纹失效，后续共享工程稳定后重新生成，不沿用过期准入。
+226 done / 24 doing / 36 todo；不开始正式复盘，不推送或发布。
+
 ## PKG-CAST-05 实际 Chrome / 远端 SDK 检查点
 
 Chrome连接恢复，使用152.0.7977.84实际打开8082示例。工作区5.4.1和重构6.0.0

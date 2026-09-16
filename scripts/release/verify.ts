@@ -6,7 +6,7 @@ import path from 'node:path'
 import { buildLedger, localFile } from '../../refactor/scripts/release-ledger.mjs'
 import { bundleManifest, checkBatch } from './bundle.ts'
 
-interface BundleExpectation {
+export interface BundleExpectation {
   sourceCommit: string
   manifestSha256: string
   names: string[]

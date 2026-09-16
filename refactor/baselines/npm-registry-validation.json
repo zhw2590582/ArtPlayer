@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "task": "CI-NPM-03",
+  "startedFrom": "783d1e3fd49ba56ed0ea38c29d385de1ae1adde0",
+  "verifiedAt": "2026-09-16T03:05:28.815Z",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "publicationAuthorized": false,
+  "tests": {
+    "tests": 47,
+    "pass": 47,
+    "fail": 0,
+    "skipped": 0,
+    "newCaseGroups": 11
+  },
+  "checks": {
+    "releaseTypes": 0,
+    "rootReadOnlyLint": 0,
+    "testLint": 0,
+    "strictToolchain": 0
+  },
+  "logs": [
+    {
+      "path": "refactor/.cache/ci-npm03-tests-final.log",
+      "sha256": "ec2100090c5047221445ad4cd4c9cbada68007ee8644cfa9c547cfdeb6071d76"
+    },
+    {
+      "path": "refactor/.cache/ci-npm03-types.log",
+      "sha256": "f7fa41d4b38f0aee7465d0bbd9a6dc4d897d68b614eca31e75ffe6c02f013238"
+    },
+    {
+      "path": "refactor/.cache/ci-npm03-lint-full.log",
+      "sha256": "0f8299250746d55589153f2637319b27269f72d4ca307ad02d5ac4977e8a3797"
+    },
+    {
+      "path": "refactor/.cache/ci-npm03-test-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "refactor/.cache/ci-npm03-toolchain.log",
+      "sha256": "2ed5576669d9dfbe0cbfe752df3e28c268bc885b9c5626430044985a45e1bdc5"
+    }
+  ],
+  "live": {
+    "scope": "Transport and pure classification only; no real bundle gate was waived or passed.",
+    "historical": {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+      "tag": "latest",
+      "observedAt": "2026-09-16T03:02:07.060Z",
+      "responseSha256": "560fa27d689284c6e1743835b765e790613b0b11d7255ea0390eb0017a7e9748",
+      "httpStatus": 200,
+      "state": "already-present",
+      "currentTag": "5.4.0",
+      "reason": "Registry SHA-512 matches; do not republish. Tag changes require separate authorization."
+    },
+    "target": {
+      "name": "artplayer",
+      "version": "6.0.0",
+      "integrity": "sha512-3HMgVqBMQzTDNJtey+EPO8UlU9+b22SbFgwCFmwXHg/1gAg7iMREaeGi0BtZrYzTAc9B7uZRtP75jBjlDa6OfA==",
+      "tag": "next",
+      "observedAt": "2026-09-16T03:02:07.060Z",
+      "responseSha256": "560fa27d689284c6e1743835b765e790613b0b11d7255ea0390eb0017a7e9748",
+      "httpStatus": 200,
+      "state": "not-observed",
+      "currentTag": null,
+      "reason": "Version not found; absence does not prove it can be published."
+    },
+    "registryTarballDownloaded": false,
+    "response": {
+      "path": "refactor/.cache/ci-npm03-live-observation.json",
+      "sha256": "d2f5fdc6ccc30ebddb4b3cac6b4fde15eb0afbd82d0ead8ecabb2d09d7dc7566"
+    }
+  },
+  "limitations": [
+    "No publishing, tag mutation, remote workflow, registry tarball download, or authorization test.",
+    "Synthetic eligible ledgers test orchestration; actual package gates remain open.",
+    "Shared tool changes invalidate existing candidate input fingerprints."
+  ],
+  "sources": [
+    "https://docs.npmjs.com/cli/v11/commands/npm-publish/",
+    "https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md"
+  ]
+}

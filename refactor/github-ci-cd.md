@@ -60,6 +60,13 @@ CI-NPM-01 从 CI-03 拆出本地精确候选交付准备，供后续 artifact �
 验收全部保留。当前包仍被准入门槛阻止，详见[记录](changes/2026-09-15-CI-NPM-01-bundle.md)
 及[实现维护](../scripts/release/README.md)。
 
+CI-NPM-03补齐只读 registry 预检：`yarn release:registry`沿用下载校验的五个必填参数，
+先后两次校验候选与实时台账，中间读取固定公共 registry。逐包区分未观察到版本、
+相同摘要且 tag 已就位、仅需 tag 调整、摘要/撤销历史冲突；网络和格式错误不算可用。
+缺失版本不能证明可发布，同摘要也只是 registry 元数据匹配，不是远端 tarball 下载验证。
+命令不发布、不调整 tag、不授权、不跳过原准入；CI-03仍负责远端信任、权限、执行和读回。
+用法与恢复边界见[scripts/release](../scripts/release/README.md)。
+
 CI-NPM-02补齐下载后的内容校验：`yarn release:verify-bundle`要求独立的源码SHA、
 manifest摘要和明确包批次/tag，重算当前仓库台账并比对已登记tarball，不能由
 下载报告自证准入。它不读取GitHub/npm，不证明workflow/run/artifact来源或版本

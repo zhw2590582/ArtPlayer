@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 285 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 286 项，范围 22 个包及工作区/示例。
 
-状态：todo 36 / doing 24 / blocked 0 / done 225 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 36 / doing 24 / blocked 0 / done 226 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -96,7 +96,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | CI-01 | workspace<br>增强兼容矩阵、并发缓存与 CI 报告 | DOC-10, ENG-08, ENG-09, ENG-10 | OS/Node/TS/浏览器与影响范围矩阵、缓存、超时、汇总检查和 artifact 报告 | 固定安装、失败/取消不误报、核心影响全生态；检查只读，失败证据可追溯 | H | doing |
 | CI-02 | workspace<br>分离并改进 GitHub Pages 部署 | DOC-10, ENG-02, SITE-03 | Pages artifact 部署配置、旧路径/域名核对、预检和迁移恢复指南 | 部署只取受信任已验证产物；本地实现可验收，远端 source/环境和实际部署状态单独登记 | H | done |
-| CI-03 | workspace<br>建立 npm 分包候选与发布工作流 | DOC-10, CI-01, REL-08, REL-04, CI-NPM-01, CI-NPM-02 | 候选准备、精确 artifact 发布配置、OIDC 评估、版本/tag/registry 预检和部分失败恢复 | 不自动发布；明确逐包信任前置和 dry run 限制，不能重建未验证内容或重发冲突版本；按版本清单校验各包下一 major 和预发布/正式 tag，保留旧核心支持范围 | H | todo |
+| CI-03 | workspace<br>建立 npm 分包候选与发布工作流 | DOC-10, CI-01, REL-08, REL-04, CI-NPM-01, CI-NPM-02, CI-NPM-03 | 候选准备、精确 artifact 发布配置、OIDC 评估、版本/tag/registry 预检和部分失败恢复 | 不自动发布；明确逐包信任前置和 dry run 限制，不能重建未验证内容或重发冲突版本；按版本清单校验各包下一 major 和预发布/正式 tag，保留旧核心支持范围 | H | todo |
 | CI-04 | workspace<br>验收 GitHub 流水线与远端发布准入 | CI-01, CI-02, CI-03, SITE-06, CI-BROWSER-01, CI-TYPES-01, CI-TYPES-02, SITE-EDITOR-VAST-01, CI-JASSUB-SOURCE-01 | 静态/干净环境检查、真实 PR 正反例、候选 dry run、required checks/Pages/npm 必需配置状态及运维指南 | 必要 Actions 证据和远端配置核对齐全；缺失保持未完成，真实 publish/deploy 仍在授权发布步骤执行 | H | todo |
 | CI-BROWSER-01 | workspace<br>分离源码与已安装产物浏览器验证范围 | ENG-05, ENG-07 | 完整源码入口、明确已安装包子集、分开的报告目录与失败传播 | 混用输入旧红新绿；源码默认保留所有spec，已安装入口严格校验四包来源；两类报告都保留，源码失败不能误报全绿；不代表完整远端或全包验收 | M | done |
 | CI-NPM-01 | workspace<br>从已验收候选准备不可重建的npm交付包 | DOC-10, REL-08, REL-04 | 复用严格准入台账、复制精确tarball、绑定源码/工具链/证据/摘要的本地准备命令及反向测试；供CI-03后续受信任artifact工作流使用 | 缺候选或任一准入缺口即拒绝；不构建、不安装、不联网或发布；阻止路径越界、脏源码、复制期间漂移及半成品冒充完成，声明远端信任/OIDC/registry预检仍未实现 | H | done |
@@ -104,6 +104,7 @@
 | CI-TYPES-02 | workspace<br>将全部库包的独立安装类型验证接入CI | CI-TYPES-01, ENG-07 | 21库包完整检查清单、实际构建和隔离安装测试调度、失败证据汇总及必需CI门槛 | 不得漏包或用通用导入替代历史类型契约；准备失败不消费旧产物；记录每包实际结果并传播失败，保留运行时/设备/未决兼容门槛 | M | done |
 | CI-JASSUB-SOURCE-01 | workspace, artplayer-plugin-jassub<br>将当前源码纳入 JASSUB 原生字幕默认验证 | CI-BROWSER-01, PKG-JASSUB-07 | 源码与发布包原生字幕配对、来源标识及独立销毁验证，真实 CLI 收集回归和三引擎证据 | 默认各三核心覆盖当前源码和发布包，明确显式诊断与安装映射边界；候选九项真实 WASM 绘制和清理通过；保留旧版失败，不冒充全量或真机验收 | M | done |
 | CI-NPM-02 | workspace<br>校验下载候选与实时发布台账 | CI-NPM-01, REL-09 | 独立摘要/源码/包批次输入、完整下载文件核验、实时台账重算和篡改/失效测试；供CI-03复用 | 不能以下载报告自证准入，不重建或发布；拒绝摘要/候选/版本/路径/台账漂移，明确远端来源和registry仍待核实 | H | done |
+| CI-NPM-03 | workspace<br>建立只读 registry 预检和部分发布恢复判断 | CI-NPM-02, REL-09 | 绑定已验证 bundle 的 registry 元数据预检、摘要冲突与 tag-only 判断、网络/漂移失败测试和维护文档 | 不绕过实时发布门槛，不把缺失版本当作可发布授权；部分批次逐包记录、失败关闭、查询后复核内容；实际发布与远端工作流仍由 CI-03 验收 | H | done |
 
 ## 2.1 早期试点
 
@@ -752,4 +753,5 @@
 - DOC-REVIEW-01: [记录](changes/2026-09-15-DOC-REVIEW-01-user-guidance.md) [记录](release-reviews.md) [记录](ai-workflow.md)
 - PKG-DANMUKU-START-01: [记录](baselines/ci-installed-webkit-validation.json) [记录](changes/2026-09-16-PKG-DANMUKU-START-01-first-sample.md) [记录](baselines/danmuku-start-validation.json)
 - CI-NPM-02: [记录](changes/2026-09-16-CI-NPM-02-verify-bundle.md) [记录](baselines/npm-bundle-verification.json)
+- CI-NPM-03: [记录](changes/2026-09-16-CI-NPM-03-registry.md) [记录](baselines/npm-registry-validation.json)
 - PKG-AUDIO-BUFFER-01: [记录](changes/2026-09-16-PKG-AUDIO-BUFFER-01-order.md) [记录](baselines/audio-buffer-order-validation.json)

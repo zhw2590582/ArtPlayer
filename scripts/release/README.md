@@ -1,5 +1,46 @@
 # Preparing exact npm candidate files
 
+## Read-only registry inspection
+
+`yarn release:registry` accepts the same five required arguments as
+`release:verify-bundle` below. It first runs that full verifier against a clean
+repository and fresh gates, reads public npm metadata, then runs the verifier
+again. It cannot inspect an unready bundle by trusting its downloaded report.
+No package is built, published or retagged; no new dependency is required.
+
+`registry.ts` owns bounded public GET requests (15 seconds including response
+body, 10 MiB maximum, redirects disabled) and pure per-package classification.
+`registry-check.ts` binds those observations to the verifier before and after
+network activity. `check-release-registry.mjs` owns CLI inputs and exit status.
+The registry origin is fixed and no npmrc or authentication token is loaded.
+
+| State | Meaning and eventual recovery action |
+| --- | --- |
+| `not-observed` | Package/version was not found; do not claim the name/version is publishable. A removed historical version may be permanently unavailable. |
+| `already-present` | Registry SHA-512 equals the verified candidate and selected tag already points there. Do not republish. |
+| `tag-change-required` | SHA-512 matches, but the tag differs or is missing. Keep the tarball; any tag change needs separately authorized promotion/recovery. This can include moving a newer tag backwards. |
+| `conflict` | Different/missing integrity or retained unpublish history. Stop the batch; never overwrite, unpublish or invent a replacement version. |
+
+The output preserves each package decision for a partially completed batch,
+timestamps and response digests. Conflicts exit 1 after printing the report;
+HTTP/schema/transport/local-verification failures exit 1 without a successful
+report. A zero exit means observations were collected without known conflicts,
+not release approval. Every report has `publicationAuthorized: false` and
+`workflowProvenanceVerified: false`. Registry tarballs are not downloaded by
+this metadata check. Registry state can change immediately; CI-03 still needs
+trusted workflow/artifact provenance, permission checks, exact-byte publication,
+explicit tag control and readback at authorized use time. Never execute a saved
+report as a command list or let it waive current release gates.
+
+`release-registry.test.mjs` covers partial batches, conflicts, unpublish markers,
+malformed data, bounded transport, stale local gates/content and CLI rejection.
+Its injected complete ledgers are synthetic, not acceptance for real packages.
+It runs through `test:release-bundle` and the existing `test:baseline` glob.
+The new TypeScript modules are included in `typecheck:release` and root lint.
+
+Sources checked 2026-09-16: [npm publish](https://docs.npmjs.com/cli/v11/commands/npm-publish/)
+and [npm registry API](https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md).
+
 Run from the repository root with the pinned Node and Yarn:
 
 ```sh

@@ -836,7 +836,8 @@
         "REL-08",
         "REL-04",
         "CI-NPM-01",
-        "CI-NPM-02"
+        "CI-NPM-02",
+        "CI-NPM-03"
       ],
       "status": "todo",
       "risk": "H",
@@ -6243,6 +6244,26 @@
       "evidence": [
         "changes/2026-09-16-CI-NPM-02-verify-bundle.md",
         "baselines/npm-bundle-verification.json"
+      ]
+    },
+    {
+      "id": "CI-NPM-03",
+      "phase": "2.2 GitHub CI/CD",
+      "title": "建立只读 registry 预检和部分发布恢复判断",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "CI-NPM-02",
+        "REL-09"
+      ],
+      "status": "done",
+      "risk": "H",
+      "deliverable": "绑定已验证 bundle 的 registry 元数据预检、摘要冲突与 tag-only 判断、网络/漂移失败测试和维护文档",
+      "acceptance": "不绕过实时发布门槛，不把缺失版本当作可发布授权；部分批次逐包记录、失败关闭、查询后复核内容；实际发布与远端工作流仍由 CI-03 验收",
+      "evidence": [
+        "changes/2026-09-16-CI-NPM-03-registry.md",
+        "baselines/npm-registry-validation.json"
       ]
     },
     {

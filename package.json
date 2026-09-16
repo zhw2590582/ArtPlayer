@@ -178,11 +178,12 @@
     "verify:monaco-unicode": "node scripts/site-vendor/monaco/reproduce-unicode.ts",
     "release:bundle": "yarn check:toolchain --strict && node scripts/prepare-release.mjs",
     "typecheck:release": "node node_modules/typescript/bin/tsc -p scripts/tsconfig.release.json --noEmit",
-    "test:release-bundle": "node --test refactor/scripts/release-bundle.test.mjs refactor/scripts/release-verify.test.mjs",
+    "test:release-bundle": "node --test refactor/scripts/release-bundle.test.mjs refactor/scripts/release-verify.test.mjs refactor/scripts/release-registry.test.mjs",
     "test:ecosystem-types": "node scripts/consumers/ecosystem.ts",
     "check:versions": "node refactor/scripts/version-plan.mjs --prepared",
     "release:verify-bundle": "yarn check:toolchain --strict && node scripts/verify-release.mjs",
-    "check:site-links": "node scripts/check-site-links.mjs"
+    "check:site-links": "node scripts/check-site-links.mjs",
+    "release:registry": "yarn check:toolchain --strict && node scripts/check-release-registry.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {
