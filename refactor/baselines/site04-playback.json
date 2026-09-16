@@ -1,0 +1,1461 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "doing",
+  "sourceBefore": "e8b48cbaed8fd0f8a4827ba6490bc86c7cc8b889",
+  "capturedAt": "2026-09-16T00:58:10.455Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "static": [
+      {
+        "language": "zh",
+        "name": "property",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+          "sha256": "ab4ed95dd0480e2530885d36de0e1c3e5b3996a4a1d072b99f8b7b0c1a2cd85c"
+        },
+        "html": {
+          "path": "docs/document/advanced/property.html",
+          "sha256": "b72c3aea3774e6c0663f05b735769be30966582fd8c0164b4a4c996e00822908"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-playback/zh-property-0.mts",
+            "sha256": "712c8b701a127cebb0732b10800acce3328c043c7bdf4972dca28d44d52a902b"
+          },
+          {
+            "path": "refactor/.cache/site04-playback/zh-property-1.mts",
+            "sha256": "622d79a44d82ee51d9118e9cb395256a0b4a682e76c52c808d38ea8dff3f544e"
+          },
+          {
+            "path": "refactor/.cache/site04-playback/zh-property-2.mts",
+            "sha256": "8b2b575718d0685e4b0ff3fdaf6d36901a17946d4c8b5686ec9b73cfbd3bfba7"
+          },
+          {
+            "path": "refactor/.cache/site04-playback/zh-property-3.mts",
+            "sha256": "b1ebc352de566ade8c86051cdf61ff4aa8aec836bf4f650f94c1f42a6a0eb079"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "advanced/property.md:137",
+            "sha256": "3cabe61431f355e4586233ea74fee21d731f7d4a971c400918a3f0b488e2c4ff"
+          },
+          {
+            "id": "advanced/property.md:157",
+            "sha256": "70a8c691c60351316a3f513143cfead37d939ee0c484690ea4391077a2c8743a"
+          },
+          {
+            "id": "advanced/property.md:181",
+            "sha256": "c3f3c00df8c7f5b58907b857a8d011f8750b4696ae43c7ff56982d64e0df8092"
+          },
+          {
+            "id": "advanced/property.md:206",
+            "sha256": "4387bb6edc35ce5f1f1a0d23bef3360501b85cb1c788a687d70fba58c542c558"
+          },
+          {
+            "id": "advanced/property.md:227",
+            "sha256": "9f90410a980c753e91b8b96c18474f89725046f7314ef2e40e6b20137606d15c"
+          },
+          {
+            "id": "advanced/property.md:248",
+            "sha256": "b59bed172f2e7cbeb3cca9a91962a673435c05435d6fb46e286802d5bdbb716b"
+          },
+          {
+            "id": "advanced/property.md:268",
+            "sha256": "0262ac7cab0b29f6291a0e4d25748126cc5c804736b5c5c56dd8921a92bf57a1"
+          },
+          {
+            "id": "advanced/property.md:288",
+            "sha256": "f08b81f8657b6319f4fdca09bb4013ed65b320b7fd6922e2fced903cb429dcf2"
+          },
+          {
+            "id": "advanced/property.md:312",
+            "sha256": "cd33637bc031f7337c104fea1b122b5e07bced68103efa0f0a1d049622031a3b"
+          },
+          {
+            "id": "advanced/property.md:334",
+            "sha256": "f478310b4a2186229b1592d6c1454bdedf40a837900a7a17e615c3a80cae6634"
+          },
+          {
+            "id": "advanced/property.md:354",
+            "sha256": "95a5bab0c95a3e6af3beaafd354d5ad8582e3c2cc2499cde4520776ce3e19eaa"
+          },
+          {
+            "id": "advanced/property.md:377",
+            "sha256": "87fc8c2bbc61c4b1ba6c5158dbe8dd23db8054d8f5a561af7f4888f643c9b7c2"
+          },
+          {
+            "id": "advanced/property.md:406",
+            "sha256": "bab7649d940c8b0dfea0be40c54be2985344672301f8337565a402b8a227422f"
+          },
+          {
+            "id": "advanced/property.md:429",
+            "sha256": "5667932068586cec17e5dc327233300b771b609501e3032e3bce1a57e1f98387"
+          },
+          {
+            "id": "advanced/property.md:451",
+            "sha256": "25793429ff3f206fd755f453b104f5584a7be7a3c837eae19ce7a3d6a9402be5"
+          },
+          {
+            "id": "advanced/property.md:472",
+            "sha256": "aa0e384baec035be0983ae24e0d46d7d1855ecfcd6df3fe0517ac2773be3b175"
+          },
+          {
+            "id": "advanced/property.md:497",
+            "sha256": "21bcfd32284f83b2666e6f1800ee9a5bd4882cc86ae53e61784d96da62edfa3c"
+          },
+          {
+            "id": "advanced/property.md:516",
+            "sha256": "9fee33590d1f16ca35860d44569130c1ef1f8fb16b6d2a237156bc780b35845a"
+          },
+          {
+            "id": "advanced/property.md:536",
+            "sha256": "31f1d341bcf7558cd3fed8d9c7885d9baa9bfe447d8598593f07553ff9757000"
+          },
+          {
+            "id": "advanced/property.md:557",
+            "sha256": "b0deffd95e61be6f3bad2a7804c555d7c99a0924e1acfb636aeb36a38725558a"
+          },
+          {
+            "id": "advanced/property.md:588",
+            "sha256": "abbb497430d6655dda16940e79e7d443db4cc2ab1c83ffe19d19dd13ed246261"
+          },
+          {
+            "id": "advanced/property.md:613",
+            "sha256": "ae7f551a33957fa38ec9c2716ed6f50d8710d90ec90a2a9b7b75120dfb3824a6"
+          },
+          {
+            "id": "advanced/property.md:644",
+            "sha256": "34cf6c5eca225e8e0000dddcf617764705d013b2d2776b3b2becba0a0b9dd59b"
+          },
+          {
+            "id": "advanced/property.md:667",
+            "sha256": "dfe94368bceb32fb3e505e0ab1cc79ad7e2a049a9d9abb5153e07ff7b48cb33b"
+          },
+          {
+            "id": "advanced/property.md:687",
+            "sha256": "4553ef81f777cc2039746903872c0af42e995f2bad32c142642c0241c8472c61"
+          },
+          {
+            "id": "advanced/property.md:708",
+            "sha256": "bde03335b221e6cbf53bdf827b1271cfb27b429418724187b2447853db30e9f7"
+          },
+          {
+            "id": "advanced/property.md:728",
+            "sha256": "89c7317aae3a7e512ff59cb3c09ec8fe4ad7511a8d9578e831be478cada01ef3"
+          },
+          {
+            "id": "advanced/property.md:747",
+            "sha256": "097fd3bec57f94ed2981ad42d03a8b5684a3988cf5d421f21579cdd4e9949f9b"
+          },
+          {
+            "id": "advanced/property.md:775",
+            "sha256": "08d554917e8a8e01a2cd1fd1de9ac2ba31ef096a4d127b4b6dbfe6fe887178d1"
+          },
+          {
+            "id": "advanced/property.md:795",
+            "sha256": "61369be2387dd04cdbaac10125ffa78c1d4f0d2e44af5919210a7aa4f71fe846"
+          },
+          {
+            "id": "advanced/property.md:817",
+            "sha256": "aa17d4b76b245662060491e5111cdf1a8fda9507a37a2a438c1a8dcdec3ecb4d"
+          },
+          {
+            "id": "advanced/property.md:839",
+            "sha256": "2204ab589ef4a8dd1051f1cf45d792f11f27808dc700c70a7217c97c42de1e34"
+          },
+          {
+            "id": "advanced/property.md:860",
+            "sha256": "33faf743b2342146d2cb3e2123b210c953d0214496a20eec81eb0aba8cbdd563"
+          },
+          {
+            "id": "advanced/property.md:890",
+            "sha256": "c6c4d8e19ca90bc1eac07a712f34170326952ad5362b0a5d08fe0efe9da8ad1f"
+          },
+          {
+            "id": "advanced/property.md:912",
+            "sha256": "c1fdc14f65e682f52ae6e15cb6669f3740881faa4a0b59a502aeed1c3dbfd7a5"
+          },
+          {
+            "id": "advanced/property.md:934",
+            "sha256": "db3e0182d4345db218a6f108ddcb503c67c9bbbde0ab4a6e8a03b2684ce26b9b"
+          },
+          {
+            "id": "advanced/property.md:955",
+            "sha256": "6a015838368689c8acfff86891c14c5a85bf66f6a687bb7129bd8df095f4ba6e"
+          },
+          {
+            "id": "advanced/property.md:979",
+            "sha256": "953763d9e84fff724bf84fb2d6114381fd4ad2c9aa8a77bfd33e1ef86b3d13c4"
+          },
+          {
+            "id": "advanced/property.md:998",
+            "sha256": "e9bdbb3515801506d7ea7653ff2219ffeaf2e8d9868ae23344a0137f6852455b"
+          },
+          {
+            "id": "advanced/property.md:1017",
+            "sha256": "32d3569ae3ff5471f6cc93e4abba9c4ad96486197cc285a9c47b7bb8701c813a"
+          },
+          {
+            "id": "advanced/property.md:1036",
+            "sha256": "bd49f48474c50b608624abd9167fe9f9d7f60c273b997a47828dd901a3445e99"
+          },
+          {
+            "id": "advanced/property.md:1063",
+            "sha256": "a68e1ed899c756ce64bb6432a1b52a7ba192d6669fa899a7f7d24c1407190592"
+          },
+          {
+            "id": "advanced/property.md:1080",
+            "sha256": "da4dde2ee26d5a97655c572a889c11d937e3cd747ae79a2f4aeb3e3d0c84c67f"
+          },
+          {
+            "id": "advanced/property.md:1130",
+            "sha256": "ee9a841efe8763bc601a8b0ab710961f76709c60541c34171f4f4b8b6e0a2953"
+          },
+          {
+            "id": "advanced/property.md:1234",
+            "sha256": "c078cb17235bd6309b69f157683d4cf6b1565b00dab397c1c4f4cafc53e61868"
+          },
+          {
+            "id": "advanced/property.md:1277",
+            "sha256": "490713b798e44c6ffc32e3bec40746b9267da62929be79ceff8ce256046b2c47"
+          },
+          {
+            "id": "advanced/property.md:1301",
+            "sha256": "9096ab3bba28746c56a44ca491a31957fd18d52649afb122970ed43774a1e689"
+          }
+        ],
+        "localLinks": [
+          "/document/advanced/property.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/advanced/property.html#%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7",
+          "/document/advanced/property.html#instance-lifecycle",
+          "/document/advanced/property.html#instance-state",
+          "/document/advanced/property.html#instance-cleanup",
+          "/document/advanced/property.html#playback-contract",
+          "/document/advanced/property.html#playback-results",
+          "/document/advanced/property.html#playback-values",
+          "/document/advanced/property.html#source-transitions",
+          "/document/advanced/property.html#quality-contract",
+          "/document/advanced/property.html#play",
+          "/document/advanced/property.html#pause",
+          "/document/advanced/property.html#toggle",
+          "/document/advanced/property.html#destroy",
+          "/document/advanced/property.html#reset",
+          "/document/advanced/property.html#seek",
+          "/document/advanced/property.html#forward",
+          "/document/advanced/property.html#backward",
+          "/document/advanced/property.html#volume",
+          "/document/advanced/property.html#url",
+          "/document/advanced/property.html#switch",
+          "/document/advanced/property.html#switchurl",
+          "/document/advanced/property.html#switchquality",
+          "/document/advanced/property.html#muted",
+          "/document/advanced/property.html#currenttime",
+          "/document/advanced/property.html#duration",
+          "/document/advanced/property.html#screenshot",
+          "/document/advanced/property.html#getdataurl",
+          "/document/advanced/property.html#getbloburl",
+          "/document/advanced/property.html#fullscreen",
+          "/document/advanced/property.html#fullscreenweb",
+          "/document/advanced/property.html#pip",
+          "/document/advanced/property.html#poster",
+          "/document/advanced/property.html#mini",
+          "/document/advanced/property.html#playing",
+          "/document/advanced/property.html#state",
+          "/document/advanced/property.html#autosize",
+          "/document/advanced/property.html#rect",
+          "/document/advanced/property.html#bottom-top-left-right-x-y-width-height",
+          "/document/advanced/property.html#flip",
+          "/document/advanced/property.html#playbackrate",
+          "/document/advanced/property.html#aspectratio",
+          "/document/advanced/property.html#autoheight",
+          "/document/advanced/property.html#attr",
+          "/document/advanced/property.html#type",
+          "/document/advanced/property.html#theme",
+          "/document/advanced/property.html#airplay",
+          "/document/advanced/property.html#loaded",
+          "/document/advanced/property.html#loadedtime",
+          "/document/advanced/property.html#played",
+          "/document/advanced/property.html#proxy",
+          "/document/advanced/property.html#query",
+          "/document/advanced/property.html#video",
+          "/document/advanced/property.html#media-capabilities",
+          "/document/advanced/property.html#cssvar",
+          "/document/advanced/property.html#css-variable-contract",
+          "/document/advanced/property.html#css-variable-defaults",
+          "/document/advanced/property.html#css-variable-modes",
+          "/document/advanced/property.html#quality",
+          "/document/advanced/property.html#thumbnails",
+          "/document/advanced/property.html#subtitleoffset"
+        ]
+      },
+      {
+        "language": "en",
+        "name": "property",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "sha256": "2d4b701f2db288e76291e57fe42fee06e83c88311e75dd9a277fd4051a9eb8df"
+        },
+        "html": {
+          "path": "docs/document/en/advanced/property.html",
+          "sha256": "b033e47695ed9bb30b5b899057586dcfd44732a121e8b060bde3848fe25900a0"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-playback/en-property-0.mts",
+            "sha256": "712c8b701a127cebb0732b10800acce3328c043c7bdf4972dca28d44d52a902b"
+          },
+          {
+            "path": "refactor/.cache/site04-playback/en-property-1.mts",
+            "sha256": "622d79a44d82ee51d9118e9cb395256a0b4a682e76c52c808d38ea8dff3f544e"
+          },
+          {
+            "path": "refactor/.cache/site04-playback/en-property-2.mts",
+            "sha256": "8b2b575718d0685e4b0ff3fdaf6d36901a17946d4c8b5686ec9b73cfbd3bfba7"
+          },
+          {
+            "path": "refactor/.cache/site04-playback/en-property-3.mts",
+            "sha256": "b1ebc352de566ade8c86051cdf61ff4aa8aec836bf4f650f94c1f42a6a0eb079"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "en/advanced/property.md:137",
+            "sha256": "3cabe61431f355e4586233ea74fee21d731f7d4a971c400918a3f0b488e2c4ff"
+          },
+          {
+            "id": "en/advanced/property.md:157",
+            "sha256": "70a8c691c60351316a3f513143cfead37d939ee0c484690ea4391077a2c8743a"
+          },
+          {
+            "id": "en/advanced/property.md:181",
+            "sha256": "c3f3c00df8c7f5b58907b857a8d011f8750b4696ae43c7ff56982d64e0df8092"
+          },
+          {
+            "id": "en/advanced/property.md:206",
+            "sha256": "4387bb6edc35ce5f1f1a0d23bef3360501b85cb1c788a687d70fba58c542c558"
+          },
+          {
+            "id": "en/advanced/property.md:227",
+            "sha256": "4632f6c855acb2635a2a8ab7b3730e84bafd57bd298a9afc3f0cad79eecd639b"
+          },
+          {
+            "id": "en/advanced/property.md:248",
+            "sha256": "b59bed172f2e7cbeb3cca9a91962a673435c05435d6fb46e286802d5bdbb716b"
+          },
+          {
+            "id": "en/advanced/property.md:268",
+            "sha256": "0262ac7cab0b29f6291a0e4d25748126cc5c804736b5c5c56dd8921a92bf57a1"
+          },
+          {
+            "id": "en/advanced/property.md:288",
+            "sha256": "f08b81f8657b6319f4fdca09bb4013ed65b320b7fd6922e2fced903cb429dcf2"
+          },
+          {
+            "id": "en/advanced/property.md:312",
+            "sha256": "cd33637bc031f7337c104fea1b122b5e07bced68103efa0f0a1d049622031a3b"
+          },
+          {
+            "id": "en/advanced/property.md:334",
+            "sha256": "f478310b4a2186229b1592d6c1454bdedf40a837900a7a17e615c3a80cae6634"
+          },
+          {
+            "id": "en/advanced/property.md:354",
+            "sha256": "95a5bab0c95a3e6af3beaafd354d5ad8582e3c2cc2499cde4520776ce3e19eaa"
+          },
+          {
+            "id": "en/advanced/property.md:377",
+            "sha256": "87fc8c2bbc61c4b1ba6c5158dbe8dd23db8054d8f5a561af7f4888f643c9b7c2"
+          },
+          {
+            "id": "en/advanced/property.md:407",
+            "sha256": "bab7649d940c8b0dfea0be40c54be2985344672301f8337565a402b8a227422f"
+          },
+          {
+            "id": "en/advanced/property.md:430",
+            "sha256": "5667932068586cec17e5dc327233300b771b609501e3032e3bce1a57e1f98387"
+          },
+          {
+            "id": "en/advanced/property.md:452",
+            "sha256": "25793429ff3f206fd755f453b104f5584a7be7a3c837eae19ce7a3d6a9402be5"
+          },
+          {
+            "id": "en/advanced/property.md:473",
+            "sha256": "aa0e384baec035be0983ae24e0d46d7d1855ecfcd6df3fe0517ac2773be3b175"
+          },
+          {
+            "id": "en/advanced/property.md:498",
+            "sha256": "21bcfd32284f83b2666e6f1800ee9a5bd4882cc86ae53e61784d96da62edfa3c"
+          },
+          {
+            "id": "en/advanced/property.md:517",
+            "sha256": "9fee33590d1f16ca35860d44569130c1ef1f8fb16b6d2a237156bc780b35845a"
+          },
+          {
+            "id": "en/advanced/property.md:537",
+            "sha256": "31f1d341bcf7558cd3fed8d9c7885d9baa9bfe447d8598593f07553ff9757000"
+          },
+          {
+            "id": "en/advanced/property.md:558",
+            "sha256": "b0deffd95e61be6f3bad2a7804c555d7c99a0924e1acfb636aeb36a38725558a"
+          },
+          {
+            "id": "en/advanced/property.md:589",
+            "sha256": "abbb497430d6655dda16940e79e7d443db4cc2ab1c83ffe19d19dd13ed246261"
+          },
+          {
+            "id": "en/advanced/property.md:614",
+            "sha256": "ae7f551a33957fa38ec9c2716ed6f50d8710d90ec90a2a9b7b75120dfb3824a6"
+          },
+          {
+            "id": "en/advanced/property.md:645",
+            "sha256": "34cf6c5eca225e8e0000dddcf617764705d013b2d2776b3b2becba0a0b9dd59b"
+          },
+          {
+            "id": "en/advanced/property.md:668",
+            "sha256": "dfe94368bceb32fb3e505e0ab1cc79ad7e2a049a9d9abb5153e07ff7b48cb33b"
+          },
+          {
+            "id": "en/advanced/property.md:688",
+            "sha256": "4553ef81f777cc2039746903872c0af42e995f2bad32c142642c0241c8472c61"
+          },
+          {
+            "id": "en/advanced/property.md:709",
+            "sha256": "4fd9295f6d5406ea993a81098ce0310ecdb2fc10218f08a08c5a30df6f9f4897"
+          },
+          {
+            "id": "en/advanced/property.md:729",
+            "sha256": "89c7317aae3a7e512ff59cb3c09ec8fe4ad7511a8d9578e831be478cada01ef3"
+          },
+          {
+            "id": "en/advanced/property.md:748",
+            "sha256": "097fd3bec57f94ed2981ad42d03a8b5684a3988cf5d421f21579cdd4e9949f9b"
+          },
+          {
+            "id": "en/advanced/property.md:776",
+            "sha256": "08d554917e8a8e01a2cd1fd1de9ac2ba31ef096a4d127b4b6dbfe6fe887178d1"
+          },
+          {
+            "id": "en/advanced/property.md:796",
+            "sha256": "61369be2387dd04cdbaac10125ffa78c1d4f0d2e44af5919210a7aa4f71fe846"
+          },
+          {
+            "id": "en/advanced/property.md:818",
+            "sha256": "aa17d4b76b245662060491e5111cdf1a8fda9507a37a2a438c1a8dcdec3ecb4d"
+          },
+          {
+            "id": "en/advanced/property.md:840",
+            "sha256": "2204ab589ef4a8dd1051f1cf45d792f11f27808dc700c70a7217c97c42de1e34"
+          },
+          {
+            "id": "en/advanced/property.md:861",
+            "sha256": "33faf743b2342146d2cb3e2123b210c953d0214496a20eec81eb0aba8cbdd563"
+          },
+          {
+            "id": "en/advanced/property.md:891",
+            "sha256": "c6c4d8e19ca90bc1eac07a712f34170326952ad5362b0a5d08fe0efe9da8ad1f"
+          },
+          {
+            "id": "en/advanced/property.md:913",
+            "sha256": "c1fdc14f65e682f52ae6e15cb6669f3740881faa4a0b59a502aeed1c3dbfd7a5"
+          },
+          {
+            "id": "en/advanced/property.md:935",
+            "sha256": "db3e0182d4345db218a6f108ddcb503c67c9bbbde0ab4a6e8a03b2684ce26b9b"
+          },
+          {
+            "id": "en/advanced/property.md:956",
+            "sha256": "6a015838368689c8acfff86891c14c5a85bf66f6a687bb7129bd8df095f4ba6e"
+          },
+          {
+            "id": "en/advanced/property.md:980",
+            "sha256": "953763d9e84fff724bf84fb2d6114381fd4ad2c9aa8a77bfd33e1ef86b3d13c4"
+          },
+          {
+            "id": "en/advanced/property.md:999",
+            "sha256": "e9bdbb3515801506d7ea7653ff2219ffeaf2e8d9868ae23344a0137f6852455b"
+          },
+          {
+            "id": "en/advanced/property.md:1018",
+            "sha256": "32d3569ae3ff5471f6cc93e4abba9c4ad96486197cc285a9c47b7bb8701c813a"
+          },
+          {
+            "id": "en/advanced/property.md:1037",
+            "sha256": "bd49f48474c50b608624abd9167fe9f9d7f60c273b997a47828dd901a3445e99"
+          },
+          {
+            "id": "en/advanced/property.md:1064",
+            "sha256": "a68e1ed899c756ce64bb6432a1b52a7ba192d6669fa899a7f7d24c1407190592"
+          },
+          {
+            "id": "en/advanced/property.md:1081",
+            "sha256": "da4dde2ee26d5a97655c572a889c11d937e3cd747ae79a2f4aeb3e3d0c84c67f"
+          },
+          {
+            "id": "en/advanced/property.md:1131",
+            "sha256": "ee9a841efe8763bc601a8b0ab710961f76709c60541c34171f4f4b8b6e0a2953"
+          },
+          {
+            "id": "en/advanced/property.md:1235",
+            "sha256": "c078cb17235bd6309b69f157683d4cf6b1565b00dab397c1c4f4cafc53e61868"
+          },
+          {
+            "id": "en/advanced/property.md:1279",
+            "sha256": "490713b798e44c6ffc32e3bec40746b9267da62929be79ceff8ce256046b2c47"
+          },
+          {
+            "id": "en/advanced/property.md:1303",
+            "sha256": "9096ab3bba28746c56a44ca491a31957fd18d52649afb122970ed43774a1e689"
+          }
+        ],
+        "localLinks": [
+          "/document/en/advanced/property.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/advanced/property.html#instance-properties",
+          "/document/en/advanced/property.html#instance-lifecycle",
+          "/document/en/advanced/property.html#instance-state",
+          "/document/en/advanced/property.html#instance-cleanup",
+          "/document/en/advanced/property.html#playback-contract",
+          "/document/en/advanced/property.html#playback-results",
+          "/document/en/advanced/property.html#playback-values",
+          "/document/en/advanced/property.html#source-transitions",
+          "/document/en/advanced/property.html#quality-contract",
+          "/document/en/advanced/property.html#play",
+          "/document/en/advanced/property.html#pause",
+          "/document/en/advanced/property.html#toggle",
+          "/document/en/advanced/property.html#destroy",
+          "/document/en/advanced/property.html#reset",
+          "/document/en/advanced/property.html#seek",
+          "/document/en/advanced/property.html#forward",
+          "/document/en/advanced/property.html#backward",
+          "/document/en/advanced/property.html#volume",
+          "/document/en/advanced/property.html#url",
+          "/document/en/advanced/property.html#switch",
+          "/document/en/advanced/property.html#switchurl",
+          "/document/en/advanced/property.html#switchquality",
+          "/document/en/advanced/property.html#muted",
+          "/document/en/advanced/property.html#currenttime",
+          "/document/en/advanced/property.html#duration",
+          "/document/en/advanced/property.html#screenshot",
+          "/document/en/advanced/property.html#getdataurl",
+          "/document/en/advanced/property.html#getbloburl",
+          "/document/en/advanced/property.html#fullscreen",
+          "/document/en/advanced/property.html#fullscreenweb",
+          "/document/en/advanced/property.html#pip",
+          "/document/en/advanced/property.html#poster",
+          "/document/en/advanced/property.html#mini",
+          "/document/en/advanced/property.html#playing",
+          "/document/en/advanced/property.html#state",
+          "/document/en/advanced/property.html#autosize",
+          "/document/en/advanced/property.html#rect",
+          "/document/en/advanced/property.html#bottom-top-left-right-x-y-width-height",
+          "/document/en/advanced/property.html#flip",
+          "/document/en/advanced/property.html#playbackrate",
+          "/document/en/advanced/property.html#aspectratio",
+          "/document/en/advanced/property.html#autoheight",
+          "/document/en/advanced/property.html#attr",
+          "/document/en/advanced/property.html#type",
+          "/document/en/advanced/property.html#theme",
+          "/document/en/advanced/property.html#airplay",
+          "/document/en/advanced/property.html#loaded",
+          "/document/en/advanced/property.html#loadedtime",
+          "/document/en/advanced/property.html#played",
+          "/document/en/advanced/property.html#proxy",
+          "/document/en/advanced/property.html#query",
+          "/document/en/advanced/property.html#video",
+          "/document/en/advanced/property.html#media-capabilities",
+          "/document/en/advanced/property.html#cssvar",
+          "/document/en/advanced/property.html#css-variable-contract",
+          "/document/en/advanced/property.html#css-variable-defaults",
+          "/document/en/advanced/property.html#css-variable-modes",
+          "/document/en/advanced/property.html#quality",
+          "/document/en/advanced/property.html#thumbnails",
+          "/document/en/advanced/property.html#subtitleoffset"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "zh",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "3cabe61431f355e4586233ea74fee21d731f7d4a971c400918a3f0b488e2c4ff",
+          "70a8c691c60351316a3f513143cfead37d939ee0c484690ea4391077a2c8743a",
+          "c3f3c00df8c7f5b58907b857a8d011f8750b4696ae43c7ff56982d64e0df8092",
+          "87fc8c2bbc61c4b1ba6c5158dbe8dd23db8054d8f5a561af7f4888f643c9b7c2",
+          "bab7649d940c8b0dfea0be40c54be2985344672301f8337565a402b8a227422f",
+          "c078cb17235bd6309b69f157683d4cf6b1565b00dab397c1c4f4cafc53e61868"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-playback/chromium-zh-property.png",
+          "sha256": "c8fcf55a0b4ed07ab7ba51f6269cbc93bdefc1da0cc18f9fbe73208683079911"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "en",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "3cabe61431f355e4586233ea74fee21d731f7d4a971c400918a3f0b488e2c4ff",
+          "70a8c691c60351316a3f513143cfead37d939ee0c484690ea4391077a2c8743a",
+          "c3f3c00df8c7f5b58907b857a8d011f8750b4696ae43c7ff56982d64e0df8092",
+          "87fc8c2bbc61c4b1ba6c5158dbe8dd23db8054d8f5a561af7f4888f643c9b7c2",
+          "bab7649d940c8b0dfea0be40c54be2985344672301f8337565a402b8a227422f",
+          "c078cb17235bd6309b69f157683d4cf6b1565b00dab397c1c4f4cafc53e61868"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-playback/chromium-en-property.png",
+          "sha256": "446407e7d7f10df6ae8de56d893c6ff44b28de918883714862b3be03cc0bd7e1"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "zh",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "3cabe61431f355e4586233ea74fee21d731f7d4a971c400918a3f0b488e2c4ff",
+          "70a8c691c60351316a3f513143cfead37d939ee0c484690ea4391077a2c8743a",
+          "c3f3c00df8c7f5b58907b857a8d011f8750b4696ae43c7ff56982d64e0df8092",
+          "87fc8c2bbc61c4b1ba6c5158dbe8dd23db8054d8f5a561af7f4888f643c9b7c2",
+          "bab7649d940c8b0dfea0be40c54be2985344672301f8337565a402b8a227422f",
+          "c078cb17235bd6309b69f157683d4cf6b1565b00dab397c1c4f4cafc53e61868"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-playback/firefox-zh-property.png",
+          "sha256": "7dfe5a7498e5dfbbc19679a36af908464e63a308356cce531a9e1ed76c79c86d"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "en",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "3cabe61431f355e4586233ea74fee21d731f7d4a971c400918a3f0b488e2c4ff",
+          "70a8c691c60351316a3f513143cfead37d939ee0c484690ea4391077a2c8743a",
+          "c3f3c00df8c7f5b58907b857a8d011f8750b4696ae43c7ff56982d64e0df8092",
+          "87fc8c2bbc61c4b1ba6c5158dbe8dd23db8054d8f5a561af7f4888f643c9b7c2",
+          "bab7649d940c8b0dfea0be40c54be2985344672301f8337565a402b8a227422f",
+          "c078cb17235bd6309b69f157683d4cf6b1565b00dab397c1c4f4cafc53e61868"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-playback/firefox-en-property.png",
+          "sha256": "e7531db324e13df5c1fb8b2926adca95e76faffc8372a15114f4a6bf5c8e9917"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "zh",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "3cabe61431f355e4586233ea74fee21d731f7d4a971c400918a3f0b488e2c4ff",
+          "70a8c691c60351316a3f513143cfead37d939ee0c484690ea4391077a2c8743a",
+          "c3f3c00df8c7f5b58907b857a8d011f8750b4696ae43c7ff56982d64e0df8092",
+          "87fc8c2bbc61c4b1ba6c5158dbe8dd23db8054d8f5a561af7f4888f643c9b7c2",
+          "bab7649d940c8b0dfea0be40c54be2985344672301f8337565a402b8a227422f",
+          "c078cb17235bd6309b69f157683d4cf6b1565b00dab397c1c4f4cafc53e61868"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-playback/webkit-zh-property.png",
+          "sha256": "d8c75f0a0db1fd073323ed4c9b2cd8a533bd3518e09bf014bd3863549547f878"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "en",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "3cabe61431f355e4586233ea74fee21d731f7d4a971c400918a3f0b488e2c4ff",
+          "70a8c691c60351316a3f513143cfead37d939ee0c484690ea4391077a2c8743a",
+          "c3f3c00df8c7f5b58907b857a8d011f8750b4696ae43c7ff56982d64e0df8092",
+          "87fc8c2bbc61c4b1ba6c5158dbe8dd23db8054d8f5a561af7f4888f643c9b7c2",
+          "bab7649d940c8b0dfea0be40c54be2985344672301f8337565a402b8a227422f",
+          "c078cb17235bd6309b69f157683d4cf6b1565b00dab397c1c4f4cafc53e61868"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-playback/webkit-en-property.png",
+          "sha256": "01ab30ae2cc9c8058463855eebee026985a2de5e26ccbb04800e29096c5b84ef"
+        }
+      }
+    ],
+    "dom": [],
+    "complete": true,
+    "limitations": [
+      "Page rendering and Run Code forwarding only. Native media checks are recorded separately using the existing source browser suite; no physical-device or release acceptance."
+    ],
+    "core": {
+      "artifact": {
+        "path": "packages/artplayer/dist/artplayer.js",
+        "sha256": "8a4caaa50a069875b3898a83765457b3c502700f4731d0c38988d6c463c3d20a"
+      },
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-qQwwPA/artplayer.tgz",
+        "version": "6.0.0",
+        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
+        "inputFingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "integrity": "sha512-+2+VWecKb9CbI3wTCs0sV7au8SNShyXahpwDAmGgZhDr22wbdv51QZnLnkPwgMgfNpVuTbsZ6A26Lpj3eY7NbQ=="
+      }
+    }
+  },
+  "semanticMapping": {
+    "addedRecords": 71,
+    "totalRecords": 900,
+    "remainingInventoryRecords": 63,
+    "unchanged": [
+      {
+        "group": "css-variables-theme",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "ef8c28715992d7e0931e306fa7a415f5819f0cf612ab5da2af76bee10e9b52a0",
+        "changedSections": [
+          "playback-contract",
+          "switchUrl warning"
+        ]
+      },
+      {
+        "group": "css-variables-theme",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "ef8c28715992d7e0931e306fa7a415f5819f0cf612ab5da2af76bee10e9b52a0",
+        "changedSections": [
+          "playback-contract",
+          "switchUrl warning"
+        ]
+      },
+      {
+        "group": "css-variables-theme",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "ef8c28715992d7e0931e306fa7a415f5819f0cf612ab5da2af76bee10e9b52a0",
+        "changedSections": [
+          "playback-contract",
+          "switchUrl warning"
+        ]
+      },
+      {
+        "group": "css-variables-theme",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "cf25d1b98abf65ec10ff4a86e9a0b74e25b1e85c4f92fd288ef763af28186a35",
+        "changedSections": [
+          "playback-contract",
+          "switchUrl warning"
+        ]
+      },
+      {
+        "group": "css-variables-theme",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "cf25d1b98abf65ec10ff4a86e9a0b74e25b1e85c4f92fd288ef763af28186a35",
+        "changedSections": [
+          "playback-contract",
+          "switchUrl warning"
+        ]
+      },
+      {
+        "group": "css-variables-theme",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "cf25d1b98abf65ec10ff4a86e9a0b74e25b1e85c4f92fd288ef763af28186a35",
+        "changedSections": [
+          "playback-contract",
+          "switchUrl warning"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "ef8c28715992d7e0931e306fa7a415f5819f0cf612ab5da2af76bee10e9b52a0",
+        "changedSections": [
+          "playback-contract",
+          "switchUrl warning"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "ef8c28715992d7e0931e306fa7a415f5819f0cf612ab5da2af76bee10e9b52a0",
+        "changedSections": [
+          "playback-contract",
+          "switchUrl warning"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "ef8c28715992d7e0931e306fa7a415f5819f0cf612ab5da2af76bee10e9b52a0",
+        "changedSections": [
+          "playback-contract",
+          "switchUrl warning"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+        "retainedContentSha256": "ef8c28715992d7e0931e306fa7a415f5819f0cf612ab5da2af76bee10e9b52a0",
+        "changedSections": [
+          "playback-contract",
+          "switchUrl warning"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "cf25d1b98abf65ec10ff4a86e9a0b74e25b1e85c4f92fd288ef763af28186a35",
+        "changedSections": [
+          "playback-contract",
+          "switchUrl warning"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "cf25d1b98abf65ec10ff4a86e9a0b74e25b1e85c4f92fd288ef763af28186a35",
+        "changedSections": [
+          "playback-contract",
+          "switchUrl warning"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "cf25d1b98abf65ec10ff4a86e9a0b74e25b1e85c4f92fd288ef763af28186a35",
+        "changedSections": [
+          "playback-contract",
+          "switchUrl warning"
+        ]
+      },
+      {
+        "group": "identity-lifecycle-media",
+        "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+        "retainedContentSha256": "cf25d1b98abf65ec10ff4a86e9a0b74e25b1e85c4f92fd288ef763af28186a35",
+        "changedSections": [
+          "playback-contract",
+          "switchUrl warning"
+        ]
+      }
+    ]
+  },
+  "tests": {
+    "count": 85,
+    "pass": 85,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 1335.4235,
+    "files": [
+      {
+        "path": "test/source.test.js",
+        "sha256": "f5d8e7c9aa2a6cda92c619d87ba7f582553d0c8238517e2d43ab905242d32949"
+      },
+      {
+        "path": "test/playback.test.js",
+        "sha256": "af40485704227e0a9ec50cf4ea1ddbd2ff964288aabac31f55575c17cf726b86"
+      },
+      {
+        "path": "test/playback-properties.test.js",
+        "sha256": "834b6b70d876dfc24d23a9bd46bbf18f5347d0dea359971887ab2ededbaae78f"
+      },
+      {
+        "path": "test/progress.test.js",
+        "sha256": "3f6472aec1b2534d894d05477b19d77404c064e3d448531a005786f75a947b2f"
+      },
+      {
+        "path": "test/documentation-pipeline.test.js",
+        "sha256": "9ca4e50b34d381339783b4f02de8a48224f3ec4e045073bacd12aa28b8d0f7b7"
+      },
+      {
+        "path": "test/site-loading.test.js",
+        "sha256": "cd0e513fcc5a6c69458ee6dd4ac12a270a2d28c15e13c46c0bab1ef1299b8667"
+      }
+    ]
+  },
+  "nativeBrowser": {
+    "scope": "source",
+    "invocation": {
+      "scope": "source",
+      "args": [
+        "test",
+        "--config=playwright.source.config.js",
+        "playback.spec.js",
+        "playback-properties.spec.js",
+        "progress-quality.spec.js",
+        "--grep",
+        "real playback|real media preserves|invalid time inputs|quality selectors",
+        "--workers=1"
+      ],
+      "node": "24.21.0",
+      "artifactMap": null,
+      "inputs": []
+    },
+    "stats": {
+      "startTime": "2026-09-16T00:54:08.871Z",
+      "duration": 42495.594000000005,
+      "expected": 24,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "published: real media preserves timeline, volume, rate and property descriptors",
+        "file": "playback-properties.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          233
+        ]
+      },
+      {
+        "title": "published: invalid time inputs and rate no-op retain native behavior",
+        "file": "playback-properties.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          169
+        ]
+      },
+      {
+        "title": "candidate: real media preserves timeline, volume, rate and property descriptors",
+        "file": "playback-properties.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          171
+        ]
+      },
+      {
+        "title": "candidate: invalid time inputs and rate no-op retain native behavior",
+        "file": "playback-properties.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          156
+        ]
+      },
+      {
+        "title": "published: real media preserves timeline, volume, rate and property descriptors",
+        "file": "playback-properties.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          1759
+        ]
+      },
+      {
+        "title": "published: invalid time inputs and rate no-op retain native behavior",
+        "file": "playback-properties.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          341
+        ]
+      },
+      {
+        "title": "candidate: real media preserves timeline, volume, rate and property descriptors",
+        "file": "playback-properties.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          350
+        ]
+      },
+      {
+        "title": "candidate: invalid time inputs and rate no-op retain native behavior",
+        "file": "playback-properties.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          470
+        ]
+      },
+      {
+        "title": "published: real media preserves timeline, volume, rate and property descriptors",
+        "file": "playback-properties.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1163
+        ]
+      },
+      {
+        "title": "published: invalid time inputs and rate no-op retain native behavior",
+        "file": "playback-properties.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1220
+        ]
+      },
+      {
+        "title": "candidate: real media preserves timeline, volume, rate and property descriptors",
+        "file": "playback-properties.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          1034
+        ]
+      },
+      {
+        "title": "candidate: invalid time inputs and rate no-op retain native behavior",
+        "file": "playback-properties.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          961
+        ]
+      },
+      {
+        "title": "published: real playback, pause, seek, switch and destroy",
+        "file": "playback.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          1561
+        ]
+      },
+      {
+        "title": "candidate: real playback, pause, seek, switch and destroy",
+        "file": "playback.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          1555
+        ]
+      },
+      {
+        "title": "published: real playback, pause, seek, switch and destroy",
+        "file": "playback.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          1912
+        ]
+      },
+      {
+        "title": "candidate: real playback, pause, seek, switch and destroy",
+        "file": "playback.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          1919
+        ]
+      },
+      {
+        "title": "published: real playback, pause, seek, switch and destroy",
+        "file": "playback.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          4618
+        ]
+      },
+      {
+        "title": "candidate: real playback, pause, seek, switch and destroy",
+        "file": "playback.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          4403
+        ]
+      },
+      {
+        "title": "published: quality selectors retain default labels, source position and empty-array behavior",
+        "file": "progress-quality.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          855
+        ]
+      },
+      {
+        "title": "candidate: quality selectors retain default labels, source position and empty-array behavior",
+        "file": "progress-quality.spec.js",
+        "engine": "chromium",
+        "status": "expected",
+        "durations": [
+          822
+        ]
+      },
+      {
+        "title": "published: quality selectors retain default labels, source position and empty-array behavior",
+        "file": "progress-quality.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          1603
+        ]
+      },
+      {
+        "title": "candidate: quality selectors retain default labels, source position and empty-array behavior",
+        "file": "progress-quality.spec.js",
+        "engine": "firefox",
+        "status": "expected",
+        "durations": [
+          1635
+        ]
+      },
+      {
+        "title": "published: quality selectors retain default labels, source position and empty-array behavior",
+        "file": "progress-quality.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          3509
+        ]
+      },
+      {
+        "title": "candidate: quality selectors retain default labels, source position and empty-array behavior",
+        "file": "progress-quality.spec.js",
+        "engine": "webkit",
+        "status": "expected",
+        "durations": [
+          3637
+        ]
+      }
+    ],
+    "files": [
+      {
+        "path": "test/browser/playback.spec.js",
+        "sha256": "5cc5df6f3968f3e834a6b2bc2c76c3c1c4ec5e7bda5ee3e99aa7394d24ac7e18"
+      },
+      {
+        "path": "test/browser/playback-properties.spec.js",
+        "sha256": "14e0774bf272cca78d203fef9c343b9b2eac5c30ffbe5c354b00640e1cd9627c"
+      },
+      {
+        "path": "test/browser/progress-quality.spec.js",
+        "sha256": "824596e3f0f1a7d8304ca7fed38de4f00b2f967eb87fd48346ad714fbb2e280f"
+      }
+    ],
+    "limit": "Published baseline versus source-built candidate, not new installed-tarball acceptance. Tests include decoded pixels and native media; WebKit historical quality-position miss is asserted separately from the candidate restoration requirement."
+  },
+  "build": {
+    "vitepressSeconds": 10.72,
+    "yarnSeconds": 12.29,
+    "checked": [
+      "build:docs",
+      "build:llm",
+      "check:llm",
+      "site-inventory --write/--check",
+      "demos --check"
+    ]
+  },
+  "ledger": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-Ig5OG6/report.json",
+      "sha256": "ac9c734589ac8ef6f969b46c16e85f231b06167c82b470bf4b54a1e83457c871"
+    },
+    "libraries": [
+      {
+        "name": "artplayer",
+        "fingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "fingerprint": "55236854b94ac7b0dd91b4107dcb60e97ac6f1a5e8b6b8a9dcb63bba66c6509a",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "fingerprint": "f88a6a2f1c5548389cae293614f648d72077ed03a7be6c81ad017a1155a839a3",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "fingerprint": "7fa3ca9577b53f3bb90e2c23fec9e6e70fbbb0c089ccae2923084b9059bcbdf9",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "fingerprint": "0c73b970872fe56df1c669e5badfa91f9cd7ec3c73070a9852cfea076cc8923f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "fingerprint": "9ced9b18e4b260ccbcf6ac016b32ec0852040cb5c0f57be72718a03d40d598bf",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "fingerprint": "f1dd73097e43df504f686f18a6ca30bcb1f57ab74d3cc62909db20505c994072",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "fingerprint": "d6d79d4b47afaefa66d32c5b1709f412ed9d32c636462723918c268a6601e631",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "fingerprint": "3d32a4c6d94d9eaa31cd982ec43ae2b710a4c923e5076f357ba4c902be48d729",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "fingerprint": "ceb17cbb235a42438c28df15ddf830d104a749b58515333c43da2b18534b166c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "fingerprint": "6716002b92bb12b54d17772d87a560bb9e863da35abfa37988907d54e02cdf74",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "fingerprint": "a3a56ecc218c8e180621d1bc00684950cca4ada8d483334b0cb91fd783c10831",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "fingerprint": "00a07f33277bae211a553e9fb2e924ade219513135bc54921886f4518dd27964",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "fingerprint": "cc9304759ff3cdd84767eee38fcbb9cf70e234f2449946536fd1da972cde679f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "fingerprint": "43825f602514c9e6a0bd8f0a270a54a03d1cb76f821b99d1e736d0150dafc190",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "fingerprint": "3503e145a591a406105eb953f9ac75c8373992c9f3f1f23b713de65c85a3bb3d",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "fingerprint": "b7932e08a086cfe16ed5e78872e274fb897931d0653dbf7ac61a19b404ddec85",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "fingerprint": "a0a8efb762e823fe4dd8c8de9601f74ac873ade8c6953a7e5305297608c71a12",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "fingerprint": "9fd7e62c56ae78866267cdd5650dc4e4af4aad76dd6ff8466b68908bc25d661c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "fingerprint": "00dc477ad56d12cfa6cd0d1e071e80f4120afed23f44af0393e23e5dac516a3b",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "fingerprint": "78bf5be3b2b5656a0b95ce2ce3cf1a635b6df609361a840b8298476f65af9d52",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      }
+    ],
+    "publicationAuthorized": false
+  },
+  "limitations": [
+    "94 prior Run Code snippets are unchanged; 36 selected forwardings do not execute every example.",
+    "Documentation pages wait for DOM content and the actual contract heading, then verify Run Code navigation; they no longer depend on unrelated ad network idle. No external advertising acceptance claimed.",
+    "No physical devices, adaptive SDK matrix, multihour playback or release acceptance."
+  ],
+  "processCorrections": [
+    "Initial docs build rejected unescaped Promise<void> text as an HTML tag; corrected to inline code and rebuilt. Failed log retained; no runtime change."
+  ],
+  "visualInspection": "chromium-zh-property.png",
+  "attachments": [
+    {
+      "path": "refactor/.cache/site04-playback-validate.mjs",
+      "sha256": "de86218091b26a9e5b527764e270296f73020a05d3f62b95115e0b1f6b04ac30"
+    },
+    {
+      "path": "refactor/.cache/site04-playback/report.json",
+      "sha256": "20387f2d04a45613c25ecab2b8aac5aef8522511a5da90fc42f3e0609e5f1cf6"
+    },
+    {
+      "path": "refactor/.cache/site04-playback-build.log",
+      "sha256": "fd7c72ae294bd1a866b683dac4a009e9dc44d67eb458655d22c16fc6040151c5"
+    },
+    {
+      "path": "refactor/.cache/site04-playback-build-failed-markdown.log",
+      "sha256": "88f8747acdba44e4dbdecff92e356c2f0eeb94c7c5d6666cce18cb275221e492"
+    },
+    {
+      "path": "refactor/.cache/site04-playback-llm.log",
+      "sha256": "6214ec941826cc65620ccb01884b427013a045a547aee213d1420ca6753dfa39"
+    },
+    {
+      "path": "refactor/.cache/site04-playback-tests.log",
+      "sha256": "b93977198b147eb9e90972e62a06e64b21a841271369ceab6951e074c1537ec0"
+    },
+    {
+      "path": "refactor/.cache/site04-playback-validate.log",
+      "sha256": "1f699d3df68568b660f8a6862b189d3cd9570d60c204c7ef5f86e44bb135a1cf"
+    },
+    {
+      "path": "refactor/.cache/site04-playback-media.log",
+      "sha256": "7f49d10b18b021235ba98639844b83ee01d0c3c61d6231e5ed3712a43a47fbd7"
+    },
+    {
+      "path": "refactor/.cache/site04-playback-media-report.json",
+      "sha256": "60a5e3d61f1276268c042e46e090273979055a2b5d2c1b7ad5bde43fe9032d97"
+    },
+    {
+      "path": "refactor/.cache/site04-playback-media-invocation.json",
+      "sha256": "fc8406d943929fab50ca7cda401eaa3efe142e49a966e97ef32a850d13ce8e88"
+    },
+    {
+      "path": "refactor/.cache/site04-playback-media-result.json",
+      "sha256": "e963fca0d734f911f57c880dc3471be19ea4898099d5493c72035f059ac9126a"
+    },
+    {
+      "path": "refactor/.cache/site04-playback-ledger.log",
+      "sha256": "d36dcc19d152e15492e31177b087d004764857c45af4ffbfb070f58cbff9d372"
+    }
+  ]
+}

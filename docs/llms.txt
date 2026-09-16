@@ -2807,6 +2807,76 @@ void [instances, identifier, retained];
 ```
 
 
+## Playback, progress and source contracts {#playback-contract}
+
+### Method results and media state {#playback-results}
+
+play() returns a Promise that waits for the current media play() result. Native rejection still reaches the caller. Only after success does it show the play notice, emit the custom play event and pause other instances when mutex is enabled. If source replacement or destruction makes the request obsolete, the caller still receives the media result, but obsolete notice, play event and mutex effects stop. Errors from later logic, including custom listeners, can also reject this Promise; rejection does not always mean decoding failed.
+
+pause() calls media pause() synchronously, then shows the notice, emits the custom pause event and returns the media method result. Native media normally returns undefined; a proxy may differ. toggle() selects play() or pause() from playing at call time and returns that branch's result directly, so it does not always return a Promise. Root Player.toggle keeps its historical void signature. PlaybackControls exported from the root is a type-only view for accurate native playback results, not a runtime object. The runtime entry also preserves proxy results through its media generic.
+
+These three methods capture their owning instance and can be called after extraction. Custom play/pause events differ from video:play/video:pause: the browser dispatches native events, whose order cannot be inferred from method calls alone. playing uses a proxy's boolean playing value when available; otherwise it requires currentTime > 0, paused false, ended false and readyState > 2. It is not simply !paused and can be false at time zero or while buffering.
+
+### Time, volume and buffer values {#playback-values}
+
+| Interface | Actual behavior |
+| --- | --- |
+| currentTime | Reads media time with a falsy fallback of 0; writes use parseFloat, clamp to 0 through art.duration and ignore NaN input. The runtime entry accepts number/string; the root keeps number |
+| duration | Reads media duration with Infinity and falsy values reported as 0; infinite live duration is not exposed as a finite seek endpoint |
+| seek | Write-only; writes currentTime, shows a progress notice and synchronously emits seek(actual time, original input). It does not return a Promise waiting for native seeked |
+| forward / backward | Write-only; forward currentTime + seconds or currentTime - seconds to seek. Pass numbers: historical JavaScript addition and subtraction coercion differ |
+| volume | Clamps writes to [0, 1] and uses the accepted media value in its notice; only nonzero values update the storage volume key. Zero retains the previous nonzero stored value and does not change muted |
+| muted | Writes the media field and synchronously emits muted, including repeated equal writes. Pass a boolean; native coercion does not change the original input carried by the event |
+| playbackRate | Writes a truthy value only when it differs from the current rate, then shows a notice; falsy input restores 1. Unsupported native rates can still throw; menu configuration is not a browser capability guarantee |
+| loadedTime | The end of the last buffered range, or 0 with no ranges; neither the sum of ranges nor a guarantee that the buffer is continuous |
+| loaded | loadedTime divided by raw media duration, without clamping or invalid-value normalization |
+| played | currentTime divided by art.duration; a position ratio, not accumulated viewing time or native played ranges |
+
+loaded/played can be NaN/Infinity before readiness, for zero duration or with unusual proxy state. Check Number.isFinite before displaying a percentage; these ratios do not prove playability. seek, forward, backward, switch and quality have no getters and read as undefined. Root declarations retain historical read types; runtime describes the write-only behavior accurately. Direct currentTime assignment does not synchronously emit custom seek, though native media events still occur.
+
+attr(key, value) directly accesses properties on the media object captured during construction; it is not an HTML attribute API. Omitted or explicit undefined means read; writes return undefined. Symbol keys work, and underlying property errors propagate. Direct media writes bypass the player facade's notices, storage and custom events. Do not replace template.$video to switch sources: most descriptors capture the original node while duration reads the current template, which would split their state.
+
+### URL assignment, completion and cancellation {#source-transitions}
+
+url reads media src, normally a browser-resolved absolute URL for native media; proxies can return null. option.url stores caller input, so these values need not match. type reads/writes option.type; a nonempty value overrides extension detection when selecting customType. Changing type alone does not reload media.
+
+Direct url assignment supersedes the current source operation. Native sources write src; customType runs on a later turn with the instance as this and video, input URL and art as arguments. A returned Promise is not a media readiness signal, but its rejection is handled by the owning operation. option.url changes only when actual src differs from its previous value. With an already-ready player and a previous URL, canplay for the current operation triggers restart. Adapters must still update media and dispatch events correctly; the core cannot infer external SDK readiness.
+
+switchUrl(url) starts at 0; switchQuality(url) captures the current position. Both pause, assign the URL, wait for readiness and any required seek, restore rate and aspect ratio, and attempt playback according to current intent. An explicit pause during loading cancels automatic resume; newer public seek/currentTime writes take precedence over automatic position restoration. Both return `Promise<void>`. Normal completion means the source operation has finished, but internal play recovery is best effort: its rejection does not reject the source-switch Promise.
+
+A later switch, direct url assignment or destroy ends the old operation and resolves its Promise normally; late callbacks cannot restore obsolete state. A request strictly equal to current art.url also completes as a no-op; relative input need not equal a resolved absolute URL. An empty URL switch completes and shows loading without clearing the old src, so it is not a substitute for reset. Media errors, adapter failures and state-restoration errors can still reject; handle them. Resolution alone does not prove the requested source is playing: inspect current source and media state as required by the application.
+
+switch is a write-only compatibility entry for switchUrl. Its assignment expression does not return the switch Promise; use the method to observe completion or errors. Direct url setter failures are logged, and assignment does not provide an awaitable Promise either. URL/Blob URL ownership remains with the provider; switching or destroying the player does not revoke caller-owned URLs.
+
+### Quality lists and selection {#quality-contract}
+
+quality accepts an array of html, url and optional default fields; html can be a string or HTMLElement. Assignment updates the right-side control named quality, using the first default item's label or the first item. This updates UI only: it neither switches to that URL nor infers highlighting from the current source. Arrays and entries follow the control's reference and default-mutation semantics rather than becoming immutable copies.
+
+A selector click updates default flags and the label before calling switchQuality. Completion updates the notice and returned label only for a still-active selection. Replacing the control, selecting a newer item or destroying the player makes older asynchronous updates obsolete. An empty array leaves an empty quality control; it is not controls.remove('quality'). Reading art.quality does not return the list, so retain application configuration separately. A static URL list is not HLS/DASH adaptive-track discovery; use the corresponding SDK plugins.
+
+```ts
+import Artplayer from 'artplayer/runtime';
+import type LegacyArtplayer from 'artplayer';
+import type { PlaybackControls } from 'artplayer';
+
+const art = new Artplayer({ container: '#player', url: '/assets/sample/video.mp4' });
+function nativeCommands(player: LegacyArtplayer): PlaybackControls {
+    return player;
+}
+async function togglePlayback(): Promise<void> {
+    await art.toggle(); // May reject when the branch requests play.
+}
+async function changeSource(url: string): Promise<void> {
+    await art.switchUrl(url);
+    // Completion includes cancellation; inspect art.url and media state as needed.
+}
+const progress: number | null = Number.isFinite(art.played) ? art.played : null;
+art.currentTime = '12.5';
+const unreadable: undefined = art.seek;
+void [nativeCommands, togglePlayback, changeSource, progress, unreadable];
+```
+
+
 ## `play`
 
 -   Type: `Function`
@@ -3072,7 +3142,7 @@ art.on('ready', () => {
 
 :::warning Note
 
-`art.switch` and `art.switchUrl` have the same functionality, but the `art.switchUrl` method returns a `Promise`. It `resolve`s when the new URL is playable and `reject`s when the new URL fails to load.
+`art.switch` and `art.switchUrl` use the same operation, but only the method returns an observable Promise. Normal completion, replacement, destruction, an equal URL or an empty URL can all resolve; failed automatic playback recovery does not itself reject the switch. Handle rejection and inspect current source/media state as needed; see [source transitions](#source-transitions).
 
 :::
 

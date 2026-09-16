@@ -684,7 +684,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-      "sha256Lf": "ef8c28715992d7e0931e306fa7a415f5819f0cf612ab5da2af76bee10e9b52a0",
+      "sha256Lf": "a449c901a5c14bc541460cba29261fdf9a128e05480598413e0a6990ca90e16e",
       "language": "zh",
       "route": "/document/advanced/property.html",
       "headings": [
@@ -705,208 +705,228 @@
           "line": 34
         },
         {
-          "text": "`play`",
+          "text": "播放、进度与切源契约 {#playback-contract}",
           "line": 58
         },
         {
+          "text": "方法返回与媒体状态 {#playback-results}",
+          "line": 60
+        },
+        {
+          "text": "时间、音量与缓冲数值 {#playback-values}",
+          "line": 68
+        },
+        {
+          "text": "地址赋值、完成与取消 {#source-transitions}",
+          "line": 87
+        },
+        {
+          "text": "画质列表与选择 {#quality-contract}",
+          "line": 99
+        },
+        {
+          "text": "`play`",
+          "line": 128
+        },
+        {
           "text": "`pause`",
-          "line": 78
+          "line": 148
         },
         {
           "text": "`toggle`",
-          "line": 102
+          "line": 172
         },
         {
           "text": "`destroy`",
-          "line": 126
+          "line": 196
         },
         {
           "text": "`reset`",
-          "line": 146
+          "line": 216
         },
         {
           "text": "`seek`",
-          "line": 168
+          "line": 238
         },
         {
           "text": "`forward`",
-          "line": 188
+          "line": 258
         },
         {
           "text": "`backward`",
-          "line": 208
+          "line": 278
         },
         {
           "text": "`volume`",
-          "line": 232
+          "line": 302
         },
         {
           "text": "`url`",
-          "line": 254
+          "line": 324
         },
         {
           "text": "`switch`",
-          "line": 274
+          "line": 344
         },
         {
           "text": "`switchUrl`",
-          "line": 297
+          "line": 367
         },
         {
           "text": "`switchQuality`",
-          "line": 326
+          "line": 396
         },
         {
           "text": "`muted`",
-          "line": 349
+          "line": 419
         },
         {
           "text": "`currentTime`",
-          "line": 371
+          "line": 441
         },
         {
           "text": "`duration`",
-          "line": 393
+          "line": 463
         },
         {
           "text": "`screenshot`",
-          "line": 418
+          "line": 488
         },
         {
           "text": "`getDataURL`",
-          "line": 437
+          "line": 507
         },
         {
           "text": "`getBlobUrl`",
-          "line": 457
+          "line": 527
         },
         {
           "text": "`fullscreen`",
-          "line": 477
+          "line": 547
         },
         {
           "text": "`fullscreenWeb`",
-          "line": 508
+          "line": 578
         },
         {
           "text": "`pip`",
-          "line": 533
+          "line": 603
         },
         {
           "text": "`poster`",
-          "line": 564
+          "line": 634
         },
         {
           "text": "`mini`",
-          "line": 587
+          "line": 657
         },
         {
           "text": "`playing`",
-          "line": 607
+          "line": 677
         },
         {
           "text": "`state`",
-          "line": 628
+          "line": 698
         },
         {
           "text": "`autoSize`",
-          "line": 649
+          "line": 719
         },
         {
           "text": "`rect`",
-          "line": 668
+          "line": 738
         },
         {
           "text": "`bottom` / `top` / `left` / `right` / `x` / `y` / `width` / `height`",
-          "line": 693
+          "line": 763
         },
         {
           "text": "`flip`",
-          "line": 715
+          "line": 785
         },
         {
           "text": "`playbackRate`",
-          "line": 737
+          "line": 807
         },
         {
           "text": "`aspectRatio`",
-          "line": 759
+          "line": 829
         },
         {
           "text": "`autoHeight`",
-          "line": 781
+          "line": 851
         },
         {
           "text": "`attr`",
-          "line": 810
+          "line": 880
         },
         {
           "text": "`type`",
-          "line": 832
+          "line": 902
         },
         {
           "text": "`theme`",
-          "line": 854
+          "line": 924
         },
         {
           "text": "`airplay`",
-          "line": 876
+          "line": 946
         },
         {
           "text": "`loaded`",
-          "line": 900
+          "line": 970
         },
         {
           "text": "`loadedTime`",
-          "line": 919
+          "line": 989
         },
         {
           "text": "`played`",
-          "line": 938
+          "line": 1008
         },
         {
           "text": "`proxy`",
-          "line": 957
+          "line": 1027
         },
         {
           "text": "`query`",
-          "line": 984
+          "line": 1054
         },
         {
           "text": "`video`",
-          "line": 1001
+          "line": 1071
         },
         {
           "text": "原生与代理媒体能力 {#media-capabilities}",
-          "line": 1018
+          "line": 1088
         },
         {
           "text": "`cssVar`",
-          "line": 1051
+          "line": 1121
         },
         {
           "text": "读取、写入与样式优先级 {#css-variable-contract}",
-          "line": 1072
+          "line": 1142
         },
         {
           "text": "内置默认值与使用位置 {#css-variable-defaults}",
-          "line": 1082
+          "line": 1152
         },
         {
           "text": "模式覆盖与布局测量 {#css-variable-modes}",
-          "line": 1132
+          "line": 1202
         },
         {
           "text": "`quality`",
-          "line": 1154
+          "line": 1224
         },
         {
           "text": "`thumbnails`",
-          "line": 1197
+          "line": 1267
         },
         {
           "text": "`subtitleOffset`",
-          "line": 1221
+          "line": 1291
         }
       ],
       "runCodeMarkers": 47,
@@ -1778,7 +1798,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-      "sha256Lf": "cf25d1b98abf65ec10ff4a86e9a0b74e25b1e85c4f92fd288ef763af28186a35",
+      "sha256Lf": "9e300b785c7b3f02346a1e7fff281ed6737e1d9abfe7cffe4985f74daca45cd4",
       "language": "en",
       "route": "/document/en/advanced/property.html",
       "headings": [
@@ -1799,208 +1819,228 @@
           "line": 34
         },
         {
-          "text": "`play`",
+          "text": "Playback, progress and source contracts {#playback-contract}",
           "line": 58
         },
         {
+          "text": "Method results and media state {#playback-results}",
+          "line": 60
+        },
+        {
+          "text": "Time, volume and buffer values {#playback-values}",
+          "line": 68
+        },
+        {
+          "text": "URL assignment, completion and cancellation {#source-transitions}",
+          "line": 87
+        },
+        {
+          "text": "Quality lists and selection {#quality-contract}",
+          "line": 99
+        },
+        {
+          "text": "`play`",
+          "line": 128
+        },
+        {
           "text": "`pause`",
-          "line": 78
+          "line": 148
         },
         {
           "text": "`toggle`",
-          "line": 102
+          "line": 172
         },
         {
           "text": "`destroy`",
-          "line": 126
+          "line": 196
         },
         {
           "text": "`reset`",
-          "line": 146
+          "line": 216
         },
         {
           "text": "`seek`",
-          "line": 168
+          "line": 238
         },
         {
           "text": "`forward`",
-          "line": 188
+          "line": 258
         },
         {
           "text": "`backward`",
-          "line": 208
+          "line": 278
         },
         {
           "text": "`volume`",
-          "line": 232
+          "line": 302
         },
         {
           "text": "`url`",
-          "line": 254
+          "line": 324
         },
         {
           "text": "`switch`",
-          "line": 274
+          "line": 344
         },
         {
           "text": "`switchUrl`",
-          "line": 297
+          "line": 367
         },
         {
           "text": "`switchQuality`",
-          "line": 327
+          "line": 397
         },
         {
           "text": "`muted`",
-          "line": 350
+          "line": 420
         },
         {
           "text": "`currentTime`",
-          "line": 372
+          "line": 442
         },
         {
           "text": "`duration`",
-          "line": 394
+          "line": 464
         },
         {
           "text": "`screenshot`",
-          "line": 419
+          "line": 489
         },
         {
           "text": "`getDataURL`",
-          "line": 438
+          "line": 508
         },
         {
           "text": "`getBlobUrl`",
-          "line": 458
+          "line": 528
         },
         {
           "text": "`fullscreen`",
-          "line": 478
+          "line": 548
         },
         {
           "text": "`fullscreenWeb`",
-          "line": 509
+          "line": 579
         },
         {
           "text": "`pip`",
-          "line": 534
+          "line": 604
         },
         {
           "text": "`poster`",
-          "line": 565
+          "line": 635
         },
         {
           "text": "`mini`",
-          "line": 588
+          "line": 658
         },
         {
           "text": "`playing`",
-          "line": 608
+          "line": 678
         },
         {
           "text": "`state`",
-          "line": 629
+          "line": 699
         },
         {
           "text": "`autoSize`",
-          "line": 650
+          "line": 720
         },
         {
           "text": "`rect`",
-          "line": 669
+          "line": 739
         },
         {
           "text": "`bottom` / `top` / `left` / `right` / `x` / `y` / `width` / `height`",
-          "line": 694
+          "line": 764
         },
         {
           "text": "`flip`",
-          "line": 716
+          "line": 786
         },
         {
           "text": "`playbackRate`",
-          "line": 738
+          "line": 808
         },
         {
           "text": "`aspectRatio`",
-          "line": 760
+          "line": 830
         },
         {
           "text": "`autoHeight`",
-          "line": 782
+          "line": 852
         },
         {
           "text": "`attr`",
-          "line": 811
+          "line": 881
         },
         {
           "text": "`type`",
-          "line": 833
+          "line": 903
         },
         {
           "text": "`theme`",
-          "line": 855
+          "line": 925
         },
         {
           "text": "`airplay`",
-          "line": 877
+          "line": 947
         },
         {
           "text": "`loaded`",
-          "line": 901
+          "line": 971
         },
         {
           "text": "`loadedTime`",
-          "line": 920
+          "line": 990
         },
         {
           "text": "`played`",
-          "line": 939
+          "line": 1009
         },
         {
           "text": "`proxy`",
-          "line": 958
+          "line": 1028
         },
         {
           "text": "`query`",
-          "line": 985
+          "line": 1055
         },
         {
           "text": "`video`",
-          "line": 1002
+          "line": 1072
         },
         {
           "text": "Native and proxy media capabilities {#media-capabilities}",
-          "line": 1019
+          "line": 1089
         },
         {
           "text": "`cssVar`",
-          "line": 1052
+          "line": 1122
         },
         {
           "text": "Values, writes, and cascade {#css-variable-contract}",
-          "line": 1073
+          "line": 1143
         },
         {
           "text": "Built-in defaults and consumers {#css-variable-defaults}",
-          "line": 1083
+          "line": 1153
         },
         {
           "text": "Mode overrides and measured layout {#css-variable-modes}",
-          "line": 1133
+          "line": 1203
         },
         {
           "text": "`quality`",
-          "line": 1155
+          "line": 1225
         },
         {
           "text": "`thumbnails`",
-          "line": 1199
+          "line": 1269
         },
         {
           "text": "`subtitleOffset`",
-          "line": 1223
+          "line": 1293
         }
       ],
       "runCodeMarkers": 47,
@@ -5510,11 +5550,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 984
+          "line": 1054
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 985
+          "line": 1055
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -5527,15 +5567,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 957
+          "line": 1027
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 958
+          "line": 1028
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1019
+          "line": 1089
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/proxy/canvas.md",
@@ -5564,11 +5604,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1001
+          "line": 1071
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1002
+          "line": 1072
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/proxy/canvas.md",
@@ -5605,7 +5645,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 126
+          "line": 196
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -5613,7 +5653,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 126
+          "line": 196
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -5626,11 +5666,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 146
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 146
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -6162,11 +6202,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 102
+          "line": 172
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 102
+          "line": 172
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7570,7 +7610,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 126
+          "line": 196
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -7578,7 +7618,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 126
+          "line": 196
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7595,7 +7635,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1221
+          "line": 1291
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -7603,7 +7643,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1223
+          "line": 1293
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -7840,7 +7880,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 759
+          "line": 829
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -7848,7 +7888,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 760
+          "line": 830
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -7873,7 +7913,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 781
+          "line": 851
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -7881,7 +7921,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 782
+          "line": 852
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -7898,7 +7938,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 649
+          "line": 719
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -7906,7 +7946,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 650
+          "line": 720
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -7944,11 +7984,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 876
+          "line": 946
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 877
+          "line": 947
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -7998,7 +8038,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 715
+          "line": 785
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -8006,7 +8046,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 716
+          "line": 786
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -8031,7 +8071,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 477
+          "line": 547
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -8039,7 +8079,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 478
+          "line": 548
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -8081,7 +8121,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 508
+          "line": 578
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -8089,7 +8129,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 509
+          "line": 579
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -8114,7 +8154,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 587
+          "line": 657
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -8122,7 +8162,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 588
+          "line": 658
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -8139,7 +8179,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 78
+          "line": 148
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -8147,7 +8187,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 78
+          "line": 148
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -8164,7 +8204,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 533
+          "line": 603
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -8172,7 +8212,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 534
+          "line": 604
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -8197,7 +8237,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 58
+          "line": 128
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -8205,7 +8245,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 58
+          "line": 128
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -8222,7 +8262,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 418
+          "line": 488
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -8230,7 +8270,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 419
+          "line": 489
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -8255,7 +8295,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 168
+          "line": 238
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -8263,7 +8303,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 168
+          "line": 238
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -8297,7 +8337,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 349
+          "line": 419
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -8305,7 +8345,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 350
+          "line": 420
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -8718,11 +8758,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 628
+          "line": 698
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 629
+          "line": 60
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "line": 699
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/plugin/chromecast.md",
@@ -8751,7 +8795,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 58
+          "line": 128
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -8759,7 +8803,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 58
+          "line": 128
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -8776,7 +8820,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 78
+          "line": 148
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -8784,7 +8828,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 78
+          "line": 148
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -8805,11 +8849,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 232
+          "line": 302
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 232
+          "line": 68
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "line": 302
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -8842,7 +8890,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 418
+          "line": 488
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -8850,7 +8898,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 419
+          "line": 489
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -8908,7 +8956,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 533
+          "line": 603
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -8916,7 +8964,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 534
+          "line": 604
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -8953,11 +9001,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 737
+          "line": 807
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 738
+          "line": 808
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -8982,7 +9030,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 759
+          "line": 829
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -8990,7 +9038,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 760
+          "line": 830
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9061,7 +9109,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 715
+          "line": 785
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -9069,7 +9117,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 716
+          "line": 786
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9171,11 +9219,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 876
+          "line": 946
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 877
+          "line": 947
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9196,11 +9244,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9237,11 +9285,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -9254,11 +9302,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -9279,11 +9327,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9421,11 +9469,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9446,11 +9494,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 564
+          "line": 634
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 565
+          "line": 635
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9471,11 +9519,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 832
+          "line": 902
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 833
+          "line": 903
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9496,11 +9544,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 854
+          "line": 924
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 855
+          "line": 925
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9538,11 +9586,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 232
+          "line": 302
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 232
+          "line": 68
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "line": 302
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9584,7 +9636,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 349
+          "line": 419
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -9592,7 +9644,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 350
+          "line": 420
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9634,7 +9686,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 649
+          "line": 719
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -9642,7 +9694,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 650
+          "line": 720
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9701,7 +9753,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 715
+          "line": 785
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -9709,7 +9761,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 716
+          "line": 786
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9730,11 +9782,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 737
+          "line": 807
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 738
+          "line": 808
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9759,7 +9811,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 759
+          "line": 829
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -9767,7 +9819,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 760
+          "line": 830
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9792,7 +9844,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 418
+          "line": 488
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -9800,7 +9852,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 419
+          "line": 489
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9891,7 +9943,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 533
+          "line": 603
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -9899,7 +9951,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 534
+          "line": 604
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9958,7 +10010,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 477
+          "line": 547
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -9966,7 +10018,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 478
+          "line": 548
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9991,7 +10043,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 508
+          "line": 578
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -9999,7 +10051,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 509
+          "line": 579
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10024,7 +10076,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1221
+          "line": 1291
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -10032,7 +10084,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1223
+          "line": 1293
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10197,11 +10249,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 876
+          "line": 946
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 877
+          "line": 947
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10222,15 +10274,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 957
+          "line": 1027
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 958
+          "line": 1028
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1019
+          "line": 1089
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/proxy/canvas.md",
@@ -10384,11 +10436,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1154
+          "line": 1224
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1155
+          "line": 1225
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10426,11 +10478,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1197
+          "line": 1267
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1199
+          "line": 1269
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10551,11 +10603,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1051
+          "line": 1121
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1052
+          "line": 1122
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10597,7 +10649,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 58
+          "line": 128
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -10605,7 +10657,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 58
+          "line": 128
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -10622,7 +10674,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 78
+          "line": 148
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -10630,7 +10682,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 78
+          "line": 148
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -10643,11 +10695,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 102
+          "line": 172
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 102
+          "line": 172
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -10664,7 +10716,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 759
+          "line": 829
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -10672,7 +10724,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 760
+          "line": 830
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10697,7 +10749,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 759
+          "line": 829
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -10705,7 +10757,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 760
+          "line": 830
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10726,11 +10778,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 628
+          "line": 698
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 629
+          "line": 60
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "line": 699
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/plugin/chromecast.md",
@@ -10755,11 +10811,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 628
+          "line": 698
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 629
+          "line": 60
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "line": 699
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/plugin/chromecast.md",
@@ -10784,11 +10844,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 832
+          "line": 902
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 833
+          "line": 903
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10809,11 +10869,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 832
+          "line": 902
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 833
+          "line": 903
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10834,11 +10894,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 737
+          "line": 807
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 738
+          "line": 808
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10859,11 +10919,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 737
+          "line": 807
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 738
+          "line": 808
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10884,11 +10944,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 371
+          "line": 441
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 372
+          "line": 442
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -10901,11 +10961,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 371
+          "line": 441
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 372
+          "line": 442
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -10918,11 +10978,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 393
+          "line": 463
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 394
+          "line": 464
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -10935,11 +10995,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 938
+          "line": 1008
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 939
+          "line": 1009
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -10952,11 +11012,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 607
+          "line": 677
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 608
+          "line": 678
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -10973,7 +11033,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 715
+          "line": 785
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -10981,7 +11041,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 716
+          "line": 786
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11006,7 +11066,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 715
+          "line": 785
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11014,7 +11074,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 716
+          "line": 786
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11039,7 +11099,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 477
+          "line": 547
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11047,7 +11107,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 478
+          "line": 548
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11072,7 +11132,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 477
+          "line": 547
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11080,7 +11140,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 478
+          "line": 548
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11105,7 +11165,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 508
+          "line": 578
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11113,7 +11173,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 509
+          "line": 579
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11138,7 +11198,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 508
+          "line": 578
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11146,7 +11206,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 509
+          "line": 579
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11167,11 +11227,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 900
+          "line": 970
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 901
+          "line": 971
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11184,11 +11244,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 919
+          "line": 989
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 920
+          "line": 990
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11205,7 +11265,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 587
+          "line": 657
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11213,7 +11273,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 588
+          "line": 658
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11230,7 +11290,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 587
+          "line": 657
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11238,7 +11298,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 588
+          "line": 658
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11255,7 +11315,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 533
+          "line": 603
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11263,7 +11323,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 534
+          "line": 604
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11288,7 +11348,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 533
+          "line": 603
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11296,7 +11356,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 534
+          "line": 604
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11317,11 +11377,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 564
+          "line": 634
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 565
+          "line": 635
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11342,11 +11402,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 564
+          "line": 634
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 565
+          "line": 635
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11367,11 +11427,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 668
+          "line": 738
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 669
+          "line": 739
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11384,11 +11444,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11401,11 +11461,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11418,11 +11478,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11435,11 +11495,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11452,11 +11512,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11469,11 +11529,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11486,11 +11546,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11503,11 +11563,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11524,7 +11584,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 168
+          "line": 238
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11532,7 +11592,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 168
+          "line": 238
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11549,7 +11609,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 168
+          "line": 238
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11557,7 +11617,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 168
+          "line": 238
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11570,11 +11630,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 188
+          "line": 258
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 188
+          "line": 258
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11587,11 +11647,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 188
+          "line": 258
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 188
+          "line": 258
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11604,11 +11664,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 208
+          "line": 278
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 208
+          "line": 278
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11621,11 +11681,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 208
+          "line": 278
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 208
+          "line": 278
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11638,11 +11698,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11663,11 +11723,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11688,11 +11748,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 232
+          "line": 302
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 232
+          "line": 68
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "line": 302
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11713,11 +11777,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 232
+          "line": 302
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 232
+          "line": 68
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "line": 302
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11742,7 +11810,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 349
+          "line": 419
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11750,7 +11818,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 350
+          "line": 420
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11775,7 +11843,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 349
+          "line": 419
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11783,7 +11851,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 350
+          "line": 420
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11804,11 +11872,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 854
+          "line": 924
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 855
+          "line": 925
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11829,11 +11897,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 854
+          "line": 924
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 855
+          "line": 925
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11858,7 +11926,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1221
+          "line": 1291
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11866,7 +11934,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1223
+          "line": 1293
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11891,7 +11959,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1221
+          "line": 1291
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11899,7 +11967,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1223
+          "line": 1293
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11920,11 +11988,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 274
+          "line": 344
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 274
+          "line": 344
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11937,11 +12005,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 274
+          "line": 344
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 274
+          "line": 344
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -11954,11 +12022,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1154
+          "line": 1224
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1155
+          "line": 1225
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11979,11 +12047,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1154
+          "line": 1224
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1155
+          "line": 1225
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -12004,11 +12072,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1197
+          "line": 1267
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1199
+          "line": 1269
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -12029,11 +12097,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1197
+          "line": 1267
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1199
+          "line": 1269
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -12058,7 +12126,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 78
+          "line": 148
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -12066,7 +12134,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 78
+          "line": 148
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12083,7 +12151,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 58
+          "line": 128
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -12091,7 +12159,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 58
+          "line": 128
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12104,11 +12172,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 102
+          "line": 172
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 102
+          "line": 172
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12121,11 +12189,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 810
+          "line": 880
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 811
+          "line": 881
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12138,11 +12206,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1051
+          "line": 1121
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1052
+          "line": 1122
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -12163,11 +12231,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 297
+          "line": 367
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 297
+          "line": 367
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12180,11 +12248,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 326
+          "line": 396
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 327
+          "line": 397
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12197,11 +12265,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 437
+          "line": 507
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 438
+          "line": 508
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12214,11 +12282,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 457
+          "line": 527
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 458
+          "line": 528
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12235,7 +12303,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 418
+          "line": 488
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -12243,7 +12311,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 419
+          "line": 489
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -12264,11 +12332,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 876
+          "line": 946
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 877
+          "line": 947
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -12293,7 +12361,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 649
+          "line": 719
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -12301,7 +12369,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 650
+          "line": 720
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -12326,7 +12394,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 781
+          "line": 851
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -12334,7 +12402,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 782
+          "line": 852
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12347,11 +12415,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 146
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 146
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -12401,11 +12469,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -12451,15 +12519,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 957
+          "line": 1027
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 958
+          "line": 1028
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1019
+          "line": 1089
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/proxy/canvas.md",
@@ -13182,11 +13250,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 984
+          "line": 1054
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 985
+          "line": 1055
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13199,15 +13267,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 957
+          "line": 1027
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 958
+          "line": 1028
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1019
+          "line": 1089
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/proxy/canvas.md",
@@ -13236,11 +13304,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1001
+          "line": 1071
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1002
+          "line": 1072
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/proxy/canvas.md",
@@ -13265,11 +13333,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 146
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 146
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -13290,7 +13358,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 126
+          "line": 196
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -13298,7 +13366,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 126
+          "line": 196
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13836,11 +13904,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 102
+          "line": 172
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 102
+          "line": 172
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13948,11 +14016,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1197
+          "line": 1267
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1199
+          "line": 1269
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -14140,7 +14208,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 759
+          "line": 829
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -14148,7 +14216,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 760
+          "line": 830
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -14173,7 +14241,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 715
+          "line": 785
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -14181,7 +14249,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 716
+          "line": 786
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -14206,7 +14274,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 168
+          "line": 238
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -14214,7 +14282,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 168
+          "line": 238
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14290,7 +14358,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 58
+          "line": 128
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -14298,7 +14366,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 58
+          "line": 128
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14315,7 +14383,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 78
+          "line": 148
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -14323,7 +14391,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 78
+          "line": 148
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14466,15 +14534,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 957
+          "line": 1027
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 958
+          "line": 1028
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1019
+          "line": 1089
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/proxy/canvas.md",
@@ -14695,15 +14763,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 957
+          "line": 1027
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 958
+          "line": 1028
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1019
+          "line": 1089
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/proxy/canvas.md",
@@ -14765,11 +14833,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1197
+          "line": 1267
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1199
+          "line": 1269
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -14807,11 +14875,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -14840,11 +14908,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 371
+          "line": 441
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 372
+          "line": 442
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14857,11 +14925,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 371
+          "line": 441
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 372
+          "line": 442
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14874,11 +14942,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 393
+          "line": 463
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 394
+          "line": 464
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14895,7 +14963,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 168
+          "line": 238
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -14903,7 +14971,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 168
+          "line": 238
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14920,7 +14988,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 168
+          "line": 238
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -14928,7 +14996,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 168
+          "line": 238
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14941,11 +15009,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 188
+          "line": 258
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 188
+          "line": 258
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14958,11 +15026,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 188
+          "line": 258
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 188
+          "line": 258
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14975,11 +15043,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 208
+          "line": 278
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 208
+          "line": 278
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -14992,11 +15060,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 208
+          "line": 278
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 208
+          "line": 278
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15009,11 +15077,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 274
+          "line": 344
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 274
+          "line": 344
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15026,11 +15094,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 274
+          "line": 344
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 274
+          "line": 344
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15043,11 +15111,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1154
+          "line": 1224
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1155
+          "line": 1225
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15068,11 +15136,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1154
+          "line": 1224
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1155
+          "line": 1225
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15093,11 +15161,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15118,11 +15186,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15143,11 +15211,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 628
+          "line": 698
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 629
+          "line": 60
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "line": 699
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/plugin/chromecast.md",
@@ -15172,11 +15244,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 628
+          "line": 698
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 629
+          "line": 60
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "line": 699
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/plugin/chromecast.md",
@@ -15205,7 +15281,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 533
+          "line": 603
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -15213,7 +15289,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 534
+          "line": 604
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15238,7 +15314,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 533
+          "line": 603
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -15246,7 +15322,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 534
+          "line": 604
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15271,7 +15347,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 477
+          "line": 547
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -15279,7 +15355,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 478
+          "line": 548
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15304,7 +15380,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 508
+          "line": 578
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -15312,7 +15388,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 509
+          "line": 579
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15337,7 +15413,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 587
+          "line": 657
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -15345,7 +15421,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 588
+          "line": 658
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15358,11 +15434,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 232
+          "line": 302
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 232
+          "line": 68
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "line": 302
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15387,7 +15467,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 349
+          "line": 419
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -15395,7 +15475,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 350
+          "line": 420
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15416,11 +15496,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 737
+          "line": 807
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 738
+          "line": 808
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15445,7 +15525,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 759
+          "line": 829
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -15453,7 +15533,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 760
+          "line": 830
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15478,7 +15558,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 715
+          "line": 785
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -15486,7 +15566,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 716
+          "line": 786
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15507,11 +15587,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 564
+          "line": 634
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 565
+          "line": 635
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15532,11 +15612,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 854
+          "line": 924
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 855
+          "line": 925
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15557,11 +15637,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 832
+          "line": 902
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 833
+          "line": 903
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15586,7 +15666,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1221
+          "line": 1291
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -15594,7 +15674,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1223
+          "line": 1293
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15615,11 +15695,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1197
+          "line": 1267
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1199
+          "line": 1269
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15640,11 +15720,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 900
+          "line": 970
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 901
+          "line": 971
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15657,11 +15737,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 919
+          "line": 989
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 920
+          "line": 990
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15674,11 +15754,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 938
+          "line": 1008
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 939
+          "line": 1009
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15691,11 +15771,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 607
+          "line": 677
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 608
+          "line": 678
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15708,11 +15788,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 668
+          "line": 738
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 669
+          "line": 739
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15725,11 +15805,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15742,11 +15822,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15759,11 +15839,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15776,11 +15856,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15793,11 +15873,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15810,11 +15890,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15827,11 +15907,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15844,11 +15924,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15865,7 +15945,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 58
+          "line": 128
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -15873,7 +15953,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 58
+          "line": 128
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15890,7 +15970,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 78
+          "line": 148
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -15898,7 +15978,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 78
+          "line": 148
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15911,11 +15991,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 102
+          "line": 172
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 102
+          "line": 172
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15928,11 +16008,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 297
+          "line": 367
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 297
+          "line": 367
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15945,11 +16025,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 326
+          "line": 396
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 327
+          "line": 397
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -15966,7 +16046,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 649
+          "line": 719
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -15974,7 +16054,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 650
+          "line": 720
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15999,7 +16079,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 781
+          "line": 851
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -16007,7 +16087,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 782
+          "line": 852
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -16020,11 +16100,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 876
+          "line": 946
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 877
+          "line": 947
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -16045,11 +16125,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 437
+          "line": 507
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 438
+          "line": 508
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -16062,11 +16142,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 457
+          "line": 527
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 458
+          "line": 528
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -16083,7 +16163,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 418
+          "line": 488
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -16091,7 +16171,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 419
+          "line": 489
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -16112,11 +16192,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 810
+          "line": 880
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 811
+          "line": 881
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -16129,11 +16209,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1051
+          "line": 1121
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1052
+          "line": 1122
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -16269,15 +16349,15 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 957
+          "line": 1027
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 958
+          "line": 1028
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1019
+          "line": 1089
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/proxy/canvas.md",
@@ -16335,7 +16415,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 126
+          "line": 196
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -16343,7 +16423,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 126
+          "line": 196
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -16564,11 +16644,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -16597,11 +16677,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 274
+          "line": 344
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 274
+          "line": 344
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -16877,11 +16957,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 102
+          "line": 172
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 102
+          "line": 172
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -17094,11 +17174,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -17151,11 +17231,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 102
+          "line": 172
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 102
+          "line": 172
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -17193,11 +17273,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 274
+          "line": 344
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 274
+          "line": 344
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -17254,7 +17334,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 126
+          "line": 196
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -17262,7 +17342,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 126
+          "line": 196
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -17483,11 +17563,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 984
+          "line": 1054
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 985
+          "line": 1055
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -17512,7 +17592,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 126
+          "line": 196
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -17520,7 +17600,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 126
+          "line": 196
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -17614,11 +17694,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 984
+          "line": 1054
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 985
+          "line": 1055
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -18131,11 +18211,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 693
+          "line": 763
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 694
+          "line": 764
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -18193,11 +18273,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 274
+          "line": 344
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 274
+          "line": 344
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -18250,11 +18330,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 254
+          "line": 324
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -18283,11 +18363,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 832
+          "line": 902
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 833
+          "line": 903
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -18606,11 +18686,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 984
+          "line": 1054
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 985
+          "line": 1055
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -19844,10 +19924,10 @@
     {
       "source": "docs/document/404.html",
       "route": "/document/404.html",
-      "sha256Lf": "f7ccf170df848c55b4f4bc1affec74b4cde0a3254e7afa37ea8ea7767e6a43ce",
+      "sha256Lf": "c50317abf5cc2737b0b0c008df7d03863d3479705a310423edaeb3221220e1be",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19857,10 +19937,10 @@
     {
       "source": "docs/document/advanced/built-in.html",
       "route": "/document/advanced/built-in.html",
-      "sha256Lf": "3d6760ae358e41765e79c1da5afede5f025853e34070ce143270371c25fa360e",
+      "sha256Lf": "cb5ac47d77686bf8cff0ec4db149cdd9e1f6d5a4d9d79eb5e2b387053acb965a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19870,10 +19950,10 @@
     {
       "source": "docs/document/advanced/class.html",
       "route": "/document/advanced/class.html",
-      "sha256Lf": "30557c47bf56e8a42a5716c6fac511efb698834c549acc15631596ca1d9fd766",
+      "sha256Lf": "50608914b881d7a94dd709794e3bb1c9f461c823a5106fdf2b4be8452eda08b7",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19883,10 +19963,10 @@
     {
       "source": "docs/document/advanced/event.html",
       "route": "/document/advanced/event.html",
-      "sha256Lf": "f20813e325ecee93fc5655ce906e7d7a4c12b6804c87562549f5979d67b978cc",
+      "sha256Lf": "daad274326ee51b273dd36366a90ba913f3d94d838da7ee29223a52e1e9d891d",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19896,10 +19976,10 @@
     {
       "source": "docs/document/advanced/global.html",
       "route": "/document/advanced/global.html",
-      "sha256Lf": "c46bfe92fdc0cd5cdcdf388c23e836acc133dba5f894f26511d61ee9f1706922",
+      "sha256Lf": "9151f57875075960b3caed67fe2829cc2bcbc605232a92246687864e779fd8a8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19909,10 +19989,10 @@
     {
       "source": "docs/document/advanced/plugin.html",
       "route": "/document/advanced/plugin.html",
-      "sha256Lf": "87652c2b8016c906925db0b71b3bbce933ef72c76be5a72d0a3b1466686e7948",
+      "sha256Lf": "2b6391532aa57d9c4924ddb8b2ca8d152938dc298aa8f1577a8412e210837d1e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19922,10 +20002,10 @@
     {
       "source": "docs/document/advanced/property.html",
       "route": "/document/advanced/property.html",
-      "sha256Lf": "7e43ee5a254eb8fd90fe82e4f6e9626958a3a0a689167f8f9eabcdbf3e8faa8f",
+      "sha256Lf": "b72c3aea3774e6c0663f05b735769be30966582fd8c0164b4a4c996e00822908",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19935,10 +20015,10 @@
     {
       "source": "docs/document/component/contextmenu.html",
       "route": "/document/component/contextmenu.html",
-      "sha256Lf": "1fdc01a6750f49df5827daaf26180dfcc8618f48ba751f1b1817328ef9eea33b",
+      "sha256Lf": "eb912363a51e34ea4dfe8b5c3d9bf9600e2b6111d5cea8e3010e8305816de393",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19948,10 +20028,10 @@
     {
       "source": "docs/document/component/controls.html",
       "route": "/document/component/controls.html",
-      "sha256Lf": "84888a71e4edf12641a3931f6274f6f426bc98b1c4129709017a5afd3edd750c",
+      "sha256Lf": "e185c8596e97aab8dd3550167b1288fde5b86c0f1211f6bd29943cad28b4877e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19961,10 +20041,10 @@
     {
       "source": "docs/document/component/layers.html",
       "route": "/document/component/layers.html",
-      "sha256Lf": "bd6adbca8f2d80b2228728f0ac6fbe1f2fecfb0451f746cf4b6264c035770b08",
+      "sha256Lf": "2c088855441be1a3a6932af4f8043e46c037b123ab5c816cc08997725f5c726f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19974,10 +20054,10 @@
     {
       "source": "docs/document/component/setting.html",
       "route": "/document/component/setting.html",
-      "sha256Lf": "4276519fef1b21fa9244b013dd7644fa59d58642c88582a97e460c45e0114949",
+      "sha256Lf": "46be04a88522f1619b4d65053552d467e40b94e6bdc211b5198cdc3b7c5956e5",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19987,10 +20067,10 @@
     {
       "source": "docs/document/en/advanced/built-in.html",
       "route": "/document/en/advanced/built-in.html",
-      "sha256Lf": "ada94325b7054bda231bf4267caaa28391df346cc5f0ab68228340e0823aa6b3",
+      "sha256Lf": "08a07f93cb754b4d8095ddcb8bb7588ce5c1053b89eecbac26888140172134a4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20000,10 +20080,10 @@
     {
       "source": "docs/document/en/advanced/class.html",
       "route": "/document/en/advanced/class.html",
-      "sha256Lf": "cc7871347a284446e5f9f6558b512487d921722ae82446f6a7108f3355d895d2",
+      "sha256Lf": "84e6cf61ed459585da61c12d86b925501bb5467767fc3edd40a3a37e9ffa1da8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20013,10 +20093,10 @@
     {
       "source": "docs/document/en/advanced/event.html",
       "route": "/document/en/advanced/event.html",
-      "sha256Lf": "ac7d8393cf24cd41e792a6652c514ed2e318b8739ecee367bb92e95bebba4627",
+      "sha256Lf": "5406b859de74c2001f09b2d3d7ab2dfcc640b230abbf862465662750735da170",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20026,10 +20106,10 @@
     {
       "source": "docs/document/en/advanced/global.html",
       "route": "/document/en/advanced/global.html",
-      "sha256Lf": "6ce547f57876272a765a5def53b80cd463b89c79ac3c41216bf11f7a9a948a50",
+      "sha256Lf": "b2cf6374b7e10129cf7ce0087a76c71ba121da49665169fbc5d15939902724b5",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20039,10 +20119,10 @@
     {
       "source": "docs/document/en/advanced/plugin.html",
       "route": "/document/en/advanced/plugin.html",
-      "sha256Lf": "603dd53ab631b36d600daeba88fdf66488dfc06a36e015b8a7d0670ea593d614",
+      "sha256Lf": "650db55f946b71a06863f334e9a1f03254a8bd4e8b8f60305b75b2df0e0f05e4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20052,10 +20132,10 @@
     {
       "source": "docs/document/en/advanced/property.html",
       "route": "/document/en/advanced/property.html",
-      "sha256Lf": "2067b0dbbfc20c16be5e8708f789e547f4eb99b92c94c81edb230770dba7c940",
+      "sha256Lf": "b033e47695ed9bb30b5b899057586dcfd44732a121e8b060bde3848fe25900a0",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20065,10 +20145,10 @@
     {
       "source": "docs/document/en/component/contextmenu.html",
       "route": "/document/en/component/contextmenu.html",
-      "sha256Lf": "1d66d7c1ce3815eeca9a2b2d163dd63bafd6539ef5b502579ec889373112dca5",
+      "sha256Lf": "ca7901e0044e3a85bd14f52faced0d99c74d3632cf8ad9202d39e860efe3daec",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20078,10 +20158,10 @@
     {
       "source": "docs/document/en/component/controls.html",
       "route": "/document/en/component/controls.html",
-      "sha256Lf": "419a32d5752402789d83cc643a9573e237f4ffd9fb484a9caaa306ee8b18cc56",
+      "sha256Lf": "906df163a46f6a9c0448617cdfe9a409a196b0cd6524cf54c124a9ce72451d44",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20091,10 +20171,10 @@
     {
       "source": "docs/document/en/component/layers.html",
       "route": "/document/en/component/layers.html",
-      "sha256Lf": "43f5ed60c01cadf26d008a6e3ea942471a0bb044c5e873fbd43c1b714778424f",
+      "sha256Lf": "eff000f9100418f501967f57b2661bc6eebae3e0e26409afb29adceeaca22775",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20104,10 +20184,10 @@
     {
       "source": "docs/document/en/component/setting.html",
       "route": "/document/en/component/setting.html",
-      "sha256Lf": "cf0d561b3b1aa0cf5a9fbaef06eb6aeb6ce8978a5c403ad592311f1e7af6b1d0",
+      "sha256Lf": "fa95e6d565e32f1406415588c30ece76c27f9f02559c1291843ecf71088717f6",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20117,10 +20197,10 @@
     {
       "source": "docs/document/en/index.html",
       "route": "/document/en/",
-      "sha256Lf": "b8f5df07ef351dc734fc45a77df8f16d6be86d60267c4365ee3b1597d647a8c7",
+      "sha256Lf": "0d1273ee4cebff91fd750dffaec9e980f705727a8e70bf5905ad34355143524b",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20130,10 +20210,10 @@
     {
       "source": "docs/document/en/plugin/ads.html",
       "route": "/document/en/plugin/ads.html",
-      "sha256Lf": "82beba9f8690101dfc7fb2e2b6050ee6219eb143ecdfd081a2fa7d81d2a7edd7",
+      "sha256Lf": "8c5f09c8b8e523b27a818aa9fab06c8e106980e6fd48936134ac24169bc9521d",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20143,10 +20223,10 @@
     {
       "source": "docs/document/en/plugin/ambilight.html",
       "route": "/document/en/plugin/ambilight.html",
-      "sha256Lf": "9059e8f05a76b19a3447c48f1a7753536b1a0f54a57b534b7ee07aae2fa43795",
+      "sha256Lf": "c29b203515982608da39ea659d12624432fb77501e834f2cb477c8cef338d173",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20156,10 +20236,10 @@
     {
       "source": "docs/document/en/plugin/asr.html",
       "route": "/document/en/plugin/asr.html",
-      "sha256Lf": "90e9c9b65e634a7a9ee1bd9fa4942bbc16e1d4ec40e8a07c8ee1041b94dede97",
+      "sha256Lf": "b73bae5c21c70ca0b9726cd60dee0284c60d9b23d2b06e9c4a8147b633a32ef6",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20169,10 +20249,10 @@
     {
       "source": "docs/document/en/plugin/audio-track.html",
       "route": "/document/en/plugin/audio-track.html",
-      "sha256Lf": "ad8d51155a42da0546163c46692f972ac95a4f4dc6bc0c673641c9663329d2d3",
+      "sha256Lf": "6f8367cd42236dd07019b35dd4078788c5df96c2416f0c34760756276f1da6b5",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20182,10 +20262,10 @@
     {
       "source": "docs/document/en/plugin/auto-thumbnail.html",
       "route": "/document/en/plugin/auto-thumbnail.html",
-      "sha256Lf": "1f69ea3368d271125c19b1d9a27302094f487a8181e3d73235f548cb25530a53",
+      "sha256Lf": "3adfc6faac0b4dbb40f8939debd2d856b765efbb2452ff86ad0a1f8ce868ed32",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20195,10 +20275,10 @@
     {
       "source": "docs/document/en/plugin/chapter.html",
       "route": "/document/en/plugin/chapter.html",
-      "sha256Lf": "51aceaaf79120c67bf6d48e6bf0b49274a315d72d4b52a0e1920cd159a1a6b3d",
+      "sha256Lf": "f419aa73b042ec697c5321d3e10c6d8ed3879523de11409bf72978ccfd9dc107",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20208,10 +20288,10 @@
     {
       "source": "docs/document/en/plugin/chromecast.html",
       "route": "/document/en/plugin/chromecast.html",
-      "sha256Lf": "b5d05b3170509df17d9bee1737b96f26e88b077556633cbf0e88ac33996e3321",
+      "sha256Lf": "8e371528e6c81b1b90ba9a45cbca10224ad6e80e4b189f54f131ff4f1c880419",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20221,10 +20301,10 @@
     {
       "source": "docs/document/en/plugin/danmuku-mask.html",
       "route": "/document/en/plugin/danmuku-mask.html",
-      "sha256Lf": "b877da5700fcef93f6678449ac3067c71ff233d9f70559dfc52bf523dc3f567c",
+      "sha256Lf": "b01e5620a7480f6accfe4e8861a2b0a474541247602325557e99c0775b18e2bd",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20234,10 +20314,10 @@
     {
       "source": "docs/document/en/plugin/danmuku.html",
       "route": "/document/en/plugin/danmuku.html",
-      "sha256Lf": "74dbb6df7b2c8daad135ebf3060bff5fbec2bec2dcf177e228d884e48343d121",
+      "sha256Lf": "c91fbd85966a436f7c42bf26e9e5510bf9db5fa4a766ed726db34fc585289872",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20247,10 +20327,10 @@
     {
       "source": "docs/document/en/plugin/dash-control.html",
       "route": "/document/en/plugin/dash-control.html",
-      "sha256Lf": "1394492462825080d30d39b1d123edfae52182ba54ed79029978a4345bd0fa0e",
+      "sha256Lf": "3c12bbb8c87c66033e3deedcf9eb564267f7dae9db22502a551a50e0b42dd013",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20260,10 +20340,10 @@
     {
       "source": "docs/document/en/plugin/document-pip.html",
       "route": "/document/en/plugin/document-pip.html",
-      "sha256Lf": "f00739d82a304bda4fedb366b93bc827e191884324651f888ffe07a87dde9a2e",
+      "sha256Lf": "f58072e009bdcc1fd137bb43a28536e6a5a184427c4b246df4a028bd635d2c23",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20273,10 +20353,10 @@
     {
       "source": "docs/document/en/plugin/hls-control.html",
       "route": "/document/en/plugin/hls-control.html",
-      "sha256Lf": "bd91235379d15c2ae9148ce3cba8a37ef4ddccc5a70be89f21b6c2e8b849785a",
+      "sha256Lf": "92791504daad4e27282a5af9549af96149921edc3a19dd39a292bb6cc5869637",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20286,10 +20366,10 @@
     {
       "source": "docs/document/en/plugin/jassub.html",
       "route": "/document/en/plugin/jassub.html",
-      "sha256Lf": "be8fad73ab8851f0b60df9e25e77816d01ba6f5e1f58db46dded4e26e992a1e6",
+      "sha256Lf": "cdc42f11db8701bdd7baf3754f71d06651324931299e997e2b951f36c4efb209",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20299,10 +20379,10 @@
     {
       "source": "docs/document/en/plugin/multiple-subtitles.html",
       "route": "/document/en/plugin/multiple-subtitles.html",
-      "sha256Lf": "806e2094fb17269e9d80f74fc7731f5194d301ce00269922712a09a2035489c1",
+      "sha256Lf": "b6910a252ece3c0c481f31c6889945fb3f273c4379ffa4ee4952623f4fdd5f32",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20312,10 +20392,10 @@
     {
       "source": "docs/document/en/plugin/vast.html",
       "route": "/document/en/plugin/vast.html",
-      "sha256Lf": "23651369d3ad4e4fe46edea9e6329cbbc2d2cd829d2ba695ad9691398587c971",
+      "sha256Lf": "7a49896edc7f80b0270edbcce08b2ef3409e8fc0d62e03e4a128426eb2a5b4d8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20325,10 +20405,10 @@
     {
       "source": "docs/document/en/plugin/vtt-thumbnail.html",
       "route": "/document/en/plugin/vtt-thumbnail.html",
-      "sha256Lf": "411785a51256a48a3975751e06de62f58e09bc60be4a55a9edc36491d44f5b1a",
+      "sha256Lf": "fd6f375d1439e17f9a75c073a3dffd3b5cf58d5ab0637876d15225850fa75521",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20338,10 +20418,10 @@
     {
       "source": "docs/document/en/proxy/canvas.html",
       "route": "/document/en/proxy/canvas.html",
-      "sha256Lf": "159fc83e30f9f38c87f231e7a38f1dfb5dd78b6db905401698141b1884b61db5",
+      "sha256Lf": "c60dd2457ca69343521803c9d795d769eed71fa4aaa6d633aecf8545eabedcaa",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20351,10 +20431,10 @@
     {
       "source": "docs/document/en/proxy/mediabunny.html",
       "route": "/document/en/proxy/mediabunny.html",
-      "sha256Lf": "748b227046e041c559e185c3de48292f355515e7e47feb544934b4c29808f236",
+      "sha256Lf": "3b1a4e33eeff288212572e5c587d2bbbdfee7e0add82ea38b3b2d8c1b1a9b417",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20364,10 +20444,10 @@
     {
       "source": "docs/document/en/start/i18n.html",
       "route": "/document/en/start/i18n.html",
-      "sha256Lf": "43a4ebb27cbdc623f89ef0f1f6988a39ef62527e887a7e03235d5378731c202f",
+      "sha256Lf": "ecc21d13460803ffa953c2ac44756f8a06a22eb9a017015a7c95dc95237bbac0",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20377,10 +20457,10 @@
     {
       "source": "docs/document/en/start/option.html",
       "route": "/document/en/start/option.html",
-      "sha256Lf": "e1812298a8b1a6205084472c79efd98289aee6d69aa4c7ad10b21fe3d86fee40",
+      "sha256Lf": "f0a1024f55492314372ad8b0222a753569e9d4318e7638484979f12b74eab5e2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20390,10 +20470,10 @@
     {
       "source": "docs/document/en/tool/iframe.html",
       "route": "/document/en/tool/iframe.html",
-      "sha256Lf": "e9237a4414fbd2b55d624bcb47d51fe9212e0a71ea35ed52b226f9d3a4260e7c",
+      "sha256Lf": "37cfe1e82747932cbc0d1b48f61b24105c9cbd8732c70c34e83d5e901be61bd2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20403,10 +20483,10 @@
     {
       "source": "docs/document/en/tool/thumbnail.html",
       "route": "/document/en/tool/thumbnail.html",
-      "sha256Lf": "9622ca9191c7248177759978caa52cbe8ad64580e6e1629b12209dc174daeccf",
+      "sha256Lf": "397dde44675331faafd0bb557934bf1afbdebed0409b70e69599eb023ca170d5",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20416,10 +20496,10 @@
     {
       "source": "docs/document/index.html",
       "route": "/document/",
-      "sha256Lf": "4cf134356608d832246fa47d3a260ec50c654fb4d7763794fb7a56ccd46d19b1",
+      "sha256Lf": "535836591d4ccdf032c1fea6e714641acee6b8a78c30fd6ace3d2b0f8110d9e7",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20429,10 +20509,10 @@
     {
       "source": "docs/document/plugin/ads.html",
       "route": "/document/plugin/ads.html",
-      "sha256Lf": "1c8cf5d6794b40308ffb617cd4eae69bf5b5a1afacb025e017c3edaccd8d3597",
+      "sha256Lf": "9d60b0f8b8272a4fc3e7ba20adbebf34fc43b8f0fdd0ee034e6dfab9e944bf24",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20442,10 +20522,10 @@
     {
       "source": "docs/document/plugin/ambilight.html",
       "route": "/document/plugin/ambilight.html",
-      "sha256Lf": "c45a1566095bcbd231495d4064b6a50e496dbb14f455055ae7f07a49ad87d647",
+      "sha256Lf": "bc23864bd58f2dbcf05ff6390f9fea08bd59d6e31d18e72f780b6ef7f112dd37",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20455,10 +20535,10 @@
     {
       "source": "docs/document/plugin/asr.html",
       "route": "/document/plugin/asr.html",
-      "sha256Lf": "f872c1b7f988261e499e7a1b253d645e00b6290865f0e3cfc85f63a6654d28ce",
+      "sha256Lf": "22704f080e47e1ba87be12ff4dd616536a557c47bbaf9aa236b4d3ca9dd61cc1",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20468,10 +20548,10 @@
     {
       "source": "docs/document/plugin/audio-track.html",
       "route": "/document/plugin/audio-track.html",
-      "sha256Lf": "ce3a3a5fb6b9e7503847cdaf8313161059cd1f1a4802a186dabfd57db6beff13",
+      "sha256Lf": "15fac6c6d0f4e7f0a8470c194ffb30d2a3b1af93505a4f7072adc3844b7b9658",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20481,10 +20561,10 @@
     {
       "source": "docs/document/plugin/auto-thumbnail.html",
       "route": "/document/plugin/auto-thumbnail.html",
-      "sha256Lf": "784baf0c19f228c9cf49e1ab90ce198546e6f305f6758e8dfd64d9d118c67792",
+      "sha256Lf": "a14f21a43f500906a216fd8c7414e10c3b053f16bca98c265a2215215e238f2c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20494,10 +20574,10 @@
     {
       "source": "docs/document/plugin/chapter.html",
       "route": "/document/plugin/chapter.html",
-      "sha256Lf": "677e390df81bd393a779fa59fdfa68e4e655d9cee2cf285a0a823f3cec1b3a5b",
+      "sha256Lf": "e0ecde19f1f0d5658133c46b9d06d106bba628d3d3e8116e0720c0a6df54594f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20507,10 +20587,10 @@
     {
       "source": "docs/document/plugin/chromecast.html",
       "route": "/document/plugin/chromecast.html",
-      "sha256Lf": "23e62da4fe8f2ee90be3153b4115b3ef08b74eb2376f3830509171665e6f8a1c",
+      "sha256Lf": "db22b83d0c482365b6b3ba338e5b6a024aac8622e91e029363c9cb4d6920ede8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20520,10 +20600,10 @@
     {
       "source": "docs/document/plugin/danmuku-mask.html",
       "route": "/document/plugin/danmuku-mask.html",
-      "sha256Lf": "78da2f5a6600d725c2f2b0f7b8592396fbe3fbf12a26aca61e02aac42692c154",
+      "sha256Lf": "5a9ab80bc61a70f152adbc89acefe772326981927c0068fd187dd0cf66026cd7",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20533,10 +20613,10 @@
     {
       "source": "docs/document/plugin/danmuku.html",
       "route": "/document/plugin/danmuku.html",
-      "sha256Lf": "9efa706a1266dcd16089f6c50b80d09b608d71392c9a72b4c08002ea23260401",
+      "sha256Lf": "b99583202bbe95afdaf4fa3e4dcfa1d5f04a94d56b69235791c6eb678df001c5",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20546,10 +20626,10 @@
     {
       "source": "docs/document/plugin/dash-control.html",
       "route": "/document/plugin/dash-control.html",
-      "sha256Lf": "c0fbc4de3b0246fa578c787754e3c24baf1e1cbd712063e257dc9b51fb38e50b",
+      "sha256Lf": "6abe2c4bf9b69810afbf81a08afa91430d64c3155e07881e448e7052a07c0e4b",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20559,10 +20639,10 @@
     {
       "source": "docs/document/plugin/document-pip.html",
       "route": "/document/plugin/document-pip.html",
-      "sha256Lf": "6e737dba9701d94ab1d620dff5d2801b3adb1f51bdb4baced8a1f7c047e25c71",
+      "sha256Lf": "c2f60adca8b7353d7d179415ad44158d15423738ae9a062383bb8b70b0c357f4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20572,10 +20652,10 @@
     {
       "source": "docs/document/plugin/hls-control.html",
       "route": "/document/plugin/hls-control.html",
-      "sha256Lf": "e4d3b9b8d1c5b346259f68f274bcac4d3b8d880c7f7f79ca1f918fd37b5fc479",
+      "sha256Lf": "89004d0b64f32024e8845b26616de4d5bb95971988a50724fd0ecab96757d9fb",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20585,10 +20665,10 @@
     {
       "source": "docs/document/plugin/jassub.html",
       "route": "/document/plugin/jassub.html",
-      "sha256Lf": "19c17cc09e6d930f36dfb2959038303fd6c5804cfd310f36144d0c3d60a746a6",
+      "sha256Lf": "a9b57dfac7b6bfc928bce7446092aabbc889aaf4524a5ac648a57036f52ebb77",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20598,10 +20678,10 @@
     {
       "source": "docs/document/plugin/multiple-subtitles.html",
       "route": "/document/plugin/multiple-subtitles.html",
-      "sha256Lf": "ba1863d9bfbf2cb81fc303f4310bba3bb9daf1ece53d52859f055c56a7f3dff0",
+      "sha256Lf": "ce5972675540da9e165752f40deb4c994b8f9675a6ebcca76b74cd1dbb5f7962",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20611,10 +20691,10 @@
     {
       "source": "docs/document/plugin/vast.html",
       "route": "/document/plugin/vast.html",
-      "sha256Lf": "1b0135cc7b7952d20c1a3ed9d5706b571799c3fc4f68f09199651f1928b2bc6d",
+      "sha256Lf": "2deef3d4d4aadd32437de41e8c2bdc8e8a3508ff0a24ec56b2d42cec2c029d65",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20624,10 +20704,10 @@
     {
       "source": "docs/document/plugin/vtt-thumbnail.html",
       "route": "/document/plugin/vtt-thumbnail.html",
-      "sha256Lf": "eb3b009dc597c1938309b58fbb3500644290f242499b99ddf5f0f343cfbb4100",
+      "sha256Lf": "876bd5f5d296925839ad46336cc54b9e42207e10b6c0be614ebea8324f72372a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20637,10 +20717,10 @@
     {
       "source": "docs/document/proxy/canvas.html",
       "route": "/document/proxy/canvas.html",
-      "sha256Lf": "0a8be675be459241a4ddb5f4f33f4623f79d6d9c743a5a77c8125c467c3c5f9c",
+      "sha256Lf": "80df853daa77f7cbc867720e594d41cb038dec8ae4cfb44db7247309ca97c71e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20650,10 +20730,10 @@
     {
       "source": "docs/document/proxy/mediabunny.html",
       "route": "/document/proxy/mediabunny.html",
-      "sha256Lf": "6eb9d98079ed9f26f80b7f474b5ef870db2410c184737e5c6de228e1f37b6429",
+      "sha256Lf": "50320daf57456aa0bb0f1fec47f91db97d695391065cf0a271c4cb2261f57c39",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20663,10 +20743,10 @@
     {
       "source": "docs/document/start/i18n.html",
       "route": "/document/start/i18n.html",
-      "sha256Lf": "80cc53ca12d53833cfce0d381e51ef757b94b1da50a350f13a58d7a0423c9bd0",
+      "sha256Lf": "289cbbb6e559de47932cf3c9e0ea0bbd8f7a5aa38b65f2b52b40b2bbf2d749a4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20676,10 +20756,10 @@
     {
       "source": "docs/document/start/option.html",
       "route": "/document/start/option.html",
-      "sha256Lf": "08ff965b254d820944588236a84c782d4c26cbce518ca3fde7b36e50b0ba8972",
+      "sha256Lf": "e445789e08cc524a15fbb030ac3f0385e7f08e351b9b6a6f2314cf57a2c49138",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20689,10 +20769,10 @@
     {
       "source": "docs/document/tool/iframe.html",
       "route": "/document/tool/iframe.html",
-      "sha256Lf": "8777b1c3e9acebd28f967477616fc8a3bb04bd2cecb1009cb405928412552769",
+      "sha256Lf": "eed50ab4ed7ac652b27122b70fc36fde0463e007765bba92951b157c69391ad4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20702,10 +20782,10 @@
     {
       "source": "docs/document/tool/thumbnail.html",
       "route": "/document/tool/thumbnail.html",
-      "sha256Lf": "0d08cd807880d089a86f4ed966d7b612a402fc809275baf70f809ccdca3d380d",
+      "sha256Lf": "e8fde992f8652630520e9784d4ada948e52a35e101c6144dad0b5f29f3dc01b8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.CghJeLiW.js",
+        "/document/assets/app.Dr65-s5r.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],

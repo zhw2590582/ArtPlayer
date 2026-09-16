@@ -55,6 +55,76 @@ void [instances, identifier, retained];
 ```
 
 
+## 播放、进度与切源契约 {#playback-contract}
+
+### 方法返回与媒体状态 {#playback-results}
+
+play() 返回 Promise，等待当前媒体的 play() 结果；原生拒绝仍向调用者传播。成功后才显示播放提示、派发自定义 play，再根据 mutex 暂停其他实例。切源或销毁使原请求过期时，调用者仍收到媒体结果，但过期请求不再更新提示、派发 play 或暂停其他实例。自定义监听器等后续逻辑抛错也可能使 Promise 拒绝，不能把所有拒绝都解释成解码失败。
+
+pause() 同步调用媒体 pause()，随后显示暂停提示、派发自定义 pause，并返回媒体方法的结果；通常原生返回 undefined，代理可能不同。toggle() 根据调用时的 playing 选择并直接返回 play() 或 pause() 的结果，不保证每次都是 Promise。根 Player.toggle 保留历史 void 声明；根入口导出的 PlaybackControls 是无运行时对象的类型视图，可用于原生媒体的准确返回类型。runtime 入口还按媒体泛型保留代理返回值。
+
+这三个方法捕获所属实例，抽取后调用仍操作原实例。自定义 play/pause 事件与 video:play/video:pause 不同：原生事件由浏览器派发，时间顺序不能仅从方法调用推断。playing 优先使用代理提供的 boolean playing，否则要求 currentTime > 0、paused 为 false、ended 为 false 且 readyState > 2；它不是简单的 !paused，时间零或缓冲期间可能为 false。
+
+### 时间、音量与缓冲数值 {#playback-values}
+
+| 接口 | 实际行为 |
+| --- | --- |
+| currentTime | 读取媒体时间，假值回退 0；写入先 parseFloat，再限制到 0 与 art.duration 之间，NaN 输入不写入。runtime 接受 number/string，根声明保留 number |
+| duration | 读取媒体时长，Infinity 和假值返回 0；直播的无限时长因此不作为可 seek 的有限终点 |
+| seek | 只写属性；通过 currentTime 写入后显示进度提示并同步派发 seek(实际时间, 原始输入)，不是等待原生 seeked 的 Promise |
+| forward / backward | 只写属性，分别把 currentTime + 秒数或 currentTime - 秒数转给 seek；请传数字，旧 JS 的加法与减法强制转换并不相同 |
+| volume | 写入限制到 [0, 1]，提示使用媒体接受后的值；只有非零音量写入 storage 的 volume 键，零不会覆盖上次非零值，也不会自动更改 muted |
+| muted | 写入媒体后同步派发 muted，重复赋相同值也会派发；传 boolean，原生字段的强制转换不改变事件携带的原始输入 |
+| playbackRate | 真值且不同于当前值时写入媒体并提示；假值恢复为 1，相同值不再写入。浏览器不支持的速率仍可抛错，配置菜单不是浏览器能力保证 |
+| loadedTime | 返回最后一个 buffered 区间的结束时间，无区间时为 0；不是所有区间长度之和，也不保证中间连续 |
+| loaded | loadedTime 除以原始媒体 duration；没有裁剪或无效值修正 |
+| played | currentTime 除以 art.duration；是当前位置比例，不是累计观看时长或原生 played 区间 |
+
+loaded/played 在未就绪、零时长或特殊代理状态下可能是 NaN/Infinity，显示百分比前检查 Number.isFinite；不要据此推断可播放性。seek、forward、backward、switch 和 quality 没有 getter，读取都是 undefined；根声明保留历史读取类型，runtime 如实描述只写行为。currentTime 直接写入不会同步派发自定义 seek，原生媒体仍会自行派发事件。
+
+attr(key, value) 直接读写构造时捕获的媒体对象属性，不是 HTML attribute API。省略 value 或显式 undefined 都是读取，写入返回 undefined；可使用 symbol，异常按底层属性行为传播。绕过 art 的属性门面直接修改媒体，不会执行门面自己的提示、存储或自定义事件。不要替换 template.$video 来实现切源：多数属性捕获原节点，duration 则读取当前模板，替换会造成两套状态。
+
+### 地址赋值、完成与取消 {#source-transitions}
+
+url 读取媒体 src，原生通常是浏览器解析后的绝对地址，代理也可能返回 null；option.url 保存调用方输入，二者不保证相等。type 读写 option.type，非空时优先于地址扩展名选择 customType；修改 type 本身不重新加载媒体。
+
+直接赋 url 会替代当前切源操作。原生地址写入 src；customType 回调延后到下一轮执行，以实例作为 this，参数仍为 video、输入 URL、art。回调返回的 Promise 不作为媒体就绪信号，其拒绝会被归属的操作处理。只有实际 src 与旧值不同才更新 option.url；已 ready 且有旧地址时，当前源的 canplay 才触发 restart。自定义适配器仍需正确更新媒体并派发事件，核心无法替它判断外部 SDK 是否真正就绪。
+
+switchUrl(url) 从 0 开始，switchQuality(url) 保存调用时的位置；两者先暂停，再赋值，等待媒体就绪/必要的 seek 完成，恢复速率和比例，并按当前播放意图尝试恢复播放。加载过程中显式 pause 可以取消恢复播放，新的公开 seek/currentTime 写入优先于自动位置恢复。返回值是 `Promise<void>`：通常完成表示当前切换流程已结束，但内部恢复 play 是尽力执行，拒绝不再使切源 Promise 失败。
+
+后续切源、直接 url 赋值或 destroy 会结束旧操作，旧 Promise 正常 resolve，迟到回调不再恢复旧状态。与当前 art.url 严格相等的调用也是正常无操作；相对地址与解析后的绝对地址未必相等。空地址切换会完成并显示加载状态，不会由此清空旧 src，不能用它代替 reset。正常流程仍可因媒体错误、自定义适配器或状态恢复异常 reject；应处理拒绝。resolve 不能单独证明请求的地址已在播放，业务应结合当前源和媒体状态判断。
+
+switch 是调用 switchUrl 的只写兼容入口，赋值表达式不会返回切源 Promise；需要捕获完成或错误时使用方法。直接 url setter 的失败会记录到控制台，赋值也没有可 await 的 Promise。URL/Blob URL 由提供者管理，核心切源及销毁不撤销调用方 URL。
+
+### 画质列表与选择 {#quality-contract}
+
+quality 接受含 html、url、可选 default 的数组；html 是字符串或 HTMLElement。设置会更新名为 quality 的右侧控件，标签取第一个 default 项，否则取第一项；这一步只设置 UI，不自动切换对应 URL，也不按当前源猜测高亮。数组及条目沿用控件的引用和 default 更新语义，不是不可变副本。
+
+选择器点击会先更新 default 与标签，再调用 switchQuality；完成后只对仍有效的选择更新提示与返回标签。替换控件、较新选择或销毁会使旧的异步更新失效。空数组保留空的 quality 控件，不等同于 controls.remove('quality')。读取 art.quality 不返回列表，需要调用方保存配置。静态 URL 列表不是 HLS/DASH 的自适应轨道发现；这些 SDK 使用各自插件。
+
+```ts
+import Artplayer from 'artplayer/runtime';
+import type LegacyArtplayer from 'artplayer';
+import type { PlaybackControls } from 'artplayer';
+
+const art = new Artplayer({ container: '#player', url: '/assets/sample/video.mp4' });
+function nativeCommands(player: LegacyArtplayer): PlaybackControls {
+    return player;
+}
+async function togglePlayback(): Promise<void> {
+    await art.toggle(); // May reject when the branch requests play.
+}
+async function changeSource(url: string): Promise<void> {
+    await art.switchUrl(url);
+    // Completion includes cancellation; inspect art.url and media state as needed.
+}
+const progress: number | null = Number.isFinite(art.played) ? art.played : null;
+art.currentTime = '12.5';
+const unreadable: undefined = art.seek;
+void [nativeCommands, togglePlayback, changeSource, progress, unreadable];
+```
+
+
 ## `play`
 
 -   Type: `Function`
@@ -319,7 +389,7 @@ art.on('ready', () => {
 
 :::warning 提示
 
-`art.switch` 和 `art.switchUrl` 的功能是一样的，只是 `art.switchUrl` 方法会返回 `Promise`，当 `resolve` 时表示新地址是可以播放，`reject` 时表示新地址加载错误
+`art.switch` 与 `art.switchUrl` 使用同一切换流程，但只有方法返回可观察的 Promise。正常完成、被替代、销毁、相同地址或空地址都可能 resolve；内部自动恢复播放失败也不等同于切源失败。请处理 reject，并结合当前源与媒体状态判断结果，详见[地址切换契约](#source-transitions)。
 
 :::
 

@@ -4597,7 +4597,9 @@
         "baselines/site04-css.json",
         "changes/2026-09-16-SITE-04-css.md",
         "baselines/site04-lifecycle.json",
-        "changes/2026-09-16-SITE-04-lifecycle.md"
+        "changes/2026-09-16-SITE-04-lifecycle.md",
+        "baselines/site04-playback.json",
+        "changes/2026-09-16-SITE-04-playback.md"
       ]
     },
     {
