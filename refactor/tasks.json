@@ -5089,7 +5089,10 @@
         "baselines/dash-candidate-refresh-check.json",
         "changes/2026-09-16-REL-02-shared-tools-refresh.md",
         "baselines/shared-tools-candidate-refresh.json",
-        "baselines/shared-tools-candidate-refresh-check.json"
+        "baselines/shared-tools-candidate-refresh-check.json",
+        "changes/2026-09-16-REL-02-site-inputs-refresh.md",
+        "baselines/site-inputs-candidate-refresh.json",
+        "baselines/site-inputs-candidate-refresh-check.json"
       ]
     },
     {

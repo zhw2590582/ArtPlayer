@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "package": "artplayer-plugin-hls-control",
+  "version": "2.0.0",
+  "gate": "build",
+  "candidateIntegrity": "sha512-R5FvRq7zCtRq/InKW9QhT+XXGVRr/K9h+4gZgnU1WT/65e8+bof8rpEColG4H7Z3c5gJP09Qrwge0Qm/ahCg7A==",
+  "inputFingerprint": "2f96b8aea69fd7f172ae9dcf397a894e66e32a5b198e295395de274280e0c1eb",
+  "result": "pass",
+  "checks": [
+    {
+      "id": "major-version-and-distribution-members",
+      "result": "pass",
+      "mode": "native"
+    },
+    {
+      "id": "production-build-archive-members",
+      "result": "pass",
+      "mode": "native"
+    },
+    {
+      "id": "isolated-install-and-frozen-lock",
+      "result": "pass",
+      "mode": "native"
+    },
+    {
+      "id": "unchanged-source-and-validation-inputs",
+      "result": "pass",
+      "mode": "native"
+    }
+  ],
+  "environment": [
+    {
+      "os": "Windows",
+      "node": "v24.21.0",
+      "yarn": "1.22.22",
+      "remote": false
+    }
+  ],
+  "command": "yarn test:package --browser",
+  "reviewedBy": "Codex implementation verification; formal REVIEW-01/02/03 not started",
+  "artifacts": [
+    {
+      "path": "refactor/.cache/release-ledger-IySLnm/report.json",
+      "sha256": "c6c80aab2debd27c6ab817d1320089814af26ab3269f8ebed0b265305b55a5b8"
+    },
+    {
+      "path": "refactor/.cache/release-ledger-aiQwnf/report.json",
+      "sha256": "c6c80aab2debd27c6ab817d1320089814af26ab3269f8ebed0b265305b55a5b8"
+    },
+    {
+      "path": "refactor/.cache/packages/run-kK0VCe/report.json",
+      "sha256": "98bfa364c21b3d546ce564fc34fa991d62b3dae6c8be9ab818c43b52ac35dc00"
+    },
+    {
+      "path": "refactor/.cache/packages/run-kK0VCe/build.log",
+      "sha256": "b11b6d883e6efc8aa3497e83d718894ecbc4136ae2f45843727cb5b18331f00b"
+    },
+    {
+      "path": "refactor/.cache/packages/run-kK0VCe/install.log",
+      "sha256": "c3b09f4c65bfb4a1bf31ddd2e3328c22988cf52a31e36c31ea2de4d3132a89c6"
+    },
+    {
+      "path": "refactor/.cache/packages/run-kK0VCe/frozen-install.log",
+      "sha256": "6d8a95fad69ac94a55d176b472fc3a0f72783092e49b7e683156b6717510f4a8"
+    },
+    {
+      "path": "refactor/.cache/packages/run-kK0VCe/consumer-yarn.lock",
+      "sha256": "06ddd9575e09d917a6895cf0c72c8df600dd8cc65087480cd1b5496dfb6635ff"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-9Vhpv4/report.json",
+      "sha256": "8b394e3bd441fa6736592aa24ff5e441d04e95601aee95d789e495a5ea46a081"
+    },
+    {
+      "path": "refactor/.cache/rel02-site-inputs-toolchain.log",
+      "sha256": "552ad579504bc6a72c8a48e6c8b312bef4f9b9bf7c40195873c7cf918b1da53a"
+    },
+    {
+      "path": "refactor/.cache/rel02-site-inputs-packages.log",
+      "sha256": "a6eb35e47e0ed6cb755716232c099239dcf69482b3ad77cce98cf1c16c716069"
+    },
+    {
+      "path": "refactor/.cache/rel02-site-inputs-thumbnail-build.log",
+      "sha256": "0377a84c13b1d244ea02f9cbc3d35212d8d9fb160a86f628c00a9bb36380663c"
+    },
+    {
+      "path": "refactor/.cache/rel02-site-inputs-thumbnail.log",
+      "sha256": "aa3e5ea0ad7205a6b1da45296daa7b0bda36a8b6bcc4850d076ad18d529aaa38"
+    },
+    {
+      "path": "refactor/.cache/record-rel02-site-inputs.mjs",
+      "sha256": "d09a7c805a8dcea55daed862b95dc33bc40c03cce05b02e3f2cf178334a6b19b"
+    },
+    {
+      "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-hls-control.tgz",
+      "sha256": "9d1aa82824e3804540e55396b3502895b8165c316c84363a55202d28403dac32"
+    },
+    {
+      "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-hls-control-pack.log",
+      "sha256": "2d2288903d2c416f7f46913b27cafe7162b3aec5eb6e7aa81bbec5a76dae86be"
+    },
+    {
+      "path": "refactor/baselines/site-inputs-candidate-refresh.json",
+      "sha256": "c39469b4e4614ec15c06c259a47ff24ca20ada97d0099da1af0d605d86b2bb3c"
+    }
+  ]
+}

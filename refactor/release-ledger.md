@@ -45,6 +45,13 @@ integrity、输入指纹不一致的 rollback 报告仍被拒绝，远端恢复�
 
 ## 候选绑定
 
+2026-09-16：SITE-05共享脚本/测试/依赖及Thumbnail-05组合更新后，从8aa99ef03
+重新构建、打包和隔离安装21库。1925个输入前后一致，1043个快照输入匹配，
+299个成员与新构建和安装副本一致，仅Thumbnail的ARCHITECTURE.md改变。
+21库build指纹恢复有效，见[准备](baselines/site-inputs-candidate-refresh.json)及
+[登记检查](baselines/site-inputs-candidate-refresh-check.json)。旧候选和报告保留，
+不将相同运行字节自动视为新候选的浏览器/设备/SDK/回退验收。
+
 2026-09-16：共享Markdown分段器及回归测试修改后，从96962a69a重新构建、打包和
 隔离安装21库。1918个输入保持一致，1041个快照输入匹配，299个归档成员与新构建、
 安装及上次候选一致。21库build指纹恢复有效，见

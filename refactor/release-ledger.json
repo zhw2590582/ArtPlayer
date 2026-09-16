@@ -63,16 +63,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer.tgz",
         "version": "6.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
-        "integrity": "sha512-+2+VWecKb9CbI3wTCs0sV7au8SNShyXahpwDAmGgZhDr22wbdv51QZnLnkPwgMgfNpVuTbsZ6A26Lpj3eY7NbQ=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "693ac1e1b107501f7202f19e8ab58ab15240e28f6ba6db0e0917eb2bebb447cd",
+        "integrity": "sha512-3HMgVqBMQzTDNJtey+EPO8UlU9+b22SbFgwCFmwXHg/1gAg7iMREaeGi0BtZrYzTAc9B7uZRtP75jBjlDa6OfA=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-shared-tools.json",
-          "sha256": "525f705d94d8670270751b6c728e3fab503b27bbaf39f5cbe06c112377513ba5"
+          "path": "refactor/baselines/major-candidate-build/artplayer-site-inputs.json",
+          "sha256": "e16d108269e939bf6a12357671fe963cde70c3fd381c290e9b2a35cc55eeb395"
         }
       }
     },
@@ -96,16 +96,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-ads.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-ads.tgz",
         "version": "3.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "55236854b94ac7b0dd91b4107dcb60e97ac6f1a5e8b6b8a9dcb63bba66c6509a",
-        "integrity": "sha512-GFDvR6oApboG4BVZapD4+ZwUcl9Juy07PKeo+dWLamk2ZxRxRBfnYqZmOzvr37WM3pM3BHkxf/UhWr0Btop1WA=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "fd20127e9c56977400b8c670fc6bc73807dec494269d24cce4bd250958a5fd27",
+        "integrity": "sha512-2VxH416Gw7XWQxTeOvuJK+xvsRrrNxDCX4QuhS/OKFonStBvB4NrA7FHTfq5Z3t1CYE8CXOKism78xpHafbihA=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-ads-shared-tools.json",
-          "sha256": "f52e250e7c7835fdb83d1f8f1547674e177a0fbb1727dba0d5f522b3eeb1a0fc"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-ads-site-inputs.json",
+          "sha256": "f0953ab14a40e1053c6b03c776ec52e3825d71f06d3071abc576848d51db9526"
         }
       }
     },
@@ -129,16 +129,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-ambilight.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-ambilight.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "f88a6a2f1c5548389cae293614f648d72077ed03a7be6c81ad017a1155a839a3",
-        "integrity": "sha512-6P9yt+wJ7v997Q7ORsr8oJadXvE71xyTX0EZ/Wo6z9ZKnyKLQXZvpH4JJLdWhzWlHnv80DPxy7se7zjCNUXPVQ=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "3b77dc69e1643822aee0a2b0b5d0571031e391e8b7e55ef13c11e20c4cb9e173",
+        "integrity": "sha512-TTAarlpk/MoP0JecH64DzfazQsQIwso03F8f5e/WtX0cq6xSur+wi5B7jhGFd3fGX0FJ47g9v8GshdLCQnSHYg=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-ambilight-shared-tools.json",
-          "sha256": "843038e6c9ce76e5058a685187f8db203ac1a4eb25e499799b0ed1ac047e3e91"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-ambilight-site-inputs.json",
+          "sha256": "dc37c7b803965dbbf9e09ea2f0c011f582358e38a392d0a98fb00c8ff492655d"
         }
       }
     },
@@ -162,16 +162,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-asr.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-asr.tgz",
         "version": "3.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "7fa3ca9577b53f3bb90e2c23fec9e6e70fbbb0c089ccae2923084b9059bcbdf9",
-        "integrity": "sha512-yo8KhQJbxhrc+Oq/X59BYyN/zlD62bsChrdBHqioPFxSkOs22Nyp4FC2tnFmc9YclcC/FCHbn5VF9t8xI0q60Q=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "7b771f0af421192fe5648ae722dd44e60dc61987354873fcd8ba30d95080ec8d",
+        "integrity": "sha512-tl28aMU3Lr08/QsX5+ZIUV3ko4oj3Q3TbLWZyT5hfmEzhVWWUgobASFSvFqJBRFCXJbwlz+3H7AdY4P32KFucg=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-asr-shared-tools.json",
-          "sha256": "5fdf60927ecf8c01a208ba532783dacc4df1757eedd8599076b1784cbb26e1df"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-asr-site-inputs.json",
+          "sha256": "9197d3c48536ee763d57d195485de08682fc1f3ccb1971bbecb49ae53695bbf8"
         }
       }
     },
@@ -195,16 +195,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-audio-track.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-audio-track.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "0c73b970872fe56df1c669e5badfa91f9cd7ec3c73070a9852cfea076cc8923f",
-        "integrity": "sha512-eQDqrJTi5gs/fEDmj7Jm+G6vm/dKztas17m6+c/v67f8AqY8ZwN5PnPLbLvQVjXF4b1v4H/bianCRnwcVpXh0w=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "08a738a0fb6e00990cbcb3b0662812f70bedd6a544c5b5cedc87ac2d1b814dce",
+        "integrity": "sha512-ue9Tph1RzrJ8zeHWvA7QPY9K+LZK0ERIUhxQvtwi6YWu+nFCamMIMTcc2YxBAGSWVk/4qoNaIAtsnzr2xmac6A=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-audio-track-shared-tools.json",
-          "sha256": "f8dd0f3c441a9c49136f4bdb577465c9fbaeafbd44f623ad7e0afc58f0a1c223"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-audio-track-site-inputs.json",
+          "sha256": "1bd45ff7ee05770af7e840a1943828f2382490a9fc0b9ddb19d16f977a67a86a"
         }
       }
     },
@@ -228,16 +228,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-auto-thumbnail.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-auto-thumbnail.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "9ced9b18e4b260ccbcf6ac016b32ec0852040cb5c0f57be72718a03d40d598bf",
-        "integrity": "sha512-cwDhP/tqidDjnEJFJioZn817zIiTf3+Hr+tSWt2moKaJSTgEhxXywMQTL2WGwY1C615ViUunDnGxS+f74R8T+w=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "5330f503bbf51c8389bc062afca872c91c92b9f698775a9448c2759bdaaa59f2",
+        "integrity": "sha512-+GYGeje9zadjrF84edKXspB4cZCdUNBGnbXJ5+aqHzpHyvwVTUFYiNJz9jYbQN+cEYXK+iwGqzngQfV9o7dE0g=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-auto-thumbnail-shared-tools.json",
-          "sha256": "dbf037ebba8e8ffcedc1136e0bde11671e330e0c8bec2724d6f9c77f22d45ff8"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-auto-thumbnail-site-inputs.json",
+          "sha256": "63d4bf77303b5a9d41c128d686de5b4e2fb7dffd696ee0779f2e7689c2596242"
         }
       }
     },
@@ -261,16 +261,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-chapter.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-chapter.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "f1dd73097e43df504f686f18a6ca30bcb1f57ab74d3cc62909db20505c994072",
-        "integrity": "sha512-uN+BfO+t2bMBPOYrDhl9Ojq2EPj0AsVogFyNIDT8fRO7PDm69eAropGrBvN9yXcO4o80UOFcZ25+CRgpN935gg=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "4ec7c64e8810c36dc59333b423875be14f2e370125caea33323eb7701f4217ab",
+        "integrity": "sha512-4R2k+iQT6fL4MvphnN2yKhHlnhKTi5Y5DuXmmAL7yDyHU8mFoBRA+WYRvHXpDLbscwOhgz3fjBl9nlS1/TNPTQ=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-chapter-shared-tools.json",
-          "sha256": "52a8d5d6e59abd98291ad2c9f51924a4737d978111ae801a9ce12f0adbeaf721"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-chapter-site-inputs.json",
+          "sha256": "f17ca8fbb74de74ba89584fbdb90fc3860069f231d35ac3b855a7af8a4bcd333"
         }
       }
     },
@@ -294,16 +294,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-chromecast.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-chromecast.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "d6d79d4b47afaefa66d32c5b1709f412ed9d32c636462723918c268a6601e631",
-        "integrity": "sha512-sO8nTpzsuu/16E/0s9bs1n9o4sWB7lDky2/s0M6E2QUTNvhkQGm48Cmfho908QH8BtteW4J6RJwFHxO7YaeXwA=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "e05496198b0cd7e99fd335de0125d36187c2ffa59d0699e46ef295d8d279ee37",
+        "integrity": "sha512-84Dm7cSe8tpz/L78W5CHMEODjOHy9sAMkO8yZrEsfKkHScZWD+q3XdhFPsKxPYpKlOYeNP+YQVwGYxSpmqb0gg=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-chromecast-shared-tools.json",
-          "sha256": "7b9559d40f843bf3cd22c227b2218935dc4270f09005302d3508d19c7a7ca73c"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-chromecast-site-inputs.json",
+          "sha256": "6f48384884508c51b71ca9d700fa288b4069112d97de99a82b00a6403754d8f1"
         }
       }
     },
@@ -327,16 +327,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-danmuku.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-danmuku.tgz",
         "version": "6.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "3d32a4c6d94d9eaa31cd982ec43ae2b710a4c923e5076f357ba4c902be48d729",
-        "integrity": "sha512-tT6aS0OMLN8BCngS3Y7hXBhYxLZiTjX0sZi/cFJ4ITsMkPi5tF78eY59yagqLNUHWQGKvQdoGItGvyttItQA2w=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "41092289c9c7e7bd76f2314235028e838eb17a5ea63345da4fdb93d82d9146c6",
+        "integrity": "sha512-wT2cmGVzVO/GkBN3812tyD+Y397HZXKolnjM/tKQU9NvHhkf6k8aur8wtDgeFxUPBfJwXvhhU8HlnlNwKlgtPw=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-danmuku-shared-tools.json",
-          "sha256": "d3d921ede358f102be1565607525c2af3e512b2d833563502b19ab462dd76f65"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-danmuku-site-inputs.json",
+          "sha256": "7233f5f3657f86b77e2a0fb64dd6da4e924bc0afadc16e7571a61b30b128dfb8"
         }
       }
     },
@@ -360,16 +360,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-danmuku-mask.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-danmuku-mask.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "ceb17cbb235a42438c28df15ddf830d104a749b58515333c43da2b18534b166c",
-        "integrity": "sha512-M4r7WeFkZvq2NB4ICmVle6s4EBSkRx4QYkjAQ/86drPHV78072hu+7phqkrAVlorbj0tpBistIqdCNIS2QLvGw=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "81409ced48a32a29e4d5285671af4bc96f002ab155b81c56a825faf4ea88d459",
+        "integrity": "sha512-/2qeg19129OV1z1UiLcrWX7QN0n2MdjMRaaz+XZCj/dQVJLeKOFt6g/2uwklIt7o/eQMgVt9MIIjdbRcOQKiLA=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-danmuku-mask-shared-tools.json",
-          "sha256": "045761e8417d39a010702e499c0f99485222400ce292573cc3c7039a0ba984fa"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-danmuku-mask-site-inputs.json",
+          "sha256": "6b3847a2b763cd475b831dccf6ac39bd9238f0c235cc0bac7cc724baab7f7c5c"
         }
       }
     },
@@ -393,16 +393,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-dash-control.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-dash-control.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "6716002b92bb12b54d17772d87a560bb9e863da35abfa37988907d54e02cdf74",
-        "integrity": "sha512-aAoDQfEMBlFC/BLh+U8UlvBZXNJMD7C0LL+QbCU+eQvzFlQwpY1kN2QwSUZapXscrVBIQ6L24L0cKEeSacjX5g=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "f499cd0fc0abc1ef87298be7b9b0f85298aa2af6b319a45dd60a6400e555be96",
+        "integrity": "sha512-+oS4caDZqjf+35vziEnJiB96uki53lNjtN02hdYk+oRN5kDgCi28XMBLwE4cZuCZ2s2LdWP53wNmPV/E0EBq+Q=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-dash-control-shared-tools.json",
-          "sha256": "d99b5520aca2253758b3836f8de7bd371b177a5069a7fd68da34074de9bd90dd"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-dash-control-site-inputs.json",
+          "sha256": "b628c25f2f5679e943c4b440d3735bbaf760ae5b69480b71a9805e3150db2951"
         }
       }
     },
@@ -426,16 +426,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-document-pip.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-document-pip.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "a3a56ecc218c8e180621d1bc00684950cca4ada8d483334b0cb91fd783c10831",
-        "integrity": "sha512-Bes/gYtlb28+V/PYSetjwpMhvBc7ZdEDbKSOZRP8Wz+jjF0cbHM5R/uNmT+a+JgZDK5D1YMcNJN4zVW5s3ixsw=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "842cd38ac27d0b7f417bb9e196ec896158f868fdb549ee48dc86faab3c82ff87",
+        "integrity": "sha512-tetlQUiMwAUyhzXAUQ9b2kEJ4UCz4GKLWnZvDEdCxMOGwqgFl3FC8vptenRvMm+PnE1poZmb4YagA/7qSyKg+g=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-document-pip-shared-tools.json",
-          "sha256": "8d7a18737c654006d0c26b206740370cff8d163eab019002a276f1602d1e66e7"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-document-pip-site-inputs.json",
+          "sha256": "217196da0b9da09aa83d93635750150fe4d467582d8b70b36c7a5ed56cd34f91"
         }
       }
     },
@@ -459,16 +459,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-hls-control.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-hls-control.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "00a07f33277bae211a553e9fb2e924ade219513135bc54921886f4518dd27964",
-        "integrity": "sha512-rAgzWBlvGQ296X0rXpNVKE1NHzwnwP7/pFRUx7vF/cMCbeY2ztAAXhLhKYAfkjfVRoT93m3yLxlVaeGwrI4QvA=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "2f96b8aea69fd7f172ae9dcf397a894e66e32a5b198e295395de274280e0c1eb",
+        "integrity": "sha512-R5FvRq7zCtRq/InKW9QhT+XXGVRr/K9h+4gZgnU1WT/65e8+bof8rpEColG4H7Z3c5gJP09Qrwge0Qm/ahCg7A=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-hls-control-shared-tools.json",
-          "sha256": "e864ef764e5af00630417c090b8e29d52e72f34c01c5f199756680c0fcd747a0"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-hls-control-site-inputs.json",
+          "sha256": "139abd5561ebd9d100929f68315c64d68356eb491602719ea329da1c87096b68"
         }
       }
     },
@@ -492,16 +492,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-jassub.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-jassub.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "cc9304759ff3cdd84767eee38fcbb9cf70e234f2449946536fd1da972cde679f",
-        "integrity": "sha512-OBKMKAYkjGgEYYSWV5U/v5EcWPsZSWIoDeZ+CucNMgyyrNcs8WzCCI1wT1FLY8ZEzF1+gts/Mfn0rrajtBHK0w=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "7c9c736702af12cee264893e5c66ec984a52dcd778d316aa410a8c84e8ba436b",
+        "integrity": "sha512-4tEOnLzM/b4rIQpRDUzSDrmedQQZLT6aUce0PQ/30iuXfNmloD6oLlRPiIBGxESyPRhS94G3DaYqFMEQA1nmPg=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-jassub-shared-tools.json",
-          "sha256": "29dca8d7b9f59dfda2725f4e089f2f4159483d595d2991f2165975281f76e0dd"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-jassub-site-inputs.json",
+          "sha256": "ec0382857d4c2d60aec761c2b868e88ce5812bec8b031a4ceebef1d45f808b5b"
         }
       }
     },
@@ -525,16 +525,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-multiple-subtitles.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-multiple-subtitles.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "43825f602514c9e6a0bd8f0a270a54a03d1cb76f821b99d1e736d0150dafc190",
-        "integrity": "sha512-Fbo6+Ywnp1yEb6foJH6PNOoLD+9Gu5oDMxepGKUDaAU4zJ/TT300F7n50+srCuvx9PiYK+Wfgj0Efr41oZscCQ=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "39d59c73e878bb3d5e57e1ab3bb18488c2b49805a17547ed32658607815b2081",
+        "integrity": "sha512-H6nt8yYHh0+/2+qUm/p6Q1NcuoQLhqaXmYYUDJ1VQLEGZJpZFHIMcV5N0ztXD0FmTnt+M6UKwKwjlMhd02VdQg=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-multiple-subtitles-shared-tools.json",
-          "sha256": "165a776104476c05352f38b2649ea5d4af7b3725412da26d3eea06b87cf6bc0f"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-multiple-subtitles-site-inputs.json",
+          "sha256": "29a45cb73050d9cc2d8014bd6a38ee1ec2a64f17d6246c15ae43b76fe5abc9cf"
         }
       }
     },
@@ -558,16 +558,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-vast.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-vast.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "3503e145a591a406105eb953f9ac75c8373992c9f3f1f23b713de65c85a3bb3d",
-        "integrity": "sha512-NP3hVRLvk7hKvQRPF6jqIBKE4/2ubpGNwsPARgXNI40SicdaW/1bizKSzoQ4oJEFLKjvJKSwLazw1yaQJmjvkw=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "0ea625702dcd65f0ef294fff89b3527dc6a50d6add1f44c9b7309757273af2bb",
+        "integrity": "sha512-25EHEBjwSe86dOKdWrTchOGcx/UmvPloP4jkNeP1ivB9msxhY06gv5pvN0NLAesrYX+43yiJXYL/KGOieUOLgw=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-vast-shared-tools.json",
-          "sha256": "3d1e86e9ff8f541d5ca16c8cb978871e88fb52eff9f5eb162bab0b55cfceea2c"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-vast-site-inputs.json",
+          "sha256": "85d5120ae89646f72b71335a1dfe35c5eb70a37c239e4d2a75649f97996b3184"
         }
       }
     },
@@ -591,16 +591,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-plugin-vtt-thumbnail.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-plugin-vtt-thumbnail.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "b7932e08a086cfe16ed5e78872e274fb897931d0653dbf7ac61a19b404ddec85",
-        "integrity": "sha512-vNPV1Tl8vgxDBgXfIXi8/BScH6Uy/2HpIvzcVcjepxKOcbWSe29hjgTfM3Alo1Z7iBYlf4cSkkidOSnsQvBz5A=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "42bee5994f3a9d77df3eb809d310e53aec8f036bfeec96523aa64bdfabf8bebb",
+        "integrity": "sha512-V0xQsnNBNcjsyujFhJO6B5qyPOkh/M3Dj+6xRurL/a+fy+DjmIgyhgwDa3ghJpfbXsX2qwbdGtUguVfQpCqNJw=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-vtt-thumbnail-shared-tools.json",
-          "sha256": "773fa2f0d8f11984d6d6e0da5efa094a00a53458a10371da5c20b4b9d8d74e86"
+          "path": "refactor/baselines/major-candidate-build/artplayer-plugin-vtt-thumbnail-site-inputs.json",
+          "sha256": "8bcad10d1af49d6d124b9e2aacd065b22de0f79dff74859b411d423a707954f5"
         }
       }
     },
@@ -624,16 +624,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-proxy-canvas.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-proxy-canvas.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "a0a8efb762e823fe4dd8c8de9601f74ac873ade8c6953a7e5305297608c71a12",
-        "integrity": "sha512-gpUo15w9jIwbCQ8Gd+VVmWBsZfAR32SlrdApSkW4Z8SmFnfZtkzbjlwQJqzznXBDt5r+QoZ47hWEO2e/t9en4g=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "e32fff48dc58e617de3d08886858fc11b96839affae481a11625199c9011e48b",
+        "integrity": "sha512-18LviJ+YNV77zd8wnw1K9VeOBReYN3fmr83/cAGtTvb6kPCJWkJVf1DjKPsYL/nHthhGR355CQVUvGkL6MBTaQ=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-proxy-canvas-shared-tools.json",
-          "sha256": "7117ee66e755f7083f2daeee8834a185f4d7ad9881770435a527564c977b5f4e"
+          "path": "refactor/baselines/major-candidate-build/artplayer-proxy-canvas-site-inputs.json",
+          "sha256": "05337985ce5432046d4fe4ec3fb3e60ad65272bbb72e9300de0c0378787ff337"
         }
       }
     },
@@ -657,16 +657,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-proxy-mediabunny.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-proxy-mediabunny.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "9fd7e62c56ae78866267cdd5650dc4e4af4aad76dd6ff8466b68908bc25d661c",
-        "integrity": "sha512-jVo6gkWjFBbfTKMjLgPamcKfIEfRTuy1icbUsWjZ1/T9QOQstMKEYZk80gfiAngOuYzBArCY3ooxn2ykp6dO4A=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "f2d21ba4e2781e394cb88524fa124b7ed75ee443778d61d69df68976fccd4ee4",
+        "integrity": "sha512-PsLo/v36ZN3jXbre0WWu2WxQYyd+z3U7BFVLDy/Aj2LxdyRvdhAG1XH+dQcFylllMJfDvnlfNtVD87JwbPDDxg=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-proxy-mediabunny-shared-tools.json",
-          "sha256": "4af532e84d1b520296a408890f3120c46c2b94237c704dc32221832461a1d904"
+          "path": "refactor/baselines/major-candidate-build/artplayer-proxy-mediabunny-site-inputs.json",
+          "sha256": "09d25c5e3d36ec7f92afd53e6c37938d07d3a6a04b33f63fa2ab7233b9c0f7dd"
         }
       }
     },
@@ -691,16 +691,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/packages/run-qQwwPA/artplayer-tool-iframe.tgz",
+        "path": "refactor/.cache/packages/run-kK0VCe/artplayer-tool-iframe.tgz",
         "version": "2.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "00dc477ad56d12cfa6cd0d1e071e80f4120afed23f44af0393e23e5dac516a3b",
-        "integrity": "sha512-Rkn+bb+szdnzL2JABHdWaZIju4y2eFdfFmlhLrr8cro+SEqtrVBcSde/wOH1/1zumlPVuUdr5CeeebXJChbSDQ=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "e7f87b6b9e5c7d7a37bc7a3e6b79aed6223f0a84fac12fac3096ab23ae19b5e6",
+        "integrity": "sha512-3XnewgYasko8wCha8/Yjr1vLUWZ8LXFROVnuhOUeNYw2Ew5YeCBzuyg1vbx4tlcJCXe7QdyGKGtXJeLjs4Uj5A=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-tool-iframe-shared-tools.json",
-          "sha256": "199040dcb4f97b05ea588418f805893b45eb73999c7170cd1120ec7ea6fff24c"
+          "path": "refactor/baselines/major-candidate-build/artplayer-tool-iframe-site-inputs.json",
+          "sha256": "929b48093c2ef423aea3cbfb2156d5da2c4c8e5f4bd5545fa26e68f94797f311"
         }
       }
     },
@@ -724,16 +724,16 @@
       },
       "candidate": {
         "kind": "npm-tarball",
-        "path": "refactor/.cache/thumbnail-package-types-bGLHWV/candidate.tgz",
+        "path": "refactor/.cache/thumbnail-package-types-9Vhpv4/candidate.tgz",
         "version": "5.0.0",
-        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
-        "inputFingerprint": "78bf5be3b2b5656a0b95ce2ce3cf1a635b6df609361a840b8298476f65af9d52",
-        "integrity": "sha512-yYn1qFiT7SwpygEWEhRU3RZAK7jPCdcdcIIzl2osrl6PIKdvHDhbFmnXh2Pb4B9NlgBXWB4W74TXR83ES1iUzg=="
+        "sourceCommit": "8aa99ef03f2ce6b240da7f4086602a91dd8e721b",
+        "inputFingerprint": "1fab41a6b45bdf46784fa2ac2991de324efb6c224d378981910634a417ff3f9e",
+        "integrity": "sha512-tBV7Awh1fvWv9maBB9MIVgkM4oW3pLXS8R/s1OG9rReOebKWj7sqEoI5+RgOgENNwybKsIJvxs0Q4NKv/pnfVQ=="
       },
       "evidence": {
         "build": {
-          "path": "refactor/baselines/major-candidate-build/artplayer-tool-thumbnail-shared-tools.json",
-          "sha256": "bded78d58a422d6b68b7e2bea28975a3230757ac364b973c411b052129a32e75"
+          "path": "refactor/baselines/major-candidate-build/artplayer-tool-thumbnail-site-inputs.json",
+          "sha256": "11bf9bed27910b67da534604a1be47d52f5ff14a577ee617bdaf03293bad40a2"
         }
       }
     },
