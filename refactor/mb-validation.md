@@ -1,5 +1,9 @@
 # MediaBunny proxy 验证入口
 
+数小时专项入口见[2026-09-16 检查点](changes/2026-09-16-PKG-MB-09-hour-soak.md)。
+它保留原断言和默认时长，支持已安装候选映射、按需分片读取及持久化采样；长测未终结
+前不能据此宣称通过。任务仍为 PKG-MB-09 doing。
+
 开始改动前读取[冻结契约](baselines/mb-contract.md)、[接口快照](baselines/mb-surface.json)、
 [归档/源码哈希](baselines/mb-release.json)。MB-01接口基线与
 [MB-02行为基线](changes/2026-09-12-PKG-MB-02-baseline.md)分开记录；不得把接口测试称为真实媒体验收。

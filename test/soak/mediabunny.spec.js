@@ -5,31 +5,39 @@ import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
 import { expect, test } from '../browser/fixtures.js'
 import { mbCandidate } from '../helpers/mediabunny.js'
+import { soakOptions } from '../helpers/soak-options.js'
 
+assert(process.env.ARTPLAYER_MB_ARTIFACT || process.env.ARTPLAYER_BROWSER_ARTIFACTS, 'Soak requires an explicit built artifact or verified installed artifact map')
 const implementation = await mbCandidate()
-assert(process.env.ARTPLAYER_MB_ARTIFACT, 'Soak requires an explicit built MediaBunny artifact')
+const { phaseSeconds, minimumMediaSeconds } = soakOptions(process.env.ARTPLAYER_MB_SOAK_SECONDS)
 assert(process.env.ARTPLAYER_MB_SOAK_MEDIA, 'Generate and specify the long HLS fixture directory')
 const directory = path.resolve(process.env.ARTPLAYER_MB_SOAK_MEDIA)
 const manifestBytes = fs.readFileSync(path.join(directory, 'manifest.json'))
 const manifest = JSON.parse(manifestBytes)
-assert(manifest.duration >= 600, 'Soak needs at least ten minutes of media')
+assert(manifest.duration >= minimumMediaSeconds, `Soak needs at least ${minimumMediaSeconds} seconds of media for both uninterrupted phases`)
 const media = new Map(Object.entries(manifest.files).map(([name, expected]) => {
   assert.equal(path.basename(name), name)
   const bytes = fs.readFileSync(path.join(directory, name))
   assert.equal(hash(bytes), expected.sha256, name)
-  return [name, bytes]
+  return [name, { file: path.join(directory, name), sha256: expected.sha256 }]
 }))
 
 for (const core of ['published', 'candidate']) {
   test(`MediaBunny sustained HLS playback with ${core} core`, async ({ page }, testInfo) => {
     await page.route('**/mb-soak/**', async (route) => {
       const name = new URL(route.request().url()).pathname.split('/').at(-1)
-      const body = media.get(name)
+      const entry = media.get(name)
+      const body = entry && fs.readFileSync(entry.file)
+      if (body)
+        assert.equal(hash(body), entry.sha256, 'Soak media changed during playback')
       await route.fulfill({ status: body ? 200 : 404, body: body || 'Missing fixture', contentType: name.endsWith('.m3u8') ? 'application/vnd.apple.mpegurl' : 'video/mp2t' })
     })
     await page.goto(`/test/player.html?core=${core}`)
     const capabilities = await page.evaluate(() => ({ audio: typeof window.AudioContext, videoDecoder: typeof window.VideoDecoder, audioDecoder: typeof window.AudioDecoder }))
-    const evidence = { core, implementation: implementation.name, sha256: hash(implementation.code), manifestSha256: hash(manifestBytes), capabilities, outcome: 'incomplete', phases: [], checkpoints: [] }
+    const evidence = { core, implementation: implementation.name, sha256: hash(implementation.code), manifestSha256: hash(manifestBytes), mediaDuration: manifest.duration, requestedPhaseSeconds: phaseSeconds, capabilities, outcome: 'incomplete', phases: [], checkpoints: [] }
+    const progressFile = testInfo.outputPath('progress.jsonl')
+    fs.mkdirSync(path.dirname(progressFile), { recursive: true })
+    fs.writeFileSync(progressFile, `${JSON.stringify({ kind: 'started', project: testInfo.project.name, ...evidence })}\n`)
     if (Object.values(capabilities).some(value => value !== 'function')) {
       evidence.outcome = 'missing-native-capability-control'
       await testInfo.attach('mediabunny-soak', { contentType: 'application/json', body: JSON.stringify(evidence) })
@@ -117,7 +125,7 @@ for (const core of ['published', 'candidate']) {
       })
       await page.click('#play')
       await page.evaluate(() => window.mbPlaying)
-      const snapshot = () => page.evaluate(() => ({ wall: performance.now(), time: window.mbCanvas.currentTime, rate: window.mbCanvas.playbackRate, active: window.mbSoak.active.size, queued: window.mbCanvas.engine.audio.queuedNodes.size, iterators: window.mbSoak.iterators.size, draws: window.mbSoak.counters.draws, visibility: document.visibilityState, paused: window.mbCanvas.paused, error: window.mbCanvas.error }))
+      const snapshot = () => page.evaluate(() => ({ wall: performance.now(), time: window.mbCanvas.currentTime, rate: window.mbCanvas.playbackRate, active: window.mbSoak.active.size, queued: window.mbCanvas.engine.audio.queuedNodes.size, iterators: window.mbSoak.iterators.size, draws: window.mbSoak.counters.draws, visibility: document.visibilityState, paused: window.mbCanvas.paused, error: window.mbCanvas.error, maxAVError: window.mbSoak.stats[window.mbSoak.phase]?.maxError ?? null }))
       async function sustain(name, seconds, rate) {
         await page.evaluate((name) => {
           window.mbSoak.stats[name] = { frames: 0, maxError: 0, sumError: 0, histogram: Array.from({ length: 1001 }, () => 0) }
@@ -129,6 +137,7 @@ for (const core of ['published', 'candidate']) {
           await page.waitForTimeout(5000)
           const current = await snapshot()
           evidence.checkpoints.push({ phase: name, ...current })
+          fs.appendFileSync(progressFile, `${JSON.stringify({ kind: 'sample', phase: name, ...current })}\n`)
           expect(current.visibility).toBe('visible')
           expect(current.error).toBeNull()
           expect(current.paused).toBe(false)
@@ -152,11 +161,11 @@ for (const core of ['published', 'candidate']) {
         expect(stats.frames).toBeGreaterThan(seconds * 12)
         expect(stats.maxError).toBeLessThan(0.25)
       }
-      await sustain('continuous-1x', 90, 1)
+      await sustain('continuous-1x', phaseSeconds, 1)
       await page.evaluate(() => {
         window.mbCanvas.playbackRate = 2
       })
-      await sustain('continuous-2x', 90, 2)
+      await sustain('continuous-2x', phaseSeconds, 2)
       await page.evaluate(async () => {
         window.mbCanvas.playbackRate = 1
         await window.mbCanvas.engine.seek(100)
@@ -190,7 +199,7 @@ for (const core of ['published', 'candidate']) {
       expect(cleanup).toMatchObject({ audioIterator: false, videoIterator: false, queued: 0, destroyed: true })
       expect(cleanup.created).toBe(cleanup.disconnected)
       evidence.cleanup = cleanup
-      evidence.scope = 'Actual 600s generated HLS input, at least 180s uninterrupted wall playback at 1x/2x then seek/quality/audio; decoded frame vs audio clock, not acoustic output, hour-scale drift, heap leak proof or physical devices. Only active nodes/iterators are retained by instrumentation.'
+      evidence.scope = `Actual ${manifest.duration}s generated HLS input, requested ${phaseSeconds}s wall playback at each of 1x/2x then seek/quality/audio; achieved duration is recorded per phase. Decoded frame vs audio clock, not acoustic output, heap leak proof, background throttling or physical devices. Only active nodes/iterators are retained by instrumentation; fixture files are read on demand.`
       await testInfo.attach('mediabunny-soak', { contentType: 'application/json', body: JSON.stringify(evidence) })
     }
   })

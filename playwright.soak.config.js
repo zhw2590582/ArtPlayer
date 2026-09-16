@@ -1,10 +1,12 @@
+import process from 'node:process'
 import { defineConfig } from '@playwright/test'
 import base from './playwright.config.js'
+import { soakOptions } from './test/helpers/soak-options.js'
 
 export default defineConfig({
   ...base,
   testDir: './test/soak',
-  timeout: 270000,
+  timeout: soakOptions(process.env.ARTPLAYER_MB_SOAK_SECONDS).timeoutMs,
   workers: 2,
   outputDir: 'refactor/.cache/soak/results',
   reporter: [

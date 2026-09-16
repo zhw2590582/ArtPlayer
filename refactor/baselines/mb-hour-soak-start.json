@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-MB-09",
+  "startedFrom": "5795492f0f6eff9f987b43e2f51643f0131f659d",
+  "capturedAt": "2026-09-16T03:20:08.923Z",
+  "status": "running-at-capture",
+  "completionProven": false,
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "sourceSha256LF": {
+    "playwright.soak.config.js": "5be535955745716e94353c8d21458b18301bf612f15c3f78d931f4d875d44c69",
+    "scripts/generate-hls-fixture.mjs": "70468ef1daa00726a985a0fcbd365f43e3ee741f883307cbf63ce24316084dad",
+    "test/helpers/soak-options.js": "bcb37f317cf34a53a0070715f625cbbc88969bd6914219a95db689e543574995",
+    "test/soak/mediabunny.spec.js": "f435cf9d04f58ed6786428d72745cb3545f595d0313fefac25d1ad671211d826",
+    "refactor/scripts/soak-options.test.mjs": "8aa25d5308376b807621f3b3914181a7ad2535e30622f3c8773b796582ea52d5"
+  },
+  "prechecks": {
+    "optionsTests": {
+      "pass": 3,
+      "fail": 0
+    },
+    "lintExit": 0,
+    "installedListExit": 0,
+    "defaultMedia": {
+      "files": 32,
+      "completeManifestEqual": true
+    }
+  },
+  "media": {
+    "path": "refactor/.cache/mb09-hour-hls/manifest.json",
+    "sha256": "ed988797a4e8c9ccd848b67ea9be85ece0fe1df1b276e88daa80a0c49f6c126a",
+    "duration": 11000,
+    "files": 22008,
+    "bytes": 598523989,
+    "ffmpeg": "ffmpeg version 2025-11-12-git-6cdd2cbe32-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers"
+  },
+  "command": "yarn test:mediabunny-soak --project chromium --project firefox",
+  "environment": {
+    "ARTPLAYER_MB_SOAK_SECONDS": "3600",
+    "ARTPLAYER_MB_SOAK_MEDIA": "refactor/.cache/mb09-hour-hls",
+    "ARTPLAYER_BROWSER_ARTIFACTS": "refactor/.cache/packages/run-kK0VCe/browser-artifacts.json"
+  },
+  "logs": [
+    {
+      "path": "refactor/.cache/mb09-hour-options.log",
+      "sha256": "5d00f6c63329e399579b084fa9898fd3959249a09cbc16533fed0d6ded04ebeb"
+    },
+    {
+      "path": "refactor/.cache/mb09-hour-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "refactor/.cache/mb09-hour-installed-list.log",
+      "sha256": "5db98207480cc15e840e3c74dbe444a4c35e86048f7a8ade061b5e9fa274ecb5"
+    },
+    {
+      "path": "refactor/.cache/mb09-hour-generate.log",
+      "sha256": "7a490ee15ad659fd6303b70d5ace5767a131a7b508fa31a1c6b8ea0cdbd9772a"
+    },
+    {
+      "path": "refactor/.cache/mb09-hour-default-generate.log",
+      "sha256": "276a5b50b4f169a525ea0ad3fb1fded298c07589d34d0017ad97c3b381820f19"
+    }
+  ],
+  "liveLog": "refactor/.cache/mb09-hour-browser.log",
+  "samples": [
+    {
+      "path": "refactor/.cache/soak/results/mediabunny-MediaBunny-sust-71bde-layback-with-published-core-chromium/progress.jsonl",
+      "started": {
+        "kind": "started",
+        "project": "chromium",
+        "core": "published",
+        "implementation": "candidate-installed",
+        "sha256": "662598a27e1757692ce4bd560c376bc96520d172ed67427ec519bd269896fa92",
+        "manifestSha256": "ed988797a4e8c9ccd848b67ea9be85ece0fe1df1b276e88daa80a0c49f6c126a",
+        "mediaDuration": 11000,
+        "requestedPhaseSeconds": 3600,
+        "capabilities": {
+          "audio": "function",
+          "videoDecoder": "function",
+          "audioDecoder": "function"
+        },
+        "outcome": "incomplete",
+        "phases": [],
+        "checkpoints": []
+      },
+      "latest": {
+        "kind": "sample",
+        "phase": "continuous-1x",
+        "wall": 55981.09999990463,
+        "time": 56.24,
+        "rate": 1,
+        "active": 50,
+        "queued": 50,
+        "iterators": 2,
+        "draws": 1326,
+        "visibility": "visible",
+        "paused": false,
+        "error": null,
+        "maxAVError": 0.02500000000000213
+      },
+      "observations": 11
+    },
+    {
+      "path": "refactor/.cache/soak/results/mediabunny-MediaBunny-sust-828df-layback-with-candidate-core-chromium/progress.jsonl",
+      "started": {
+        "kind": "started",
+        "project": "chromium",
+        "core": "candidate",
+        "implementation": "candidate-installed",
+        "sha256": "662598a27e1757692ce4bd560c376bc96520d172ed67427ec519bd269896fa92",
+        "manifestSha256": "ed988797a4e8c9ccd848b67ea9be85ece0fe1df1b276e88daa80a0c49f6c126a",
+        "mediaDuration": 11000,
+        "requestedPhaseSeconds": 3600,
+        "capabilities": {
+          "audio": "function",
+          "videoDecoder": "function",
+          "audioDecoder": "function"
+        },
+        "outcome": "incomplete",
+        "phases": [],
+        "checkpoints": []
+      },
+      "latest": {
+        "kind": "sample",
+        "phase": "continuous-1x",
+        "wall": 55933.39999997616,
+        "time": 56.18933333333334,
+        "rate": 1,
+        "active": 53,
+        "queued": 53,
+        "iterators": 2,
+        "draws": 1325,
+        "visibility": "visible",
+        "paused": false,
+        "error": null,
+        "maxAVError": 0.02500000000000213
+      },
+      "observations": 11
+    }
+  ],
+  "limitations": [
+    "This start snapshot is not a terminal browser result. Recheck the live process and report before assessing completion.",
+    "Fixed installed runtime bytes are tested; shared-tool changes invalidated their original release input fingerprint.",
+    "No physical-device, acoustic, background or whole-heap proof."
+  ]
+}

@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-MB-09 数小时播放运行检查点
+
+扩展现有长测为每段90..3600秒，默认时长/超时和断言不变；支持已安装候选映射，
+媒体改为按需读取且每次校验哈希，每5秒持久化进度。3项前置测试、定向lint、
+安装映射列举通过，默认12秒素材32文件/参数/哈希完全不变。
+11000秒素材生成完成，Chromium/Firefox新旧核心四组已启动、两个worker；
+[启动快照](baselines/mb-hour-soak-start.json)记录首批Chromium约55秒的正常推进，
+不是最终结果。用实际会话句柄和 `refactor/.cache/soak/results/*/progress.jsonl`
+检查持续状态，终结后保留完整报告；不要重复启动或让其他浏览器测试占用8084。
+[维护与限制](changes/2026-09-16-PKG-MB-09-hour-soak.md)。MB-09仍doing，计数不变。
+当前没有正式复盘、推送或发布。
+
 ## CI-NPM-03 只读 registry 与部分发布恢复判断
 
 新增 `yarn release:registry`，在真实候选验证前后夹住只读 registry 查询，区分缺失、

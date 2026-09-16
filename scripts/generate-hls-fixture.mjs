@@ -9,7 +9,7 @@ import { hash } from '../refactor/scripts/releases.mjs'
 const root = fileURLToPath(new URL('../', import.meta.url))
 const output = path.resolve(root, process.argv[2] || 'test/browser/media/hls')
 const duration = Number(process.argv[3] || 12)
-assert(Number.isInteger(duration) && duration >= 12 && duration <= 3600, 'Duration must be 12..3600 whole seconds')
+assert(Number.isInteger(duration) && duration >= 12 && duration <= 14400, 'Duration must be 12..14400 whole seconds')
 assert(!fs.existsSync(output), 'Output must be a new directory; never overwrite frozen media')
 const ffmpeg = process.env.ARTPLAYER_FFMPEG || 'ffmpeg'
 const version = execFileSync(ffmpeg, ['-version'], { encoding: 'utf8' }).split(/\r?\n/)[0]
