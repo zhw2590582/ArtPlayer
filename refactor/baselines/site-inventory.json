@@ -684,7 +684,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-      "sha256Lf": "0c1a40d37bd3a87c31eb768acae3104286976b7feb0d560c187d31b0805421e6",
+      "sha256Lf": "3227457839b6640adac2a170fff4b564c2bde3b678734ce2ddc77e19d9d2438d",
       "language": "zh",
       "route": "/document/advanced/property.html",
       "headings": [
@@ -869,16 +869,28 @@
           "line": 965
         },
         {
-          "text": "`quality`",
+          "text": "读取、写入与样式优先级 {#css-variable-contract}",
           "line": 986
         },
         {
+          "text": "内置默认值与使用位置 {#css-variable-defaults}",
+          "line": 996
+        },
+        {
+          "text": "模式覆盖与布局测量 {#css-variable-modes}",
+          "line": 1046
+        },
+        {
+          "text": "`quality`",
+          "line": 1068
+        },
+        {
           "text": "`thumbnails`",
-          "line": 1029
+          "line": 1111
         },
         {
           "text": "`subtitleOffset`",
-          "line": 1053
+          "line": 1135
         }
       ],
       "runCodeMarkers": 47,
@@ -1750,7 +1762,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-      "sha256Lf": "041d33b8d81cbb928ea07504885ceccab4becf3476bf82120013d5f2840c31b7",
+      "sha256Lf": "dc0412d08c690b6221372caa50bcee08439fa22aa4cfd2c544f09f6db42498a6",
       "language": "en",
       "route": "/document/en/advanced/property.html",
       "headings": [
@@ -1935,16 +1947,28 @@
           "line": 966
         },
         {
-          "text": "`quality`",
+          "text": "Values, writes, and cascade {#css-variable-contract}",
           "line": 987
         },
         {
+          "text": "Built-in defaults and consumers {#css-variable-defaults}",
+          "line": 997
+        },
+        {
+          "text": "Mode overrides and measured layout {#css-variable-modes}",
+          "line": 1047
+        },
+        {
+          "text": "`quality`",
+          "line": 1069
+        },
+        {
           "text": "`thumbnails`",
-          "line": 1031
+          "line": 1113
         },
         {
           "text": "`subtitleOffset`",
-          "line": 1055
+          "line": 1137
         }
       ],
       "runCodeMarkers": 47,
@@ -7535,7 +7559,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1053
+          "line": 1135
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -7543,7 +7567,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1055
+          "line": 1137
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -9964,7 +9988,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1053
+          "line": 1135
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -9972,7 +9996,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1055
+          "line": 1137
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10320,11 +10344,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 986
+          "line": 1068
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 987
+          "line": 1069
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -10362,11 +10386,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1029
+          "line": 1111
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1031
+          "line": 1113
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11794,7 +11818,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1053
+          "line": 1135
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11802,7 +11826,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1055
+          "line": 1137
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11827,7 +11851,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1053
+          "line": 1135
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -11835,7 +11859,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1055
+          "line": 1137
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11890,11 +11914,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 986
+          "line": 1068
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 987
+          "line": 1069
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11915,11 +11939,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 986
+          "line": 1068
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 987
+          "line": 1069
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11940,11 +11964,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1029
+          "line": 1111
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1031
+          "line": 1113
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -11965,11 +11989,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1029
+          "line": 1111
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1031
+          "line": 1113
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -13876,11 +13900,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1029
+          "line": 1111
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1031
+          "line": 1113
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -14685,11 +14709,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1029
+          "line": 1111
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1031
+          "line": 1113
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -14963,11 +14987,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 986
+          "line": 1068
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 987
+          "line": 1069
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -14988,11 +15012,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 986
+          "line": 1068
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 987
+          "line": 1069
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15506,7 +15530,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1053
+          "line": 1135
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
@@ -15514,7 +15538,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1055
+          "line": 1137
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -15535,11 +15559,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/property.md",
-          "line": 1029
+          "line": 1111
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
-          "line": 1031
+          "line": 1113
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/start/option.md",
@@ -19760,10 +19784,10 @@
     {
       "source": "docs/document/404.html",
       "route": "/document/404.html",
-      "sha256Lf": "849fb478802e3efe699c7c20296e0f02c2c8c3d91678000c73eae96e51674759",
+      "sha256Lf": "b0b60f943e243fade8ec59ed0d5902a94426f7dd57bed4bab283f33c0fea5f53",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19773,10 +19797,10 @@
     {
       "source": "docs/document/advanced/built-in.html",
       "route": "/document/advanced/built-in.html",
-      "sha256Lf": "4aa9e7f0ba7d13087984278431026c924f73723b6dd19ab5291a9dd336a6dcef",
+      "sha256Lf": "81f2f6176a737af601cfda80a1423e142aaa81946ac5105454b8b68282804ed2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19786,10 +19810,10 @@
     {
       "source": "docs/document/advanced/class.html",
       "route": "/document/advanced/class.html",
-      "sha256Lf": "201f6797bd0e1e56b584a319e1b1f2ced530184a466f0fa2e73b988291f4b175",
+      "sha256Lf": "fec67a83936dfb3ded6cde9f204d13aa148d819bcfd835eaa018881a9cd8759d",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19799,10 +19823,10 @@
     {
       "source": "docs/document/advanced/event.html",
       "route": "/document/advanced/event.html",
-      "sha256Lf": "4b3bdecbdbefcf4b1ed468ad5600ab493142a2d599c92baab95b6ecd381b94da",
+      "sha256Lf": "5c463bec84a77bbe1fb1f6aaa57fcff05114fa7affad5db57114d73f9675f77c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19812,10 +19836,10 @@
     {
       "source": "docs/document/advanced/global.html",
       "route": "/document/advanced/global.html",
-      "sha256Lf": "b103eb5b9c613de69a806099b6a3824d3ac05dcf19cd924708a8aca302663698",
+      "sha256Lf": "c851f8310aae4d468d0d91da402107a1b82a036b9f29f1982ca6d67bf0185afd",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19825,10 +19849,10 @@
     {
       "source": "docs/document/advanced/plugin.html",
       "route": "/document/advanced/plugin.html",
-      "sha256Lf": "1471552f6150bfc41dc88c54e1dc8dddc3f4fca8debb1d5e04d478503039661a",
+      "sha256Lf": "1b992d3bd08c4a8e172f7b854e909eca57c610d4e23818e41782cbb769b4c8d5",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19838,10 +19862,10 @@
     {
       "source": "docs/document/advanced/property.html",
       "route": "/document/advanced/property.html",
-      "sha256Lf": "5245ab60154838c008df2b66e9001fcbb12b8f7c3b379c47c252ae049be93d1d",
+      "sha256Lf": "1c0a839bf98130612b51c1f0bc3666ef4acf434e722e28d747d84bf6590d30e6",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19851,10 +19875,10 @@
     {
       "source": "docs/document/component/contextmenu.html",
       "route": "/document/component/contextmenu.html",
-      "sha256Lf": "8aae04c17750aded057596bf84d9530dc198c2baee7953887a1df779511c6e88",
+      "sha256Lf": "c989aca42b449e80d215108db15f91ac837359be63e6bdb4faeeeb0f9fac7813",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19864,10 +19888,10 @@
     {
       "source": "docs/document/component/controls.html",
       "route": "/document/component/controls.html",
-      "sha256Lf": "b27775b3aacecbc5317c020986bb7b5c8fb910118cb6d4c7a76c6c61647b4fc6",
+      "sha256Lf": "79791ce402d3e2b0851f32f9fb302be4d68923b633fff6237f73a82d31d736f5",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19877,10 +19901,10 @@
     {
       "source": "docs/document/component/layers.html",
       "route": "/document/component/layers.html",
-      "sha256Lf": "7d6895f4a7242f2c9dc7e972a2aaeb7500b296db96951348ad188e6ecb8f14ae",
+      "sha256Lf": "b2806fc31099ad6998f740360802edf682dfb81e1b29c38fea1aa7fa70238c11",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19890,10 +19914,10 @@
     {
       "source": "docs/document/component/setting.html",
       "route": "/document/component/setting.html",
-      "sha256Lf": "bc0b940132af542ac97db9d8e4fea4f19579574b9d82a59129de643132b71af9",
+      "sha256Lf": "e2484ef0612ff49fe5498db917d1f53e15236c26625242bf8f47a9ac16874b8c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19903,10 +19927,10 @@
     {
       "source": "docs/document/en/advanced/built-in.html",
       "route": "/document/en/advanced/built-in.html",
-      "sha256Lf": "374194966130d9b235f37f58161946399d386d13e47c9ec9735534099a97dc8f",
+      "sha256Lf": "4c04573829f79ffa64541d10b26ddbca20200818d1b74a522a4f3226244f425a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19916,10 +19940,10 @@
     {
       "source": "docs/document/en/advanced/class.html",
       "route": "/document/en/advanced/class.html",
-      "sha256Lf": "764113f234b2864ba184139b6794f6716d4ac9d9e740e7096a2391f73cf02323",
+      "sha256Lf": "1d873cd777f957135c63d9f26abeac965fa0259ba8a5ef4e83f1033b0d950f43",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19929,10 +19953,10 @@
     {
       "source": "docs/document/en/advanced/event.html",
       "route": "/document/en/advanced/event.html",
-      "sha256Lf": "0b32a36bf4bd52b7de7351358e7f0f8176e0b19489112dd4c597e51cd98f6ca9",
+      "sha256Lf": "90a8fdcdb3efcc57cfe9d6923d54476ad8b1331694c735008288e499575e90e0",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19942,10 +19966,10 @@
     {
       "source": "docs/document/en/advanced/global.html",
       "route": "/document/en/advanced/global.html",
-      "sha256Lf": "e336010d936eb5b274971421ddaf25f8fa3aadda46894cef6b7125bce5341add",
+      "sha256Lf": "e01de4913498eb0bb1cf10a73beb587f4bbe5e7896e6a97b4f08fc86169aab3c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19955,10 +19979,10 @@
     {
       "source": "docs/document/en/advanced/plugin.html",
       "route": "/document/en/advanced/plugin.html",
-      "sha256Lf": "36905feb0600ca73a742d2bf78b9489d58678c23e15dbd0d85a17104346fa696",
+      "sha256Lf": "d97d19577ce4564ec429294b12f9eca6c8e87a63ffdf9f9adcd3235a8d952b4e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19968,10 +19992,10 @@
     {
       "source": "docs/document/en/advanced/property.html",
       "route": "/document/en/advanced/property.html",
-      "sha256Lf": "c9dfcaf95f4a3cb1f88b672d9944b2a5079d192ff522e9fb704fd07d5bd694d0",
+      "sha256Lf": "c3cd8abf7d33ee1f47414e88806f4228758c2c37877c14d53fbc3f5f3f23737b",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19981,10 +20005,10 @@
     {
       "source": "docs/document/en/component/contextmenu.html",
       "route": "/document/en/component/contextmenu.html",
-      "sha256Lf": "25efda2f978f12f7cc3dae496038f2c114d297adcd76a094aa6d1389381bb9bd",
+      "sha256Lf": "768ed6ea9839c574279d8de08ea178fdf82e11098125203debe8c54e8a5f50b9",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19994,10 +20018,10 @@
     {
       "source": "docs/document/en/component/controls.html",
       "route": "/document/en/component/controls.html",
-      "sha256Lf": "93ccc70ae08cb7420e35d3d372892d35119734d65c32791c5283c2c2b92e2fea",
+      "sha256Lf": "537a825cdf47272e5adcf9ca85cdf6a98a08c1bc006609f7c1b5b62ee0d33e79",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20007,10 +20031,10 @@
     {
       "source": "docs/document/en/component/layers.html",
       "route": "/document/en/component/layers.html",
-      "sha256Lf": "fb11698ae6e04bb5fc6570093bada06db4d2fe07c78f1714e7c6fc3bf51c6a6e",
+      "sha256Lf": "d5b815b0d4fb4d5358d8fb72cd1c43a42bae917c1c6f92124f520a988ba23aea",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20020,10 +20044,10 @@
     {
       "source": "docs/document/en/component/setting.html",
       "route": "/document/en/component/setting.html",
-      "sha256Lf": "39352087f351b162fec01b50d6a508f44c968ea6def521a0cd4fbe293a20e515",
+      "sha256Lf": "d6a0664134e5dd3810554d2dc0f1cec4aeae4453dba926fbb4768a8e4d3f37ea",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20033,10 +20057,10 @@
     {
       "source": "docs/document/en/index.html",
       "route": "/document/en/",
-      "sha256Lf": "943cc450dcfdb4b3fb2a14715983cc75dbdd3abfdd5fbb4a7b2bb174d099695e",
+      "sha256Lf": "fa1e9408f5166d4ef996d32b36099c6f4eeb0f9f27e7852b27099617cdfcba51",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20046,10 +20070,10 @@
     {
       "source": "docs/document/en/plugin/ads.html",
       "route": "/document/en/plugin/ads.html",
-      "sha256Lf": "aa4e1828006cd8a1a999d0f60cae0c7a79a07799e6e858e6ed5be5fd6b3adbaa",
+      "sha256Lf": "301c6aa7883526ae6d24d757248b870069ba542469de45271e083bec58eb4951",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20059,10 +20083,10 @@
     {
       "source": "docs/document/en/plugin/ambilight.html",
       "route": "/document/en/plugin/ambilight.html",
-      "sha256Lf": "e118688b62c226a536372b063c208a6ce0510be3467dcd001d8192ac9d6faea8",
+      "sha256Lf": "ac250b1087d9936604fd2ee8faecc9eaebac0b35e24c9978025766a67655b751",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20072,10 +20096,10 @@
     {
       "source": "docs/document/en/plugin/asr.html",
       "route": "/document/en/plugin/asr.html",
-      "sha256Lf": "82170a448208a3314840a9b18deb99ab5ee1062f423e9c7434dce4e5a617b62e",
+      "sha256Lf": "448a33ebff02710ae10067e3e63ff86e25fd59931c8969656cd20da0928ccf7c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20085,10 +20109,10 @@
     {
       "source": "docs/document/en/plugin/audio-track.html",
       "route": "/document/en/plugin/audio-track.html",
-      "sha256Lf": "8590247bc57c67f53f12065f4a3b007abf94776eec1631c512d55c4f30dfd54d",
+      "sha256Lf": "fc7b41985b62faf986c86c28a00f38f5313ec2c49ce52fe8abc20a6810ac93f4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20098,10 +20122,10 @@
     {
       "source": "docs/document/en/plugin/auto-thumbnail.html",
       "route": "/document/en/plugin/auto-thumbnail.html",
-      "sha256Lf": "4bdbac26c9eddf84ca210992cb7a0ac63393aff31182e5df4b15705c82e27c2c",
+      "sha256Lf": "d955e6f9499a32208052c1ae8706ea150e3f7fed410a2cebdf7fdce98a50ff21",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20111,10 +20135,10 @@
     {
       "source": "docs/document/en/plugin/chapter.html",
       "route": "/document/en/plugin/chapter.html",
-      "sha256Lf": "1d0ecb7ecc289b04b5d2b2829285cc556ad802cc4dd32dccc31cdd66b1e7ea8e",
+      "sha256Lf": "4841fc581e5113ced00000c4895f15ab42046decb232023dd08758f8f56d23b1",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20124,10 +20148,10 @@
     {
       "source": "docs/document/en/plugin/chromecast.html",
       "route": "/document/en/plugin/chromecast.html",
-      "sha256Lf": "8efdeeb4e94351227494d5250bdc84114b87d114cd7b64cca74ab055ab18844e",
+      "sha256Lf": "efa9d75e0e0975bfba19a494e590067b2bd39a7550534384899dc51c23b565d5",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20137,10 +20161,10 @@
     {
       "source": "docs/document/en/plugin/danmuku-mask.html",
       "route": "/document/en/plugin/danmuku-mask.html",
-      "sha256Lf": "c7d60da1250022223e733aec398e0c97983bad840e2c63ab50ca8c951e9a0396",
+      "sha256Lf": "1db4df0aba4cae81e9b3a765b87b26d8df139105a60bbd0a8c101abc73d58acd",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20150,10 +20174,10 @@
     {
       "source": "docs/document/en/plugin/danmuku.html",
       "route": "/document/en/plugin/danmuku.html",
-      "sha256Lf": "102cb268ef550bf8b66bdc0d74e5d518e309e9d2bcfc3e1a8f4234dd663cb4f5",
+      "sha256Lf": "52028c2e1c6a762a57f2677594be25ccf8a98cbca2570f12acbcaf4d2b676d3d",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20163,10 +20187,10 @@
     {
       "source": "docs/document/en/plugin/dash-control.html",
       "route": "/document/en/plugin/dash-control.html",
-      "sha256Lf": "96f8a02f018130165929d2858e856d2950f0506ab6f034d7aed01e664c231987",
+      "sha256Lf": "3a89e0bc43825090888d2a159d65d9ef58d924a4d9ca75e419499ef11e091481",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20176,10 +20200,10 @@
     {
       "source": "docs/document/en/plugin/document-pip.html",
       "route": "/document/en/plugin/document-pip.html",
-      "sha256Lf": "1264f1b0a779eef3ed4239ad867b542bcd650fa0dfbc6ecf6a927f03987ee25b",
+      "sha256Lf": "f09962d05973e92dcacbbf5a49c7b944a98151795b19908763f90faf7fd55269",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20189,10 +20213,10 @@
     {
       "source": "docs/document/en/plugin/hls-control.html",
       "route": "/document/en/plugin/hls-control.html",
-      "sha256Lf": "74d27da92f022336b2a7681adaca59959faf2f0cf39a3a1fab18b8299ab1b6fb",
+      "sha256Lf": "9194c439310aa88395b8c01c4f74a522f5f47dd1529b5dc7913139274fd14019",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20202,10 +20226,10 @@
     {
       "source": "docs/document/en/plugin/jassub.html",
       "route": "/document/en/plugin/jassub.html",
-      "sha256Lf": "40e6aea56b7e8fc2b1e4c404a502056382d70b8d8d940796d9abf107adfc68f7",
+      "sha256Lf": "383506c9a53e66b59d5f79394e7806d571103b61a2120e4212e19dbd26c024aa",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20215,10 +20239,10 @@
     {
       "source": "docs/document/en/plugin/multiple-subtitles.html",
       "route": "/document/en/plugin/multiple-subtitles.html",
-      "sha256Lf": "88a033227526daaba644c3798f7650a67a4a0f565c8456bb4f9019fc705d903c",
+      "sha256Lf": "b54316dd72d5396993c96d4c5c03c045735daf95a6d22df1a25997b90a042f81",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20228,10 +20252,10 @@
     {
       "source": "docs/document/en/plugin/vast.html",
       "route": "/document/en/plugin/vast.html",
-      "sha256Lf": "08b59cfd7bba68bb9351b19dfccff7fd1d8c82c3c32361b4cda2421ce84c211e",
+      "sha256Lf": "b1100032caa48e41261d9c80ab96e5cc77b5b8a5152ca20899c5a5969960cb1d",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20241,10 +20265,10 @@
     {
       "source": "docs/document/en/plugin/vtt-thumbnail.html",
       "route": "/document/en/plugin/vtt-thumbnail.html",
-      "sha256Lf": "71d2e5d5a928207e7c6a4843ed5c7dc9e629d8d27f500f2f7d0e2d605df74d5b",
+      "sha256Lf": "e6d1f3bd3778980e3ba6228decdf80cd13ecc2a1bc92804a785e56a6bf642e4a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20254,10 +20278,10 @@
     {
       "source": "docs/document/en/proxy/canvas.html",
       "route": "/document/en/proxy/canvas.html",
-      "sha256Lf": "44d244025cd8b39b6b865fd1fde6bbdbb64feb8e93e068f4c44e11bd17b9b676",
+      "sha256Lf": "4c19d3d8dba93b999852cbd12c25945e65646ddffbbfd4d3e37b49c82b003f59",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20267,10 +20291,10 @@
     {
       "source": "docs/document/en/proxy/mediabunny.html",
       "route": "/document/en/proxy/mediabunny.html",
-      "sha256Lf": "5695aa958cfe95610255c6d2700296d415bf5f2b1bd5df8268fdde64b8d96678",
+      "sha256Lf": "62be5e88d9499ca8a7966556a3016471f5a9811c07ac9f448bb668e3f891b7c4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20280,10 +20304,10 @@
     {
       "source": "docs/document/en/start/i18n.html",
       "route": "/document/en/start/i18n.html",
-      "sha256Lf": "f6170dad7143d22c575ac07920cd7a2016267c3e73f182bae828d84703a13cb0",
+      "sha256Lf": "7488ccc9b3f39a97cdd20759fda5aa1ff91de1a1b39a1e77973d61534f878996",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20293,10 +20317,10 @@
     {
       "source": "docs/document/en/start/option.html",
       "route": "/document/en/start/option.html",
-      "sha256Lf": "637eb116d8a640f32df33b6b7ec13e26506690081d8d4eca3ce5d83ec1ed47fa",
+      "sha256Lf": "e1baf679389c1a7c97302086c380a297047f1d1f4323861d0efbcbe2aa038e4a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20306,10 +20330,10 @@
     {
       "source": "docs/document/en/tool/iframe.html",
       "route": "/document/en/tool/iframe.html",
-      "sha256Lf": "ab959374aaab955bc2a6713316237bbafb97897ea39be5fce6079ef51916b09f",
+      "sha256Lf": "5667615f83d0f6d6d38c5f38f63e11de172ec8312f52caedff1bd0a61ff7982b",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20319,10 +20343,10 @@
     {
       "source": "docs/document/en/tool/thumbnail.html",
       "route": "/document/en/tool/thumbnail.html",
-      "sha256Lf": "a1615737731c6f9b31254351567d256168952f45ddfad6c47612e42cf72ccec9",
+      "sha256Lf": "60075753664f31f1e28066496f3032b3f7648ffa861358856d030317fb503ff2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20332,10 +20356,10 @@
     {
       "source": "docs/document/index.html",
       "route": "/document/",
-      "sha256Lf": "b373e113468c7b931e2c4510d3b86a38dc54d5239b0c790f5ac5b351bce05f37",
+      "sha256Lf": "b3d37917ea234879bc87feb6763b8f1b010981b53187a1c2d74388eac59b88b0",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20345,10 +20369,10 @@
     {
       "source": "docs/document/plugin/ads.html",
       "route": "/document/plugin/ads.html",
-      "sha256Lf": "0753dfb90837dd99eec0296a4f29fe300c515c1b33efea3298272e03bfef75a5",
+      "sha256Lf": "46a1a5dd9875f2ebf430afcc80357933112052aa9c981377b19b1d1c5e5d0ac2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20358,10 +20382,10 @@
     {
       "source": "docs/document/plugin/ambilight.html",
       "route": "/document/plugin/ambilight.html",
-      "sha256Lf": "d67e4d84d48fb1d46a7db4045e6d306d2b645a3f020f36b5558c8bd08336fb5f",
+      "sha256Lf": "66112afcb177602b4482469e41e2851ce6924498a86a06bff14441a123eb9d0d",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20371,10 +20395,10 @@
     {
       "source": "docs/document/plugin/asr.html",
       "route": "/document/plugin/asr.html",
-      "sha256Lf": "5d28375a19f016b8b21ec90d316b794a8ac7373d6a4f80e9dd34f2b73eae3898",
+      "sha256Lf": "c64f28265d7135fb2a64730d04c26541a35b5b6263e75699e5d804ebe235ae23",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20384,10 +20408,10 @@
     {
       "source": "docs/document/plugin/audio-track.html",
       "route": "/document/plugin/audio-track.html",
-      "sha256Lf": "f08bf969aa7ead121272f452f1e81ab0e4c4b9b3dbf8af6da60beace489df2a0",
+      "sha256Lf": "cee8c38db64a9e4cfe0d87c63405d4f6810935ab1b87ce4429cd7772a6d13b8d",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20397,10 +20421,10 @@
     {
       "source": "docs/document/plugin/auto-thumbnail.html",
       "route": "/document/plugin/auto-thumbnail.html",
-      "sha256Lf": "96f206a3fe894d21be49f50feef0ae4025386aa5a28c80957159b60586072da3",
+      "sha256Lf": "c9f8ec22c0195d2aa533c504984af9d716c71cd789b6763a34507dd1018a9080",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20410,10 +20434,10 @@
     {
       "source": "docs/document/plugin/chapter.html",
       "route": "/document/plugin/chapter.html",
-      "sha256Lf": "ebf2460ab6fc0416ec337ebe876a864dfd51c1c1bafaf092128beff08d60cebd",
+      "sha256Lf": "be50d26c937932b007f86b0d1dd690d3c6aaca2473298cf82076c7f5b076e93d",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20423,10 +20447,10 @@
     {
       "source": "docs/document/plugin/chromecast.html",
       "route": "/document/plugin/chromecast.html",
-      "sha256Lf": "3d065b3b6df3c95eb833e59b4464dbb29e2eacc3048fdb02e96afe73d2c60401",
+      "sha256Lf": "9c4d7438984d605f02e14e0547fad6623a0f361f74602e092a421b651fdc7bdd",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20436,10 +20460,10 @@
     {
       "source": "docs/document/plugin/danmuku-mask.html",
       "route": "/document/plugin/danmuku-mask.html",
-      "sha256Lf": "55f66b488e3368fe4dd30195b1ca5ac3e561cc578d3f750fbbc64ab539ed916c",
+      "sha256Lf": "c77bf8432df2b0aca01513345d89d6dc7c35747c292a1f301b702def20fca246",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20449,10 +20473,10 @@
     {
       "source": "docs/document/plugin/danmuku.html",
       "route": "/document/plugin/danmuku.html",
-      "sha256Lf": "f60e63e8784fabb69f7db7039db661a865cafb8c98283e40d8483e003baec479",
+      "sha256Lf": "b94d572eab4f0150fe686cb1dc71137603aa9df49e6badbe68c09641ffdee266",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20462,10 +20486,10 @@
     {
       "source": "docs/document/plugin/dash-control.html",
       "route": "/document/plugin/dash-control.html",
-      "sha256Lf": "4fa3a41d422139b271d7514f7c2f44d470130abade2ad87a38e96356d530ae04",
+      "sha256Lf": "310d9e61fa1c5ee8ff8581d2510a947ed27152421a90dea581164a0a46b33244",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20475,10 +20499,10 @@
     {
       "source": "docs/document/plugin/document-pip.html",
       "route": "/document/plugin/document-pip.html",
-      "sha256Lf": "2cbc3f83024f90dcfb6329d4da2871c430ee7ec81889aad22dbafa097370d720",
+      "sha256Lf": "7eb133158149ebea1a97e91d4287b392e3c624296e28b0311161b5fc4eb0229b",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20488,10 +20512,10 @@
     {
       "source": "docs/document/plugin/hls-control.html",
       "route": "/document/plugin/hls-control.html",
-      "sha256Lf": "e6c60a46796a246562a6ed7bb2a483529087f76ac751f0e9be1f1d6413289931",
+      "sha256Lf": "b11eb2421c31fd4e3f182606a0a66af7e6fa3f57f455fee43ae8be013a025e7d",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20501,10 +20525,10 @@
     {
       "source": "docs/document/plugin/jassub.html",
       "route": "/document/plugin/jassub.html",
-      "sha256Lf": "e60d83dcf4a9af0ac24e16de2f7b43b7925241726ab471aae265274a57bb1d07",
+      "sha256Lf": "393effd7e153301bce3cb0cb27965c2b474e3d15b94aeb5a53ebda413df7f7c9",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20514,10 +20538,10 @@
     {
       "source": "docs/document/plugin/multiple-subtitles.html",
       "route": "/document/plugin/multiple-subtitles.html",
-      "sha256Lf": "0006277486428ee82cb5255e82a53c278ae95cc10085aa91ea2a5d6e7cb23828",
+      "sha256Lf": "bceeb47d2e928ba6f64770e48d2a8353624e4806835deafdc4b3d92dae56ccb4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20527,10 +20551,10 @@
     {
       "source": "docs/document/plugin/vast.html",
       "route": "/document/plugin/vast.html",
-      "sha256Lf": "9c09afec933c58c84af5c64081e9a9632e41649024f73e98eab6cf065ac9b47d",
+      "sha256Lf": "9c9a7769b35902c1d81418c41a9a25e3b85c8c76a75b050760521b2fd8a13f15",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20540,10 +20564,10 @@
     {
       "source": "docs/document/plugin/vtt-thumbnail.html",
       "route": "/document/plugin/vtt-thumbnail.html",
-      "sha256Lf": "4b2d1199be5aa5a97eb99a4f6a72a552746428be95950615c38932ce75c3a93d",
+      "sha256Lf": "188b562401068351a8e243e5234437a5b3cedace4048594315cb16b5610531cf",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20553,10 +20577,10 @@
     {
       "source": "docs/document/proxy/canvas.html",
       "route": "/document/proxy/canvas.html",
-      "sha256Lf": "0dec51461151e95ccfca41d983d394eb2b152b10a19b237124af550c3de35730",
+      "sha256Lf": "e32f71e836b81a79bc65b5b8192d617d04a7dd5294bc03a9bd917284071694f3",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20566,10 +20590,10 @@
     {
       "source": "docs/document/proxy/mediabunny.html",
       "route": "/document/proxy/mediabunny.html",
-      "sha256Lf": "8739bf8968fe162174ec740d5f345ee164890af9fef3dea4e2bb385444ebee64",
+      "sha256Lf": "5a97b7897bf9da72c97a36935e65e9cedb8822992e5234737debe051c69c834d",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20579,10 +20603,10 @@
     {
       "source": "docs/document/start/i18n.html",
       "route": "/document/start/i18n.html",
-      "sha256Lf": "441e85fc2855f7605daada6e5afb3e9e2fcec63b5090478b428a31808f8136b1",
+      "sha256Lf": "b527b6ae816af2bf9503d2f4d4ce9abe80848ea2efaeebab3f8a3ad9f9760cb3",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20592,10 +20616,10 @@
     {
       "source": "docs/document/start/option.html",
       "route": "/document/start/option.html",
-      "sha256Lf": "c17f231b45e9c7834b85b4402ea12127a3f3ba51afbcd8a3c883c73ff9bd9544",
+      "sha256Lf": "965cde01712784187fcbda2f0afbb21a66c13c2ad8ccee012e407059e2e56609",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20605,10 +20629,10 @@
     {
       "source": "docs/document/tool/iframe.html",
       "route": "/document/tool/iframe.html",
-      "sha256Lf": "cd7b35f777b876dd4fcbb2789284fbb21bf6a0f740d2a2642a174c7255c78f20",
+      "sha256Lf": "9e3685ce3635a27a875a43937af1dcc9ad82e4b2196e7a821ae123b1769d1542",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20618,10 +20642,10 @@
     {
       "source": "docs/document/tool/thumbnail.html",
       "route": "/document/tool/thumbnail.html",
-      "sha256Lf": "6e1d66b5e94f8b5d4bad9f1db6c527ae6bcbfe2e17ca833a0ff44864d67cf144",
+      "sha256Lf": "015ad96a3a2755329316730ba0733dc1f9c71040dac6ffdf94c13078e0ffa3a2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DeQtpgol.js",
+        "/document/assets/app.DV8S4_UP.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],

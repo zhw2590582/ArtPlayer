@@ -3,13 +3,13 @@
   "task": "SITE-04",
   "inventory": {
     "path": "refactor/baselines/site-inventory.json",
-    "sha256": "9a444c8db60f47c9d12ac6d183d3aff88e1f088072927ce967cca77a8356b24e"
+    "sha256": "e478cd552039ff1fd4f089c4c4a94ad5fd59d47e7ba57df98f214ce0aefe5d78"
   },
-  "reviewedAt": "2026-09-16T00:12:40.060Z",
+  "reviewedAt": "2026-09-16T00:26:27.419Z",
   "counts": {
     "inventoryRecords": 963,
-    "reviewedRecords": 720,
-    "unreviewedRecords": 243
+    "reviewedRecords": 768,
+    "unreviewedRecords": 195
   },
   "note": "Explicit declaration-record semantic mapping, including overload/getter/setter rows and root/runtime aliases. Counts are not overall API or release completion. Recheck affected groups if their source/document hashes drift. Other declarations and inline members are not implicitly covered.",
   "groups": [
@@ -6746,6 +6746,548 @@
         }
       ],
       "evidence": "baselines/site04-options.json"
+    },
+    {
+      "id": "css-variables-theme",
+      "status": "semantic-reviewed",
+      "conclusion": "43 historical CSS variables with base defaults, actual consumers and mobile/fullscreen overrides; mini-progress-height is retained but unused. cssVar/theme read computed strings and write only truthy values, numeric-zero/read and string-zero/write distinction, removal through native style API, legacy numeric/9999 types versus runtime signatures. Instance-local cascade, unchanged option snapshots, initial theme precedence, internal measured controls height and platform limitations. No runtime or CSS behavior changed.",
+      "records": [
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-theme@2",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-theme",
+          "line": 2
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-font-color@3",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-font-color",
+          "line": 3
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-background-color@4",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-background-color",
+          "line": 4
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-text-shadow-color@5",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-text-shadow-color",
+          "line": 5
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-transition-duration@6",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-transition-duration",
+          "line": 6
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-padding@7",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-padding",
+          "line": 7
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-border-radius@8",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-border-radius",
+          "line": 8
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-progress-height@9",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-progress-height",
+          "line": 9
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-progress-color@10",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-progress-color",
+          "line": 10
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-progress-top-gap@11",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-progress-top-gap",
+          "line": 11
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-hover-color@12",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-hover-color",
+          "line": 12
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-loaded-color@13",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-loaded-color",
+          "line": 13
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-state-size@14",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-state-size",
+          "line": 14
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-state-opacity@15",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-state-opacity",
+          "line": 15
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-bottom-height@16",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-bottom-height",
+          "line": 16
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-bottom-offset@17",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-bottom-offset",
+          "line": 17
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-bottom-gap@18",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-bottom-gap",
+          "line": 18
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-highlight-width@19",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-highlight-width",
+          "line": 19
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-highlight-color@20",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-highlight-color",
+          "line": 20
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-control-height@21",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-control-height",
+          "line": 21
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-control-opacity@22",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-control-opacity",
+          "line": 22
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-control-icon-size@23",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-control-icon-size",
+          "line": 23
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-control-icon-scale@24",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-control-icon-scale",
+          "line": 24
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-volume-height@25",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-volume-height",
+          "line": 25
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-volume-handle-size@26",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-volume-handle-size",
+          "line": 26
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-lock-size@27",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-lock-size",
+          "line": 27
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-indicator-scale@28",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-indicator-scale",
+          "line": 28
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-indicator-size@29",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-indicator-size",
+          "line": 29
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-fullscreen-web-index@30",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-fullscreen-web-index",
+          "line": 30
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-settings-icon-size@31",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-settings-icon-size",
+          "line": 31
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-settings-max-height@32",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-settings-max-height",
+          "line": 32
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-selector-max-height@33",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-selector-max-height",
+          "line": 33
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-contextmenus-min-width@34",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-contextmenus-min-width",
+          "line": 34
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-subtitle-font-size@35",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-subtitle-font-size",
+          "line": 35
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-subtitle-gap@36",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-subtitle-gap",
+          "line": 36
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-subtitle-bottom@37",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-subtitle-bottom",
+          "line": 37
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-subtitle-border@38",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-subtitle-border",
+          "line": 38
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-widget-background@39",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-widget-background",
+          "line": 39
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-tip-background@40",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-tip-background",
+          "line": 40
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-scrollbar-size@41",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-scrollbar-size",
+          "line": 41
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-scrollbar-background@42",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-scrollbar-background",
+          "line": 42
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-scrollbar-background-hover@43",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-scrollbar-background-hover",
+          "line": 43
+        },
+        {
+          "id": "packages/artplayer/public/cssVar.ts#CssVar.--art-mini-progress-height@44",
+          "file": "packages/artplayer/public/cssVar.ts",
+          "declaration": "CssVar",
+          "name": "--art-mini-progress-height",
+          "line": 44
+        },
+        {
+          "id": "packages/artplayer/public/player.ts#Player.theme@79",
+          "file": "packages/artplayer/public/player.ts",
+          "declaration": "Player",
+          "name": "theme",
+          "line": 79
+        },
+        {
+          "id": "packages/artplayer/public/player.ts#Player.theme@80",
+          "file": "packages/artplayer/public/player.ts",
+          "declaration": "Player",
+          "name": "theme",
+          "line": 80
+        },
+        {
+          "id": "packages/artplayer/public/player.ts#Player.cssVar@100",
+          "file": "packages/artplayer/public/player.ts",
+          "declaration": "Player",
+          "name": "cssVar",
+          "line": 100
+        },
+        {
+          "id": "packages/artplayer/public/runtime/player.ts#Player.theme@42",
+          "file": "packages/artplayer/public/runtime/player.ts",
+          "declaration": "Player",
+          "name": "theme",
+          "line": 42
+        },
+        {
+          "id": "packages/artplayer/public/runtime/player.ts#Player.cssVar@74",
+          "file": "packages/artplayer/public/runtime/player.ts",
+          "declaration": "Player",
+          "name": "cssVar",
+          "line": 74
+        }
+      ],
+      "sources": [
+        {
+          "path": "packages/artplayer/src/player/cssVarMix.ts",
+          "sha256": "0d023f28b7a8b4c1a5e2c4dd5672ef4294c86bce0013babd9d52efa32a443b2a"
+        },
+        {
+          "path": "packages/artplayer/src/player/themeMix.ts",
+          "sha256": "5bf11bcf8b77cd5d5f2970bc3edcee315c693c1be3d567770d5107a5951cb48f"
+        },
+        {
+          "path": "packages/artplayer/src/player/optionInit.ts",
+          "sha256": "7c1c47679ee6201d0e0d203fc7b449a09309e7b24a0a1099ad259a70fc1b1a35"
+        },
+        {
+          "path": "packages/artplayer/src/control/layout.ts",
+          "sha256": "72e0b95bc632561e97569d789b76d16f36edd94eac8c62ba9e1918c9a222d328"
+        },
+        {
+          "path": "packages/artplayer/src/style/index.ts",
+          "sha256": "856afc037ffcd4d18c4b54901ddbb30e310014553fe9d19560e34fb54b8378c1"
+        },
+        {
+          "path": "packages/artplayer/src/style/inject.ts",
+          "sha256": "9cddbe51b5de0da74f27c045ab982b509c3854cc6b81eeb02a6b974914760a4d"
+        },
+        {
+          "path": "packages/artplayer/public/cssVar.ts",
+          "sha256": "e027d82fb4f01c9ce7559cf679b2d5ee1962d3f7e5b4dd64ca21f472b933efb6"
+        },
+        {
+          "path": "packages/artplayer/public/player.ts",
+          "sha256": "f1e50257df2ea592d0a0e1f36078dda77eaf2cf3b3d795307501396562d99f28"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/player.ts",
+          "sha256": "a4a24794e26cfb9e4310bf0f459a7a407e85bf81b4f3a4feb6294331af8036fb"
+        },
+        {
+          "path": "packages/artplayer/src/style/accessibility.less",
+          "sha256": "eb9cfe282c64a059d2e102280750bcd33ac33726fa09042eb9875f534335efef"
+        },
+        {
+          "path": "packages/artplayer/src/style/artplayer.less",
+          "sha256": "4e8513138d5d10c05b66986977d24ed17f1de3c0df3816dec6d90db7a97b5da3"
+        },
+        {
+          "path": "packages/artplayer/src/style/aspectRatio.less",
+          "sha256": "091931a0cdc83e65a669332811ef3276b85bca9e55f7fff42aa46893d728c1ef"
+        },
+        {
+          "path": "packages/artplayer/src/style/backdrop.less",
+          "sha256": "6c2cd0fa200d1f3525df98c3c56dbdc553445724aece3feb0386949245813343"
+        },
+        {
+          "path": "packages/artplayer/src/style/bottom.less",
+          "sha256": "6fb307d8449fd04b804d5e72ea0f175f8aa9c9dd2bf1efbf756f800b39ac97ab"
+        },
+        {
+          "path": "packages/artplayer/src/style/contextmenu.less",
+          "sha256": "70f6c7e26dc96652b659c7bf6fdad92737ed477dea69d253c57dc7266c76586d"
+        },
+        {
+          "path": "packages/artplayer/src/style/controls.less",
+          "sha256": "eb6d4bf4e4ff903d724d45f3ff60f0cf10c02e622fba195555a8179100cdce87"
+        },
+        {
+          "path": "packages/artplayer/src/style/danmuku.less",
+          "sha256": "e4215ee9fa2f1d0599e7311a2415cc975138265b7c6af0448d27d21b6c9e3511"
+        },
+        {
+          "path": "packages/artplayer/src/style/flip.less",
+          "sha256": "5d3c7a81df9be455c2f683ebf48f39597d218dc2144addacb72ee1736bac3b7f"
+        },
+        {
+          "path": "packages/artplayer/src/style/fullscreen.less",
+          "sha256": "dd350d3a0fc556d59b622a53c786b8c2a583e8fb28176e4b9e91baff90479496"
+        },
+        {
+          "path": "packages/artplayer/src/style/fullscreenWeb.less",
+          "sha256": "d74e785c2fbbb2976e131620e751326f622f2916eceff9f2333059ca3296cdc9"
+        },
+        {
+          "path": "packages/artplayer/src/style/hideCursor.less",
+          "sha256": "09a4607c8b0005dc199828172aa8dda395f861e407769b9696d793476c4a7823"
+        },
+        {
+          "path": "packages/artplayer/src/style/hint.less",
+          "sha256": "ae9f3115dfdb1e2d7b8249497c080e6a25f9667f915f6e89820338d67bbc2d85"
+        },
+        {
+          "path": "packages/artplayer/src/style/icon.less",
+          "sha256": "52d8f75c1d193e6160f57ca6997c3f9135adad8eb2338ed60c1eb8e5fe443be5"
+        },
+        {
+          "path": "packages/artplayer/src/style/index.less",
+          "sha256": "7fece0bc5b5a106d051eb80152d5e4558f2e73953c4c33175aa901b9695be61b"
+        },
+        {
+          "path": "packages/artplayer/src/style/info.less",
+          "sha256": "fa56d1b8c8936218e581b2426026e4ba85cd5fea20d045c4f69aca96be4059be"
+        },
+        {
+          "path": "packages/artplayer/src/style/layers.less",
+          "sha256": "9653c581190bb22d60a706109819cd010908898740701c9526957b5682991c5f"
+        },
+        {
+          "path": "packages/artplayer/src/style/loading.less",
+          "sha256": "185b0f05274196ba71fdb1d088b55af568f3342a495490c99c3f0e058a40659e"
+        },
+        {
+          "path": "packages/artplayer/src/style/mask.less",
+          "sha256": "d1239a171b71ea6184cb4aee6660d74d6ffc0c48f7c47c3cf5fbe52d2e93ac92"
+        },
+        {
+          "path": "packages/artplayer/src/style/mini.less",
+          "sha256": "8be782a3054154ab908b1cce650b6131330cf0f0e936b749accb4b2dfe605a27"
+        },
+        {
+          "path": "packages/artplayer/src/style/mixins.less",
+          "sha256": "c6be95aa682f266749fe37cb89796fbec6488abc537174f817da79bdac6e00b5"
+        },
+        {
+          "path": "packages/artplayer/src/style/mobile.less",
+          "sha256": "ff3f64fca5d2dd7ddd50385d88d9b2fa1a645909488ab7a0978ba4f1670b7c0e"
+        },
+        {
+          "path": "packages/artplayer/src/style/notice.less",
+          "sha256": "72a935c0effc557a9d7ab3baccb2c3b77fc3a1783450b4e3178a40a5325fe369"
+        },
+        {
+          "path": "packages/artplayer/src/style/plugins.less",
+          "sha256": "ea345094ea5708dd3a3c290f357dbb301b38af35464d213c47e3ec6c60eaadca"
+        },
+        {
+          "path": "packages/artplayer/src/style/poster.less",
+          "sha256": "36b38fe138f8c9537ff4e93f7ec4f2dbdba1ec41d243d741ddf1da7c6581e546"
+        },
+        {
+          "path": "packages/artplayer/src/style/progress.less",
+          "sha256": "59b9d95d49dbcb1be40752d7086239b6de5925b0574da231199d999e22ff4990"
+        },
+        {
+          "path": "packages/artplayer/src/style/selector.less",
+          "sha256": "44585c6b0179e34d21eeefce6d3494faacc0e9d108079426876e8847fd441513"
+        },
+        {
+          "path": "packages/artplayer/src/style/setting.less",
+          "sha256": "5618eb443ab6368bc4a18e9a379ce6552629555cdca6074e753aa6fd7baf9bf9"
+        },
+        {
+          "path": "packages/artplayer/src/style/subtitle.less",
+          "sha256": "273cacb63ec0214ba434dcf19a4a455dbbdd408fb2d1749de4878804c1371e41"
+        },
+        {
+          "path": "packages/artplayer/src/style/variables.less",
+          "sha256": "703739b2bdfc77bfde063d8788ef6b6a55b8730764baae8e7d755b7c54d8ecc7"
+        },
+        {
+          "path": "packages/artplayer/src/style/video.less",
+          "sha256": "b89c6f6e27592d49825c68c9ab98d46e81cb1e5add855863f89d19637f98e35f"
+        },
+        {
+          "path": "packages/artplayer/src/style/volume.less",
+          "sha256": "6e99bbe0dbcb40667ef99789b65812dc9c94ce8a1071c00d2edec5eba041c434"
+        }
+      ],
+      "docs": [
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+          "sha256": "a3c53867cd8b43b517d19bad61893606791cef967ce9e953e3a6ffe67371093e",
+          "anchor": "css-variable-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+          "sha256": "a3c53867cd8b43b517d19bad61893606791cef967ce9e953e3a6ffe67371093e",
+          "anchor": "css-variable-defaults"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+          "sha256": "a3c53867cd8b43b517d19bad61893606791cef967ce9e953e3a6ffe67371093e",
+          "anchor": "css-variable-modes"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "sha256": "bec5fe09633dfc4d35739f70d46303e73fd5befd62f123ba81d4799c8dae55a8",
+          "anchor": "css-variable-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "sha256": "bec5fe09633dfc4d35739f70d46303e73fd5befd62f123ba81d4799c8dae55a8",
+          "anchor": "css-variable-defaults"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "sha256": "bec5fe09633dfc4d35739f70d46303e73fd5befd62f123ba81d4799c8dae55a8",
+          "anchor": "css-variable-modes"
+        }
+      ],
+      "evidence": "baselines/site04-css.json"
     }
   ]
 }

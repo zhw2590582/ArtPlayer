@@ -1,0 +1,1785 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "doing",
+  "sourceBefore": "24011ea26678ab7b52f9d10b3fd589f388a6a0cc",
+  "capturedAt": "2026-09-16T00:26:27.419Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "static": [
+      {
+        "language": "zh",
+        "name": "property",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/advanced/property.md",
+          "sha256": "a3c53867cd8b43b517d19bad61893606791cef967ce9e953e3a6ffe67371093e"
+        },
+        "html": {
+          "path": "docs/document/advanced/property.html",
+          "sha256": "1c0a839bf98130612b51c1f0bc3666ef4acf434e722e28d747d84bf6590d30e6"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-css/zh-property-0.mts",
+            "sha256": "b1ebc352de566ade8c86051cdf61ff4aa8aec836bf4f650f94c1f42a6a0eb079"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "advanced/property.md:14",
+            "sha256": "3cabe61431f355e4586233ea74fee21d731f7d4a971c400918a3f0b488e2c4ff"
+          },
+          {
+            "id": "advanced/property.md:34",
+            "sha256": "70a8c691c60351316a3f513143cfead37d939ee0c484690ea4391077a2c8743a"
+          },
+          {
+            "id": "advanced/property.md:58",
+            "sha256": "c3f3c00df8c7f5b58907b857a8d011f8750b4696ae43c7ff56982d64e0df8092"
+          },
+          {
+            "id": "advanced/property.md:83",
+            "sha256": "4387bb6edc35ce5f1f1a0d23bef3360501b85cb1c788a687d70fba58c542c558"
+          },
+          {
+            "id": "advanced/property.md:104",
+            "sha256": "9f90410a980c753e91b8b96c18474f89725046f7314ef2e40e6b20137606d15c"
+          },
+          {
+            "id": "advanced/property.md:125",
+            "sha256": "b59bed172f2e7cbeb3cca9a91962a673435c05435d6fb46e286802d5bdbb716b"
+          },
+          {
+            "id": "advanced/property.md:145",
+            "sha256": "0262ac7cab0b29f6291a0e4d25748126cc5c804736b5c5c56dd8921a92bf57a1"
+          },
+          {
+            "id": "advanced/property.md:165",
+            "sha256": "f08b81f8657b6319f4fdca09bb4013ed65b320b7fd6922e2fced903cb429dcf2"
+          },
+          {
+            "id": "advanced/property.md:189",
+            "sha256": "cd33637bc031f7337c104fea1b122b5e07bced68103efa0f0a1d049622031a3b"
+          },
+          {
+            "id": "advanced/property.md:211",
+            "sha256": "f478310b4a2186229b1592d6c1454bdedf40a837900a7a17e615c3a80cae6634"
+          },
+          {
+            "id": "advanced/property.md:231",
+            "sha256": "95a5bab0c95a3e6af3beaafd354d5ad8582e3c2cc2499cde4520776ce3e19eaa"
+          },
+          {
+            "id": "advanced/property.md:254",
+            "sha256": "87fc8c2bbc61c4b1ba6c5158dbe8dd23db8054d8f5a561af7f4888f643c9b7c2"
+          },
+          {
+            "id": "advanced/property.md:283",
+            "sha256": "bab7649d940c8b0dfea0be40c54be2985344672301f8337565a402b8a227422f"
+          },
+          {
+            "id": "advanced/property.md:306",
+            "sha256": "5667932068586cec17e5dc327233300b771b609501e3032e3bce1a57e1f98387"
+          },
+          {
+            "id": "advanced/property.md:328",
+            "sha256": "25793429ff3f206fd755f453b104f5584a7be7a3c837eae19ce7a3d6a9402be5"
+          },
+          {
+            "id": "advanced/property.md:349",
+            "sha256": "aa0e384baec035be0983ae24e0d46d7d1855ecfcd6df3fe0517ac2773be3b175"
+          },
+          {
+            "id": "advanced/property.md:374",
+            "sha256": "21bcfd32284f83b2666e6f1800ee9a5bd4882cc86ae53e61784d96da62edfa3c"
+          },
+          {
+            "id": "advanced/property.md:393",
+            "sha256": "9fee33590d1f16ca35860d44569130c1ef1f8fb16b6d2a237156bc780b35845a"
+          },
+          {
+            "id": "advanced/property.md:413",
+            "sha256": "31f1d341bcf7558cd3fed8d9c7885d9baa9bfe447d8598593f07553ff9757000"
+          },
+          {
+            "id": "advanced/property.md:434",
+            "sha256": "b0deffd95e61be6f3bad2a7804c555d7c99a0924e1acfb636aeb36a38725558a"
+          },
+          {
+            "id": "advanced/property.md:465",
+            "sha256": "abbb497430d6655dda16940e79e7d443db4cc2ab1c83ffe19d19dd13ed246261"
+          },
+          {
+            "id": "advanced/property.md:490",
+            "sha256": "ae7f551a33957fa38ec9c2716ed6f50d8710d90ec90a2a9b7b75120dfb3824a6"
+          },
+          {
+            "id": "advanced/property.md:521",
+            "sha256": "34cf6c5eca225e8e0000dddcf617764705d013b2d2776b3b2becba0a0b9dd59b"
+          },
+          {
+            "id": "advanced/property.md:544",
+            "sha256": "dfe94368bceb32fb3e505e0ab1cc79ad7e2a049a9d9abb5153e07ff7b48cb33b"
+          },
+          {
+            "id": "advanced/property.md:564",
+            "sha256": "4553ef81f777cc2039746903872c0af42e995f2bad32c142642c0241c8472c61"
+          },
+          {
+            "id": "advanced/property.md:585",
+            "sha256": "bde03335b221e6cbf53bdf827b1271cfb27b429418724187b2447853db30e9f7"
+          },
+          {
+            "id": "advanced/property.md:605",
+            "sha256": "89c7317aae3a7e512ff59cb3c09ec8fe4ad7511a8d9578e831be478cada01ef3"
+          },
+          {
+            "id": "advanced/property.md:624",
+            "sha256": "097fd3bec57f94ed2981ad42d03a8b5684a3988cf5d421f21579cdd4e9949f9b"
+          },
+          {
+            "id": "advanced/property.md:652",
+            "sha256": "08d554917e8a8e01a2cd1fd1de9ac2ba31ef096a4d127b4b6dbfe6fe887178d1"
+          },
+          {
+            "id": "advanced/property.md:672",
+            "sha256": "61369be2387dd04cdbaac10125ffa78c1d4f0d2e44af5919210a7aa4f71fe846"
+          },
+          {
+            "id": "advanced/property.md:694",
+            "sha256": "aa17d4b76b245662060491e5111cdf1a8fda9507a37a2a438c1a8dcdec3ecb4d"
+          },
+          {
+            "id": "advanced/property.md:716",
+            "sha256": "2204ab589ef4a8dd1051f1cf45d792f11f27808dc700c70a7217c97c42de1e34"
+          },
+          {
+            "id": "advanced/property.md:737",
+            "sha256": "33faf743b2342146d2cb3e2123b210c953d0214496a20eec81eb0aba8cbdd563"
+          },
+          {
+            "id": "advanced/property.md:767",
+            "sha256": "c6c4d8e19ca90bc1eac07a712f34170326952ad5362b0a5d08fe0efe9da8ad1f"
+          },
+          {
+            "id": "advanced/property.md:789",
+            "sha256": "c1fdc14f65e682f52ae6e15cb6669f3740881faa4a0b59a502aeed1c3dbfd7a5"
+          },
+          {
+            "id": "advanced/property.md:811",
+            "sha256": "db3e0182d4345db218a6f108ddcb503c67c9bbbde0ab4a6e8a03b2684ce26b9b"
+          },
+          {
+            "id": "advanced/property.md:832",
+            "sha256": "6a015838368689c8acfff86891c14c5a85bf66f6a687bb7129bd8df095f4ba6e"
+          },
+          {
+            "id": "advanced/property.md:856",
+            "sha256": "953763d9e84fff724bf84fb2d6114381fd4ad2c9aa8a77bfd33e1ef86b3d13c4"
+          },
+          {
+            "id": "advanced/property.md:875",
+            "sha256": "e9bdbb3515801506d7ea7653ff2219ffeaf2e8d9868ae23344a0137f6852455b"
+          },
+          {
+            "id": "advanced/property.md:894",
+            "sha256": "32d3569ae3ff5471f6cc93e4abba9c4ad96486197cc285a9c47b7bb8701c813a"
+          },
+          {
+            "id": "advanced/property.md:913",
+            "sha256": "bd49f48474c50b608624abd9167fe9f9d7f60c273b997a47828dd901a3445e99"
+          },
+          {
+            "id": "advanced/property.md:940",
+            "sha256": "a68e1ed899c756ce64bb6432a1b52a7ba192d6669fa899a7f7d24c1407190592"
+          },
+          {
+            "id": "advanced/property.md:957",
+            "sha256": "da4dde2ee26d5a97655c572a889c11d937e3cd747ae79a2f4aeb3e3d0c84c67f"
+          },
+          {
+            "id": "advanced/property.md:974",
+            "sha256": "ee9a841efe8763bc601a8b0ab710961f76709c60541c34171f4f4b8b6e0a2953"
+          },
+          {
+            "id": "advanced/property.md:1078",
+            "sha256": "c078cb17235bd6309b69f157683d4cf6b1565b00dab397c1c4f4cafc53e61868"
+          },
+          {
+            "id": "advanced/property.md:1121",
+            "sha256": "490713b798e44c6ffc32e3bec40746b9267da62929be79ceff8ce256046b2c47"
+          },
+          {
+            "id": "advanced/property.md:1145",
+            "sha256": "9096ab3bba28746c56a44ca491a31957fd18d52649afb122970ed43774a1e689"
+          }
+        ],
+        "localLinks": [
+          "/document/advanced/property.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/advanced/property.html#%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7",
+          "/document/advanced/property.html#play",
+          "/document/advanced/property.html#pause",
+          "/document/advanced/property.html#toggle",
+          "/document/advanced/property.html#destroy",
+          "/document/advanced/property.html#reset",
+          "/document/advanced/property.html#seek",
+          "/document/advanced/property.html#forward",
+          "/document/advanced/property.html#backward",
+          "/document/advanced/property.html#volume",
+          "/document/advanced/property.html#url",
+          "/document/advanced/property.html#switch",
+          "/document/advanced/property.html#switchurl",
+          "/document/advanced/property.html#switchquality",
+          "/document/advanced/property.html#muted",
+          "/document/advanced/property.html#currenttime",
+          "/document/advanced/property.html#duration",
+          "/document/advanced/property.html#screenshot",
+          "/document/advanced/property.html#getdataurl",
+          "/document/advanced/property.html#getbloburl",
+          "/document/advanced/property.html#fullscreen",
+          "/document/advanced/property.html#fullscreenweb",
+          "/document/advanced/property.html#pip",
+          "/document/advanced/property.html#poster",
+          "/document/advanced/property.html#mini",
+          "/document/advanced/property.html#playing",
+          "/document/advanced/property.html#state",
+          "/document/advanced/property.html#autosize",
+          "/document/advanced/property.html#rect",
+          "/document/advanced/property.html#bottom-top-left-right-x-y-width-height",
+          "/document/advanced/property.html#flip",
+          "/document/advanced/property.html#playbackrate",
+          "/document/advanced/property.html#aspectratio",
+          "/document/advanced/property.html#autoheight",
+          "/document/advanced/property.html#attr",
+          "/document/advanced/property.html#type",
+          "/document/advanced/property.html#theme",
+          "/document/advanced/property.html#airplay",
+          "/document/advanced/property.html#loaded",
+          "/document/advanced/property.html#loadedtime",
+          "/document/advanced/property.html#played",
+          "/document/advanced/property.html#proxy",
+          "/document/advanced/property.html#query",
+          "/document/advanced/property.html#video",
+          "/document/advanced/property.html#cssvar",
+          "/document/advanced/property.html#css-variable-contract",
+          "/document/advanced/property.html#css-variable-defaults",
+          "/document/advanced/property.html#css-variable-modes",
+          "/document/advanced/property.html#quality",
+          "/document/advanced/property.html#thumbnails",
+          "/document/advanced/property.html#subtitleoffset"
+        ]
+      },
+      {
+        "language": "en",
+        "name": "property",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+          "sha256": "bec5fe09633dfc4d35739f70d46303e73fd5befd62f123ba81d4799c8dae55a8"
+        },
+        "html": {
+          "path": "docs/document/en/advanced/property.html",
+          "sha256": "c3cd8abf7d33ee1f47414e88806f4228758c2c37877c14d53fbc3f5f3f23737b"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-css/en-property-0.mts",
+            "sha256": "b1ebc352de566ade8c86051cdf61ff4aa8aec836bf4f650f94c1f42a6a0eb079"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "en/advanced/property.md:14",
+            "sha256": "3cabe61431f355e4586233ea74fee21d731f7d4a971c400918a3f0b488e2c4ff"
+          },
+          {
+            "id": "en/advanced/property.md:34",
+            "sha256": "70a8c691c60351316a3f513143cfead37d939ee0c484690ea4391077a2c8743a"
+          },
+          {
+            "id": "en/advanced/property.md:58",
+            "sha256": "c3f3c00df8c7f5b58907b857a8d011f8750b4696ae43c7ff56982d64e0df8092"
+          },
+          {
+            "id": "en/advanced/property.md:83",
+            "sha256": "4387bb6edc35ce5f1f1a0d23bef3360501b85cb1c788a687d70fba58c542c558"
+          },
+          {
+            "id": "en/advanced/property.md:104",
+            "sha256": "4632f6c855acb2635a2a8ab7b3730e84bafd57bd298a9afc3f0cad79eecd639b"
+          },
+          {
+            "id": "en/advanced/property.md:125",
+            "sha256": "b59bed172f2e7cbeb3cca9a91962a673435c05435d6fb46e286802d5bdbb716b"
+          },
+          {
+            "id": "en/advanced/property.md:145",
+            "sha256": "0262ac7cab0b29f6291a0e4d25748126cc5c804736b5c5c56dd8921a92bf57a1"
+          },
+          {
+            "id": "en/advanced/property.md:165",
+            "sha256": "f08b81f8657b6319f4fdca09bb4013ed65b320b7fd6922e2fced903cb429dcf2"
+          },
+          {
+            "id": "en/advanced/property.md:189",
+            "sha256": "cd33637bc031f7337c104fea1b122b5e07bced68103efa0f0a1d049622031a3b"
+          },
+          {
+            "id": "en/advanced/property.md:211",
+            "sha256": "f478310b4a2186229b1592d6c1454bdedf40a837900a7a17e615c3a80cae6634"
+          },
+          {
+            "id": "en/advanced/property.md:231",
+            "sha256": "95a5bab0c95a3e6af3beaafd354d5ad8582e3c2cc2499cde4520776ce3e19eaa"
+          },
+          {
+            "id": "en/advanced/property.md:254",
+            "sha256": "87fc8c2bbc61c4b1ba6c5158dbe8dd23db8054d8f5a561af7f4888f643c9b7c2"
+          },
+          {
+            "id": "en/advanced/property.md:284",
+            "sha256": "bab7649d940c8b0dfea0be40c54be2985344672301f8337565a402b8a227422f"
+          },
+          {
+            "id": "en/advanced/property.md:307",
+            "sha256": "5667932068586cec17e5dc327233300b771b609501e3032e3bce1a57e1f98387"
+          },
+          {
+            "id": "en/advanced/property.md:329",
+            "sha256": "25793429ff3f206fd755f453b104f5584a7be7a3c837eae19ce7a3d6a9402be5"
+          },
+          {
+            "id": "en/advanced/property.md:350",
+            "sha256": "aa0e384baec035be0983ae24e0d46d7d1855ecfcd6df3fe0517ac2773be3b175"
+          },
+          {
+            "id": "en/advanced/property.md:375",
+            "sha256": "21bcfd32284f83b2666e6f1800ee9a5bd4882cc86ae53e61784d96da62edfa3c"
+          },
+          {
+            "id": "en/advanced/property.md:394",
+            "sha256": "9fee33590d1f16ca35860d44569130c1ef1f8fb16b6d2a237156bc780b35845a"
+          },
+          {
+            "id": "en/advanced/property.md:414",
+            "sha256": "31f1d341bcf7558cd3fed8d9c7885d9baa9bfe447d8598593f07553ff9757000"
+          },
+          {
+            "id": "en/advanced/property.md:435",
+            "sha256": "b0deffd95e61be6f3bad2a7804c555d7c99a0924e1acfb636aeb36a38725558a"
+          },
+          {
+            "id": "en/advanced/property.md:466",
+            "sha256": "abbb497430d6655dda16940e79e7d443db4cc2ab1c83ffe19d19dd13ed246261"
+          },
+          {
+            "id": "en/advanced/property.md:491",
+            "sha256": "ae7f551a33957fa38ec9c2716ed6f50d8710d90ec90a2a9b7b75120dfb3824a6"
+          },
+          {
+            "id": "en/advanced/property.md:522",
+            "sha256": "34cf6c5eca225e8e0000dddcf617764705d013b2d2776b3b2becba0a0b9dd59b"
+          },
+          {
+            "id": "en/advanced/property.md:545",
+            "sha256": "dfe94368bceb32fb3e505e0ab1cc79ad7e2a049a9d9abb5153e07ff7b48cb33b"
+          },
+          {
+            "id": "en/advanced/property.md:565",
+            "sha256": "4553ef81f777cc2039746903872c0af42e995f2bad32c142642c0241c8472c61"
+          },
+          {
+            "id": "en/advanced/property.md:586",
+            "sha256": "4fd9295f6d5406ea993a81098ce0310ecdb2fc10218f08a08c5a30df6f9f4897"
+          },
+          {
+            "id": "en/advanced/property.md:606",
+            "sha256": "89c7317aae3a7e512ff59cb3c09ec8fe4ad7511a8d9578e831be478cada01ef3"
+          },
+          {
+            "id": "en/advanced/property.md:625",
+            "sha256": "097fd3bec57f94ed2981ad42d03a8b5684a3988cf5d421f21579cdd4e9949f9b"
+          },
+          {
+            "id": "en/advanced/property.md:653",
+            "sha256": "08d554917e8a8e01a2cd1fd1de9ac2ba31ef096a4d127b4b6dbfe6fe887178d1"
+          },
+          {
+            "id": "en/advanced/property.md:673",
+            "sha256": "61369be2387dd04cdbaac10125ffa78c1d4f0d2e44af5919210a7aa4f71fe846"
+          },
+          {
+            "id": "en/advanced/property.md:695",
+            "sha256": "aa17d4b76b245662060491e5111cdf1a8fda9507a37a2a438c1a8dcdec3ecb4d"
+          },
+          {
+            "id": "en/advanced/property.md:717",
+            "sha256": "2204ab589ef4a8dd1051f1cf45d792f11f27808dc700c70a7217c97c42de1e34"
+          },
+          {
+            "id": "en/advanced/property.md:738",
+            "sha256": "33faf743b2342146d2cb3e2123b210c953d0214496a20eec81eb0aba8cbdd563"
+          },
+          {
+            "id": "en/advanced/property.md:768",
+            "sha256": "c6c4d8e19ca90bc1eac07a712f34170326952ad5362b0a5d08fe0efe9da8ad1f"
+          },
+          {
+            "id": "en/advanced/property.md:790",
+            "sha256": "c1fdc14f65e682f52ae6e15cb6669f3740881faa4a0b59a502aeed1c3dbfd7a5"
+          },
+          {
+            "id": "en/advanced/property.md:812",
+            "sha256": "db3e0182d4345db218a6f108ddcb503c67c9bbbde0ab4a6e8a03b2684ce26b9b"
+          },
+          {
+            "id": "en/advanced/property.md:833",
+            "sha256": "6a015838368689c8acfff86891c14c5a85bf66f6a687bb7129bd8df095f4ba6e"
+          },
+          {
+            "id": "en/advanced/property.md:857",
+            "sha256": "953763d9e84fff724bf84fb2d6114381fd4ad2c9aa8a77bfd33e1ef86b3d13c4"
+          },
+          {
+            "id": "en/advanced/property.md:876",
+            "sha256": "e9bdbb3515801506d7ea7653ff2219ffeaf2e8d9868ae23344a0137f6852455b"
+          },
+          {
+            "id": "en/advanced/property.md:895",
+            "sha256": "32d3569ae3ff5471f6cc93e4abba9c4ad96486197cc285a9c47b7bb8701c813a"
+          },
+          {
+            "id": "en/advanced/property.md:914",
+            "sha256": "bd49f48474c50b608624abd9167fe9f9d7f60c273b997a47828dd901a3445e99"
+          },
+          {
+            "id": "en/advanced/property.md:941",
+            "sha256": "a68e1ed899c756ce64bb6432a1b52a7ba192d6669fa899a7f7d24c1407190592"
+          },
+          {
+            "id": "en/advanced/property.md:958",
+            "sha256": "da4dde2ee26d5a97655c572a889c11d937e3cd747ae79a2f4aeb3e3d0c84c67f"
+          },
+          {
+            "id": "en/advanced/property.md:975",
+            "sha256": "ee9a841efe8763bc601a8b0ab710961f76709c60541c34171f4f4b8b6e0a2953"
+          },
+          {
+            "id": "en/advanced/property.md:1079",
+            "sha256": "c078cb17235bd6309b69f157683d4cf6b1565b00dab397c1c4f4cafc53e61868"
+          },
+          {
+            "id": "en/advanced/property.md:1123",
+            "sha256": "490713b798e44c6ffc32e3bec40746b9267da62929be79ceff8ce256046b2c47"
+          },
+          {
+            "id": "en/advanced/property.md:1147",
+            "sha256": "9096ab3bba28746c56a44ca491a31957fd18d52649afb122970ed43774a1e689"
+          }
+        ],
+        "localLinks": [
+          "/document/en/advanced/property.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/advanced/property.html#instance-properties",
+          "/document/en/advanced/property.html#play",
+          "/document/en/advanced/property.html#pause",
+          "/document/en/advanced/property.html#toggle",
+          "/document/en/advanced/property.html#destroy",
+          "/document/en/advanced/property.html#reset",
+          "/document/en/advanced/property.html#seek",
+          "/document/en/advanced/property.html#forward",
+          "/document/en/advanced/property.html#backward",
+          "/document/en/advanced/property.html#volume",
+          "/document/en/advanced/property.html#url",
+          "/document/en/advanced/property.html#switch",
+          "/document/en/advanced/property.html#switchurl",
+          "/document/en/advanced/property.html#switchquality",
+          "/document/en/advanced/property.html#muted",
+          "/document/en/advanced/property.html#currenttime",
+          "/document/en/advanced/property.html#duration",
+          "/document/en/advanced/property.html#screenshot",
+          "/document/en/advanced/property.html#getdataurl",
+          "/document/en/advanced/property.html#getbloburl",
+          "/document/en/advanced/property.html#fullscreen",
+          "/document/en/advanced/property.html#fullscreenweb",
+          "/document/en/advanced/property.html#pip",
+          "/document/en/advanced/property.html#poster",
+          "/document/en/advanced/property.html#mini",
+          "/document/en/advanced/property.html#playing",
+          "/document/en/advanced/property.html#state",
+          "/document/en/advanced/property.html#autosize",
+          "/document/en/advanced/property.html#rect",
+          "/document/en/advanced/property.html#bottom-top-left-right-x-y-width-height",
+          "/document/en/advanced/property.html#flip",
+          "/document/en/advanced/property.html#playbackrate",
+          "/document/en/advanced/property.html#aspectratio",
+          "/document/en/advanced/property.html#autoheight",
+          "/document/en/advanced/property.html#attr",
+          "/document/en/advanced/property.html#type",
+          "/document/en/advanced/property.html#theme",
+          "/document/en/advanced/property.html#airplay",
+          "/document/en/advanced/property.html#loaded",
+          "/document/en/advanced/property.html#loadedtime",
+          "/document/en/advanced/property.html#played",
+          "/document/en/advanced/property.html#proxy",
+          "/document/en/advanced/property.html#query",
+          "/document/en/advanced/property.html#video",
+          "/document/en/advanced/property.html#cssvar",
+          "/document/en/advanced/property.html#css-variable-contract",
+          "/document/en/advanced/property.html#css-variable-defaults",
+          "/document/en/advanced/property.html#css-variable-modes",
+          "/document/en/advanced/property.html#quality",
+          "/document/en/advanced/property.html#thumbnails",
+          "/document/en/advanced/property.html#subtitleoffset"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "zh",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "db3e0182d4345db218a6f108ddcb503c67c9bbbde0ab4a6e8a03b2684ce26b9b",
+          "ee9a841efe8763bc601a8b0ab710961f76709c60541c34171f4f4b8b6e0a2953"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-css/chromium-zh-property.png",
+          "sha256": "05c0310c70a2361b6324e96a098b1e1f7ea30078c698e3423a28c2968653ba12"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "en",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "db3e0182d4345db218a6f108ddcb503c67c9bbbde0ab4a6e8a03b2684ce26b9b",
+          "ee9a841efe8763bc601a8b0ab710961f76709c60541c34171f4f4b8b6e0a2953"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-css/chromium-en-property.png",
+          "sha256": "7d6c353b62408a58fc861f049ac7d71cc8bb88ecabf443abcc80395efc2d64fb"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "zh",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "db3e0182d4345db218a6f108ddcb503c67c9bbbde0ab4a6e8a03b2684ce26b9b",
+          "ee9a841efe8763bc601a8b0ab710961f76709c60541c34171f4f4b8b6e0a2953"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-css/firefox-zh-property.png",
+          "sha256": "76a95aba1cfd91cc3a2d7c66f9ae618455ae67fca8ff4872d139aadb7513948b"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "en",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "db3e0182d4345db218a6f108ddcb503c67c9bbbde0ab4a6e8a03b2684ce26b9b",
+          "ee9a841efe8763bc601a8b0ab710961f76709c60541c34171f4f4b8b6e0a2953"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-css/firefox-en-property.png",
+          "sha256": "a9eae8054f4f21ad243456e4f71b7aeedc60ba1c31dedd24868a6338a5c85102"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "zh",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "db3e0182d4345db218a6f108ddcb503c67c9bbbde0ab4a6e8a03b2684ce26b9b",
+          "ee9a841efe8763bc601a8b0ab710961f76709c60541c34171f4f4b8b6e0a2953"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-css/webkit-zh-property.png",
+          "sha256": "7272e5358963687d1bd870cbcee09086295e2d8859d2d121481ac8ef9793e64c"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "en",
+        "name": "property",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "db3e0182d4345db218a6f108ddcb503c67c9bbbde0ab4a6e8a03b2684ce26b9b",
+          "ee9a841efe8763bc601a8b0ab710961f76709c60541c34171f4f4b8b6e0a2953"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-css/webkit-en-property.png",
+          "sha256": "c218f54172c56e6d3a212e8335eb75bc75ba2eae459d8712a10f223602e0e06a"
+        }
+      }
+    ],
+    "dom": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "base default --art-theme",
+          "base default --art-font-color",
+          "base default --art-background-color",
+          "base default --art-text-shadow-color",
+          "base default --art-transition-duration",
+          "base default --art-padding",
+          "base default --art-border-radius",
+          "base default --art-progress-height",
+          "base default --art-progress-color",
+          "base default --art-progress-top-gap",
+          "base default --art-hover-color",
+          "base default --art-loaded-color",
+          "base default --art-state-size",
+          "base default --art-state-opacity",
+          "base default --art-bottom-height",
+          "base default --art-bottom-offset",
+          "base default --art-bottom-gap",
+          "base default --art-highlight-width",
+          "base default --art-highlight-color",
+          "base default --art-control-height",
+          "base default --art-control-opacity",
+          "base default --art-control-icon-size",
+          "base default --art-control-icon-scale",
+          "base default --art-volume-height",
+          "base default --art-volume-handle-size",
+          "base default --art-lock-size",
+          "base default --art-indicator-scale",
+          "base default --art-indicator-size",
+          "base default --art-fullscreen-web-index",
+          "base default --art-settings-icon-size",
+          "base default --art-settings-max-height",
+          "base default --art-selector-max-height",
+          "base default --art-contextmenus-min-width",
+          "base default --art-subtitle-font-size",
+          "base default --art-subtitle-gap",
+          "base default --art-subtitle-bottom",
+          "base default --art-subtitle-border",
+          "base default --art-widget-background",
+          "base default --art-tip-background",
+          "base default --art-scrollbar-size",
+          "base default --art-scrollbar-background",
+          "base default --art-scrollbar-background-hover",
+          "base default --art-mini-progress-height",
+          "read returns string even for numeric legacy fields",
+          "missing custom property is empty",
+          "falsy argument reads 0",
+          "falsy argument reads ",
+          "falsy argument reads false",
+          "falsy argument reads null",
+          "falsy argument reads undefined",
+          "falsy argument reads NaN",
+          "truthy write returns undefined and stores zero text",
+          "opacity consumer receives zero",
+          "inline writes are isolated to this player",
+          "removal restores stylesheet value",
+          "theme delegates to CSS variable",
+          "theme changes do not mutate option snapshots or emit",
+          "theme affects played-track CSS",
+          "empty theme does not clear inline override",
+          "control dimension consumer uses custom value",
+          "measured control height tracks rendered layout",
+          "manual measured-height override replaced on resize",
+          "subtitle font consumer receives custom value",
+          "unlisted custom variables are supported",
+          "CSS variable tokens are not schema validated",
+          "root defaults override inherited container values",
+          "root selector overrides ordinary base declaration",
+          "inline beats ordinary author stylesheet",
+          "important author declaration can beat inline value",
+          "mobile class default bottom-gap",
+          "mobile class default control-height",
+          "mobile class default control-icon-scale",
+          "mobile class default state-size",
+          "mobile class default settings-max-height",
+          "mobile class default selector-max-height",
+          "mobile class default indicator-scale",
+          "mobile class default control-opacity",
+          "web fullscreen defaults applied",
+          "web fullscreen index accepts values beyond legacy literal",
+          "explicit inline dimension overrides fullscreen default",
+          "leaving web fullscreen restores base mode",
+          "unused mini-progress variable leaves track geometry unchanged",
+          "constructor numeric zero retains same truthiness behavior"
+        ]
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "base default --art-theme",
+          "base default --art-font-color",
+          "base default --art-background-color",
+          "base default --art-text-shadow-color",
+          "base default --art-transition-duration",
+          "base default --art-padding",
+          "base default --art-border-radius",
+          "base default --art-progress-height",
+          "base default --art-progress-color",
+          "base default --art-progress-top-gap",
+          "base default --art-hover-color",
+          "base default --art-loaded-color",
+          "base default --art-state-size",
+          "base default --art-state-opacity",
+          "base default --art-bottom-height",
+          "base default --art-bottom-offset",
+          "base default --art-bottom-gap",
+          "base default --art-highlight-width",
+          "base default --art-highlight-color",
+          "base default --art-control-height",
+          "base default --art-control-opacity",
+          "base default --art-control-icon-size",
+          "base default --art-control-icon-scale",
+          "base default --art-volume-height",
+          "base default --art-volume-handle-size",
+          "base default --art-lock-size",
+          "base default --art-indicator-scale",
+          "base default --art-indicator-size",
+          "base default --art-fullscreen-web-index",
+          "base default --art-settings-icon-size",
+          "base default --art-settings-max-height",
+          "base default --art-selector-max-height",
+          "base default --art-contextmenus-min-width",
+          "base default --art-subtitle-font-size",
+          "base default --art-subtitle-gap",
+          "base default --art-subtitle-bottom",
+          "base default --art-subtitle-border",
+          "base default --art-widget-background",
+          "base default --art-tip-background",
+          "base default --art-scrollbar-size",
+          "base default --art-scrollbar-background",
+          "base default --art-scrollbar-background-hover",
+          "base default --art-mini-progress-height",
+          "read returns string even for numeric legacy fields",
+          "missing custom property is empty",
+          "falsy argument reads 0",
+          "falsy argument reads ",
+          "falsy argument reads false",
+          "falsy argument reads null",
+          "falsy argument reads undefined",
+          "falsy argument reads NaN",
+          "truthy write returns undefined and stores zero text",
+          "opacity consumer receives zero",
+          "inline writes are isolated to this player",
+          "removal restores stylesheet value",
+          "theme delegates to CSS variable",
+          "theme changes do not mutate option snapshots or emit",
+          "theme affects played-track CSS",
+          "empty theme does not clear inline override",
+          "control dimension consumer uses custom value",
+          "measured control height tracks rendered layout",
+          "manual measured-height override replaced on resize",
+          "subtitle font consumer receives custom value",
+          "unlisted custom variables are supported",
+          "CSS variable tokens are not schema validated",
+          "root defaults override inherited container values",
+          "root selector overrides ordinary base declaration",
+          "inline beats ordinary author stylesheet",
+          "important author declaration can beat inline value",
+          "mobile class default bottom-gap",
+          "mobile class default control-height",
+          "mobile class default control-icon-scale",
+          "mobile class default state-size",
+          "mobile class default settings-max-height",
+          "mobile class default selector-max-height",
+          "mobile class default indicator-scale",
+          "mobile class default control-opacity",
+          "web fullscreen defaults applied",
+          "web fullscreen index accepts values beyond legacy literal",
+          "explicit inline dimension overrides fullscreen default",
+          "leaving web fullscreen restores base mode",
+          "unused mini-progress variable leaves track geometry unchanged",
+          "constructor numeric zero retains same truthiness behavior"
+        ]
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "base default --art-theme",
+          "base default --art-font-color",
+          "base default --art-background-color",
+          "base default --art-text-shadow-color",
+          "base default --art-transition-duration",
+          "base default --art-padding",
+          "base default --art-border-radius",
+          "base default --art-progress-height",
+          "base default --art-progress-color",
+          "base default --art-progress-top-gap",
+          "base default --art-hover-color",
+          "base default --art-loaded-color",
+          "base default --art-state-size",
+          "base default --art-state-opacity",
+          "base default --art-bottom-height",
+          "base default --art-bottom-offset",
+          "base default --art-bottom-gap",
+          "base default --art-highlight-width",
+          "base default --art-highlight-color",
+          "base default --art-control-height",
+          "base default --art-control-opacity",
+          "base default --art-control-icon-size",
+          "base default --art-control-icon-scale",
+          "base default --art-volume-height",
+          "base default --art-volume-handle-size",
+          "base default --art-lock-size",
+          "base default --art-indicator-scale",
+          "base default --art-indicator-size",
+          "base default --art-fullscreen-web-index",
+          "base default --art-settings-icon-size",
+          "base default --art-settings-max-height",
+          "base default --art-selector-max-height",
+          "base default --art-contextmenus-min-width",
+          "base default --art-subtitle-font-size",
+          "base default --art-subtitle-gap",
+          "base default --art-subtitle-bottom",
+          "base default --art-subtitle-border",
+          "base default --art-widget-background",
+          "base default --art-tip-background",
+          "base default --art-scrollbar-size",
+          "base default --art-scrollbar-background",
+          "base default --art-scrollbar-background-hover",
+          "base default --art-mini-progress-height",
+          "read returns string even for numeric legacy fields",
+          "missing custom property is empty",
+          "falsy argument reads 0",
+          "falsy argument reads ",
+          "falsy argument reads false",
+          "falsy argument reads null",
+          "falsy argument reads undefined",
+          "falsy argument reads NaN",
+          "truthy write returns undefined and stores zero text",
+          "opacity consumer receives zero",
+          "inline writes are isolated to this player",
+          "removal restores stylesheet value",
+          "theme delegates to CSS variable",
+          "theme changes do not mutate option snapshots or emit",
+          "theme affects played-track CSS",
+          "empty theme does not clear inline override",
+          "control dimension consumer uses custom value",
+          "measured control height tracks rendered layout",
+          "manual measured-height override replaced on resize",
+          "subtitle font consumer receives custom value",
+          "unlisted custom variables are supported",
+          "CSS variable tokens are not schema validated",
+          "root defaults override inherited container values",
+          "root selector overrides ordinary base declaration",
+          "inline beats ordinary author stylesheet",
+          "important author declaration can beat inline value",
+          "mobile class default bottom-gap",
+          "mobile class default control-height",
+          "mobile class default control-icon-scale",
+          "mobile class default state-size",
+          "mobile class default settings-max-height",
+          "mobile class default selector-max-height",
+          "mobile class default indicator-scale",
+          "mobile class default control-opacity",
+          "web fullscreen defaults applied",
+          "web fullscreen index accepts values beyond legacy literal",
+          "explicit inline dimension overrides fullscreen default",
+          "leaving web fullscreen restores base mode",
+          "unused mini-progress variable leaves track geometry unchanged",
+          "constructor numeric zero retains same truthiness behavior"
+        ]
+      }
+    ],
+    "complete": true,
+    "limitations": [
+      "Page navigation and DOM contracts only; no playback, codec, physical-device or release acceptance."
+    ],
+    "core": {
+      "artifact": {
+        "path": "packages/artplayer/dist/artplayer.js",
+        "sha256": "8a4caaa50a069875b3898a83765457b3c502700f4731d0c38988d6c463c3d20a"
+      },
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-qQwwPA/artplayer.tgz",
+        "version": "6.0.0",
+        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
+        "inputFingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "integrity": "sha512-+2+VWecKb9CbI3wTCs0sV7au8SNShyXahpwDAmGgZhDr22wbdv51QZnLnkPwgMgfNpVuTbsZ6A26Lpj3eY7NbQ=="
+      }
+    }
+  },
+  "consumers": {
+    "variableCount": 43,
+    "unused": [
+      "--art-mini-progress-height"
+    ],
+    "measuredInternalVariable": "--art-controls-height",
+    "usage": [
+      {
+        "name": "--art-theme",
+        "value": "#f00",
+        "consumers": [
+          "packages/artplayer/src/style/contextmenu.less",
+          "packages/artplayer/src/style/plugins.less",
+          "packages/artplayer/src/style/progress.less",
+          "packages/artplayer/src/style/selector.less",
+          "packages/artplayer/src/style/setting.less",
+          "packages/artplayer/src/style/volume.less"
+        ]
+      },
+      {
+        "name": "--art-font-color",
+        "value": "#fff",
+        "consumers": [
+          "packages/artplayer/src/style/artplayer.less"
+        ]
+      },
+      {
+        "name": "--art-background-color",
+        "value": "#000",
+        "consumers": [
+          "packages/artplayer/src/style/artplayer.less"
+        ]
+      },
+      {
+        "name": "--art-text-shadow-color",
+        "value": "rgba(0, 0, 0, 0.5)",
+        "consumers": [
+          "packages/artplayer/src/style/artplayer.less"
+        ]
+      },
+      {
+        "name": "--art-transition-duration",
+        "value": "0.2s",
+        "consumers": [
+          "packages/artplayer/src/style/bottom.less",
+          "packages/artplayer/src/style/controls.less",
+          "packages/artplayer/src/style/mask.less",
+          "packages/artplayer/src/style/progress.less",
+          "packages/artplayer/src/style/selector.less",
+          "packages/artplayer/src/style/setting.less",
+          "packages/artplayer/src/style/subtitle.less",
+          "packages/artplayer/src/style/volume.less"
+        ]
+      },
+      {
+        "name": "--art-padding",
+        "value": "10px",
+        "consumers": [
+          "packages/artplayer/src/style/bottom.less",
+          "packages/artplayer/src/style/info.less",
+          "packages/artplayer/src/style/mobile.less",
+          "packages/artplayer/src/style/notice.less",
+          "packages/artplayer/src/style/plugins.less",
+          "packages/artplayer/src/style/setting.less"
+        ]
+      },
+      {
+        "name": "--art-border-radius",
+        "value": "3px",
+        "consumers": [
+          "packages/artplayer/src/style/contextmenu.less",
+          "packages/artplayer/src/style/info.less",
+          "packages/artplayer/src/style/mini.less",
+          "packages/artplayer/src/style/notice.less",
+          "packages/artplayer/src/style/plugins.less",
+          "packages/artplayer/src/style/progress.less",
+          "packages/artplayer/src/style/selector.less",
+          "packages/artplayer/src/style/setting.less",
+          "packages/artplayer/src/style/volume.less"
+        ]
+      },
+      {
+        "name": "--art-progress-height",
+        "value": "6px",
+        "consumers": [
+          "packages/artplayer/src/style/plugins.less",
+          "packages/artplayer/src/style/progress.less"
+        ]
+      },
+      {
+        "name": "--art-progress-color",
+        "value": "rgba(255, 255, 255, 0.25)",
+        "consumers": [
+          "packages/artplayer/src/style/progress.less"
+        ]
+      },
+      {
+        "name": "--art-progress-top-gap",
+        "value": "10px",
+        "consumers": [
+          "packages/artplayer/src/style/progress.less"
+        ]
+      },
+      {
+        "name": "--art-hover-color",
+        "value": "rgba(255, 255, 255, 0.25)",
+        "consumers": [
+          "packages/artplayer/src/style/progress.less"
+        ]
+      },
+      {
+        "name": "--art-loaded-color",
+        "value": "rgba(255, 255, 255, 0.25)",
+        "consumers": [
+          "packages/artplayer/src/style/progress.less"
+        ]
+      },
+      {
+        "name": "--art-state-size",
+        "value": "80px",
+        "consumers": [
+          "packages/artplayer/src/style/mask.less"
+        ]
+      },
+      {
+        "name": "--art-state-opacity",
+        "value": "0.8",
+        "consumers": [
+          "packages/artplayer/src/style/mask.less"
+        ]
+      },
+      {
+        "name": "--art-bottom-height",
+        "value": "100px",
+        "consumers": [
+          "packages/artplayer/src/style/bottom.less"
+        ]
+      },
+      {
+        "name": "--art-bottom-offset",
+        "value": "20px",
+        "consumers": [
+          "packages/artplayer/src/style/bottom.less"
+        ]
+      },
+      {
+        "name": "--art-bottom-gap",
+        "value": "5px",
+        "consumers": [
+          "packages/artplayer/src/style/plugins.less",
+          "packages/artplayer/src/style/progress.less"
+        ]
+      },
+      {
+        "name": "--art-highlight-width",
+        "value": "8px",
+        "consumers": [
+          "packages/artplayer/src/style/progress.less"
+        ]
+      },
+      {
+        "name": "--art-highlight-color",
+        "value": "rgba(255, 255, 255, 0.5)",
+        "consumers": [
+          "packages/artplayer/src/style/progress.less"
+        ]
+      },
+      {
+        "name": "--art-control-height",
+        "value": "46px",
+        "consumers": [
+          "packages/artplayer/src/style/controls.less",
+          "packages/artplayer/src/style/plugins.less",
+          "packages/artplayer/src/style/selector.less",
+          "packages/artplayer/src/style/setting.less",
+          "packages/artplayer/src/style/subtitle.less",
+          "packages/artplayer/src/style/volume.less"
+        ]
+      },
+      {
+        "name": "--art-control-opacity",
+        "value": "0.75",
+        "consumers": [
+          "packages/artplayer/src/style/controls.less"
+        ]
+      },
+      {
+        "name": "--art-control-icon-size",
+        "value": "36px",
+        "consumers": [
+          "packages/artplayer/src/style/controls.less"
+        ]
+      },
+      {
+        "name": "--art-control-icon-scale",
+        "value": "1.1",
+        "consumers": [
+          "packages/artplayer/src/style/controls.less"
+        ]
+      },
+      {
+        "name": "--art-volume-height",
+        "value": "120px",
+        "consumers": [
+          "packages/artplayer/src/style/volume.less"
+        ]
+      },
+      {
+        "name": "--art-volume-handle-size",
+        "value": "14px",
+        "consumers": [
+          "packages/artplayer/src/style/volume.less"
+        ]
+      },
+      {
+        "name": "--art-lock-size",
+        "value": "36px",
+        "consumers": [
+          "packages/artplayer/src/style/plugins.less"
+        ]
+      },
+      {
+        "name": "--art-indicator-scale",
+        "value": "0",
+        "consumers": [
+          "packages/artplayer/src/style/progress.less"
+        ]
+      },
+      {
+        "name": "--art-indicator-size",
+        "value": "16px",
+        "consumers": [
+          "packages/artplayer/src/style/progress.less"
+        ]
+      },
+      {
+        "name": "--art-fullscreen-web-index",
+        "value": "9999",
+        "consumers": [
+          "packages/artplayer/src/style/fullscreenWeb.less"
+        ]
+      },
+      {
+        "name": "--art-settings-icon-size",
+        "value": "24px",
+        "consumers": [
+          "packages/artplayer/src/style/setting.less"
+        ]
+      },
+      {
+        "name": "--art-settings-max-height",
+        "value": "300px",
+        "consumers": [
+          "packages/artplayer/src/style/setting.less"
+        ]
+      },
+      {
+        "name": "--art-selector-max-height",
+        "value": "300px",
+        "consumers": [
+          "packages/artplayer/src/style/selector.less"
+        ]
+      },
+      {
+        "name": "--art-contextmenus-min-width",
+        "value": "250px",
+        "consumers": [
+          "packages/artplayer/src/style/contextmenu.less"
+        ]
+      },
+      {
+        "name": "--art-subtitle-font-size",
+        "value": "20px",
+        "consumers": [
+          "packages/artplayer/src/style/subtitle.less"
+        ]
+      },
+      {
+        "name": "--art-subtitle-gap",
+        "value": "5px",
+        "consumers": [
+          "packages/artplayer/src/style/subtitle.less"
+        ]
+      },
+      {
+        "name": "--art-subtitle-bottom",
+        "value": "15px",
+        "consumers": [
+          "packages/artplayer/src/style/plugins.less",
+          "packages/artplayer/src/style/subtitle.less"
+        ]
+      },
+      {
+        "name": "--art-subtitle-border",
+        "value": "#000",
+        "consumers": [
+          "packages/artplayer/src/style/subtitle.less"
+        ]
+      },
+      {
+        "name": "--art-widget-background",
+        "value": "rgba(0, 0, 0, 0.85)",
+        "consumers": [
+          "packages/artplayer/src/style/contextmenu.less",
+          "packages/artplayer/src/style/info.less",
+          "packages/artplayer/src/style/plugins.less",
+          "packages/artplayer/src/style/progress.less",
+          "packages/artplayer/src/style/selector.less",
+          "packages/artplayer/src/style/setting.less",
+          "packages/artplayer/src/style/volume.less"
+        ]
+      },
+      {
+        "name": "--art-tip-background",
+        "value": "rgba(0, 0, 0, 0.7)",
+        "consumers": [
+          "packages/artplayer/src/style/notice.less",
+          "packages/artplayer/src/style/plugins.less",
+          "packages/artplayer/src/style/progress.less"
+        ]
+      },
+      {
+        "name": "--art-scrollbar-size",
+        "value": "4px",
+        "consumers": [
+          "packages/artplayer/src/style/artplayer.less"
+        ]
+      },
+      {
+        "name": "--art-scrollbar-background",
+        "value": "rgba(255, 255, 255, 0.25)",
+        "consumers": [
+          "packages/artplayer/src/style/artplayer.less"
+        ]
+      },
+      {
+        "name": "--art-scrollbar-background-hover",
+        "value": "rgba(255, 255, 255, 0.5)",
+        "consumers": [
+          "packages/artplayer/src/style/artplayer.less"
+        ]
+      },
+      {
+        "name": "--art-mini-progress-height",
+        "value": "2px",
+        "consumers": []
+      }
+    ],
+    "sources": [
+      {
+        "path": "packages/artplayer/src/style/accessibility.less",
+        "sha256": "eb9cfe282c64a059d2e102280750bcd33ac33726fa09042eb9875f534335efef"
+      },
+      {
+        "path": "packages/artplayer/src/style/artplayer.less",
+        "sha256": "4e8513138d5d10c05b66986977d24ed17f1de3c0df3816dec6d90db7a97b5da3"
+      },
+      {
+        "path": "packages/artplayer/src/style/aspectRatio.less",
+        "sha256": "091931a0cdc83e65a669332811ef3276b85bca9e55f7fff42aa46893d728c1ef"
+      },
+      {
+        "path": "packages/artplayer/src/style/backdrop.less",
+        "sha256": "6c2cd0fa200d1f3525df98c3c56dbdc553445724aece3feb0386949245813343"
+      },
+      {
+        "path": "packages/artplayer/src/style/bottom.less",
+        "sha256": "6fb307d8449fd04b804d5e72ea0f175f8aa9c9dd2bf1efbf756f800b39ac97ab"
+      },
+      {
+        "path": "packages/artplayer/src/style/contextmenu.less",
+        "sha256": "70f6c7e26dc96652b659c7bf6fdad92737ed477dea69d253c57dc7266c76586d"
+      },
+      {
+        "path": "packages/artplayer/src/style/controls.less",
+        "sha256": "eb6d4bf4e4ff903d724d45f3ff60f0cf10c02e622fba195555a8179100cdce87"
+      },
+      {
+        "path": "packages/artplayer/src/style/danmuku.less",
+        "sha256": "e4215ee9fa2f1d0599e7311a2415cc975138265b7c6af0448d27d21b6c9e3511"
+      },
+      {
+        "path": "packages/artplayer/src/style/flip.less",
+        "sha256": "5d3c7a81df9be455c2f683ebf48f39597d218dc2144addacb72ee1736bac3b7f"
+      },
+      {
+        "path": "packages/artplayer/src/style/fullscreen.less",
+        "sha256": "dd350d3a0fc556d59b622a53c786b8c2a583e8fb28176e4b9e91baff90479496"
+      },
+      {
+        "path": "packages/artplayer/src/style/fullscreenWeb.less",
+        "sha256": "d74e785c2fbbb2976e131620e751326f622f2916eceff9f2333059ca3296cdc9"
+      },
+      {
+        "path": "packages/artplayer/src/style/hideCursor.less",
+        "sha256": "09a4607c8b0005dc199828172aa8dda395f861e407769b9696d793476c4a7823"
+      },
+      {
+        "path": "packages/artplayer/src/style/hint.less",
+        "sha256": "ae9f3115dfdb1e2d7b8249497c080e6a25f9667f915f6e89820338d67bbc2d85"
+      },
+      {
+        "path": "packages/artplayer/src/style/icon.less",
+        "sha256": "52d8f75c1d193e6160f57ca6997c3f9135adad8eb2338ed60c1eb8e5fe443be5"
+      },
+      {
+        "path": "packages/artplayer/src/style/index.less",
+        "sha256": "7fece0bc5b5a106d051eb80152d5e4558f2e73953c4c33175aa901b9695be61b"
+      },
+      {
+        "path": "packages/artplayer/src/style/info.less",
+        "sha256": "fa56d1b8c8936218e581b2426026e4ba85cd5fea20d045c4f69aca96be4059be"
+      },
+      {
+        "path": "packages/artplayer/src/style/layers.less",
+        "sha256": "9653c581190bb22d60a706109819cd010908898740701c9526957b5682991c5f"
+      },
+      {
+        "path": "packages/artplayer/src/style/loading.less",
+        "sha256": "185b0f05274196ba71fdb1d088b55af568f3342a495490c99c3f0e058a40659e"
+      },
+      {
+        "path": "packages/artplayer/src/style/mask.less",
+        "sha256": "d1239a171b71ea6184cb4aee6660d74d6ffc0c48f7c47c3cf5fbe52d2e93ac92"
+      },
+      {
+        "path": "packages/artplayer/src/style/mini.less",
+        "sha256": "8be782a3054154ab908b1cce650b6131330cf0f0e936b749accb4b2dfe605a27"
+      },
+      {
+        "path": "packages/artplayer/src/style/mixins.less",
+        "sha256": "c6be95aa682f266749fe37cb89796fbec6488abc537174f817da79bdac6e00b5"
+      },
+      {
+        "path": "packages/artplayer/src/style/mobile.less",
+        "sha256": "ff3f64fca5d2dd7ddd50385d88d9b2fa1a645909488ab7a0978ba4f1670b7c0e"
+      },
+      {
+        "path": "packages/artplayer/src/style/notice.less",
+        "sha256": "72a935c0effc557a9d7ab3baccb2c3b77fc3a1783450b4e3178a40a5325fe369"
+      },
+      {
+        "path": "packages/artplayer/src/style/plugins.less",
+        "sha256": "ea345094ea5708dd3a3c290f357dbb301b38af35464d213c47e3ec6c60eaadca"
+      },
+      {
+        "path": "packages/artplayer/src/style/poster.less",
+        "sha256": "36b38fe138f8c9537ff4e93f7ec4f2dbdba1ec41d243d741ddf1da7c6581e546"
+      },
+      {
+        "path": "packages/artplayer/src/style/progress.less",
+        "sha256": "59b9d95d49dbcb1be40752d7086239b6de5925b0574da231199d999e22ff4990"
+      },
+      {
+        "path": "packages/artplayer/src/style/selector.less",
+        "sha256": "44585c6b0179e34d21eeefce6d3494faacc0e9d108079426876e8847fd441513"
+      },
+      {
+        "path": "packages/artplayer/src/style/setting.less",
+        "sha256": "5618eb443ab6368bc4a18e9a379ce6552629555cdca6074e753aa6fd7baf9bf9"
+      },
+      {
+        "path": "packages/artplayer/src/style/subtitle.less",
+        "sha256": "273cacb63ec0214ba434dcf19a4a455dbbdd408fb2d1749de4878804c1371e41"
+      },
+      {
+        "path": "packages/artplayer/src/style/variables.less",
+        "sha256": "703739b2bdfc77bfde063d8788ef6b6a55b8730764baae8e7d755b7c54d8ecc7"
+      },
+      {
+        "path": "packages/artplayer/src/style/video.less",
+        "sha256": "b89c6f6e27592d49825c68c9ab98d46e81cb1e5add855863f89d19637f98e35f"
+      },
+      {
+        "path": "packages/artplayer/src/style/volume.less",
+        "sha256": "6e99bbe0dbcb40667ef99789b65812dc9c94ce8a1071c00d2edec5eba041c434"
+      }
+    ]
+  },
+  "semanticMapping": {
+    "addedRecords": 48,
+    "totalRecords": 768,
+    "remainingInventoryRecords": 195,
+    "previousSourceAndGuideHashesUnchanged": true
+  },
+  "tests": {
+    "count": 47,
+    "pass": 47,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 1594.0244,
+    "suites": [
+      "options",
+      "entry",
+      "template-resources",
+      "setting-layout",
+      "component-resources",
+      "site-loading",
+      "documentation-pipeline"
+    ]
+  },
+  "build": {
+    "vitepressSeconds": 9.06,
+    "yarnSeconds": 10.65,
+    "checked": [
+      "build:docs",
+      "build:llm",
+      "check:llm",
+      "site-inventory --write/--check",
+      "demos --check"
+    ]
+  },
+  "correctionsDuringValidation": [
+    "Initial documentation-pipeline run correctly rejected stale LLM outputs; regenerated them and reran all selected tests.",
+    "Strict TS rejected nullable $player use in the new snippet; corrected both guides to optional access and regenerated/revalidated outputs.",
+    "Initial browser probe assumed literal 0.75; diagnostic demonstrated bundle CSS returns .75 before/after on the untouched player. Replaced that spelling assumption with equality to the captured pre-write value; preserved write-isolation and zero assertions."
+  ],
+  "serializationDiagnostic": {
+    "before": [
+      ".75",
+      ".75"
+    ],
+    "after": [
+      "0",
+      ".75"
+    ],
+    "inline": [
+      "0",
+      ""
+    ]
+  },
+  "ledger": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-S9MeGm/report.json",
+      "sha256": "f4636a6e6924a2fe82dfd82c1b5beff45eab1b9eec28d353e751c754d1c27c5b"
+    },
+    "libraries": [
+      {
+        "name": "artplayer",
+        "fingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "fingerprint": "55236854b94ac7b0dd91b4107dcb60e97ac6f1a5e8b6b8a9dcb63bba66c6509a",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "fingerprint": "f88a6a2f1c5548389cae293614f648d72077ed03a7be6c81ad017a1155a839a3",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "fingerprint": "7fa3ca9577b53f3bb90e2c23fec9e6e70fbbb0c089ccae2923084b9059bcbdf9",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "fingerprint": "0c73b970872fe56df1c669e5badfa91f9cd7ec3c73070a9852cfea076cc8923f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "fingerprint": "9ced9b18e4b260ccbcf6ac016b32ec0852040cb5c0f57be72718a03d40d598bf",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "fingerprint": "f1dd73097e43df504f686f18a6ca30bcb1f57ab74d3cc62909db20505c994072",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "fingerprint": "d6d79d4b47afaefa66d32c5b1709f412ed9d32c636462723918c268a6601e631",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "fingerprint": "3d32a4c6d94d9eaa31cd982ec43ae2b710a4c923e5076f357ba4c902be48d729",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "fingerprint": "ceb17cbb235a42438c28df15ddf830d104a749b58515333c43da2b18534b166c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "fingerprint": "6716002b92bb12b54d17772d87a560bb9e863da35abfa37988907d54e02cdf74",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "fingerprint": "a3a56ecc218c8e180621d1bc00684950cca4ada8d483334b0cb91fd783c10831",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "fingerprint": "00a07f33277bae211a553e9fb2e924ade219513135bc54921886f4518dd27964",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "fingerprint": "cc9304759ff3cdd84767eee38fcbb9cf70e234f2449946536fd1da972cde679f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "fingerprint": "43825f602514c9e6a0bd8f0a270a54a03d1cb76f821b99d1e736d0150dafc190",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "fingerprint": "3503e145a591a406105eb953f9ac75c8373992c9f3f1f23b713de65c85a3bb3d",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "fingerprint": "b7932e08a086cfe16ed5e78872e274fb897931d0653dbf7ac61a19b404ddec85",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "fingerprint": "a0a8efb762e823fe4dd8c8de9601f74ac873ade8c6953a7e5305297608c71a12",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "fingerprint": "9fd7e62c56ae78866267cdd5650dc4e4af4aad76dd6ff8466b68908bc25d661c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "fingerprint": "00dc477ad56d12cfa6cd0d1e071e80f4120afed23f44af0393e23e5dac516a3b",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "fingerprint": "78bf5be3b2b5656a0b95ce2ce3cf1a635b6df609361a840b8298476f65af9d52",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      }
+    ],
+    "publicationAuthorized": false
+  },
+  "limitations": [
+    "83 browser assertions include 43 base-default comparisons and 8 mobile-class default comparisons; they are not 83 independent interaction scenarios.",
+    "Mobile classes are simulated on desktop engines; no physical mobile/native fullscreen/scrollbar feature acceptance.",
+    "All 94 original snippets are unchanged and parse; only cssVar/theme examples forwarded, 12 total, not a complete demo run.",
+    "No runtime, declaration, stylesheet or dependency changed."
+  ],
+  "visualInspection": "chromium-zh-property.png",
+  "attachments": [
+    {
+      "path": "refactor/.cache/site04-css-validate.mjs",
+      "sha256": "f75a7d0ccd9df5a74ea791af5211ea23effa32adf26e5a1eda74b729a208e311"
+    },
+    {
+      "path": "refactor/.cache/site04-css-probe.js",
+      "sha256": "512a8bf17cffd23167025e9c572c08b385b6f80bf472f06f9069e4c9c1b96cd4"
+    },
+    {
+      "path": "refactor/.cache/site04-css/report.json",
+      "sha256": "01ef1103f222240b9fec11c1239fc9a5d457a6e305d42f78a48ae843981dd909"
+    },
+    {
+      "path": "refactor/.cache/site04-css/failed-serialization-report.json",
+      "sha256": "d84f3e91e83894e661c062d840bd84667459d27fd35c0562b5703fe03cf046e8"
+    },
+    {
+      "path": "refactor/.cache/site04-css-build-types-fixed.log",
+      "sha256": "8215b95172841c1edd98900dacaa9e7aa4733e9b1442186a78130076dcd54bbe"
+    },
+    {
+      "path": "refactor/.cache/site04-css-llm-types-fixed.log",
+      "sha256": "408999e750695a80aa02c0dd11fed627b1ec18e7e450d86d2371af20c03cfc84"
+    },
+    {
+      "path": "refactor/.cache/site04-css-tests.log",
+      "sha256": "695a9a75d1bc6070ff561bd2fb3d629173cad6f9decd8c2b913c89e9acaf26ec"
+    },
+    {
+      "path": "refactor/.cache/site04-css-tests-types-fixed.log",
+      "sha256": "ca02e6a157b50f65163b69dfd03f50c049aa840c91bac8f98f290147ca4892ee"
+    },
+    {
+      "path": "refactor/.cache/site04-css-validate.log",
+      "sha256": "44b496e8ac60191724df98b1786a57330b10a6b0ac60430a726ffb9f3cbc5237"
+    },
+    {
+      "path": "refactor/.cache/site04-css-validate-types-fixed.log",
+      "sha256": "af92ea2aa8966e51d8335659db8418e60a44289ff8ab47017505db616cda7ea8"
+    },
+    {
+      "path": "refactor/.cache/site04-css-validate-final.log",
+      "sha256": "3130d04faee0d0e603281ca1972d2a2183807bb93f2a9237e4b84df2b4a5182c"
+    },
+    {
+      "path": "refactor/.cache/site04-css-ledger-final.log",
+      "sha256": "5b5d34ab01446849c460445a9bbfffa3c95528693a6966bef7153e8b1f3ef349"
+    },
+    {
+      "path": "refactor/.cache/site04-css-consumers.mjs",
+      "sha256": "fd3de37f3f16cf373da997835ca2888ce67d15766faf1cf3df2b60d3c8e96d7d"
+    },
+    {
+      "path": "refactor/.cache/site04-css-consumers.json",
+      "sha256": "71b06e85cf247d34e6153178671d00d431ee58848e7ff72ca430f8b921245cf8"
+    },
+    {
+      "path": "refactor/.cache/site04-css-variables.json",
+      "sha256": "b79ca89b0d76f5008c525681b836635d3cc349931dc63daf3b2104450ab4be98"
+    },
+    {
+      "path": "refactor/.cache/site04-css-serialization.mjs",
+      "sha256": "7337e237ecc166cdda198de5c573854b7e0616f2034e88b297263c51f243f2c5"
+    },
+    {
+      "path": "refactor/.cache/site04-css-serialization.log",
+      "sha256": "f5362b6586ba294f73db46b381fb5519d110d0bf05a633d951ff86ee7c2ee963"
+    },
+    {
+      "path": "refactor/.cache/site04-css-server.mjs",
+      "sha256": "f878ce962172e7c339136d47e00356c5df3a65af96a62f0ecdcf7481f2a6d6f7"
+    }
+  ]
+}

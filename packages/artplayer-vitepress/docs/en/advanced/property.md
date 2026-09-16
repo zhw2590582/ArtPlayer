@@ -984,6 +984,88 @@ art.on('ready', () => {
 });
 ```
 
+### Values, writes, and cascade {#css-variable-contract}
+
+art.cssVar(name) reads getComputedStyle from art.template.$player and returns a **string**, including for opacity, scale and z-index. It returns the computed custom-property text, not a parsed number or necessarily a normalized color. A missing variable returns an empty string. art.theme delegates to '--art-theme'.
+
+The second argument uses a historical truthiness check. A truthy value calls style.setProperty and returns undefined; numeric 0, an empty string, false, null, undefined or NaN instead read the current value. Use the string '0' to write zero. To remove an inline override, use art.template.$player.style.removeProperty(name); cssVar(name, '') does not remove it. Values are passed to CSS rather than validated against CssVar; invalid CSS tokens may be stored while the consuming property falls back or becomes invalid.
+
+Writes affect this player's inline style and its descendants, not other instances. They do not update art.option.cssVar or art.option.theme, emit a theme event, or install a plugin. At construction, nonempty option.theme takes precedence over the initial '--art-theme' option. External styles follow normal CSS cascade rules: scope overrides to the actual .art-video-player, because the built-in defaults declared on that node can override values merely inherited from its container. Inline overrides generally win ordinary stylesheet declarations; !important declarations can still change the result.
+
+The root cssVar signature retains historical numeric/literal types, including the 9999 literal for '--art-fullscreen-web-index'. Runtime values are not limited to that literal. The runtime entry exposes string reads and string-or-void writes without changing behavior; the constructor's legacy cssVar option shape remains distinct.
+
+### Built-in defaults and consumers {#css-variable-defaults}
+
+These are the base stylesheet values, before constructor overrides, mobile/fullscreen classes, user CSS and inline styles. Length values need CSS units where applicable. Naming a variable here does not prove support for a browser-specific pseudo-element or feature.
+
+| Variable | Base value | Used for |
+| --- | --- | --- |
+| `--art-theme` | `#f00` | Accent color for progress and selected items |
+| `--art-font-color` | `#fff` | Base text, links and SVG fill |
+| `--art-background-color` | `#000` | Player background |
+| `--art-text-shadow-color` | `rgba(0, 0, 0, 0.5)` | Base text shadow color |
+| `--art-transition-duration` | `0.2s` | Duration for transitions that consume it, not every animation |
+| `--art-padding` | `10px` | Spacing for the bottom area, menus and info |
+| `--art-border-radius` | `3px` | Corner radius for panels and tips |
+| `--art-progress-height` | `6px` | Progress control height; inner track starts at half height |
+| `--art-progress-color` | `rgba(255, 255, 255, 0.25)` | Progress track background |
+| `--art-progress-top-gap` | `10px` | Top interaction padding above the progress track |
+| `--art-hover-color` | `rgba(255, 255, 255, 0.25)` | Progress hover range color |
+| `--art-loaded-color` | `rgba(255, 255, 255, 0.25)` | Buffered range color |
+| `--art-state-size` | `80px` | Central playback-state button size |
+| `--art-state-opacity` | `0.8` | State-button opacity when shown |
+| `--art-bottom-height` | `100px` | Bottom gradient background height, not total control layout height |
+| `--art-bottom-offset` | `20px` | Translation of bottom controls while hidden |
+| `--art-bottom-gap` | `5px` | Gap below progress and around related overlays |
+| `--art-highlight-width` | `8px` | Timestamp marker width |
+| `--art-highlight-color` | `rgba(255, 255, 255, 0.5)` | Timestamp marker color |
+| `--art-control-height` | `46px` | Control-item minimum height/width and layout fallback |
+| `--art-control-opacity` | `0.75` | Control-item opacity outside hover |
+| `--art-control-icon-size` | `36px` | Control icon width and height |
+| `--art-control-icon-scale` | `1.1` | Control icon scale, with a further pressed-state factor |
+| `--art-volume-height` | `120px` | Volume panel height |
+| `--art-volume-handle-size` | `14px` | Volume slider handle size |
+| `--art-lock-size` | `36px` | Mobile lock-button size |
+| `--art-indicator-scale` | `0` | Base progress indicator scale; hover/active rules can override it |
+| `--art-indicator-size` | `16px` | Progress indicator width and height |
+| `--art-fullscreen-web-index` | `9999` | Web-fullscreen stacking level, not native fullscreen permission |
+| `--art-settings-icon-size` | `24px` | Left-side setting icon size |
+| `--art-settings-max-height` | `300px` | CSS setting-panel maximum; JS also constrains available space |
+| `--art-selector-max-height` | `300px` | Control selector maximum height |
+| `--art-contextmenus-min-width` | `250px` | Context-menu minimum width |
+| `--art-subtitle-font-size` | `20px` | Subtitle font size |
+| `--art-subtitle-gap` | `5px` | Gap between subtitle lines |
+| `--art-subtitle-bottom` | `15px` | Base subtitle bottom offset; controls can add layout height |
+| `--art-subtitle-border` | `#000` | Subtitle outline text-shadow color, not border width |
+| `--art-widget-background` | `rgba(0, 0, 0, 0.85)` | Menu, setting and thumbnail panel background |
+| `--art-tip-background` | `rgba(0, 0, 0, 0.7)` | Progress tip, notice and lock-button background |
+| `--art-scrollbar-size` | `4px` | Width/height of WebKit scrollbar pseudo-elements |
+| `--art-scrollbar-background` | `rgba(255, 255, 255, 0.25)` | WebKit scrollbar thumb color |
+| `--art-scrollbar-background-hover` | `rgba(255, 255, 255, 0.5)` | Hovered WebKit scrollbar thumb color |
+| `--art-mini-progress-height` | `2px` | Retained historical value; current core styles do not consume it |
+
+### Mode overrides and measured layout {#css-variable-modes}
+
+The mobile class changes bottom-gap to 10px, control-height to 38px, control-icon-scale to 1, state-size to 60px, settings/selector-max-height to 180px, indicator-scale to 1, and control-opacity to 1. Fullscreen styles change progress-height to 8px, indicator-size to 20px, control-height to 60px and control-icon-scale to 1.3; web fullscreen reuses those styles. When classes overlap, specificity and stylesheet order decide the result, and explicit inline values can suppress these mode defaults. These are style changes, not device or fullscreen-capability detection.
+
+The control-layout observer additionally writes '--art-controls-height' from the rendered control area's offsetHeight. Subtitle and panel positioning use that measurement, falling back to '--art-control-height'. It is an internal measured value, not one of the 43 declared input variables; manual writes can be replaced by a later resize observation. Changing CSS dimensions does not change layout constants such as SETTING_ITEM_HEIGHT or configure player features.
+
+'--art-mini-progress-height' remains declared with a 2px default for compatibility, but has no current core consumer. The mini progress presentation uses the normal progress/control geometry; changing that unused variable alone has no effect.
+
+
+```ts
+import Artplayer from 'artplayer/runtime';
+
+const art = new Artplayer({ container: '#player' });
+const opacity: string = art.cssVar('--art-control-opacity');
+const result: string | void = art.cssVar('--art-control-opacity', '0');
+art.cssVar('--art-fullscreen-web-index', '10001');
+art.theme = 'green';
+const theme: string = art.theme;
+art.template.$player?.style.removeProperty('--art-control-opacity');
+void [opacity, result, theme];
+```
+
 ## `quality`
 
 -   Type: `Setter`

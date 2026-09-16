@@ -983,6 +983,88 @@ art.on('ready', () => {
 });
 ```
 
+### 读取、写入与样式优先级 {#css-variable-contract}
+
+art.cssVar(name) 从 art.template.$player 的 getComputedStyle 读取并返回**字符串**，透明度、缩放和层级也一样。返回的是计算后的自定义属性文本，不是解析后的数字，也不一定是规范化颜色。不存在的变量返回空字符串；art.theme 转发到 '--art-theme'。
+
+第二参数沿用历史真值判断：真值调用 style.setProperty，返回 undefined；数字 0、空字符串、false、null、undefined 或 NaN 会改为读取当前值。写入零请用字符串 '0'。删除行内覆盖使用 art.template.$player.style.removeProperty(name)，cssVar(name, '') 不会删除。值直接交给 CSS，不按 CssVar 校验；非法 token 可能被保存，但使用它的 CSS 属性可能回退或失效。
+
+写入只作用于本实例的行内样式及其后代，不影响其他实例；不会同步修改 art.option.cssVar 或 art.option.theme，不派发 theme 事件，也不会安装插件。构造时非空 option.theme 优先于初始 '--art-theme' 配置。外部样式按正常 CSS 层叠规则处理，应定位到真正的 .art-video-player：该节点自身的内置默认值可能覆盖仅从容器继承的值。行内覆盖通常优先于普通样式规则，!important 仍可能改变结果。
+
+根入口 cssVar 签名保留历史数字/字面量类型，包括 '--art-fullscreen-web-index' 的 9999；实际运行时不限于该字面量。runtime 入口提供字符串读取及 string-or-void 写入类型，行为不变；构造 cssVar 配置仍有独立的历史类型形状。
+
+### 内置默认值与使用位置 {#css-variable-defaults}
+
+下表是基础样式值，尚未叠加构造配置、移动端/全屏类、用户 CSS 或行内样式。长度值按 CSS 要求提供单位。变量列在这里不代表所有浏览器都支持相关伪元素或功能。
+
+| 变量 | 基础值 | 用途 |
+| --- | --- | --- |
+| `--art-theme` | `#f00` | 进度、选中项等主题色 |
+| `--art-font-color` | `#fff` | 基础文字、链接与 SVG 填充 |
+| `--art-background-color` | `#000` | 播放器背景 |
+| `--art-text-shadow-color` | `rgba(0, 0, 0, 0.5)` | 基础文字阴影颜色 |
+| `--art-transition-duration` | `0.2s` | 使用该变量的界面过渡时长，不包含所有动画 |
+| `--art-padding` | `10px` | 底栏、菜单、信息等边距 |
+| `--art-border-radius` | `3px` | 弹层、提示等圆角 |
+| `--art-progress-height` | `6px` | 进度控件高度，内部轨道默认是它的一半 |
+| `--art-progress-color` | `rgba(255, 255, 255, 0.25)` | 进度轨道背景 |
+| `--art-progress-top-gap` | `10px` | 进度条上方交互区域的 padding |
+| `--art-hover-color` | `rgba(255, 255, 255, 0.25)` | 进度悬停范围颜色 |
+| `--art-loaded-color` | `rgba(255, 255, 255, 0.25)` | 已缓冲范围颜色 |
+| `--art-state-size` | `80px` | 中间播放状态按钮尺寸 |
+| `--art-state-opacity` | `0.8` | 显示时的状态按钮透明度 |
+| `--art-bottom-height` | `100px` | 底部渐变背景高度，不是底栏布局总高度 |
+| `--art-bottom-offset` | `20px` | 隐藏时底部控件的平移距离 |
+| `--art-bottom-gap` | `5px` | 进度条下方与相关弹层间距 |
+| `--art-highlight-width` | `8px` | 时间标记宽度 |
+| `--art-highlight-color` | `rgba(255, 255, 255, 0.5)` | 时间标记颜色 |
+| `--art-control-height` | `46px` | 单个控制条目的最小高度/宽度及布局回退值 |
+| `--art-control-opacity` | `0.75` | 非悬停控制条目透明度 |
+| `--art-control-icon-size` | `36px` | 控制条目图标宽高 |
+| `--art-control-icon-scale` | `1.1` | 控制图标缩放，按下时还有额外比例 |
+| `--art-volume-height` | `120px` | 音量面板高度 |
+| `--art-volume-handle-size` | `14px` | 音量滑块手柄尺寸 |
+| `--art-lock-size` | `36px` | 移动端锁定按钮尺寸 |
+| `--art-indicator-scale` | `0` | 进度指示点基础缩放，悬停/按下规则另行覆盖 |
+| `--art-indicator-size` | `16px` | 进度指示点宽高 |
+| `--art-fullscreen-web-index` | `9999` | 网页全屏层级；不是原生全屏权限 |
+| `--art-settings-icon-size` | `24px` | 设置项左侧图标尺寸 |
+| `--art-settings-max-height` | `300px` | 设置面板 CSS 最大高度，JS 还会按可用空间约束 |
+| `--art-selector-max-height` | `300px` | 控制条目选择器最大高度 |
+| `--art-contextmenus-min-width` | `250px` | 右键菜单最小宽度 |
+| `--art-subtitle-font-size` | `20px` | 字幕字号 |
+| `--art-subtitle-gap` | `5px` | 字幕行间 gap |
+| `--art-subtitle-bottom` | `15px` | 字幕基础底部距离，控件显示时叠加布局高度 |
+| `--art-subtitle-border` | `#000` | 字幕 text-shadow 的描边颜色，不是边框宽度 |
+| `--art-widget-background` | `rgba(0, 0, 0, 0.85)` | 菜单、设置、预览图等背景 |
+| `--art-tip-background` | `rgba(0, 0, 0, 0.7)` | 进度提示、通知、锁按钮等背景 |
+| `--art-scrollbar-size` | `4px` | WebKit 滚动条伪元素的宽高 |
+| `--art-scrollbar-background` | `rgba(255, 255, 255, 0.25)` | WebKit 滚动条滑块颜色 |
+| `--art-scrollbar-background-hover` | `rgba(255, 255, 255, 0.5)` | WebKit 滚动条滑块悬停颜色 |
+| `--art-mini-progress-height` | `2px` | 历史保留值；当前核心样式没有读取它 |
+
+### 模式覆盖与布局测量 {#css-variable-modes}
+
+移动端类把 bottom-gap 改为 10px、control-height 改为 38px、control-icon-scale 改为 1、state-size 改为 60px、settings/selector-max-height 改为 180px、indicator-scale 和 control-opacity 改为 1。全屏样式把 progress-height 改为 8px、indicator-size 改为 20px、control-height 改为 60px、control-icon-scale 改为 1.3；网页全屏复用这些样式。类重叠时由选择器优先级和样式顺序决定，显式行内值也会覆盖这些模式默认值。这些是样式变化，不是设备或全屏能力检测。
+
+控制栏布局观察器还会根据实际 offsetHeight 写入 '--art-controls-height'，字幕和面板定位使用该测量值，缺失时回退到 '--art-control-height'。它是内部测量结果，不属于这 43 个声明输入变量；手动写入可能被后续 resize 观察覆盖。修改 CSS 尺寸不会修改 SETTING_ITEM_HEIGHT 等布局常量，也不会配置播放器功能。
+
+'--art-mini-progress-height' 为兼容保留声明和 2px 默认值，但当前核心没有读取它。迷你进度显示仍使用普通进度和控制栏的几何信息，只修改该闲置变量不会生效。
+
+
+```ts
+import Artplayer from 'artplayer/runtime';
+
+const art = new Artplayer({ container: '#player' });
+const opacity: string = art.cssVar('--art-control-opacity');
+const result: string | void = art.cssVar('--art-control-opacity', '0');
+art.cssVar('--art-fullscreen-web-index', '10001');
+art.theme = 'green';
+const theme: string = art.theme;
+art.template.$player?.style.removeProperty('--art-control-opacity');
+void [opacity, result, theme];
+```
+
 ## `quality`
 
 -   Type: `Setter`
