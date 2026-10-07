@@ -4,9 +4,19 @@
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
+let cachedVideo = null;
+let cachedUrl = null;
 function create({ url, width, number }, callback) {
-  const video = document.createElement("video");
+  if (!cachedVideo || cachedUrl !== url) {
+    cachedVideo = document.createElement("video");
+    cachedUrl = url;
+  }
+  const video = cachedVideo;
   video.crossOrigin = "anonymous";
+  video.onerror = () => {
+    console.warn(`[artplayerPluginAutoThumbnail] failed to load ${url}`);
+    video.onseeked = null;
+  };
   video.src = url;
   video.onloadedmetadata = () => {
     const duration = video.duration;
@@ -18,6 +28,8 @@ function create({ url, width, number }, callback) {
     let blobUrl = null;
     function seekAndDraw(index) {
       canvas.toBlob((blob) => {
+        if (!blob)
+          return;
         URL.revokeObjectURL(blobUrl);
         blobUrl = URL.createObjectURL(blob);
         callback({
@@ -29,7 +41,13 @@ function create({ url, width, number }, callback) {
         return;
       video.currentTime = duration * index / number;
       video.onseeked = () => {
-        ctx.drawImage(video, index % 10 * width, Math.floor(index / 10) * height, width, height);
+        try {
+          ctx.drawImage(video, index % 10 * width, Math.floor(index / 10) * height, width, height);
+        } catch (error) {
+          console.warn("[artplayerPluginAutoThumbnail] draw failed:", error);
+          video.onseeked = null;
+          return;
+        }
         seekAndDraw(index + 1);
       };
     }

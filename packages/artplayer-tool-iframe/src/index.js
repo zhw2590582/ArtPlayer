@@ -73,6 +73,7 @@ export default class ArtplayerToolIframe {
     this.injected = false
     this.destroyed = false
     this.messageCallback = () => null
+    this._msgId = 0
     this.onMessage = this.onMessage.bind(this)
     window.addEventListener('message', this.onMessage)
     this.$iframe.src = this.url
@@ -112,7 +113,10 @@ export default class ArtplayerToolIframe {
         }
         else {
           if (this.injected) {
-            const id = Date.now()
+            // Monotonic ids: Date.now() collided for posts sent in the same
+            // millisecond and the first promise never settled (todo O7).
+            // and the first promise never settled (todo O7).
+            const id = ++this._msgId
             this.promises[id] = { resove, reject }
             this.$iframe.contentWindow.postMessage(
               {

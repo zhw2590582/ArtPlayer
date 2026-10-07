@@ -78,22 +78,28 @@ function artplayerPluginAmbilight(option = {}) {
           return;
         }
         lastUpdateTime = now;
-        const w = $video2.videoWidth / 3;
-        const h = $video2.videoHeight / 3;
-        const colors = [
-          [0, 0],
-          [w, 0],
-          [2 * w, 0],
-          [0, h],
-          [w, h],
-          [2 * w, h],
-          [0, 2 * h],
-          [w, 2 * h],
-          [2 * w, 2 * h]
-        ].map(([x, y]) => getAverageColor(x, y, w, h));
-        gridItems2.forEach(($item, index) => {
-          $item.style.backgroundColor = colors[index];
-        });
+        try {
+          const w = $video2.videoWidth / 3;
+          const h = $video2.videoHeight / 3;
+          const colors = [
+            [0, 0],
+            [w, 0],
+            [2 * w, 0],
+            [0, h],
+            [w, h],
+            [2 * w, h],
+            [0, 2 * h],
+            [w, 2 * h],
+            [2 * w, 2 * h]
+          ].map(([x, y]) => getAverageColor(x, y, w, h));
+          gridItems2.forEach(($item, index) => {
+            $item.style.backgroundColor = colors[index];
+          });
+        } catch (error) {
+          console.warn("[artplayerPluginAmbilight] disabled:", error);
+          stop();
+          return;
+        }
         animationFrameId = requestAnimationFrame(updateColors2);
       };
     }

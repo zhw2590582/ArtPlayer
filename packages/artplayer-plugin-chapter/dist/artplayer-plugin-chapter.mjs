@@ -46,7 +46,7 @@ function artplayerPluginChapter(option = {}) {
         return;
       if (!art.duration)
         return;
-      chapters = chapters.sort((a, b) => a.start - b.start);
+      chapters = [...chapters].sort((a, b) => a.start - b.start);
       for (let i = 0; i < chapters.length; i++) {
         const chapter = chapters[i];
         const nextChapter = chapters[i + 1];
@@ -132,6 +132,7 @@ function artplayerPluginChapter(option = {}) {
       }
     });
     art.once("video:loadedmetadata", () => update(option.chapters));
+    art.on("restart", () => update([]));
     return {
       name: "artplayerPluginChapter",
       update: ({ chapters }) => update(chapters)

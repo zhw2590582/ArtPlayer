@@ -66,6 +66,7 @@ ${data}
     this.injected = false;
     this.destroyed = false;
     this.messageCallback = () => null;
+    this._msgId = 0;
     this.onMessage = this.onMessage.bind(this);
     window.addEventListener("message", this.onMessage);
     this.$iframe.src = this.url;
@@ -96,7 +97,7 @@ ${data}
           reject(new Error("The instance has been destroyed"));
         } else {
           if (this.injected) {
-            const id = Date.now();
+            const id = ++this._msgId;
             this.promises[id] = { resove, reject };
             this.$iframe.contentWindow.postMessage(
               {

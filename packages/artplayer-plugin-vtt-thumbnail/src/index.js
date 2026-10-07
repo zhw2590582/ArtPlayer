@@ -10,7 +10,15 @@ export default function artplayerPluginVttThumbnail(option) {
     } = art
 
     let timer = null
-    const thumbnails = await getVttArray(option.vtt)
+    let thumbnails = []
+
+    try {
+      thumbnails = await getVttArray(option.vtt)
+    }
+    catch (error) {
+      art.notice.show = error
+      console.error('[artplayerPluginVttThumbnail]', error)
+    }
 
     function showThumbnails($control, find, width) {
       setStyle($control, 'backgroundImage', `url(${find.url})`)

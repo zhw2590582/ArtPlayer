@@ -21,6 +21,8 @@ export default function artplayerPluginAsr(option = {}) {
     let hideTimer = null
     let mediaStream = null
     let mediaStreamSource = null
+    let currentSource = null
+    let starting = false
 
     const $asr = art.layers.add({
       name: 'asr',
@@ -48,9 +50,15 @@ export default function artplayerPluginAsr(option = {}) {
       clearTimeout(hideTimer)
       hideTimer = setTimeout(hide, autoHideTimeout)
       $asr.style.display = ''
-      $asr.innerHTML = splitByPunctuation(subtitle)
-        .map(line => `<div class="art-asr-line">${line}</div>`)
-        .join('')
+      // Transcription output comes from a remote service: build text nodes so
+      // it can never execute as HTML (todo S2).
+      $asr.textContent = ''
+      for (const line of splitByPunctuation(subtitle)) {
+        const $line = document.createElement('div')
+        $line.className = 'art-asr-line'
+        $line.textContent = line
+        $asr.appendChild($line)
+      }
     }
 
     const recorderProcessorCode = `
@@ -164,14 +172,16 @@ export default function artplayerPluginAsr(option = {}) {
     }
 
     async function startCapture() {
-      if (started)
+      if (started || starting)
         return
+      starting = true
 
       try {
         await setupAudioContext()
         const audioSource = await setupAudioSource()
         if (!audioSource)
           throw new Error('Could not establish audio source')
+        currentSource = audioSource
 
         if (!workletLoaded) {
           const blobUrl = createWorkletBlobUrl()
@@ -210,8 +220,15 @@ export default function artplayerPluginAsr(option = {}) {
           const chunkToSend = accumulated.slice(0, CHUNK_SAMPLES)
           const pcm = floatTo16BitPCM(chunkToSend)
           const wav = pcmToWav(pcm, sampleRate)
-          const subtitle = await onAudioChunk({ pcm, wav })
-          append(subtitle)
+          try {
+            const subtitle = await onAudioChunk({ pcm, wav })
+            append(subtitle)
+          }
+          catch (error) {
+            // A failing backend must not kill the interval with an unhandled
+            // rejection (todo S4).
+            console.warn('[artplayerPluginAsr] onAudioChunk failed:', error)
+          }
         }, interval)
 
         started = true
@@ -219,6 +236,9 @@ export default function artplayerPluginAsr(option = {}) {
       catch (err) {
         console.error('[artplayerPluginAsr] Initialization failed:', err)
         await stopCapture()
+      }
+      finally {
+        starting = false
       }
     }
 
@@ -229,6 +249,14 @@ export default function artplayerPluginAsr(option = {}) {
 
       clearInterval(timer)
       timer = null
+
+      // Sever the source-side edges too, otherwise each play/pause cycle
+      // leaves the old worklet attached to the live audio graph (todo S5).
+      if (currentSource && recorderNode)
+        currentSource.disconnect(recorderNode)
+      if (currentSource && gainNode)
+        currentSource.disconnect(gainNode)
+      currentSource = null
 
       if (recorderNode) {
         recorderNode.disconnect()
@@ -244,7 +272,7 @@ export default function artplayerPluginAsr(option = {}) {
       bufferChunks = []
     }
 
-    async function destroy() {
+    async function realDestroy() {
       await stopCapture()
 
       if (mediaStreamSource) {
@@ -271,18 +299,23 @@ export default function artplayerPluginAsr(option = {}) {
     }
 
     art.on('video:volumechange', () => {
-      if (gainNode) {
+      // Only the MediaStream fallback path needs gain-based volume: the direct
+      // MediaElementSource path already inherits the element's own volume, so
+      // multiplying here made the audible volume the square of the setting.
+      if (mediaStreamSource && gainNode)
         gainNode.gain.value = art.volume
-      }
     })
 
     art.on('play', startCapture)
     art.on('pause', stopCapture)
-    art.on('destroy', destroy)
+    art.on('destroy', realDestroy)
 
     return {
       name: 'artplayerPluginAsr',
-      stop: destroy,
+      // Public stop only pauses capture. Closing the AudioContext here would
+      // permanently mute the video: createMediaElementSource reroutes the
+      // element's audio into this context forever (todo S1).
+      stop: stopCapture,
       hide,
       append,
     }

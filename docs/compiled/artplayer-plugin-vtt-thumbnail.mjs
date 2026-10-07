@@ -26,18 +26,23 @@ function t2d(time) {
   return h + m + s + ms;
 }
 async function getVttArray(vttUrl = "") {
-  const vttString = await (await fetch(vttUrl)).text();
+  const response = await fetch(vttUrl);
+  if (!response.ok)
+    throw new Error(`[artplayerPluginVttThumbnail] request failed: ${response.status} ${vttUrl}`);
+  const vttString = await response.text();
   const lines = vttString.split(/[\n\r]/g).filter((item) => item.trim());
   const vttArray = [];
   for (let i = 1; i < lines.length; i += 2) {
     const time = lines[i];
     const text = lines[i + 1];
-    if (!text.trim())
+    if (!text || !text.trim())
       continue;
     const timeReg = /((?:\d{2}:)?(?:\d{2}:)?\d{2}(?:.\d{3})?) ?--> ?((?:\d{2}:)?(?:\d{2}:)?\d{2}(?:.\d{3})?)/;
     const timeMatch = time.match(timeReg);
     const textReg = /(.*)#(\w{4})=(.*)/;
     const textMatch = text.match(textReg);
+    if (!timeMatch || !textMatch)
+      continue;
     const start = Math.floor(t2d(timeMatch[1]));
     const end = Math.floor(t2d(timeMatch[2]));
     let url = textMatch[1];
@@ -67,7 +72,13 @@ function artplayerPluginVttThumbnail(option) {
       template: { $progress }
     } = art;
     let timer = null;
-    const thumbnails = await getVttArray(option.vtt);
+    let thumbnails = [];
+    try {
+      thumbnails = await getVttArray(option.vtt);
+    } catch (error) {
+      art.notice.show = error;
+      console.error("[artplayerPluginVttThumbnail]", error);
+    }
     function showThumbnails($control, find, width) {
       setStyle($control, "backgroundImage", `url(${find.url})`);
       setStyle($control, "height", `${find.h}px`);

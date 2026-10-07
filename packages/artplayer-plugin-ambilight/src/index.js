@@ -89,24 +89,34 @@ export default function artplayerPluginAmbilight(option = {}) {
 
         lastUpdateTime = now
 
-        const w = $video.videoWidth / 3
-        const h = $video.videoHeight / 3
+        try {
+          const w = $video.videoWidth / 3
+          const h = $video.videoHeight / 3
 
-        const colors = [
-          [0, 0],
-          [w, 0],
-          [2 * w, 0],
-          [0, h],
-          [w, h],
-          [2 * w, h],
-          [0, 2 * h],
-          [w, 2 * h],
-          [2 * w, 2 * h],
-        ].map(([x, y]) => getAverageColor(x, y, w, h))
+          const colors = [
+            [0, 0],
+            [w, 0],
+            [2 * w, 0],
+            [0, h],
+            [w, h],
+            [2 * w, h],
+            [0, 2 * h],
+            [w, 2 * h],
+            [2 * w, 2 * h],
+          ].map(([x, y]) => getAverageColor(x, y, w, h))
 
-        gridItems.forEach(($item, index) => {
-          $item.style.backgroundColor = colors[index]
-        })
+          gridItems.forEach(($item, index) => {
+            $item.style.backgroundColor = colors[index]
+          })
+        }
+        catch (error) {
+          // A tainted (cross-origin, CORS-less) video throws SecurityError on
+          // getImageData: stop the loop instead of dying with an uncaught
+          // error (todo O4).
+          console.warn('[artplayerPluginAmbilight] disabled:', error)
+          stop()
+          return
+        }
 
         animationFrameId = requestAnimationFrame(updateColors)
       }

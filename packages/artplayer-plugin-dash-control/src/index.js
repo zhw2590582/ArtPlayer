@@ -15,7 +15,23 @@ function uniqBy(array, property) {
 export default function artplayerPluginDashControl(option = {}) {
   return (art) => {
     const { $video } = art.template
-    const { errorHandle } = art.constructor.utils
+
+    function removeControl(name) {
+      if (art.controls.cache.has(name))
+        art.controls.remove(name)
+    }
+
+    function removeSetting(name) {
+      if (art.setting.find(name))
+        art.setting.remove(name)
+    }
+
+    function clear() {
+      removeControl('dash-quality')
+      removeControl('dash-audio')
+      removeSetting('dash-quality')
+      removeSetting('dash-audio')
+    }
 
     function updateQuality(dash) {
       const qualities = dash.getRepresentationsByType('video')
@@ -163,7 +179,12 @@ export default function artplayerPluginDashControl(option = {}) {
     }
 
     function update() {
-      errorHandle(art.dash.getVideoElement() === $video, 'Cannot find instance of DASH from "art.dash"')
+      if (!art.dash || art.dash.getVideoElement() !== $video) {
+        // The new source is not driven by dash.js: drop the stale selectors
+        // instead of leaving them pointing at a dead instance.
+        clear()
+        return
+      }
       updateQuality(art.dash)
       updateAudio(art.dash)
     }

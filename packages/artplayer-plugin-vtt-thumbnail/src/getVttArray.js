@@ -24,7 +24,10 @@ function t2d(time) {
 }
 
 export default async function getVttArray(vttUrl = '') {
-  const vttString = await (await fetch(vttUrl)).text()
+  const response = await fetch(vttUrl)
+  if (!response.ok)
+    throw new Error(`[artplayerPluginVttThumbnail] request failed: ${response.status} ${vttUrl}`)
+  const vttString = await response.text()
   const lines = vttString.split(/[\n\r]/g).filter(item => item.trim())
   const vttArray = []
 
@@ -32,7 +35,7 @@ export default async function getVttArray(vttUrl = '') {
     const time = lines[i]
     const text = lines[i + 1]
 
-    if (!text.trim())
+    if (!text || !text.trim())
       continue
 
     const timeReg
@@ -41,6 +44,11 @@ export default async function getVttArray(vttUrl = '') {
 
     const textReg = /(.*)#(\w{4})=(.*)/
     const textMatch = text.match(textReg)
+
+    // Skip cue ids, NOTE blocks and lines without xywh metadata instead of
+    // crashing on them.
+    if (!timeMatch || !textMatch)
+      continue
 
     const start = Math.floor(t2d(timeMatch[1]))
     const end = Math.floor(t2d(timeMatch[2]))

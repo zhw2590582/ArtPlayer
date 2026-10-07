@@ -148,8 +148,15 @@ class ArtplayerToolThumbnail extends Emitter {
     }
   }
   start() {
-    if (!this.video.duration)
+    if (!this.video.duration) {
+      this._retries = (this._retries || 0) + 1;
+      if (this._retries > 30) {
+        this._retries = 0;
+        this.errorHandle(false, "The video metadata never became available");
+      }
       return sleep(1e3).then(() => this.start());
+    }
+    this._retries = 0;
     const { width, number, begin, end } = this.option;
     const height = this.video.videoHeight / this.video.videoWidth * width;
     this.option.height = height;

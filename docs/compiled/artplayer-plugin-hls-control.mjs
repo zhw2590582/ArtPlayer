@@ -19,7 +19,20 @@ function uniqBy(array, property) {
 function artplayerPluginHlsControl(option = {}) {
   return (art) => {
     const { $video } = art.template;
-    const { errorHandle } = art.constructor.utils;
+    function removeControl(name) {
+      if (art.controls.cache.has(name))
+        art.controls.remove(name);
+    }
+    function removeSetting(name) {
+      if (art.setting.find(name))
+        art.setting.remove(name);
+    }
+    function clear() {
+      removeControl("hls-quality");
+      removeControl("hls-audio");
+      removeSetting("hls-quality");
+      removeSetting("hls-audio");
+    }
     function updateQuality(hls) {
       if (!hls.levels.length)
         return;
@@ -126,7 +139,10 @@ function artplayerPluginHlsControl(option = {}) {
       }
     }
     function update() {
-      errorHandle(art.hls?.media === $video, 'Cannot find instance of HLS from "art.hls"');
+      if (!art.hls || art.hls.media !== $video) {
+        clear();
+        return;
+      }
       updateQuality(art.hls);
       updateAudio(art.hls);
     }
