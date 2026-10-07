@@ -35,6 +35,5 @@ interface Result {
 declare const artplayerPluginAudioTrack: (option: Option) => (art: Artplayer) => Result
 
 export default artplayerPluginAudioTrack
-
 export = artplayerPluginAudioTrack
-export as namespace artplayerPluginAudioTrack;
+export as namespace artplayerPluginAudioTrack

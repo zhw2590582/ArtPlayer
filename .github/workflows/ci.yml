@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      matrix:
+        node-version: [22.x, 24.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - name: install
+        run: npm ci
+      - name: lint (check only)
+        run: npm run lint:check
+      - name: test
+        run: node --test test/*.test.js
+      - name: test generated-type utils (node 24)
+        if: matrix.node-version == '24.x'
+        run: node --test test/utils.test.ts
+      - name: build docs examples
+        run: npm run build:test
+      - name: build all packages
+        run: npm run build:all
+      - name: check generated artifacts are in sync
+        run: git diff --exit-code docs/assets/ts docs/assets/js

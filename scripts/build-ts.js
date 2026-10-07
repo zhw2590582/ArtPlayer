@@ -31,13 +31,20 @@ const artplayerTSoutput = path.join('docs/assets/ts/artplayer.d.ts')
 let code = ''
 for (let index = 0; index < artplayerTS.length; index++) {
   const type = artplayerTS[index]
-  code += `${String(fs.readFileSync(type)).replace(reg, '')}\n`
+  // Only a line-start `export default` conflicts with the `export =` form
+  // appended below; nested ones (e.g. i18n's indented `export default lang`)
+  // must stay. Trim each file so the aggregate does not grow blank-line runs,
+  // and emit the no-semi style the repo lint gate enforces.
+  const content = String(fs.readFileSync(type))
+    .replace(reg, '')
+    .replace(/^export default /m, '')
+    .trim()
+  code += `${content}\n`
 }
 
-code.replace('export default ', '')
-code += `export = Artplayer;\nexport as namespace Artplayer;\n`
+code += `export = Artplayer\nexport as namespace Artplayer\n`
 ensureDirExists(artplayerTSoutput)
-fs.writeFileSync(artplayerTSoutput, code.trim())
+fs.writeFileSync(artplayerTSoutput, `${code.trim()}\n`)
 console.log(`✨ Built ${artplayerTSoutput}`);
 
 (async function () {
@@ -47,10 +54,10 @@ console.log(`✨ Built ${artplayerTSoutput}`);
   for (let index = 0; index < pluginsTS.length; index++) {
     const type = pluginsTS[index]
     const { name, file } = parsePluginInfo(type)
-    const code = `${String(fs.readFileSync(type)).replace(reg, '')}\nexport = ${name};\nexport as namespace ${name};\n`
+    const code = `${String(fs.readFileSync(type)).replace(reg, '').trim()}\nexport = ${name}\nexport as namespace ${name}\n`
     const output = path.join('docs/assets/ts', file)
     ensureDirExists(output)
-    fs.writeFileSync(output, code.trim())
+    fs.writeFileSync(output, `${code.trim()}\n`)
     console.log(`✨ Built ${output}`)
     pluginFiles.push(file)
   }

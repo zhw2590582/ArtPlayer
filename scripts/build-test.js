@@ -22,6 +22,9 @@ function extractCodeBlocks(content, filePath) {
     // Skip if code contains markdown syntax (unclosed code block issue)
     if (code.includes('\n## ') || code.includes('\n:::') || code.includes('<div className="run-code">')) {
       console.warn(`⚠️  Skipping malformed code block in ${filePath}`)
+      // Advance the regex before continuing, otherwise the same match is
+      // processed forever.
+      match = runCodePattern.exec(content)
       continue
     }
 

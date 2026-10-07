@@ -33,6 +33,5 @@ interface Result {
 declare const artplayerPluginJassub: (option: JassubOption) => (art: Artplayer) => Result
 
 export default artplayerPluginJassub
-
 export = artplayerPluginJassub
-export as namespace artplayerPluginJassub;
+export as namespace artplayerPluginJassub

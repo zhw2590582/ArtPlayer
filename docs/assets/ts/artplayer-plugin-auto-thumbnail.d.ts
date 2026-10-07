@@ -12,6 +12,5 @@ interface Result {
 declare const artplayerPluginAutoThumbnail: (option: Option) => (art: Artplayer) => Result
 
 export default artplayerPluginAutoThumbnail
-
 export = artplayerPluginAutoThumbnail
-export as namespace artplayerPluginAutoThumbnail;
+export as namespace artplayerPluginAutoThumbnail

@@ -21,6 +21,5 @@ interface AsrPluginInstance {
 declare function artplayerPluginAsr(option?: AsrPluginOption): (art: Artplayer) => AsrPluginInstance
 
 export default artplayerPluginAsr
-
 export = artplayerPluginAsr
-export as namespace artplayerPluginAsr;
+export as namespace artplayerPluginAsr

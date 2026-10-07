@@ -62,7 +62,6 @@ export interface Utils {
   getComposedPath: (event: Event) => EventTarget[]
   supportsFlex: () => boolean
 }
-
 export interface Template {
   readonly html: string
   readonly $container: HTMLDivElement
@@ -90,7 +89,6 @@ export interface Template {
   readonly $infoClose: HTMLDivElement
   readonly $contextmenu: HTMLDivElement
 }
-
 export interface Subtitle {
   /**
    * The subtitle url
@@ -127,7 +125,6 @@ export interface Subtitle {
    */
   onVttLoad?: (vtt: string) => string
 }
-
 export interface SettingOption extends Omit<Setting, 'html' | 'icon' | 'tooltip'> {
   html: string
   icon: string | undefined
@@ -221,7 +218,6 @@ export interface Setting {
    */
   [key: string]: any
 }
-
 export interface Quality {
   /**
    * Whether the default is selected
@@ -238,7 +234,6 @@ export interface Quality {
    */
   url: string
 }
-
 export type AspectRatio = 'default' | '4:3' | '16:9' | (`${number}:${number}` & Record<never, never>)
 export type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | (number & Record<never, never>)
 export type Flip = 'normal' | 'horizontal' | 'vertical' | (string & Record<never, never>)
@@ -347,7 +342,6 @@ export declare class Player {
   autoHeight(): void
   reset(): void
 }
-
 export type CustomType
   = | 'flv'
     | 'm3u8'
@@ -661,7 +655,6 @@ export interface Option {
     >
   >
 }
-
 export interface Icons {
   readonly loading: HTMLDivElement
   readonly state: HTMLDivElement
@@ -692,7 +685,6 @@ export interface Icons {
   readonly airplay: HTMLDivElement
   readonly [key: string]: HTMLDivElement
 }
-
 type I18nKeys
   = | 'en'
     | 'zh-cn'
@@ -755,7 +747,6 @@ declare module 'artplayer/i18n/*' {
   // @ts-expect-error TS2666
   export default lang
 }
-
 export type Bar = 'loaded' | 'played' | 'hover'
 
 export interface Events {
@@ -850,7 +841,6 @@ export interface Events {
   'setBar': [type: Bar, percentage: number, event?: Event | undefined]
   'keydown': [event: KeyboardEvent]
 }
-
 export interface CssVar {
   '--art-theme': string
   '--art-font-color': string
@@ -896,7 +886,6 @@ export interface CssVar {
   '--art-scrollbar-background-hover': string
   '--art-mini-progress-height': string
 }
-
 export interface Config {
   readonly properties: readonly [
     'audioTracks',
@@ -978,7 +967,6 @@ export interface Config {
     'webkitExitFullscreen',
   ]
 }
-
 export interface Selector {
   /**
    * Whether the default is selected
@@ -1109,7 +1097,6 @@ export interface ComponentOption {
    */
   onSelect?: (this: Artplayer, selector: Selector, element: HTMLElement, event: Event) => void
 }
-
 export type {
   Config,
   Events,
@@ -1124,7 +1111,7 @@ export type {
   Utils,
 }
 
-export default class Artplayer extends Player {
+class Artplayer extends Player {
   constructor(option: Option, readyCallback?: (this: Artplayer, art: Artplayer) => unknown)
 
   static readonly instances: Artplayer[]
@@ -1298,6 +1285,5 @@ export default class Artplayer extends Player {
     ) => Promise<Artplayer['plugins']>
   } & Record<string, unknown>
 }
-
 export = Artplayer
-export as namespace Artplayer;
+export as namespace Artplayer

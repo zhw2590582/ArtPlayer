@@ -17,6 +17,5 @@ interface Result {
 declare const artplayerPluginDocumentPip: (option: Option) => (art: Artplayer) => Result
 
 export default artplayerPluginDocumentPip
-
 export = artplayerPluginDocumentPip
-export as namespace artplayerPluginDocumentPip;
+export as namespace artplayerPluginDocumentPip

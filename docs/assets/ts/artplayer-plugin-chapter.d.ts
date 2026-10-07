@@ -16,6 +16,5 @@ interface Result {
 declare const artplayerPluginChapter: (option: Option) => (art: Artplayer) => Result
 
 export default artplayerPluginChapter
-
 export = artplayerPluginChapter
-export as namespace artplayerPluginChapter;
+export as namespace artplayerPluginChapter

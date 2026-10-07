@@ -254,6 +254,5 @@ export interface Result {
 declare const artplayerPluginDanmuku: (option: Option) => (art: Artplayer) => Result
 
 export default artplayerPluginDanmuku
-
 export = artplayerPluginDanmuku
-export as namespace artplayerPluginDanmuku;
+export as namespace artplayerPluginDanmuku

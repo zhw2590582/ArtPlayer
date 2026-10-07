@@ -20,6 +20,5 @@ interface Result {
 declare const artplayerPluginDanmukuMask: (option?: Option) => (art: Artplayer) => Result
 
 export default artplayerPluginDanmukuMask
-
 export = artplayerPluginDanmukuMask
-export as namespace artplayerPluginDanmukuMask;
+export as namespace artplayerPluginDanmukuMask

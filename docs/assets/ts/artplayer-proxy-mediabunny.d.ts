@@ -104,6 +104,5 @@ type Result = HTMLCanvasElement
 declare const artplayerProxyMediabunny: (option?: Option) => (art: Artplayer) => Result
 
 export default artplayerProxyMediabunny
-
 export = artplayerProxyMediabunny
-export as namespace artplayerProxyMediabunny;
+export as namespace artplayerProxyMediabunny

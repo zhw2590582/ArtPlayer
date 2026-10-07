@@ -12,6 +12,5 @@ declare const artplayerPluginDashControl: (option: { quality?: Config, audio?: C
 }
 
 export default artplayerPluginDashControl
-
 export = artplayerPluginDashControl
-export as namespace artplayerPluginDashControl;
+export as namespace artplayerPluginDashControl

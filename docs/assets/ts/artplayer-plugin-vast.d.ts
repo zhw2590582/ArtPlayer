@@ -31,6 +31,5 @@ declare function artplayerPluginVast(
 ): (art: Artplayer) => ArtplayerPluginVastInstance
 
 export default artplayerPluginVast
-
 export = artplayerPluginVast
-export as namespace artplayerPluginVast;
+export as namespace artplayerPluginVast

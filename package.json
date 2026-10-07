@@ -25,8 +25,6 @@
     "node": ">= 20.0.0"
   },
   "scripts": {
-    "bootstrap": "npx lerna link",
-    "postinstall": "npx lerna run prepare",
     "build:ts": "node ./scripts/build-ts.js",
     "build:llm": "node ./scripts/build-llm.js",
     "build:docs": "node ./scripts/build-docs.js",
@@ -39,7 +37,8 @@
     "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
     "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
     "lint": "npx eslint packages/*/{src,types,package.json} scripts/*.js test/* docs/assets/ts/* --fix",
-    "build:all": "npm run build all && npm run build:i18n && npm run build:ts && npm run build:docs && npm run lint"
+    "lint:check": "npx eslint packages/*/{src,types,package.json} scripts/*.js test/* docs/assets/ts/*",
+    "build:all": "npm run build all && npm run build:i18n && npm run build:ts && npm run build:docs && npm run lint:check"
   },
   "browserslist": "last 1 Chrome version",
   "dependencies": {
