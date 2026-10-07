@@ -142,6 +142,16 @@ export default function artplayerPluginDocumentPip(userOptions = {}) {
         return
       try {
         state.cleanup?.()
+        if (art.isDestroy) {
+          // Core destroy already emptied the container and tore down the
+          // event system: do not re-insert into the detached parent and do
+          // not re-bind global listeners nothing will ever remove.
+          state.win.close()
+          state.win = null
+          removeClass($player, 'artplayer-document-pip')
+          art.emit('document-pip', false)
+          return
+        }
         restoreToOriginalDocument()
         state.win.close()
         state.win = null

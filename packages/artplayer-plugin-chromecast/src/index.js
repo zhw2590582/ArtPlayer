@@ -32,39 +32,48 @@ export default function artplayerPluginChromecast(option) {
   const DEFAULT_SDK = 'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'
 
   let isCastInitialized = false
+  let initPromise = null
   let castSession = null
   let castState = null
 
-  const updateCastButton = (state) => {
-    const button = document.querySelector('.art-icon-cast')
-    if (button) {
-      switch (state) {
-        case 'connected':
-          button.style.color = 'red'
-          break
-        case 'connecting':
-        case 'disconnecting':
-          button.style.color = 'orange'
-          break
-        case 'disconnected':
-        default:
-          button.style.color = 'white'
-          break
-      }
+  const updateCastButton = (state, button) => {
+    if (!button)
+      return
+    switch (state) {
+      case 'connected':
+        button.style.color = 'red'
+        break
+      case 'connecting':
+      case 'disconnecting':
+        button.style.color = 'orange'
+        break
+      case 'disconnected':
+      default:
+        button.style.color = 'white'
+        break
     }
   }
 
-  const initializeCastApi = () => {
-    return new Promise((resolve, reject) => {
-      window.__onGCastApiAvailable = (isAvailable) => {
-        if (isAvailable) {
+  return async (art) => {
+    const $control = art.controls.add({
+      name: 'chromecast',
+      position: 'right',
+      tooltip: 'Chromecast',
+      html: `<i class="art-icon art-icon-cast">${option.icon || DEFAULT_ICON}</i>`,
+    })
+    // Scope the button lookup to this instance: the CastContext is a page
+    // singleton, so a document-wide query would color another player's icon.
+    const $castButton = $control?.querySelector?.('.art-icon-cast') || null
+
+    const initializeCastApi = () => {
+      return new Promise((resolve, reject) => {
+        const setup = () => {
           const context = window.cast.framework.CastContext.getInstance()
           context.setOptions({
             receiverApplicationId: window.chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
             autoJoinPolicy: window.chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED,
           })
 
-          // Listen for session state changes
           context.addEventListener(
             window.cast.framework.CastContextEventType.SESSION_STATE_CHANGED,
             (event) => {
@@ -75,29 +84,28 @@ export default function artplayerPluginChromecast(option) {
               switch (event.sessionState) {
                 case SessionState.NO_SESSION:
                   option.onStateChange?.('disconnected')
-                  updateCastButton('disconnected')
+                  updateCastButton('disconnected', $castButton)
                   break
                 case SessionState.SESSION_STARTING:
                   option.onStateChange?.('connecting')
-                  updateCastButton('connecting')
+                  updateCastButton('connecting', $castButton)
                   break
                 case SessionState.SESSION_STARTED:
                   option.onStateChange?.('connected')
-                  updateCastButton('connected')
+                  updateCastButton('connected', $castButton)
                   break
                 case SessionState.SESSION_ENDING:
                   option.onStateChange?.('disconnecting')
-                  updateCastButton('disconnecting')
+                  updateCastButton('disconnecting', $castButton)
                   break
                 case SessionState.SESSION_RESUMED:
                   option.onStateChange?.('connected')
-                  updateCastButton('connected')
+                  updateCastButton('connected', $castButton)
                   break
               }
             },
           )
 
-          // Listen for cast state changes
           context.addEventListener(window.cast.framework.CastContextEventType.CAST_STATE_CHANGED, (event) => {
             const CastState = window.cast.framework.CastState
             switch (event.castState) {
@@ -105,8 +113,6 @@ export default function artplayerPluginChromecast(option) {
                 option.onCastAvailable?.(false)
                 break
               case CastState.NOT_CONNECTED:
-                option.onCastAvailable?.(true)
-                break
               case CastState.CONNECTING:
               case CastState.CONNECTED:
                 option.onCastAvailable?.(true)
@@ -117,67 +123,73 @@ export default function artplayerPluginChromecast(option) {
           isCastInitialized = true
           resolve()
         }
+
+        // The framework only invokes __onGCastApiAvailable once per script
+        // load; when it is already present (another player/page loaded it),
+        // initialize synchronously or the promise would never settle.
+        if (window.cast?.framework?.CastContext) {
+          setup()
+        }
         else {
-          reject(new Error('Cast API is not available'))
+          window.__onGCastApiAvailable = (isAvailable) => {
+            if (isAvailable)
+              setup()
+            else
+              reject(new Error('Cast API is not available'))
+          }
+          if (!window.chrome || !window.chrome.cast) {
+            loadScript(option.sdk || DEFAULT_SDK).catch(reject)
+          }
+        }
+      })
+    }
+
+    const castVideo = (session) => {
+      const url = option.url || art.option.url
+      const mediaInfo = new window.chrome.cast.media.MediaInfo(url, option.mimeType || getMimeType(url))
+      const request = new window.chrome.cast.media.LoadRequest(mediaInfo)
+      session
+        .loadMedia(request)
+        .then(() => {
+          art.notice.show = 'Casting started'
+          option.onCastStart?.()
+        })
+        .catch((error) => {
+          art.notice.show = 'Error casting media'
+          option.onError?.(error)
+        })
+    }
+
+    art.proxy($control, 'click', async () => {
+      if (!isCastInitialized) {
+        initPromise = initPromise || initializeCastApi().catch((error) => {
+          initPromise = null
+          throw error
+        })
+        try {
+          await initPromise
+        }
+        catch (error) {
+          art.notice.show = 'Failed to initialize Cast API'
+          option.onError?.(error)
+          return
         }
       }
-      if (!window.chrome || !window.chrome.cast) {
-        loadScript(option.sdk || DEFAULT_SDK).catch(reject)
-      }
-    })
-  }
 
-  const castVideo = (art, session) => {
-    const url = option.url || art.option.url
-    const mediaInfo = new window.chrome.cast.media.MediaInfo(url, option.mimeType || getMimeType(url))
-    const request = new window.chrome.cast.media.LoadRequest(mediaInfo)
-    session
-      .loadMedia(request)
-      .then(() => {
-        art.notice.show = 'Casting started'
-        option.onCastStart?.()
-      })
-      .catch((error) => {
-        art.notice.show = 'Error casting media'
+      const context = window.cast.framework.CastContext.getInstance()
+      if (castSession) {
+        castVideo(castSession)
+        return
+      }
+
+      try {
+        const session = await context.requestSession()
+        castVideo(session)
+      }
+      catch (error) {
+        art.notice.show = 'Error connecting to cast session'
         option.onError?.(error)
-        throw error
-      })
-  }
-
-  return async (art) => {
-    art.controls.add({
-      name: 'chromecast',
-      position: 'right',
-      tooltip: 'Chromecast',
-      html: `<i class="art-icon art-icon-cast">${option.icon || DEFAULT_ICON}</i>`,
-      click: async () => {
-        if (!isCastInitialized) {
-          try {
-            await initializeCastApi()
-          }
-          catch (error) {
-            art.notice.show = 'Failed to initialize Cast API'
-            option.onError?.(error)
-            throw error
-          }
-        }
-
-        const context = window.cast.framework.CastContext.getInstance()
-        if (castSession) {
-          castVideo(art, castSession)
-        }
-        else {
-          try {
-            const session = await context.requestSession()
-            castVideo(art, session)
-          }
-          catch (error) {
-            art.notice.show = 'Error connecting to cast session'
-            option.onError?.(error)
-            throw error
-          }
-        }
-      },
+      }
     })
 
     return {

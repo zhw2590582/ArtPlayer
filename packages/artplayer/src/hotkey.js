@@ -42,7 +42,7 @@ export default class Hotkey {
     }
 
     this.art.on('document:keydown', (event) => {
-      if (this.art.isFocus) {
+      if (this.art.isFocus && !this.art.isLock) {
         const tag = document.activeElement.tagName.toUpperCase()
         const editable = document.activeElement.getAttribute('contenteditable')
         if (

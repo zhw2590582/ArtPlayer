@@ -442,8 +442,9 @@ function artplayerPluginVast(callback) {
     const { createElement, setStyles } = constructor.utils;
     const { $video, $player } = template;
     await e();
-    const google = window.google;
-    const ima = google.ima;
+    const ima = window.google?.ima;
+    if (!ima)
+      throw new Error("[artplayerPluginVast] IMA SDK not loaded");
     const adsRenderingSettings = new ima.AdsRenderingSettings();
     adsRenderingSettings.restoreCustomPlaybackStateOnAdBreakComplete = true;
     adsRenderingSettings.enablePreloading = true;
@@ -541,6 +542,7 @@ function artplayerPluginVast(callback) {
         }
       });
     }
+    art.on("destroy", destroyPlayer);
     return {
       name: "artplayerPluginVast",
       destroy: destroyPlayer

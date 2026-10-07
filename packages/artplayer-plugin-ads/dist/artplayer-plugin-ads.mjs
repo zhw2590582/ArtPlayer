@@ -26,7 +26,7 @@ function artplayerPluginAds(option) {
       icons: { volume, volumeClose, fullscreenOn, fullscreenOff, loading },
       constructor: {
         validator,
-        utils: { query, append, setStyle }
+        utils: { query, append, setStyle, silencePromise }
       }
     } = art;
     option = validator(
@@ -71,12 +71,17 @@ function artplayerPluginAds(option) {
     let isEnd = false;
     let isInit = false;
     let isCanClose = false;
+    let lockBeforeAd = false;
     function getI18n(val, str) {
       return str.replace("%s", val);
     }
     function skip() {
+      if (isEnd)
+        return;
       isEnd = true;
-      art.play();
+      clearTimeout(timer);
+      art.isLock = lockBeforeAd;
+      silencePromise(art.play());
       if (option.video)
         $ads.pause();
       setStyle(art.template.$ads, "display", "none");
@@ -203,11 +208,13 @@ function artplayerPluginAds(option) {
       isInit = true;
       show();
       art.pause();
+      lockBeforeAd = art.isLock;
+      art.isLock = true;
       if (option.video) {
         art.proxy($ads, "error", skip);
         art.proxy($ads, "loadedmetadata", () => {
           play();
-          $ads.play();
+          silencePromise($ads.play());
           setStyle($timer, "display", "flex");
           setStyle($control, "display", "flex");
           setStyle($loading, "display", "none");
@@ -229,6 +236,10 @@ function artplayerPluginAds(option) {
     art.on("ready", () => {
       art.once("play", init);
       art.once("video:playing", init);
+    });
+    art.on("destroy", () => {
+      clearTimeout(timer);
+      isEnd = true;
     });
     return {
       name: "artplayerPluginAds",

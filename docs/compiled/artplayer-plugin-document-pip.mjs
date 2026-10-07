@@ -125,6 +125,13 @@ function artplayerPluginDocumentPip(userOptions = {}) {
         return;
       try {
         state.cleanup?.();
+        if (art.isDestroy) {
+          state.win.close();
+          state.win = null;
+          removeClass($player, "artplayer-document-pip");
+          art.emit("document-pip", false);
+          return;
+        }
         restoreToOriginalDocument();
         state.win.close();
         state.win = null;

@@ -7,8 +7,9 @@ export default function artplayerPluginVast(callback) {
     const { $video, $player } = template
 
     await loadImaSdk()
-    const google = window.google
-    const ima = google.ima
+    const ima = window.google?.ima
+    if (!ima)
+      throw new Error('[artplayerPluginVast] IMA SDK not loaded')
 
     const adsRenderingSettings = new ima.AdsRenderingSettings()
     adsRenderingSettings.restoreCustomPlaybackStateOnAdBreakComplete = true
@@ -121,6 +122,8 @@ export default function artplayerPluginVast(callback) {
         },
       })
     }
+
+    art.on('destroy', destroyPlayer)
 
     return {
       name: 'artplayerPluginVast',
