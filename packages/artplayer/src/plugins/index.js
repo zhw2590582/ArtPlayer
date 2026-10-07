@@ -9,6 +9,7 @@ export default class Plugins {
   constructor(art) {
     this.art = art
     this.id = 0
+    this.registry = new Map()
 
     const { option } = art
 
@@ -41,7 +42,11 @@ export default class Plugins {
     this.id += 1
     const result = plugin.call(this.art, this.art)
     if (result instanceof Promise) {
-      return result.then(res => this.next(plugin, res))
+      return result.then(res => this.next(plugin, res)).catch((error) => {
+        console.error('[ArtPlayer] plugin failed:', error)
+        this.art.notice.show = error
+        return this
+      })
     }
     else {
       return this.next(plugin, result)
@@ -54,6 +59,21 @@ export default class Plugins {
     def(this, pluginName, {
       value: result,
     })
+    this.registry.set(pluginName, result)
     return this
+  }
+
+  destroy() {
+    for (const [name, plugin] of this.registry) {
+      if (plugin && typeof plugin.destroy === 'function') {
+        try {
+          plugin.destroy()
+        }
+        catch (error) {
+          console.warn(`[ArtPlayer] plugin [${name}] destroy failed:`, error)
+        }
+      }
+    }
+    this.registry.clear()
   }
 }

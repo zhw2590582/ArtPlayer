@@ -20,6 +20,8 @@ export default class Component {
   set show(value) {
     const { $player } = this.art.template
     const className = `art-${this.name}-show`
+    if (hasClass($player, className) === value)
+      return
     if (value) {
       addClass($player, className)
     }

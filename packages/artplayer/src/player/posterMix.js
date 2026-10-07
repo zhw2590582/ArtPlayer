@@ -15,7 +15,8 @@ export default function posterMix(art) {
       }
     },
     set(url) {
-      setStyle($poster, 'backgroundImage', `url(${url})`)
+      const safeUrl = String(url).replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+      setStyle($poster, 'backgroundImage', `url("${safeUrl}")`)
     },
   })
 }

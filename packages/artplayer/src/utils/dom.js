@@ -145,6 +145,7 @@ export function loadImg(url, scale) {
           const scaledImg = new Image()
 
           scaledImg.onload = function () {
+            URL.revokeObjectURL(blobUrl)
             resolve(scaledImg)
           }
 

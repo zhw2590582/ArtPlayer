@@ -36,7 +36,7 @@ export default class Artplayer extends Emitter {
     this.id = ++id
 
     const mergeOption = utils.mergeDeep(Artplayer.option, option)
-    mergeOption.container = option.container
+    mergeOption.container = option.container ?? mergeOption.container
 
     this.option = validator(mergeOption, scheme)
 
@@ -208,9 +208,16 @@ export default class Artplayer extends Emitter {
   }
 
   destroy(removeHtml = true) {
+    if (this.isDestroy)
+      return
     if (Artplayer.REMOVE_SRC_WHEN_DESTROY) {
       this.reset()
     }
+    if (this.template.$mini) {
+      this.template.$mini.remove()
+      delete this.template.$mini
+    }
+    this.plugins.destroy()
     this.events.destroy()
     this.template.destroy(removeHtml)
     instances.splice(instances.indexOf(this), 1)

@@ -55,8 +55,15 @@ export default function thumbnailsMix(art) {
     if (type === 'hover' || isMobileDragging) {
       if (!image && !loding) {
         loding = true
-        image = await loadImg(url, scale)
-        loding = false
+        try {
+          image = await loadImg(url, scale)
+        }
+        catch (error) {
+          console.warn('[ArtPlayer] thumbnails load failed:', error)
+        }
+        finally {
+          loding = false
+        }
       }
 
       if (!image)

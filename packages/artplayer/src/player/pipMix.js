@@ -11,7 +11,7 @@ function nativePip(art) {
 
   def(art, 'pip', {
     get() {
-      return document.pictureInPictureElement
+      return document.pictureInPictureElement === $video
     },
     set(value) {
       if (value) {

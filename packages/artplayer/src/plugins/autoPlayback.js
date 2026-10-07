@@ -25,42 +25,52 @@ export default function autoPlayback(art) {
   append($close, icons.close)
 
   let timer = null
+  let lastSeenTime = 0
+  let lastSaved = 0
 
   art.on('video:timeupdate', () => {
-    if (art.playing) {
-      const times = storage.get('times') || {}
-      const keys = Object.keys(times)
-      if (keys.length > constructor.AUTO_PLAYBACK_MAX) {
-        delete times[keys[0]]
-      }
-      times[art.option.id || art.option.url] = art.currentTime
-      storage.set('times', times)
+    if (!art.playing)
+      return
+    const now = Date.now()
+    if (now - lastSaved < 3000)
+      return
+    lastSaved = now
+    const times = storage.get('times') || {}
+    const keys = Object.keys(times)
+    if (keys.length > constructor.AUTO_PLAYBACK_MAX) {
+      delete times[keys[0]]
     }
+    times[art.option.id || art.option.url] = art.currentTime
+    storage.set('times', times)
+  })
+
+  proxy($close, 'click', () => {
+    setStyle($autoPlayback, 'display', 'none')
+  })
+
+  proxy($jump, 'click', () => {
+    if (lastSeenTime < constructor.AUTO_PLAYBACK_MIN)
+      return
+    // Jump restores the position recorded when the popup was shown, not the
+    // live playhead (which kept moving while the popup was visible).
+    art.seek = lastSeenTime
+    silencePromise(art.play())
+    setStyle($poster, 'display', 'none')
+    setStyle($autoPlayback, 'display', 'none')
   })
 
   function init() {
     const times = storage.get('times') || {}
-    const currentTime = times[art.option.id || art.option.url]
+    lastSeenTime = times[art.option.id || art.option.url] || 0
 
     clearTimeout(timer)
     setStyle($autoPlayback, 'display', 'none')
 
-    if (currentTime && currentTime >= constructor.AUTO_PLAYBACK_MIN) {
+    if (lastSeenTime && lastSeenTime >= constructor.AUTO_PLAYBACK_MIN) {
       setStyle($autoPlayback, 'display', 'flex')
 
-      $last.textContent = `${i18n.get('Last Seen')} ${secondToTime(currentTime)}`
+      $last.textContent = `${i18n.get('Last Seen')} ${secondToTime(lastSeenTime)}`
       $jump.textContent = i18n.get('Jump Play')
-
-      proxy($close, 'click', () => {
-        setStyle($autoPlayback, 'display', 'none')
-      })
-
-      proxy($jump, 'click', () => {
-        art.seek = currentTime
-        silencePromise(art.play())
-        setStyle($poster, 'display', 'none')
-        setStyle($autoPlayback, 'display', 'none')
-      })
 
       art.once('video:timeupdate', () => {
         timer = setTimeout(() => {

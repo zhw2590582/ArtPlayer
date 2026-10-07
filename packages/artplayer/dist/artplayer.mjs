@@ -13,7 +13,7 @@ var hasRequiredOptionValidator;
 function requireOptionValidator() {
   if (hasRequiredOptionValidator) return optionValidator$1.exports;
   hasRequiredOptionValidator = 1;
-  (function(module, exports$1) {
+  (function(module, exports) {
     !(function(r, t) {
       module.exports = t();
     })(optionValidator, function() {
@@ -363,6 +363,7 @@ function loadImg(url, scale) {
           const blobUrl = URL.createObjectURL(blob);
           const scaledImg = new Image();
           scaledImg.onload = function() {
+            URL.revokeObjectURL(blobUrl);
             resolve(scaledImg);
           };
           scaledImg.onerror = function() {
@@ -454,7 +455,7 @@ function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 function secondToTime(second) {
-  if (!second)
+  if (!second || second < 0)
     return "00:00";
   const add0 = (num) => num < 10 ? `0${num}` : String(num);
   const hour = Math.floor(second / 3600);
@@ -787,6 +788,8 @@ class Component {
   set show(value) {
     const { $player } = this.art.template;
     const className = `art-${this.name}-show`;
+    if (hasClass($player, className) === value)
+      return;
     if (value) {
       addClass($player, className);
     } else {
@@ -987,10 +990,9 @@ function playbackRate$2(option) {
   };
 }
 function version(option) {
-  const url = isBrowser ? location.href : "";
   return {
     ...option,
-    html: `<a href="https://artplayer.org?ref=${encodeURIComponent(url)}" target="_blank" style="width:100%;">ArtPlayer ${version$1}</a>`
+    html: `<a href="https://artplayer.org" target="_blank" style="width:100%;">ArtPlayer ${version$1}</a>`
   };
 }
 class Contextmenu extends Component {
@@ -1283,7 +1285,7 @@ function progress(options) {
           for (let index = 0; index < option.highlight.length; index++) {
             const item = option.highlight[index];
             const left = clamp(item.time, 0, art.duration) / art.duration * 100;
-            const html = `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`;
+            const html = `<span data-text="${escape(item.text)}" data-time="${item.time}" style="left: ${left}%"></span>`;
             append($highlight, html);
           }
         }
@@ -1432,6 +1434,7 @@ function volume$1(option) {
     ...option,
     mounted: ($control) => {
       const { proxy, icons } = art;
+      const { $video } = art.template;
       const $volume = append($control, icons.volume);
       const $close = append($control, icons.volumeClose);
       const $panel = append($control, '<div class="art-volume-panel"></div>');
@@ -1473,19 +1476,25 @@ function volume$1(option) {
         setStyle($panel, "display", "none");
       } else {
         let isDragging = false;
+        const setVideoVolume = (value) => {
+          $video.volume = clamp(value, 0, 1);
+        };
         proxy($slider, "mousedown", (event) => {
           isDragging = event.button === 0;
-          art.volume = getVolumeFromEvent(event);
+          if (isDragging) {
+            art.muted = false;
+            setVideoVolume(getVolumeFromEvent(event));
+          }
         });
         art.on("document:mousemove", (event) => {
           if (isDragging) {
-            art.muted = false;
-            art.volume = getVolumeFromEvent(event);
+            setVideoVolume(getVolumeFromEvent(event));
           }
         });
         art.on("document:mouseup", () => {
           if (isDragging) {
             isDragging = false;
+            art.volume = $video.volume;
           }
         });
       }
@@ -1702,6 +1711,8 @@ class Control extends Component {
       const item = option.selector.find(
         (item2) => item2.$control_item === path.find(($item) => item2.$control_item === $item)
       );
+      if (!item)
+        return;
       this.check(item);
       if (option.onSelect) {
         $value.innerHTML = await option.onSelect.call(this.art, item, item.$control_item, event2);
@@ -1814,6 +1825,7 @@ function gestureInit(art, events) {
         const isVertical = [1, 2].includes(direction);
         const isLegal = isHorizontal && !art.isRotate || isVertical && art.isRotate;
         if (isLegal) {
+          event.preventDefault();
           const ratioX = clamp((pageX - startX) / art.width, -1, 1);
           const ratioY = clamp((pageY - startY) / art.height, -1, 1);
           const ratio = art.isRotate ? ratioY : ratioX;
@@ -1839,13 +1851,13 @@ function gestureInit(art, events) {
         touchTarget = $video;
         onTouchStart(event);
       });
-      events.proxy($video, "touchmove", onTouchMove);
+      events.proxy($video, "touchmove", onTouchMove, { passive: false });
     }
     events.proxy($progress, "touchstart", (event) => {
       touchTarget = $progress;
       onTouchStart(event);
     });
-    events.proxy($progress, "touchmove", onTouchMove);
+    events.proxy($progress, "touchmove", onTouchMove, { passive: false });
     art.on("document:touchend", onTouchEnd);
   }
 }
@@ -2049,8 +2061,9 @@ class Hotkey {
     }
     this.art.on("document:keydown", (event) => {
       if (this.art.isFocus) {
-        const tag = document.activeElement.tagName.toUpperCase();
-        const editable = document.activeElement.getAttribute("contenteditable");
+        const active = document.activeElement;
+        const tag = active?.tagName?.toUpperCase() ?? "";
+        const editable = active?.getAttribute?.("contenteditable");
         if (tag !== "INPUT" && tag !== "TEXTAREA" && editable !== "" && editable !== "true" && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
           const events = this.keys[event.code];
           if (events) {
@@ -2738,28 +2751,33 @@ function fullscreenMix(art) {
     template: { $video, $player }
   } = art;
   const nativeScreenfull = (art2) => {
-    screenfull.on("change", () => {
-      art2.emit("fullscreen", screenfull.isFullscreen);
-      if (screenfull.isFullscreen) {
+    const onChange = () => {
+      art2.emit("fullscreen", art2.fullscreen);
+      if (art2.fullscreen) {
         art2.state = "fullscreen";
         addClass($player, "art-fullscreen");
       } else {
         removeClass($player, "art-fullscreen");
       }
       art2.emit("resize");
-    });
-    screenfull.on("error", (event) => {
+    };
+    art2.events.proxy(document, screenfull.raw.fullscreenchange, onChange);
+    art2.events.proxy(document, screenfull.raw.fullscreenerror, (event) => {
       art2.emit("fullscreenError", event);
     });
     def(art2, "fullscreen", {
       get() {
-        return screenfull.isFullscreen;
+        return document[screenfull.raw.fullscreenElement] === $player;
       },
       async set(value) {
-        if (value) {
-          await screenfull.request($player);
-        } else {
-          await screenfull.exit();
+        try {
+          if (value) {
+            await screenfull.request($player);
+          } else {
+            await screenfull.exit();
+          }
+        } catch (error2) {
+          art2.emit("fullscreenError", error2);
         }
       }
     });
@@ -2798,7 +2816,6 @@ function fullscreenMix(art) {
         }
       });
     }
-    def(art, "fullscreen", get(art, "fullscreen"));
   });
 }
 function fullscreenWebMix(art) {
@@ -2984,14 +3001,15 @@ function optionInit(art) {
     $video.volume = clamp(volumeStorage, 0, 1);
   }
   if (option.poster) {
-    setStyle($poster, "backgroundImage", `url(${option.poster})`);
+    const safePoster = String(option.poster).replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+    setStyle($poster, "backgroundImage", `url("${safePoster}")`);
   }
   if (option.autoplay) {
     $video.autoplay = option.autoplay;
   }
   if (option.playsInline) {
     $video.playsInline = true;
-    $video["webkit-playsinline"] = true;
+    $video.setAttribute("webkit-playsinline", "");
   }
   if (option.theme) {
     option.cssVar["--art-theme"] = option.theme;
@@ -3025,7 +3043,7 @@ function nativePip(art) {
   $video.disablePictureInPicture = false;
   def(art, "pip", {
     get() {
-      return document.pictureInPictureElement;
+      return document.pictureInPictureElement === $video;
     },
     set(value) {
       if (value) {
@@ -3164,7 +3182,8 @@ function posterMix(art) {
       }
     },
     set(url) {
-      setStyle($poster, "backgroundImage", `url(${url})`);
+      const safeUrl = String(url).replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+      setStyle($poster, "backgroundImage", `url("${safeUrl}")`);
     }
   });
 }
@@ -3323,26 +3342,36 @@ function subtitleOffsetMix(art) {
   });
 }
 function switchMix(art) {
+  let switchSeq = 0;
   function switchUrl(url, currentTime) {
     return new Promise((resolve, reject) => {
       if (url === art.url) {
         resolve();
         return;
       }
+      const id2 = ++switchSeq;
       const { playing, aspectRatio: aspectRatio2, playbackRate: playbackRate2 } = art;
       art.pause();
       art.url = url;
       art.notice.show = "";
       const handlers = {};
       handlers.error = (error2) => {
+        if (id2 !== switchSeq)
+          return;
         art.off("video:canplay", handlers.canplay);
         art.off("video:loadedmetadata", handlers.metadata);
         reject(error2);
       };
       handlers.metadata = () => {
+        if (id2 !== switchSeq)
+          return;
         art.currentTime = currentTime;
       };
       handlers.canplay = async () => {
+        if (id2 !== switchSeq) {
+          resolve();
+          return;
+        }
         art.off("video:error", handlers.error);
         art.playbackRate = playbackRate2;
         art.aspectRatio = aspectRatio2;
@@ -3427,8 +3456,13 @@ function thumbnailsMix(art) {
     if (type === "hover" || isMobileDragging) {
       if (!image && !loding) {
         loding = true;
-        image = await loadImg(url, scale);
-        loding = false;
+        try {
+          image = await loadImg(url, scale);
+        } catch (error2) {
+          console.warn("[ArtPlayer] thumbnails load failed:", error2);
+        } finally {
+          loding = false;
+        }
       }
       if (!image)
         return;
@@ -3490,7 +3524,6 @@ function urlMix(art) {
           art.loading.show = true;
           typeCallback.call(art, $video, newUrl, art);
         } else {
-          URL.revokeObjectURL(oldUrl);
           $video.src = newUrl;
         }
         if (oldUrl !== art.url) {
@@ -3682,35 +3715,43 @@ function autoPlayback(art) {
   const $close = query(".art-auto-playback-close", $autoPlayback);
   append($close, icons.close);
   let timer = null;
+  let lastSeenTime = 0;
+  let lastSaved = 0;
   art.on("video:timeupdate", () => {
-    if (art.playing) {
-      const times = storage.get("times") || {};
-      const keys = Object.keys(times);
-      if (keys.length > constructor.AUTO_PLAYBACK_MAX) {
-        delete times[keys[0]];
-      }
-      times[art.option.id || art.option.url] = art.currentTime;
-      storage.set("times", times);
+    if (!art.playing)
+      return;
+    const now = Date.now();
+    if (now - lastSaved < 3e3)
+      return;
+    lastSaved = now;
+    const times = storage.get("times") || {};
+    const keys = Object.keys(times);
+    if (keys.length > constructor.AUTO_PLAYBACK_MAX) {
+      delete times[keys[0]];
     }
+    times[art.option.id || art.option.url] = art.currentTime;
+    storage.set("times", times);
+  });
+  proxy($close, "click", () => {
+    setStyle($autoPlayback, "display", "none");
+  });
+  proxy($jump, "click", () => {
+    if (lastSeenTime < constructor.AUTO_PLAYBACK_MIN)
+      return;
+    art.seek = lastSeenTime;
+    silencePromise(art.play());
+    setStyle($poster, "display", "none");
+    setStyle($autoPlayback, "display", "none");
   });
   function init() {
     const times = storage.get("times") || {};
-    const currentTime = times[art.option.id || art.option.url];
+    lastSeenTime = times[art.option.id || art.option.url] || 0;
     clearTimeout(timer);
     setStyle($autoPlayback, "display", "none");
-    if (currentTime && currentTime >= constructor.AUTO_PLAYBACK_MIN) {
+    if (lastSeenTime && lastSeenTime >= constructor.AUTO_PLAYBACK_MIN) {
       setStyle($autoPlayback, "display", "flex");
-      $last.textContent = `${i18n.get("Last Seen")} ${secondToTime(currentTime)}`;
+      $last.textContent = `${i18n.get("Last Seen")} ${secondToTime(lastSeenTime)}`;
       $jump.textContent = i18n.get("Jump Play");
-      proxy($close, "click", () => {
-        setStyle($autoPlayback, "display", "none");
-      });
-      proxy($jump, "click", () => {
-        art.seek = currentTime;
-        silencePromise(art.play());
-        setStyle($poster, "display", "none");
-        setStyle($autoPlayback, "display", "none");
-      });
       art.once("video:timeupdate", () => {
         timer = setTimeout(() => {
           setStyle($autoPlayback, "display", "none");
@@ -3844,6 +3885,7 @@ class Plugins {
   constructor(art) {
     this.art = art;
     this.id = 0;
+    this.registry = /* @__PURE__ */ new Map();
     const { option } = art;
     if (option.miniProgressBar && !option.isLive) {
       this.add(miniProgressBar);
@@ -3868,7 +3910,11 @@ class Plugins {
     this.id += 1;
     const result = plugin.call(this.art, this.art);
     if (result instanceof Promise) {
-      return result.then((res) => this.next(plugin, res));
+      return result.then((res) => this.next(plugin, res)).catch((error2) => {
+        console.error("[ArtPlayer] plugin failed:", error2);
+        this.art.notice.show = error2;
+        return this;
+      });
     } else {
       return this.next(plugin, result);
     }
@@ -3879,7 +3925,20 @@ class Plugins {
     def(this, pluginName, {
       value: result
     });
+    this.registry.set(pluginName, result);
     return this;
+  }
+  destroy() {
+    for (const [name, plugin] of this.registry) {
+      if (plugin && typeof plugin.destroy === "function") {
+        try {
+          plugin.destroy();
+        } catch (error2) {
+          console.warn(`[ArtPlayer] plugin [${name}] destroy failed:`, error2);
+        }
+      }
+    }
+    this.registry.clear();
   }
 }
 function aspectRatio(art) {
@@ -4603,6 +4662,7 @@ class Subtitle extends Component {
       return;
     this.option = subtitleOption;
     this.style(subtitleOption.style);
+    const seq = this._initSeq = (this._initSeq || 0) + 1;
     return fetch(subtitleOption.url).then((response) => response.arrayBuffer()).then((buffer) => {
       const decoder = new TextDecoder(subtitleOption.encoding);
       const text = decoder.decode(buffer);
@@ -4626,6 +4686,11 @@ class Subtitle extends Component {
       }
     }).then((subUrl) => {
       $subtitle.innerHTML = "";
+      if (seq !== this._initSeq) {
+        if (typeof subUrl === "string" && subUrl.startsWith("blob:"))
+          URL.revokeObjectURL(subUrl);
+        return subUrl;
+      }
       if (this.url === subUrl)
         return subUrl;
       URL.revokeObjectURL(this.url);
@@ -4826,7 +4891,7 @@ class Artplayer extends Emitter {
     }
     this.id = ++id;
     const mergeOption = mergeDeep(Artplayer.option, option);
-    mergeOption.container = option.container;
+    mergeOption.container = option.container ?? mergeOption.container;
     this.option = validator(mergeOption, scheme);
     this.isLock = false;
     this.isReady = false;
@@ -4976,9 +5041,16 @@ class Artplayer extends Emitter {
     this.video.load();
   }
   destroy(removeHtml = true) {
+    if (this.isDestroy)
+      return;
     if (Artplayer.REMOVE_SRC_WHEN_DESTROY) {
       this.reset();
     }
+    if (this.template.$mini) {
+      this.template.$mini.remove();
+      delete this.template.$mini;
+    }
+    this.plugins.destroy();
     this.events.destroy();
     this.template.destroy(removeHtml);
     instances.splice(instances.indexOf(this), 1);

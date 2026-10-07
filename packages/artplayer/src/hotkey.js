@@ -43,8 +43,9 @@ export default class Hotkey {
 
     this.art.on('document:keydown', (event) => {
       if (this.art.isFocus) {
-        const tag = document.activeElement.tagName.toUpperCase()
-        const editable = document.activeElement.getAttribute('contenteditable')
+        const active = document.activeElement
+        const tag = active?.tagName?.toUpperCase() ?? ''
+        const editable = active?.getAttribute?.('contenteditable')
         if (
           tag !== 'INPUT'
           && tag !== 'TEXTAREA'

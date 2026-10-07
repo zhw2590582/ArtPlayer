@@ -25,7 +25,8 @@ export default function optionInit(art) {
   }
 
   if (option.poster) {
-    setStyle($poster, 'backgroundImage', `url(${option.poster})`)
+    const safePoster = String(option.poster).replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+    setStyle($poster, 'backgroundImage', `url("${safePoster}")`)
   }
 
   if (option.autoplay) {
@@ -34,7 +35,8 @@ export default function optionInit(art) {
 
   if (option.playsInline) {
     $video.playsInline = true
-    $video['webkit-playsinline'] = true
+    // Legacy WebKit only honors the attribute form of webkit-playsinline.
+    $video.setAttribute('webkit-playsinline', '')
   }
 
   if (option.theme) {

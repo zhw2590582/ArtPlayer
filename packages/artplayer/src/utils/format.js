@@ -7,7 +7,7 @@ export function capitalize(str) {
 }
 
 export function secondToTime(second) {
-  if (!second)
+  if (!second || second < 0)
     return '00:00'
   const add0 = num => (num < 10 ? `0${num}` : String(num))
   const hour = Math.floor(second / 3600)

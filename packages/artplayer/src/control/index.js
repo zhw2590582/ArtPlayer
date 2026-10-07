@@ -276,6 +276,8 @@ export default class Control extends Component {
       const item = option.selector.find(
         item => item.$control_item === path.find($item => item.$control_item === $item),
       )
+      if (!item)
+        return
       this.check(item)
       if (option.onSelect) {
         $value.innerHTML = await option.onSelect.call(this.art, item, item.$control_item, event)

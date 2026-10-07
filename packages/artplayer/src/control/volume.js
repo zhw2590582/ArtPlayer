@@ -1,10 +1,11 @@
-import { append, getRect, isMobile, setStyle } from '../utils'
+import { append, clamp, getRect, isMobile, setStyle } from '../utils'
 
 export default function volume(option) {
   return art => ({
     ...option,
     mounted: ($control) => {
       const { proxy, icons } = art
+      const { $video } = art.template
 
       const $volume = append($control, icons.volume)
       const $close = append($control, icons.volumeClose)
@@ -56,21 +57,31 @@ export default function volume(option) {
       else {
         let isDragging = false
 
+        // Drag updates the element directly so the notice and localStorage
+        // write only happen once when the drag finishes. The element fires
+        // volumechange itself, which drives the control's update().
+        const setVideoVolume = (value) => {
+          $video.volume = clamp(value, 0, 1)
+        }
+
         proxy($slider, 'mousedown', (event) => {
           isDragging = event.button === 0
-          art.volume = getVolumeFromEvent(event)
+          if (isDragging) {
+            art.muted = false
+            setVideoVolume(getVolumeFromEvent(event))
+          }
         })
 
         art.on('document:mousemove', (event) => {
           if (isDragging) {
-            art.muted = false
-            art.volume = getVolumeFromEvent(event)
+            setVideoVolume(getVolumeFromEvent(event))
           }
         })
 
         art.on('document:mouseup', () => {
           if (isDragging) {
             isDragging = false
+            art.volume = $video.volume
           }
         })
       }

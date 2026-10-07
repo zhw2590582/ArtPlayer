@@ -1,12 +1,15 @@
 import { def, silencePromise } from '../utils'
 
 export default function switchMix(art) {
+  let switchSeq = 0
+
   function switchUrl(url, currentTime) {
     return new Promise((resolve, reject) => {
       if (url === art.url) {
         resolve()
         return
       }
+      const id = ++switchSeq
       const { playing, aspectRatio, playbackRate } = art
 
       art.pause()
@@ -16,16 +19,24 @@ export default function switchMix(art) {
       const handlers = {}
 
       handlers.error = (error) => {
+        if (id !== switchSeq)
+          return
         art.off('video:canplay', handlers.canplay)
         art.off('video:loadedmetadata', handlers.metadata)
         reject(error)
       }
 
       handlers.metadata = () => {
+        if (id !== switchSeq)
+          return
         art.currentTime = currentTime
       }
 
       handlers.canplay = async () => {
+        if (id !== switchSeq) {
+          resolve()
+          return
+        }
         art.off('video:error', handlers.error)
         art.playbackRate = playbackRate
         art.aspectRatio = aspectRatio

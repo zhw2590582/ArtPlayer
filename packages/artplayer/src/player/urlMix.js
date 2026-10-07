@@ -22,7 +22,6 @@ export default function urlMix(art) {
           typeCallback.call(art, $video, newUrl, art)
         }
         else {
-          URL.revokeObjectURL(oldUrl)
           $video.src = newUrl
         }
 

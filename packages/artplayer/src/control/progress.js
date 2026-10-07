@@ -1,4 +1,4 @@
-import { addClass, append, clamp, getRect, includeFromEvent, isMobile, query, removeClass, secondToTime, setStyle } from '../utils'
+import { addClass, append, clamp, escape, getRect, includeFromEvent, isMobile, query, removeClass, secondToTime, setStyle } from '../utils'
 
 export function getPosFromEvent(art, event) {
   const { $progress } = art.template
@@ -96,7 +96,7 @@ export default function progress(options) {
           for (let index = 0; index < option.highlight.length; index++) {
             const item = option.highlight[index]
             const left = (clamp(item.time, 0, art.duration) / art.duration) * 100
-            const html = `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`
+            const html = `<span data-text="${escape(item.text)}" data-time="${item.time}" style="left: ${left}%"></span>`
             append($highlight, html)
           }
         }

@@ -1,5 +1,5 @@
 import screenfull from '../libs/screenfull'
-import { addClass, def, get, removeClass } from '../utils'
+import { addClass, def, removeClass } from '../utils'
 
 export default function fullscreenMix(art) {
   const {
@@ -9,10 +9,10 @@ export default function fullscreenMix(art) {
   } = art
 
   const nativeScreenfull = (art) => {
-    screenfull.on('change', () => {
-      art.emit('fullscreen', screenfull.isFullscreen)
+    const onChange = () => {
+      art.emit('fullscreen', art.fullscreen)
 
-      if (screenfull.isFullscreen) {
+      if (art.fullscreen) {
         art.state = 'fullscreen'
         addClass($player, 'art-fullscreen')
       }
@@ -21,22 +21,28 @@ export default function fullscreenMix(art) {
       }
 
       art.emit('resize')
-    })
+    }
 
-    screenfull.on('error', (event) => {
+    art.events.proxy(document, screenfull.raw.fullscreenchange, onChange)
+    art.events.proxy(document, screenfull.raw.fullscreenerror, (event) => {
       art.emit('fullscreenError', event)
     })
 
     def(art, 'fullscreen', {
       get() {
-        return screenfull.isFullscreen
+        return document[screenfull.raw.fullscreenElement] === $player
       },
       async set(value) {
-        if (value) {
-          await screenfull.request($player)
+        try {
+          if (value) {
+            await screenfull.request($player)
+          }
+          else {
+            await screenfull.exit()
+          }
         }
-        else {
-          await screenfull.exit()
+        catch (error) {
+          art.emit('fullscreenError', error)
         }
       },
     })
@@ -81,8 +87,5 @@ export default function fullscreenMix(art) {
         },
       })
     }
-
-    // Asynchronous setting
-    def(art, 'fullscreen', get(art, 'fullscreen'))
   })
 }

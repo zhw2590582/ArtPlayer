@@ -142,6 +142,8 @@ export default class Subtitle extends Component {
     this.option = subtitleOption
     this.style(subtitleOption.style)
 
+    const seq = (this._initSeq = (this._initSeq || 0) + 1)
+
     return fetch(subtitleOption.url)
       .then(response => response.arrayBuffer())
       .then((buffer) => {
@@ -168,6 +170,13 @@ export default class Subtitle extends Component {
       })
       .then((subUrl) => {
         $subtitle.innerHTML = ''
+        if (seq !== this._initSeq) {
+          // A newer switch superseded this one; discard the stale blob without
+          // touching the track the newer switch created.
+          if (typeof subUrl === 'string' && subUrl.startsWith('blob:'))
+            URL.revokeObjectURL(subUrl)
+          return subUrl
+        }
         if (this.url === subUrl)
           return subUrl
         URL.revokeObjectURL(this.url)

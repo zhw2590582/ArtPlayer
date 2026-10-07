@@ -63,6 +63,9 @@ export default function gestureInit(art, events) {
         const isVertical = [1, 2].includes(direction)
         const isLegal = (isHorizontal && !art.isRotate) || (isVertical && art.isRotate)
         if (isLegal) {
+          // Horizontal seek gestures own the touch: stop the page from
+          // scrolling at the same time.
+          event.preventDefault()
           const ratioX = clamp((pageX - startX) / art.width, -1, 1)
           const ratioY = clamp((pageY - startY) / art.height, -1, 1)
           const ratio = art.isRotate ? ratioY : ratioX
@@ -90,7 +93,7 @@ export default function gestureInit(art, events) {
         touchTarget = $video
         onTouchStart(event)
       })
-      events.proxy($video, 'touchmove', onTouchMove)
+      events.proxy($video, 'touchmove', onTouchMove, { passive: false })
     }
 
     events.proxy($progress, 'touchstart', (event) => {
@@ -98,7 +101,7 @@ export default function gestureInit(art, events) {
       onTouchStart(event)
     })
 
-    events.proxy($progress, 'touchmove', onTouchMove)
+    events.proxy($progress, 'touchmove', onTouchMove, { passive: false })
     art.on('document:touchend', onTouchEnd)
   }
 }
