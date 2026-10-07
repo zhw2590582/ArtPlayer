@@ -49113,11 +49113,18 @@ function artplayerPluginDanmukuMask(option = {}) {
       }
       return imageData;
     }
+    let lastSegmentTime = 0;
     async function segmentBody() {
       if (!isInitialized || $video.paused || $video.ended) {
         animationFrameId = requestAnimationFrame(segmentBody);
         return;
       }
+      const now2 = Date.now();
+      if (now2 - lastSegmentTime < 150) {
+        animationFrameId = requestAnimationFrame(segmentBody);
+        return;
+      }
+      lastSegmentTime = now2;
       try {
         canvas.width = $video.videoWidth;
         canvas.height = $video.videoHeight;
@@ -49162,7 +49169,15 @@ function artplayerPluginDanmukuMask(option = {}) {
       }
     }
     art.on("ready", startSegmentation);
-    art.on("destroy", stopSegmentation);
+    art.on("destroy", () => {
+      stopSegmentation();
+      isInitialized = false;
+      try {
+        segmenter?.close?.();
+      } catch {
+      }
+      segmenter = null;
+    });
     return {
       name: "artplayerPluginDanmukuMask",
       start: startSegmentation,

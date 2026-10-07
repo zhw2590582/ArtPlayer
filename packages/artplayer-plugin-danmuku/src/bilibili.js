@@ -68,26 +68,35 @@ function createWorker() {
 }
 
 export function bilibiliDanmuParseFromUrl(url) {
-  // eslint-disable-next-line no-async-promise-executor
-  return new Promise(async (resolve) => {
+  return (async () => {
     const res = await fetch(url)
+    if (!res.ok)
+      throw new Error(`[artplayerPluginDanmuku] danmaku request failed: ${res.status} ${url}`)
     const xml = await res.text()
 
-    try {
-      const worker = createWorker()
-      worker.onmessage = (event) => {
-        const { danmus, id } = event.data
-        if (!id || !danmus)
-          return
-        resolve(danmus)
+    return await new Promise((resolve, reject) => {
+      try {
+        const worker = createWorker()
+        const timeout = setTimeout(() => reject(new Error('danmuku parse timeout')), 10000)
         worker.terminate()
+        worker.onmessage = (event) => {
+          const { danmus, id } = event.data
+          if (!id || !danmus)
+            return
+          clearTimeout(timeout)
+          resolve(danmus)
+          worker.terminate()
+        }
+        worker.onerror = (error) => {
+          clearTimeout(timeout)
+          reject(error)
+        }
+        worker.postMessage({ xml, id: Date.now() })
       }
-      worker.postMessage({ xml, id: Date.now() })
-    }
-    catch (error) {
-      console.error('Error parsing Bilibili Danmu:', error)
-      const danmus = bilibiliDanmuParseFromXml(xml)
-      resolve(danmus)
-    }
-  })
+      catch (error) {
+        console.error('Error parsing Bilibili Danmu:', error)
+        resolve(bilibiliDanmuParseFromXml(xml))
+      }
+    })
+  })()
 }

@@ -85,6 +85,9 @@ async function runBuild() {
     }
     console.log('✅ Finished building all packages!')
   }
+  else if (projects[process.argv[2]]) {
+    await buildProject(process.argv[2])
+  }
   else {
     const { value } = await prompts({
       type: 'select',

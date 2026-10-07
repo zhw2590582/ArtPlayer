@@ -88,11 +88,22 @@ export default function artplayerPluginDanmukuMask(option = {}) {
       return imageData
     }
 
+    let lastSegmentTime = 0
+
     async function segmentBody() {
       if (!isInitialized || $video.paused || $video.ended) {
         animationFrameId = requestAnimationFrame(segmentBody)
         return
       }
+
+      // Segmenting + PNG-encoding every frame is expensive; cap the mask
+      // refresh at ~7fps, the rAF loop only polls.
+      const now = Date.now()
+      if (now - lastSegmentTime < 150) {
+        animationFrameId = requestAnimationFrame(segmentBody)
+        return
+      }
+      lastSegmentTime = now
 
       try {
         canvas.width = $video.videoWidth
@@ -148,7 +159,15 @@ export default function artplayerPluginDanmukuMask(option = {}) {
     }
 
     art.on('ready', startSegmentation)
-    art.on('destroy', stopSegmentation)
+    art.on('destroy', () => {
+      stopSegmentation()
+      isInitialized = false
+      try {
+        segmenter?.close?.()
+      }
+      catch {}
+      segmenter = null
+    })
 
     return {
       name: 'artplayerPluginDanmukuMask',

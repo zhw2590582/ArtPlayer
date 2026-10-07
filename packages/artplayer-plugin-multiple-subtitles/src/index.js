@@ -2,6 +2,8 @@ import { WebVTTParser, WebVTTSerializer } from './parser'
 
 async function loadVtt(option, { getExt, srtToVtt, assToVtt }) {
   const response = await fetch(option.url)
+  if (!response.ok)
+    throw new Error(`[multipleSubtitles] subtitle request failed: ${response.status} ${option.url}`)
   const buffer = await response.arrayBuffer()
   const decoder = new TextDecoder(option.encoding || 'utf-8')
   const text = decoder.decode(buffer)
@@ -46,50 +48,59 @@ function mergeTrees(trees) {
 
 export default function artplayerPluginMultipleSubtitles({ subtitles = [] }) {
   return async (art) => {
-    const { unescape, getExt, srtToVtt, assToVtt } = art.constructor.utils
+    try {
+      const { unescape, getExt, srtToVtt, assToVtt } = art.constructor.utils
 
-    const parser = new WebVTTParser()
-    const seri = new WebVTTSerializer()
+      const parser = new WebVTTParser()
+      const seri = new WebVTTSerializer()
 
-    const vtts = await Promise.all(
-      subtitles.map((option) => {
-        return loadVtt(option, { getExt, srtToVtt, assToVtt })
-      }),
-    )
+      const vtts = await Promise.all(
+        subtitles.map((option) => {
+          return loadVtt(option, { getExt, srtToVtt, assToVtt })
+        }),
+      )
 
-    const trees = vtts.map((vtt, index) => {
-      const tree = parser.parse(vtt, 'metadata')
-      tree.url = subtitles[index].url
-      tree.name = subtitles[index].name
-      return tree
-    })
-
-    let lastUrl = ''
-    function setTracks(trees = []) {
-      const tree = mergeTrees(trees)
-      const vtt = seri.serialize(tree.cues)
-      URL.revokeObjectURL(lastUrl)
-      const url = URL.createObjectURL(new Blob([vtt], { type: 'text/vtt' }))
-      lastUrl = url
-      art.option.subtitle.escape = false
-      art.subtitle.init({
-        ...art.option.subtitle,
-        url,
-        type: 'vtt',
-        onVttLoad: unescape,
+      const trees = vtts.map((vtt, index) => {
+        const tree = parser.parse(vtt, 'metadata')
+        tree.url = subtitles[index].url
+        tree.name = subtitles[index].name
+        return tree
       })
+
+      let lastUrl = ''
+      function setTracks(list = []) {
+        const tree = mergeTrees(list)
+        const vtt = seri.serialize(tree.cues)
+        URL.revokeObjectURL(lastUrl)
+        const url = URL.createObjectURL(new Blob([vtt], { type: 'text/vtt' }))
+        lastUrl = url
+        art.option.subtitle.escape = false
+        art.subtitle.init({
+          ...art.option.subtitle,
+          url,
+          type: 'vtt',
+          onVttLoad: unescape,
+        })
+      }
+
+      setTracks(trees)
+
+      return {
+        name: 'multipleSubtitles',
+        tracks(names = []) {
+          return setTracks(names.map(name => trees.find(tree => tree.name === name)).filter(Boolean))
+        },
+        reset() {
+          return setTracks(trees)
+        },
+      }
     }
-
-    setTracks(trees)
-
-    return {
-      name: 'multipleSubtitles',
-      tracks(names = []) {
-        return setTracks(names.map(name => trees.find(tree => tree.name === name)))
-      },
-      reset() {
-        return setTracks(trees)
-      },
+    catch (error) {
+      // A failed factory used to swallow the plugin silently (core stores the
+      // rejection without a catch); surface it instead.
+      art.notice.show = error
+      console.error('[artplayerPluginMultipleSubtitles] init failed:', error)
+      return { name: 'multipleSubtitles' }
     }
   }
 }
