@@ -76,6 +76,10 @@ export default class VideoEngine {
 
     const img = new Image()
     img.onload = () => {
+      // A slow poster must not clobber a video frame that is already being
+      // rendered (todo N7).
+      if (this.videoSink || this.posterDrawn)
+        return
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
       this.canvas.width = img.naturalWidth || this.canvas.width
       this.canvas.height = img.naturalHeight || this.canvas.height
@@ -224,9 +228,10 @@ export default class VideoEngine {
     if (Number.isFinite(this.duration) && t >= this.duration) {
       this.stop()
       this.stalled = false
-      this.events.emit('ended')
+      // Native order is pause first, then ended - and ended is not followed
+      // by canplay (todo N6).
       this.events.emit('pause')
-      this.events.emit('canplay')
+      this.events.emit('ended')
       return
     }
 

@@ -245,6 +245,13 @@ export default class AudioEngine {
   }
 
   async seek(time) {
+    if (!this.audioContext) {
+      // Seek before the audio context exists (load still in flight): park the
+      // target position so play() resumes from there instead of throwing
+      // (todo M7).
+      this.playbackTimeAtStart = Math.max(0, time)
+      return
+    }
     this.playbackTimeAtStart = Math.max(0, time)
     this.audioContextStartTime = this.audioContext.currentTime
     this.latestScheduledEndTime = this.playbackTimeAtStart

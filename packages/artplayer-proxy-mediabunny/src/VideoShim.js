@@ -67,7 +67,7 @@ export default class VideoShim {
 
   set src(v) {
     this._src = v
-    if (v)
+    if (v && !this._destroyed)
       this.engine.load(v)
   }
 
@@ -90,7 +90,10 @@ export default class VideoShim {
 
   // Buffered/Played/Seekable
   get buffered() {
-    return this.createTimeRanges(0, this.engine.duration)
+    // Pretend everything up to the playhead is ready: the engine does not
+    // expose real buffer ranges yet, and claiming the full duration made the
+    // loaded bar read 100% on HLS (todo M4).
+    return this.createTimeRanges(0, Math.min(this.engine.currentTime + 1, this.engine.duration || 0))
   }
 
   get played() {
@@ -165,7 +168,6 @@ export default class VideoShim {
 
   set volume(v) {
     this._volume = clamp(v, 0, 1)
-    this._muted = false
     this.engine.setVolume(this._volume, this._muted)
     this.events.emit('volumechange')
   }
@@ -190,7 +192,7 @@ export default class VideoShim {
   }
 
   load() {
-    if (this._src)
+    if (this._src && !this._destroyed)
       this.engine.load(this._src)
   }
 
@@ -282,7 +284,13 @@ export default class VideoShim {
   }
 
   requestVideoFrameCallback(callback) {
-    const id = requestAnimationFrame((time) => {
+    // Spec semantics: one callback per presented frame, so keep re-arming
+    // until cancelled (todo M5).
+    this._rvfcCallbacks ||= new Map()
+    const state = { active: true, id: 0 }
+    const frame = (time) => {
+      if (!state.active)
+        return
       callback(time, {
         presentationTime: this.engine.currentTime,
         expectedDisplayTime: time + 16.6,
@@ -295,11 +303,20 @@ export default class VideoShim {
         receiveTime: time,
         rtpTimestamp: 0,
       })
-    })
-    return id
+      if (state.active)
+        state.id = requestAnimationFrame(frame)
+    }
+    state.id = requestAnimationFrame(frame)
+    this._rvfcCallbacks.set(state.id, state)
+    return state.id
   }
 
   cancelVideoFrameCallback(id) {
+    const state = this._rvfcCallbacks?.get(id)
+    if (state) {
+      state.active = false
+      this._rvfcCallbacks.delete(id)
+    }
     cancelAnimationFrame(id)
   }
 
@@ -322,6 +339,10 @@ export default class VideoShim {
   }
 
   destroy() {
+    this._destroyed = true
+    // Abort any in-flight load: core destroy() calls video.load() through
+    // reset(), which would otherwise restart a full load on the dead engine.
+    this.engine.loadSeq++
     this.engine.destroy()
   }
 }

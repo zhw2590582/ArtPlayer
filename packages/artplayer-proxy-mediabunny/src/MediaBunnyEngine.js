@@ -31,7 +31,9 @@ export default class MediaBunnyEngine {
     this.networkState = 0
     this.error = null
     this.seeking = false
+    this._seeking = false
     this.loadSeq = 0
+    this.replaceSeq = 0
     this.input = null
     this.media = null
 
@@ -39,6 +41,9 @@ export default class MediaBunnyEngine {
     events.addEventListener?.('ended', () => {
       this.ended = true
       this.paused = true
+      // Stop the audio pump instead of letting the pre-scheduled buffers and
+      // the iterator drain out on their own (todo M8).
+      this.audio.pause()
     })
   }
 
@@ -162,6 +167,7 @@ export default class MediaBunnyEngine {
     if (!this.media)
       return
 
+    const id = ++this.replaceSeq
     const nextMedia = {
       ...this.media,
       videoTrack,
@@ -180,17 +186,23 @@ export default class MediaBunnyEngine {
     this.events.emit('waiting')
 
     nextMedia.duration = await resolveDuration(nextMedia)
+    if (id !== this.replaceSeq)
+      return
     this.media = nextMedia
 
     await Promise.all([
       this.video.load(nextMedia),
       this.audio.load(nextMedia),
     ])
+    if (id !== this.replaceSeq)
+      return
 
     await Promise.all([
       this.video.seek(currentTime),
       this.audio.seek(currentTime),
     ])
+    if (id !== this.replaceSeq)
+      return
 
     this.readyState = 4
     this.networkState = 1
@@ -284,8 +296,12 @@ export default class MediaBunnyEngine {
     await this.audio.play()
     this.video.start(this.audio)
 
-    this.events.emit('play')
-    this.events.emit('playing')
+    // A seek internally pauses/resumes through the same path; the real
+    // media element does not emit pause/play events for seeks (todo M3).
+    if (!this._seeking) {
+      this.events.emit('play')
+      this.events.emit('playing')
+    }
   }
 
   pause() {
@@ -297,7 +313,9 @@ export default class MediaBunnyEngine {
     this.audio.pause()
     this.video.stop()
 
-    this.events.emit('pause')
+    if (!this._seeking) {
+      this.events.emit('pause')
+    }
   }
 
   async seek(time) {
@@ -309,6 +327,7 @@ export default class MediaBunnyEngine {
     this.events.emit('seeking')
     this.events.emit('waiting')
 
+    this._seeking = true
     this.pause()
 
     await Promise.all([
@@ -317,11 +336,15 @@ export default class MediaBunnyEngine {
     ])
 
     this.seeking = false
+    // The real media element fires timeupdate when a seek completes; without
+    // it the paused progress bar never moves (todo M1).
+    this.events.emit('timeupdate')
     this.events.emit('seeked')
 
     if (shouldResume && !this.ended) {
       await this.play()
     }
+    this._seeking = false
   }
 
   setVolume(volume, muted) {
@@ -334,6 +357,10 @@ export default class MediaBunnyEngine {
   }
 
   destroy() {
+    // Invalidate any in-flight load()/replaceTracks(): their guarded
+    // continuations must not run against a destroyed engine (todo N2).
+    this.loadSeq++
+    this.replaceSeq++
     this.pause()
     this.disposeInput()
     this.audio.destroy()

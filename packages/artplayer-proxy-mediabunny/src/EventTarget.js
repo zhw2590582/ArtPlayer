@@ -31,7 +31,9 @@ export default class EventTarget {
 
     const list = this.listeners.get(type)
     if (list) {
-      list.forEach(fn => fn(evt))
+      // Snapshot: a listener that removes itself during dispatch would
+      // otherwise skip its neighbours (todo P3-8).
+      list.slice().forEach(fn => fn(evt))
     }
   }
 }
