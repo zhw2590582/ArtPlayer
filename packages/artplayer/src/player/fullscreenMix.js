@@ -33,6 +33,9 @@ export default function fullscreenMix(art) {
       },
       async set(value) {
         if (value) {
+          if (art.fullscreenWeb) {
+            art.fullscreenWeb = false
+          }
           await screenfull.request($player)
         }
         else {
